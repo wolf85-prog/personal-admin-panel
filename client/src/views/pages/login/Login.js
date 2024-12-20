@@ -12,6 +12,9 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CNav,
+  CNavItem,
+  CNavLink
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -26,6 +29,8 @@ const Login = observer(() => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showLogin, setShowLogin] = useState(true)
+    const [activeKey, setActiveKey] = useState(1)
 
     const click = async () => {
         try {
@@ -40,14 +45,45 @@ const Login = observer(() => {
 
     }
 
+    const openLogin = (hub) => {
+      if (hub === 'Авторизация') { 
+        setShowLogin(true)
+        setActiveKey(1)
+      }
+      if (hub === 'Регистрация') { 
+        setShowLogin(false)
+        setActiveKey(2)
+      }
+    }
+
   return (
     <div className="bg-dark min-vh-100 d-flex flex-row align-items-center dark-theme bg-uley">
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={5}>
+            <CNav variant="tabs">
+              <CNavItem>
+                <CNavLink 
+                  style={{background: activeKey !== 1 ? '#08080869' : '', cursor: 'pointer'}} 
+                  onClick={() => openLogin("Авторизация")} 
+                  active={activeKey === 1}
+                >
+                  Авторизация
+                </CNavLink>
+              </CNavItem>
+              <CNavItem>
+                <CNavLink 
+                  style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
+                  onClick={() => openLogin("Регистрация")} 
+                  active={activeKey === 2}
+                >Регистраци</CNavLink>
+              </CNavItem>
+            </CNav>
+
             <CCardGroup>
               <CCard className="p-4">
-                <CCardBody>
+
+                <CCardBody style={{display: showLogin ? 'block' : 'none'}}>
                   <CForm>
                     <h1 style={{textAlign: 'center', color: '#fff'}}>{'U.L.E.Y'}</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Войдите в свой аккаунт</p>
@@ -91,6 +127,40 @@ const Login = observer(() => {
                       </CCol>
                     </CRow>
                   </CForm>
+                </CCardBody>
+
+                <CCardBody className="p-4" style={{display: !showLogin ? 'block' : 'none'}}>
+                  <CForm>
+                    <h1 style={{textAlign: 'center', color: '#fff'}}>U.L.E.Y</h1>
+                    <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Создайте свой аккаунт</p>
+                                  <CInputGroup className="mb-3">
+                                    <CInputGroupText>@</CInputGroupText>
+                                    <CFormInput placeholder="Введите ваш email..." autoComplete="email" />
+                                  </CInputGroup>
+                                  <CInputGroup className="mb-3">
+                                    <CInputGroupText>
+                                      <CIcon icon={cilLockLocked} />
+                                    </CInputGroupText>
+                                    <CFormInput
+                                      type="password"
+                                      placeholder="Пароль"
+                                      autoComplete="new-password"
+                                    />
+                                  </CInputGroup>
+                                  <CInputGroup className="mb-4">
+                                    <CInputGroupText>
+                                      <CIcon icon={cilLockLocked} />
+                                    </CInputGroupText>
+                                    <CFormInput
+                                      type="password"
+                                      placeholder="Повторить пароль"
+                                      autoComplete="new-password"
+                                    />
+                                  </CInputGroup>
+                                  <div className="d-grid">
+                                    <CButton color="success">Создать</CButton>
+                                  </div>
+                                </CForm>              
                 </CCardBody>
               </CCard>
             </CCardGroup>
