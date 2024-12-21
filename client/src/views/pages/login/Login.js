@@ -93,7 +93,7 @@ const Login = observer(() => {
                   style={{background: activeKey !== 2 ? '#08080869' : '', cursor: 'pointer'}} 
                   onClick={() => openLogin("Регистрация")} 
                   active={activeKey === 2}
-                >Регистраци</CNavLink>
+                >Регистрация</CNavLink>
               </CNavItem>
             </CNav>
 
@@ -179,7 +179,7 @@ const Login = observer(() => {
                                       type="password"
                                       placeholder="Повторить пароль"
                                       autoComplete="new-password"
-                                      value={password}
+                                      value={password2}
                                       onChange={e => setPassword2(e.target.value)}
                                     />
                                   </CInputGroup>
