@@ -100,7 +100,7 @@ const Login = observer(() => {
             <CCardGroup>
               <CCard className="p-4">
 
-                <CCardBody style={{display: showLogin ? 'block' : 'none'}}>
+                <CCardBody style={{display: showLogin ? 'block' : 'none', height: '300px'}}>
                   <CForm>
                     <h1 style={{textAlign: 'center', color: '#fff'}}>{'U.L.E.Y'}</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Войдите в свой аккаунт</p>
@@ -146,8 +146,8 @@ const Login = observer(() => {
                   </CForm>
                 </CCardBody>
 
-                <CCardBody className="p-4" style={{display: !showLogin ? 'block' : 'none'}}>
-                  <CForm>
+                <CCardBody className="p-4" style={{display: !showLogin ? 'block' : 'none', height: '300px'}}>
+                  <CForm style={{marginTop: '-20px'}}>
                     <h1 style={{textAlign: 'center', color: '#fff'}}>U.L.E.Y</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Создайте свой аккаунт</p>
                                   <CInputGroup className="mb-3">

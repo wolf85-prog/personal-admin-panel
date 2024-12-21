@@ -294,7 +294,7 @@ const Profile = () => {
                                     profile ? 
                                   <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
                                   : 
-                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '0'}}>
+                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', marginBottom: '3px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
                                   )
@@ -339,7 +339,7 @@ const Profile = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '450px'}}></input>
+                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '450px'}}></input>
                                     </div>
                                     <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
@@ -386,20 +386,20 @@ const Profile = () => {
                                   </div>
 
                                   <div style={{position: 'relative'}}>
-                                    <label className='title-label' style={{position: 'absolute', top: '-15px', left: '60px'}}>Проекты</label>
+                                    <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
                                     <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '24px'}}>                                   
                                       {/* проекты за месяц */}
-                                      <div>
+                                      <div style={{marginRight: '10px'}}>
                                         <label className='title-label'>За месяц</label>
                                         <div className="text-field">
-                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '100px', marginRight: '8px'}}/>
+                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '100%', marginRight: '8px'}}/>
                                         </div>
                                       </div>
                                       {/* проекты всего */}
                                       <div> 
                                         <label className='title-label'>Всего</label>
                                         <div className="text-field">
-                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '100px', marginRight: '8px'}}/>
+                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '100%', marginRight: '8px'}}/>
                                         </div>
                                       </div>
                                       
@@ -411,22 +411,15 @@ const Profile = () => {
 {/* 3 */}
                                 <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                     <label className='title-label'>Телефон №1</label>
-                                    <div className="text-field" onMouseOver={()=>setShowSavePhone1(true)} onMouseOut={()=>setShowSavePhone1(false)}>
-                                      <img 
-                                        src={Disketa} 
-                                        onClick={()=>{navigator.clipboard.writeText(phone)}} 
-                                        alt="" 
-                                        style={{visibility: showSavePhone1 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                      />
-                                     
+                                    <div className="text-field">                                   
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '225px'}}
+                                          //style={{width: '225px'}}
                                           type="text" 
                                           name="phone" 
                                           id="phone"
                                           mask="+7 (999) 999-99-99"
-                                          disabled={!blockProfile}
+                                          //disabled={!blockProfile}
                                           maskChar=""
                                           onChange={(e) => setPhone(e.target.value)} 
                                           value={phone}
@@ -437,22 +430,15 @@ const Profile = () => {
                                     </div> 
 
                                   <label className='title-label'>Телефон №2</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSavePhone2(true)} onMouseOut={()=>setShowSavePhone2(false)}>
-                                      <img 
-                                        src={Disketa} 
-                                        onClick={()=>{navigator.clipboard.writeText(phone2)}} 
-                                        alt="" 
-                                        style={{visibility: showSavePhone2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                      />
-                                     
+                                  <div className="text-field">                                    
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '225px'}}
+                                          //style={{width: '320px'}}
                                           type="text" 
                                           name="phone2" 
                                           id="phone2"
                                           mask="+7 (999) 999-99-99"
-                                          disabled={!blockProfile}
+                                          //disabled={!blockProfile}
                                           maskChar=""
                                           onChange={(e) => setPhone2(e.target.value)} 
                                           value={phone2}
@@ -478,7 +464,7 @@ const Profile = () => {
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '200px', height: '295px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: '295px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
