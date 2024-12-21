@@ -36,6 +36,7 @@ import {
 
 import avatar2 from 'src/assets/images/avatars/blank-avatar.png'
 import arrowDown from 'src/assets/images/arrowDown.svg'
+import arrowUp from 'src/assets/images/ArrowUp.png'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 
@@ -143,6 +144,7 @@ const Admin = () => {
               <Suspense fallback={<CSpinner color="primary" />}>
 
               <>
+                <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100'}}/>
                 <WidgetsBrand/>
 
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
