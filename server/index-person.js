@@ -22,8 +22,6 @@ const axios = require("axios");
 const {io} = require("socket.io-client")
 const socketUrl = process.env.SOCKET_APP_URL
 
-//мониторинг
-const statusMonitor = require('express-status-monitor');
 
 let tasks = []
 
