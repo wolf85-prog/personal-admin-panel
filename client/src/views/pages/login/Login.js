@@ -21,7 +21,7 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {ADMIN_ROUTE} from "../../../utils/consts";
-import {login} from "../../../http/userAPI";
+import {login, registration} from "../../../http/userAPI";
 import {Context} from "../../../index";
 
 const Login = observer(() => {
