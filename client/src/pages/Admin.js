@@ -39,6 +39,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 
+import WidgetsBrand from '../views/widgets/WidgetsBrand'
 import WidgetsDropdown from '../views/widgets/WidgetsDropdown'
 import WidgetsDropdown2 from '../views/widgets/WidgetsDropdown2'
 import WidgetsDropdown3 from '../views/widgets/WidgetsDropdown3'
@@ -141,7 +142,87 @@ const Admin = () => {
             <CContainer lg>
               <Suspense fallback={<CSpinner color="primary" />}>
 
-              
+              <>
+                <WidgetsBrand/>
+
+                <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
+
+{/*---------------------------------------- Renthub ------------------------------------  */} 
+                  <CCardBody id="Renthub">
+                    <CRow>
+                      <CCol xs>
+                        <CCard className="mb-4">
+                          <CCardHeader style={{textAlign: 'left'}}>Пользователи бота ({clients.length - 1})</CCardHeader>
+                          <CCardBody>
+                            <CRow>
+                              <CCol xs={12} md={6} xl={6}>
+                                <CRow>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-info py-1 px-3">
+                                      <div className="text-medium-emphasis small">Новые клиенты</div>
+                                      <div className="fs-5 fw-semibold">{newClients.length}</div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Постоянные клиенты</div>
+                                      <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
+                                    </div>
+                                  </CCol>
+                                </CRow>
+                              </CCol>
+
+                              <CCol xs={12} md={6} xl={6}>
+                                <CRow>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Просмотры</div>
+                                      <div className="fs-5 fw-semibold">-</div>
+                                    </div>
+                                  </CCol>
+                                  <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                      <div className="text-medium-emphasis small">Другое</div>
+                                      <div className="fs-5 fw-semibold">-</div>
+                                    </div>
+                                  </CCol>
+                                </CRow>
+
+                                <div className="mb-5"></div>
+
+                              </CCol>
+                            </CRow>
+
+
+                            <CTable align="middle" className="mb-0 border" hover responsive>
+                              <CTableHead className='table-dark'>
+                                <CTableRow>
+                                  <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '100px'}}>
+                                    <CIcon icon={cilPeople} />
+                                  </CTableHeaderCell>
+                                  <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
+                                  <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
+                                  <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
+                                  <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
+                                  <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
+                                </CTableRow>
+                              </CTableHead>
+                              <CTableBody>
+                                
+                              </CTableBody>
+                            </CTable>
+                          
+                          </CCardBody>
+                        </CCard>
+                      </CCol>
+                    </CRow>
+                  </CCardBody>
+
+                </CCard>
+              </>
               </Suspense>
             </CContainer>
         </div>
