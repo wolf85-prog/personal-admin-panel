@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "start": "node dashboard-personal.js",
+    "start": "node dashboard-person.js",
     "build": "react-scripts build",
     "dev": "react-scripts start",
     "changelog": "auto-changelog --starting-version 4.4.0 --commit-limit false --hide-credit",
