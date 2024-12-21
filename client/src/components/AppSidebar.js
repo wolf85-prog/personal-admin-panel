@@ -101,7 +101,7 @@ const AppSidebar = () => {
     },
     {
       component: CNavLink,
-      name: 'Площадки',
+      name: 'Локации',
       to: '/platforms',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
@@ -116,7 +116,7 @@ const AppSidebar = () => {
 
     {
       component: CNavLink,
-      name: 'Менеджеры',
+      name: 'Клиент | Чат',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatrent'),
       style: {cursor: 'pointer', backgroundColor: '#0078d421'},
@@ -124,7 +124,7 @@ const AppSidebar = () => {
     },
     {
       component: CNavLink,
-      name: 'Рассылки',
+      name: 'Клиент | Профиль',
       //to: '/distributionr',
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/distributionr'),
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
@@ -132,13 +132,13 @@ const AppSidebar = () => {
     },   
     {
       component: CNavItem,
-      name: 'Профиль',
+      name: 'Специалисты | Чат',
       to: '/managers',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
     {
       component: CNavLink,
-      name: 'Уведомления',
+      name: 'Специалисты | Профиль',
       //to: '/managers',
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/managers'),
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
@@ -164,7 +164,7 @@ const AppSidebar = () => {
 
     {
       component: CNavItem,
-      name: 'Специалисты',
+      name: 'Контрагенты',
       to: '/chatwork',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
@@ -172,23 +172,17 @@ const AppSidebar = () => {
     },
     {
       component: CNavItem,
-      name: 'Рассылки',
+      name: 'Сметы',
       to: '/distributionw',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
-      name: 'Профиль',
+      name: 'Ставки',
       to: '/specialist',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
-    {
-      component: CNavItem,
-      name: 'Уведомления',
-      to: '/workers',
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countPretendent ? {color: 'info', text: countPretendent,} : "",
-    },
+
 //------------------------------------------------------------------------------------------------------
     {
       component: CNavTitle,
@@ -206,11 +200,11 @@ const AppSidebar = () => {
     },
     {
       component: CNavItem,
-      name: 'Архив',
+      name: 'Техническая поддержка',
       to: '/chat2',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      style: {сolor: '#e55353',},
+      //style: {сolor: '#e55353',},
     },
 //--------------------------------------------------------------------------------------------------------    
     {
@@ -220,22 +214,22 @@ const AppSidebar = () => {
 //---------------------------------------------------------------------------------------------------------
     
     
-    // {
-    //   component: CNavItem,
-    //   name: 'Рассылки',
-    //   to: '/distribution',
-    //   icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-    //   style: {сolor: '#e55353',},
-    // },
+    {
+      component: CNavItem,
+      name: 'Поиск специалистов',
+      to: '/distribution',
+      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      style: {сolor: '#e55353',},
+    },
    
-    // {
-    //   component: CNavItem,
-    //   name: 'Уведомления',
-    //   to: '/notifications',
-    //   icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-    //   badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-    //   style: {сolor: '#e55353',},
-    // },
+    {
+      component: CNavItem,
+      name: 'Поиск оборудования',
+      to: '/notifications',
+      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
+      style: {сolor: '#e55353',},
+    },
     // {
     //   component: CNavItem,
     //   name: 'Специалисты 2.0',

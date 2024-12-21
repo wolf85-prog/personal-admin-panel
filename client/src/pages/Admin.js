@@ -145,7 +145,8 @@ const Admin = () => {
 
               <>
                 <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100', width: '100px'}}/>
-                <WidgetsBrand/>
+                
+                <WidgetsDropdown/>
 
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
 

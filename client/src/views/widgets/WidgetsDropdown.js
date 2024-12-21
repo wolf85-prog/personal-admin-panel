@@ -265,10 +265,11 @@ const WidgetsDropdown = ({users, projects, companys}) => {
           color="danger"
           value={
             <>
-              44{' '}
+              {companys}{' '}
+              {/* 44{' '}
               <span className="fs-6 fw-normal">
                 (-23.6% <CIcon icon={cilArrowBottom} />)
-              </span>
+              </span> */}
             </>
           }
           title="Часы [за год]"
