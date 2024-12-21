@@ -29,10 +29,11 @@ const Login = observer(() => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [activeKey, setActiveKey] = useState(1)
 
-    const click = async () => {
+    const clickLogin = async () => {
         try {
             const data = await login(email, password);
             //console.log(data)
@@ -42,7 +43,23 @@ const Login = observer(() => {
         } catch (e) {
             alert(e.response.data.message)
         }
+    }
 
+    const clickReg = async () => {
+      try {
+          if (password === password2) {
+            const data = await registration(email, password, 'USER');
+            console.log(data)
+            user.setUser(user)
+            user.setIsAuth(true)
+            navigate(ADMIN_ROUTE)
+          } else {
+            alert("Пароли не совпадают!")
+          }
+          
+      } catch (e) {
+          alert(e.response.data.message)
+      }
     }
 
     const openLogin = (hub) => {
@@ -115,7 +132,7 @@ const Login = observer(() => {
                         <CButton 
                           color="primary" 
                           className="px-4"
-                          onClick={click}
+                          onClick={clickLogin}
                         >
                           {'Войти'}
                         </CButton>
@@ -135,7 +152,12 @@ const Login = observer(() => {
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Создайте свой аккаунт</p>
                                   <CInputGroup className="mb-3">
                                     <CInputGroupText>@</CInputGroupText>
-                                    <CFormInput placeholder="Введите ваш email..." autoComplete="email" />
+                                    <CFormInput 
+                                      placeholder="Введите ваш email..." 
+                                      autoComplete="email"
+                                      value={email}
+                                      onChange={e => setEmail(e.target.value)} 
+                                    />
                                   </CInputGroup>
                                   <CInputGroup className="mb-3">
                                     <CInputGroupText>
@@ -145,6 +167,8 @@ const Login = observer(() => {
                                       type="password"
                                       placeholder="Пароль"
                                       autoComplete="new-password"
+                                      value={password}
+                                      onChange={e => setPassword(e.target.value)}
                                     />
                                   </CInputGroup>
                                   <CInputGroup className="mb-4">
@@ -155,10 +179,12 @@ const Login = observer(() => {
                                       type="password"
                                       placeholder="Повторить пароль"
                                       autoComplete="new-password"
+                                      value={password}
+                                      onChange={e => setPassword2(e.target.value)}
                                     />
                                   </CInputGroup>
                                   <div className="d-grid">
-                                    <CButton color="success">Создать</CButton>
+                                    <CButton onClick={clickReg} color="success">Создать</CButton>
                                   </div>
                                 </CForm>              
                 </CCardBody>
