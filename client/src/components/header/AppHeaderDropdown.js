@@ -39,7 +39,13 @@ const AppHeaderDropdown = observer(() => {
         <CAvatar src={avatar} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownHeader className="bg-light fw-semibold py-2">Аккаунт</CDropdownHeader>
+        <CDropdownHeader className="bg-light fw-semibold py-2">
+          Аккаунт ID: 1
+        </CDropdownHeader>
+        <CDropdownItem href="/profile">
+          <CIcon icon={cilUser} className="me-2" />
+          Профиль
+        </CDropdownItem>
         <CDropdownItem href="#">
           <CIcon icon={cilEnvelopeOpen} className="me-2" />
           Сообщений
@@ -62,10 +68,7 @@ const AppHeaderDropdown = observer(() => {
           </CBadge>
         </CDropdownItem>
         <CDropdownHeader className="bg-light fw-semibold py-2">Настройки</CDropdownHeader>
-        <CDropdownItem href="#">
-          <CIcon icon={cilUser} className="me-2" />
-          Профиль
-        </CDropdownItem>
+        
         <CDropdownItem href="#">
           <CIcon icon={cilSettings} className="me-2" />
           Настройки

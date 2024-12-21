@@ -1,4 +1,6 @@
 export const ADMIN_ROUTE = '/dashboard'
+export const PROFILE_ROUTE = '/profile'
+
 export const ADMIN_ROUTE2 = '/dashboard2'
 export const RENTHUB_ROUTE = '/renthub'
 export const WORKHUB_ROUTE = '/workhub'
