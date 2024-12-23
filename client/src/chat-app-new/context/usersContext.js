@@ -198,6 +198,10 @@ const UsersProvider = ({ children }) => {
 			setUsers,
 			contacts,
 			setContacts,
+			companysAll,
+			platformsAll,
+			managersAll, 
+			workersAll,
 		}}>
 			{children}
 		</UsersContext.Provider>
