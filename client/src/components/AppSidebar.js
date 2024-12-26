@@ -115,36 +115,39 @@ const AppSidebar = () => {
 //-----------------------------------------------------------------------------------   
 
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Клиент | Чат',
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '21px', marginLeft: '4px' }} />,
-      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/chatrent'),
+      to: '/clientchat',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer', backgroundColor: '#0078d421'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
     },
+
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Клиент | Профиль',
-      //to: '/distributionr',
-      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/distributionr'),
+      to: '/clientprofile',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-      style: { cursor: 'pointer'},
-    },   
+      style: {cursor: 'pointer'},
+      badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
+    },
+
     {
       component: CNavItem,
       name: 'Специалисты | Чат',
-      to: '/managers',
+      to: '/clientchat',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      style: {cursor: 'pointer'},
     },
+
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Специалисты | Профиль',
-      //to: '/managers',
-      onClick: ()=>handleLinkClick2('https://proj.uley.team:3002/managers'),
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-      style: { cursor: 'pointer'},
+      to: '/specialist',
+      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      style: {cursor: 'pointer'},
     },
+  
     
 //----------------------------------------------------------------------------------
     {
@@ -214,22 +217,22 @@ const AppSidebar = () => {
 //---------------------------------------------------------------------------------------------------------
     
     
-    {
-      component: CNavItem,
-      name: 'Поиск специалистов',
-      to: '/distribution',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-      style: {сolor: '#e55353',},
-    },
+    // {
+    //   component: CNavItem,
+    //   name: 'Поиск специалистов',
+    //   to: '/distribution',
+    //   icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+    //   style: {сolor: '#e55353',},
+    // },
    
-    {
-      component: CNavItem,
-      name: 'Поиск оборудования',
-      to: '/notifications',
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-      style: {сolor: '#e55353',},
-    },
+    // {
+    //   component: CNavItem,
+    //   name: 'Поиск оборудования',
+    //   to: '/notifications',
+    //   icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+    //   badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
+    //   style: {сolor: '#e55353',},
+    // },
     // {
     //   component: CNavItem,
     //   name: 'Специалисты 2.0',

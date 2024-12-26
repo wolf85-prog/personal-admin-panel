@@ -58,16 +58,11 @@ const UsersProvider = ({ children }) => {
 
 	const [specialistAll, setSpecialistAll] = useState([]);
 	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
-	//const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
+	const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 
 	const [companys, setCompanys]= useState([]);
-	const [companysAll, setCompanysAll] =  useState( () => {
-		const savedUserWorkers = localStorage.getItem("companys");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	});  //все компании;
 
 	const [platforms, setPlatforms] = useState([])
 	const [platformsAll, setPlatformsAll] = useState([])
@@ -198,10 +193,25 @@ const UsersProvider = ({ children }) => {
 			setUsers,
 			contacts,
 			setContacts,
-			companysAll,
-			platformsAll,
+			companys,
+			setCompanys,
 			managersAll, 
-			workersAll,
+			setManagersAll,
+			companysAll,
+			platforms, 
+			setPlatforms,
+			setCompanysAll,
+			platformsAll,
+			setPlatformsAll,
+			specialist, 
+			setSpecialist,
+
+			managersCount,
+			setManagersCount,
+			companysCount,
+			setCompanysCount,
+			specialistsCount, 
+			setSpecialistsCount,
 		}}>
 			{children}
 		</UsersContext.Provider>

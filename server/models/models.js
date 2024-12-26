@@ -40,7 +40,64 @@ const Project = sequelize.define('project', {
     deleted: {type: DataTypes.BOOLEAN},
 })
 
+const Worker = sequelize.define('worker', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    userfamily: {type: DataTypes.STRING},
+    username: {type: DataTypes.STRING},
+    phone: {type: DataTypes.STRING},
+    dateborn: {type: DataTypes.STRING},  
+    city: {type: DataTypes.STRING},
+    companys: {type: DataTypes.STRING},
+    stag: {type: DataTypes.STRING},
+    worklist: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING, unique: true},
+    promoId: {type: DataTypes.STRING},
+    from: {type: DataTypes.STRING},
+    avatar: {type: DataTypes.STRING},
+    comment: {type: DataTypes.TEXT}, 
+    rank: {type: DataTypes.INTEGER}, 
+    block: {type: DataTypes.BOOLEAN}, 
+    deleted: {type: DataTypes.BOOLEAN},
+    newcity: {type: DataTypes.STRING},
+    great: {type: DataTypes.BOOLEAN},
+})
+
+const Platform = sequelize.define('platform', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    title: {type: DataTypes.STRING}, //
+    city: {type: DataTypes.STRING}, //
+    address: {type: DataTypes.STRING}, //
+    track: {type: DataTypes.STRING}, //
+    url: {type: DataTypes.STRING}, //
+    karta: {type: DataTypes.STRING}, //
+    comment: {type: DataTypes.TEXT},
+})
+
+const Company = sequelize.define('company', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    title: {type: DataTypes.STRING}, //
+    city: {type: DataTypes.STRING},
+    office: {type: DataTypes.STRING},
+    sklad: {type: DataTypes.STRING},
+    comment: {type: DataTypes.TEXT},
+    projects: {type: DataTypes.TEXT},
+    managers: {type: DataTypes.TEXT},
+    dogovorDate: {type: DataTypes.STRING}, 
+    dogovorNumber: {type: DataTypes.STRING}, 
+    bugalterFio: {type: DataTypes.STRING}, 
+    bugalterEmail: {type: DataTypes.STRING},
+    bugalterPhone: {type: DataTypes.STRING},  
+    GUID: {type: DataTypes.STRING}, 
+    inn: {type: DataTypes.STRING}, //инн компании
+    profile: {type: DataTypes.STRING},
+    sfera: {type: DataTypes.TEXT},
+    comteg: {type: DataTypes.TEXT},
+})
+
 module.exports = {
     User, 
     Project,
+    Company,
+    Platform,
+    Worker,
 }
