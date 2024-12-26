@@ -212,6 +212,20 @@ const UsersProvider = ({ children }) => {
 			setCompanysCount,
 			specialistsCount, 
 			setSpecialistsCount,
+
+			soundVolume, 
+			setSoundVolume,
+			soundMute, 
+			setSoundMute,
+
+			workerCall,
+			showCallCard,
+			setShowCallCard,
+			showCallCardNo,
+			setShowCallCardNo,
+			workerCallNo,
+			callIndex,
+			callIndex2,
 		}}>
 			{children}
 		</UsersContext.Provider>

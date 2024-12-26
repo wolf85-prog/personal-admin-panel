@@ -57,6 +57,7 @@ import distribData from 'src/data/specDistribData';
 
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getContacts } from '../http/chatAPI'
+import { addManager, getManagerId } from 'src/http/managerAPI';
 
 
 const Profile = () => {
@@ -96,6 +97,8 @@ const Profile = () => {
   const [showSaveTg, setShowSaveTg] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
 
+  const [managerProfile, setManagerProfile] = useState({});
+
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
@@ -105,19 +108,10 @@ const Profile = () => {
   const [reyting, setReyting] = useState('');
   const [rank, setRank] = useState('');
   const [company, setCompany] = useState('');
-  const [comteg, setComteg] = useState([]);
-  const [sfera, setSfera] = useState([]);
-  const [worklist, setWorklist] = useState([]);
   const [dolgnost, setDolgnost] = useState('');
-  const [inn, setInn] = useState('');
   const [email, setEmail] = useState('');
-  const [comment, setComment] = useState('');
-  const [dogovor, setDogovor] = useState('');
-  const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
-  const [profile, setProfile] = useState('');
-  const [office, setOffice] = useState('');
-  const [sklad, setSklad] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -188,28 +182,6 @@ const Profile = () => {
   }, [])
 
 
-  const onChangeReyting = () => {
-    setShowBlacklist(false)
-    setShowMenu2(false)
-
-    //убрать из списка специальностей Blacklist
-    const res = sfera.filter(item=>item !== 'Blacklist')
-    console.log("sfera: ", res)
-
-    setSfera(res)
-  }
-
-  const onChangeBlacklist = () => {
-    setShowBlacklist(true)
-    setShowMenu1(false)
-
-    //добавить в список специальностей Blacklist
-    const arr = [...sfera]
-    arr.push('Blacklist')
-    //console.log("sfera: ", sfera)
-
-    setSfera(arr)
-  }
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
@@ -232,6 +204,28 @@ const Profile = () => {
   const saveProfile = async(id) => { 
       setShowClose(true)
       console.log(id)
+
+
+      const saveData = {
+        fio,
+        chatId: telegram,
+        phone, 
+        phone2,
+        city, 
+        dolgnost: dolgnost,
+        company: company,
+        profile: avatar, 
+        email: email, 
+      }
+      
+      console.log("saveData: ", saveData)
+
+      //сохранить в контексте
+      setManagerProfile(saveData)
+
+      const result = await getManagerId()
+
+      const resAdd = await addManager(saveData)
   
       addToast(exampleToast) //ваши данные сохранены
 
@@ -291,8 +285,8 @@ const Profile = () => {
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
                                   :
                                   (
-                                    profile ? 
-                                  <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
+                                    avatar ? 
+                                  <img src={avatar} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
                                   : 
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', marginBottom: '3px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
@@ -319,20 +313,16 @@ const Profile = () => {
 
                                   <label className='title-label'>Telegram ID</label>
                                   <div className="text-field">
-                                    <InputMask
-                                        disabled
-                                        className="text-field__input" 
-                                        style={{width: '250px'}}
-                                        type="text" 
-                                        name="inn" 
-                                        id="inn"
-                                        mask="9999-999999-99"
-                                        maskChar=""
-                                        //onChange={(e) => setInn(e.target.value)} 
-                                        value={inn}
-                                        placeholder=''
-                                    >
-                                    </InputMask>
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      pattern="[0-9]*"
+                                      name="telegram" 
+                                      id="telegram" 
+                                      value={telegram} 
+                                      onChange={handleTg} 
+                                      style={{width: '250px'}}
+                                    />
                                   </div> 
 
 
@@ -450,12 +440,12 @@ const Profile = () => {
 
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input disabled className="text-field__input" type="text" name="office" id="office" value={office}/>
+                                    <input disabled className="text-field__input" type="text" name="email" id="email" value={email}/>
                                   </div> 
 
                                   <label className='title-label'>Пароль</label>
                                   <div className="text-field">
-                                    <input disabled className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} />
+                                    <input disabled className="text-field__input" type="text" name="password" id="password"  />
                                   </div> 
                                 </div>
 

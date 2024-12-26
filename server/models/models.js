@@ -9,6 +9,20 @@ const User = sequelize.define('user', {
     role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
+const Manager = sequelize.define('manager', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    fio: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING, unique: true},
+    phone: {type: DataTypes.STRING}, //телефон менеджера
+    phone2: {type: DataTypes.STRING}, //телефон менеджера
+    city: {type: DataTypes.STRING},
+    dolgnost: {type: DataTypes.STRING}, 
+    companyId: {type: DataTypes.STRING}, // id заказчика  
+    projects: {type: DataTypes.STRING},
+    email: {type: DataTypes.STRING}, //почта менеджера
+    avatar: {type: DataTypes.TEXT},
+})
+
 
 const Project = sequelize.define('project', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -40,26 +54,37 @@ const Project = sequelize.define('project', {
     deleted: {type: DataTypes.BOOLEAN},
 })
 
-const Worker = sequelize.define('worker', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    userfamily: {type: DataTypes.STRING},
-    username: {type: DataTypes.STRING},
-    phone: {type: DataTypes.STRING},
-    dateborn: {type: DataTypes.STRING},  
-    city: {type: DataTypes.STRING},
-    companys: {type: DataTypes.STRING},
-    stag: {type: DataTypes.STRING},
-    worklist: {type: DataTypes.STRING},
+const Specialist = sequelize.define('specialist', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
+    fio: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
-    promoId: {type: DataTypes.STRING},
-    from: {type: DataTypes.STRING},
-    avatar: {type: DataTypes.STRING},
-    comment: {type: DataTypes.TEXT}, 
+    phone: {type: DataTypes.STRING},
+    phone2: {type: DataTypes.STRING},
+    specialization: {type: DataTypes.TEXT},  
+    city: {type: DataTypes.STRING},
+    skill: {type: DataTypes.TEXT},
+    promoId: {type: DataTypes.STRING}, 
     rank: {type: DataTypes.INTEGER}, 
-    block: {type: DataTypes.BOOLEAN}, 
-    deleted: {type: DataTypes.BOOLEAN},
-    newcity: {type: DataTypes.STRING},
-    great: {type: DataTypes.BOOLEAN},
+    merch: {type: DataTypes.STRING},
+    company: {type: DataTypes.STRING},
+    comteg: {type: DataTypes.TEXT},
+    comteg2: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT}, 
+    comment2: {type: DataTypes.TEXT}, 
+    age: {type: DataTypes.STRING},
+    reyting: {type: DataTypes.STRING},
+    inn: {type: DataTypes.STRING}, 
+    passport: {type: DataTypes.TEXT},
+    profile: {type: DataTypes.TEXT},
+    dogovor: {type: DataTypes.BOOLEAN}, 
+    samozanjatost: {type: DataTypes.BOOLEAN},
+    passportScan: {type: DataTypes.TEXT},
+    email: {type: DataTypes.STRING},  
+    blockW: {type: DataTypes.BOOLEAN},
+    deleted: {type: DataTypes.BOOLEAN}, //distrib
+    great: {type: DataTypes.BOOLEAN}, //hello
+    block18: {type: DataTypes.BOOLEAN}, 
+    krest: {type: DataTypes.BOOLEAN}, //bad
 })
 
 const Platform = sequelize.define('platform', {
@@ -96,8 +121,9 @@ const Company = sequelize.define('company', {
 
 module.exports = {
     User, 
+    Manager,
     Project,
     Company,
     Platform,
-    Worker,
+    Specialist,
 }

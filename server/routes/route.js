@@ -7,6 +7,20 @@ const { getProjects, getProjectsId, getProjectNew, getProjectsAll,
     getProjectNewCreate, getProjectNewUpdate, 
     getProjectNewDel, getProjectNewChatId } = require('../controllers/projectController')
 
+const { getSpecialist, getSpecCount, editSpecialist, 
+    getSpecialistId, addSpecialist, deleteSpecialist, 
+    getSpecCountAll, getSpecialistPhone, getSpecialistChatId, 
+    blockSpecialist } = require('../controllers/specialistController')
+
+const { getManagers, getManagerCount, editManager, getManagerId, 
+    addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
+
+const { getCompanys, getCompanyCount, editCompany, getCompanyId, 
+    addCompany, deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
+
+const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, 
+    addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
+
 route.post('/user/registration', userController.registration)
 route.post('/user/login', userController.login)
 route.get('/user/auth', authMiddleware, userController.check)
@@ -21,5 +35,48 @@ route.post('/projects/add', getProjectNewCreate)
 route.patch('/projects/update/:id', getProjectNewUpdate)
 route.get('/projects/delete/:id', getProjectNewDel)
 route.get('/projects/chat/get/:id', getProjectNewChatId)
+
+
+
+//----------------- Специалисты ---------------------------------
+route.get('/specialist/get', getSpecialist)
+route.get("/specialist/:id", getSpecialistId);
+route.get('/specialist/count/get/:count/:prev', getSpecCount) //еще
+route.patch('/specialist/update/:id', editSpecialist)
+route.get("/specialist/delete/:id", deleteSpecialist);
+route.post("/specialist/add", addSpecialist);
+route.get("/specialist/count/get", getSpecCountAll);
+route.get("/specialist/phone/:id", getSpecialistPhone);
+route.get("/specialist/chat/:id", getSpecialistChatId);
+route.get('/specialist/block/:id', blockSpecialist)
+
+
+//----------------- Менеджеры ---------------------------------
+route.get('/managers/get', getManagers)
+route.get("/managers/:id", getManagerId);
+route.get('/managers/count/get/:count/:prev', getManagerCount) //еще
+route.patch('/managers/update/:id', editManager)
+route.get("/managers/delete/:id", deleteManager);
+route.post("/managers/add", addManager);
+route.get("/managers/count/get", getManagerCountAll);
+route.get("/managers/chat/:id", getManagerId);
+
+//----------------- Компании ---------------------------------
+route.get('/companys/get', getCompanys)
+route.get("/companys/:id", getCompanyId);
+route.get('/companys/count/get/:count/:prev', getCompanyCount) //еще
+route.patch('/companys/update/:id', editCompany)
+route.get("/companys/delete/:id", deleteCompany);
+route.post("/companys/add", addCompany);
+route.get("/companys/count/get", getCompanyCountAll);
+
+//----------------- Площадки ---------------------------------
+route.get('/platforms/get', getPlatforms)
+route.get("/platforms/:id", getPlatformId);
+route.get('/platforms/count/get/:count/:prev', getPlatformCount) //еще
+route.patch('/platforms/update/:id', editPlatform)
+route.get("/platforms/delete/:id", deletePlatform);
+route.post("/platforms/add", addPlatform);
+route.get("/platforms/count/get", getPlatformCountAll);
 
 module.exports = route
