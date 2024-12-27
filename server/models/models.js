@@ -21,6 +21,7 @@ const Manager = sequelize.define('manager', {
     projects: {type: DataTypes.STRING},
     email: {type: DataTypes.STRING}, //почта менеджера
     avatar: {type: DataTypes.TEXT},
+    userId: {type: DataTypes.STRING}, 
 })
 
 

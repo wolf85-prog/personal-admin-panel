@@ -112,7 +112,7 @@ class ManagersController {
     async getManagerId(req, res) {
         const {id} = req.params
         try {
-            const manager = await Manager.findOne({where: {chatId: id.toString()}})
+            const manager = await Manager.findOne({where: {userId: id.toString()}})
             return res.status(200).json(manager);
         } catch (err) {
             return res.status(500).json(err);
@@ -122,10 +122,17 @@ class ManagersController {
     async addManager(req, res) {       
         try {    
 
-            const {fio} = req.body
+            const {fio,
+                companyId,
+                city,
+                phone,
+                phone2,
+                chatId,
+                email,
+            } = req.body
             console.log("fio: ", fio)
 
-            const newUser = await Manager.create({fio})
+            const newUser = await Manager.create({fio, city, companyId, phone, phone2, chatId, email})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);

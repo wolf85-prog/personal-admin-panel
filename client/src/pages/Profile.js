@@ -57,7 +57,7 @@ import distribData from 'src/data/specDistribData';
 
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getContacts } from '../http/chatAPI'
-import { addManager, getManagerId } from 'src/http/managerAPI';
+import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
 
 const Profile = () => {
@@ -213,8 +213,8 @@ const Profile = () => {
         phone2,
         city, 
         dolgnost: dolgnost,
-        company: company,
-        profile: avatar, 
+        companyId: company,
+        avatar, 
         email: email, 
       }
       
@@ -223,9 +223,15 @@ const Profile = () => {
       //сохранить в контексте
       setManagerProfile(saveData)
 
-      const result = await getManagerId()
+      const result = await getManagerId(id)
 
-      const resAdd = await addManager(saveData)
+      if (!result) {
+        const resAdd = await addManager(saveData)
+      } else {
+        const resUpdate = await editManager(saveData, result?.id)
+      }
+
+      
   
       addToast(exampleToast) //ваши данные сохранены
 
