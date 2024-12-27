@@ -511,7 +511,7 @@ const AppHeader = (props) => {
           </CNavItem>
         </CHeaderNav>
 
-        <CHeaderNav className="ms-3">
+        <CHeaderNav className="dark-theme ms-3">
           <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>

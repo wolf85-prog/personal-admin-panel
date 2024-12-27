@@ -39,12 +39,10 @@ const AppHeaderDropdown = observer(() => {
         <CAvatar src={avatar} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownItem className="bg-dark fw-semibold py-2" style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px'}}>
-          Аккаунт ID: 1
-        </CDropdownItem>
-        <CDropdownItem className="bg-dark fw-semibold py-2">
-          Роль: Пользователь
-        </CDropdownItem>
+        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Аккаунт ID: 1</CDropdownHeader>
+
+        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
+
         <CDropdownItem href="/profile">
           <CIcon icon={cilUser} className="me-2" />
           Профиль
