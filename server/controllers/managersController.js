@@ -123,7 +123,7 @@ class ManagersController {
         try {    
 
             const {fio,
-                companyId,
+                companyId: company,
                 city,
                 phone,
                 phone2,

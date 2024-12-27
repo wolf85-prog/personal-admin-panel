@@ -1,4 +1,5 @@
-import React, { Suspense, useEffect, useState, useRef } from 'react'
+import React, { Suspense, useEffect, useState, useRef, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import InputMask from 'react-input-mask';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -30,6 +31,7 @@ import {
 
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
+import {Context} from "../index";
 
 import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
@@ -61,8 +63,11 @@ import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
 
 const Profile = () => {
+  const {user} = useContext(Context)
+  const navigate = useNavigate()
+  const { userId, setUserId } = useUsersContext();
+  const [managerProfile, setManagerProfile] = useState({});
 
-  const { managers, setManagers } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [managerCount, setManagerCount] = useState([]);
   const [companysData, setCompanysData] = useState([]);
@@ -96,8 +101,6 @@ const Profile = () => {
   const [showSavePhone2, setShowSavePhone2] = useState(false)
   const [showSaveTg, setShowSaveTg] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
-
-  const [managerProfile, setManagerProfile] = useState({});
 
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
@@ -160,6 +163,7 @@ const Profile = () => {
   //-----------------------------------------------------------------------------------------
   useEffect(()=> {
 
+    console.log("cities: ", cities)
     // сортировка городов
     const newCities = cities.map((item)=> { 
       const newArr = item.label
@@ -177,26 +181,40 @@ const Profile = () => {
     const fetchData = async() => {
       setShowProfile(true)
       setLoading(false)
+      
+      const user = localStorage.getItem('user')
+      console.log("user: ", JSON.parse(user))
+
+      if (user) {
+        setUserId(JSON.parse(user)?.id)
+        setEmail(JSON.parse(user)?.email)
+      }
+      
     }
     fetchData()
   }, [])
 
 
+  useEffect(()=> {
+    const fetchData = async() => {
+      const result = await getManagerId(userId)
+      console.log("Manager: ", result)
+
+      setManagerProfile(result)
+      setCity(result ? result.city : '')
+    }
+
+    fetchData()
+  }, [userId])
+
+  useEffect(()=> {
+    setManagerProfile({...managerProfile, city: city})
+  }, [city])
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
     setFilePreview(URL.createObjectURL(e.target.files[0]));
-  }
-
-
-  const clickSearch = (e) => {
-    setShowClear(true)
-    setText(e.target.value)
-  }
-
-  const clearSearch = () => {
-    setText('')
   }
 
 
@@ -207,23 +225,20 @@ const Profile = () => {
 
 
       const saveData = {
-        fio,
-        chatId: telegram,
-        phone, 
-        phone2,
+        fio: managerProfile?.fio,
+        chatId: managerProfile?.chatId,
+        phone: managerProfile?.phone, 
+        phone2: managerProfile?.phone2,
         city, 
-        dolgnost: dolgnost,
-        companyId: company,
+        dolgnost: managerProfile?.dolgnost,
+        company: managerProfile?.companyId,
         avatar, 
         email: email, 
-      }
-      
+      }  
       console.log("saveData: ", saveData)
 
-      //сохранить в контексте
-      setManagerProfile(saveData)
-
-      const result = await getManagerId(id)
+      const result = await getManagerId(userId)
+      console.log("Manager: ", result)
 
       if (!result) {
         const resAdd = await addManager(saveData)
@@ -231,8 +246,6 @@ const Profile = () => {
         const resUpdate = await editManager(saveData, result?.id)
       }
 
-      
-  
       addToast(exampleToast) //ваши данные сохранены
 
       setTimeout(()=> {
@@ -245,23 +258,42 @@ const Profile = () => {
   }
 
   const closeProfile = () => { 
-    setShowProfile(false)
-    setShowClose(false)
-    setShowSearch(true)
+    // setShowProfile(false)
+    // setShowClose(false)
+    // setShowSearch(true)
 
-    setShowClear(true)
-    setFilePreview('')
+    // setShowClear(true)
+    // setFilePreview('')
+
+    navigate("/dashboard")
   }
 
-
-  const onChangeCompany = (e) => {
-    setCompanyName(e.target.value)     
-  }
   
   const handleTg = event => {
     const result = event.target.value.replace(/\D/g, '');
-    setTelegram(result);
+    setManagerProfile({...managerProfile, chatId: result})
   };
+
+  const changeFio = (e) => {
+    setManagerProfile({...managerProfile, fio: e.target.value})
+  }
+
+  const changeCompany = (e) => {
+    console.log("company: ", e.target.value)
+    setManagerProfile({...managerProfile, companyId: e.target.value})
+  }
+
+  const changeDolgnost = (e) => {
+    setManagerProfile({...managerProfile, dolgnost: e.target.value})
+  }
+
+  const changePhone = (e) => {
+    setManagerProfile({...managerProfile, phone: e.target.value})
+  }
+
+  const changePhone2 = (e) => {
+    setManagerProfile({...managerProfile, phone2: e.target.value})
+  }
 
   return (
     <div className='dark-theme'>
@@ -313,7 +345,15 @@ const Profile = () => {
 
                                   <label className='title-label'>ID</label>
                                   <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
+                                      <input 
+                                        disabled={true} 
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="dateReg" 
+                                        id="dateReg" 
+                                        value={'0000'+ userId} 
+                                        style={{width: '250px'}}
+                                      />
                                   </div>
 
 
@@ -325,7 +365,7 @@ const Profile = () => {
                                       pattern="[0-9]*"
                                       name="telegram" 
                                       id="telegram" 
-                                      value={telegram} 
+                                      value={managerProfile?.chatId} 
                                       onChange={handleTg} 
                                       style={{width: '250px'}}
                                     />
@@ -335,7 +375,7 @@ const Profile = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '450px'}}></input>
+                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={managerProfile?.fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '450px'}}></input>
                                     </div>
                                     <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
@@ -352,33 +392,58 @@ const Profile = () => {
                                 <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
-                                      <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={dolgnostData}
-                                        selected={dolgnost}
-                                        setSelected={setDolgnost}
+                                      <Autocomplete
+                                         sx={{
+                                            display: 'inline-block',
+                                            '& input': {zIndex: '25',
+                                                width: '100%',
+                                                border: 'none',
+                                                height: '40px',
+                                                padding: '5px 4px',
+                                                fontFamily: 'inherit',
+                                                fontSize: '14px',
+                                                fontWeight: '700',
+                                                lineHeight: '1.5',
+                                                textAlign: 'center',
+                                                color: '#ffffff',
+                                                backgroundColor: 'transparent', 
+                                            }
+                                        }}
+                                        className="text-field__input" 
+                                        openOnFocus
+                                        id="custom-input-demo"
+                                        options={sortedCities}
+                                        style={{width: '100%', padding: '0'}}
+                                        isOptionEqualToValue={(option, value) => option.value === value.value}
+                                        onInputChange={(e)=>setCity(e.target.value)}
+                                        onChange={(event, newValue) => {
+                                          if (newValue && newValue.length) {                                                      
+                                            setCity(newValue)
+                                          }  
+                                        }}
+                                        value={city} 
+                                        inputValue={city}
+                                        renderInput={(params) => (
+                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                            <input 
+                                                className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder=''
+                                            />
+                                        </div>
+                                        )}                                           
                                       />
                                       <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                      <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={dolgnostData}
-                                        selected={dolgnost}
-                                        setSelected={setDolgnost}
-                                      />
+                                    <input className="text-field__input" type="text" name="company" id="company" value={managerProfile?.companyId} onChange={(e)=>changeCompany(e)}  />
                                   </div>
 
                                   <label className='title-label'>Должность</label>
                                   <div className="text-field"> 
-                                      <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={dolgnostData}
-                                        selected={dolgnost}
-                                        setSelected={setDolgnost}
-                                      />
+                                    <input className="text-field__input" type="text" name="dolgnost" id="dolgnost" value={managerProfile?.dolgnost} onChange={(e)=>changeDolgnost(e)}  />
                                   </div>
 
                                   <div style={{position: 'relative'}}>
@@ -417,8 +482,8 @@ const Profile = () => {
                                           mask="+7 (999) 999-99-99"
                                           //disabled={!blockProfile}
                                           maskChar=""
-                                          onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          onChange={(e) => changePhone(e)} 
+                                          value={managerProfile?.phone}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -436,8 +501,8 @@ const Profile = () => {
                                           mask="+7 (999) 999-99-99"
                                           //disabled={!blockProfile}
                                           maskChar=""
-                                          onChange={(e) => setPhone2(e.target.value)} 
-                                          value={phone2}
+                                          onChange={(e) => changePhone2(e)} 
+                                          value={managerProfile?.phone2}
                                           placeholder=''
                                       >
                                       </InputMask>

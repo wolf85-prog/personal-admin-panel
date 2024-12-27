@@ -44,6 +44,7 @@ const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
+	const [userId, setUserId] = useState(''); 
 	const [users, setUsers] = useState([]); //все специалисты;
 	// const [users, setUsers] = useState( () => {
 	// 	const savedUsers = localStorage.getItem("users");
@@ -189,6 +190,8 @@ const UsersProvider = ({ children }) => {
 
 	return (
 		<UsersContext.Provider value={{ 
+			userId, 
+			setUserId,
 			users, 
 			setUsers,
 			contacts,

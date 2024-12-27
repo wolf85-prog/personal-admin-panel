@@ -23,6 +23,7 @@ import {observer} from "mobx-react-lite";
 import {ADMIN_ROUTE} from "../../../utils/consts";
 import {login, registration} from "../../../http/userAPI";
 import {Context} from "../../../index";
+import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 
 const Login = observer(() => {
     const {user} = useContext(Context)
@@ -33,12 +34,19 @@ const Login = observer(() => {
     const [showLogin, setShowLogin] = useState(true)
     const [activeKey, setActiveKey] = useState(1)
 
+    const { userId, setUserId } = useUsersContext();
+
     const clickLogin = async () => {
         try {
             const data = await login(email, password);
             console.log(data)
+
             user.setUser(user)
             user.setIsAuth(true)
+
+            setUserId(data.id)
+            localStorage.setItem('user', JSON.stringify({id: data.id, email: data.email}))
+
             navigate(ADMIN_ROUTE)
         } catch (e) {
             alert(e.message)
