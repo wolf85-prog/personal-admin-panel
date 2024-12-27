@@ -4,7 +4,6 @@ const { Op } = require('sequelize')
 
 require("dotenv").config();
 
-const {specData} = require('../data/specData');
 const host = process.env.HOST
 
 const https = require('https');

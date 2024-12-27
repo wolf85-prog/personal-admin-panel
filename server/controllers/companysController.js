@@ -1,10 +1,9 @@
-const {Company} = require('../models/renthub')
+const {Company} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
 require("dotenv").config();
 
-const {specData} = require('../data/specData');
 const host = process.env.HOST
 
 const https = require('https');
