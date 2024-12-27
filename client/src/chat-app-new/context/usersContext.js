@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
-
+import { getCompany } from '../../http/companyAPI'
 
 import { getDistributionsW, 
 	getDistributionsCountW,
@@ -72,9 +72,6 @@ const UsersProvider = ({ children }) => {
 	const [newProject, setNewProject]= useState(false);
 	const [countProjects, setCountProjects] = useState(0)
 
-	const [pretendents, setPretendents] = useState([])
-	const [newPretendent, setNewPretendent] = useState(false);
-	const [countPretendent, setCountPretendent] = useState(0)
 
 	const [userWorkers, setUserWorkers] = useState( () => {
 		const savedUserWorkers = localStorage.getItem("userWorkers");
@@ -83,11 +80,6 @@ const UsersProvider = ({ children }) => {
 	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-	// const [workersAll, setWorkersAll] =  useState( () => {
-	// 	const savedUserWorkers = localStorage.getItem("specialist");
-	//    	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	//    	return parsedUserWorkers || "";
-	// });  //все специалисты;
 
 	const [specialist, setSpecialist] =  useState([])
 
@@ -96,11 +88,6 @@ const UsersProvider = ({ children }) => {
 	const [companysCount, setCompanysCount] = useState(0)
 
 
-	const [userRenthub, setUserRenthub] = useState( () => {
-		const savedUserRenthub = localStorage.getItem("userRenthub");
-	   	const parsedUserRenthub = JSON.parse(savedUserRenthub);
-	   	return parsedUserRenthub || "";
-	}); 
 
 	const [countMessageWork, setCountMessageWork] = useState(() => {
 		// getting stored value
@@ -124,12 +111,7 @@ const UsersProvider = ({ children }) => {
 	const [workerCallNo, setWorkerCallNo] = useState('');
 	const [callIndex, setCallIndex] = useState(0)
 	const [callIndex2, setCallIndex2] = useState(0)
-	//update workers
-	const [showUpdate, setShowUpdate] = useState(false);
-	const [workerUpdate, setWorkerUpdate] = useState(100);
-	//update avatar
-	const [showUpdate2, setShowUpdate2] = useState(false);
-	const [avatarUpdate, setAvatarUpdate] = useState(100);
+
 	//show distrib
 	const [showDistrib, setShowDistrib] = useState(false);
 
@@ -182,6 +164,79 @@ const UsersProvider = ({ children }) => {
 	}, [soundVolume, soundMute]);
 	
 
+
+//------------------------------------------------------------------------------------------
+// get Companys
+//------------------------------------------------------------------------------------------	
+	useEffect(() => {
+		const fetchData = async () => {
+			let company = await getCompany();
+			console.log("companys context: ", company)
+
+		
+			let arrCompanys = []
+		
+			company.map(async (user, i) => {
+				const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+				const d2 = new Date(d)
+				const month = String(d2.getMonth()+1).padStart(2, "0");
+				const day = String(d2.getDate()).padStart(2, "0");
+				const chas = d2.getHours();
+				const min = String(d2.getMinutes()).padStart(2, "0");
+				const newDate = `${day}.${month} ${chas}:${min}`;
+		
+				let str_sfera = ''
+				user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+				str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+				})
+
+				let str_comteg = ''
+				user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+				str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+				})
+		
+				let str_comment = ''
+				user.comment && JSON.parse(user.comment).map((item, index)=> {
+				str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+				})
+			
+		
+				const newUser = {
+				id: user.id,
+				title: user.title,
+				city: user.city,
+				office: user.office,
+				sklad: user.sklad,
+				comment: str_comment,
+				inn: user.inn,
+				bugalterFio: user.bugalterFio, 
+				bugalterEmail: user.bugalterEmail,
+				bugalterPhone: user.bugalterPhone,
+				profile: user.profile,
+				sfera: str_sfera,
+				comteg: str_comteg,
+				}
+				arrCompanys.push(newUser)
+		
+				//если элемент массива последний
+				if (i === company.length-1) {
+					const sortedUser = [...arrCompanys].sort((a, b) => {       
+						var idA = a.id, idB = b.id 
+						return idB-idA  //сортировка по возрастанию 
+					})
+		
+					setCompanysAll(sortedUser)
+							
+					//сохранить кэш
+					//localStorage.setItem("companys", JSON.stringify(sortedUser));
+				}
+		
+			})
+		}
+
+		fetchData();
+
+	},[])
 
 //------------------------------------------------------------------------------------------
 

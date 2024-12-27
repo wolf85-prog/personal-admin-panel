@@ -190,11 +190,11 @@ const Companys = () => {
       console.log("count: ", companysCount)
 
       let arrManagers = []
-      let managersDB = await getManager()
-      managersDB.map((item, index)=> {
-        arrManagers.push(item.fio)
-      })
-      setManagersData(arrManagers)
+      // let managersDB = await getManager()
+      // managersDB.map((item, index)=> {
+      //   arrManagers.push(item.fio)
+      // })
+      // setManagersData(arrManagers)
       //console.log("managersDB: ", arrManagers)
 
       let arrCompanys = []
@@ -225,16 +225,16 @@ const Companys = () => {
 
         let str_manager = ''
         let str_manager2 = ''
-        user.managers && JSON.parse(user.managers).map((item, index)=> {
-          const fioManager = managersDB.find(item2 => item2.id === item.name)
-          if (fioManager) {
-            str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-            str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-          } else {
-            str_manager = str_manager + 'ФИО' + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-            str_manager2 = str_manager2 + JSON.stringify({fio: 'ФИО', dolgnost: 'менеджер', phone: ''}) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-          }
-        })
+        // user.managers && JSON.parse(user.managers).map((item, index)=> {
+        //   const fioManager = managersDB.find(item2 => item2.id === item.name)
+        //   if (fioManager) {
+        //     str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+        //     str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+        //   } else {
+        //     str_manager = str_manager + 'ФИО' + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+        //     str_manager2 = str_manager2 + JSON.stringify({fio: 'ФИО', dolgnost: 'менеджер', phone: ''}) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
+        //   }
+        // })
 
         const newUser = {
           id: user.id,
@@ -290,7 +290,7 @@ const Companys = () => {
 
     companys.push({
       id: res?.id, 
-      title: res?.fio, 
+      title: res?.title, 
       managers: '',  
       comment: '',
 
@@ -919,9 +919,9 @@ const Companys = () => {
                                   </div>
 
                                   {/* ФИО */}
-                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-15px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
                                       {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}

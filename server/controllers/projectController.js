@@ -29,7 +29,7 @@ class ProjectController {
         }
     }
 
-    async getProjectNew(req, res) {
+    async getProject(req, res) {
         try {
             const daysAgo10 = new Date(new Date().setDate(new Date().getDate() - 10));
 
@@ -82,10 +82,10 @@ class ProjectController {
         }
     }
 
-    async getProjectNewId(req, res) {
+    async getProjectId(req, res) {
         const {id} = req.params
         try {
-            const projects = await ProjectNew.findOne({
+            const projects = await Project.findOne({
                 where: {id},
             })
             return res.status(200).json(projects);
@@ -94,7 +94,7 @@ class ProjectController {
         }
     }
 
-    async getProjectNewChatId(req, res) {
+    async getProjectChatId(req, res) {
         const {id} = req.params
         try {
             const projects = await Project.findAll({
@@ -108,7 +108,7 @@ class ProjectController {
 
 
 
-    async getProjectNewCreate(req, res) {
+    async getProjectCreate(req, res) {
         const {name, status, specifika, city, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo, comment, equipment, index, number} = req.body
 
@@ -143,14 +143,14 @@ class ProjectController {
                 number,
             }
 
-            const project = await ProjectNew.create(obj)
+            const project = await Project.create(obj)
             return res.status(200).json(project);
         } catch (error) {
             return res.status(500).json(error.message);
         }
     }
 
-    async getProjectNewUpdate(req, res) {
+    async getProjectUpdate(req, res) {
         const {id} = req.params 
         const {name, status, datestart, dateend, teh, geo, managerId, managerId2, companyId, 
             comment, specifika, city, teh1, teh2, teh3, teh4, teh5, teh6, teh7, teh8, deleted} = req.body
@@ -201,7 +201,7 @@ class ProjectController {
         }
     }
 
-    async getProjectNewDel(req, res) {
+    async getProjectDel(req, res) {
         const {id} = req.params
         try {
             const projects = await Project.destroy({
