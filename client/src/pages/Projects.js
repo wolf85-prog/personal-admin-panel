@@ -320,37 +320,37 @@ const Projects = () => {
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
 
-    const resPretendents = await getPretendentProjectId(id)
-    console.log("pretendents: ", resPretendents)
+    // const resPretendents = await getPretendentProjectId(id)
+    // console.log("pretendents: ", resPretendents)
 
     
 
     let newArray = []
     let colorStatus = ''
-    resPretendents.map((item)=> {
-      const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
-      //console.log("workers: ", workersAll)
-      //console.log("fioSpec: ", fioSpec)
-      const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
+    // resPretendents.map((item)=> {
+    //   const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
+    //   //console.log("workers: ", workersAll)
+    //   //console.log("fioSpec: ", fioSpec)
+    //   const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
 
-      if (item.status === 'В Проект') colorStatus = 'green'
-      if (item.status === 'Отказано') colorStatus = 'yellow'
+    //   if (item.status === 'В Проект') colorStatus = 'green'
+    //   if (item.status === 'Отказано') colorStatus = 'yellow'
 
-      const newObj = {
-        id: item.id,
-        data: localDate,
-        status: item.status ? JSON.stringify({name: item.status, color: colorStatus}) : '',
-        fio: fioSpec?.userfamily + " " + fioSpec?.username, 
-        workerId: fioSpec?.id,
-        projectId: item.projectId,
-        receiverId: item.receiverId,
-        spec: JSON.parse(fioSpec?.worklist)[0]?.spec,
-        comment: JSON.parse(fioSpec?.comment),
-        comteg: JSON.parse(fioSpec?.comteg),
-      }
-      newArray.push(newObj)
-    })
-    setPretendents(newArray)
+    //   const newObj = {
+    //     id: item.id,
+    //     data: localDate,
+    //     status: item.status ? JSON.stringify({name: item.status, color: colorStatus}) : '',
+    //     fio: fioSpec?.userfamily + " " + fioSpec?.username, 
+    //     workerId: fioSpec?.id,
+    //     projectId: item.projectId,
+    //     receiverId: item.receiverId,
+    //     spec: JSON.parse(fioSpec?.worklist)[0]?.spec,
+    //     comment: JSON.parse(fioSpec?.comment),
+    //     comteg: JSON.parse(fioSpec?.comteg),
+    //   }
+    //   newArray.push(newObj)
+    // })
+    // setPretendents(newArray)
 
     setId(id)
     setCrmID(resProj.crmID)
@@ -531,6 +531,7 @@ ${loc.url}`;
     //Toast
     setShowModal(true)
 
+    console.log("id: ", id)
     console.log("start: ", startDate)
     console.log("end: ", endDate)
     console.log("managerId: ", managersAll.find(item=> item.fio === managerName)?.id)
@@ -550,8 +551,8 @@ ${loc.url}`;
     const saveData = {
       name: projectName,
       status: statusProject.name,
-      datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
-      dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
+      //datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
+      //dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
       teh: tehText, 
       teh1,
       teh2,
@@ -562,9 +563,9 @@ ${loc.url}`;
       teh7,
       teh8,
       geo: geoId, 
-      managerId: managersAll.find(item=> item.fio === managerName)?.id, 
-      managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
-      companyId: companysAll.find(item=> item.title === companyName)?.id, 
+      //managerId: managersAll.find(item=> item.fio === managerName)?.id, 
+      //managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
+      //companyId: companysAll.find(item=> item.title === companyName)?.id, 
       comment, 
       specifika: specifikaProject.name, 
       city,
@@ -575,81 +576,81 @@ ${loc.url}`;
     const resSave = await editProject(saveData, id) 
     console.log("resSave: ", resSave)
 
-    console.log("mainSpec save: ", mainspec)
-    mainspec.map(async(item, index)=> {
-      //setTimeout(async()=> {
-        console.log("id item: ", item.id)
-        if (item.id) {
-          const resEdit = await editMainspec(
-            {
-              date: item.date,
-              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-              specId: item.specId,
-              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-              comment: item.comment,
-              projectId: item.projectId,
-              number: index+1,
-              hr: item.hr,
-            },
-            item.id
-          )
-          console.log("resEdit: ", resEdit)
-        } else {
-          await addMainspec(
-            {
-              date: item.date,
-              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-              specId: item.specId,
-              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-              comment: item.comment,
-              projectId: item.projectId,
-              number: index+1,
-              hr: item.hr,
-            }
-          )
-        }
+    // console.log("mainSpec save: ", mainspec)
+    // mainspec.map(async(item, index)=> {
+    //   //setTimeout(async()=> {
+    //     console.log("id item: ", item.id)
+    //     if (item.id) {
+    //       const resEdit = await editMainspec(
+    //         {
+    //           date: item.date,
+    //           vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+    //           specId: item.specId,
+    //           specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+    //           stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+    //           comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+    //           comment: item.comment,
+    //           projectId: item.projectId,
+    //           number: index+1,
+    //           hr: item.hr,
+    //         },
+    //         item.id
+    //       )
+    //       console.log("resEdit: ", resEdit)
+    //     } else {
+    //       await addMainspec(
+    //         {
+    //           date: item.date,
+    //           vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+    //           specId: item.specId,
+    //           specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+    //           stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+    //           comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+    //           comment: item.comment,
+    //           projectId: item.projectId,
+    //           number: index+1,
+    //           hr: item.hr,
+    //         }
+    //       )
+    //     }
         
-      //}, 500 * ++index)
-    })
+    //   //}, 500 * ++index)
+    // })
 
 
     //send otkaz
-    pretendents.map(async(item, index)=> {
-      console.log("pretendent: ", item, index)
-      setTimeout(async() => {
-        if (item.status) {
-          if (JSON.parse(item.status).name === 'Отказано') {
+    // pretendents.map(async(item, index)=> {
+    //   console.log("pretendent: ", item, index)
+    //   setTimeout(async() => {
+    //     if (item.status) {
+    //       if (JSON.parse(item.status).name === 'Отказано') {
 
-            //сохранение отказа в базе
-            const newObj = {
-              projectId: item.projectId,
-              workerId: item.workerId.toString(),  
-              receiverId: item.receiverId, 
-              cancel: true
-            }
-            console.log("newObj: ", newObj)
+    //         //сохранение отказа в базе
+    //         const newObj = {
+    //           projectId: item.projectId,
+    //           workerId: item.workerId.toString(),  
+    //           receiverId: item.receiverId, 
+    //           cancel: true
+    //         }
+    //         console.log("newObj: ", newObj)
 
-            //отправка сообщения об отказе
-            const retCanceled = await getCanceledId(newObj)
-            console.log("retCanceled: ", retCanceled)
-            if (!retCanceled) {
-              await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
-            }
+    //         //отправка сообщения об отказе
+    //         const retCanceled = await getCanceledId(newObj)
+    //         console.log("retCanceled: ", retCanceled)
+    //         if (!retCanceled) {
+    //           await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
+    //         }
 
-            const resAdd = await addCanceled(newObj)
-            console.log("resAdd: ", resAdd)
-          }
+    //         const resAdd = await addCanceled(newObj)
+    //         console.log("resAdd: ", resAdd)
+    //       }
 
-          await editPretendent(item.id, {status: JSON.parse(item.status).name})
-        } 
-      }, 1000 * ++index)
+    //       await editPretendent(item.id, {status: JSON.parse(item.status).name})
+    //     } 
+    //   }, 1000 * ++index)
       
         
-    })
+    // })
 
     //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
   
