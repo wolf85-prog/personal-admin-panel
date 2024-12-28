@@ -364,92 +364,8 @@ const Projects = () => {
     setStartTime(timeStart) 
     setEndTime(resProj.dateEnd?.split('T')[1]?.slice(0, 5)) 
 
-    let resMain
-    resMain = await getMainSpecProject(id)
-    console.log("resMain: ", resMain)
-
-    if (resMain.length > 0) {
-      let arr = []
-      let myColor = ''
-      let myColor2 = ''
-
-      resMain.map((item)=>{
-        if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
-        if (item.vidWork === 'Офис') myColor = 'purple'
-
-        const obj = {
-          name: item.vidWork,
-          color: myColor
-        }
-
-        const obj1 = {
-          name: item.specialization,
-          color: ''
-        }
-
-        const obj2 = {
-          name: item.stavka,
-          color: ''
-        }
-
-        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor = 'red'
-
-        const obj3 = {
-          name: item.comteg,
-          color: myColor2
-        }
-
-        const newObj = {
-          id: item.id,
-          date: item.date,
-          specId: item.specId,
-          vidWork: JSON.stringify(obj),
-          specialization: JSON.stringify(obj1),
-          comteg: JSON.stringify(obj3),
-          comment: item.comment,
-          stavka: JSON.stringify(obj2),   
-          numder: item.number, 
-          hr: item.hr,  
-          count: item.count,  
-          projectId: id,
-        }
-
-        arr.push(newObj)
-      })
-
-      //console.log(arr)
-      setMainspec(arr)
-
-    } else {
-      //новый состав специалистов
-      const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
-      const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
-
-      //console.log("startD: ", startD, startT)
-
-      const data = {
-        //id: resProj.crmID+1,
-        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
-        vidWork: null,
-        specId: null,
-        specialization: null,
-        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
-        comment: null,
-        comteg: null,
-        taxi: null,
-        merch: null,
-        projectId: id,    
-      }
-
-      let arr = []
-      setMainspec(
-        //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
-        [...arr, data, data, data, data]
-      );
-    }
-
-    setStatusProject({name: status, color: statusData.find((stat)=> stat.label === status)?.color})
-    setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === specifika)?.color})
+    setStatusProject({name: status, color: statusData.find((stat)=> stat.label === resProj.status)?.color})
+    setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === resProj.specifika)?.color})
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
     //console.log("companyName: ", compTitle?.title ? compTitle?.title : '')
@@ -507,6 +423,91 @@ ${loc.url}`;
     setTeh7(resProj.teh7)
     setTeh8(resProj.teh8)
 
+
+    // let resMain
+    // resMain = await getMainSpecProject(id)
+    // console.log("resMain: ", resMain)
+
+    // if (resMain.length > 0) {
+    //   let arr = []
+    //   let myColor = ''
+    //   let myColor2 = ''
+
+    //   resMain.map((item)=>{
+    //     if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
+    //     if (item.vidWork === 'Офис') myColor = 'purple'
+
+    //     const obj = {
+    //       name: item.vidWork,
+    //       color: myColor
+    //     }
+
+    //     const obj1 = {
+    //       name: item.specialization,
+    //       color: ''
+    //     }
+
+    //     const obj2 = {
+    //       name: item.stavka,
+    //       color: ''
+    //     }
+
+    //     if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor = 'red'
+
+    //     const obj3 = {
+    //       name: item.comteg,
+    //       color: myColor2
+    //     }
+
+    //     const newObj = {
+    //       id: item.id,
+    //       date: item.date,
+    //       specId: item.specId,
+    //       vidWork: JSON.stringify(obj),
+    //       specialization: JSON.stringify(obj1),
+    //       comteg: JSON.stringify(obj3),
+    //       comment: item.comment,
+    //       stavka: JSON.stringify(obj2),   
+    //       numder: item.number, 
+    //       hr: item.hr,  
+    //       count: item.count,  
+    //       projectId: id,
+    //     }
+
+    //     arr.push(newObj)
+    //   })
+
+    //   //console.log(arr)
+    //   setMainspec(arr)
+
+    // } else {
+    //   //новый состав специалистов
+    //   const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
+    //   const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
+
+    //   //console.log("startD: ", startD, startT)
+
+    //   const data = {
+    //     //id: resProj.crmID+1,
+    //     date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
+    //     vidWork: null,
+    //     specId: null,
+    //     specialization: null,
+    //     stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
+    //     comment: null,
+    //     comteg: null,
+    //     taxi: null,
+    //     merch: null,
+    //     projectId: id,    
+    //   }
+
+    //   let arr = []
+    //   setMainspec(
+    //     //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
+    //     [...arr, data, data, data, data]
+    //   );
+    // }
+
     
     setVisibleA(true)
     setVisibleB(true)
@@ -551,8 +552,8 @@ ${loc.url}`;
     const saveData = {
       name: projectName,
       status: statusProject.name,
-      //datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
-      //dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
+      datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
+      dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
       teh: tehText, 
       teh1,
       teh2,
@@ -565,7 +566,7 @@ ${loc.url}`;
       geo: geoId, 
       //managerId: managersAll.find(item=> item.fio === managerName)?.id, 
       //managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
-      //companyId: companysAll.find(item=> item.title === companyName)?.id, 
+      companyId: companysAll.find(item=> item.title === companyName)?.id, 
       comment, 
       specifika: specifikaProject.name, 
       city,
