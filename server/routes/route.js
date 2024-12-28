@@ -2,10 +2,10 @@ const Router = require('express')
 const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
-const { getProjects, getProjectsId, getProjectNew, getProjectsAll, 
-    getProjectsDelete, getProjectNewId, 
-    getProjectNewCreate, getProjectNewUpdate, 
-    getProjectNewDel, getProjectNewChatId } = require('../controllers/projectController')
+const { getProjectsAll, 
+    getProjectsDelete, getProjectId, 
+    getProjectCreate, getProjectUpdate, 
+    getProjectDel, getProjectChatId } = require('../controllers/projectController')
 
 const { getSpecialist, getSpecCount, editSpecialist, 
     getSpecialistId, addSpecialist, deleteSpecialist, 
@@ -30,11 +30,11 @@ route.get('/user/get/:id', authMiddleware, userController.getOne)
 
 route.get('/projects/get', getProjectsAll)
 route.get('/projects/delete/get', getProjectsDelete)
-route.get('/projects/get/:id', getProjectNewId)
-route.post('/projects/add', getProjectNewCreate)
-route.patch('/projects/update/:id', getProjectNewUpdate)
-route.get('/projects/delete/:id', getProjectNewDel)
-route.get('/projects/chat/get/:id', getProjectNewChatId)
+route.get('/projects/get/:id', getProjectId)
+route.post('/projects/add', getProjectCreate)
+route.patch('/projects/update/:id', getProjectUpdate)
+route.get('/projects/delete/:id', getProjectDel)
+route.get('/projects/chat/get/:id', getProjectChatId)
 
 
 
