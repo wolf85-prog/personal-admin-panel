@@ -51,7 +51,7 @@ import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
 
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
-import cities from 'src/data/cities';
+
 import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 
@@ -65,10 +65,10 @@ import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 const Profile = () => {
   const {user} = useContext(Context)
   const navigate = useNavigate()
-  const { userId, setUserId } = useUsersContext();
-  const [managerProfile, setManagerProfile] = useState({});
+  const { userId, sortedCities, email, managerProfile, setManagerProfile } = useUsersContext();
+  // const [managerProfile, setManagerProfile] = useState({});
 
-  const [sortedCities, setSortedCities] = useState([])
+  
   const [managerCount, setManagerCount] = useState([]);
   const [companysData, setCompanysData] = useState([]);
 
@@ -112,7 +112,6 @@ const Profile = () => {
   const [rank, setRank] = useState('');
   const [company, setCompany] = useState('');
   const [dolgnost, setDolgnost] = useState('');
-  const [email, setEmail] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [avatar, setAvatar] = useState('');
 
@@ -155,57 +154,17 @@ const Profile = () => {
     </CToast>
   )
 
-
-
-
   //-----------------------------------------------------------------------------------------
-  //			get profile
-  //-----------------------------------------------------------------------------------------
-  useEffect(()=> {
-
-    console.log("cities: ", cities)
-    // сортировка городов
-    const newCities = cities.map((item)=> { 
-      const newArr = item.label
-      return newArr
-    })
-    const one = [...newCities].slice(0, 4)
-    const city = [...newCities].slice(5)
-    const sorted = city.sort((a, b) => {       
-      var cityA = a, cityB = b
-      return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-    })
-    const newSorted = [...one, ...city]
-    setSortedCities(newSorted)
-    
-    const fetchData = async() => {
-      setShowProfile(true)
-      setLoading(false)
-      
-      const user = localStorage.getItem('user')
-      console.log("user: ", JSON.parse(user))
-
-      if (user) {
-        setUserId(JSON.parse(user)?.id)
-        setEmail(JSON.parse(user)?.email)
-      }
-      
-    }
-    fetchData()
-  }, [])
-
-
-  useEffect(()=> {
-    const fetchData = async() => {
-      const result = await getManagerId(userId)
-      console.log("Manager: ", result)
-
-      setManagerProfile(result)
-      setCity(result ? result.city : '')
-    }
-
-    fetchData()
-  }, [userId])
+	//			get profile
+	//-----------------------------------------------------------------------------------------
+	useEffect(()=> {
+	
+		const fetchData = async() => {
+		  setShowProfile(true)
+		  setLoading(false)  
+		}
+		fetchData()
+	}, [])
 
   useEffect(()=> {
     setManagerProfile({...managerProfile, city: city})

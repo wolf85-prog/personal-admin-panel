@@ -1,8 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
+import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getCompany } from '../../http/companyAPI'
+
+import cities from 'src/data/cities';
 
 import { getDistributionsW, 
 	getDistributionsCountW,
@@ -46,6 +49,7 @@ const UsersProvider = ({ children }) => {
 	const socket = useSocketContext();
 	const [userId, setUserId] = useState(''); 
 	const [users, setUsers] = useState([]); //все специалисты;
+	const [email, setEmail] = useState('');
 	// const [users, setUsers] = useState( () => {
 	// 	const savedUsers = localStorage.getItem("users");
 	//    	const parsedUsers = JSON.parse(savedUsers);
@@ -56,6 +60,10 @@ const UsersProvider = ({ children }) => {
 	const [count, setCount] = useState(0)
 	const [countMessage, setCountMessage] = useState(0)
 	const [countMessageRent, setCountMessageRent] = useState(0)
+
+	const [managerProfile, setManagerProfile] = useState({});
+
+	const [sortedCities, setSortedCities] = useState([])
 
 	const [specialistAll, setSpecialistAll] = useState([]);
 	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
@@ -162,7 +170,47 @@ const UsersProvider = ({ children }) => {
 		localStorage.setItem("soundMute", soundMute);
 		
 	}, [soundVolume, soundMute]);
+
 	
+	//-----------------------------------------------------------------------------------------
+	//			get profile
+	//-----------------------------------------------------------------------------------------
+	useEffect(()=> {
+	
+		//console.log("cities: ", cities)
+		// сортировка городов
+		const newCities = cities.map((item)=> { 
+		  const newArr = item.label
+		  return newArr
+		})
+		const one = [...newCities].slice(0, 4)
+		const city = [...newCities].slice(5)
+		const sorted = city.sort((a, b) => {       
+		  var cityA = a, cityB = b
+		  return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+		})
+		const newSorted = [...one, ...city]
+		setSortedCities(newSorted)
+		
+		
+		const fetchData = async() => {
+		  
+		  const user = localStorage.getItem('user')
+		  console.log("user: ", JSON.parse(user))
+	
+		  if (user) {
+			setUserId(JSON.parse(user)?.id)
+			setEmail(JSON.parse(user)?.email)
+			
+			const result = await getManagerId(JSON.parse(user)?.id)
+		  	console.log("Manager: ", result)
+	
+		  	setManagerProfile(result)
+		  }
+		  
+		}
+		fetchData()
+	}, [])
 
 
 //------------------------------------------------------------------------------------------
@@ -270,6 +318,11 @@ const UsersProvider = ({ children }) => {
 			setCompanysCount,
 			specialistsCount, 
 			setSpecialistsCount,
+
+			managerProfile, 
+			setManagerProfile,
+			sortedCities,
+			email,
 
 			soundVolume, 
 			setSoundVolume,
