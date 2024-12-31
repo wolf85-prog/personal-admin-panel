@@ -167,8 +167,9 @@ const Profile = () => {
 	}, [])
 
   useEffect(()=> {
-    setManagerProfile({...managerProfile, city: city})
-  }, [city])
+    //setManagerProfile({...managerProfile, city: city})
+    setCity(managerProfile.city)
+  }, [])
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
