@@ -117,7 +117,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Клиент | Чат',
-      to: '/clientchat',
+      to: '/chatman',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer', backgroundColor: '#0078d421'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
@@ -135,7 +135,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Специалисты | Чат',
-      to: '/clientchat',
+      to: '/chatwork',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },

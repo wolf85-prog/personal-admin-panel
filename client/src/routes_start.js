@@ -6,6 +6,8 @@ import {
     COMPANYS_ROUTE,
     SPECIALIST_ROUTE,
     PLATFORMS_ROUTE,
+    CHAT_MANAGER,
+    CHAT_WORKER,
 
 } from "./utils/consts";
 
@@ -17,6 +19,9 @@ const Specialist = React.lazy(() => import('./pages/Specialist'))
 const Companys = React.lazy(() => import('./pages/Companys'))
 const Platforms = React.lazy(() => import('./pages/Platforms'))
 
+const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
+const ChatManager = React.lazy(() => import('./pages/ChatManager'))
+
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
     { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
@@ -24,6 +29,9 @@ export const authRoutes = [
     { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },
     { path: PLATFORMS_ROUTE, name: 'Площадки', Component: Platforms },
+
+    { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
+    { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },
 
     { path: '/', name: 'Пункт управления', Component: Admin },
 ]

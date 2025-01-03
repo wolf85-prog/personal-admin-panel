@@ -81,11 +81,7 @@ const UsersProvider = ({ children }) => {
 	const [countProjects, setCountProjects] = useState(0)
 
 
-	const [userWorkers, setUserWorkers] = useState( () => {
-		const savedUserWorkers = localStorage.getItem("userWorkers");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	}); 
+	const [userWorkers, setUserWorkers] = useState([]); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 
@@ -311,6 +307,9 @@ const UsersProvider = ({ children }) => {
 			setPlatformsAll,
 			specialist, 
 			setSpecialist,
+
+			userWorkers,
+			workersAll,
 
 			managersCount,
 			setManagersCount,
