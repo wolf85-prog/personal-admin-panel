@@ -3,10 +3,17 @@ const express = require('express')
 const path = require('path')
 const https = require('https');
 const fs = require('fs');
+const cors = require('cors')
 
 const PORT = process.env.REACT_APP_PORT || 2001
 
+const corsOptions = {
+    origin: ['https://uley.company:2001/', 'http://localhost:3000/'],//(https://your-client-app.com)
+    optionsSuccessStatus: 200,
+};
+
 const app = express()
+app.use(cors(corsOptions))
 app.use(express.static(__dirname))
 app.use(express.static(path.resolve(__dirname, 'build')))
 app.use((req, res, next) => {

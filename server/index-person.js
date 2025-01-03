@@ -34,7 +34,12 @@ const $host = axios.create({
 
 const app = express();
 
-app.use(cors())
+const corsOptions = {
+    origin: ['https://uley.company:2001/', 'http://localhost:3000/'],//(https://your-client-app.com)
+    optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
