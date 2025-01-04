@@ -26,9 +26,9 @@ export const editCompany = async (data, id) =>{
     }
 }
 
-export const addCompany = async (data) =>{
+export const addCompany = async (data, userId) =>{
     try {
-        let response = await $host.post(`api/companys/add`, data); 
+        let response = await $host.post(`api/companys/add/${userId}`, data); 
         return response.data;
     } catch (error) {
         console.log("error while calling addCompany api",error.message);

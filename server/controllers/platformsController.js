@@ -110,11 +110,10 @@ class PlatformsController {
     }
 
     async addPlatform(req, res) {       
-        try {    
+        try {     
+            const {title, userId} = req.body
 
-            const {title} = req.body
-
-            const newUser = await Platform.create({title})
+            const newUser = await Platform.create({title, userId})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);

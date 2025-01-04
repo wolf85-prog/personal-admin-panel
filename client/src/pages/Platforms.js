@@ -364,6 +364,7 @@ const clearSearch = () => {
 const clickAdd = async()=> {   
 
   const data = {
+    userId,
     title: 'Новая площадка',
   }
   

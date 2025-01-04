@@ -132,12 +132,11 @@ class CompanysController {
         }
     }
 
-    async addCompany(req, res) {       
+    async addCompany(req, res) {  
         try {    
+            const {title, userId} = req.body
 
-            const {title} = req.body
-
-            const newUser = await Company.create({title})
+            const newUser = await Company.create({title, userId})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);

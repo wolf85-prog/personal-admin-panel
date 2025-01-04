@@ -354,6 +354,7 @@ const Specialist = () => {
   const clickAdd = async()=> {   
 
     const data = {
+      userId,
       fio: 'ФИО',
     }
     const res = await addSpecialist(data)

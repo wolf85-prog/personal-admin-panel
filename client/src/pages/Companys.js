@@ -278,6 +278,7 @@ const Companys = () => {
   const clickAdd = async()=> {   
 
     const data = {
+      userId,
       title: 'Новая компания',
     }
     const res = await addCompany(data)
@@ -564,7 +565,7 @@ const Companys = () => {
         managersObjArr.push(obj)
 
         const saveData = {
-          company: JSON.parse(item).companyId,
+          companyId: JSON.parse(item).companyId,
         }
 
         console.log("saveCompany: ", saveData)
@@ -585,7 +586,8 @@ const Companys = () => {
       commentArr.push(obj1)
 
   
-      const saveData = {   
+      const saveData = { 
+        userId,  
         title, 
         city,
         office,
