@@ -123,16 +123,21 @@ class ManagersController {
         try {    
 
             const {fio,
-                companyId: company,
-                city,
+                chatId,
                 phone,
                 phone2,
-                chatId,
+                city,
+                dolgnost,
                 email,
+                companyId,
+                projects,
+                avatar,
+                userId,
             } = req.body
             console.log("fio: ", fio)
 
-            const newUser = await Manager.create({fio, city, companyId, phone, phone2, chatId, email})
+            const newUser = await Manager.create({fio, chatId, phone, phone2, city, dolgnost, companyId, email, projects, avatar,
+                userId})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
