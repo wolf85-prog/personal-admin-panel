@@ -215,7 +215,7 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------	
 	useEffect(() => {
 		const fetchData = async () => {
-			let company = await getCompany();
+			let company = await getCompany(userId);
 			console.log("companys context: ", company)
 
 		
@@ -248,6 +248,7 @@ const UsersProvider = ({ children }) => {
 		
 				const newUser = {
 				id: user.id,
+				userId: user.userId,
 				title: user.title,
 				city: user.city,
 				office: user.office,
@@ -281,7 +282,7 @@ const UsersProvider = ({ children }) => {
 
 		fetchData();
 
-	},[])
+	},[userId])
 
 
 //------------------------------------------------------------------------------------------
@@ -335,7 +336,7 @@ const UsersProvider = ({ children }) => {
 
 		fetchData();
 
-	},[])
+	},[userId])
 
 //------------------------------------------------------------------------------------------
 

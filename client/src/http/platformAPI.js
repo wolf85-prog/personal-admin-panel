@@ -5,7 +5,7 @@ export const getPlatforms = async (userId) =>{
        let response = await $host.get(`api/platforms/user/get/${userId}`);
        return response.data;
     } catch (error) {
-        console.log("error while calling getCompany api", error.message);
+        console.log("error while calling getPlatforms api", error.message);
     }
 }
 
