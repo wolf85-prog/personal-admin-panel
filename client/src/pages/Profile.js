@@ -169,7 +169,29 @@ const Profile = () => {
   useEffect(()=> {
     //setManagerProfile({...managerProfile, city: city})
     setCity(managerProfile?.city)
+    setAvatar(managerProfile?.avatar)
   }, [])
+
+  useEffect(() => {
+      const getImage = async () => {
+          if (file) {
+            //setShowUpload(true)
+            console.log("file:", file)
+            const data = new FormData();
+            data.append("name", file.name);
+            data.append("avatar", file);
+            
+            let response = await uploadAvatar(data) //distribFile(data) // uploadFile(data)
+            console.log("response: ", response.data.path)
+  
+            setImage(response.data.path.split('.team')[1]);
+            //сообщение с ссылкой на файл
+            console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
+            setAvatar(host + response.data.path.split('.team')[1])
+          }
+      }
+      getImage();
+    }, [file])
 
   {/* Добавление файла */}
   const onFileChange = (e) => {
@@ -192,8 +214,9 @@ const Profile = () => {
         city, 
         dolgnost: managerProfile?.dolgnost,
         companyId: managerProfile?.companyId,
-        avatar: managerProfile?.avatar, 
-        email: email, 
+        avatar: avatar, 
+        email: email,
+        userId, 
       }  
       console.log("saveData: ", saveData)
 
@@ -301,7 +324,7 @@ const Profile = () => {
                                   )
                                   }
                                   <div className="file-upload" style={{marginBottom: '8px'}}>
-                                    {/* <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
+                                    <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input 
                                       type="file"
                                       id="formFile" 
@@ -309,7 +332,7 @@ const Profile = () => {
                                       name="avatar"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
-                                    /> */}
+                                    />
                                   </div>
 
                                   <label className='title-label'>ID</label>
