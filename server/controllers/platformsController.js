@@ -52,6 +52,9 @@ class PlatformsController {
                 order: [
                     ['id', 'ASC'], //DESC, ASC
                 ],
+                where: {
+                    userId: userId
+                },
                 offset: count > k ? count - k : 0,
                 //limit : 50,
             })
