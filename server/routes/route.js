@@ -21,7 +21,7 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId,
 const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, 
     addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
 
-const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
+const { uploadFile } = require( "../controllers/fileController")
 
 const upload = require('../middleware/file')
 const uploadAvatar = require('../middleware/fileAvatar')
