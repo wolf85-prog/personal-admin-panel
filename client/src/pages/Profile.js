@@ -168,7 +168,7 @@ const Profile = () => {
 
   useEffect(()=> {
     //setManagerProfile({...managerProfile, city: city})
-    setCity(managerProfile.city)
+    setCity(managerProfile?.city)
   }, [])
 
   {/* Добавление файла */}
