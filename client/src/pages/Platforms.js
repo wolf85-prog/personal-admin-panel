@@ -163,7 +163,7 @@ const Platforms = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      let response = await getPlatformCount(20, platforms.length)
+      let response = await getPlatformCount(userId, 20, platforms.length)
       console.log("platforms: ", response)
 
       let arrWorkers = []

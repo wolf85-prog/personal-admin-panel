@@ -4,6 +4,7 @@ import { useSocketContext } from "./socketContext";
 import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 import { getAllMessages, getContacts, getConversation, getMessages } from '../../http/chatAPI'
 import { getCompany } from '../../http/companyAPI'
+import { getPlatforms } from '../../http/platformAPI'
 
 import cities from 'src/data/cities';
 
@@ -276,6 +277,60 @@ const UsersProvider = ({ children }) => {
 				}
 		
 			})
+		}
+
+		fetchData();
+
+	},[])
+
+
+//------------------------------------------------------------------------------------------
+// get Platforms
+//------------------------------------------------------------------------------------------	
+	useEffect(() => {
+		const fetchData = async () => {
+			let platforms = await getPlatforms(userId);
+			console.log("platforms context: ", platforms)
+		
+			let arrCompanys = []
+		
+			platforms.map(async (user, i) => {
+		
+				const newUser = {
+				id: user.id,
+				title: user.title,
+				city: user.city,
+				address: user.address,
+				track: user.track, //
+				url: user.url,
+				karta: user.karta,
+				}
+				arrCompanys.push(newUser)
+		
+				//если элемент массива последний
+				if (i === platforms.length-1) {
+					const sortedUser = [...arrCompanys].sort((a, b) => {       
+						let titleA = a.title 
+						let titleB = b.title
+						// return titleB-titleA  //сортировка по возрастанию 
+						if (titleA.toLowerCase() < titleB.toLowerCase()) {
+							return -1;
+						}
+						if (titleA.toLowerCase() > titleB.toLowerCase()) {
+							return 1;
+						}
+						return 0;
+					})
+					//console.log("sortedUser: ", sortedUser)
+		
+					setPlatformsAll(sortedUser)
+							
+					//сохранить кэш
+					//localStorage.setItem("companys", JSON.stringify(sortedUser));
+				}
+		
+			})
+
 		}
 
 		fetchData();

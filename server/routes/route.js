@@ -46,7 +46,7 @@ route.get('/projects/chat/get/:id', getProjectChatId)
 //----------------- Специалисты ---------------------------------
 route.get('/specialist/user/get/:userId', getSpecialist)
 route.get("/specialist/:id", getSpecialistId);
-route.get('/specialist/count/get/:count/:prev', getSpecCount) //еще
+route.get('/specialist/count/get/:userId/:count/:prev', getSpecCount) //еще
 route.patch('/specialist/update/:id', editSpecialist)
 route.get("/specialist/delete/:id", deleteSpecialist);
 route.post("/specialist/add", addSpecialist);
@@ -69,7 +69,7 @@ route.get("/managers/chat/:id", getManagerId);
 //----------------- Компании ---------------------------------
 route.get('/companys/user/get/:userId', getCompanys)
 route.get("/companys/:id", getCompanyId);
-route.get('/companys/count/get/:count/:prev', getCompanyCount) //еще
+route.get('/companys/count/get/:userId/:count/:prev', getCompanyCount) //еще
 route.patch('/companys/update/:id', editCompany)
 route.get("/companys/delete/:id", deleteCompany);
 route.post("/companys/add", addCompany);
@@ -78,7 +78,7 @@ route.get("/companys/count/get", getCompanyCountAll);
 //----------------- Площадки ---------------------------------
 route.get('/platforms/user/get/:userId', getPlatforms)
 route.get("/platforms/:id", getPlatformId);
-route.get('/platforms/count/get/:count/:prev', getPlatformCount) //еще
+route.get('/platforms/count/get/:userId/:count/:prev', getPlatformCount) //еще
 route.patch('/platforms/update/:id', editPlatform)
 route.get("/platforms/delete/:id", deletePlatform);
 route.post("/platforms/add", addPlatform);
