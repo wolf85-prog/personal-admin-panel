@@ -63,7 +63,7 @@ import { CollectionsOutlined } from '@mui/icons-material';
 //Workers.js
 const Companys = () => {
 
-  const { companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll } = useUsersContext();
+  const { userId, companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [companyCount, setCompanyCount] = useState([]); 
 

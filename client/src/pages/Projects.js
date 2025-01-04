@@ -97,7 +97,7 @@ const Projects = () => {
   //const navigate = useNavigate();
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
+  const { userId, companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -550,6 +550,7 @@ ${loc.url}`;
     const day2 = String(new Date(endDate).getDate()).padStart(2, "0");
   
     const saveData = {
+      userId,
       name: projectName,
       status: statusProject.name,
       datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,

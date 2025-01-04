@@ -70,7 +70,7 @@ import Filters from 'src/components/table/Filters2'
 import { getPlatforms, getPlatformId, editPlatform, getPlatformCount, addPlatform, deletePlatform } from 'src/http/platformAPI';
 
 const Platforms = () => {
-  const { platforms, setPlatforms, platformsAll, setPlatformsAll } = useUsersContext();
+  const { userId, platforms, setPlatforms, platformsAll, setPlatformsAll } = useUsersContext();
 
   const [platformCount, setPlatformCount] = useState([]);
 

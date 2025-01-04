@@ -30,6 +30,7 @@ class ProjectController {
     }
 
     async getProject(req, res) {
+        const {id} = req.params
         try {
             const daysAgo10 = new Date(new Date().setDate(new Date().getDate() - 10));
 
@@ -40,7 +41,8 @@ class ProjectController {
                 where: {
                     datestart: {
                         [Op.gte]: daysAgo10
-                    }
+                    },
+                    userId: id
                 }
             })
             return res.status(200).json(projects);
@@ -51,6 +53,7 @@ class ProjectController {
 
 
     async getProjectsAll(req, res) {
+        const {id} = req.params
         try {
             const projects = await Project.findAll({
                 order: [
@@ -58,6 +61,7 @@ class ProjectController {
                 ],
                 where: {
                     deleted: null,
+                    userId: id
                 }
             })
             return res.status(200).json(projects);
@@ -67,6 +71,7 @@ class ProjectController {
     }
 
     async getProjectsDelete(req, res) {
+        const {id} = req.params
         try {
             const projects = await Project.findAll({
                 order: [
@@ -74,6 +79,7 @@ class ProjectController {
                 ],
                 where: {
                     deleted: true,
+                    userId: id
                 }
             })
             return res.status(200).json(projects);
@@ -113,12 +119,6 @@ class ProjectController {
             managerId, companyId, chatId, spec, geo, comment, equipment, index, number} = req.body
 
         try {
-            // const generate = await sequelize.query('SELECT generate_series(1000,10000,1)', {
-            //     // тип запроса - выборка
-            //     type: QueryTypes.SELECT,
-            //   })
-
-            //   const generateId = generate[index].generate_series
 
             const crm = await sequelize.query("SELECT nextval('crm_id')");
 

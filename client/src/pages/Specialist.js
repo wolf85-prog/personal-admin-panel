@@ -73,8 +73,8 @@ const Specialist = () => {
   const workerId= location.state?.workerId
   //console.log("workerId: ", workerId)
 
-  const { specialist, setSpecialist, specialistAll, setSpecialistAll, specialistsCount, setSpecialistsCount, addNewSpecialist } = useUsersContext();
-  //const { userWorkers: specusers } = useUsersContext();
+  const { userId,specialist, setSpecialist, specialistAll, 
+    setSpecialistAll, specialistsCount, setSpecialistsCount, addNewSpecialist } = useUsersContext();
 
   const [specialistCount, setSpecialistCount] = useState([]);
   const [filterAll, setFilterAll] = useState([]);
