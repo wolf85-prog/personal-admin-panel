@@ -215,6 +215,8 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------	
 	useEffect(() => {
 		const fetchData = async () => {
+			console.log("userId: ", userId)
+
 			let company = await getCompany(userId);
 			console.log("companys context: ", company)
 
@@ -290,6 +292,8 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------	
 	useEffect(() => {
 		const fetchData = async () => {
+			console.log("userId: ", userId)
+			
 			let platforms = await getPlatforms(userId);
 			console.log("platforms context: ", platforms)
 		
