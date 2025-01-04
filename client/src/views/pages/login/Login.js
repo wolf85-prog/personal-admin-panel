@@ -66,7 +66,7 @@ const Login = observer(() => {
           }
           
       } catch (e) {
-          alert(e.response.data.message)
+          alert(e.message)
       }
     }
 
