@@ -212,7 +212,7 @@ const Specialist = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      let workers = await getSpecCount(20, specialist.length)
+      let workers = await getSpecCount(userId, 20, specialist.length)
       console.log("specialist: ", workers)
 
       let arrWorkers = []

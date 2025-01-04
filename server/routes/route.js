@@ -81,7 +81,7 @@ route.get("/platforms/:id", getPlatformId);
 route.get('/platforms/count/get/:userId/:count/:prev', getPlatformCount) //еще
 route.patch('/platforms/update/:id', editPlatform)
 route.get("/platforms/delete/:id", deletePlatform);
-route.post("/platforms/add/:userId", addPlatform);
+route.post("/platforms/add", addPlatform);
 route.get("/platforms/count/get", getPlatformCountAll);
 
 

@@ -258,6 +258,7 @@ const openPlatform = (resPlatform) => {
   console.log("id: ", id)
 
   const saveData = {   
+    userId,
     title, 
     city,
     address,
@@ -394,7 +395,7 @@ const clickAdd = async()=> {
 //ЕЩЁ
 const clickNext = async() => {
   //1 все платформы
-  let response = await getPlatformCount(20, platforms.length);
+  let response = await getPlatformCount(userId, 20, platforms.length);
   console.log("platforms size: ", response)
 
   const arrayWorker = []

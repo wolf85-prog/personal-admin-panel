@@ -185,7 +185,7 @@ const Companys = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      let company = await getCompanyCount(20, 0)
+      let company = await getCompanyCount(userId, 20, 0)
       console.log("companys: ", company)
       console.log("count: ", companysCount)
 

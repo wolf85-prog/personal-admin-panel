@@ -113,7 +113,7 @@ class PlatformsController {
         try {     
             const {title, userId} = req.body
 
-            const newUser = await Platform.create({title, userId})
+            const newUser = await Platform.create({userId, title})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
