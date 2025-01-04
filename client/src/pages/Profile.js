@@ -191,8 +191,8 @@ const Profile = () => {
         phone2: managerProfile?.phone2,
         city, 
         dolgnost: managerProfile?.dolgnost,
-        company: managerProfile?.companyId,
-        avatar, 
+        companyId: managerProfile?.companyId,
+        avatar: managerProfile?.avatar, 
         email: email, 
       }  
       console.log("saveData: ", saveData)
