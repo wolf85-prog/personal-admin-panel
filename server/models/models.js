@@ -27,6 +27,7 @@ const Manager = sequelize.define('manager', {
 
 const Project = sequelize.define('project', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    userId: {type: DataTypes.STRING}, 
     crmID: {type: DataTypes.STRING},
     name: {type: DataTypes.STRING},  //название проекта
     status: {type: DataTypes.STRING},
@@ -57,6 +58,7 @@ const Project = sequelize.define('project', {
 
 const Specialist = sequelize.define('specialist', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
+    userId: {type: DataTypes.STRING}, 
     fio: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
     phone: {type: DataTypes.STRING},
@@ -90,6 +92,7 @@ const Specialist = sequelize.define('specialist', {
 
 const Platform = sequelize.define('platform', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    userId: {type: DataTypes.STRING}, //id менеджера
     title: {type: DataTypes.STRING}, //
     city: {type: DataTypes.STRING}, //
     address: {type: DataTypes.STRING}, //
@@ -101,6 +104,7 @@ const Platform = sequelize.define('platform', {
 
 const Company = sequelize.define('company', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    userId: {type: DataTypes.STRING}, 
     title: {type: DataTypes.STRING}, //
     city: {type: DataTypes.STRING},
     office: {type: DataTypes.STRING},
