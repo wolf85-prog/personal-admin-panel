@@ -21,6 +21,11 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId,
 const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, 
     addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
 
+const { uploadFile, getImage, sendNarush } = require( "../controllers/fileController.js")
+
+const upload = require('../middleware/file')
+const uploadAvatar = require('../middleware/fileAvatar')
+
 route.post('/user/registration', userController.registration)
 route.post('/user/login', userController.login)
 route.get('/user/auth', authMiddleware, userController.check)
@@ -78,5 +83,9 @@ route.patch('/platforms/update/:id', editPlatform)
 route.get("/platforms/delete/:id", deletePlatform);
 route.post("/platforms/add", addPlatform);
 route.get("/platforms/count/get", getPlatformCountAll);
+
+
+route.post("/file/upload", upload.single("photo"), uploadFile);
+route.post("/file/avatar", uploadAvatar.single("avatar"), uploadFile);
 
 module.exports = route
