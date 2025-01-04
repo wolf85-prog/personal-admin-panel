@@ -33,8 +33,8 @@ route.get('/user/get', authMiddleware, userController.getAll)
 route.get('/user/get/:id', authMiddleware, userController.getOne)
 
 
-route.get('/projects/get', getProjectsAll)
-route.get('/projects/delete/get', getProjectsDelete)
+route.get('/projects/user/get/:userId', getProjectsAll)
+route.get('/projects/delete/get/:userId', getProjectsDelete)
 route.get('/projects/get/:id', getProjectId)
 route.post('/projects/add', getProjectCreate)
 route.patch('/projects/update/:id', getProjectUpdate)

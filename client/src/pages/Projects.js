@@ -284,8 +284,8 @@ const Projects = () => {
 
     //5
     const fetchData = async() => {
-      const projs = await getProjects()
-      //console.log("projs: ", projs)
+      const projs = await getProjects(userId)
+      console.log("projs: ", projs)
       const sortProj = [...projs].sort((a, b) => {  
         if (a.dateStart < b.dateStart)
           return -1;

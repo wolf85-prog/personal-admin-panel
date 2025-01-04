@@ -53,7 +53,7 @@ class ProjectController {
 
 
     async getProjectsAll(req, res) {
-        const {id} = req.params
+        const {userId} = req.params
         try {
             const projects = await Project.findAll({
                 order: [
@@ -61,7 +61,7 @@ class ProjectController {
                 ],
                 where: {
                     deleted: null,
-                    userId: id
+                    userId: userId
                 }
             })
             return res.status(200).json(projects);
@@ -71,7 +71,7 @@ class ProjectController {
     }
 
     async getProjectsDelete(req, res) {
-        const {id} = req.params
+        const {userId} = req.params
         try {
             const projects = await Project.findAll({
                 order: [
@@ -79,7 +79,7 @@ class ProjectController {
                 ],
                 where: {
                     deleted: true,
-                    userId: id
+                    userId: userId
                 }
             })
             return res.status(200).json(projects);
