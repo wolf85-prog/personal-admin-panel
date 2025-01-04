@@ -33,6 +33,7 @@ const AppHeaderDropdown = observer(() => {
     console.log("Выход")
     user.setUser({})
     user.setIsAuth(false)
+    setUserId('')
   }
 
   useEffect(()=> { 
