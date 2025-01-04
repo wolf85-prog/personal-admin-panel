@@ -23,6 +23,11 @@ const { getPlatforms, getPlatformCount, editPlatform, getPlatformId,
 
 const { uploadFile } = require( "../controllers/fileController")
 
+const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, 
+    addMainspec, getMainspecCountAll, deleteMainspecProject } = require('../controllers/mainspecController')
+
+const { addCrmID, getCrmID } = require('../controllers/crmIDController')
+
 const upload = require('../middleware/file')
 const uploadAvatar = require('../middleware/fileAvatar')
 
@@ -87,5 +92,18 @@ route.get("/platforms/count/get", getPlatformCountAll);
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
 route.post("/file/avatar", uploadAvatar.single("avatar"), uploadFile);
+
+
+//----------------- Основной состав (специалисты) ---------------------------------
+route.get('/mainspec/project/get/:id', getMainSpecProject)
+route.get("/mainspec/:id", getMainSpecId);
+route.patch('/mainspec/update/:id', editMainspec)
+route.get("/mainspec/delete/:id", deleteMainspec);
+route.get("/mainspec/project/delete/:id", deleteMainspecProject);
+route.post("/mainspec/add", addMainspec);
+route.get("/mainspec/count/get/:userId", getMainspecCountAll);
+
+route.get("/crmid/add", addCrmID);
+route.get("/crmid/get", getCrmID);
 
 module.exports = route

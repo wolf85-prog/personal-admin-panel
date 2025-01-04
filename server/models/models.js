@@ -124,6 +124,24 @@ const Company = sequelize.define('company', {
     comteg: {type: DataTypes.TEXT},
 })
 
+const MainSpec = sequelize.define('mainspec', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
+    userId: {type: DataTypes.STRING}, 
+    date: {type: DataTypes.STRING},
+    specId: {type: DataTypes.STRING},
+    vidWork: {type: DataTypes.STRING},
+    specialization: {type: DataTypes.TEXT},  
+    comteg: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT},
+    stavka: {type: DataTypes.STRING},
+    merch: {type: DataTypes.STRING},
+    taxi: {type: DataTypes.STRING},
+    projectId: {type: DataTypes.STRING},
+    hr: {type: DataTypes.BOOLEAN},
+    number: {type: DataTypes.INTEGER},
+    count: {type: DataTypes.INTEGER},
+})
+
 module.exports = {
     User, 
     Manager,
@@ -131,4 +149,5 @@ module.exports = {
     Company,
     Platform,
     Specialist,
+    MainSpec,
 }

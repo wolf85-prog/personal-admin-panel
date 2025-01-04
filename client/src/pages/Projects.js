@@ -424,89 +424,91 @@ ${loc.url}`;
     setTeh8(resProj.teh8)
 
 
-    // let resMain
-    // resMain = await getMainSpecProject(id)
-    // console.log("resMain: ", resMain)
+    //основной состав (специалисты)
+    let resMain
+    resMain = await getMainSpecProject(id)
+    console.log("resMain: ", resMain)
 
-    // if (resMain.length > 0) {
-    //   let arr = []
-    //   let myColor = ''
-    //   let myColor2 = ''
+    if (resMain.length > 0) {
+      let arr = []
+      let myColor = ''
+      let myColor2 = ''
 
-    //   resMain.map((item)=>{
-    //     if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
-    //     if (item.vidWork === 'Офис') myColor = 'purple'
+      resMain.map((item)=>{
+        if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
+        if (item.vidWork === 'Офис') myColor = 'purple'
 
-    //     const obj = {
-    //       name: item.vidWork,
-    //       color: myColor
-    //     }
+        const obj = {
+          name: item.vidWork,
+          color: myColor
+        }
 
-    //     const obj1 = {
-    //       name: item.specialization,
-    //       color: ''
-    //     }
+        const obj1 = {
+          name: item.specialization,
+          color: ''
+        }
 
-    //     const obj2 = {
-    //       name: item.stavka,
-    //       color: ''
-    //     }
+        const obj2 = {
+          name: item.stavka,
+          color: ''
+        }
 
-    //     if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor = 'red'
+        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor = 'red'
 
-    //     const obj3 = {
-    //       name: item.comteg,
-    //       color: myColor2
-    //     }
+        const obj3 = {
+          name: item.comteg,
+          color: myColor2
+        }
 
-    //     const newObj = {
-    //       id: item.id,
-    //       date: item.date,
-    //       specId: item.specId,
-    //       vidWork: JSON.stringify(obj),
-    //       specialization: JSON.stringify(obj1),
-    //       comteg: JSON.stringify(obj3),
-    //       comment: item.comment,
-    //       stavka: JSON.stringify(obj2),   
-    //       numder: item.number, 
-    //       hr: item.hr,  
-    //       count: item.count,  
-    //       projectId: id,
-    //     }
+        const newObj = {
+          id: item.id,
+          date: item.date,
+          specId: item.specId,
+          vidWork: JSON.stringify(obj),
+          specialization: JSON.stringify(obj1),
+          comteg: JSON.stringify(obj3),
+          comment: item.comment,
+          stavka: JSON.stringify(obj2),   
+          numder: item.number, 
+          hr: item.hr,  
+          count: item.count,  
+          projectId: id,
+        }
 
-    //     arr.push(newObj)
-    //   })
+        arr.push(newObj)
+      })
 
-    //   //console.log(arr)
-    //   setMainspec(arr)
+      //console.log(arr)
+      setMainspec(arr)
 
-    // } else {
-    //   //новый состав специалистов
-    //   const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
-    //   const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
+    } else {
+      //новый состав специалистов
+      const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
+      const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
 
-    //   //console.log("startD: ", startD, startT)
+      //console.log("startD: ", startD, startT)
 
-    //   const data = {
-    //     //id: resProj.crmID+1,
-    //     date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
-    //     vidWork: null,
-    //     specId: null,
-    //     specialization: null,
-    //     stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
-    //     comment: null,
-    //     comteg: null,
-    //     taxi: null,
-    //     merch: null,
-    //     projectId: id,    
-    //   }
+      const data = {
+        //id: resProj.crmID+1,
+        userId,
+        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
+        vidWork: null,
+        specId: null,
+        specialization: null,
+        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
+        comment: null,
+        comteg: null,
+        taxi: null,
+        merch: null,
+        projectId: id,    
+      }
 
-    //   let arr = []
-    //   setMainspec(
-    //     //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
-    //     [...arr, data, data, data, data]
-    //   );
-    // }
+      let arr = []
+      setMainspec(
+        //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
+        [...arr, data, data, data, data]
+      );
+    }
 
     
     setVisibleA(true)
@@ -578,46 +580,47 @@ ${loc.url}`;
     const resSave = await editProject(saveData, id) 
     console.log("resSave: ", resSave)
 
-    // console.log("mainSpec save: ", mainspec)
-    // mainspec.map(async(item, index)=> {
-    //   //setTimeout(async()=> {
-    //     console.log("id item: ", item.id)
-    //     if (item.id) {
-    //       const resEdit = await editMainspec(
-    //         {
-    //           date: item.date,
-    //           vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-    //           specId: item.specId,
-    //           specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-    //           stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-    //           comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-    //           comment: item.comment,
-    //           projectId: item.projectId,
-    //           number: index+1,
-    //           hr: item.hr,
-    //         },
-    //         item.id
-    //       )
-    //       console.log("resEdit: ", resEdit)
-    //     } else {
-    //       await addMainspec(
-    //         {
-    //           date: item.date,
-    //           vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-    //           specId: item.specId,
-    //           specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-    //           stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-    //           comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-    //           comment: item.comment,
-    //           projectId: item.projectId,
-    //           number: index+1,
-    //           hr: item.hr,
-    //         }
-    //       )
-    //     }
+    console.log("mainSpec save: ", mainspec)
+    mainspec.map(async(item, index)=> {
+      //setTimeout(async()=> {
+        console.log("id item: ", item.id)
+        if (item.id) {
+          const resEdit = await editMainspec(
+            {
+              date: item.date,
+              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+              specId: item.specId,
+              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+              comment: item.comment,
+              projectId: item.projectId,
+              number: index+1,
+              hr: item.hr,
+            },
+            item.id
+          )
+          console.log("resEdit: ", resEdit)
+        } else {
+          await addMainspec(
+            {
+              userId,
+              date: item.date,
+              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+              specId: item.specId,
+              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+              comment: item.comment,
+              projectId: item.projectId,
+              number: index+1,
+              hr: item.hr,
+            }
+          )
+        }
         
-    //   //}, 500 * ++index)
-    // })
+      //}, 500 * ++index)
+    })
 
 
     //send otkaz
