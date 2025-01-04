@@ -64,6 +64,7 @@ class CompanysController {
             }
 
             const {
+                userId,
                 title, 
                 city,
                 office,
@@ -84,6 +85,7 @@ class CompanysController {
 
             const newUser = await Company.update(
                 { 
+                    userId,
                     title, 
                     city,
                     office,

@@ -109,7 +109,7 @@ class ProjectController {
 
 
     async getProjectCreate(req, res) {
-        const {name, status, specifika, city, datestart, dateend, teh, 
+        const {userId, name, status, specifika, city, datestart, dateend, teh, 
             managerId, companyId, chatId, spec, geo, comment, equipment, index, number} = req.body
 
         try {
@@ -124,7 +124,8 @@ class ProjectController {
 
             const resid = crm[0][0].nextval
             
-              const obj = {                
+              const obj = {    
+                userId,            
                 crmID: resid.toString(),
                 name,
                 status,

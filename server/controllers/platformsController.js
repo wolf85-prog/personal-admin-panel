@@ -64,6 +64,7 @@ class PlatformsController {
             }
 
             const {
+                userId,
                 title, 
                 city,
                 address,
@@ -74,6 +75,7 @@ class PlatformsController {
 
             const newUser = await Platform.update(
                 { 
+                    userId,
                     title, 
                     city,
                     address,

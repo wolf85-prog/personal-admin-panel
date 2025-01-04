@@ -68,6 +68,7 @@ class SpecialistController {
             }
 
             const {
+                userId,
                 fio, 
                 chatId,
                 phone,
@@ -94,6 +95,7 @@ class SpecialistController {
 
             const newUser = await Specialist.update(
                 { 
+                    userId,
                     fio, 
                     chatId,
                     phone, 
