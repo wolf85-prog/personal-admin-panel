@@ -1,8 +1,8 @@
 import {$authHost, $host} from "./index";
 
-export const getPlatforms = async () =>{
+export const getPlatforms = async (userId) =>{
     try {
-       let response = await $host.get('api/platforms/get');
+       let response = await $host.get(`api/platforms/user/get/${userId}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getCompany api", error.message);
@@ -18,9 +18,9 @@ export const getPlatformId = async (id) =>{
     }
 }
 
-export const getPlatformCount = async (count, prev) =>{
+export const getPlatformCount = async (userId, count, prev) =>{
     try {
-       let response = await $host.get(`api/platforms/count/get/${count}/${prev}`);
+       let response = await $host.get(`api/platforms/count/get/${userId}/${count}/${prev}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getCompanyCount api", error.message);
@@ -53,9 +53,9 @@ export const deletePlatform = async (id) =>{
 }
 
 
-export const getPlatformCountAll = async () =>{
+export const getPlatformCountAll = async (userId) =>{
     try {
-        let response = await $host.get(`api/platforms/count/get`); 
+        let response = await $host.get(`api/platforms/count/get/${userId}`); 
         return response.data; 
     } catch (error) {
         console.log("error while calling getCompanyCountAll api",error.message);

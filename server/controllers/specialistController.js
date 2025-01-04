@@ -18,6 +18,7 @@ const socketUrl = process.env.SOCKET_APP_URL
 class SpecialistController {
 
     async getSpecialist(req, res) {
+        const {userId} = req.params
         try {
             const workers = await Specialist.findAll({
                 order: [
@@ -26,7 +27,8 @@ class SpecialistController {
                 where: {
                     chatId: {
                         [Op.ne]: null
-                    }
+                    },
+                    userId: userId
                 }
             })
             return res.status(200).json(workers);
@@ -38,8 +40,13 @@ class SpecialistController {
     async getSpecCount(req, res) {
         const kol = req.params.count
         const prev = req.params.prev
+        const {userId} = req.params
         try {
-            const count = await Specialist.count();
+            const count = await Specialist.count({
+                where: {
+                    userId: userId
+                }
+            });
             //console.log(count)
 
             const k = parseInt(kol) + parseInt(prev)
@@ -48,6 +55,9 @@ class SpecialistController {
                 order: [
                     ['id', 'ASC'], //DESC, ASC
                 ],
+                where: {
+                    userId: userId
+                },
                 offset: count > k ? count - k : 0,
                 //limit : 50,
             })
@@ -211,8 +221,13 @@ class SpecialistController {
     }
 
     async getSpecCountAll(req, res) {
+        const {userId} = req.params
         try {
-            const count = await Specialist.count();
+            const count = await Specialist.count({
+                where: {
+                    userId: userId
+                }
+            });
 
             return res.status(200).json(count);
         } catch (error) {

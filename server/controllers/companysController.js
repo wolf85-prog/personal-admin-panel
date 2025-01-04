@@ -18,11 +18,15 @@ const socketUrl = process.env.SOCKET_APP_URL
 class CompanysController {
 
     async getCompanys(req, res) {
+        const {userId} = req.params
         try {
             const company = await Company.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
+                where: {
+                    userId: userId
+                }
             })
             return res.status(200).json(company);
         } catch (error) {
@@ -33,8 +37,13 @@ class CompanysController {
     async getCompanyCount(req, res) {
         const kol = req.params.count
         const prev = req.params.prev
+        const {userId} = req.params
         try {
-            const count = await Company.count();
+            const count = await Company.count({
+                where: {
+                    userId: userId
+                }
+            });
             //console.log(count)
 
             const k = parseInt(kol) + parseInt(prev)
@@ -43,6 +52,9 @@ class CompanysController {
                 order: [
                     ['id', 'ASC'], //DESC, ASC
                 ],
+                where: {
+                    userId: userId
+                },
                 offset: count > k ? count - k : 0,
                 //limit : 50,
             })
@@ -145,8 +157,13 @@ class CompanysController {
     }
 
     async getCompanyCountAll(req, res) {
+        const {userId} = req.params
         try {
-            const count = await Company.count();
+            const count = await Company.count({
+                where: {
+                    userId: userId
+                }
+            });
 
             return res.status(200).json(count);
         } catch (error) {

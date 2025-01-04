@@ -18,11 +18,15 @@ const socketUrl = process.env.SOCKET_APP_URL
 class PlatformsController {
 
     async getPlatforms(req, res) {
+        const {userId} = req.params
         try {
             const company = await Platform.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
+                where: {
+                    userId: userId
+                }
             })
             return res.status(200).json(company);
         } catch (error) {
@@ -33,8 +37,13 @@ class PlatformsController {
     async getPlatformCount(req, res) {
         const kol = req.params.count
         const prev = req.params.prev
+        const {userId} = req.params
         try {
-            const count = await Platform.count();
+            const count = await Platform.count({
+                where: {
+                    userId: userId
+                }
+            });
             //console.log(count)
 
             const k = parseInt(kol) + parseInt(prev)
@@ -125,8 +134,13 @@ class PlatformsController {
     }
 
     async getPlatformCountAll(req, res) {
+        const {userId} = req.params
         try {
-            const count = await Platform.count();
+            const count = await Platform.count({
+                where: {
+                    userId: userId
+                }
+            });
 
             return res.status(200).json(count);
         } catch (error) {

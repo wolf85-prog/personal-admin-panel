@@ -1,17 +1,17 @@
 import {$authHost, $host, $host_worker} from "./index";
 
-export const getSpecialist = async () =>{
+export const getSpecialist = async (userId) =>{
     try {
-       let response = await $host.get('api/specialist/get');
+       let response = await $host.get(`api/specialist/user/get/${userId}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getSpecialist api", error.message);
     }
 }
 
-export const getSpecCount = async (count, prev) =>{
+export const getSpecCount = async (userId, count, prev) =>{
     try {
-       let response = await $host.get(`api/specialist/count/get/${count}/${prev}`);
+       let response = await $host.get(`api/specialist/count/get/${userId}/${count}/${prev}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getSpecCount api", error.message);

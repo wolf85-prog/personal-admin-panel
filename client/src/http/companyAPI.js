@@ -1,17 +1,17 @@
 import {$authHost, $host} from "./index";
 
-export const getCompany = async () =>{
+export const getCompany = async (userId) =>{
     try {
-       let response = await $host.get('api/companys/get');
+       let response = await $host.get(`api/companys/user/get/${userId}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getCompany api", error.message);
     }
 }
 
-export const getCompanyCount = async (count, prev) =>{
+export const getCompanyCount = async (userId, count, prev) =>{
     try {
-       let response = await $host.get(`api/companys/count/get/${count}/${prev}`);
+       let response = await $host.get(`api/companys/count/get/${userId}/${count}/${prev}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getCompanyCount api", error.message);
@@ -44,9 +44,9 @@ export const deleteCompany = async (id) =>{
 }
 
 
-export const getCompanyCountAll = async () =>{
+export const getCompanyCountAll = async (userId) =>{
     try {
-        let response = await $host.get(`api/companys/count/get`); 
+        let response = await $host.get(`api/companys/count/get/${userId}`); 
         return response.data; 
     } catch (error) {
         console.log("error while calling getCompanyCountAll api",error.message);
