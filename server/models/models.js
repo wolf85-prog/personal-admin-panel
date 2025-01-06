@@ -142,6 +142,40 @@ const MainSpec = sequelize.define('mainspec', {
     count: {type: DataTypes.INTEGER},
 })
 
+const Client = sequelize.define('client', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
+    userId: {type: DataTypes.STRING}, 
+    fio: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING, unique: true},
+    phone: {type: DataTypes.STRING},
+    phone2: {type: DataTypes.STRING},
+    specialization: {type: DataTypes.TEXT},  
+    city: {type: DataTypes.STRING},
+    skill: {type: DataTypes.TEXT},
+    promoId: {type: DataTypes.STRING}, 
+    rank: {type: DataTypes.INTEGER}, 
+    merch: {type: DataTypes.STRING},
+    company: {type: DataTypes.STRING},
+    comteg: {type: DataTypes.TEXT},
+    comteg2: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT}, 
+    comment2: {type: DataTypes.TEXT}, 
+    age: {type: DataTypes.STRING},
+    reyting: {type: DataTypes.STRING},
+    inn: {type: DataTypes.STRING}, 
+    passport: {type: DataTypes.TEXT},
+    profile: {type: DataTypes.TEXT},
+    dogovor: {type: DataTypes.BOOLEAN}, 
+    samozanjatost: {type: DataTypes.BOOLEAN},
+    passportScan: {type: DataTypes.TEXT},
+    email: {type: DataTypes.STRING},  
+    blockW: {type: DataTypes.BOOLEAN},
+    deleted: {type: DataTypes.BOOLEAN}, //distrib
+    great: {type: DataTypes.BOOLEAN}, //hello
+    block18: {type: DataTypes.BOOLEAN}, 
+    krest: {type: DataTypes.BOOLEAN}, //bad
+})
+
 module.exports = {
     User, 
     Manager,
@@ -150,4 +184,5 @@ module.exports = {
     Platform,
     Specialist,
     MainSpec,
+    Client,
 }
