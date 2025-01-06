@@ -90,6 +90,7 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'В эфире',
+      to: '/air',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },
@@ -126,7 +127,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Клиент | Профиль',
-      to: '/clientprofile',
+      to: '/client',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',

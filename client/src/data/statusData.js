@@ -7,7 +7,7 @@ const statusData = [
   {value: 6, label: "Отменен", color: 'red', divide: false}, //IndianRed
   {value: 7, label: "Заморожен", color: 'red', divide: true}, //IndianRed
   {value: 8, label: "Рассчитан",color: '#1E90FF', divide: false }, //DodgerBlue
-  {value: 9, label: "Fuck", color: '#FF8C00', divide: false},
+  // {value: 9, label: "Fuck", color: '#FF8C00', divide: false},
 ];
 
 export default statusData;

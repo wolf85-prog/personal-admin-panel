@@ -30,7 +30,7 @@ import {
   CTooltip,
 } from '@coreui/react'
 
-//import Icon from "./../chat-app-worker/components/Icon";
+import Icon from "./../chat-app-worker/components/Icon";
 import InputMask from 'react-input-mask';
 import {
   flexRender,
@@ -103,7 +103,7 @@ const Projects = () => {
   const [showCalendar, setShowCalendar] = useState(false)
   const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
-
+  const [showHeader, setShowHeader] = useState(false)
   const [showSaveAddress, setShowSaveAddress] = useState(false)
 
   const [height, setHeight] = useState(600)
@@ -312,6 +312,7 @@ const Projects = () => {
   const openProject = async(month, item, number, id, name, end, status, timeStart, specifika) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
+    setShowHeader(true)
     setShowProject(true)
     setShowCalendar(false)
     setShowCalendar2(false)
@@ -519,7 +520,7 @@ ${loc.url}`;
 
 
     setTimeout(()=> {
-      setHeight(509)
+      setHeight(559)
     }, 200)
     
   }
@@ -690,6 +691,7 @@ ${loc.url}`;
   }
 
   const closeProfile = () => {
+    setShowHeader(false)
     setShowProject(false)
     setShowCalendar2(true)
     setShowMainTable(false)
@@ -947,8 +949,7 @@ ${loc.url}`;
 
   const changeDateProject=(e, index)=> {
     console.log("change Date: ", index, e.target.value+'T'+'00:00')
-    let arr = []
-    arr = [...mainspec]
+    let arr = JSON.parse(JSON.stringify(mainspec))
     // console.log("arr: ", arr)
     arr[index].date = e.target.value+'T' + arr[index].date?.split('T')[1]
     setMainspec(arr)
@@ -956,8 +957,7 @@ ${loc.url}`;
 
   const changeTimeProject=(e, index)=> {
     //console.log(e.target.value, index)
-    let arr = []
-    arr = [...mainspec]
+    let arr = JSON.parse(JSON.stringify(mainspec))
     arr[index].date = arr[index].date.split('T')[0] + 'T'+ e.target.value
     setMainspec(arr)
   }
@@ -1213,7 +1213,21 @@ ${loc.url}`;
                     <CRow className="mt-2">
                       <CCol xs>
                         <CCard className="mb-4">
-                          {/* <CCardHeader>Сметы</CCardHeader> */}
+                          <CCardHeader style={{display: showHeader ? 'block' : 'none'}}>                                                  
+                            <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
+                              <div className="text-field" style={{marginBottom: '0'}}>
+                                <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
+                              </div>
+                              <div style={{display: 'flex', alignItems: 'center'}}>
+                                <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>
+                                <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                              </div>                 
+                            </div>
+                          </CCardHeader>                    
 
                           <CCardBody style={{padding: '12px', height: `${height}px`}}>
                             {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
@@ -1226,23 +1240,8 @@ ${loc.url}`;
                                   <Calendar2 openProject={openProject} projects={projects} setProjects={setProjects} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
-                                    <div style={{position: 'relative', height: '494px', display: 'flex', flexDirection: 'row', marginTop: '35px'}}>
-                                              <div style={{position: 'absolute', top: '-34px', left: '0px'}}>
-                                                <div className="text-field">
-                                                  <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
-                                                </div>
-                                              </div>
-                                              
-                                              <div style={{position: 'absolute', top: '-25px', right: '4px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'flex-end', width: '-webkit-fill-available'}}>   
-                                                <div style={{display: 'flex'}}>
-                                                  {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}
-                                                  <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                                  <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                                </div>
-                                              </div>
+                                    <div style={{position: 'relative', height: '581px', display: 'flex', flexDirection: 'row'}}>
+
                                           {/* 1 */}                               
                                           <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
                                             
@@ -1297,6 +1296,19 @@ ${loc.url}`;
 
                                               
                                               <label className='title-label'>Специфика</label>
+                                              <div className="text-field">
+                                                <MyDropdown4
+                                                  style={{backgroundColor: '#131c21'}}
+                                                  options={specifikaData}
+                                                  selected={specifikaProject}
+                                                  setSelected={setSpecifikaProject}
+                                                  placeholder='Выбери специфику'
+                                                  // onChange={addCity}
+                                                />
+                                                {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
+                                              </div>
+
+                                              <label className='title-label'>Специфика 2</label>
                                               <div className="text-field">
                                                 <MyDropdown4
                                                   style={{backgroundColor: '#131c21'}}
@@ -1495,6 +1507,64 @@ ${loc.url}`;
                                             />
                                           </div>
 
+                                          <label className='title-label'>Локация 2</label>
+                                          <div className="text-field" style={{width: '320px'}}>
+                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                            <Autocomplete
+                                              sx={{
+                                                  display: 'inline-block',
+                                                  '& input': {zIndex: '25',
+                                                    width: '100%',
+                                                    border: 'none',
+                                                    height: '40px',
+                                                    padding: '5px 4px',
+                                                    fontFamily: 'inherit',
+                                                    fontSize: '14px',
+                                                    fontWeight: '700',
+                                                    lineHeight: '1.5',
+                                                    textAlign: 'center',
+                                                    color: '#ffffff',
+                                                    backgroundColor: 'transparent',
+                                                  }
+                                              }}
+                                              className="text-field__input" 
+                                              openOnFocus
+                                              id="custom-input-demo"
+                                              options={platformsData}
+                                              style={{width: '100%', padding: '0'}}
+                                              onInputChange={(e)=>setLocationProject(e.target.value)}
+                                              //onInputChange={(e)=>console.log(e.target.value)}
+                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                              onChange={(event, newValue) => {
+                                                  if (newValue && newValue.length) {
+                                                      setLocationProject(newValue)
+                                                      
+                                                      const loc = platformsAll.find(item=> item.title === newValue)
+                                                      console.log("loc: ", loc)
+                                                      if (loc) {
+                                                        let text = `${loc.city}
+${loc.address}     
+${loc.track}   
+${loc.url}`;
+                                                        setAddress(text)
+                                                        setGeoId(loc.id)
+                                                      }
+                                                  }  
+                                              }}
+                                              value={locationProject}
+                                              inputValue={locationProject}
+                                              renderInput={(params) => (
+                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                  <input 
+                                                      className="text-field__input" 
+                                                      type="text" {...params.inputProps} 
+                                                      placeholder=''
+                                                  />
+                                              </div>
+                                              )}
+                                            />
+                                          </div>
+
                                           <div style={{position:'relative'}}>
                                             <label className='title-label'>Адрес</label>
                                             <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
@@ -1628,11 +1698,11 @@ ${loc.url}`;
                                               id="comment"
                                               value={tehText}
                                               onChange={(e)=>setTehText(e.target.value)}
-                                              style={{resize: 'none', width: '320px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
+                                              style={{resize: 'none', width: '320px', height: '208px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
                                             />
                                           </div> 
 
-                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '300px', right: '240px'}}>Техническое Задание</label>
+                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '387px', right: '240px'}}>Техническое Задание</label>
 
                                           <div  style={{display: 'flex', flexDirection: 'row', marginTop: '45px'}}>
                                             <div>
@@ -1702,9 +1772,11 @@ ${loc.url}`;
                                             <label className='title-label' style={{marginTop: '20px'}}>Финальная смета</label>
 
                                             <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
+
+                                            <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
                                           </div>
 
-                                          <div style={{marginTop: '52px', marginLeft: '-40px'}}>
+                                          <div style={{marginTop: '93px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
                                                   <input disabled={false} className="text-field__input" type="text" name="teh5" id="teh5" value={teh5} onChange={(e)=>setTeh5(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
@@ -1767,9 +1839,19 @@ ${loc.url}`;
                                               : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
                                             }
                                           </div>
+
+                                          <div onClick={pressPoster} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
+                                            {
+                                              playPoster ? 
+                                              (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
+                                                <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                              )
+                                              : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                            }
+                                          </div>
                                         </div>
                                         
-
+                            {/* </CCollapse> */}
                                     </div>
                                   :'')
                                 )
@@ -1820,8 +1902,8 @@ ${loc.url}`;
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
+                                    {/* <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Комтег</CTableHeaderCell>                         
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Мерч</CTableHeaderCell>
@@ -1875,7 +1957,7 @@ ${loc.url}`;
                                                             placeholder="" 
                                                             disableUnderline
                                                             aria-label="sm input example"
-                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', borderRadius: '5px', width: '100px'}} 
+                                                            style={{backgroundColor: 'transparent', height: '14px', textAlign: 'center', border: 'none', borderRadius: '5px', width: '109px'}} 
                                                           />}
                                         </InputMask>
                                         <InputMask 
@@ -1928,7 +2010,7 @@ ${loc.url}`;
                                     {item.hr ?
                                       <></> 
                                       :<MyDropdown5
-                                        options={specOnlyData2}
+                                        options={[]}
                                         selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
@@ -1948,12 +2030,6 @@ ${loc.url}`;
                                         style={{width: '130px'}}
                                       />
                                     }
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      {/* 🟩 */}
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      {/* 🟩 */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                     {item.hr ?
