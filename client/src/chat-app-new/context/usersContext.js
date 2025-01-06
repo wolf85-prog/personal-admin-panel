@@ -67,6 +67,7 @@ const UsersProvider = ({ children }) => {
 	const [sortedCities, setSortedCities] = useState([])
 
 	const [specialistAll, setSpecialistAll] = useState([]);
+	const [clientAll, setClientAll] = useState([]);
 	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
 	const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
 	const [usersOnline, setUsersOnline] = useState([]);
@@ -80,7 +81,7 @@ const UsersProvider = ({ children }) => {
 	const [projects, setProjects] = useState([]); 
 	const [newProject, setNewProject]= useState(false);
 	const [countProjects, setCountProjects] = useState(0)
-
+	const [client, setClient] = useState([]); 
 
 	const [userWorkers, setUserWorkers] = useState([]); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
@@ -91,7 +92,7 @@ const UsersProvider = ({ children }) => {
 	const [specialistsCount, setSpecialistsCount] = useState(0)
 	const [managersCount, setManagersCount] = useState(0)
 	const [companysCount, setCompanysCount] = useState(0)
-
+	const [clientsCount, setClientsCount] = useState(0)
 
 
 	const [countMessageWork, setCountMessageWork] = useState(() => {
@@ -367,6 +368,10 @@ const UsersProvider = ({ children }) => {
 			setPlatformsAll,
 			specialist, 
 			setSpecialist,
+			clientAll,
+			setClientAll,
+			client,
+			setClient,
 
 			userWorkers,
 			workersAll,
@@ -377,6 +382,8 @@ const UsersProvider = ({ children }) => {
 			setCompanysCount,
 			specialistsCount, 
 			setSpecialistsCount,
+			clientsCount, 
+			setClientsCount,
 
 			managerProfile, 
 			setManagerProfile,

@@ -37,7 +37,7 @@ import {
 //import Icon from "./../chat-app-worker/components/Icon";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
-import { getSpecialist, getSpecCount, editSpecialist, addSpecialist, deleteSpecialist } from '../http/specAPI'
+import { getClient, getClientCount, editClient, addClient, deleteClient } from '../http/clientAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
@@ -73,10 +73,10 @@ const Client = () => {
   const workerId= location.state?.workerId
   //console.log("workerId: ", workerId)
 
-  const { userId,specialist, setSpecialist, specialistAll, 
-    setSpecialistAll, specialistsCount, setSpecialistsCount, addNewSpecialist } = useUsersContext();
+  const { userId, clientAll, setClientAll, client, setClient,
+    clientsCount, setClientsCount } = useUsersContext();
 
-  const [specialistCount, setSpecialistCount] = useState([]);
+  const [clientCount, setClientCount] = useState([]);
   const [filterAll, setFilterAll] = useState([]);
 
   const [userbots, setUserbots] = useState([]);
@@ -178,11 +178,11 @@ const Client = () => {
 
   //поиск
   // useEffect(() => {
-	// 	const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-  //   setSpecialist(text === '' ? specialistCount : filteredData); 
+	// 	const filteredData = clientAll.filter(user=> (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+  //   setClient(text === '' ? clientCount : filteredData); 
 
-  //   setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
-  //   //console.log("specialist", specialist)
+  //   setClientsCount(text === '' ? clientAll.length : filteredData.length)
+  //   //console.log("client", client)
   //   setShowClear(text === '' ? false : true)
   // }, [text]);
 
@@ -190,7 +190,7 @@ const Client = () => {
   useEffect(()=> {
 
     if (workerId) {
-      const res = specialistAll.find((item)=>item.id === workerId)
+      const res = clientAll.find((item)=>item.id === workerId)
       console.log("res: ", res)
       clickFio(res)
     }
@@ -212,12 +212,12 @@ const Client = () => {
     const fetchData = async() => {
 
       // 2 специалисты 20 чел.
-      let workers = await getSpecCount(userId, 20, specialist.length)
-      console.log("specialist: ", workers)
+      let workers = await getClientCount(userId, 20, client.length)
+      console.log("client: ", workers)
 
       let arrWorkers = []
 
-      workers.map(async (worker, i) => {
+      workers && workers.map(async (worker, i) => {
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
         const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -306,11 +306,11 @@ const Client = () => {
             return idB-idA  //сортировка по возрастанию 
           })
 
-					setSpecialistCount(sortedWorker)
-          setSpecialist(sortedWorker)
+					setClientCount(sortedWorker)
+          setClient(sortedWorker)
 					
 					//сохранить кэш
-					localStorage.setItem("specialist", JSON.stringify(sortedWorker));
+					localStorage.setItem("client", JSON.stringify(sortedWorker));
 				}
 
       })  
@@ -357,14 +357,14 @@ const Client = () => {
       userId,
       fio: 'ФИО',
     }
-    const res = await addSpecialist(data)
+    const res = await addClient(data)
     console.log("res: ", res)
 
     // if (res) {
-    //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
+    //   await addNewclient(res?.id, res?.fio, res?.profile)
     // }
 
-    specialist.push(
+    client.push(
       {
         id: res?.id, 
         fio: res?.fio, 
@@ -378,12 +378,12 @@ const Client = () => {
         comment2: '', 
     })
 
-    const sortedUser = [...specialist].sort((a, b) => {       
+    const sortedUser = [...client].sort((a, b) => {       
       var idA = a.id, idB = b.id 
       return idB-idA  //сортировка по возрастанию 
     })
 
-    setSpecialist(sortedUser)
+    setClient(sortedUser)
   }
 
   const clickFio = (worker)=> {
@@ -464,23 +464,23 @@ const Client = () => {
     console.log("check sort", countPress + 1)
 
     if (countPress + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
         return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else if (countPress + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
         return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var fioA = a.id, fioB = b.id 
         return fioB-fioA  //сортировка по убыванию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     }
     
   }
@@ -495,25 +495,25 @@ const Client = () => {
     console.log("check sort", countPressTG + 1)
 
     if (countPressTG + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var tgA = a.telegram, tgB = b.telegram 
         return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else if (countPressTG + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var tgA = a.telegram, tgB = b.telegram 
         return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var fioA = a.id, fioB = b.id 
         return fioB-fioA  //сортировка по убыванию 
       })
 
-      //setSpecialistCount(sortedWorker)
-      setSpecialist(sortedWorker)
+      //setClientCount(sortedWorker)
+      setClient(sortedWorker)
     }
     
   }
@@ -528,25 +528,25 @@ const Client = () => {
     //console.log("check sort", countPressTG + 1)
 
     if (countPressCity + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else if (countPressCity + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var idA = a.id, idB = b.id 
         return idB-idA  //сортировка по убыванию 
       })
 
-      //setSpecialistCount(sortedWorker)
-      setSpecialist(sortedWorker)
+      //setClientCount(sortedWorker)
+      setClient(sortedWorker)
     }
     
   }
@@ -561,25 +561,25 @@ const Client = () => {
     //console.log("check sort", countPressTG + 1)
 
     if (countPressCategory + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else if (countPressCategory + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var cityA = a.city, cityB = b.city
         return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
+      setClient(sortedWorker)
     } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
+      const sortedWorker = [...client].sort((a, b) => {       
         var idA = a.id, idB = b.id 
         return idB-idA  //сортировка по убыванию 
       })
 
-      //setSpecialistCount(sortedWorker)
-      setSpecialist(sortedWorker)
+      //setClientCount(sortedWorker)
+      setClient(sortedWorker)
     }
     
   }
@@ -587,7 +587,7 @@ const Client = () => {
   //ЕЩЁ
   const clickNext = async() => {
     //1 все специалисты
-		let response = await getSpecCount(20, specialist.length);
+		let response = await getClientCount(20, client.length);
     //console.log("workers size: ", response)
 
     const arrayWorker = []
@@ -685,8 +685,8 @@ const Client = () => {
         var idA = a.id, idB = b.id 
         return idB-idA  //сортировка по возрастанию 
       })
-      setSpecialist(sortedWorker)
-      setSpecialistCount(sortedWorker)
+      setClient(sortedWorker)
+      setClientCount(sortedWorker)
   }
 
   const closeProfile = () => { 
@@ -828,10 +828,10 @@ const Client = () => {
     }
     console.log(saveData)
 
-    setSpecialist((specialist) => {	
+    setClient((client) => {	
 
-			let userIndex = specialist.findIndex((spec) => spec.id === id);
-			const usersCopy = JSON.parse(JSON.stringify(specialist));
+			let userIndex = client.findIndex((spec) => spec.id === id);
+			const usersCopy = JSON.parse(JSON.stringify(client));
 
       const userObject = usersCopy[userIndex];
 			usersCopy[userIndex] = { ...userObject, 
@@ -864,7 +864,7 @@ const Client = () => {
     });
 
     //сохранить изменения в базе
-    await editSpecialist(saveData, id)
+    await editClient(saveData, id)
 
     addToast(exampleToast) //ваши данные сохранены
   }
@@ -882,10 +882,10 @@ const Client = () => {
 
 
   useEffect(() => {
-    console.log("speclist: ", speclist)
+    console.log("client: ", client)
     
 
-  }, [speclist]);
+  }, [client]);
 
 
   const handleTg = event => {
@@ -905,7 +905,7 @@ const Client = () => {
 
   const changeSpec = (e) => {
     console.log(e.target.innerText)
-    setSpeclist([...specialist, e.target.innerText])
+    setSpeclist([...client, e.target.innerText])
     setShowSpec(false)
   }
 
@@ -971,10 +971,10 @@ const Client = () => {
     console.log(id)
     setVisibleDelete(false)
 
-    await deleteSpecialist(id)
+    await deleteClient(id)
     addToast(deleteToast) //ваши данные сохранены
 
-    setSpecialist([...specialist].filter(item=>item.id !== id))
+    setClient([...client].filter(item=>item.id !== id))
 
     setShowProfile(false)
   }
@@ -1028,7 +1028,7 @@ const Client = () => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <p style={{position: 'absolute', top: '-18px', right: '15px', fontSize: '14px', color: '#f3f3f3'}}>
-                              Всего: {specialistsCount}
+                              Всего: {clientsCount}
                             </p>
                             <CCardBody>
                               {!showProfile ?
@@ -1072,7 +1072,7 @@ const Client = () => {
                                       </CTableRow>
                                     </CTableHead>
                                     <CTableBody >                                  
-                                    {specialist.map((item, index) => (
+                                    {client.map((item, index) => (
                                         <CTableRow v-for="item in tableItems" key={index+1} style={{lineHeight: '14px'}}>
                                           <CTableDataCell className="text-center widthSpace my-td">
                                             {index+1}

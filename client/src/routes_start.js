@@ -36,7 +36,7 @@ export const authRoutes = [
     { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },
     { path: PLATFORMS_ROUTE, name: 'Площадки', Component: Platforms },
 
-    { path: CLIENT_ROUTE, name: 'Клиенты', Component: Specialist },
+    { path: CLIENT_ROUTE, name: 'Клиенты', Component: Client },
 
     { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
     { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },
