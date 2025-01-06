@@ -28,6 +28,11 @@ const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec,
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
+const { getClient, getClientCount, editClient, 
+    getClientId, addClient, deleteClient, 
+    getClientCountAll, getClientPhone, getClientChatId, 
+    blockClient } = require('../controllers/clientController')
+
 const upload = require('../middleware/file')
 const uploadAvatar = require('../middleware/fileAvatar')
 
@@ -105,5 +110,18 @@ route.get("/mainspec/count/get/:userId", getMainspecCountAll);
 
 route.get("/crmid/add", addCrmID);
 route.get("/crmid/get", getCrmID);
+
+
+//----------------- Клиенты ---------------------------------
+route.get('/client/user/get/:userId', getClient)
+route.get("/client/:id", getClientId);
+route.get('/client/count/get/:userId/:count/:prev', getClientCount) //еще
+route.patch('/client/update/:id', editClient)
+route.get("/client/delete/:id", deleteClient);
+route.post("/client/add", addClient);
+route.get("/client/count/get", getClientCountAll);
+route.get("/client/phone/:id", getClientPhone);
+route.get("/client/chat/:id", getClientChatId);
+route.get('/client/block/:id', blockClient)
 
 module.exports = route
