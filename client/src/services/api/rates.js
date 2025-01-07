@@ -4,8 +4,8 @@ import axios from 'axios'
 // const BASE_URL = 'http://localhost:8000/api/'
 // const BASE_URL = 'http://localhost:6868/api/'
 // const BASE_URL = 'http://localhost:7777/api/'
-// const BASE_URL = 'http://localhost:7979/api/'
-const BASE_URL = 'https://uley.company:7979/api/'
+const BASE_URL = 'http://localhost:7979/api/'
+// const BASE_URL = 'https://uley.company:7979/api/'
 
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL

@@ -9,6 +9,9 @@ import UserStore from "./store/UserStore";
 import { UsersProvider } from "./chat-app-new/context/usersContext";
 import { SocketProvider } from "./chat-app-new/context/socketContext";
 import AccountProvider from './chat-app-new/context/AccountProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 export const Context = createContext(null)
 
@@ -21,11 +24,13 @@ createRoot(document.getElementById('root')).render(
 
       <Provider store={store}>
         <SocketProvider>
-          <UsersProvider>
-            <AccountProvider>
-              <App />
-            </AccountProvider>          
-          </UsersProvider>
+          <QueryClientProvider client={queryClient}>
+            <UsersProvider>
+              <AccountProvider>
+                <App />
+              </AccountProvider>          
+            </UsersProvider>
+          </QueryClientProvider>
         </SocketProvider>
       </Provider>
 

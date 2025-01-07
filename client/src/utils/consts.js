@@ -37,6 +37,8 @@ export const PROJECTS_ROUTE = '/projects'
 export const TRASH_ROUTE = '/trash'
 export const PLATFORMS_ROUTE = '/platforms'
 
+export const PAY_RATE_ROUTE = '/payrate'
+
 export const AIR_ROUTE = '/air'
 
 export const CLIENT_ROUTE = '/client'

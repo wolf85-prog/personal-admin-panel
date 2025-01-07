@@ -183,7 +183,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Ставки',
-      to: '/specialist',
+      to: '/payrate',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
 
