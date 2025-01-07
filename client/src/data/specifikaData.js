@@ -12,9 +12,9 @@ const specifikaData = [
   {value: 8, label: "Офис", color: '#CD5C5C'},
 
   {value: 9, label: "Гастрольный тур", color: '#1E90FF'},
-  {value: 10, label: "Проект 90", color: '#1E90FF'},
-  {value: 11, label: "Проект 60", color: '#1E90FF'},
-  {value: 12, label: "Проект 30", color: '#1E90FF'},
+  // {value: 10, label: "Проект 90", color: '#1E90FF'},
+  // {value: 11, label: "Проект 60", color: '#1E90FF'},
+  // {value: 12, label: "Проект 30", color: '#1E90FF'},
 ];
 
 export default specifikaData;

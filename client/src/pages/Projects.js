@@ -92,6 +92,7 @@ import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFi
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
+import startData from 'src/data/startData';
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -120,6 +121,7 @@ const Projects = () => {
   const [city, setCity] = useState('');
   const [statusProject, setStatusProject] = useState({name: '', color: ''});
   const [specifikaProject, setSpecifikaProject] = useState({name: '', color: ''});
+  const [startProject, setStartProject] = useState({name: '', color: ''});
   const [vidProject, setVidProject] = useState([]);
   const [company, setCompany] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -1295,20 +1297,20 @@ ${loc.url}`;
                                               </div>
 
                                               
-                                              <label className='title-label'>Специфика</label>
+                                              <label className='title-label'>Старт</label>
                                               <div className="text-field">
                                                 <MyDropdown4
                                                   style={{backgroundColor: '#131c21'}}
-                                                  options={specifikaData}
-                                                  selected={specifikaProject}
-                                                  setSelected={setSpecifikaProject}
-                                                  placeholder='Выбери специфику'
+                                                  options={startData}
+                                                  selected={startProject}
+                                                  setSelected={setStartProject}
+                                                  placeholder='Выбери старт'
                                                   // onChange={addCity}
                                                 />
                                                 {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
                                               </div>
 
-                                              <label className='title-label'>Специфика 2</label>
+                                              <label className='title-label'>Специфика</label>
                                               <div className="text-field">
                                                 <MyDropdown4
                                                   style={{backgroundColor: '#131c21'}}
@@ -1507,72 +1509,25 @@ ${loc.url}`;
                                             />
                                           </div>
 
-                                          <label className='title-label'>Локация 2</label>
+                                          <label className='title-label'>Адрес</label>
                                           <div className="text-field" style={{width: '320px'}}>
-                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
-                                            <Autocomplete
-                                              sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                    width: '100%',
-                                                    border: 'none',
-                                                    height: '40px',
-                                                    padding: '5px 4px',
-                                                    fontFamily: 'inherit',
-                                                    fontSize: '14px',
-                                                    fontWeight: '700',
-                                                    lineHeight: '1.5',
-                                                    textAlign: 'center',
-                                                    color: '#ffffff',
-                                                    backgroundColor: 'transparent',
-                                                  }
-                                              }}
-                                              className="text-field__input" 
-                                              openOnFocus
-                                              id="custom-input-demo"
-                                              options={platformsData}
-                                              style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>setLocationProject(e.target.value)}
-                                              //onInputChange={(e)=>console.log(e.target.value)}
-                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onChange={(event, newValue) => {
-                                                  if (newValue && newValue.length) {
-                                                      setLocationProject(newValue)
-                                                      
-                                                      const loc = platformsAll.find(item=> item.title === newValue)
-                                                      console.log("loc: ", loc)
-                                                      if (loc) {
-                                                        let text = `${loc.city}
-${loc.address}     
-${loc.track}   
-${loc.url}`;
-                                                        setAddress(text)
-                                                        setGeoId(loc.id)
-                                                      }
-                                                  }  
-                                              }}
-                                              value={locationProject}
-                                              inputValue={locationProject}
-                                              renderInput={(params) => (
-                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
-                                                      className="text-field__input" 
-                                                      type="text" {...params.inputProps} 
-                                                      placeholder=''
-                                                  />
-                                              </div>
-                                              )}
+                                            <input disabled={false} className="text-field__input" type="text" 
+                                              name="address" 
+                                              id="address" 
+                                              style={{width: '320px'}}
+                                              value={address}
                                             />
+
                                           </div>
 
                                           <div style={{position:'relative'}}>
-                                            <label className='title-label'>Адрес</label>
+                                            <label className='title-label'>Как добраться</label>
                                             <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
                                               <textarea 
                                                 className="text-field__input" 
                                                 type="text" 
-                                                name="address" 
-                                                id="address"
+                                                name="treck" 
+                                                id="treck"
                                                 value={address}
                                                 style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
                                               />
@@ -1702,7 +1657,7 @@ ${loc.url}`;
                                             />
                                           </div> 
 
-                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '387px', right: '240px'}}>Техническое Задание</label>
+                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '387px', right: '200px'}}>Техническое Задание</label>
 
                                           <div  style={{display: 'flex', flexDirection: 'row', marginTop: '45px'}}>
                                             <div>

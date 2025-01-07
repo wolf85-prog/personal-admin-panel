@@ -132,7 +132,10 @@ const Admin = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const host = process.env.REACT_APP_API_URL
   
-  
+  useEffect(()=>{
+    setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0)
+  },[])
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -147,6 +150,53 @@ const Admin = () => {
                 <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100', width: '100px'}}/>
                 
                 <WidgetsDropdown/>
+
+                {/* График Год */}
+                <CWidgetStatsA
+                  ref={grafik}
+                  className="mb-4 box"
+                  color="gray"
+                  value={<></>}
+                  title={new Date().getFullYear()}
+                  //action={}
+                  chart={
+                    <Chart 
+                      range={800}
+                      data={[
+                        { name: 'Январь', value: 0 },
+                        { name: 'Февраль', value: 100 },
+                        { name: 'Март', value: 0 },
+                        { name: 'Апрель', value: 50 },
+                        { name: 'Май', value: 10 },
+                        { name: 'Июнь', value: 0 },
+                        { name: 'Июль', value: 0 },
+                        { name: 'Август', value: 200 },
+                        { name: 'Сентябрь', value: 300 },
+                        { name: 'Октябрь', value: 0 },
+                        { name: 'Ноябрь', value: 150 },
+                        { name: 'Декабрь', value: 0 },
+                      ]}
+                      //data2={[]} 
+                      data2={
+                        [
+                          { name: 'Январь', value: 0 },
+                          { name: 'Февраль', value: 0 },
+                          { name: 'Март', value: 0 },
+                          { name: 'Апрель', value: 0 },
+                          { name: 'Май', value: 1 },
+                          { name: 'Июнь', value: 0 },
+                          { name: 'Июль', value: 0 },
+                          { name: 'Август', value: 2 },
+                          { name: 'Сентябрь', value: 2 },
+                          { name: 'Октябрь', value: 0 },
+                          { name: 'Ноябрь', value: 0 },
+                          { name: 'Декабрь', value: 0 },
+                        ]
+                      }
+                      width={widthGrafik} height={350} 
+                    />             
+                  }
+                />
 
                 <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
 

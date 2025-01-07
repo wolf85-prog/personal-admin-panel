@@ -373,6 +373,7 @@ const UsersProvider = ({ children }) => {
 			client,
 			setClient,
 
+			conversations,
 			userWorkers,
 			workersAll,
 

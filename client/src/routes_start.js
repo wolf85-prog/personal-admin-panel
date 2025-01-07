@@ -8,6 +8,7 @@ import {
     PLATFORMS_ROUTE,
     CHAT_MANAGER,
     CHAT_WORKER,
+    CHAT_SUPPORT,
     AIR_ROUTE,
     CLIENT_ROUTE,
     PAY_RATE_ROUTE,
@@ -28,7 +29,7 @@ const PayRate = React.lazy(() => import('./views/estimates/PayRate'))
 
 const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
 const ChatManager = React.lazy(() => import('./pages/ChatManager'))
-
+const ChatSupport = React.lazy(() => import('./pages/ChatSupport'))
 const Client = React.lazy(() => import('./pages/Client'))
 
 export const authRoutes = [
@@ -45,6 +46,7 @@ export const authRoutes = [
 
     { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
     { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },
+    { path: CHAT_SUPPORT, name: 'Техническая поддержка', Component: ChatSupport },
 
     { path: AIR_ROUTE, name: 'В эфире', Component: Air },
 
