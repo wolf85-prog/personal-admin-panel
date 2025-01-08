@@ -68,7 +68,7 @@ const AppHeaderDropdown = observer(() => {
 
         <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
 
-        <Link to='/profile'><CDropdownItem>
+        <Link to='/profile' style={{textDecoration:'none'}}><CDropdownItem>
             <CIcon icon={cilUser} className="me-2" />
             Профиль
           </CDropdownItem>
