@@ -215,34 +215,6 @@ const AppSidebar = () => {
       component: CNavTitle,
       name: '',
     },
-//---------------------------------------------------------------------------------------------------------
-    
-    
-    // {
-    //   component: CNavItem,
-    //   name: 'Поиск специалистов',
-    //   to: '/distribution',
-    //   icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-    //   style: {сolor: '#e55353',},
-    // },
-   
-    // {
-    //   component: CNavItem,
-    //   name: 'Поиск оборудования',
-    //   to: '/notifications',
-    //   icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-    //   badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-    //   style: {сolor: '#e55353',},
-    // },
-    // {
-    //   component: CNavItem,
-    //   name: 'Специалисты 2.0',
-    //   to: '/specialist',
-    //   icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    //   style: {color: '#e55353',},
-    // },
-    
-    
   ]
 
   return (

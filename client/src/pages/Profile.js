@@ -46,16 +46,6 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
-import MyDropdown from 'src/components/Dropdown/Dropdown';
-import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
-
-import comtegs from 'src/data/comtegs';
-import companys from 'src/data/companys';
-
-import dolgnostData from 'src/data/dolgnostData';
-import sferaData from 'src/data/sfera';
-
-import distribData from 'src/data/specDistribData';
 
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getContacts } from '../http/chatAPI'
@@ -89,18 +79,7 @@ const Profile = () => {
   const [showUpload, setShowUpload] = useState(false)
   const [showSearch, setShowSearch] = useState(true)
   const [showClear, setShowClear] = useState(false)
-  const [showMenuBlock18, setShowMenuBlock18] = useState(false)
-  const [showBlock18, setShowBlock18] = useState(false)
-  const [block18, setBlock18] = useState(false)
-  const [block, setBlock] = useState(false)
-  const [showMenuKrest, setShowMenuKrest] = useState(false)
-  const [showKrest, setShowKrest] = useState(false)
 
-  
-  const [showSavePhone1, setShowSavePhone1] = useState(false)
-  const [showSavePhone2, setShowSavePhone2] = useState(false)
-  const [showSaveTg, setShowSaveTg] = useState(false)
-  const [showSave3, setShowSave3] = useState(false)
 
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');

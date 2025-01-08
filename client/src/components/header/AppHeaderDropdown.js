@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import {Context} from "../../index";
 import {
   CAvatar,
@@ -28,6 +29,8 @@ import { useUsersContext } from "../../chat-app-new/context/usersContext";
 const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
   const { userId, setUserId } = useUsersContext();
+  
+  const navigate = useNavigate()
 
   const logOut = () => {
     console.log("Выход")
@@ -36,21 +39,24 @@ const AppHeaderDropdown = observer(() => {
     setUserId('')
   }
 
-  useEffect(()=> { 
-    const fetchData = async() => {
+  // useEffect(()=> { 
+  //   const fetchData = async() => {
       
-      const user = localStorage.getItem('user')
-      //console.log("user: ", JSON.parse(user))
+  //     const user = localStorage.getItem('user')
+  //     //console.log("user: ", JSON.parse(user))
 
-      if (user) {
-        setUserId(JSON.parse(user)?.id)
-        //setEmail(JSON.parse(user)?.email)
-      }
+  //     if (user) {
+  //       setUserId(JSON.parse(user)?.id)
+  //       //setEmail(JSON.parse(user)?.email)
+  //     }
       
-    }
-    fetchData()
-  }, [])
+  //   }
+  //   fetchData()
+  // }, [])
 
+  const openProfile = () => { 
+    navigate("/profile")
+  }
 
   return (
     <CDropdown variant="nav-item">
@@ -62,7 +68,7 @@ const AppHeaderDropdown = observer(() => {
 
         <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
 
-        <CDropdownItem href="/profile">
+        <CDropdownItem onClick={openProfile}>
           <CIcon icon={cilUser} className="me-2" />
           Профиль
         </CDropdownItem>
