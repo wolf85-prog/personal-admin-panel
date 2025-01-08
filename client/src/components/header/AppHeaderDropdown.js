@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {Context} from "../../index";
 import {
   CAvatar,
@@ -30,7 +30,7 @@ const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
   const { userId, setUserId } = useUsersContext();
   
-  const navigate = useNavigate()
+  const location = useLocation();
 
   const logOut = () => {
     console.log("Выход")
@@ -55,7 +55,7 @@ const AppHeaderDropdown = observer(() => {
   // }, [])
 
   const openProfile = () => { 
-    navigate("/profile")
+    //location("/profile")
   }
 
   return (
@@ -68,11 +68,12 @@ const AppHeaderDropdown = observer(() => {
 
         <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
 
-        <CDropdownItem onClick={openProfile}>
-          <CIcon icon={cilUser} className="me-2" />
-          Профиль
-        </CDropdownItem>
-        
+        <Link to='/profile'><CDropdownItem>
+            <CIcon icon={cilUser} className="me-2" />
+            Профиль
+          </CDropdownItem>
+        </Link>
+
         <CDropdownItem href="#">
           <CIcon icon={cilSettings} className="me-2" />
           Настройки
