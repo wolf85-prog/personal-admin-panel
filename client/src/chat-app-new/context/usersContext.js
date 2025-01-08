@@ -216,15 +216,16 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------	
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log("userId: ", userId)
 
-			let company = await getCompany(userId);
+			const user = localStorage.getItem('user')
+
+			let company = await getCompany(JSON.parse(user)?.id);
 			console.log("companys context: ", company)
 
 		
 			let arrCompanys = []
 		
-			company.map(async (user, i) => {
+			company && company.map(async (user, i) => {
 				const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
 				const d2 = new Date(d)
 				const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -285,7 +286,7 @@ const UsersProvider = ({ children }) => {
 
 		fetchData();
 
-	},[userId])
+	},[])
 
 
 //------------------------------------------------------------------------------------------
@@ -293,14 +294,14 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------	
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log("userId: ", userId)
+			const user = localStorage.getItem('user')
 			
-			let platforms = await getPlatforms(userId);
+			let platforms = await getPlatforms(JSON.parse(user)?.id);
 			console.log("platforms context: ", platforms)
 		
 			let arrCompanys = []
 		
-			platforms.map(async (user, i) => {
+			platforms && platforms.map(async (user, i) => {
 		
 				const newUser = {
 				id: user.id,
@@ -341,7 +342,7 @@ const UsersProvider = ({ children }) => {
 
 		fetchData();
 
-	},[userId])
+	},[])
 
 //------------------------------------------------------------------------------------------
 

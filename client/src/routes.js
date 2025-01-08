@@ -12,16 +12,19 @@ const PayRate = React.lazy(() => import('./views/estimates/PayRate'))
 
 const Client = React.lazy(() => import('./pages/Client'))
 
+const Air = React.lazy(() => import('./pages/Air'))
+
 const routes = [
-  { path: '/', exact: true, name: 'Пункт управления / ' },
-  { path: '/dashboard', name: 'Пункт управления / ', Component: Admin },
+  { path: '/', exact: true, name: 'Пункт управления' },
+  { path: '/dashboard', name: 'Пункт управления', Component: Admin },
+  { path: '/air', name: 'В эфире', Component: Air },
   { path: '/profile', name: 'Профиль', Component: Profile },
   { path: '/projects', name: 'Проекты', Component: Projects },
-  { path: "/specialist", name: 'Специалисты / Профиль', Component: Specialist },
+  { path: "/specialist", name: 'Специалисты', Component: Specialist },
   { path: "/payrate", name: 'Ставки', Component: PayRate },
-  { path: "/companys", name: 'Компании / Профиль', Component: Companys },
+  { path: "/companys", name: 'Компании', Component: Companys },
   { path: "/platforms", name: 'Площадки', Component: Platforms },
-  { path: "/client", name: 'Клиенты / Профиль', Component: Client },
+  { path: "/client", name: 'Клиенты', Component: Client },
 ]
 
 export default routes

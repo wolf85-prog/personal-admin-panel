@@ -63,7 +63,7 @@ import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
 
 const Profile = () => {
-  const {user} = useContext(Context)
+  //const {user} = useContext(Context)
   const navigate = useNavigate()
   const { userId, sortedCities, email, managerProfile, setManagerProfile } = useUsersContext();
   // const [managerProfile, setManagerProfile] = useState({});
@@ -160,7 +160,7 @@ const Profile = () => {
 	useEffect(()=> {
 	
 		const fetchData = async() => {
-		  setShowProfile(true)
+		  //setShowProfile(true)
 		  setLoading(false)  
 		}
 		fetchData()
@@ -303,11 +303,10 @@ const Profile = () => {
                       <CCol style={{textAlign: 'center'}}>
                         <CCard className="mb-4"> 
                             <CCardBody>
-                              {showProfile ?
-                              
-                              // (loading ?                                
-                              // <CSpinner/>                        
-                              // :
+                              {loading ?
+                                                             
+                              <CSpinner/>                        
+                              :
                               <div style={{position: 'relative', height: '400px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
@@ -525,8 +524,6 @@ const Profile = () => {
 
 
                               </div>
-                              //)
-                              :''
                               }
                             </CCardBody>
                           </CCard>
