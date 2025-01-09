@@ -35,14 +35,14 @@ const Client = React.lazy(() => import('./pages/Client'))
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
     { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
-    { path: SPECIALIST_ROUTE, name: 'Специалисты', Component: Specialist },
+    { path: SPECIALIST_ROUTE, name: 'Сотрудники', Component: Specialist },
     { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },
-    { path: PLATFORMS_ROUTE, name: 'Площадки', Component: Platforms },
+    { path: PLATFORMS_ROUTE, name: 'Локации', Component: Platforms },
 
     { path: PAY_RATE_ROUTE, name: 'Ставки', Component: PayRate },
 
-    { path: CLIENT_ROUTE, name: 'Клиенты', Component: Client },
+    { path: CLIENT_ROUTE, name: 'Клиент', Component: Client },
 
     { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
     { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },

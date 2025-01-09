@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import routes from '../routes'
 
-import { CBreadcrumb, CBreadcrumbItem } from '@coreui/react'
+import { CBreadcrumb, CBreadcrumbItem, CButton } from '@coreui/react'
 
 const AppBreadcrumb = (props) => {
   const currentLocation = useLocation().pathname
@@ -32,7 +32,7 @@ const AppBreadcrumb = (props) => {
   const breadcrumbs = getBreadcrumbs(currentLocation)
 
   return (
-    <CBreadcrumb className="m-0 ms-2" >
+    <CBreadcrumb className="m-0 ms-2">
       {/* <CBreadcrumbItem href="/">Пункт управления</CBreadcrumbItem> */}
       {breadcrumbs.map((breadcrumb, index) => {
         return (
@@ -41,9 +41,15 @@ const AppBreadcrumb = (props) => {
             key={index}
           >
             {breadcrumb.name} {props.tabs}
+ 
           </CBreadcrumbItem>
         )
       })}
+
+      <div style={{marginLeft: '450px'}}>
+        <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти специалистов</CButton></a>
+        <a href='https://t.me/ULEY_Projects_Bot' style={{backgroundColor: 'transparent', marginLeft: '20px'}}><CButton color="dark">Найти оборудование</CButton></a>
+      </div>
     </CBreadcrumb>
   )
 }

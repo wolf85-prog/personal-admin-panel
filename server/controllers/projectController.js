@@ -129,6 +129,7 @@ class ProjectController {
                 crmID: resid.toString(),
                 name,
                 status,
+                start,
                 specifika,
                 city,
                 dateStart: datestart, 
@@ -168,6 +169,7 @@ class ProjectController {
                 {
                     name: name,
                     status: status,
+                    start,
                     specifika,
                     city,
                     dateStart: datestart, 

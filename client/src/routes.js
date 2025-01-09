@@ -20,11 +20,11 @@ const routes = [
   { path: '/air', name: 'В эфире', Component: Air },
   { path: '/profile', name: 'Профиль', Component: Profile },
   { path: '/projects', name: 'Проекты', Component: Projects },
-  { path: "/specialist", name: 'Специалисты', Component: Specialist },
+  { path: "/specialist", name: 'Сотрудники', Component: Specialist },
   { path: "/payrate", name: 'Ставки', Component: PayRate },
   { path: "/companys", name: 'Компании', Component: Companys },
-  { path: "/platforms", name: 'Площадки', Component: Platforms },
-  { path: "/client", name: 'Клиенты', Component: Client },
+  { path: "/platforms", name: 'Локации', Component: Platforms },
+  { path: "/client", name: 'Клиент', Component: Client },
 ]
 
 export default routes

@@ -368,6 +368,7 @@ const Projects = () => {
     setEndTime(resProj.dateEnd?.split('T')[1]?.slice(0, 5)) 
 
     setStatusProject({name: status, color: statusData.find((stat)=> stat.label === resProj.status)?.color})
+    setStartProject({name: start, color: startData.find((stat)=> stat.label === resProj.start)?.color})
     setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === resProj.specifika)?.color})
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
@@ -2148,7 +2149,7 @@ ${loc.url}`;
                           </CCollapse>
                         </CCard>
 
-                        <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
+                        {/* <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
                           <CCollapse visible={visibleC}>
                             <CCardBody style={{padding: '12px'}}>
@@ -2181,7 +2182,7 @@ ${loc.url}`;
                               </table>
                             </CCardBody>
                           </CCollapse>
-                        </CCard>
+                        </CCard> */}
 
                       </CCol>
                     </CRow>
