@@ -1,4 +1,4 @@
-const {Company} = require('../models/models')
+const {Company, CompanyProf} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
@@ -167,6 +167,84 @@ class CompanysController {
             return res.status(200).json(count);
         } catch (error) {
             return res.status(500).json(error.message);
+        }
+    }
+
+    async addCompanyProf(req, res) {  
+        try {    
+            const {title, userId} = req.body
+
+            const newUser = await CompanyProf.create({title, userId})
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async editCompanyProf(req, res) { 
+        const {id} = req.params      
+        try {    
+            let exist=await CompanyProf.findOne( {where: {id: id}} )
+            
+            if(!exist){
+                res.status(500).json({msg: "user not exist"});
+                return;
+            }
+
+            const {
+                userId,
+                title, 
+                city,
+                office,
+                sklad,
+                comment,
+                projects,
+                managers,
+                dogovorDate, 
+                dogovorNumber, 
+                bugalterFio, 
+                bugalterEmail,
+                bugalterPhone,  
+                inn, //инн компании
+                profile,
+                sfera,
+                comteg,
+            } = req.body
+
+            const newUser = await CompanyProf.update(
+                { 
+                    userId,
+                    title, 
+                    city,
+                    office,
+                    sklad,
+                    comment,
+                    projects,
+                    managers,
+                    dogovorDate, 
+                    dogovorNumber, 
+                    bugalterFio, 
+                    bugalterEmail,
+                    bugalterPhone,  
+                    inn, //инн компании
+                    profile,
+                    sfera,
+                    comteg,
+                },
+                { where: {id: id} })
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    async getCompanyProfId(req, res) {
+        const {id} = req.params
+        try {
+            const company = await CompanyProf.findOne({where: {id: String(id)}})
+            return res.status(200).json(company);
+        } catch (err) {
+            return res.status(500).json(err);
         }
     }
 
