@@ -150,6 +150,7 @@ const Projects = () => {
   const [teh8, setTeh8] = useState('');
   const [tehText, setTehText] = useState('');
   const [address, setAddress] = useState('');
+  const [track, setTrack] = useState('');
   const [geoId, setGeoId] = useState('');
   const [comment, setComment] = useState('');
   
@@ -311,7 +312,7 @@ const Projects = () => {
 
 
 // Открыть проект  
-  const openProject = async(month, item, number, id, name, end, status, timeStart, specifika) => {
+  const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, start) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
     setShowHeader(true)
@@ -405,11 +406,13 @@ const Projects = () => {
 ${loc.address}     
 ${loc.track}   
 ${loc.url}`;
-      setAddress(text)
+      setAddress(loc.city)
+      setTrack(loc.track)
       setLocationProject(loc.title)
     } else {
       setLocationProject('')
       setAddress('')
+      setTrack('')
     }
 
     setGeoId(resProj?.geo)
@@ -1491,7 +1494,8 @@ ${loc.url}`;
 ${loc.address}     
 ${loc.track}   
 ${loc.url}`;
-                                                        setAddress(text)
+                                                        setAddress(loc.address)
+                                                        setTrack(loc.track)
                                                         setGeoId(loc.id)
                                                       }
                                                   }  
@@ -1529,7 +1533,7 @@ ${loc.url}`;
                                                 type="text" 
                                                 name="treck" 
                                                 id="treck"
-                                                value={address}
+                                                value={track}
                                                 style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
                                               />
                                             </div> 

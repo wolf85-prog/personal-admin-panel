@@ -149,7 +149,7 @@ const Admin = () => {
               <>
                 <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100', width: '100px'}}/>
                 
-                <WidgetsDropdown/>
+                <WidgetsDropdown2/>
 
                 {/* График Год */}
                 <CWidgetStatsA

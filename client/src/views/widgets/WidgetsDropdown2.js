@@ -22,13 +22,13 @@ const WidgetsDropdown2 = ({
           color="primary"
           value={
             <>
-              {users.length} {/*{' '}
+              0 {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Всего"}
+          title={"Проекты"}
           action={""}
           chart={
             <CChartLine
@@ -42,13 +42,7 @@ const WidgetsDropdown2 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-primary'),
-                    data: [
-                      (users.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/users.length-5, 
-                      (users.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/users.length-5, 
-                      (users.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/users.length-5, 
-                      (users.filter(item => new Date(item.createDate).getMonth() === 3)).length*100/users.length-5, 
-                     0, 0, 0
-                    ],
+                    data: [65, 59, 84, 84, 51, 55, 40],
                   },
                 ],
               }}
@@ -103,13 +97,13 @@ const WidgetsDropdown2 = ({
           color="info"
           value={
             <>
-              {newUsers.length} 
+              0{/* {newUsers.length}  */}
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
-          title={"Новые"}
+          title="Доход"
           action={""}
           chart={
             <CChartLine
@@ -123,13 +117,7 @@ const WidgetsDropdown2 = ({
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
                     pointBackgroundColor: getStyle('--cui-info'),
-                    data: [
-                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 0)).length*100/newUsers.length-5, 
-                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 1)).length*100/newUsers.length-5, 
-                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 2)).length*100/newUsers.length-5, 
-                      (newUsers.filter(item => new Date(item.createDate).getMonth() === 3)).length*100/newUsers.length-5, 
-                      0, 0, 0
-                    ],
+                    data: [65, 59, 84, 84, 51, 55, 40],
                   },
                 ],
               }}
@@ -183,13 +171,13 @@ const WidgetsDropdown2 = ({
           color="warning"
           value={
             <>
-              {activeUsers.length} {/*{' '}
+              0{/*{' '} 
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
-          title={"Активные"}
+          title="Расход"
           action={""}
           chart={
             <CChartLine
@@ -244,10 +232,10 @@ const WidgetsDropdown2 = ({
           color="danger"
           value={
             <>
-              {delUsers.length}
+              0{/* {delUsers.length} */}
             </>
           }
-          title={"Удаленные"}
+          title={"Прибыль"}
           action={""}
           chart={
             <CChartBar
