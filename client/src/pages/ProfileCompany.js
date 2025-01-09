@@ -173,91 +173,12 @@ const ProfileCompany = () => {
     setSortedCities(newSorted)
 
     const fetchData = async() => {
-
-      // 2 специалисты 20 чел.
-      let company = await getCompanyCount(userId, 20, 0)
-      console.log("companys: ", company)
-      console.log("count: ", companysCount)
-
-      let arrManagers = []
-      // let managersDB = await getManager()
-      // managersDB.map((item, index)=> {
-      //   arrManagers.push(item.fio)
-      // })
-      // setManagersData(arrManagers)
-      //console.log("managersDB: ", arrManagers)
-
-      let arrCompanys = []
-
-      company.map(async (user, i) => {
-        const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-        const d2 = new Date(d)
-        const month = String(d2.getMonth()+1).padStart(2, "0");
-        const day = String(d2.getDate()).padStart(2, "0");
-        const chas = d2.getHours();
-        const min = String(d2.getMinutes()).padStart(2, "0");
-        const newDate = `${day}.${month} ${chas}:${min}`;
-
-        let str_sfera = ''
-        user.sfera && JSON.parse(user.sfera).map((item, index)=> {
-          str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
-        })
-
-        let str_comteg = ''
-        user.comteg && JSON.parse(user.comteg).map((item, index)=> {
-          str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
-        })
-
-        let str_comment = ''
-        user.comment && JSON.parse(user.comment).map((item, index)=> {
-          str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
-        })
-
-        let str_manager = ''
-        let str_manager2 = ''
-        // user.managers && JSON.parse(user.managers).map((item, index)=> {
-        //   const fioManager = managersDB.find(item2 => item2.id === item.name)
-        //   if (fioManager) {
-        //     str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-        //     str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-        //   } else {
-        //     str_manager = str_manager + 'ФИО' + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-        //     str_manager2 = str_manager2 + JSON.stringify({fio: 'ФИО', dolgnost: 'менеджер', phone: ''}) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-        //   }
-        // })
-
-        const newUser = {
-          id: user.id,
-          title: user.title,
-          city: user.city,
-          office: user.office,
-          sklad: user.sklad,
-          comment: str_comment,
-          managers: str_manager,
-          managersObj: str_manager2,
-          bugalterFio: user.bugalterFio, 
-          bugalterEmail: user.bugalterEmail,
-          bugalterPhone: user.bugalterPhone,
-          profile: user.profile,
-          sfera: str_sfera,
-          comteg: str_comteg,
-
-        }
-        arrCompanys.push(newUser)
-
-        //если элемент массива последний
-				if (i === company.length-1) {
-          const sortedUser = [...arrCompanys].sort((a, b) => {       
-            var idA = a.id, idB = b.id 
-            return idB-idA  //сортировка по возрастанию 
-          })
-
-					setCompanyCount(sortedUser)
-          setCompanys(sortedUser)
-					
-				}
-
-      })   
+ 
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+      setId(result?.id)
+      setTitle(result?.title)
+      //setCity(result?.city)
 
       setLoading(false)
     }
@@ -590,7 +511,7 @@ const ProfileCompany = () => {
 
                                   <label className='title-label'>ID</label>
                                   <div className="text-field" >
-                                    <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={0} style={{width: '250px', marginRight: '25px'}}/>
+                                    <input disabled={true} className="text-field__input" type="text" name="companyId" id="companyId" value={id} style={{width: '250px', marginRight: '25px'}}/>
                                   </div>
 
                                   <label className='title-label'>Реквизиты</label>
