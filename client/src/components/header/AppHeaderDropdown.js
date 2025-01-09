@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {Context} from "../../index";
 import {
@@ -25,11 +25,13 @@ import CIcon from '@coreui/icons-react'
 import avatar from './../../assets/images/avatars/logo_chat_admin.png'
 import {observer} from "mobx-react-lite";
 import { useUsersContext } from "../../chat-app-new/context/usersContext";
+import { getCompanyProfId } from '../../http/companyAPI'
 
 const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
   const { userId, setUserId } = useUsersContext();
-  
+  const [companyId, setCompanyId] = useState('');
+
   const location = useLocation();
 
   const logOut = () => {
@@ -39,20 +41,16 @@ const AppHeaderDropdown = observer(() => {
     setUserId('')
   }
 
-  // useEffect(()=> { 
-  //   const fetchData = async() => {
+  useEffect(()=> { 
+    const fetchData = async() => {
       
-  //     const user = localStorage.getItem('user')
-  //     //console.log("user: ", JSON.parse(user))
-
-  //     if (user) {
-  //       setUserId(JSON.parse(user)?.id)
-  //       //setEmail(JSON.parse(user)?.email)
-  //     }
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+      setCompanyId(result.id)
       
-  //   }
-  //   fetchData()
-  // }, [])
+    }
+    fetchData()
+  }, [])
 
   const openProfile = () => { 
     //location("/profile")
@@ -78,7 +76,7 @@ const AppHeaderDropdown = observer(() => {
 
         <Link to='/profile_company' style={{textDecoration:'none'}}><CDropdownItem>
             <CIcon icon={cilUser} className="me-2" />
-            Моя компания: 0
+            Моя компания: 00{companyId}
           </CDropdownItem>
         </Link>
 
