@@ -57,7 +57,7 @@ import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
-import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar } from '../http/companyAPI'
+import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar, getCompanyProfId, addCompanyProf, editCompanyProf } from '../http/companyAPI'
 import { getManager, editManager } from 'src/http/managerAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
 
@@ -151,17 +151,6 @@ const ProfileCompany = () => {
       </div>
     </CToast>
   )
-
-
-  //поиск
-  useEffect(() => {
-		const filteredData = companysAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-    setCompanys(text === '' ? companyCount : filteredData); 
-
-    setCompanysCount(text === '' ? companysAll.length : filteredData.length)
-    //console.log("specialist", specialist)
-    setShowClear(text === '' ? false : true)
-  }, [text]);
 
 
 
@@ -275,197 +264,7 @@ const ProfileCompany = () => {
     fetchData()
   }, [])
 
-  //Добавить компанию
-  const clickAdd = async()=> {   
 
-    const data = {
-      userId,
-      title: 'Новая компания',
-    }
-    const res = await addCompany(data)
-    console.log("res: ", res)
-
-    //контекст
-    // if (res) {
-    //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
-    // }
-
-    companys.push({
-      id: res?.id, 
-      title: res?.title, 
-      managers: '',  
-      comment: '',
-
-    })
-
-    const sortedUser = [...companys].sort((a, b) => {       
-      var idA = a.id, idB = b.id 
-      return idB-idA  //сортировка по возрастанию 
-    })
-
-    setCompanys(sortedUser)
-  }
-  
-  //сортировка по ФИО
-  const onSortTitle = () => {
-    setCountPress(countPress + 1)
-    
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
-    }
-    console.log("check sort", countPress + 1)
-
-    if (countPress + 1 === 1) {
-      const sortedWorker = [...companys].sort((a, b) => {       
-        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setCompanys(sortedWorker)
-    } else if (countPress + 1 === 2) {
-      const sortedWorker = [...companys].sort((a, b) => {       
-        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setCompanys(sortedWorker)
-    } else {
-      const sortedWorker = [...companys].sort((a, b) => {       
-        var fioA = a.id, fioB = b.id 
-        return fioB-fioA  //сортировка по убыванию 
-      })
-      setCompanys(sortedWorker)
-    }
-    
-  }
-
-
-  //сортировка по Городу
-  const onSortCity = () => {
-    setCountPressCity(countPressCity + 1)
-    
-    if (countPressCity + 1 >= 3) {
-      setCountPressCity(0)
-    }
-    console.log("check sort", countPressTG + 1)
-
-    if (countPressCity + 1 === 1) {
-      const sortedWorker = [...companys].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setCompanys(sortedWorker)
-    } else if (countPressCity + 1 === 2) {
-      const sortedWorker = [...companys].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setCompanys(sortedWorker)
-    } else {
-      const sortedWorker = [...companys].sort((a, b) => {       
-        var idA = a.id, idB = b.id 
-        return idB-idA  //сортировка по убыванию 
-      })
-
-      setCompanys(sortedWorker)
-    }
-    
-  }
-
-  //ЕЩЁ
-  const clickNext = async() => {
-    //setLoading(true)
-  
-    //1 все специалисты
-    let response = await getCompanyCount(20, companys.length);
-    //console.log("workers size: ", response)
-
-    let managersDB = await getManager()
-      //console.log("managersDB: ", managersDB)
-  
-    const arrCompanys = []
-    
-      response.reverse().map(async (user, i) => {
-        const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-        const d2 = new Date(d)
-  
-        const month = String(d2.getMonth()+1).padStart(2, "0");
-        const day = String(d2.getDate()).padStart(2, "0");
-        const chas = d2.getHours();
-        const min = String(d2.getMinutes()).padStart(2, "0");
-        
-        const newDate = `${day}.${month} ${chas}:${min}`;
-  
-        let str_comment = ''
-        user.comment && JSON.parse(user.comment).map((item, index)=> {
-          str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
-        })
-
-        let str_manager = ''
-        let str_manager2 = ''
-        user.managers && JSON.parse(user.managers).map((item, index)=> {
-          const fioManager = managersDB.find(item2 => item2.id === item.name)
-          if (fioManager) {
-            str_manager = str_manager + fioManager.fio + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-            str_manager2 = str_manager2 + JSON.stringify(fioManager) + (index+1 !== JSON.parse(user.managers).length ? ', ' : '')
-          }
-        })
-
-        const newUser = {
-          id: user.id,
-          title: user.title,
-          city: user.city,
-          office: user.office,
-          sklad: user.sklad,
-          comment: str_comment,
-          managers: str_manager,
-          managersObj: str_manager2,
-          bugalterFio, 
-          bugalterEmail,
-          bugalterPhone,
-          profile,
-        }
-        arrCompanys.push(newUser)
-
-        //если элемент массива последний
-				if (i === response.length-1) {
-          const sortedUser = [...arrCompanys].sort((a, b) => {       
-            var idA = a.id, idB = b.id 
-            return idB-idA  //сортировка по возрастанию 
-          })
-
-          setCompanys(sortedUser)
-          
-          //сохранить кэш
-          //localStorage.setItem("specialist", JSON.stringify(sortedUser));
-  
-          setLoading(false)
-        }
-      })    
-      
-  }
-
-  const onChangeReyting = () => {
-    setShowBlacklist(false)
-    setShowMenu2(false)
-
-    //убрать из списка специальностей Blacklist
-    const res = sfera.filter(item=>item !== 'Blacklist')
-    console.log("sfera: ", res)
-
-    setSfera(res)
-  }
-
-  const onChangeBlacklist = () => {
-    setShowBlacklist(true)
-    setShowMenu1(false)
-
-    //добавить в список специальностей Blacklist
-
-    const arr = [...sfera]
-    arr.push('Blacklist')
-    console.log("sfera: ", arr)
-
-    setSfera(arr)
-  }
 //------ загрузить аватар-------------
   useEffect(() => {
     const getImage = async () => {
@@ -494,32 +293,6 @@ const ProfileCompany = () => {
     setFilePreview(URL.createObjectURL(e.target.files[0]));
   }
 
-
-  const clickSearch = (e) => {
-    setShowClear(true)
-    setText(e.target.value)
-  }
-
-  const clearSearch = () => {
-    setText('')
-  }
-
-  const clickDelete = (id) => {
-    console.log(id)
-
-    setVisibleDelete(!visibleDelete)
-
-  }
-
-  //удаление специалиста
-  const deleteProfile = async(id) => {
-    console.log(id)
-    setVisibleDelete(false)
-
-    //await deleteSpecialist(id)
-    addToast(deleteToast) //ваши данные сохранены
-  
-  }
 
   //сохранить профиль
   const saveProfile = async(id) => { 
@@ -637,12 +410,17 @@ const ProfileCompany = () => {
   
         return usersCopy;
       });
-  
-      //сохранить изменения в базе
-      await editCompany(saveData, id)
 
-      //сохранить изменения в базе
-      //await editManager(saveData, id)
+
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+      
+      if (!result) {
+        const resAdd = await addCompanyProf(saveData)
+      } else {
+        //сохранить изменения в базе
+        const resUpdate = await editCompanyProf(saveData, result?.id)
+      }
   
       addToast(exampleToast) //ваши данные сохранены
 
@@ -802,11 +580,11 @@ const ProfileCompany = () => {
                                       </div>
                                       <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
                                           <span>Изменить рейтинг</span>
-                                          <span onClick={onChangeBlacklist} style={{cursor: 'pointer'}}>Blacklist</span>
+                                          <span style={{cursor: 'pointer'}}>Blacklist</span>
                                       </div>
                                       <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
                                           <span>Изменить рейтинг</span>
-                                          <span onClick={onChangeReyting} style={{cursor: 'pointer'}}>Рейтинг</span>
+                                          <span style={{cursor: 'pointer'}}>Рейтинг</span>
                                       </div>
                                   </div>
 
@@ -1135,28 +913,6 @@ const ProfileCompany = () => {
                           </CCard>
                         </CCol>
                     </CRow>
-
-                    <CModal
-                      backdrop="static"
-                      visible={visibleDelete}
-                      onClose={() => setVisibleDelete(false)}
-                      aria-labelledby="StaticBackdropExampleLabel"
-                    >
-                      <CModalHeader>
-                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
-                      </CModalHeader>
-                      <CModalBody>
-                        Пользователь будет удален из базы!
-                      </CModalBody>
-                      <CModalFooter>
-                        <CButton color="secondary" onClick={() => setVisibleDelete(false)}>
-                          Отмена
-                        </CButton>
-                        <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
-                      </CModalFooter>
-                    </CModal>
-
-                  
                   
                 </Suspense>
             </CContainer>

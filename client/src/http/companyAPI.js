@@ -66,3 +66,31 @@ export const uploadAvatar = async (data) =>{
         
     }
 }
+
+
+
+export const editCompanyProf = async (data, id) =>{
+    try {
+        await $host.patch(`api/companyprof/update/${id}`, data); 
+    } catch (error) {
+        console.log("error while calling editCompanyProf api",error.message);
+    }
+}
+
+export const addCompanyProf = async (data) =>{
+    try {
+        let response = await $host.post(`api/companyprof/add`, data); 
+        return response.data;
+    } catch (error) {
+        console.log("error while calling addCompanyProf api",error.message);
+    }
+}
+
+export const getCompanyProfId = async (id) =>{
+    try {
+       let response = await $host.get(`api/companyprof/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getCompanyProfId api", error.message);
+    }
+}

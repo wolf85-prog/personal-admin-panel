@@ -239,9 +239,9 @@ class CompanysController {
     }
 
     async getCompanyProfId(req, res) {
-        const {id} = req.params
+        const {userId} = req.params
         try {
-            const company = await CompanyProf.findOne({where: {id: String(id)}})
+            const company = await CompanyProf.findOne({where: {userId: String(userId)}})
             return res.status(200).json(company);
         } catch (err) {
             return res.status(500).json(err);

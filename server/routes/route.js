@@ -87,7 +87,7 @@ route.get("/companys/count/get", getCompanyCountAll);
 
 route.post("/companyprof/add", addCompanyProf);
 route.patch('/companyprof/update/:id', editCompanyProf)
-route.get("/companyprof/:id", getCompanyProfId);
+route.get("/companyprof/:userId", getCompanyProfId);
 
 //----------------- Площадки ---------------------------------
 route.get('/platforms/user/get/:userId', getPlatforms)
