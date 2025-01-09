@@ -48,7 +48,7 @@ const AppBreadcrumb = (props) => {
 
       <div style={{marginLeft: '450px'}}>
         <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти специалистов</CButton></a>
-        <a href='https://t.me/ULEY_Projects_Bot' style={{backgroundColor: 'transparent', marginLeft: '20px'}}><CButton color="dark">Найти оборудование</CButton></a>
+        <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '20px'}}><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти оборудование</CButton></a>
       </div>
     </CBreadcrumb>
   )

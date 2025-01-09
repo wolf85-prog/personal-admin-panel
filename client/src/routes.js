@@ -2,6 +2,7 @@ import React from 'react'
 
 const Admin = React.lazy(() => import('./pages/Admin'))
 const Profile = React.lazy(() => import('./pages/Profile'))
+const ProfileCompany = React.lazy(() => import('./pages/ProfileCompany'))
 const Projects = React.lazy(() => import('./pages/Projects'))
 
 const Specialist = React.lazy(() => import('./pages/Specialist'))
@@ -19,6 +20,7 @@ const routes = [
   { path: '/dashboard', name: 'Пункт управления', Component: Admin },
   { path: '/air', name: 'В эфире', Component: Air },
   { path: '/profile', name: 'Профиль', Component: Profile },
+  { path: '/profile_company', name: 'Профиль компании', Component: ProfileCompany },
   { path: '/projects', name: 'Проекты', Component: Projects },
   { path: "/specialist", name: 'Сотрудники', Component: Specialist },
   { path: "/payrate", name: 'Ставки', Component: PayRate },

@@ -2,6 +2,7 @@ import React from 'react'
 import { 
     ADMIN_ROUTE, 
     PROFILE_ROUTE,
+    PROFILECOMPANY_ROUTE,
     PROJECTS_ROUTE,
     COMPANYS_ROUTE,
     SPECIALIST_ROUTE,
@@ -17,6 +18,7 @@ import {
 
 const Admin = React.lazy(() => import('./pages/Admin'))
 const Profile = React.lazy(() => import('./pages/Profile'))
+const ProfileCompany = React.lazy(() => import('./pages/ProfileCompany'))
 const Projects = React.lazy(() => import('./pages/Projects'))
 
 const Air = React.lazy(() => import('./pages/Air'))
@@ -35,6 +37,7 @@ const Client = React.lazy(() => import('./pages/Client'))
 export const authRoutes = [
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
     { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
+    { path: PROFILECOMPANY_ROUTE, name: 'Профиль компании', Component: ProfileCompany },
     { path: SPECIALIST_ROUTE, name: 'Сотрудники', Component: Specialist },
     { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },

@@ -178,20 +178,7 @@ const Admin = () => {
                       ]}
                       //data2={[]} 
                       data2={
-                        [
-                          { name: 'Январь', value: 0 },
-                          { name: 'Февраль', value: 0 },
-                          { name: 'Март', value: 0 },
-                          { name: 'Апрель', value: 0 },
-                          { name: 'Май', value: 1 },
-                          { name: 'Июнь', value: 0 },
-                          { name: 'Июль', value: 0 },
-                          { name: 'Август', value: 2 },
-                          { name: 'Сентябрь', value: 2 },
-                          { name: 'Октябрь', value: 0 },
-                          { name: 'Ноябрь', value: 0 },
-                          { name: 'Декабрь', value: 0 },
-                        ]
+                        []
                       }
                       width={widthGrafik} height={350} 
                     />             

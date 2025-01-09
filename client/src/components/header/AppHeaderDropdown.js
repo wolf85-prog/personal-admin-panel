@@ -64,9 +64,11 @@ const AppHeaderDropdown = observer(() => {
         <CAvatar src={avatar} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>
+        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>
 
-        <CDropdownHeader className="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
+        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
+
+        <CDropdownDivider />
 
         <Link to='/profile' style={{textDecoration:'none'}}><CDropdownItem>
             <CIcon icon={cilUser} className="me-2" />
@@ -74,11 +76,19 @@ const AppHeaderDropdown = observer(() => {
           </CDropdownItem>
         </Link>
 
+        <Link to='/profile_company' style={{textDecoration:'none'}}><CDropdownItem>
+            <CIcon icon={cilUser} className="me-2" />
+            Моя компания: 0
+          </CDropdownItem>
+        </Link>
+
         <CDropdownItem href="#">
           <CIcon icon={cilSettings} className="me-2" />
           Настройки
-        </CDropdownItem>       
+        </CDropdownItem>  
+
         <CDropdownDivider />
+
         <CDropdownItem onClick={()=> logOut()}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Выйти
