@@ -34,39 +34,39 @@ export const TextEditableCell = ({data, itemId, updateData}) => {
   }, [initialValue])
 
   return (
-    <CTableDataCell
-      style={{
-        height: '30px',
-        minHeight: '30px',
-        maxHeight: '30px',
+   <CTableDataCell
+   style={{
+     height: '30px',
+     minHeight: '30px',
+     maxHeight: '30px',
 
-        padding: '0',
-        borderColor: 'inherit',
-        borderStyle: 'solid',
-        borderWidth: 0,
-        // borderBottomWidth: '1px',
-        textAlign: 'center',
-       
-      }}
-    >
-      <input
-        style={{
-          height: '30px',
-          minHeight: '30px',
-          maxHeight: '30px',
+     padding: '0',
+     borderColor: 'inherit',
+     borderStyle: 'solid',
+     
+     // borderBottomWidth: '1px',
+     textAlign: 'center',
+    
+   }}
+ >
+   <input
+     style={{
+       height: '30px',
+       minHeight: '30px',
+       maxHeight: '30px',
 
-          padding: '0',
-          borderColor: 'inherit',
-          color: 'white',
-          borderWidth: 0,
-          textAlign: 'center',
-          backgroundColor: 'inherit',
-        }}
-        value={value}
-        onBlur={onBlur}
-        onKeyDown={handleUpdate}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    </CTableDataCell>
+       padding: '0',
+       borderColor: 'inherit',
+       color: 'white',
+       borderWidth: 0,
+       textAlign: 'center',
+       backgroundColor: 'inherit',
+     }}
+     value={value}
+     onBlur={onBlur}
+     onKeyDown={handleUpdate}
+     onChange={(e) => setValue(e.target.value)}
+   />
+ </CTableDataCell>
   )
 }

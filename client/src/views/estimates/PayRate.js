@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState, Suspense } from 'react'
+import React, { useEffect, useState, Suspense, useContext } from 'react'
 import { format } from '../../utils/formater'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
@@ -39,15 +39,25 @@ import {
 
 import MenuIcon3 from 'src/components/MenuIcon/MenuIcon'
 import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../../components/index'
+// import { useUsersContext } from "../chat-app-new/context/usersContext";
+import { useUsersContext } from "../../chat-app-new/context/usersContext";
+import {Context} from "src/index";
 
-const PayRate = () => {
-  // const [rates, setRates] = useState()
+const PayRate = () => {  
+  const { userId, token } = useUsersContext();
+  
+
   const queryClient = useQueryClient()
   // const [groupItems, setGroup] = useState(groups)
 
+  console.log(process.env.REACT_APP_TENANT_REST_API)
+  console.log(token)
+  console.log(localStorage.getItem('user'))
+
+
   const [editing, setEditing] = useState(false)
 
-  const [showCollapsible, setShowCollapsible] = useState({})
+  const [showCollapsible, setShowCollapsible] = useState({})  
   const hoursList = [1, 2, 4, 6, 8, 10, 12, 24]
 
   const handleCreateGroup = (e) => {
@@ -122,11 +132,39 @@ const PayRate = () => {
       return await queryClient.invalidateQueries({ queryKey: ['rates'] })
     },
   })
+  
 
-  if (isPending) return <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Загрузка...</div>
+  if (isPending)
+    return (
+      <div className="dark-theme">
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+          <AppHeader />
+          <div className="body flex-grow-1 px-3">
+            <CContainer lg>
+              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Загрузка...</div>
+            </CContainer>
+          </div>
+          <AppFooter />
+        </div>
+      </div>
+    )
 
   if (error)
-    return <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке ставок</div>
+    return (
+      <div className="dark-theme">
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+          <AppHeader />
+          <div className="body flex-grow-1 px-3">
+            <CContainer lg>
+              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке ставок</div>
+            </CContainer>
+          </div>
+          <AppFooter />
+        </div>
+      </div>
+    )
 
   const editItem = (item_id, e) => {
     if (e.key === 'Enter') {
@@ -179,6 +217,8 @@ const PayRate = () => {
       [id]: !set[id],
     }))
   }
+
+
 
   return groupItems.length > 0 ? (
     <div className="dark-theme">
@@ -417,7 +457,7 @@ const PayRate = () => {
                                       updateData={handleUpdateSpecialityName}
                                     />
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       // onBlur={(e) =>
                                       //   editItem(item.rate_items.stavka1.id, e.currentTarget.textContent)
                                       // }
@@ -435,7 +475,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka1.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',
@@ -452,7 +492,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka2.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',
@@ -469,7 +509,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka3.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',
@@ -486,7 +526,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka4.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',
@@ -503,7 +543,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka5.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',
@@ -520,7 +560,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka6.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',
@@ -537,7 +577,7 @@ const PayRate = () => {
                                       {format(item.rate_items.stavka7.payment)}
                                     </CTableDataCell>
                                     <CTableDataCell
-                                      contentEditable="true"
+                                      // contentEditable="true"
                                       style={{
                                         width: '114px',
                                         minWidth: '114px',

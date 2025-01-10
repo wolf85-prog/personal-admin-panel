@@ -8,7 +8,7 @@ import axios from 'axios'
 // const BASE_URL = 'https://uley.company:7979/api/'
 
 
-const BASE_URL = process.env.TENANT_REST_API
+const BASE_URL = process.env.REACT_APP_TENANT_REST_API
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL })
 
