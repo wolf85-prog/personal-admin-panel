@@ -9,7 +9,7 @@ yarn.lock
 /coverage
 
 # production
-#/build
+/build
 
 # misc
 .eslintcache
@@ -24,3 +24,5 @@ yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.pem
