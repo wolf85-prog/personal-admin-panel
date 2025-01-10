@@ -312,7 +312,7 @@ const Projects = () => {
 
 
 // Открыть проект  
-  const openProject = async(month, item, number, id, name, end, status, timeStart, specifika, start) => {
+  const openProject = async(month, item, number, id, name, end, status, start, timeStart, specifika) => {
     console.log("item: ", month+1, item, number, specifika, end)
 
     setShowHeader(true)
@@ -547,6 +547,7 @@ ${loc.url}`;
     console.log("managerId: ", managersAll.find(item=> item.fio === managerName)?.id)
     console.log("managerId2: ", managersAll.find(item=> item.fio === managerName)?.id)
     console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
+    console.log("startProject: ", startProject)
 
     //удаляем старые записи из Основного состава
     //const resAllDel = await deleteMainspecProject(id)
@@ -562,6 +563,7 @@ ${loc.url}`;
       userId,
       name: projectName,
       status: statusProject.name,
+      start: startProject.name,
       datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
       dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
       teh: tehText, 
@@ -713,6 +715,7 @@ ${loc.url}`;
     setStartTime('') 
     setEndTime('') 
     setStatusProject({name: '', color: ''})
+    setStartProject({name: '', color: ''})
     setSpecifikaProject({name: '', color: ''})
     setCompanyName('')
     setManagerName('')

@@ -79,6 +79,14 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     const [projectStatus6, setProjectStatus6] = useState([])
     const [projectStatus7, setProjectStatus7] = useState([])
 
+    const [projectStart, setProjectStart] = useState([])
+    const [projectStart2, setProjectStart2] = useState([])
+    const [projectStart3, setProjectStart3] = useState([])
+    const [projectStart4, setProjectStart4] = useState([])
+    const [projectStart5, setProjectStart5] = useState([])
+    const [projectStart6, setProjectStart6] = useState([])
+    const [projectStart7, setProjectStart7] = useState([])
+
     const [projectColor, setProjectColor] = useState([])
     const [projectColor2, setProjectColor2] = useState([])
     const [projectColor3, setProjectColor3] = useState([])
@@ -172,6 +180,14 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
         let statusProj6 = []
         let statusProj7 = []
 
+        let startProj = [] 
+        let startProj2 = []
+        let startProj3 = []
+        let startProj4 = []
+        let startProj5 = []
+        let startProj6 = []
+        let startProj7 = []
+
         let colorProj = [] 
         let colorProj2 = []
         let colorProj3 = []
@@ -254,35 +270,38 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             // )  
 
                             if (!nameProj[index]) {
-                            arr[index] = true 
-                            nameProj[index] = item.name
-                            setProjectName(nameProj)
+                                arr[index] = true 
+                                nameProj[index] = item.name
+                                setProjectName(nameProj)
 
-                            endProj[index] = item.dateEnd 
-                            setProjectEnd(endProj)
+                                endProj[index] = item.dateEnd 
+                                setProjectEnd(endProj)
 
-                            statusProj[index] = item.status 
-                            setProjectStatus(statusProj)
+                                statusProj[index] = item.status 
+                                setProjectStatus(statusProj)
 
-                            colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor(colorProj)
+                                startProj[index] = item.start 
+                                setProjectStart(startProj)
 
-                            //console.log("timeProj: ", item)
-                            timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime(timeProj)
+                                colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor(colorProj)
+
+                                //console.log("timeProj: ", item)
+                                timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime(timeProj)
 
 
-                            cityProj[index] = item.city 
-                            setProjectCity(cityProj)
+                                cityProj[index] = item.city 
+                                setProjectCity(cityProj)
 
-                            commentProj[index] = item.comment
-                            setProjectComment(commentProj)
+                                commentProj[index] = item.comment
+                                setProjectComment(commentProj)
 
-                            specifProj[index] = item.specifika
-                            setProjectSpecifika(specifProj)
+                                specifProj[index] = item.specifika
+                                setProjectSpecifika(specifProj)
 
-                            idProj[index] = item.id
-                            setProjectId(idProj)
+                                idProj[index] = item.id
+                                setProjectId(idProj)
                             } 
                             else if (!nameProj2[index]) {
                                 arr2[index] = true 
@@ -294,6 +313,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 statusProj2[index] = item.status 
                                 setProjectStatus2(statusProj2)
+
+                                startProj2[index] = item.start 
+                                setProjectStart2(startProj2)
 
                                 colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor2(colorProj2)
@@ -324,6 +346,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 statusProj3[index] = item.status 
                                 setProjectStatus3(statusProj3)
 
+                                startProj4[index] = item.start 
+                                setProjectStart4(startProj4)
+
                                 colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor3(colorProj3)
 
@@ -352,6 +377,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 statusProj4[index] = item.status 
                                 setProjectStatus4(statusProj4)
+
+                                startProj4[index] = item.start 
+                                setProjectStart4(startProj4)
 
                                 colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor4(colorProj4)
@@ -382,6 +410,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 statusProj5[index] = item.status 
                                 setProjectStatus5(statusProj5)
 
+                                startProj5[index] = item.start 
+                                setProjectStart5(startProj5)
+
                                 colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor5(colorProj5)
 
@@ -411,6 +442,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 statusProj6[index] = item.status 
                                 setProjectStatus6(statusProj6)
 
+                                startProj6[index] = item.start 
+                                setProjectStart6(startProj6)
+
                                 colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor6(colorProj6)
 
@@ -439,6 +473,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 statusProj7[index] = item.status 
                                 setProjectStatus7(statusProj7)
+
+                                startProj7[index] = item.start 
+                                setProjectStart7(startProj7)
 
                                 colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor7(colorProj7)
@@ -465,35 +502,38 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             (new Date(new Date(date.getFullYear(), month, d).setHours(new Date(date.getFullYear(), month, d).getHours()+3)).getTime() <= new Date(item?.dateEnd?.split('T')[0]).getTime()) ) {
 
                             if (!nameProj[index]) {
-                            arr[index] = true 
-                            nameProj[index] = item.name
-                            setProjectName(nameProj)
+                                arr[index] = true 
+                                nameProj[index] = item.name
+                                setProjectName(nameProj)
 
-                            endProj[index] = item.dateEnd 
-                            setProjectEnd(endProj)
+                                endProj[index] = item.dateEnd 
+                                setProjectEnd(endProj)
 
-                            statusProj[index] = item.status 
-                            setProjectStatus(statusProj)
+                                statusProj[index] = item.status 
+                                setProjectStatus(statusProj)
 
-                            colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
-                            setProjectColor(colorProj)
+                                startProj[index] = item.start 
+                                setProjectStart(startProj)
 
-                            //console.log("timeProj: ", item)
-                            timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
-                            setProjectTime(timeProj)
+                                colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
+                                setProjectColor(colorProj)
+
+                                //console.log("timeProj: ", item)
+                                timeProj[index] = item.dateStart.split('T')[1]?.slice(0, 5) 
+                                setProjectTime(timeProj)
 
 
-                            cityProj[index] = item.city 
-                            setProjectCity(cityProj)
+                                cityProj[index] = item.city 
+                                setProjectCity(cityProj)
 
-                            commentProj[index] = item.comment
-                            setProjectComment(commentProj)
+                                commentProj[index] = item.comment
+                                setProjectComment(commentProj)
 
-                            specifProj[index] = item.specifika
-                            setProjectSpecifika(specifProj)
+                                specifProj[index] = item.specifika
+                                setProjectSpecifika(specifProj)
 
-                            idProj[index] = item.id
-                            setProjectId(idProj)
+                                idProj[index] = item.id
+                                setProjectId(idProj)
                             } 
                             else if (!nameProj2[index]) {
                                 arr2[index] = true 
@@ -505,6 +545,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 statusProj2[index] = item.status 
                                 setProjectStatus2(statusProj2)
+
+                                startProj2[index] = item.start 
+                                setProjectStart2(startProj2)
 
                                 colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor2(colorProj2)
@@ -535,6 +578,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 statusProj3[index] = item.status 
                                 setProjectStatus3(statusProj3)
 
+                                startProj3[index] = item.start 
+                                setProjectStart3(startProj3)
+
                                 colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor3(colorProj3)
 
@@ -563,6 +609,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 statusProj4[index] = item.status 
                                 setProjectStatus4(statusProj4)
+
+                                startProj4[index] = item.start 
+                                setProjectStart4(startProj4)
 
                                 colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor4(colorProj4)
@@ -593,6 +642,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 statusProj5[index] = item.status 
                                 setProjectStatus5(statusProj5)
 
+                                startProj5[index] = item.start 
+                                setProjectStart5(startProj5)
+
                                 colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor5(colorProj5)
 
@@ -622,6 +674,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 statusProj6[index] = item.status 
                                 setProjectStatus6(statusProj6)
 
+                                startProj6[index] = item.start 
+                                setProjectStart6(startProj6)
+
                                 colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor6(colorProj6)
 
@@ -650,6 +705,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                                 statusProj7[index] = item.status 
                                 setProjectStatus7(statusProj7)
+
+                                startProj7[index] = item.start 
+                                setProjectStart7(startProj7)
 
                                 colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                                 setProjectColor7(colorProj7)
@@ -684,6 +742,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             statusProj[index] = item.status 
                             setProjectStatus(statusProj)
 
+                            startProj[index] = item.start 
+                            setProjectStart(startProj)
+
                             colorProj[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor(colorProj)
 
@@ -715,6 +776,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             statusProj2[index] = item.status 
                             setProjectStatus2(statusProj2)
 
+                            startProj2[index] = item.start 
+                            setProjectStart2(startProj2)
+
                             colorProj2[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor2(colorProj2)
 
@@ -743,6 +807,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             statusProj3[index] = item.status 
                             setProjectStatus3(statusProj3)
+
+                            startProj3[index] = item.start 
+                            setProjectStart3(startProj3)
 
                             colorProj3[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor3(colorProj3)
@@ -773,6 +840,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             statusProj4[index] = item.status 
                             setProjectStatus4(statusProj4)
 
+                            startProj4[index] = item.start 
+                            setProjectStart4(startProj4)
+
                             colorProj4[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor4(colorProj4)
 
@@ -801,6 +871,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             statusProj5[index] = item.status 
                             setProjectStatus5(statusProj5)
+
+                            startProj5[index] = item.start 
+                            setProjectStart5(startProj5)
 
                             colorProj5[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor5(colorProj5)
@@ -831,6 +904,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                             statusProj6[index] = item.status 
                             setProjectStatus6(statusProj6)
 
+                            startProj6[index] = item.start 
+                            setProjectStart6(startProj6)
+
                             colorProj6[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor6(colorProj6)
 
@@ -859,6 +935,9 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
                             statusProj7[index] = item.status 
                             setProjectStatus7(statusProj7)
+
+                            startProj7[index] = item.start 
+                            setProjectStart7(startProj7)
 
                             colorProj7[index] = statusData.find((stat)=> stat.label === item.status)?.color 
                             setProjectColor7(colorProj7)
@@ -948,6 +1027,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             statusProj[item] = projectStatus
             setProjectStatus(statusProj)
 
+            let startProj = [...projectStart]
+            startProj[item] = projectStart
+            setProjectStart(startProj)
+
             let colorProj = [...projectColor]
             colorProj[item] = projectColor
             setProjectColor(colorProj)
@@ -981,6 +1064,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             let statusProj2 = [...projectStatus2]
             statusProj2[item] = projectStatus
             setProjectStatus2(statusProj2)
+
+            let startProj2 = [...projectStart2]
+            startProj2[item] = projectStart
+            setProjectStart2(startProj2)
 
             let colorProj2 = [...projectColor2]
             colorProj2[item] = projectColor
@@ -1016,6 +1103,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             statusProj3[item] = projectStatus
             setProjectStatus3(statusProj3)
 
+            let startProj = [...projectStart3]
+            startProj[item] = projectStart
+            setProjectStart3(startProj)
+
             let colorProj3 = [...projectColor3]
             colorProj3[item] = projectColor
             setProjectColor3(colorProj3)
@@ -1049,6 +1140,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             let statusProj4 = [...projectStatus4]
             statusProj4[item] = projectStatus
             setProjectStatus4(statusProj4)
+
+            let startProj = [...projectStart4]
+            startProj[item] = projectStart
+            setProjectStart4(startProj)
 
             let colorProj4 = [...projectColor4]
             colorProj4[item] = projectColor
@@ -1084,6 +1179,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             statusProj5[item] = projectStatus
             setProjectStatus5(statusProj5)
 
+            let startProj = [...projectStart5]
+            startProj[item] = projectStart
+            setProjectStart5(startProj)
+
             let colorProj5 = [...projectColor5]
             colorProj5[item] = projectColor
             setProjectColor5(colorProj5)
@@ -1118,6 +1217,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             statusProj6[item] = projectStatus
             setProjectStatus6(statusProj6)
 
+            let startProj = [...projectStart6]
+            startProj[item] = projectStart
+            setProjectStart6(startProj)
+
             let colorProj6 = [...projectColor6]
             colorProj6[item] = projectColor
             setProjectColor6(colorProj6)
@@ -1151,6 +1254,10 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             let statusProj7 = [...projectStatus7]
             statusProj7[item] = projectStatus
             setProjectStatus7(statusProj7)
+
+            let startProj = [...projectStart7]
+            startProj[item] = projectStart
+            setProjectStart7(startProj)
 
             let colorProj7 = [...projectColor7]
             colorProj7[item] = projectColor
@@ -1358,7 +1465,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 1, projectId[index], projectName[index], projectEnd[index], projectStatus[index], projectTime[index], projectSpecifika[index])} 
+                                        onClick={()=>openProject(month, index, 1, projectId[index], projectName[index], projectEnd[index], projectStatus[index], projectStart[index], projectTime[index], projectSpecifika[index])} 
                                         style={{border: `1px solid ${projectColor[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName[index] && projectName[index].length > 15 ? projectName[index].substr(0, 15) + '...' : projectName[index]}</p>   
@@ -1378,7 +1485,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project2[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor2[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 2, projectId2[index], projectName2[index], projectEnd2[index], projectStatus2[index], projectTime2[index], projectSpecifika2[index])} 
+                                        onClick={()=>openProject(month, index, 2, projectId2[index], projectName2[index], projectEnd2[index], projectStatus2[index], projectStart2[index], projectTime2[index], projectSpecifika2[index])} 
                                         style={{border: `1px solid ${projectColor2[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName2[index] && projectName2[index].length > 15 ? projectName2[index].substr(0, 15) + '...' : projectName2[index]}</p>   
@@ -1398,7 +1505,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project3[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor3[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 3, projectId3[index], projectName3[index], projectEnd3[index], projectStatus3[index], projectTime3[index], projectSpecifika3[index])} 
+                                        onClick={()=>openProject(month, index, 3, projectId3[index], projectName3[index], projectEnd3[index], projectStatus3[index], projectStart3[index], projectTime3[index], projectSpecifika3[index])} 
                                         style={{border: `1px solid ${projectColor3[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName3[index] && projectName3[index].length > 15 ? projectName3[index].substr(0, 15) + '...' : projectName3[index]}</p>   
@@ -1418,7 +1525,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project4[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor4[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectEnd4[index], projectStatus4[index], projectTime4[index], projectSpecifika4[index])} 
+                                        onClick={()=>openProject(month, index, 4, projectId4[index], projectName4[index], projectEnd4[index], projectStatus4[index], projectStart4[index], projectTime4[index], projectSpecifika4[index])} 
                                         style={{border: `1px solid ${projectColor4[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName4[index] && projectName4[index].length > 15 ? projectName4[index].substr(0, 15) + '...' : projectName4[index]}</p>   
@@ -1438,7 +1545,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project5[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor5[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 5, projectId5[index], projectName5[index], projectEnd5[index], projectStatus5[index], projectTime5[index], projectSpecifika5[index])} 
+                                        onClick={()=>openProject(month, index, 5, projectId5[index], projectName5[index], projectEnd5[index], projectStatus5[index], projectStart5[index], projectTime5[index], projectSpecifika5[index])} 
                                         style={{border: `1px solid ${projectColor5[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName5[index] && projectName5[index].length > 15 ? projectName5[index].substr(0, 15) + '...' : projectName5[index]}</p>   
@@ -1458,7 +1565,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project6[index] ?
                                     <><p className='date-proj-day2' style={{color: `${projectColor6[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 6, projectId6[index], projectName6[index], projectEnd6[index], projectStatus6[index], projectTime6[index], projectSpecifika6[index])} 
+                                        onClick={()=>openProject(month, index, 6, projectId6[index], projectName6[index], projectEnd6[index], projectStatus6[index], projectStart6[index], projectTime6[index], projectSpecifika6[index])} 
                                         style={{border: `1px solid ${projectColor6[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName6[index] && projectName6[index].length > 15 ? projectName6[index].substr(0, 15) + '...' : projectName6[index]}</p>   
@@ -1478,7 +1585,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
                                 {project7[index] ? 
                                     <><p className='date-proj-day2' style={{color: `${projectColor7[index]}`}}>{String(d).padStart(2, "0") + '.'+ String(month+1).padStart(2, "0")}</p>
                                     <div className='view-project' 
-                                        onClick={()=>openProject(month, index, 7, projectId7[index], projectName7[index], projectEnd7[index], projectStatus7[index], projectTime7[index], projectSpecifika7[index])} 
+                                        onClick={()=>openProject(month, index, 7, projectId7[index], projectName7[index], projectEnd7[index], projectStatus7[index], projectStart7[index], projectTime7[index], projectSpecifika7[index])} 
                                         style={{border: `1px solid ${projectColor7[index]}`}}
                                     >
                                         <p style={{fontSize: '16px', marginBottom: '3px'}}>{projectName7[index] && projectName7[index].length > 15 ? projectName7[index].substr(0, 15) + '...' : projectName7[index]}</p>   

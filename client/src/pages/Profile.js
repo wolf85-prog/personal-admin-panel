@@ -50,6 +50,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getContacts } from '../http/chatAPI'
 import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
+import { getCompanyProfId } from '../http/companyAPI'
 
 
 const Profile = () => {
@@ -82,7 +83,7 @@ const Profile = () => {
 
 
   const [id, setId] = useState('');
-  const [fio, setFio] = useState('');
+  const [title, setTitle] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -140,6 +141,11 @@ const Profile = () => {
 	
 		const fetchData = async() => {
 		  //setShowProfile(true)
+
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+      setTitle(result.title)
+
 		  setLoading(false)  
 		}
 		fetchData()
@@ -408,7 +414,7 @@ const Profile = () => {
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                    <input className="text-field__input" type="text" name="company" id="company" value={managerProfile?.companyId} onChange={(e)=>changeCompany(e)}  />
+                                    <input className="text-field__input" type="text" name="company" id="company" value={title} onChange={(e)=>changeCompany(e)}  />
                                   </div>
 
                                   <label className='title-label'>Должность</label>
