@@ -261,17 +261,17 @@ const Projects = () => {
 
     //3
     let arrWorkers = []
-    //console.log("workersAll: ", workersAll)
-    // workersAll.map((item, index)=> {
-    //   const obj = {
-    //     id: item.id,
-    //     label: item.userfamily + ' ' + item.username,
-    //     value: index,
-    //   }
-    //   arrWorkers.push(obj)
-    // })
-    // //console.log("arrWorkers: ", arrWorkers)
-    // setWorkersData(arrWorkers)
+    console.log("workersAll: ", workersAll)
+    workersAll.map((item, index)=> {
+      const obj = {
+        id: item.id,
+        label: item.userfamily + ' ' + item.username,
+        value: index,
+      }
+      arrWorkers.push(obj)
+    })
+    //console.log("arrWorkers: ", arrWorkers)
+    setWorkersData(arrWorkers)
 
     //4
     let arrPlatfroms = []

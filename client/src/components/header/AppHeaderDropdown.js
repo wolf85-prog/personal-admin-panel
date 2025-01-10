@@ -20,6 +20,7 @@ import {
   cilSettings,
   cilTask,
   cilUser,
+  cilPeople,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import avatar from './../../assets/images/avatars/logo_chat_admin.png'
@@ -63,6 +64,7 @@ const AppHeaderDropdown = observer(() => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>
+        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Компания ID: {'000'+ companyId}</CDropdownHeader>
 
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
 
@@ -75,8 +77,8 @@ const AppHeaderDropdown = observer(() => {
         </Link>
 
         <Link to='/profile_company' style={{textDecoration:'none'}}><CDropdownItem>
-            <CIcon icon={cilUser} className="me-2" />
-            Моя компания: 00{companyId}
+            <CIcon icon={cilPeople} className="me-2" />
+            Компания
           </CDropdownItem>
         </Link>
 

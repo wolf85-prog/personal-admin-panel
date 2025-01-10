@@ -6,7 +6,7 @@ const Dropdown4 = ({options, selected, setSelected, placeholder, style}) => {
     const [menuShow, setMenuShow] = useState(false)
     // const [selected, setSelected] = useState(options[0])
 
-    console.log("selected: ", selected)
+    //console.log("selected: ", selected)
 
     useEffect(()=> {
       setSelected(selected ? {name: selected.name, color: selected.color} : {name: placeholder, color: '#f3f3f3'})
