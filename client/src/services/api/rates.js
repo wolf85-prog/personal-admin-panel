@@ -30,3 +30,7 @@ export const updateRateHour = async ({ rate_id, data }) => {
 export const updateRateItem = async ({ item_id, data }) => {
   await axiosInstance.post(`rates/items/${item_id}`, data)
 }
+
+// export const updateRateItem = async ({ item_id, data }) => {
+//   await axiosInstance.post(`rates/items/${item_id}`, data)
+// }

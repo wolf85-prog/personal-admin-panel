@@ -35,3 +35,7 @@ export const duplicateSpeciality = async (data) => {
 export const updateSpeciality = async (data) => {
   await axiosInstance.put('speciality', data)
 }
+
+// export const updateSpeciality = async (data) => {
+//   await axiosInstance.put('speciality', data)
+// }
