@@ -913,6 +913,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
             userId,
             name: projectTitle, 
             status: projectStatus,
+            start: projectStart,
             specifika: '',
             city: '',
             datestart: day, 
