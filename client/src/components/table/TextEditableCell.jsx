@@ -59,7 +59,7 @@ export const TextEditableCell = ({data, itemId, updateData}) => {
        borderColor: 'inherit',
        color: 'white',
        borderWidth: 0,
-       textAlign: 'center',
+       textAlign: 'left',
        backgroundColor: 'inherit',
      }}
      value={value}
