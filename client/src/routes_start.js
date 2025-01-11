@@ -13,6 +13,7 @@ import {
     AIR_ROUTE,
     CLIENT_ROUTE,
     PAY_RATE_ROUTE,
+    SETTINGS_ROUTE,
 
 } from "./utils/consts";
 
@@ -34,6 +35,8 @@ const ChatManager = React.lazy(() => import('./pages/ChatManager'))
 const ChatSupport = React.lazy(() => import('./pages/ChatSupport'))
 const Client = React.lazy(() => import('./pages/Client'))
 
+const Settings = React.lazy(() => import('./pages/Settings'))
+
 export const authRoutes = [
     { path: '/', name: 'Пункт управления', Component: Admin },
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
@@ -51,6 +54,7 @@ export const authRoutes = [
 
     { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
     { path: PROFILECOMPANY_ROUTE, name: 'Профиль компании', Component: ProfileCompany },
+    { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
 
     { path: PAY_RATE_ROUTE, name: 'Ставки', Component: PayRate },
 ]

@@ -168,24 +168,30 @@ const AppSidebar = () => {
 
     {
       component: CNavItem,
-      name: 'Контрагенты',
-      to: '/partner',
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
-      badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
+      name: 'Сметы',
+      to: '/estimate',
+      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {backgroundColor: '#0078d421'},
     },
     {
       component: CNavItem,
-      name: 'Сметы',
-      to: '/estimate',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      name: 'Ставки',
+      to: '/rate',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
-      name: 'Ставки',
-      to: '/payrate',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      name: 'Контрагенты',
+      to: '/partner',
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,     
     },
+    {
+      component: CNavItem,
+      name: 'Документы',
+      to: '/document',
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,     
+    },
+    
 
 //------------------------------------------------------------------------------------------------------
     {
