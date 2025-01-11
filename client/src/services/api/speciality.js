@@ -15,6 +15,9 @@ export const axiosInstance = axios.create({ baseURL: BASE_URL })
 export const getSpecialities = async () => {
   return (await axiosInstance.get('speciality')).data
 }
+export const getSpecialitiesFilter = async () => {
+  return (await axiosInstance.get('speciality/filters')).data
+}
 
 export const getSpecialityGrups = async () => {
   return (await axiosInstance.get('group')).data

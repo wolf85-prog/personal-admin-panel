@@ -1,4 +1,5 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -85,7 +86,7 @@ import cities from 'src/data/cities';
 import specifikaData from 'src/data/specifikaData';
 import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
-import specOnlyData2 from 'src/data/specOnlyData2';
+// import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster } from '../http/adminAPI'
@@ -93,6 +94,9 @@ import { getProjects, deleteProject, editProject, getProjectId } from '../http/p
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 import startData from 'src/data/startData';
+import {
+  getSpecialitiesFilter,
+} from 'src/services/api/speciality'
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -217,6 +221,17 @@ const Projects = () => {
     enableRowSelection: true,
     getRowCanExpand: () => true,
   })
+
+  const {
+    specialitiesIsPending,
+    specialitiesError,
+    data: specialities,
+  } = useQuery({
+    queryKey: ['specialities'],
+    queryFn: getSpecialitiesFilter,
+    initialData: []
+  })
+  
 
 
   useEffect(()=> {
@@ -1973,7 +1988,7 @@ ${loc.url}`;
                                     {item.hr ?
                                       <></> 
                                       :<MyDropdown5
-                                        options={[]}
+                                        options={specialities}
                                         selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}

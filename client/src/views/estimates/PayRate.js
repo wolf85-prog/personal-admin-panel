@@ -40,24 +40,22 @@ import {
 import MenuIcon3 from 'src/components/MenuIcon/MenuIcon'
 import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../../components/index'
 // import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { useUsersContext } from "../../chat-app-new/context/usersContext";
-import {Context} from "src/index";
+import { useUsersContext } from '../../chat-app-new/context/usersContext'
+import { Context } from 'src/index'
 
-const PayRate = () => {  
-  const { userId, token } = useUsersContext();
-  
+const PayRate = () => {
+  const { userId, token } = useUsersContext()
 
   const queryClient = useQueryClient()
   // const [groupItems, setGroup] = useState(groups)
 
-  console.log(process.env.REACT_APP_TENANT_REST_API)
-  console.log(token)
-  console.log(localStorage.getItem('user'))
-
+  // console.log(process.env.REACT_APP_TENANT_REST_API)
+  // console.log(token)
+  // console.log(localStorage.getItem('user'))
 
   const [editing, setEditing] = useState(false)
 
-  const [showCollapsible, setShowCollapsible] = useState({})  
+  const [showCollapsible, setShowCollapsible] = useState('')
   const hoursList = [1, 2, 4, 6, 8, 10, 12, 24]
 
   const handleCreateGroup = (e) => {
@@ -92,6 +90,17 @@ const PayRate = () => {
     queryFn: getSpecialityGrups,
   })
 
+  // if (groupItems && showCollapsible === '' ) {
+  //   const newItem = {}
+
+  //   const newItem2 = groupItems.map((item) => {
+  //     return { ...newItem, [item.id]: true }
+  //   })
+  //   console.log(newItem2)
+  //   setShowCollapsible(newItem2)
+  // }
+  
+
   const {
     isPending,
     error,
@@ -100,6 +109,7 @@ const PayRate = () => {
     queryKey: ['rates'],
     queryFn: getRates,
   })
+
   const { mutate: mutateSpeciality } = useMutation({
     mutationFn: updateSpeciality,
     onSettled: async () => {
@@ -132,7 +142,6 @@ const PayRate = () => {
       return await queryClient.invalidateQueries({ queryKey: ['rates'] })
     },
   })
-  
 
   if (isPending)
     return (
@@ -218,8 +227,6 @@ const PayRate = () => {
     }))
   }
 
-
-
   return groupItems.length > 0 ? (
     <div className="dark-theme">
       <AppSidebar />
@@ -228,7 +235,7 @@ const PayRate = () => {
         <div className="body flex-grow-1 px-3">
           <CContainer lg>
             <Suspense fallback={<CSpinner color="primary" />}>
-              <CForm onSubmit={handleCreateGroup}>
+              {/* <CForm onSubmit={handleCreateGroup}>
                 <CFormInput
                   style={{ width: '250px' }}
                   type="text"
@@ -236,7 +243,7 @@ const PayRate = () => {
                   placeholder="Создать группу"
                   name="groupName"
                 />
-              </CForm>
+              </CForm> */}
               <CRow className="mt-2">
                 <CCol xs>
                   {groupItems.map((group, index) => (
