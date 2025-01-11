@@ -83,27 +83,27 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Проекты',
-      to: '/projects',
+      to: '/project',
       icon: <img src={ProjIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
       style: {backgroundColor: '#0078d421'},
     },
     {
       component: CNavLink,
       name: 'В эфире',
-      to: '/air',
+      to: '/on_air',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },
     {
       component: CNavItem,
       name: 'Компании',
-      to: '/companys',
+      to: '/company',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
     },
     {
       component: CNavLink,
       name: 'Локации',
-      to: '/platforms',
+      to: '/location',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },  
@@ -118,7 +118,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Клиент',
-      to: '/chatman',
+      to: '/customer',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {cursor: 'pointer', backgroundColor: '#0078d421'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
@@ -127,7 +127,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Клиент | Профиль',
-      to: '/client',
+      to: '/profile_customer',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
@@ -136,7 +136,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Сотрудники',
-      to: '/chatwork',
+      to: '/worker',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },
@@ -144,7 +144,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Сотрудники | Профиль',
-      to: '/specialist',
+      to: '/profile_worker',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },
@@ -169,7 +169,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Контрагенты',
-      to: '/chatwork',
+      to: '/partner',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421'},
@@ -177,7 +177,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Сметы',
-      to: '/distributionw',
+      to: '/estimate',
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
     },
     {
@@ -194,21 +194,21 @@ const AppSidebar = () => {
     },
 //-------------------------------------------------------------------------------------------------------------
 
-    {
-      component: CNavLink,
-      name: 'Telegram',
-      //href: 'https://t.me/ULEY_Assistant',
-      icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
-      onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
-      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
-    },
+    // {
+    //   component: CNavLink,
+    //   name: 'Telegram',
+    //   //href: 'https://t.me/ULEY_Assistant',
+    //   icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
+    //   onClick: ()=>handleLinkClick('https://t.me/ULEY_Assistant'),
+    //   style: {backgroundColor: '#0078d421', cursor: 'pointer'},
+    // },
     {
       component: CNavItem,
       name: 'Техническая поддержка',
       to: '/support',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      //style: {сolor: '#e55353',},
+      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
 //--------------------------------------------------------------------------------------------------------    
     {
