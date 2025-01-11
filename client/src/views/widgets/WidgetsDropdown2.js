@@ -22,14 +22,14 @@ const WidgetsDropdown2 = ({
           color="primary"
           value={
             <>
-              0 {/*{' '}
+              {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
           title={"Проекты"}
-          action={""}
+          action={"0"}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -97,14 +97,14 @@ const WidgetsDropdown2 = ({
           color="info"
           value={
             <>
-              0{/* {newUsers.length}  */}
+              {/* {newUsers.length}  */}
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
           title="Доход"
-          action={""}
+          action={"0"}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -171,14 +171,14 @@ const WidgetsDropdown2 = ({
           color="warning"
           value={
             <>
-              0{/*{' '} 
+              {/*{' '} 
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
           title="Расход"
-          action={""}
+          action={"0"}
           chart={
             <CChartLine
               className="mt-3"
@@ -232,11 +232,11 @@ const WidgetsDropdown2 = ({
           color="danger"
           value={
             <>
-              0{/* {delUsers.length} */}
+              {/* {delUsers.length} */}
             </>
           }
           title={"Прибыль"}
-          action={""}
+          action={"0"}
           chart={
             <CChartBar
               className="mt-3 mx-3"
