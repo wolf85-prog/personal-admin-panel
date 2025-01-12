@@ -11,8 +11,13 @@ import axios from 'axios'
 const BASE_URL = process.env.REACT_APP_TENANT_REST_API
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL })
+axiosInstance.interceptors.request.use(config => {
+  config.headers["Tenant-User"] =  localStorage.getItem('user');
+  return config; 
+});
 
 export const getRates = async () => {
+  
   return (await axiosInstance.get('rates')).data
 }
 
