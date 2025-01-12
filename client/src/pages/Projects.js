@@ -422,7 +422,7 @@ ${loc.address}
 ${loc.track}   
 ${loc.url}`;
       setAddress(loc.city)
-      setTrack(loc.track)
+      setTrack(text)
       setLocationProject(loc.title)
     } else {
       setLocationProject('')
@@ -1115,6 +1115,8 @@ ${loc.url}`;
     setLocationProject(e.target.value)
     if (e.target.value === '') {
       setAddress('')
+      setTrack('')
+      setGeoId('')
     }
   }
 
@@ -1498,7 +1500,7 @@ ${loc.url}`;
                                               id="custom-input-demo"
                                               options={platformsData}
                                               style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>setLocationProject(e.target.value)}
+                                              onInputChange={(e)=>changeLocation(e)}
                                               //onInputChange={(e)=>console.log(e.target.value)}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onChange={(event, newValue) => {
@@ -1513,7 +1515,7 @@ ${loc.address}
 ${loc.track}   
 ${loc.url}`;
                                                         setAddress(loc.address)
-                                                        setTrack(loc.track)
+                                                        setTrack(text)
                                                         setGeoId(loc.id)
                                                       }
                                                   }  

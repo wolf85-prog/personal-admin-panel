@@ -36,7 +36,12 @@ const credentials = {
 };
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+    //res.sendFile(path.join(__dirname, 'build', 'index.html'))
+    res.sendFile(path.join(__dirname, 'build', 'index.html'), function(err) {
+        if (err) {
+          res.status(500).send(err)
+        }
+    })
 })
 
 const httpsServer = https.createServer(credentials, app);

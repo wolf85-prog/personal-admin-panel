@@ -76,13 +76,13 @@ const AppHeaderDropdown = observer(() => {
           </CDropdownItem>
         </Link>
 
-        <Link to='/profile_company' style={{textDecoration:'none'}}><CDropdownItem>
+        <Link to='/my_company' style={{textDecoration:'none'}}><CDropdownItem>
             <CIcon icon={cilPeople} className="me-2" />
             Компания
           </CDropdownItem>
         </Link>
 
-        <CDropdownItem href="#">
+        <CDropdownItem href="/settings">
           <CIcon icon={cilSettings} className="me-2" />
           Настройки
         </CDropdownItem>  
