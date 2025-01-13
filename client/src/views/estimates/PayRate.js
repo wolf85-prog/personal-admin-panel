@@ -28,6 +28,7 @@ import {
   CDropdownToggle,
 } from '@coreui/react'
 import { TextEditableCell } from 'src/components/table/TextEditableCell'
+import { MoneyEditableCell } from 'src/components/table/MoneyEditableCell'
 import { getRates, updateRateItem, updateRateHour } from 'src/services/api/rates'
 import {
   getSpecialityGrups,
@@ -37,10 +38,9 @@ import {
 } from 'src/services/api/speciality'
 
 import MenuIcon3 from 'src/components/MenuIcon/MenuIcon'
-import { AppSidebar, AppFooter, AppHeader} from '../../components/index'
+import { AppSidebar, AppFooter, AppHeader } from '../../components/index'
 
 import { useUsersContext } from '../../chat-app-new/context/usersContext'
-
 
 const PayRate = () => {
   const { userId, token } = useUsersContext()
@@ -66,13 +66,11 @@ const PayRate = () => {
       mutateGroup(item)
     }
     if (item.type === 'Добавить') {
-      const formValues = {        
-        
+      const formValues = {
         type: 'add',
-      }      
+      }
       mutateGroup(formValues)
     }
-    
   }
 
   const handleChangePayRate = (item) => {
@@ -93,14 +91,12 @@ const PayRate = () => {
   } = useQuery({
     queryKey: ['groups'],
     queryFn: getSpecialityGrups,
-    
   })
 
-  if (groupItems && showCollapsible === '' ) {    
-    const obj = groupItems.reduce((o, key) => ({ ...o, [key.id]: true}), {})    
+  if (groupItems && showCollapsible === '') {
+    const obj = groupItems.reduce((o, key) => ({ ...o, [key.id]: true }), {})
     setShowCollapsible(obj)
   }
-  
 
   const {
     isPending,
@@ -120,9 +116,9 @@ const PayRate = () => {
   const { mutate: mutateGroup } = useMutation({
     mutationFn: createSpecialityGroup,
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['groups'] })
+      return await queryClient.invalidateQueries({ queryKey: ['groups', 'rates'] })
     },
-  })  
+  })
 
   const { mutate: updateGroup } = useMutation({
     mutationFn: updateSpecialityGroup,
@@ -175,19 +171,17 @@ const PayRate = () => {
         </div>
       </div>
     )
+  
 
-  const editItem = (item_id, e) => {
-    if (e.key === 'Enter') {
-      // call action
-      // const payment = e.currentTarget.textContent
-      // const data = { payment: parseInt(payment.replace(' ', ''), 10) }
+  const editItemNew = (item_id, value) => {
+    console.log(value)
+    console.log(item_id)    
+    
+    const valueParsed = parseInt(value.replace(/\s/g, ""), 10)
+    const data = { payment: valueParsed }
 
-      // const item = { item_id, data }
-      // mutatePaument(item)
-      e.preventDefault()
-    }
-    const payment = e.currentTarget.textContent
-    const data = { payment: parseInt(payment.replace(' ', ''), 10) }
+    console.log(data)
+
 
     const item = { item_id, data }
     mutatePaument(item)
@@ -274,7 +268,7 @@ const PayRate = () => {
                           </CCol>
                         </CRow>
                       </CCardHeader>
-                      
+
                       {showCollapsible[group.id] && (
                         <CCardBody>
                           <CTable
@@ -464,8 +458,13 @@ const PayRate = () => {
                                       itemId={item.speciality.id}
                                       updateData={handleUpdateSpecialityName}
                                     />
-                                    <CTableDataCell
-                                      // contentEditable="true"
+                                    <MoneyEditableCell
+                                      data={item.rate_items.stavka1.payment}
+                                      itemId={item.rate_items.stavka1.id}
+                                      updateData={editItemNew}
+                                    />
+                                    {/* <CTableDataCell
+                                      contentEditable="true"
                                       // onBlur={(e) =>
                                       //   editItem(item.rate_items.stavka1.id, e.currentTarget.textContent)
                                       // }
@@ -481,130 +480,47 @@ const PayRate = () => {
                                       className="text-center"
                                     >
                                       {format(item.rate_items.stavka1.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka2.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka2.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka2.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka3.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka3.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka3.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka4.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka4.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka4.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka5.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka5.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka5.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka6.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka6.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka6.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka7.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka7.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka7.payment)}
-                                    </CTableDataCell>
-                                    <CTableDataCell
-                                      // contentEditable="true"
-                                      style={{
-                                        width: '114px',
-                                        minWidth: '114px',
-                                        height: '30px',
-                                        minHeight: '30px',
-                                        maxHeight: '30px',
-                                      }}
-                                      // onBlur={(e) =>
-                                      //   editItem(item.rate_items.stavka8.id, e.currentTarget.textContent)
-                                      // }
-                                      onKeyDown={(e) => editItem(item.rate_items.stavka8.id, e)}
-                                      className="text-center"
-                                    >
-                                      {format(item.rate_items.stavka8.payment)}
-                                    </CTableDataCell>
+                                    </CTableDataCell> */}
+                                    
+                                    <MoneyEditableCell
+                                      data={item.rate_items.stavka2.payment}
+                                      itemId={item.rate_items.stavka2.id}
+                                      updateData={editItemNew}
+                                    />
+                                    <MoneyEditableCell
+                                      data={item.rate_items.stavka3.payment}
+                                      itemId={item.rate_items.stavka3.id}
+                                      updateData={editItemNew}
+                                    />
+                                    <MoneyEditableCell
+                                      data={item.rate_items.stavka4.payment}
+                                      itemId={item.rate_items.stavka4.id}
+                                      updateData={editItemNew}
+                                    />
+                                     <MoneyEditableCell
+                                      data={item.rate_items.stavka5.payment}
+                                      itemId={item.rate_items.stavka5.id}
+                                      updateData={editItemNew}
+                                    />
+                                    <MoneyEditableCell
+                                      data={item.rate_items.stavka6.payment}
+                                      itemId={item.rate_items.stavka6.id}
+                                      updateData={editItemNew}
+                                    />
+                                     <MoneyEditableCell
+                                      data={item.rate_items.stavka7.payment}
+                                      itemId={item.rate_items.stavka7.id}
+                                      updateData={editItemNew}
+                                    />
+                                     <MoneyEditableCell
+                                      data={item.rate_items.stavka8.payment}
+                                      itemId={item.rate_items.stavka8.id}
+                                      updateData={editItemNew}
+                                    />
 
                                     {/* <CTableDataCell className="text-center">{item.shift}</CTableDataCell> */}
                                     <CTableDataCell
-                                      // onDoubleClick={() => setEditing(true)}
+                                      
                                       className="text-center"
                                     >
                                       {editing === item.id ? (
@@ -674,8 +590,6 @@ const PayRate = () => {
                           </CTable>
                         </CCardBody>
                       )}
-
-                      
                     </CCard>
                   ))}
                 </CCol>
