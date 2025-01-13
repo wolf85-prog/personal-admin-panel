@@ -32,16 +32,15 @@ import { getRates, updateRateItem, updateRateHour } from 'src/services/api/rates
 import {
   getSpecialityGrups,
   createSpecialityGroup,
-  duplicateSpeciality,
   updateSpeciality,
   updateSpecialityGroup,
 } from 'src/services/api/speciality'
 
 import MenuIcon3 from 'src/components/MenuIcon/MenuIcon'
-import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../../components/index'
-// import { useUsersContext } from "../chat-app-new/context/usersContext";
+import { AppSidebar, AppFooter, AppHeader} from '../../components/index'
+
 import { useUsersContext } from '../../chat-app-new/context/usersContext'
-import { Context } from 'src/index'
+
 
 const PayRate = () => {
   const { userId, token } = useUsersContext()
@@ -58,16 +57,22 @@ const PayRate = () => {
   const [showCollapsible, setShowCollapsible] = useState('')
   const hoursList = [1, 2, 4, 6, 8, 10, 12, 24]
 
-  const handleCreateGroup = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-
-    const formValues = {
-      name: formData.get('groupName'),
-      order: 0,
+  const handleCreateGroup = (item) => {
+    // e.preventDefault()
+    // const formData = new FormData(e.currentTarget)
+    console.log(item)
+    if (item.type === 'Удалить') {
+      item.type = 'delete'
+      mutateGroup(item)
     }
-
-    createGroup(formValues)
+    if (item.type === 'Добавить') {
+      const formValues = {        
+        
+        type: 'add',
+      }      
+      mutateGroup(formValues)
+    }
+    
   }
 
   const handleChangePayRate = (item) => {
@@ -88,17 +93,13 @@ const PayRate = () => {
   } = useQuery({
     queryKey: ['groups'],
     queryFn: getSpecialityGrups,
+    
   })
 
-  // if (groupItems && showCollapsible === '' ) {
-  //   const newItem = {}
-
-  //   const newItem2 = groupItems.map((item) => {
-  //     return { ...newItem, [item.id]: true }
-  //   })
-  //   console.log(newItem2)
-  //   setShowCollapsible(newItem2)
-  // }
+  if (groupItems && showCollapsible === '' ) {    
+    const obj = groupItems.reduce((o, key) => ({ ...o, [key.id]: true}), {})    
+    setShowCollapsible(obj)
+  }
   
 
   const {
@@ -116,17 +117,17 @@ const PayRate = () => {
       return await queryClient.invalidateQueries({ queryKey: ['rates'] })
     },
   })
-  const { mutate: createGroup } = useMutation({
+  const { mutate: mutateGroup } = useMutation({
     mutationFn: createSpecialityGroup,
     onSettled: async () => {
       return await queryClient.invalidateQueries({ queryKey: ['groups'] })
     },
-  })
+  })  
 
   const { mutate: updateGroup } = useMutation({
     mutationFn: updateSpecialityGroup,
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['groups'] })
+      return await queryClient.invalidateQueries({ queryKey: ['groups', 'rates'] })
     },
   })
 
@@ -264,7 +265,7 @@ const PayRate = () => {
                           ></CCol>
                           <CCol lg={1} className="text-end">
                             <MenuIcon3
-                              change={handleChangePayRate}
+                              change={handleCreateGroup}
                               groupId={group.id}
                               // specialitiId={item.id}
                               items={[{ name: 'Удалить' }, { name: 'Добавить' }]}
@@ -273,7 +274,7 @@ const PayRate = () => {
                           </CCol>
                         </CRow>
                       </CCardHeader>
-                      {/* <CCollapse visible={visible} id={group.id}> */}
+                      
                       {showCollapsible[group.id] && (
                         <CCardBody>
                           <CTable
@@ -674,7 +675,7 @@ const PayRate = () => {
                         </CCardBody>
                       )}
 
-                      {/* </CCollapse> */}
+                      
                     </CCard>
                   ))}
                 </CCol>
@@ -692,7 +693,7 @@ const PayRate = () => {
         <AppHeader />
         <div className="body flex-grow-1 px-3">
           <CContainer lg>
-            <Suspense fallback={<CSpinner color="primary" />}>
+            {/* <Suspense fallback={<CSpinner color="primary" />}>
               <CForm onSubmit={handleCreateGroup}>
                 <CFormInput
                   style={{ width: '250px' }}
@@ -702,7 +703,7 @@ const PayRate = () => {
                   name="groupName"
                 />
               </CForm>
-            </Suspense>
+            </Suspense> */}
           </CContainer>
         </div>
         <AppFooter />

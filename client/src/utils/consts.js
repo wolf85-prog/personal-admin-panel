@@ -30,4 +30,4 @@ export const REGISTRATION_ROUTE = '/register'
 
 export const TRASH_ROUTE = '/trash'
 
-export const PAY_RATE_ROUTE = '/payrate'
+export const PAY_RATE_ROUTE = '/rate'
