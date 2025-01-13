@@ -5,6 +5,10 @@ const authMiddleware = require('../middleware/authMiddleware')
 
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
 
+const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
+const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
+const { newConversationWorker, getConversationWorker, getConversationsW } = require('../controllers/wconversationController')
+
 const { getProjectsAll, 
     getProjectsDelete, getProjectId, 
     getProjectCreate, getProjectUpdate, 
@@ -50,6 +54,22 @@ route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 route.patch('/userbots/update/:id', editUser)
 route.patch('/userbots/updatefile/:id', editUserAvatar)
+
+//----------------WORKERS--------------------------------
+route.get('/wuserbots/get', getUserWorkers)
+route.get('/wuserbots/get/:id', getUserWorker)
+route.patch('/wuserbots/update/:id', editUserWorker)
+
+route.post('/wmessage/add', newMessageWorker)
+route.delete('/wmessage/delete/:id', delMessageWorker)
+route.get('/wmessage/get', getAllMessagesWorker)
+route.get('/wmessage/get/:id', getMessagesWorker)
+route.get('/wmessage/get/count/:count', getMessagesWorkerCount)
+route.get('/wmessage2/get/:id/:count/:prev', getMessagesWorker2) //еще
+
+route.post('/wconversation/add', newConversationWorker)
+route.get('/wconversation/get/:id', getConversationWorker)
+route.get('/wconversations/get', getConversationsW)
 
 
 route.get('/projects/user/get/:userId', getProjectsAll)
