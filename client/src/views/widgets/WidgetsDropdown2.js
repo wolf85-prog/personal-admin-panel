@@ -20,16 +20,17 @@ const WidgetsDropdown2 = ({
         <CWidgetStatsA
           className="mb-4"
           color="primary"
+          style={{height: '160px'}}
           value={
             <>
-              0 {/*{' '}
+              {/*{' '}
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
           title={"Проекты"}
-          action={""}
+          action={"0"}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -94,17 +95,18 @@ const WidgetsDropdown2 = ({
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
+          style={{height: '160px'}}
           color="info"
           value={
             <>
-              0{/* {newUsers.length}  */}
+              {/* {newUsers.length}  */}
               {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span> */}
             </>
           }
           title="Доход"
-          action={""}
+          action={"0"}
           chart={
             <CChartLine
               className="mt-3 mx-3"
@@ -168,17 +170,18 @@ const WidgetsDropdown2 = ({
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
+          style={{height: '160px'}}
           color="warning"
           value={
             <>
-              0{/*{' '} 
+              {/*{' '} 
                <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span> */}
             </>
           }
           title="Расход"
-          action={""}
+          action={"0"}
           chart={
             <CChartLine
               className="mt-3"
@@ -229,14 +232,15 @@ const WidgetsDropdown2 = ({
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
+          style={{height: '160px'}}
           color="danger"
           value={
             <>
-              0{/* {delUsers.length} */}
+              {/* {delUsers.length} */}
             </>
           }
           title={"Прибыль"}
-          action={""}
+          action={"0"}
           chart={
             <CChartBar
               className="mt-3 mx-3"

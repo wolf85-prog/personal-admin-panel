@@ -13,6 +13,7 @@ import {
     AIR_ROUTE,
     CLIENT_ROUTE,
     PAY_RATE_ROUTE,
+    SETTINGS_ROUTE,
 
 } from "./utils/consts";
 
@@ -34,24 +35,26 @@ const ChatManager = React.lazy(() => import('./pages/ChatManager'))
 const ChatSupport = React.lazy(() => import('./pages/ChatSupport'))
 const Client = React.lazy(() => import('./pages/Client'))
 
+const Settings = React.lazy(() => import('./pages/Settings'))
+
 export const authRoutes = [
+    { path: '/', name: 'Пункт управления', Component: Admin },
     { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
-    { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
-    { path: PROFILECOMPANY_ROUTE, name: 'Профиль компании', Component: ProfileCompany },
-    { path: SPECIALIST_ROUTE, name: 'Сотрудники', Component: Specialist },
-    { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
+
     { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },
+    { path: AIR_ROUTE, name: 'В эфире', Component: Air },
+    { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: PLATFORMS_ROUTE, name: 'Локации', Component: Platforms },
-
-    { path: PAY_RATE_ROUTE, name: 'Ставки', Component: PayRate },
-
+    { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },
+    { path: SPECIALIST_ROUTE, name: 'Сотрудники', Component: Specialist },
+    { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
     { path: CLIENT_ROUTE, name: 'Клиент', Component: Client },
 
-    { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
-    { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },
     { path: CHAT_SUPPORT, name: 'Техническая поддержка', Component: ChatSupport },
 
-    { path: AIR_ROUTE, name: 'В эфире', Component: Air },
+    { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
+    { path: PROFILECOMPANY_ROUTE, name: 'Профиль компании', Component: ProfileCompany },
+    { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
 
-    { path: '/', name: 'Пункт управления', Component: Admin },
+    { path: PAY_RATE_ROUTE, name: 'Ставки', Component: PayRate },
 ]

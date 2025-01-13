@@ -178,7 +178,7 @@ const ProfileCompany = () => {
       console.log("Company: ", result)
       setId(result?.id)
       setTitle(result?.title)
-      //setCity(result?.city)
+      setCity(result.city ? result.city : '')
 
       setLoading(false)
     }

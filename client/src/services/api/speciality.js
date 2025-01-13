@@ -11,9 +11,17 @@ import { json } from 'react-router-dom'
 const BASE_URL = process.env.REACT_APP_TENANT_REST_API
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL })
+axiosInstance.interceptors.request.use(config => {    
+  
+  config.headers["Tenant-User"] =  localStorage.getItem('user');
+  return config; 
+});
 
 export const getSpecialities = async () => {
   return (await axiosInstance.get('speciality')).data
+}
+export const getSpecialitiesFilter = async () => {
+  return (await axiosInstance.get('speciality/filters')).data
 }
 
 export const getSpecialityGrups = async () => {

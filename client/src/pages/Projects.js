@@ -1,4 +1,5 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
 import { 
@@ -85,7 +86,7 @@ import cities from 'src/data/cities';
 import specifikaData from 'src/data/specifikaData';
 import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
-import specOnlyData2 from 'src/data/specOnlyData2';
+// import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster } from '../http/adminAPI'
@@ -93,6 +94,9 @@ import { getProjects, deleteProject, editProject, getProjectId } from '../http/p
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 import startData from 'src/data/startData';
+import {
+  getSpecialitiesFilter,
+} from 'src/services/api/speciality'
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -217,6 +221,17 @@ const Projects = () => {
     enableRowSelection: true,
     getRowCanExpand: () => true,
   })
+
+  const {
+    specialitiesIsPending,
+    specialitiesError,
+    data: specialities,
+  } = useQuery({
+    queryKey: ['specialities'],
+    queryFn: getSpecialitiesFilter,
+    initialData: []
+  })
+  
 
 
   useEffect(()=> {
@@ -403,11 +418,10 @@ const Projects = () => {
     console.log("loc: ", loc)
     if (loc) {
       let text = `${loc.city}
-${loc.address}     
 ${loc.track}   
 ${loc.url}`;
-      setAddress(loc.city)
-      setTrack(loc.track)
+      setAddress(loc.address)
+      setTrack(text)
       setLocationProject(loc.title)
     } else {
       setLocationProject('')
@@ -1100,6 +1114,8 @@ ${loc.url}`;
     setLocationProject(e.target.value)
     if (e.target.value === '') {
       setAddress('')
+      setTrack('')
+      setGeoId('')
     }
   }
 
@@ -1483,7 +1499,7 @@ ${loc.url}`;
                                               id="custom-input-demo"
                                               options={platformsData}
                                               style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>setLocationProject(e.target.value)}
+                                              onInputChange={(e)=>changeLocation(e)}
                                               //onInputChange={(e)=>console.log(e.target.value)}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onChange={(event, newValue) => {
@@ -1493,12 +1509,11 @@ ${loc.url}`;
                                                       const loc = platformsAll.find(item=> item.title === newValue)
                                                       console.log("loc: ", loc)
                                                       if (loc) {
-                                                        let text = `${loc.city}
-${loc.address}     
+                                                        let text = `${loc.city}   
 ${loc.track}   
 ${loc.url}`;
                                                         setAddress(loc.address)
-                                                        setTrack(loc.track)
+                                                        setTrack(text)
                                                         setGeoId(loc.id)
                                                       }
                                                   }  
@@ -1973,7 +1988,7 @@ ${loc.url}`;
                                     {item.hr ?
                                       <></> 
                                       :<MyDropdown5
-                                        options={[]}
+                                        options={specialities}
                                         selected={mainspec}
                                         setSelected={setMainspec}
                                         index={index}
@@ -2035,7 +2050,7 @@ ${loc.url}`;
                           </CCollapse>
                         </CCard>
 
-                        <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
+                        {/* <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody style={{padding: '12px'}}>
@@ -2083,7 +2098,6 @@ ${loc.url}`;
                                         
                                       />
                                       
-                                      {/* <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span> */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {item.data}
@@ -2155,6 +2169,7 @@ ${loc.url}`;
                             </CCardBody>
                           </CCollapse>
                         </CCard>
+                        */}
 
                         {/* <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
