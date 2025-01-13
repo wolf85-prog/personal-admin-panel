@@ -1,21 +1,21 @@
-const UserBot = require('../models/UserBot')
+const UserBot = require('../models/models')
 const ApiError = require('../error/ApiError')
 
 class UserbotController {
 
     async addUser(req, res) {       
         try {    
-            let exist=await User.findOne( {sub: request.body.sub})
+            // let exist=await User.findOne( {sub: request.body.sub})
             
-            if(exist){
-                response.status(200).json({msg: "user already exist"});
-                return;
-            }
+            // if(exist){
+            //     response.status(200).json({msg: "user already exist"});
+            //     return;
+            // }
 
-            const {first_name, last_name, chatId} = req.body
+            // const {first_name, last_name, chatId} = req.body
 
-            const newUser = await UserBot.create({first_name, last_name, chatId})
-            return res.status(200).json(newUser);
+            // const newUser = await UserBot.create({first_name, last_name, chatId})
+            // return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
         }
