@@ -2,6 +2,9 @@ const Router = require('express')
 const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
+
+const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
+
 const { getProjectsAll, 
     getProjectsDelete, getProjectId, 
     getProjectCreate, getProjectUpdate, 
@@ -41,6 +44,12 @@ route.post('/user/login', userController.login)
 route.get('/user/auth', authMiddleware, userController.check)
 route.get('/user/get', authMiddleware, userController.getAll)
 route.get('/user/get/:id', authMiddleware, userController.getOne)
+
+
+route.get('/userbots/get', getUsers)
+route.get('/userbots/get/:id', getUser)
+route.patch('/userbots/update/:id', editUser)
+route.patch('/userbots/updatefile/:id', editUserAvatar)
 
 
 route.get('/projects/user/get/:userId', getProjectsAll)

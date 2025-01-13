@@ -1,5 +1,16 @@
 import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_renthub, $host_smeta} from "./index";
 
+export const getUserbot = async () =>{
+    try {
+       let response = await $host.get('api/userbots/get');
+       //console.log("projects: ", response.data);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getUserbot api", error.message);
+    }
+}
+
+
 export const getProjects = async () =>{
     try {
        let response = await $host_bot.get('projects');
