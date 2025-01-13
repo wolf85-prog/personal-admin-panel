@@ -25,9 +25,9 @@ class SpecialistController {
                     ['id', 'DESC'], //DESC, ASC
                 ],
                 where: {
-                    chatId: {
-                        [Op.ne]: null
-                    },
+                    // chatId: {
+                    //     [Op.ne]: null
+                    // },
                     userId: userId
                 }
             })

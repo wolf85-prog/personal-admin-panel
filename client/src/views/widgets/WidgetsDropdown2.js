@@ -20,6 +20,7 @@ const WidgetsDropdown2 = ({
         <CWidgetStatsA
           className="mb-4"
           color="primary"
+          style={{height: '160px'}}
           value={
             <>
               {/*{' '}
@@ -94,6 +95,7 @@ const WidgetsDropdown2 = ({
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
+          style={{height: '160px'}}
           color="info"
           value={
             <>
@@ -168,6 +170,7 @@ const WidgetsDropdown2 = ({
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
+          style={{height: '160px'}}
           color="warning"
           value={
             <>
@@ -229,6 +232,7 @@ const WidgetsDropdown2 = ({
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
+          style={{height: '160px'}}
           color="danger"
           value={
             <>
