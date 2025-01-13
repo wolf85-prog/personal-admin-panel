@@ -8,7 +8,6 @@ const UserBot = sequelize.define('wuserbot', {
     chatId: {type: DataTypes.STRING, unique: true},
     avatar: {type: DataTypes.STRING},
     username: {type: DataTypes.STRING},
-    block: {type: DataTypes.BOOLEAN},
 })
 
 const Worker = sequelize.define('worker', {
