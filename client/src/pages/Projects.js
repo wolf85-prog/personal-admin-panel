@@ -418,10 +418,9 @@ const Projects = () => {
     console.log("loc: ", loc)
     if (loc) {
       let text = `${loc.city}
-${loc.address}     
 ${loc.track}   
 ${loc.url}`;
-      setAddress(loc.city)
+      setAddress(loc.address)
       setTrack(text)
       setLocationProject(loc.title)
     } else {
@@ -1510,8 +1509,7 @@ ${loc.url}`;
                                                       const loc = platformsAll.find(item=> item.title === newValue)
                                                       console.log("loc: ", loc)
                                                       if (loc) {
-                                                        let text = `${loc.city}
-${loc.address}     
+                                                        let text = `${loc.city}   
 ${loc.track}   
 ${loc.url}`;
                                                         setAddress(loc.address)
@@ -2052,7 +2050,7 @@ ${loc.url}`;
                           </CCollapse>
                         </CCard>
 
-                        <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
+                        {/* <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
                           <CCollapse visible={visibleB}>
                             <CCardBody style={{padding: '12px'}}>
@@ -2100,7 +2098,6 @@ ${loc.url}`;
                                         
                                       />
                                       
-                                      {/* <span style={{position: 'absolute', left: '45px', top: '8px'}}>❌</span> */}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
                                       {item.data}
@@ -2172,6 +2169,7 @@ ${loc.url}`;
                             </CCardBody>
                           </CCollapse>
                         </CCard>
+                        */}
 
                         {/* <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
