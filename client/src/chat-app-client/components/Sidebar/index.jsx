@@ -9,29 +9,29 @@ import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { userWorkers, workersAll } = useUsersContext();
+	const { userClients, clientAll } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
 	const [loading, setLoading]= useState(true);
 
-	const CountWorkers = 50
+	const CountClients = 50
 
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		
 		//сортировка
-		// const userSort = [...userWorkers].sort((a, b) => {       
+		// const userSort = [...userClients].sort((a, b) => {       
 		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
 		// 	return dateB-dateA //сортировка по убывающей дате  
 		// })
 		
 		const arr = []
 
-		for (const item of userWorkers) {		
+		for (const item of userClients) {		
 			arr.push(item)
-			if (arr.length === CountWorkers)
+			if (arr.length === CountClients)
 			  break;
 		}
 
@@ -43,18 +43,18 @@ const Sidebar = () => {
 			setLoading(false)
 		}		
 		
-	},[userWorkers])
+	},[userClients])
 
 	
 	useEffect(() => {
 		const arr = []
-		for (const item of userWorkers) {			
+		for (const item of userClients) {			
 			arr.push(item)
-			if (arr.length === CountWorkers)
+			if (arr.length === CountClients)
 			  break;
 		}
 
-		const filteredData = userWorkers.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));       
+		const filteredData = userClients.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));       
 		setContacts(text === '' ? arr : filteredData);     
 		 
     }, [text]);
@@ -133,7 +133,7 @@ const Sidebar = () => {
 				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact key={ind} contact={contact} worker={workersAll.filter((item)=> item.chatId === contact.chatId)} />
+						<Contact key={ind} contact={contact} worker={clientAll.filter((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}

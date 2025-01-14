@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
 
+import { getClient } from "./../../http/clientAPI"
+
 import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
 import { getAllMessages, getContacts, getConversation, getMessages, getMessagesCount, getClientCount } from '../../http/chatAPI'
@@ -336,11 +338,11 @@ const UsersProvider = ({ children }) => {
 useEffect(() => {
 	//---------get UserClients-----------------------------------------
 	const fetchUserClientData = async () => {
-
-
+		const user = localStorage.getItem('user')
+			
 		//0 все клиенты
-		let all = await getUserbot()
-		console.log("Userbot all: ", all)
+		let all = await getClient(JSON.parse(user)?.id)
+		console.log("Client all: ", all)
 
 		const arrayClientAll = []
 	
@@ -350,6 +352,7 @@ useEffect(() => {
 			userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
 			username: '',//user.username,
 			phone: user.phone,
+			phone2: user.phone2,
 			dateborn: user.age,
 			city: user.city, 
 			//newcity: user.newcity, 
@@ -374,8 +377,8 @@ useEffect(() => {
 
 
 		//1 все специалисты 100
-		let response = await getClientCount(100, client.length);
-		//console.log("client 100: ", response)
+		let response = await getClientCount(JSON.parse(user)?.id, 100, client.length);
+		console.log("client 100: ", response)
 	
 		const arrayClient = []
 	
@@ -385,16 +388,14 @@ useEffect(() => {
 				userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
 				username: '',//user.username,
 				phone: user.phone,
+				phone2: user.phone2,
 				dateborn: user.age,
 				city: user.city, 
-				//newcity: user.newcity, 
 				companys: user.company,
-				//stag: user.stag,
 				worklist:  user.specialization,
 				chatId: user.chatId,
 				createDate: user.createdAt,
 				avatar: user.profile,
-				//from: user.from,
 				promoId: user.promoId,
 				blockW: user.blockW,
 				deleted: user.deleted,
@@ -422,8 +423,8 @@ useEffect(() => {
 		let count = 0
 		convers.forEach(async (user, index) => {
 	
-			let worker = arrayClientAll.find((item)=> item.chatId === user.members[0])
-			let userbot = userbots.find((item)=> item.chatId === worker?.chatId)	
+			let client = arrayClientAll.find((item)=> item.chatId === user.members[0])
+			let userbot = userbots.find((item)=> item.chatId === client?.chatId)	
 				
 			let conversationId = user.id //await getWConversation(user.members[0])
 
@@ -506,20 +507,20 @@ useEffect(() => {
 				obj[dates[i]] = arrayDateMessage;
 			}	
 			
-			if (worker) {
+			if (client) {
 				const newUser = {
-					id: worker.id,
+					id: client.id,
 					username: userbot?.username ? userbot?.username : '', // user.username ? user.username : '',
-					name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
-					city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
+					name: client?.userfamily + " " + client?.username, //notion[0]?.fio ? notion[0]?.fio : '',
+					city: client?.city, //notion[0]?.city ? notion[0]?.city : '',
 					//newcity: worker?.newcity,
-					phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
-					age: worker?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
-					chatId: worker?.chatId,
-					avatar: worker?.avatar, //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+					phone: client?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
+					age: client?.dateborn, //notion[0]?.age ? notion[0]?.age : "",
+					chatId: client?.chatId,
+					avatar: client?.avatar, //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 					conversationId: conversationId ? conversationId : 0,
 					block: userbot?.block ? userbot?.block : '',
-					blockW: worker?.blockW,
+					blockW: client?.blockW,
 					unread: 0, 
 					pinned: false,
 					typing: false,
@@ -794,6 +795,7 @@ useEffect(() => {
 			platformsAll,
 			setPlatformsAll,
 			
+			userClients,
 			client, 
 			setClient,
 			clientAll,
