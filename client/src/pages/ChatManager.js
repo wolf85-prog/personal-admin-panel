@@ -7,8 +7,8 @@ import "./../chat-app-new/assets/css/index.css";
 
 // import Loader from "../chat-app-new/components/Loader";
 import Home from "../chat-app-new/pages/Home";
-import Sidebar from "../chat-app-worker/components/Sidebar";
-import Chat from "../chat-app-worker/pages/Chat";
+import Sidebar from "../chat-app-client/components/Sidebar";
+import Chat from "../chat-app-client/pages/Chat";
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
 

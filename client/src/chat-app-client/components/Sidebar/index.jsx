@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/main.css";
 import avatar from "./../../../chat-app-new/assets/images/logo_chat_admin.png";
-import Icon from "./../../../chat-app-new/components/Icon";
+import Icon from "../../../chat-app-new/components/Icon";
 import Contact from "./Contact";
-import OptionsBtn from "./../../../chat-app-new/components/OptionsButton";
-import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
+import OptionsBtn from "../../../chat-app-new/components/OptionsButton";
+import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
@@ -91,7 +91,7 @@ const Sidebar = () => {
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
-				<div>Сотрудники</div>
+				<div>Клиенты</div>
 				<div className="sidebar__actions">
 					<OptionsBtn
 						className="sidebar__action"
@@ -120,7 +120,7 @@ const Sidebar = () => {
 				</div>
 				<input 
 					className="search" 
-					placeholder="Поиск сотрудника" 
+					placeholder="Поиск клиента" 
 					onChange={(e)=>setText(e.target.value)}
 				/>
 			</div>

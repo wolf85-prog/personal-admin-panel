@@ -11,6 +11,24 @@ export const getUserbot = async () =>{
 }
 
 
+export const getWUserbot = async () =>{
+    try {
+       let response = await $host.get('api/wuserbots/get');
+       //console.log("projects: ", response.data);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWUserbot api", error.message);
+    }
+}
+
+
+
+
+
+
+
+
+
 export const getProjects = async () =>{
     try {
        let response = await $host_bot.get('projects');

@@ -30,6 +30,7 @@ export const editContact = async (data, id) =>{
     }
 }
 
+
 export const editContactAvatar = async (data, id) =>{
     try {
        let response = await $host.patch(`api/userbots/updatefile/${id}`, data);
@@ -39,6 +40,7 @@ export const editContactAvatar = async (data, id) =>{
         console.log("error while calling editContactAvatar api", error.message);
     }
 }
+
 
 export const setConversation= async (data)=>{
     try {
@@ -113,6 +115,17 @@ export const getAllMessages = async()=>{
     }
 }
 
+export const getMessagesCount = async(count)=>{
+    try {
+        let response= await $host.get(`api/message/get/count/${count}`);
+        
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getWMessagesCount api",error.message);
+        
+    }
+}
+
 //file
 export const uploadFile = async (data) =>{
     try {
@@ -152,5 +165,15 @@ export const uploadAvatar = async (data) =>{
     } catch (error) {
         console.log("error while calling uploadAvatar api",error.message);
         
+    }
+}
+
+
+export const getClientCount = async (count, prev) =>{
+    try {
+       let response = await $host.get(`api/clients/count/get/${count}/${prev}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getClientCount api", error.message);
     }
 }
