@@ -189,11 +189,49 @@ const Admin = () => {
 
 {/*---------------------------------------- Renthub ------------------------------------  */} 
                   <CCardBody id="Renthub">
-                    <CRow>
-                      <CCol xs>
-                        <CCard className="mb-4">
-                          <CCardHeader style={{textAlign: 'left'}}>Пользователи бота ({clients.length - 1})</CCardHeader>
-                          <CCardBody>
+                          <CRow>
+                              <CCol md={6} style={{textAlign: 'left'}}>
+                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Неделя</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Месяц</CButton>
+                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Год</CButton>
+                              </CCol>
+                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate1}
+                                  //onChange={changeDate1}
+                                >
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="01.01.2025" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}}    
+                                                  />}
+                                </InputMask>
+
+                                <InputMask 
+                                  mask="99.99.9999"
+                                  value={periodDate2}
+                                  //onChange={changeDate2}
+                                >
+                                  {(inputProps) => <CFormInput 
+                                                    {...inputProps} 
+                                                    placeholder="31.12.2025" 
+                                                    disableUnderline
+                                                    aria-label="sm input example"
+                                                    style={{marginLeft: '10px'}} 
+                                                  />}
+                                </InputMask>                             
+                                            
+                                <CButton color="dark" style={{marginLeft: '10px'}}>Применить</CButton>
+                              </CCol>      
+                            </CRow>
+                            
+                            <br/>
+
+
                             <CRow>
                               <CCol xs={12} md={6} xl={6}>
                                 <CRow>
@@ -255,12 +293,7 @@ const Admin = () => {
                               </CTableBody>
                             </CTable>
                           
-                          </CCardBody>
-                        </CCard>
-                      </CCol>
-                    </CRow>
                   </CCardBody>
-
                 </CCard>
               </>
               </Suspense>

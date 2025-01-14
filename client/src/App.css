@@ -382,6 +382,10 @@ th.widthCompany {
     --cui-dark-stop: #292a2b;
 }
 
+.dark-theme .btn{
+  --cui-btn-border-color: #1f282c;
+}
+
 .modal {
     --cui-modal-bg: #1d1f2b;
     --cui-modal-border-color: rgba(0,0,0,.2);

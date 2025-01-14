@@ -20,6 +20,9 @@ import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import CompIcon from 'src/assets/images/dashboard3.png'
 import ProjIcon from 'src/assets/images/projects.png'
 import ChatIcon from 'src/assets/images/chat.png'
+import CompanyIcon from 'src/assets/images/company_icon.png'
+import LocalIcon from 'src/assets/images/location_icon.png'
+import SupportIcon from 'src/assets/images/support_icon.png'
 import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
@@ -98,13 +101,15 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Компании',
       to: '/company',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      //icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      icon: <img src={CompanyIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
     },
     {
       component: CNavLink,
       name: 'Локации',
       to: '/location',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      //icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      icon: <img src={LocalIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
       style: {cursor: 'pointer'},
     },  
 
@@ -119,14 +124,15 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Клиент',
       to: '/customer',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      //icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       style: {cursor: 'pointer', backgroundColor: '#0078d421'},
       badge: countMessageRent > 0 ? {color: 'info', text: countMessageRent,} : '',
     },
 
     {
       component: CNavItem,
-      name: 'Клиент | Профиль',
+      name: 'Профиль клиента',
       to: '/profile_customer',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
@@ -137,13 +143,14 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Сотрудники',
       to: '/worker',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      //icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       style: {cursor: 'pointer'},
     },
 
     {
       component: CNavItem,
-      name: 'Сотрудники | Профиль',
+      name: 'Профиль сотрудника',
       to: '/profile_worker',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
@@ -212,7 +219,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Техническая поддержка',
       to: '/support',
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
+      icon: <img src={SupportIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
