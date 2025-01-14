@@ -73,7 +73,7 @@ const Specialist = () => {
   const workerId= location.state?.workerId
   //console.log("workerId: ", workerId)
 
-  const { userId,specialist, setSpecialist, specialistAll, 
+  const { userId, specialist, setSpecialist, specialistAll, 
     setSpecialistAll, specialistsCount, setSpecialistsCount, addNewSpecialist } = useUsersContext();
 
   const [specialistCount, setSpecialistCount] = useState([]);
@@ -217,7 +217,7 @@ const Specialist = () => {
 
       let arrWorkers = []
 
-      workers.map(async (worker, i) => {
+      workers && workers.map(async (worker, i) => {
         const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
         const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -310,7 +310,7 @@ const Specialist = () => {
           setSpecialist(sortedWorker)
 					
 					//сохранить кэш
-					localStorage.setItem("specialist", JSON.stringify(sortedWorker));
+					//localStorage.setItem("specialist", JSON.stringify(sortedWorker));
 				}
 
       })  

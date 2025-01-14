@@ -23,6 +23,8 @@ import ChatIcon from 'src/assets/images/chat.png'
 import CompanyIcon from 'src/assets/images/company_icon.png'
 import LocalIcon from 'src/assets/images/location_icon.png'
 import SupportIcon from 'src/assets/images/support_icon.png'
+import ContragentIcon from 'src/assets/images/contragent_icon.png'
+
 import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
@@ -190,7 +192,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Контрагенты',
       to: '/partner',
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,     
+      icon: <img src={ContragentIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,     
     },
     {
       component: CNavItem,

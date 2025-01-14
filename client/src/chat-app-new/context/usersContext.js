@@ -64,6 +64,8 @@ const UsersProvider = ({ children }) => {
 	const [usersOnline, setUsersOnline] = useState([]);
 	const [managers, setManagers]= useState([]); // менеджеры (заказчики)
 
+	const [specialist, setSpecialist] = useState([])
+
 	const [companys, setCompanys]= useState([]);
 
 	const [platforms, setPlatforms] = useState([])
@@ -781,6 +783,9 @@ useEffect(() => {
 			setUserId,
 			users, 
 			setUsers,
+
+			specialist,
+			setSpecialist,
 			
 			contacts,
 			setContacts,
