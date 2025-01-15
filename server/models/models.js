@@ -205,7 +205,7 @@ module.exports = {
     Company,
     CompanyProf,
     Platform,
-    Specialist,
+    Worker,
     MainSpec,
     Client,
 }
