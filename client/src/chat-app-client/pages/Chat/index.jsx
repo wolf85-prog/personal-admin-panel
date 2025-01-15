@@ -35,12 +35,12 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage2, conversations, workersAll } = useUsersContext();
+	const { userClients, setUserAsUnread, addNewMessage2, conversations, clientAll } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = personW.id;
-	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
+	let user = userClients.filter((user) => user.chatId === chatId.toString())[0];
 	let convs = conversations.find((conv) => conv.members[0] === chatId.toString());
 
 	let data2
@@ -82,8 +82,8 @@ const Chat = () => {
 		//console.log("personW: ", personW.id)
 		if (user) {
 			scrollToLastMsg();
-			setUserAsUnread(user.chatId);
-			setCountMessage(0)
+			//setUserAsUnread(user.chatId);
+			//setCountMessage(0)
 			//обнулить кол-во сообщений
 			//const kol_mess = getCountMessage()
 			//newCountWMessage(kol_mess - 1)
@@ -92,7 +92,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		user && scrollToLastMsg();
-	}, [userWorkers]);
+	}, [userClients]);
 
 	useEffect(() => {
 		console.log(selectedElement)
@@ -398,7 +398,7 @@ const Chat = () => {
 		console.log("send passport")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userClients.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -449,7 +449,7 @@ const Chat = () => {
 		console.log("send rule")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userClients.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -541,7 +541,7 @@ https://t.me/ULEY_Office_Bot
 		console.log("send poster")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userClients.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -601,7 +601,7 @@ https://t.me/ULEY_Office_Bot
 
 				<Header
 					user={personW}
-					worker={workersAll.filter((item)=> item.chatId === user.chatId)}
+					worker={clientAll.filter((item)=> item.chatId === user.chatId)}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}

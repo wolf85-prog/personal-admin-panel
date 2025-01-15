@@ -130,7 +130,7 @@ export const getMessagesCount = async(count)=>{
         
         return response.data;
     } catch (error) {
-        console.log("error while calling getWMessagesCount api",error.message);
+        console.log("error while calling getMessagesCount api",error.message);
         
     }
 }

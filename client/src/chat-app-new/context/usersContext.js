@@ -8,8 +8,7 @@ import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
 import { getAllMessages, getContacts, getConversation, getConversations, getMessages, getMessagesCount } from '../../http/chatAPI'
 
-import { getAllPretendent, getWContacts, getWConversation, 
-	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
+import { getWContacts, getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI'
 
 import { getCompany } from '../../http/companyAPI'
@@ -372,7 +371,7 @@ useEffect(() => {
 			comment: user.comment,
 			comteg: user.comteg,
 			}
-	
+			console.log("newClient: ", newClient)
 			arrayClientAll.push(newClient)
 		})
 	
@@ -411,23 +410,24 @@ useEffect(() => {
 	
 		//2 все пользователи бота
 		let userbots = await getUserbot();
-		//console.log("wuserbots size: ", wuserbots.length)
+		console.log("userbots size: ", userbots.length)
 		const arrayContact = []
 
 		//3 все беседы (conversations)
 		let convers = await getConversations()
-		console.log("conversations: ", convers.length)
+		console.log("conversations: ", convers)
 		setConversations(convers)
 
 		//4 все сообщения бота
 		let messagesAll = await getMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
-		//console.log("messagesAll: ", messagesAll.length)
+		console.log("messagesAll: ", messagesAll.length)
 
 		let count = 0
 		convers.forEach(async (user, index) => {
 	
 			let client = arrayClientAll.find((item)=> item.chatId === user.members[0])
 			let userbot = userbots.find((item)=> item.chatId === client?.chatId)	
+			console.log("Client: ", client)
 				
 			let conversationId = user.id //await getWConversation(user.members[0])
 
@@ -512,7 +512,7 @@ useEffect(() => {
 			
 			if (client) {
 				const newUser = {
-					id: client.id,
+					id: client?.id,
 					username: userbot?.username ? userbot?.username : '', // user.username ? user.username : '',
 					name: client?.userfamily + " " + client?.username, //notion[0]?.fio ? notion[0]?.fio : '',
 					city: client?.city, //notion[0]?.city ? notion[0]?.city : '',
@@ -531,7 +531,7 @@ useEffect(() => {
 					date: dateMessage,
 					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
 				}
-				//console.log(newUser)
+				console.log("newUser: ", newUser)
 				arrayContact.push(newUser)
 			}		
 			
@@ -543,6 +543,8 @@ useEffect(() => {
 					var dateA = new Date(a.date), dateB = new Date(b.date) 
 					return dateB-dateA  //сортировка по убывающей дате  
 				})
+
+				console.log("sortedClients: ", sortedClients)
 	
 				setUserClients(sortedClients)
 			}				
@@ -559,9 +561,12 @@ useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
 
+			const user = localStorage.getItem('user')
+			//console.log("userId: ", JSON.parse(user)?.id)
+
 			//0 все специалисты
-			let all = await getWUserbot()
-			//console.log("WUserbot all: ", all)
+			let all = await getWorkers()
+			console.log("Workers all: ", all)
 
 			const arrayWorkerAll = []
 		

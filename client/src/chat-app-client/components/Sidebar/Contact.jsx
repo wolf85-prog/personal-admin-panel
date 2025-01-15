@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import formatTime from "../../../chat-app-new/utils/formatTime";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider'
 import avatarDefault from "./../../../chat-app-new/assets/images/no-avatar.png";
-import avatarKrest from "./../../../chat-app-worker/assets/images/uncheck.png";
-import blockUser from "./../../../chat-app-worker/assets/images/stop.png";
+import avatarKrest from "./../../../chat-app-client/assets/images/uncheck.png";
+import blockUser from "./../../../chat-app-client/assets/images/stop.png";
 import block18 from "./../../../assets/images/block18.png";
 
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
@@ -20,8 +20,8 @@ const Contact = ({ contact, worker }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
-	const { userWorkers, setUserWorkers } = useUsersContext();
+	//const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
+	const { userClients, setUserClients } = useUsersContext();
 
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
@@ -31,8 +31,8 @@ const Contact = ({ contact, worker }) => {
 			avatar: contact.avatar
         });
 
-		setUserWorkerAsUnread(contact.chatId)
-		setCountMessageWork('0')
+		//setUserWorkerAsUnread(contact.chatId)
+		//setCountMessageWork('0')
 		//await newCountWMessage(0)
 
 		if (Object.keys(contact.messages).length === 0) {
@@ -86,9 +86,9 @@ const Contact = ({ contact, worker }) => {
 				//console.log("obj: ", obj)
 
 				//сохранить сообщения в контексте пользователя
-				setUserWorkers((userWorkers) => {
-					let userIndex = userWorkers.findIndex((user) => user.chatId === contact.chatId.toString());
-					const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+				setUserClients((userClients) => {
+					let userIndex = userClients.findIndex((user) => user.chatId === contact.chatId.toString());
+					const usersCopy = JSON.parse(JSON.stringify(userClients));
 					usersCopy[userIndex].messages = obj
 
 					return usersCopy;
@@ -145,21 +145,21 @@ const Contact = ({ contact, worker }) => {
 					</>
 				}
 				
-				{
+				{/* {
                     worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
                     <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
                     : "")
                     : ""
-                }
+                } */}
                 
-				{
+				{/* {
                     worker.length !== 0 ? 
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === '+18') ?   
                     <img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
                     : "")
                     : ""
-                }
+                } */}
 
 				
 			</div>

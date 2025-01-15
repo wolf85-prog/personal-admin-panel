@@ -4,10 +4,10 @@ import Icon from "../../../components/Icon";
 import OptionsBtn from "../../../components/OptionsButton";
 
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
-import avatarBlacklist from "./../../../../chat-app-worker/assets/images/uncheck.png";
-import blockUser from "./../../../../chat-app-worker/assets/images/stop.png";
+import avatarBlacklist from "./../../../../chat-app-client/assets/images/uncheck.png";
+import blockUser from "./../../../../chat-app-client/assets/images/stop.png";
 import block18 from "./../../../../assets/images/block18.png";
-import robot from "./../../../../chat-app-worker/assets/images/robot.png";
+import robot from "./../../../../chat-app-client/assets/images/robot.png";
 import editIcon from './../../../../assets/images/pencil.png'
 
 import { 
@@ -96,13 +96,13 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 					</>
 				}
 				
-				{
+				{/* {
                     worker && worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
                     <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
                     : "")
                     : ""
-                }
+                } */}
                 
 				{/* {
                     worker.length !== 0 ? 

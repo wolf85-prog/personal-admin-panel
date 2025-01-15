@@ -40,9 +40,9 @@ export const getWorkerChildrenId = async (id) =>{
     }
 }
 
-export const getWorkers = async () =>{
+export const getWorkers = async (userId) =>{
     try {
-       let response = await $host.get('api/workers/get');
+       let response = await $host.get(`api/workers/user/get/${userId}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getWorkers api", error.message);

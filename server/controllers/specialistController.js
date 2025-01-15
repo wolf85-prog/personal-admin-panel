@@ -1,4 +1,4 @@
-const {Specialist} = require('../models/models')
+const {Worker} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
@@ -20,7 +20,7 @@ class SpecialistController {
     async getSpecialist(req, res) {
         const {userId} = req.params
         try {
-            const workers = await Specialist.findAll({
+            const workers = await Worker.findAll({
                 order: [
                     ['id', 'DESC'], //DESC, ASC
                 ],
@@ -42,7 +42,7 @@ class SpecialistController {
         const prev = req.params.prev
         const {userId} = req.params
         try {
-            const count = await Specialist.count({
+            const count = await Worker.count({
                 where: {
                     userId: userId
                 }
@@ -51,7 +51,7 @@ class SpecialistController {
 
             const k = parseInt(kol) + parseInt(prev)
 
-            const workers = await Specialist.findAll({
+            const workers = await Worker.findAll({
                 order: [
                     ['id', 'ASC'], //DESC, ASC
                 ],
@@ -70,7 +70,7 @@ class SpecialistController {
     async editSpecialist(req, res) { 
         const {id} = req.params      
         try {    
-            let exist=await Specialist.findOne( {where: {id: id}} )
+            let exist=await Worker.findOne( {where: {id: id}} )
             
             if(!exist){
                 res.status(500).json({msg: "user not exist"});
@@ -103,7 +103,7 @@ class SpecialistController {
                 krest
             } = req.body
 
-            const newUser = await Specialist.update(
+            const newUser = await Worker.update(
                 { 
                     userId,
                     fio, 
@@ -139,7 +139,7 @@ class SpecialistController {
     async getSpecialistId(req, res) {
         const {id} = req.params
         try {
-            const worker = await Specialist.findOne({where: {id: id.toString()}})
+            const worker = await Worker.findOne({where: {id: id.toString()}})
             return res.status(200).json(worker);
         } catch (err) {
             return res.status(500).json(err);
@@ -149,7 +149,7 @@ class SpecialistController {
     async getSpecialistChatId(req, res) {
         const {id} = req.params
         try {
-            const workers = await Specialist.findOne({where: {chatId: id.toString()}})
+            const workers = await Worker.findOne({where: {chatId: id.toString()}})
             return res.status(200).json(workers);
         } catch (err) {
             return res.status(500).json(err);
@@ -200,7 +200,7 @@ class SpecialistController {
                 urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:54:44.499Z.jpg'
             } 
 
-            const newUser = await Specialist.create({userId, fio, profile: urlAvatar})
+            const newUser = await Worker.create({userId, fio, profile: urlAvatar})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
@@ -210,7 +210,7 @@ class SpecialistController {
     async deleteSpecialist(req, res) {      
         const {id} = req.params 
         try {              
-            await Specialist.destroy({
+            await Worker.destroy({
                 where: { id: String(id) },
             })
             return res.status(200).json("Данные успешно удалены!");
@@ -222,7 +222,7 @@ class SpecialistController {
     async getSpecCountAll(req, res) {
         const {userId} = req.params
         try {
-            const count = await Specialist.count({
+            const count = await Worker.count({
                 where: {
                     userId: userId
                 }
@@ -237,7 +237,7 @@ class SpecialistController {
     async getSpecialistPhone(req, res) {
         const {id} = req.params
         try {
-            const worker = await Specialist.findOne({where: {
+            const worker = await Worker.findOne({where: {
                 [Op.or]: [{phone: id.toString()}, {phone2: id.toString()}]
             }})
             return res.status(200).json(worker);
@@ -249,14 +249,14 @@ class SpecialistController {
     async blockSpecialist(req, res) { 
         const {id} = req.params      
         try {    
-            let exist=await Specialist.findOne( {where: {chatId: id}} )
+            let exist=await Worker.findOne( {where: {chatId: id}} )
             
             if(!exist){
                 res.status(500).json({msg: "user not exist"});
                 return;
             }
 
-            const newUser = await Specialist.update(
+            const newUser = await Worker.update(
                 { blockW: exist.dataValues.blockW !==null ? !exist.dataValues.blockW : true},
                 { where: {chatId: id} })
             return res.status(200).json(newUser);

@@ -101,17 +101,17 @@ route.get('/projects/chat/get/:id', getProjectChatId)
 
 
 
-//----------------- Специалисты ---------------------------------
-route.get('/specialist/user/get/:userId', getSpecialist)
-route.get("/specialist/:id", getSpecialistId);
-route.get('/specialist/count/get/:userId/:count/:prev', getSpecCount) //еще
-route.patch('/specialist/update/:id', editSpecialist)
-route.get("/specialist/delete/:id", deleteSpecialist);
-route.post("/specialist/add", addSpecialist);
-route.get("/specialist/count/get", getSpecCountAll);
-route.get("/specialist/phone/:id", getSpecialistPhone);
-route.get("/specialist/chat/:id", getSpecialistChatId);
-route.get('/specialist/block/:id', blockSpecialist)
+//----------------- Сотрудники ---------------------------------
+route.get('/workers/user/get/:userId', getSpecialist)
+route.get("/workers/:id", getSpecialistId);
+route.get('/workers/count/get/:userId/:count/:prev', getSpecCount) //еще
+route.patch('/workers/update/:id', editSpecialist)
+route.get("/workers/delete/:id", deleteSpecialist);
+route.post("/workers/add", addSpecialist);
+route.get("/workers/count/get", getSpecCountAll);
+route.get("/workers/phone/:id", getSpecialistPhone);
+route.get("/workers/chat/:id", getSpecialistChatId);
+route.get('/workers/block/:id', blockSpecialist)
 
 
 //----------------- Менеджеры ---------------------------------

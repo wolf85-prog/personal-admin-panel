@@ -39,7 +39,7 @@ const Profile = ({ user, closeSidebar }) => {
 	const [form, setForm] = useState(false)
 
 	const { addNewName, addNewAvatar } = useUsersContext();
-	const { userWorkers, workersAll } = useUsersContext();
+	const { userClients, clientAll } = useUsersContext();
 	const { addNewMessage2 } = useUsersContext();
 
 	const { setPersonW } = useContext(AccountContext);
@@ -73,8 +73,8 @@ const Profile = ({ user, closeSidebar }) => {
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
 			console.log("user: ", user)
-			console.log("specialist: ", workersAll)
-			const fio_notion = workersAll.find(item=>item.chatId === user.chatId) //await getWorkerNotionId(user.chatId)
+			console.log("specialist: ", clientAll)
+			const fio_notion = clientAll.find(item=>item.chatId === user.chatId) //await getWorkerNotionId(user.chatId)
 			console.log("worker: ", fio_notion)
 			
 			setWorker(fio_notion)
@@ -119,49 +119,49 @@ const Profile = ({ user, closeSidebar }) => {
 	}, [user])
 
 
-	useEffect(()=>{
+	// useEffect(()=>{
 
-		const fetch = async() => {
-			const pretendentArray = await getLastPretendent(user.chatId)
-			console.log("pretendentArray: ", pretendentArray)
+	// 	const fetch = async() => {
+	// 		const pretendentArray = await getLastPretendent(user.chatId)
+	// 		console.log("pretendentArray: ", pretendentArray)
 			
-			if (pretendentArray.length > 0) {
-				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
-				const projectId2 = pretendentArray[pretendentArray.length-2]?.projectId
-				const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
+	// 		if (pretendentArray.length > 0) {
+	// 			const projectId = pretendentArray[pretendentArray.length-1]?.projectId
+	// 			const projectId2 = pretendentArray[pretendentArray.length-2]?.projectId
+	// 			const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
 				
-				//получить CrmId по id проекта
-				const project = await getProjectId(projectId)
-				console.log("project profile: ", project)
-				const project2 = await getProjectId(projectId2)
-				const project3 = await getProjectId(projectId3)
+	// 			//получить CrmId по id проекта
+	// 			const project = await getProjectId(projectId)
+	// 			console.log("project profile: ", project)
+	// 			const project2 = await getProjectId(projectId2)
+	// 			const project3 = await getProjectId(projectId3)
 
-				const crmId = project ? project.crmID : '—'
-				const crmId2 = project2 ? project2.crmID : '—'
-				const crmId3 = project3 ? project3.crmID : '—' 
+	// 			const crmId = project ? project.crmID : '—'
+	// 			const crmId2 = project2 ? project2.crmID : '—'
+	// 			const crmId3 = project3 ? project3.crmID : '—' 
 
-				console.log("crmId: ", crmId, crmId2, crmId3)
+	// 			console.log("crmId: ", crmId, crmId2, crmId3)
 
-				setCrmId(crmId)
-				setCrmId2(crmId2)
-				setCrmId3(crmId3)
-			} else {
-				setCrmId('—')
-			}	
+	// 			setCrmId(crmId)
+	// 			setCrmId2(crmId2)
+	// 			setCrmId3(crmId3)
+	// 		} else {
+	// 			setCrmId('—')
+	// 		}	
 			
-			const blocked = await getSpecialistChatId(user.chatId)
-			console.log("blocked: ", blocked, user.chatId)
-			setBlockWorker(blocked?.blockW ? blocked?.blockW : false)
-		}
+	// 		const blocked = await getSpecialistChatId(user.chatId)
+	// 		console.log("blocked: ", blocked, user.chatId)
+	// 		setBlockWorker(blocked?.blockW ? blocked?.blockW : false)
+	// 	}
 		
-		fetch()
-	}, [user])
+	// 	fetch()
+	// }, [user])
 
 	const clickSetBlocked = async() => {
 		setBlockWorker(!blockWorker)
 		//заблокировать/разблокировать пользователю рассылки
-		const res = await blockedSpecialist(user.chatId)
-		console.log("res block: ", res)
+		//const res = await blockedSpecialist(user.chatId)
+		//console.log("res block: ", res)
 	}
 	
 	const onImageError = (e) => {
