@@ -1225,6 +1225,11 @@ ${loc.url}`;
     }
   }
 
+  const changeDate = (date, e) => {
+    console.log(e.target.value)
+    setStartDate(date)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1278,7 +1283,7 @@ ${loc.url}`;
                                                     className="uley-datepicker-control text-center text-field__input"
                                                     style={{ height: '40px', width: '120px'}}
                                                     selected={startDate}
-                                                    onChange={(date) => setStartDate(date)}
+                                                    onChange={(date, e) => changeDate(date, e)}
                                                     selectsStart
                                                     //startDate={startDate}
                                                     dateFormat="dd.MM.yyyy"

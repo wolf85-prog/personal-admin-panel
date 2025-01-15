@@ -168,17 +168,15 @@ const AppHeader = (props) => {
         </CHeaderBrand>
 
         <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
               Пункт управления
             </CNavLink>
           </CNavItem>
-          {/* <CNavItem>
-            <CNavLink href="/chat2">Менеджеры</CNavLink>
-          </CNavItem> */}
+
           <CNavItem>
             <CNavLink href="/project">Проекты</CNavLink>
-          </CNavItem>
+          </CNavItem> */}
         </CHeaderNav>
 
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>

@@ -14,6 +14,9 @@ import {
     CLIENT_ROUTE,
     PAY_RATE_ROUTE,
     SETTINGS_ROUTE,
+    ESTIMATE_ROUTE,
+    PARTNER_ROUTE,
+    DOCUMENT_ROUTE,
 
 } from "./utils/consts";
 

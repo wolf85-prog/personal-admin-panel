@@ -25,6 +25,10 @@ import LocalIcon from 'src/assets/images/location_icon.png'
 import SupportIcon from 'src/assets/images/support_icon.png'
 import ContragentIcon from 'src/assets/images/contragent_icon.png'
 
+import StavkiIcon from 'src/assets/images/stavki_icon.png'
+import SmetaIcon from 'src/assets/images/smeta_icon.png'
+import DocumIcon from 'src/assets/images/docum_icon.png'
+
 import { newPretendent, getCountMessage } from 'src/http/adminAPI'
 
 // sidebar nav config
@@ -179,14 +183,16 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Сметы',
       to: '/estimate',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      //icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      icon: <img src={SmetaIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       style: {backgroundColor: '#0078d421'},
     },
     {
       component: CNavItem,
       name: 'Ставки',
       to: '/rate',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      //icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+      icon: <img src={StavkiIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
     },
     {
       component: CNavItem,
@@ -198,7 +204,7 @@ const AppSidebar = () => {
       component: CNavItem,
       name: 'Документы',
       to: '/document',
-      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,     
+      icon: <img src={DocumIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,     
     },
     
 
