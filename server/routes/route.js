@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/authMiddleware')
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
 const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
 const { newMessage, delMessage, getMessages, getLastMessages, getAllMessages, getCountMessages, 
-    newCountMessage, newCountWMessage, newCountProjects, newCountMessagePretendent,
+    newCountMessage, newCountWMessage, newCountProjects, getMessagesClientCount,
  } = require('../controllers/messageController')
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
@@ -71,6 +71,7 @@ route.get('/message/get', getAllMessages)
 route.get('/message/get/:id', getMessages)
 route.get('/message/last/get/:id', getLastMessages)
 route.get('/message/count/get', getCountMessages)
+route.get('/message/get/count/:count', getMessagesClientCount)
 
 
 //----------------WORKERS--------------------------------

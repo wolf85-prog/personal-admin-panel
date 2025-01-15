@@ -143,6 +143,27 @@ class MessageController {
             return res.status(500).json(error.message);
         }
     }
+
+    //выбрать сообщения с конца таблицы (последние)
+    async getMessagesClientCount(req, res) {
+        const count = req.params.count
+        try {   
+            const countAll = await Message.count();
+            //console.log("MessagesAll: ", countAll)
+
+            const messages = await Message.findAll({
+                order: [
+                    ['id', 'ASC'],
+                ],
+                offset: countAll > count ? countAll - count : 0,
+                //limit : 50,
+            })
+            //console.log("MessagesCount: ", messages.length)
+            return res.status(200).json(messages);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new MessageController()
