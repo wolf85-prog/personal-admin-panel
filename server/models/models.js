@@ -57,7 +57,7 @@ const Project = sequelize.define('project', {
     deleted: {type: DataTypes.BOOLEAN},
 })
 
-const Specialist = sequelize.define('specialist', {
+const Worker = sequelize.define('worker', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
     userId: {type: DataTypes.STRING}, 
     fio: {type: DataTypes.STRING},
