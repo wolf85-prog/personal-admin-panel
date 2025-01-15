@@ -5,6 +5,9 @@ const authMiddleware = require('../middleware/authMiddleware')
 
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
 const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
+const { newMessage, delMessage, getMessages, getLastMessages, getAllMessages, getCountMessages, 
+    newCountMessage, newCountWMessage, newCountProjects, newCountMessagePretendent,
+ } = require('../controllers/messageController')
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
@@ -60,6 +63,14 @@ route.patch('/userbots/updatefile/:id', editUserAvatar)
 route.post('/conversation/add', newConversation)
 route.get('/conversation/get/:id', getConversation)
 route.get('/conversations/get', getConversations)
+
+
+route.post('/message/add', newMessage)
+route.delete('/message/delete/:id', delMessage)
+route.get('/message/get', getAllMessages)
+route.get('/message/get/:id', getMessages)
+route.get('/message/last/get/:id', getLastMessages)
+route.get('/message/count/get', getCountMessages)
 
 
 //----------------WORKERS--------------------------------
