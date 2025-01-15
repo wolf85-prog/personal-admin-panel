@@ -64,6 +64,15 @@ export const getConversation= async (id)=>{
     }
 }
 
+export const getConversations= async ()=>{
+    try {
+       let response= await $host.get(`api/conversations/get`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getConversations api", error.message);       
+    }
+}
+
 // message
 export const newMessage = async (data) =>{
     try {
@@ -165,15 +174,5 @@ export const uploadAvatar = async (data) =>{
     } catch (error) {
         console.log("error while calling uploadAvatar api",error.message);
         
-    }
-}
-
-
-export const getClientCount = async (count, prev) =>{
-    try {
-       let response = await $host.get(`api/clients/count/get/${count}/${prev}`);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getClientCount api", error.message);
     }
 }

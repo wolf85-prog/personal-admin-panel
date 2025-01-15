@@ -2,11 +2,11 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
 
-import { getClient } from "./../../http/clientAPI"
+import { getClient, getClientCount } from "./../../http/clientAPI"
 
 import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
-import { getAllMessages, getContacts, getConversation, getMessages, getMessagesCount, getClientCount } from '../../http/chatAPI'
+import { getAllMessages, getContacts, getConversation, getConversations, getMessages, getMessagesCount } from '../../http/chatAPI'
 
 import { getAllPretendent, getWContacts, getWConversation, 
 	getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
@@ -184,14 +184,14 @@ const UsersProvider = ({ children }) => {
 		const fetchData = async() => {
 		  
 		  const user = localStorage.getItem('user')
-		  console.log("user: ", JSON.parse(user))
+		  //console.log("user: ", JSON.parse(user))
 	
 		  if (user) {
 			setUserId(JSON.parse(user)?.id)
 			setEmail(JSON.parse(user)?.email)
 			
 			const result = await getManagerId(JSON.parse(user)?.id)
-		  	console.log("Manager: ", result)
+		  	//console.log("Manager: ", result)
 	
 		  	setManagerProfile(result)
 		  }
@@ -210,7 +210,7 @@ const UsersProvider = ({ children }) => {
 			const user = localStorage.getItem('user')
 
 			let company = await getCompany(JSON.parse(user)?.id);
-			console.log("companys context: ", company)
+			//console.log("companys context: ", company)
 
 		
 			let arrCompanys = []
@@ -287,7 +287,7 @@ const UsersProvider = ({ children }) => {
 			const user = localStorage.getItem('user')
 			
 			let platforms = await getPlatforms(JSON.parse(user)?.id);
-			console.log("platforms context: ", platforms)
+			//console.log("platforms context: ", platforms)
 		
 			let arrCompanys = []
 		
@@ -341,6 +341,7 @@ useEffect(() => {
 	//---------get UserClients-----------------------------------------
 	const fetchUserClientData = async () => {
 		const user = localStorage.getItem('user')
+		console.log("userId: ", JSON.parse(user)?.id)
 			
 		//0 все клиенты
 		let all = await getClient(JSON.parse(user)?.id)
@@ -379,34 +380,34 @@ useEffect(() => {
 
 
 		//1 все специалисты 100
-		let response = await getClientCount(JSON.parse(user)?.id, 100, client.length);
-		console.log("client 100: ", response)
+		//let response = await getClientCount(JSON.parse(user)?.id, 100, client.length);
+		//console.log("client 100: ", response)
 	
 		const arrayClient = []
 	
-		response.reverse().map(async (user) => {
-			const newClient = {
-				id: user.id,
-				userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
-				username: '',//user.username,
-				phone: user.phone,
-				phone2: user.phone2,
-				dateborn: user.age,
-				city: user.city, 
-				companys: user.company,
-				worklist:  user.specialization,
-				chatId: user.chatId,
-				createDate: user.createdAt,
-				avatar: user.profile,
-				promoId: user.promoId,
-				blockW: user.blockW,
-				deleted: user.deleted,
-			}
+		// response.reverse().map(async (user) => {
+		// 	const newClient = {
+		// 		id: user.id,
+		// 		userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+		// 		username: '',//user.username,
+		// 		phone: user.phone,
+		// 		phone2: user.phone2,
+		// 		dateborn: user.age,
+		// 		city: user.city, 
+		// 		companys: user.company,
+		// 		worklist:  user.specialization,
+		// 		chatId: user.chatId,
+		// 		createDate: user.createdAt,
+		// 		avatar: user.profile,
+		// 		promoId: user.promoId,
+		// 		blockW: user.blockW,
+		// 		deleted: user.deleted,
+		// 	}
 	
-			arrayClient.push(newClient)
-		})
+		// 	arrayClient.push(newClient)
+		// })
 	
-		setClient(arrayClient)	
+		setClient(arrayClientAll)	
 	
 		//2 все пользователи бота
 		let userbots = await getUserbot();
@@ -414,8 +415,8 @@ useEffect(() => {
 		const arrayContact = []
 
 		//3 все беседы (conversations)
-		let convers = await getConversation()
-		//console.log("conversations: ", convers.length)
+		let convers = await getConversations()
+		console.log("conversations: ", convers.length)
 		setConversations(convers)
 
 		//4 все сообщения бота
@@ -560,7 +561,7 @@ useEffect(() => {
 
 			//0 все специалисты
 			let all = await getWUserbot()
-			console.log("WUserbot all: ", all)
+			//console.log("WUserbot all: ", all)
 
 			const arrayWorkerAll = []
 		

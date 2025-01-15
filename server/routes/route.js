@@ -4,6 +4,7 @@ const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 
 const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
+const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
 
 const { getUserWorkers, getUserWorker, editUserWorker} = require('../controllers/wuserbotController')
 const { newMessageWorker, delMessageWorker, getMessagesWorker, getMessagesWorker2, getAllMessagesWorker, getMessagesWorkerCount } = require('../controllers/wmessageController')
@@ -54,6 +55,12 @@ route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
 route.patch('/userbots/update/:id', editUser)
 route.patch('/userbots/updatefile/:id', editUserAvatar)
+
+
+route.post('/conversation/add', newConversation)
+route.get('/conversation/get/:id', getConversation)
+route.get('/conversations/get', getConversations)
+
 
 //----------------WORKERS--------------------------------
 route.get('/wuserbots/get', getUserWorkers)
