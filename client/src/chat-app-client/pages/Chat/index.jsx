@@ -12,7 +12,7 @@ import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider';
-import { newMessage, uploadFile } from "src/http/workerAPI";
+import { newMessage, uploadFile } from "src/http/chatAPI";
 import { newCountWMessage, getCountMessage } from "src/http/adminAPI";
 import { $host } from '../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
@@ -29,7 +29,7 @@ import {
   } from '@coreui/react'
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN
 const host = process.env.REACT_APP_HOST
 const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA

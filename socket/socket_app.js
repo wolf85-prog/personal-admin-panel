@@ -229,6 +229,85 @@ io.on("connection", (socket) => {
         })
     })
 
+// Чат клиентов
+//------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendMessageCustomer", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageCustomer", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+            replyId,
+            isBot, 
+        })
+    })
+
+    //send and get message
+    socket.on("sendAdminCustomer", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getAdminCustomer", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
+    //send and get message
+    socket.on("delAdminCustomer", ({messageId, messageDate, chatId})=>{
+        io.emit("getDelAdminCustomer", {
+            messageId,
+            messageDate,
+            chatId,
+        })
+    })
+
+
+    // Чат сотрудников
+//------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendMessageWorker", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageWorker", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+            replyId,
+            isBot, 
+        })
+    })
+
+    //send and get message
+    socket.on("sendAdminWorker", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getAdminWorker", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
+    //send and get message
+    socket.on("delAdminWorker", ({messageId, messageDate, chatId})=>{
+        io.emit("getDelAdminWorker", {
+            messageId,
+            messageDate,
+            chatId,
+        })
+    })
+
 // Notifications
 //------------------------------------------------------------------
 //send and get message in workers
