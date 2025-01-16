@@ -25,6 +25,9 @@ import {login, registration} from "../../../http/userAPI";
 import {Context} from "../../../index";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 
+import {addManager} from "../../../http/managerAPI";
+import {addCompanyProf} from "../../../http/companyAPI";
+
 const Login = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
@@ -56,8 +59,16 @@ const Login = observer(() => {
     const clickReg = async () => {
       try {
           if (password === password2) {
-            const data = await registration(email, password, 'USER');
+            const data = await registration(null, email, password, 'USER');
             console.log(data)
+
+            //создание менеджера
+            const resManager = await addManager({fio: "ФИО", userId: data?.id, email: data?.email})
+            console.log("resManager: ", resManager)
+
+            //создание компании
+            const resCompany = await addCompanyProf({userId: data?.id, title: 'Название компании' })
+
             user.setUser(user)
             user.setIsAuth(true)
             navigate(ADMIN_ROUTE)
