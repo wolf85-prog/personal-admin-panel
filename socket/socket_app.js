@@ -43,7 +43,7 @@ httpsServer.listen(PORT, () => {
 // Socket setup
 const io = socket(httpsServer, {
     cors: {
-        origin: [host_admin, host_admin2, host_admin3, host_local],
+        origin: [host_admin, host_admin2, host, host_local],
         optionsSuccessStatus: 200 // For legacy browser support
     }
 });
