@@ -35,7 +35,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userClients, setUserAsUnread, addNewMessage2, conversations, clientAll } = useUsersContext();
+	const { userClients, setUserAsUnread, addNewMessage, conversations, clientAll } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -357,7 +357,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
 					senderId: chatAdminId, 
@@ -373,7 +373,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 

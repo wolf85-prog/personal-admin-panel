@@ -57,7 +57,6 @@ const UsersProvider = ({ children }) => {
 	const [sortedCities, setSortedCities] = useState([])
 
 	const [specialistAll, setSpecialistAll] = useState([]);
-	const [clientAll, setClientAll] = useState([]);
 	const [managersAll, setManagersAll]= useState([]); // менеджеры (заказчики)
 	const [companysAll, setCompanysAll]= useState([]); // менеджеры (заказчики)
 	const [usersOnline, setUsersOnline] = useState([]);
@@ -75,11 +74,13 @@ const UsersProvider = ({ children }) => {
 	const [countProjects, setCountProjects] = useState(0)
 	const [client, setClient] = useState([]); 
 
+	const [userClients, setUserClients] = useState([]);  
+	const [clients, setClients] = useState([]); //100 последних специалистов;
+	const [clientAll, setClientAll] = useState([]); //все специалисты
+
 	const [userWorkers, setUserWorkers] = useState([]); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
-
-	const [userClients, setUserClients] = useState([]); 
 
 	const [support, setSupport] = useState([]); 
 	const [userSupport, setUserSupport] = useState([]); 
@@ -965,6 +966,438 @@ useEffect(() => {
 	},[])
 
 
+//------------------------------------------------------------------------------------
+	useEffect(() => {
+		socket.on("getMessageCustomer", fetchMessageCustomerResponse);
+		socket.on("getAdminCustomer", fetchAdminCustomer);	
+		socket.on("getDelAdminCustomer", fetchDelAdminCustomer);
+
+		socket.on("getMessageWorker", fetchMessageWorkerResponse);
+		socket.on("getAdminWorker", fetchAdminWorker);	
+		socket.on("getDelAdminWorker", fetchDelAdminWorker);
+
+		//socket.on("start_typing", setUserAsTyping);
+		//socket.on("stop_typing", setUserAsNotTyping);
+		
+	}, [socket]);
+
+//=======================================================================
+// 						Customer
+//=======================================================================
+
+//получить сообщение из телеграмма WorkersBot
+const fetchMessageCustomerResponse = async(data) => {
+	
+	console.log("Получено сообщение от специалиста: ", data)
+	const { isBot} = data;
+
+	let arrWorkers = []
+			
+	//пришло новое сообщение
+	//const kol = await getCountMessage()
+	//setCountMessageWork(count + 1)
+	//const res = await newCountWMessage(kol.workers + 1)
+	console.log("Пришло новое сообщение в Customer: ", count + 1)
+
+	if (!isBot || isBot === null) {
+			//play sound
+			//audioMessageW.play();
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioMessageW.volume = parseFloat(savedVolume)
+				audioMessageW.play();
+			}	
+	} 
+		
+
+	setUserClients((userClients) => {
+		const { senderId, text, type, messageId, convId, replyId, isBot } = data;
+		//console.log("users: ", users)
+		let userIndex = userClients.findIndex((user) => user.chatId === senderId.toString());
+		const usersCopy = JSON.parse(JSON.stringify(userClients));
+
+		if (userIndex === -1) {
+			const newUser = {
+				id: usersCopy.length,
+				name: 'Новый клиент',
+				chatId: `${senderId}`,
+				avatar: '',
+				conversationId: convId,
+				unread: 0, 
+				pinned: false,
+				typing: false,
+				message:  '',
+				date: '2000-01-01T00:00:00',
+				messages: {}, 
+			}	
+			usersCopy.push(newUser)
+			//console.log("usersCopy: ", usersCopy)
+
+			userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
+
+			//("userIndex new: ", userIndex)
+		}
+		
+		const newMsgObject = {
+			date: new Date().toLocaleDateString(),
+			content: text,
+			image: type === 'image' ? true : false,
+			sender: senderId,
+			time: new Date().toLocaleTimeString(),
+			status: null,
+			id: messageId,
+			reply: replyId,
+			isBot: isBot,  
+		};
+
+		const currentDate = new Date().toLocaleDateString()
+
+		if (usersCopy[userIndex].messages[currentDate]) {
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		} else {
+			usersCopy[userIndex].messages[currentDate] = [];
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		}
+		
+		const userObject = usersCopy[userIndex];
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
+
+		//сортировка
+		const userSort = [...usersCopy].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		return userSort;
+	});
+
+	//_updateUserProp(data.senderId, "uread", value +1);
+};
+
+//получить исходящее сообщение в админку workhub
+const fetchAdminCustomer = (data) => {
+	//console.log("Пришло сообщение в Админку: ", data)
+
+	setUserClients((userClients) => {
+		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
+
+		//console.log("userWorkers: ", userWorkers)
+
+		let userIndex = userClients.findIndex((user) => user.chatId === receiverId.toString());
+		const usersCopy = JSON.parse(JSON.stringify(userClients));
+		//console.log("usersCopy: ", usersCopy)
+
+		const newMsgObject = {
+			date: new Date().toLocaleDateString(),
+			content: text,
+			image: type === 'image' ? true : false,
+			descript: buttons ? buttons : '',
+			sender: senderId,
+			time: new Date().toLocaleTimeString(),
+			status: 'delivered',
+			id: messageId,
+		};
+
+		const currentDate = new Date().toLocaleDateString()
+
+		//if (usersCopy[userIndex].messages[currentDate]) {
+		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+		} else {
+			usersCopy[userIndex].messages[currentDate] = [];
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		}
+		
+		const userObject = usersCopy[userIndex];
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
+
+		//сортировка
+		const userSort = [...usersCopy].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		//console.log(userSort)
+
+		return userSort;
+	});
+}
+
+//получить исходящее сообщение в админку
+const fetchDelAdminCustomer = (data) => {
+	//console.log("Удаление сообщение в Админке: ", data)
+
+	setUserClients((userClients) => {
+		const { messageId, messageDate, chatId } = data;
+
+		let userIndex = userClients.findIndex((user) => user.chatId === chatId);
+		const usersCopy = JSON.parse(JSON.stringify(userClients));
+
+		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
+		usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
+
+		const userObject = usersCopy[userIndex];
+		const userSort = [...usersCopy]
+
+		return userSort;
+	});
+}
+
+
+//отправить сообщение из админки workhub
+const addNewMessage = (userId, message, type, textButton, convId, messageId, isBot) => {
+	console.log("isBot: ", isBot)
+
+	socket.emit("sendAdminCustomer", { 
+		senderId: chatAdminId,
+		receiverId: userId,
+		text: message,
+		type: type,
+		buttons: textButton,
+		convId: convId,
+		messageId,
+		isBot: isBot,
+	})
+};
+
+//удалить сообщение из админки workhub
+const delWMessageContext = (messageId, messageDate, chatId) => {
+	socket.emit("delAdminCustomer", { 
+		messageId,
+		messageDate,
+		chatId,
+	})
+}
+
+//=======================================================================
+// 						Worker
+//=======================================================================
+
+//получить сообщение из телеграмма WorkersBot
+const fetchMessageWorkerResponse = async(data) => {
+	
+	console.log("Получено сообщение от сотрудника: ", data)
+	const { isBot} = data;
+
+	let arrWorkers = []
+			
+	//пришло новое сообщение
+	//const kol = await getCountMessage()
+	//setCountMessageWork(count + 1)
+	//const res = await newCountWMessage(kol.workers + 1)
+	//console.log("Пришло новое сообщение в Worker: ", count + 1)
+
+	if (!isBot || isBot === null) {
+			//play sound
+			//audioMessageW.play();
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioMessageW.volume = parseFloat(savedVolume)
+				audioMessageW.play();
+			}	
+	} 
+		
+
+	setUserWorkers((userWorkers) => {
+		const { senderId, text, type, messageId, convId, replyId, isBot } = data;
+		//console.log("users: ", users)
+		let userIndex = userWorkers.findIndex((user) => user.chatId === senderId.toString());
+		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+
+		if (userIndex === -1) {
+			const newUser = {
+				id: usersCopy.length,
+				name: 'Новый сотрудник',
+				chatId: `${senderId}`,
+				avatar: '',
+				conversationId: convId,
+				unread: 0, 
+				pinned: false,
+				typing: false,
+				message:  '',
+				date: '2000-01-01T00:00:00',
+				messages: {}, 
+			}	
+			usersCopy.push(newUser)
+			//console.log("usersCopy: ", usersCopy)
+
+			userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
+
+			//("userIndex new: ", userIndex)
+		}
+		
+		const newMsgObject = {
+			date: new Date().toLocaleDateString(),
+			content: text,
+			image: type === 'image' ? true : false,
+			sender: senderId,
+			time: new Date().toLocaleTimeString(),
+			status: null,
+			id: messageId,
+			reply: replyId,
+			isBot: isBot,  
+		};
+
+		const currentDate = new Date().toLocaleDateString()
+
+		if (usersCopy[userIndex].messages[currentDate]) {
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		} else {
+			usersCopy[userIndex].messages[currentDate] = [];
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		}
+		
+		const userObject = usersCopy[userIndex];
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
+
+		//сортировка
+		const userSort = [...usersCopy].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		return userSort;
+	});
+
+	//_updateUserProp(data.senderId, "uread", value +1);
+};
+
+//получить исходящее сообщение в админку workhub
+const fetchAdminWorker= (data) => {
+	//console.log("Пришло сообщение в Админку: ", data)
+
+	setUserWorkers((userWorkers) => {
+		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
+
+		//console.log("userWorkers: ", userWorkers)
+
+		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
+		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+		//console.log("usersCopy: ", usersCopy)
+
+		const newMsgObject = {
+			date: new Date().toLocaleDateString(),
+			content: text,
+			image: type === 'image' ? true : false,
+			descript: buttons ? buttons : '',
+			sender: senderId,
+			time: new Date().toLocaleTimeString(),
+			status: 'delivered',
+			id: messageId,
+		};
+
+		const currentDate = new Date().toLocaleDateString()
+
+		//if (usersCopy[userIndex].messages[currentDate]) {
+		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+		} else {
+			usersCopy[userIndex].messages[currentDate] = [];
+			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+		}
+		
+		const userObject = usersCopy[userIndex];
+		if (isBot) {
+			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+		} else {
+			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+		}
+		
+
+		//сортировка
+		const userSort = [...usersCopy].sort((a, b) => {       
+			var dateA = new Date(a.date), dateB = new Date(b.date) 
+			return dateB-dateA  //сортировка по убывающей дате  
+		})
+
+		//console.log(userSort)
+
+		return userSort;
+	});
+}
+
+//получить исходящее сообщение в админку
+const fetchDelAdminWorker = (data) => {
+	//console.log("Удаление сообщение в Админке: ", data)
+
+	setUserWorkers((userWorkers) => {
+		const { messageId, messageDate, chatId } = data;
+
+		let userIndex = userWorkers.findIndex((user) => user.chatId === chatId);
+		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+
+		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
+		usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
+
+		const userObject = usersCopy[userIndex];
+		const userSort = [...usersCopy]
+
+		return userSort;
+	});
+}
+
+
+//отправить сообщение из админки workhub
+const addNewMessage2 = (userId, message, type, textButton, convId, messageId, isBot) => {
+	console.log("isBot: ", isBot)
+
+	socket.emit("sendAdminWorker", { 
+		senderId: chatAdminId,
+		receiverId: userId,
+		text: message,
+		type: type,
+		buttons: textButton,
+		convId: convId,
+		messageId,
+		isBot: isBot,
+	})
+};
+
+//удалить сообщение из админки workhub
+const delWMessageContext2 = (messageId, messageDate, chatId) => {
+	socket.emit("delAdminWorker", { 
+		messageId,
+		messageDate,
+		chatId,
+	})
+}
+
+
+function isObjectEmpty(obj) {
+	return Object.keys(obj).length === 0;
+}
+
 	return (
 		<UsersContext.Provider value={{ 
 			userId, 
@@ -1033,6 +1466,11 @@ useEffect(() => {
 			workerCallNo,
 			callIndex,
 			callIndex2,
+
+			addNewMessage,
+			addNewMessage2,
+			delWMessageContext,
+			delWMessageContext2,
 		}}>
 			{children}
 		</UsersContext.Provider>
