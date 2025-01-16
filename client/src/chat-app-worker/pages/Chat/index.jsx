@@ -82,8 +82,8 @@ const Chat = () => {
 		//console.log("personW: ", personW.id)
 		if (user) {
 			scrollToLastMsg();
-			setUserAsUnread(user.chatId);
-			setCountMessage(0)
+			//setUserAsUnread(user.chatId);
+			//setCountMessage(0)
 			//обнулить кол-во сообщений
 			//const kol_mess = getCountMessage()
 			//newCountWMessage(kol_mess - 1)
