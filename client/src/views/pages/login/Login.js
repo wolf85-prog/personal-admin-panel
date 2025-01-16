@@ -63,7 +63,7 @@ const Login = observer(() => {
             console.log(data)
 
             //создание менеджера
-            const resManager = await addManager({fio: "ФИО", userId: data?.id, email: data?.email})
+            const resManager = await addManager({fio: "ФИО", userId: data?.id, email: data?.role})
             console.log("resManager: ", resManager)
 
             //создание компании
