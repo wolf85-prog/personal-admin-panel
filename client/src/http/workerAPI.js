@@ -49,9 +49,9 @@ export const getWorkers = async (userId) =>{
     }
 }
 
-export const getWorkersCount = async (count, prev) =>{
+export const getWorkersCount = async (userId, count, prev) =>{
     try {
-       let response = await $host.get(`api/workers/count/get/${count}/${prev}`);
+       let response = await $host.get(`api/workers/count/get/${userId}/${count}/${prev}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getWorkersCount api", error.message);

@@ -569,7 +569,7 @@ useEffect(() => {
 			//console.log("userId: ", JSON.parse(user)?.id)
 
 			//0 все специалисты
-			let all = await getWorkers()
+			let all = await getWorkers(JSON.parse(user)?.id)
 			console.log("Workers all: ", all)
 
 			const arrayWorkerAll = []
@@ -604,9 +604,9 @@ useEffect(() => {
 
 
 			//1 все специалисты 100
-			//let response = await getWorkersCount(100, workers.length);
-			let response = await getClientCount(100, client.length);
-			//console.log("client 100: ", response)
+			let response = await getWorkersCount(JSON.parse(user)?.id, 100, workers.length);
+			//let response = await getClientCount(JSON.parse(user)?.id, 100, client.length);
+			console.log("worker 100: ", response)
 		
 			const arrayWorker = []
 		
@@ -638,12 +638,12 @@ useEffect(() => {
 		
 			//2 все пользователи бота
 			let wuserbots = await getWContacts();
-			//console.log("wuserbots size: ", wuserbots.length)
+			console.log("wuserbots size: ", wuserbots.length)
 			const arrayContact = []
 
 			//3 все беседы (conversations)
 			let convers = await getWConversations()
-			//console.log("conversations: ", convers.length)
+			console.log("conversations: ", convers.length)
 			setConversations(convers)
 
 			//4 все сообщения бота
