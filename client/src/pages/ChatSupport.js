@@ -7,7 +7,7 @@ import "./../chat-app-new/assets/css/index.css";
 
 // import Loader from "../chat-app-new/components/Loader";
 import Home from "../chat-app-new/pages/Home";
-//import Sidebar from "../chat-app-worker/components/Sidebar";
+import Sidebar from "../chat-app-support/components/Sidebar";
 import Chat from "../chat-app-support/pages/Chat";
 
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
@@ -34,8 +34,8 @@ const ChatSupport = () => {
                   <div className="app">
                     <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
                     <div className="app-content">
-                      {/* <Sidebar /> */}
-                      {Object.keys(personW).length ? <Chat /> : <Chat /> }
+                      <Sidebar />
+                      {Object.keys(personW).length ? <Chat /> : <Home /> }
                     </div>
                   </div>
 
