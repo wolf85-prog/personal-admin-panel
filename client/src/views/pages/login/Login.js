@@ -59,7 +59,7 @@ const Login = observer(() => {
     const clickReg = async () => {
       try {
           if (password === password2) {
-            const data = await registration(null, email, password, 'USER');
+            const data = await registration(email, password, 'USER');
             console.log(data)
 
             //создание менеджера
@@ -69,7 +69,7 @@ const Login = observer(() => {
             //создание компании
             const resCompany = await addCompanyProf({userId: data?.id, title: 'Название компании' })
 
-            user.setUser(user)
+            user.setUser(data)
             user.setIsAuth(true)
             navigate(ADMIN_ROUTE)
           } else {
