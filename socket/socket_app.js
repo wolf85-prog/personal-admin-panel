@@ -110,85 +110,6 @@ io.on("connection", (socket) => {
         })
     })
 
-// Чат специалистов
-//------------------------------------------------------------------
-    //send and get message in workers
-    socket.on("sendMessageSpec", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
-        const user = getUser(receiverId)
-        io.emit("getMessageSpec", {
-            senderId,
-            text,
-            type,
-            convId,
-            messageId,
-            replyId,
-            isBot, 
-        })
-    })
-
-    //send and get message
-    socket.on("sendAdminSpec", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
-        io.emit("getAdminSpec", {
-            senderId,
-            receiverId,
-            text,
-            type,
-            buttons,
-            convId,
-            messageId,
-            isBot,
-        })
-    })
-
-    //send and get message
-    socket.on("delAdminSpec", ({messageId, messageDate, chatId})=>{
-        io.emit("getDelAdminSpec", {
-            messageId,
-            messageDate,
-            chatId,
-        })
-    })
-
-
-// Чат renthub
-//------------------------------------------------------------------
-//send and get message in workers
-    socket.on("sendMessageRent", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
-        const user = getUser(receiverId)
-        io.emit("getMessageRent", {
-            senderId,
-            text,
-            type,
-            convId,
-            messageId,
-            replyId,
-            isBot, 
-        })
-    })
-
-
-    //send and get message
-    socket.on("sendAdminRent", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
-        io.emit("getAdminRent", {
-            senderId,
-            receiverId,
-            text,
-            type,
-            buttons,
-            convId,
-            messageId,
-            isBot,
-        })
-    })
-
-    //send and get message
-    socket.on("delAdminRent", ({messageId, messageDate, chatId})=>{
-        io.emit("getDelAdminRent", {
-            messageId,
-            messageDate,
-            chatId,
-        })
-    })
 
 // Чат тех. поддержки
 //------------------------------------------------------------------
@@ -307,40 +228,6 @@ io.on("connection", (socket) => {
             chatId,
         })
     })
-
-// Notifications
-//------------------------------------------------------------------
-//send and get message in workers
-    socket.on("sendNotif", ({task, tg_id, fio, sity, year_of_birth, rating, projects, specialities, 
-        comtags, foto, phone, workers_update, processUpdateD, processDistrib})=>{
-        io.emit("getNotif", {
-            task,
-            tg_id,
-            fio,
-            sity,
-            year_of_birth, 
-            rating, 
-            projects, 
-            specialities, 
-            comtags, 
-            foto,
-            phone,
-            workers_update,
-            processUpdateD,
-            processDistrib,
-        })
-    })  
-
-    socket.on("sendNotifRent", ({task, managers_update, processUpdateD, processDistrib})=>{
-        io.emit("getNotifRent", {
-            task,
-            managers_update,
-            processUpdateD,
-            processDistrib,
-        })
-    }) 
-    
-
 
 
     //when disconnect
