@@ -441,7 +441,7 @@ const Chat = () => {
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
     }
 
 	//отправка сценария Правила
@@ -532,7 +532,7 @@ https://t.me/ULEY_Office_Bot
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
@@ -578,7 +578,7 @@ https://t.me/ULEY_Office_Bot
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
