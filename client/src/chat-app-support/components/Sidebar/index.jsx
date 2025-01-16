@@ -9,7 +9,7 @@ import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { userWorkers, workersAll } = useUsersContext();
+	const { userSupport, support } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
@@ -29,7 +29,7 @@ const Sidebar = () => {
 		
 		const arr = []
 
-		for (const item of userWorkers) {		
+		for (const item of userSupport) {		
 			arr.push(item)
 			if (arr.length === CountWorkers)
 			  break;
@@ -43,21 +43,9 @@ const Sidebar = () => {
 			setLoading(false)
 		}		
 		
-	},[userWorkers])
+	},[userSupport])
 
-	
-	useEffect(() => {
-		const arr = []
-		for (const item of userWorkers) {			
-			arr.push(item)
-			if (arr.length === CountWorkers)
-			  break;
-		}
 
-		const filteredData = userWorkers.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));       
-		setContacts(text === '' ? arr : filteredData);     
-		 
-    }, [text]);
 
 
 	const onSelected = (index) => {
@@ -91,7 +79,7 @@ const Sidebar = () => {
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
-				<div></div>
+				<div>Тех. поддержка</div>
 				<div className="sidebar__actions">
 					<OptionsBtn
 						className="sidebar__action"
@@ -111,7 +99,7 @@ const Sidebar = () => {
 			</header>
 			
 			{/* Search */}
-			<div className="search-wrapper">
+			{/* <div className="search-wrapper">
 				<div className="search-icons">
 					<Icon id="search" className="search-icon" />
 					<button className="search__back-btn">
@@ -123,7 +111,7 @@ const Sidebar = () => {
 					placeholder="Поиск специалиста" 
 					onChange={(e)=>setText(e.target.value)}
 				/>
-			</div>
+			</div> */}
 			
 			{/* Conversations */}
 			<div className="sidebar__contacts">
@@ -133,7 +121,7 @@ const Sidebar = () => {
 				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact key={ind} contact={contact} worker={workersAll.filter((item)=> item.chatId === contact.chatId)} />
+						<Contact key={ind} contact={contact} worker={support.filter((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}
