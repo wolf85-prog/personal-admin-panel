@@ -12,7 +12,7 @@ const User = sequelize.define('user', {
 const Manager = sequelize.define('manager', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     fio: {type: DataTypes.STRING},
-    chatId: {type: DataTypes.STRING, unique: true},
+    chatId: {type: DataTypes.STRING},
     phone: {type: DataTypes.STRING}, //телефон менеджера
     phone2: {type: DataTypes.STRING}, //телефон менеджера
     city: {type: DataTypes.STRING},
