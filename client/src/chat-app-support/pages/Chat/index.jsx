@@ -12,7 +12,7 @@ import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider';
-import { newMessage, uploadFile } from "src/http/workerAPI";
+import { newMessage, uploadFile } from "src/http/supportAPI";
 import { newCountWMessage, getCountMessage } from "src/http/adminAPI";
 import { $host } from '../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
@@ -29,19 +29,19 @@ import {
   } from '@coreui/react'
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_SUPPORT
 const host = process.env.REACT_APP_HOST
 const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage2, conversations, workersAll } = useUsersContext();
-	const { personW } = useContext(AccountContext);
+	const { userId, userSupport, setUserAsUnread, addNewMessage3, sconversations, support } = useUsersContext();
+	const { personS } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
-	const chatId = personW.id;
-	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
-	let convs = conversations.find((conv) => conv.members[0] === chatId.toString());
+	const chatId = userId //personS.id;
+	let user = userSupport.filter((user) => user.chatId === chatId.toString())[0];
+	let convs = sconversations.find((conv) => conv.members[0] === chatId.toString());
 
 	let data2
 
@@ -79,20 +79,16 @@ const Chat = () => {
 	 }
 
 	useEffect(() => {
-		//console.log("personW: ", personW.id)
+		console.log("support: ", support, user)
+
 		if (user) {
 			scrollToLastMsg();
-			setUserAsUnread(user.chatId);
-			setCountMessage(0)
-			//обнулить кол-во сообщений
-			//const kol_mess = getCountMessage()
-			//newCountWMessage(kol_mess - 1)
 		}
 	}, []);
 
 	useEffect(() => {
 		user && scrollToLastMsg();
-	}, [userWorkers]);
+	}, [userSupport]);
 
 	useEffect(() => {
 		console.log(selectedElement)
@@ -290,31 +286,31 @@ const Chat = () => {
 			
 			let sendToTelegram
 
-			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
+			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${temp}`
 			// const sendToTelegram = await $host.get(url_send_msg);
 
 			if(!file) {
-				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
+				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${temp}`
 				
 				sendToTelegram = await $host.get(url_send_msg);
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
 					// if (image.slice(-3) === 'ocx' || image.slice(-3)==='doc' || image.slice(-3)==='lsx' || image.slice(-3)==='xls' || image.slice(-3)==='iff' || image.slice(-3)==='IFF') {
-					// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${host+image}`
+					// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${host+image}`
 					// 	//console.log("url_send_doc: ", url_send_doc)
 					// 	sendPhotoToTelegram = await $host.get(url_send_doc);
 					// } else if (image.slice(-3) === 'png' || image.slice(-3)==='jpg' || image.slice(-3)==='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)
 					// } else if (image.slice(-3) === 'pdf' ) {
-					// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
+					// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personS.id}&document=${host+image}`
 					// 	//console.log("url_send_doc: ", url_send_doc)
 					// 	sendPhotoToTelegram = await $host.get(url_send_doc);
 					// } else {
-						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
+						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personS.id}&document=${host+image}`
 						//console.log("url_send_doc: ", url_send_doc)
 						
 						const form = new FormData();
-						form.append("chat_id", personW.id); // добавление имени файла
+						form.append("chat_id", personS.id); // добавление имени файла
 						form.append("document", file); // добавление файла
 						//const form = new FormData();
 						sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
@@ -325,7 +321,7 @@ const Chat = () => {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)
 					// } else {
-						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personS.id}&photo=${host+image}`
 						//console.log("url_send_photo: ", url_send_photo)
 						sendToTelegram = await $host.get(url_send_photo);
 					//}		
@@ -357,7 +353,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage3(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
 					senderId: chatAdminId, 
@@ -373,7 +369,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage2(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage3(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
@@ -398,7 +394,7 @@ const Chat = () => {
 		console.log("send passport")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userSupport.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -441,7 +437,7 @@ const Chat = () => {
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage3(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
     }
 
 	//отправка сценария Правила
@@ -449,7 +445,7 @@ const Chat = () => {
 		console.log("send rule")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userSupport.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -532,7 +528,7 @@ https://t.me/ULEY_Office_Bot
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage3(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
@@ -541,7 +537,7 @@ https://t.me/ULEY_Office_Bot
 		console.log("send poster")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userSupport.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -578,7 +574,7 @@ https://t.me/ULEY_Office_Bot
 		await newMessage(message)
 	
 		//сохранить в контексте
-		addNewMessage2(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
+		addNewMessage3(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
     
 	}
 
@@ -600,8 +596,8 @@ https://t.me/ULEY_Office_Bot
 				<div className="chat__bg"></div>
 
 				<Header
-					user={personW}
-					worker={workersAll.filter((item)=> item.chatId === user.chatId)}
+					user={personS}
+					worker={support[0]}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}

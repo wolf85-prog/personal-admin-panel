@@ -100,6 +100,9 @@ const UsersProvider = ({ children }) => {
 
 
 	const [conversations, setConversations] = useState([]); 
+	const [wconversations, setWConversations] = useState([]); 
+	const [sconversations, setSConversations] = useState([]); 
+
 	const [wuserbots, setWuserbots] = useState([]); 
 
 
@@ -806,15 +809,9 @@ useEffect(() => {
 				phone2: '',
 				dateborn: '',
 				city: '', 
-				//newcity: user.newcity, 
-				//companys: user.company,
-				//stag: user.stag,
-				//worklist:  user.specialization,
-				chatId: chatAdminId,
+				chatId: JSON.parse(user)?.id.toString(),
 				createDate: '',
 				avatar: '',
-				//from: user.from,
-				//promoId: user.promoId,
 				blockW: '',
 				deleted: '',
 				comment: '',
@@ -829,14 +826,15 @@ useEffect(() => {
 			setSupport(arrayClientAll)	
 		
 			//2 все пользователи бота
-			let userbots = await getUserbot();
-			console.log("suserbots size: ", userbots.length)
+			//let userbots = await getUserbot();
+			//console.log("suserbots size: ", userbots.length)
+			
 			const arrayContact = []
 
 			//3 все беседы (conversations)
 			let convers = await getConversations()
 			console.log("sconversations: ", convers)
-			setConversations(convers)
+			setSConversations(convers)
 
 			//4 все сообщения бота
 			let messagesAll = await getMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
@@ -846,7 +844,7 @@ useEffect(() => {
 			convers.forEach(async (user, index) => {
 		
 				let client = arrayClientAll.find((item)=> item.chatId === user.members[0])
-				let userbot = userbots.find((item)=> item.chatId === client?.chatId)	
+				//let userbot = userbots.find((item)=> item.chatId === client?.chatId)	
 				console.log("Client: ", client)
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
@@ -933,7 +931,7 @@ useEffect(() => {
 				if (client) {
 					const newUser = {
 						id: client?.id,
-						username: userbot?.username ? userbot?.username : '', // user.username ? user.username : '',
+						username: 'Менеджер', // user.username ? user.username : '',
 						name: client?.userfamily + " " + client?.username, //notion[0]?.fio ? notion[0]?.fio : '',
 						city: client?.city, //notion[0]?.city ? notion[0]?.city : '',
 						//newcity: worker?.newcity,
@@ -942,7 +940,7 @@ useEffect(() => {
 						chatId: client?.chatId,
 						avatar: client?.avatar, //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 						conversationId: conversationId ? conversationId : 0,
-						block: userbot?.block ? userbot?.block : '',
+						block: '',
 						blockW: client?.blockW,
 						unread: 0, 
 						pinned: false,
@@ -1430,6 +1428,9 @@ function isObjectEmpty(obj) {
 			setClient,
 
 			conversations,
+			wconversations,
+			sconversations,
+
 			userWorkers,
 			workersAll,
 

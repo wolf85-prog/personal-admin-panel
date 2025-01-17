@@ -44,6 +44,11 @@ const { getClient, getClientCount, editClient,
     getClientCountAll, getClientPhone, getClientChatId, 
     blockClient } = require('../controllers/clientController')
 
+
+const { newConversationSupport, getConversationSupport, getConversationsSupport } = require('../controllers/sconversationController')
+const { newMessageSupport, delMessageSupport, getMessagesSupport, getAllMessagesSupport, getMessagesSupportCount,
+     } = require('../controllers/smessageController')
+
 const upload = require('../middleware/file')
 const uploadAvatar = require('../middleware/fileAvatar')
 
@@ -175,5 +180,19 @@ route.get("/client/count/get", getClientCountAll);
 route.get("/client/phone/:id", getClientPhone);
 route.get("/client/chat/:id", getClientChatId);
 route.get('/client/block/:id', blockClient)
+
+//----------------- SUPPORT ---------------------------------
+route.post('/sconversation/add', newConversationSupport)
+route.get('/sconversation/get/:id', getConversationSupport)
+route.get('/sconversations/get', getConversationsSupport)
+
+
+route.post('/smessage/add', newMessageSupport)
+route.delete('/smessage/delete/:id', delMessageSupport)
+route.get('/smessage/get', getAllMessagesSupport)
+route.get('/smessage/get/:id', getMessagesSupport)
+// route.get('/smessage/last/get/:id', getLastMessagesSupport)
+// route.get('/smessage/count/get', getCountMessagesSupport)
+// route.get('/smessage/get/count/:count', getMessagesClientCountSupport)
 
 module.exports = route

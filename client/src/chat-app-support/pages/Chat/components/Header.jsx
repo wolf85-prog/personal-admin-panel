@@ -30,8 +30,8 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 
 	const host = process.env.REACT_APP_API_URL
 
-	console.log("user: ", user)
-	console.log("worker: ", worker)
+	//console.log("user: ", user)
+	//console.log("worker: ", worker)
 
 	const onSelected = (index) => {
 		switch(index) {
@@ -96,13 +96,13 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 					</>
 				}
 				
-				{
+				{/* {
                     worker && worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
                     <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
                     : "")
                     : ""
-                }
+                } */}
                 
 				{/* {
                     worker.length !== 0 ? 
