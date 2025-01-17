@@ -604,6 +604,7 @@ useEffect(() => {
 			})
 		
 			setWorkersAll(arrayWorkerAll)
+			
 
 
 			//1 все специалисты 100
@@ -638,6 +639,7 @@ useEffect(() => {
 			})
 		
 			setWorkers(arrayWorker)	
+			setSpecialist(arrayWorker)
 		
 			//2 все пользователи бота
 			let wuserbots = await getWContacts();
@@ -1617,6 +1619,8 @@ function isObjectEmpty(obj) {
 
 			specialist,
 			setSpecialist,
+			workers,
+			setWorkers,
 			
 			contacts,
 			setContacts,

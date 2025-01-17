@@ -1290,7 +1290,20 @@ ${loc.url}`;
                                                   />
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/>
+                                                  {/* <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/> */}
+                                                  <InputMask 
+                                                    mask="99:99"
+                                                    value={startTime}
+                                                    onChange={(e)=>setStartTime(e.target.value)}>
+                                                    {(inputProps) => <CFormInput 
+                                                                      {...inputProps} 
+                                                                      placeholder="" 
+                                                                      disableUnderline
+                                                                      aria-label="sm input example"
+                                                                      className="text-field__input"
+                                                                      style={{width: '90px'}} 
+                                                                    />}
+                                                  </InputMask>
                                                 </div>
                                               </div>
 
@@ -1308,7 +1321,20 @@ ${loc.url}`;
                                                   />
                                                 </div>
                                                 <div className="text-field">
-                                                  <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/>
+                                                  {/* <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/> */}
+                                                  <InputMask 
+                                                    mask="99:99"
+                                                    value={endTime}
+                                                    onChange={(e)=>setEndTime(e.target.value)}>
+                                                    {(inputProps) => <CFormInput 
+                                                                      {...inputProps} 
+                                                                      placeholder="" 
+                                                                      disableUnderline
+                                                                      aria-label="sm input example"
+                                                                      className="text-field__input"
+                                                                      style={{width: '90px'}} 
+                                                                    />}
+                                                  </InputMask>
                                                 </div>
                                               </div>
 

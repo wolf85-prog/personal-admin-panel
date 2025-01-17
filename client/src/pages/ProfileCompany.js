@@ -261,12 +261,19 @@ const ProfileCompany = () => {
 
         const saveData = {
           companyId: JSON.parse(item).companyId,
+          title, 
+          city,
+          office,
+          sklad,
+          comment,
+          sfera: strSfera,
+          comteg: strComteg,
         }
 
         console.log("saveCompany: ", saveData)
 
         //сохранить изменения в базе
-        await editManager(saveData, JSON.parse(item).id)
+        await editCompany(saveData, JSON.parse(item).id)
       })
       console.log(managersObjArr)
   
