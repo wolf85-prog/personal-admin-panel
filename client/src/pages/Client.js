@@ -1168,7 +1168,7 @@ const Client = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '550px', display: 'flex', flexDirection: 'row'}}>
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
@@ -1373,6 +1373,12 @@ const Client = () => {
                                       />
                                   </div>
 
+                                  {/* email */}
+                                  <label className='title-label'>Почта</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
+                                  </div> 
+
                                   {/* <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
@@ -1435,6 +1441,7 @@ const Client = () => {
                                         setTags={setComteg}
                                         options={comtegs}
                                         onChange={changeSpec}
+                                        heightStyle={'125px'}
                                       />
                                   </div>
 
@@ -1446,7 +1453,7 @@ const Client = () => {
                                       name="comment" 
                                       id="comment" 
                                       value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                      style={{resize: 'none', width: '320px', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
@@ -1528,7 +1535,7 @@ const Client = () => {
                                   </div>
 
                                   {/* ник */}
-                                  <label>Никнейм </label>
+                                  <label className='title-label'>Никнейм </label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
                                     <img 
                                       src={Disketa} 
@@ -1539,18 +1546,10 @@ const Client = () => {
                                     <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
-                                  
-
-                                  {/* email */}
-                                  <label>Почта</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
-                                  </div> 
-
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '120px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
