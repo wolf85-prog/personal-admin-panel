@@ -58,6 +58,7 @@ import { array } from 'prop-types';
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+import MyDropdown3 from 'src/components/Dropdown3/Dropdown3';
 
 import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
@@ -66,6 +67,8 @@ import skills from 'src/data/skills';
 import merchData from 'src/data/merchData';
 import companys from 'src/data/companys';
 import cities from 'src/data/cities';
+import sferaData from 'src/data/sfera';
+import dolgnostData from 'src/data/dolgnostData';
 
 //Workers.js
 const Client = () => {
@@ -133,6 +136,8 @@ const Client = () => {
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
+  const [sfera, setSfera] = useState('');
+  const [dolgnost, setDolgnost] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -429,6 +434,8 @@ const Client = () => {
     setComment(worker.comment)
     setComment2(worker.comment2)
     setProfile(worker.profile)
+    setSfera(worker.sfera ? worker.sfera.split(',') : [])
+    setDolgnost(worker.dolgnost ? worker.dolgnost.split(',') : [])
 
     setPassport(worker.passport)
     setDogovor(worker.dogovor)
@@ -1212,51 +1219,40 @@ const Client = () => {
 
                                   
                                   
-                                  <label className='title-label'>В системе</label>
+                                  <label className='title-label'>ID</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={dateReg && dateReg.length >0 ? dateReg.split('-')[2].split('T')[0] + '.' + dateReg.split('-')[1] + '.' + dateReg.split('-')[0] : ''} style={{width: '250px'}}/>
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={''} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
 
-                                  <div style={{display: 'flex'}}>
-                                    <div>
-                                      <label className='title-label'>Самозанятость</label>
-                                      <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
-                                        <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
-                                          <input className="text-field__input" type="text" name="dogovor" id="dogovor" value={dogovor} onChange={(e) => setDogovor(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
-                                        </div>
+                                  <div>
+                                    <label className='title-label'>Договор</label>
+                                    <div style={{display: 'flex'}}>
+                                      <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
+                                      <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
+                                        <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                       </div> 
                                     </div>
-                                    <div style={{width: '15px'}}></div>
-                                    <div>
-                                      <label className='title-label'>Договор</label>
-                                      <div style={{display: 'flex'}}>
-                                        <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
-                                        <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
-                                          <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
-                                        </div> 
-                                      </div>
-                                    </div>
-                                    
-                                    
-                                  </div>
-
+                                  </div>  
                                    
                                   <div style={{position:'relative'}}>
-                                    <label className='title-label'>Паспорт</label>
-                                    <div className="text-field" style={{marginBottom: '0px'}}>
-                                      <textarea 
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="passport" 
-                                        id="passport" 
-                                        value={passport} 
-                                        onChange={(e) => setPassport(e.target.value)} 
-                                        style={{resize: 'none', width: '250px', height: '270px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
+                                    <label className='title-label'>ИНН</label>
+                                    <div className="text-field">
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{width: '250px'}}
+                                          type="text" 
+                                          name="inn" 
+                                          id="inn"
+                                          mask="9999-999999-99"
+                                          maskChar=""
+                                          onChange={(e) => setInn(e.target.value)} 
+                                          value={inn}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
                                     </div> 
-                                    <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
                                   
                                 </div>
@@ -1347,27 +1343,37 @@ const Client = () => {
                                       <img src={Close} onClick={clearCity} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 
-                                  <label className='title-label'>Специальность</label>
-                                  <div className="text-field"> 
-                                      <MyDropdown2
-                                        tags={speclist.filter(item=>item !== 'Blacklist')}
-                                        setTags={setSpeclist}
-                                        options={specOnlyData}
-                                        onChange={changeSpec}
-                                      />
-                                  </div>
-
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                      <MyDropdown2
-                                        tags={company}
-                                        setTags={setCompany}
-                                        options={companys}
-                                        //onChange={changeSpec}
+                                    <MyDropdown3
+                                      tags={company}
+                                      setTags={setCompany}
+                                      options={companys}
+                                      style={{minHeight: '40px !important'}}
+                                    />
+                                  </div>
+
+                                  <label className='title-label'>Должность</label>
+                                  <div className="text-field"> 
+                                      <MyDropdown3
+                                        tags={dolgnost}
+                                        setTags={setDolgnost}
+                                        options={dolgnostData}
+                                        style={{minHeight: '40px !important'}}
                                       />
                                   </div>
 
-                                  <label className='title-label'>Комтеги</label>
+                                  <label className='title-label'>Сфера деятельности</label>
+                                  <div className="text-field"> 
+                                      <MyDropdown3
+                                        tags={sfera}
+                                        setTags={setSfera}
+                                        options={sferaData}
+                                        style={{minHeight: '40px !important'}}
+                                      />
+                                  </div>
+
+                                  {/* <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
                                         tags={comteg}
@@ -1386,7 +1392,7 @@ const Client = () => {
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
                                       style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
-                                  </div> 
+                                  </div>  */}
                                   
                                 </div>
 {/* 3 */}
@@ -1420,54 +1426,35 @@ const Client = () => {
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
                                     </div>
                                   </div>
-                                  
-                                  <label className='title-label'>Навык</label>
-                                  <div className="text-field"> 
-                                      <MyDropdown2
-                                        tags={skill}
-                                        setTags={setSkill}
-                                        options={skills}
-                                        onChange={changeSpec}
-                                      />
-                                  </div>
+                            
 
-                                  <label className='title-label'>Мерч</label>
+                                  <label className='title-label'>Комтег</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        tags={merch}
-                                        setTags={setMerch}
-                                        options={merchData}
-                                        onChange={changeSpec}
-                                      />
-                                  </div>
-
-                                  <label className='title-label'>Комтеги 2.0</label>
-                                  <div className="text-field"> 
-                                      <MyDropdown2
-                                        tags={comteg2}
-                                        setTags={setComteg2}
+                                        tags={comteg}
+                                        setTags={setComteg}
                                         options={comtegs}
                                         onChange={changeSpec}
                                       />
                                   </div>
 
-                                  <label className='title-label'>Комментарии 2.0</label>
+                                  <label className='title-label'>Комментарий</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
                                     <textarea 
                                       className="text-field__input" 
                                       type="text" 
-                                      name="comment2" 
-                                      id="comment2" 
-                                      value={comment2} onChange={(e) => setComment2(e.target.value)} 
+                                      name="comment" 
+                                      id="comment" 
+                                      value={comment} onChange={(e) => setComment(e.target.value)} 
                                       style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
+                                <div style={{marginLeft: '40px', marginTop: '46px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
 
                                   {/* phone */}
-                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '90px'}}>Телефон</label>
+                                  <label className='title-label'>Телефон №1</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
                                     <img 
                                       src={Disketa} 
@@ -1493,6 +1480,33 @@ const Client = () => {
                                     
                                   </div> 
 
+                                  {/* phone2 */}
+                                  <label className='title-label' >Телефон №2</label>
+                                  <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                      alt="" 
+                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                    <InputMask
+                                        className="text-field__input" 
+                                        style={{width: '250px'}}
+                                        type="text" 
+                                        name="phone2" 
+                                        id="phone2"
+                                        mask="+7 (999) 999-99-99"
+                                        disabled={!blockProfile}
+                                        maskChar=""
+                                        onChange={(e) => setPhone2(e.target.value)} 
+                                        value={phone2}
+                                        placeholder=''
+                                    >
+                                    </InputMask>
+                                    
+                                  </div>
+
                                   <label className='title-label'>Telegram</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
                                     <img 
@@ -1514,7 +1528,7 @@ const Client = () => {
                                   </div>
 
                                   {/* ник */}
-                                  <label> </label>
+                                  <label>Никнейм </label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
                                     <img 
                                       src={Disketa} 
@@ -1525,48 +1539,14 @@ const Client = () => {
                                     <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
-                                  <label className='title-label'>ИНН</label>
-                                  <div className="text-field">
-                                    <InputMask
-                                        className="text-field__input" 
-                                        style={{width: '250px'}}
-                                        type="text" 
-                                        name="inn" 
-                                        id="inn"
-                                        mask="9999-999999-99"
-                                        maskChar=""
-                                        onChange={(e) => setInn(e.target.value)} 
-                                        value={inn}
-                                        placeholder=''
-                                    >
-                                    </InputMask>
-                                  </div> 
+                                  
 
                                   {/* email */}
-                                  <label></label>
+                                  <label>Почта</label>
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
-                                  <label className='title-label'>Промокод</label>
-                                  <div className="text-field">
-                                    <input 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="promo" 
-                                      id="promo" 
-                                      value={promo} 
-                                      onChange={handlePromo} 
-                                      style={{width: '250px'}}
-                                      pattern="[0-9]*"
-                                    />
-                                  </div>
-
-                                  {/* скан паспорта */}
-                                  <label></label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '250px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
-                                  </div> 
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
