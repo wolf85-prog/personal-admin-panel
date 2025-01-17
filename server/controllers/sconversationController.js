@@ -9,22 +9,24 @@ class SconversationController {
         try {
             const {senderId, receiverId} = req.body
 
+            let conversation
+
             //найти беседу
-            const exist = await Conversation.findOne({
+            conversation = await Conversation.findOne({
                 where: { 
                     members: {
                         [Op.contains]: [senderId]
                     } 
                 },
             }) 
-            if (exist) {
-                return res.status(200).json(`conversation already exist`);
+            if (conversation) {
+                return res.status(200).json(conversation);
             }
 
-            await Conversation.create({
+            conversation = await Conversation.create({
                 members: [senderId, receiverId]
             }) 
-            return res.status(200).json(`coversation saved sucessfully`)
+            return res.status(200).json(conversation)
         } catch (error) {
             return res.status(500).json(error.message)
         }

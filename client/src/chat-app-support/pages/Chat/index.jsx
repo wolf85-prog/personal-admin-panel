@@ -12,7 +12,7 @@ import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider';
-import { addConversation, newMessage, uploadFile } from "src/http/supportAPI";
+import { addConversation, getConversation, newMessage, uploadFile } from "src/http/supportAPI";
 import { newCountWMessage, getCountMessage } from "src/http/adminAPI";
 import { $host } from '../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
@@ -41,7 +41,7 @@ const Chat = () => {
 
 	const chatId = userId //personS.id;
 	let user = userSupport.filter((user) => user.chatId === chatId.toString())[0];
-	let convs = sconversations.find((conv) => conv.members[0] === chatId.toString());
+	//let convs = sconversations.find((conv) => conv.members[0] === chatId.toString());
 
 	let data2
 
@@ -337,16 +337,26 @@ const Chat = () => {
 			// 	console.log('Что-то пошло не так. Попробуйте ещё раз.');
 			// }
 
-			//создать беседу
-			const conv = await addConversation({senderId: userId, receiverId: chatAdminId})
-			console.log("conv: ", conv)
+			let conv
+
+			//найти беседу
+			conv = await getConversation(userId)
+			console.log("conv1: ", conv)
+
+			if (!conv) {
+				//создать беседу
+				conv = await addConversation({senderId: userId, receiverId: chatAdminId})
+				console.log("conv2: ", conv)
+			}
+			
+
 
 			let message = {};
 			if(!file) {
 				message = {
-					senderId: user.chatId, 
+					senderId: userId, 
 					receiverId: chatAdminId,
-					conversationId: convs.id,
+					conversationId: conv.id,
 					type: "text",
 					text: mess,
 					isBot: null,
@@ -357,12 +367,12 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage3(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage3(user.chatId, mess, 'text', '', conv.id, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
-					senderId: user.chatId, 
+					senderId: userId, 
 					receiverId: chatAdminId,
-					conversationId: convs.id,
+					conversationId: conv.id,
 					type: "image",
 					text: host + image,
 					isBot: null,
@@ -373,7 +383,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage3(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage3(user.chatId, host + image, 'image', '', conv.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
