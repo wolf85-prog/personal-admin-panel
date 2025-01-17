@@ -12,7 +12,7 @@ import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { AccountContext } from '../../../chat-app-new/context/AccountProvider';
-import { newMessage, uploadFile } from "src/http/supportAPI";
+import { addConversation, newMessage, uploadFile } from "src/http/supportAPI";
 import { newCountWMessage, getCountMessage } from "src/http/adminAPI";
 import { $host } from '../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
@@ -79,7 +79,7 @@ const Chat = () => {
 	 }
 
 	useEffect(() => {
-		console.log("support: ", support, user)
+		console.log("support: ", support, userSupport)
 
 		if (user) {
 			scrollToLastMsg();
@@ -289,64 +289,68 @@ const Chat = () => {
 			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${temp}`
 			// const sendToTelegram = await $host.get(url_send_msg);
 
-			if(!file) {
-				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${temp}`
+			// if(!file) {
+			// 	const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${temp}`
 				
-				sendToTelegram = await $host.get(url_send_msg);
-			} else {
-				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
-					// if (image.slice(-3) === 'ocx' || image.slice(-3)==='doc' || image.slice(-3)==='lsx' || image.slice(-3)==='xls' || image.slice(-3)==='iff' || image.slice(-3)==='IFF') {
-					// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${host+image}`
-					// 	//console.log("url_send_doc: ", url_send_doc)
-					// 	sendPhotoToTelegram = await $host.get(url_send_doc);
-					// } else if (image.slice(-3) === 'png' || image.slice(-3)==='jpg' || image.slice(-3)==='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
-					// 	setShowErrorFile(true)
-					// } else if (image.slice(-3) === 'pdf' ) {
-					// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personS.id}&document=${host+image}`
-					// 	//console.log("url_send_doc: ", url_send_doc)
-					// 	sendPhotoToTelegram = await $host.get(url_send_doc);
-					// } else {
-						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personS.id}&document=${host+image}`
-						//console.log("url_send_doc: ", url_send_doc)
+			// 	sendToTelegram = await $host.get(url_send_msg);
+			// } else {
+			// 	if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
+			// 		// if (image.slice(-3) === 'ocx' || image.slice(-3)==='doc' || image.slice(-3)==='lsx' || image.slice(-3)==='xls' || image.slice(-3)==='iff' || image.slice(-3)==='IFF') {
+			// 		// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personS.id}&parse_mode=html&text=${host+image}`
+			// 		// 	//console.log("url_send_doc: ", url_send_doc)
+			// 		// 	sendPhotoToTelegram = await $host.get(url_send_doc);
+			// 		// } else if (image.slice(-3) === 'png' || image.slice(-3)==='jpg' || image.slice(-3)==='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
+			// 		// 	setShowErrorFile(true)
+			// 		// } else if (image.slice(-3) === 'pdf' ) {
+			// 		// 	const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personS.id}&document=${host+image}`
+			// 		// 	//console.log("url_send_doc: ", url_send_doc)
+			// 		// 	sendPhotoToTelegram = await $host.get(url_send_doc);
+			// 		// } else {
+			// 			const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personS.id}&document=${host+image}`
+			// 			//console.log("url_send_doc: ", url_send_doc)
 						
-						const form = new FormData();
-						form.append("chat_id", personS.id); // добавление имени файла
-						form.append("document", file); // добавление файла
-						//const form = new FormData();
-						sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
+			// 			const form = new FormData();
+			// 			form.append("chat_id", personS.id); // добавление имени файла
+			// 			form.append("document", file); // добавление файла
+			// 			//const form = new FormData();
+			// 			sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
 
-						//sendPhotoToTelegram = await $host.get(url_send_doc);
-					//}		
-				} else if (fileType === 'image') {
-					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
-					// 	setShowErrorFile(true)
-					// } else {
-						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personS.id}&photo=${host+image}`
-						//console.log("url_send_photo: ", url_send_photo)
-						sendToTelegram = await $host.get(url_send_photo);
-					//}		
-				}	
-			}
+			// 			//sendPhotoToTelegram = await $host.get(url_send_doc);
+			// 		//}		
+			// 	} else if (fileType === 'image') {
+			// 		// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
+			// 		// 	setShowErrorFile(true)
+			// 		// } else {
+			// 			const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personS.id}&photo=${host+image}`
+			// 			//console.log("url_send_photo: ", url_send_photo)
+			// 			sendToTelegram = await $host.get(url_send_photo);
+			// 		//}		
+			// 	}	
+			// }
 
 			//Выводим сообщение об успешной отправке
-			if (sendToTelegram) {
-				console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram.data.result.message_id);
-			}           
-			//А здесь сообщение об ошибке при отправке
-			else {
-				console.log('Что-то пошло не так. Попробуйте ещё раз.');
-			}
+			// if (sendToTelegram) {
+			// 	console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram.data.result.message_id);
+			// }           
+			// //А здесь сообщение об ошибке при отправке
+			// else {
+			// 	console.log('Что-то пошло не так. Попробуйте ещё раз.');
+			// }
+
+			//создать беседу
+			const conv = await addConversation({senderId: userId, receiverId: chatAdminId})
+			console.log("conv: ", conv)
 
 			let message = {};
 			if(!file) {
 				message = {
-					senderId: chatAdminId, 
-					receiverId: user.chatId,
+					senderId: user.chatId, 
+					receiverId: chatAdminId,
 					conversationId: convs.id,
 					type: "text",
 					text: mess,
 					isBot: null,
-					messageId: sendToTelegram.data.result.message_id,
+					//messageId: sendToTelegram.data.result.message_id,
 				}
 
 				//сохранение сообщения в базе данных
@@ -356,8 +360,8 @@ const Chat = () => {
 				addNewMessage3(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
 				message = {
-					senderId: chatAdminId, 
-					receiverId: user.chatId,
+					senderId: user.chatId, 
+					receiverId: chatAdminId,
 					conversationId: convs.id,
 					type: "image",
 					text: host + image,
