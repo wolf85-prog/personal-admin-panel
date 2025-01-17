@@ -57,7 +57,7 @@ export const getConversation= async (id)=>{
        if (response.data === null) {
             return null;
        }
-        return response.data.id
+        return response.data
     } catch (error) {
         console.log("error while calling getConversation api", error.message);
         
