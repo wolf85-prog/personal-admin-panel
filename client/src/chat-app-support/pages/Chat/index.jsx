@@ -359,7 +359,7 @@ const Chat = () => {
 					conversationId: conv.id,
 					type: "text",
 					text: mess,
-					isBot: null,
+					//isBot: null,
 					//messageId: sendToTelegram.data.result.message_id,
 				}
 
@@ -367,7 +367,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage3(user.chatId, mess, 'text', '', conv.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage3(userId, mess, 'text', '', conv.id, null, null);
 			} else {
 				message = {
 					senderId: userId, 
@@ -375,7 +375,7 @@ const Chat = () => {
 					conversationId: conv.id,
 					type: "image",
 					text: host + image,
-					isBot: null,
+					//isBot: null,
 					messageId: sendToTelegram.data.result.message_id,
 				}
 
@@ -383,7 +383,7 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage3(user.chatId, host + image, 'image', '', conv.id, sendToTelegram.data.result.message_id, null);
+				addNewMessage3(userId, host + image, 'image', '', conv.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
