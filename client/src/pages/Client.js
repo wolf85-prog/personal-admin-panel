@@ -418,36 +418,18 @@ const Client = () => {
     setFio(worker.fio)
     setCity(worker.city ? worker.city : '')
     setAge(worker.age ? worker.age.split('-')[0] : '')
-    setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
-
-    setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
-
-    setShowBlacklist(worker.speclist.includes('Blacklist'))
 
     setPhone(worker.phone)
-    setPhone2(worker.phone2)
     setTelegram(worker.chatId)
-    setSkill(worker.skill ? worker.skill.split(', ') : [])
 
     setReyting(worker.reyting === null ? '' : worker.reyting)
-    setPromo(worker.promo)
-    setRank(worker.rank === null ? '' : worker.rank)
-    setMerch(worker.merch ? worker.merch.split(',') : [])
     setCompany(worker.company ? worker.company.split(',') : [])
-    setInn(worker.inn === null ? '' : worker.inn)
     setComteg(worker.comteg ? worker.comteg.split(',') : [])
-    setComteg2(worker.comteg2 ? worker.comteg2.split(',') : [])
     setEmail(worker.email)
     setComment(worker.comment)
-    setComment2(worker.comment2)
     setProfile(worker.profile)
     setSfera(worker.sfera)
     setDolgnost(worker.dolgnost)
-
-    setPassport(worker.passport)
-    setDogovor(worker.dogovor)
-    setSamozanjatost(worker.samozanjatost)
-    setPassportScan(worker.passportScan)
     
     if (userbots) {
       setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
@@ -805,6 +787,11 @@ const Client = () => {
     await editClient(saveData, id)
 
     addToast(exampleToast) //ваши данные сохранены
+
+    setTimeout(()=> {
+      //setShowModal(false)
+      closeProfile()
+    }, 500)
   }
 
   const blockedProfile = () => { 
@@ -1076,8 +1063,8 @@ const Client = () => {
                                   <div className="menu-reyting">
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
-                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
+                                        <span style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
+                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}}>
                                           <img className='star-icon' onClick={()=>setStarActive1(!starActive1)} src={starActive1 ? StarActive : Star} alt='' /> 
                                           <img className='star-icon' onClick={()=>setStarActive2(!starActive2)} src={starActive2 ? StarActive : Star} alt='' />
                                           <img className='star-icon' onClick={()=>setStarActive3(!starActive3)} src={starActive3 ? StarActive : Star} alt='' />
@@ -1233,7 +1220,7 @@ const Client = () => {
                                   <div style={{display: 'flex'}}>
                                     {/* проекты за месяц */}
                                     <div className="text-field" style={{marginRight: '8px'}}>
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field" style={{marginRight: '8px'}}>
