@@ -47,7 +47,7 @@ const AppHeaderDropdown = observer(() => {
       
       const result = await getCompanyProfId(userId)
       console.log("Company: ", result)
-      setCompanyId(result.id)
+      setCompanyId(result?.id)
       
     }
     fetchData()

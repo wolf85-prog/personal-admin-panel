@@ -48,16 +48,18 @@ export const authRoutes = [
     { path: AIR_ROUTE, name: 'В эфире', Component: Air },
     { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
     { path: PLATFORMS_ROUTE, name: 'Локации', Component: Platforms },
-    { path: CHAT_WORKER, name: 'Workhub', Component: ChatWorker },
-    { path: SPECIALIST_ROUTE, name: 'Сотрудники', Component: Specialist },
-    { path: CHAT_MANAGER, name: 'Renthub', Component: ChatManager },
-    { path: CLIENT_ROUTE, name: 'Клиент', Component: Client },
+   
+
+    { path: CHAT_MANAGER, name: 'Клиент', Component: ChatManager },
+    { path: CLIENT_ROUTE, name: 'Профиль клиента', Component: Client },
+
+    { path: CHAT_WORKER, name: 'Сотрудники', Component: ChatWorker },
+    { path: SPECIALIST_ROUTE, name: 'Профиль сотрудника', Component: Specialist },
 
     { path: CHAT_SUPPORT, name: 'Техническая поддержка', Component: ChatSupport },
 
     { path: PROFILE_ROUTE, name: 'Профиль', Component: Profile },
     { path: PROFILECOMPANY_ROUTE, name: 'Профиль компании', Component: ProfileCompany },
     { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
-
     { path: PAY_RATE_ROUTE, name: 'Ставки', Component: PayRate },
 ]

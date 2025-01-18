@@ -18,15 +18,20 @@ const Air = React.lazy(() => import('./pages/Air'))
 const routes = [
   { path: '/', exact: true, name: 'Пункт управления' },
   { path: '/dashboard', name: 'Пункт управления', Component: Admin },
-  { path: '/air', name: 'В эфире', Component: Air },
+  
+  { path: '/project', name: 'Проекты', Component: Projects },
+  { path: '/on_air', name: 'В эфире', Component: Air },
   { path: '/profile', name: 'Профиль', Component: Profile },
-  { path: '/profile_company', name: 'Профиль компании', Component: ProfileCompany },
-  { path: '/projects', name: 'Проекты', Component: Projects },
-  { path: "/specialist", name: 'Сотрудники', Component: Specialist },
+  { path: '/my_company', name: 'Профиль компании', Component: ProfileCompany },
+  
+  
   { path: "/payrate", name: 'Ставки', Component: PayRate },
-  { path: "/companys", name: 'Компании', Component: Companys },
-  { path: "/platforms", name: 'Локации', Component: Platforms },
-  { path: "/client", name: 'Клиент', Component: Client },
+  { path: "/company", name: 'Компании', Component: Companys },
+  { path: "/location", name: 'Локации', Component: Platforms },
+  
+
+  { path: "/profile_customer", name: 'Профиль клиента', Component: Client },
+  { path: "/profile_worker", name: 'Профиль сотрудника', Component: Specialist },
 ]
 
 export default routes

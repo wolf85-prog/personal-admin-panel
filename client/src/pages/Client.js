@@ -150,6 +150,12 @@ const Client = () => {
   const [showMenu2, setShowMenu2] = useState(false)
   const [showClearCity, setShowClearCity] = useState(false)
 
+  const [starActive1, setStarActive1] = useState(true)
+  const [starActive2, setStarActive2] = useState(true)
+  const [starActive3, setStarActive3] = useState(true)
+  const [starActive4, setStarActive4] = useState(false)
+  const [starActive5, setStarActive5] = useState(false)
+
   const [visibleDelete, setVisibleDelete] = useState(false)
 
   const [file, setFile] = useState(0);
@@ -1168,30 +1174,17 @@ const Client = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '550px', display: 'flex', flexDirection: 'row'}}>
-                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
-                                  {filePreview ? 
-                                  <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
-                                  :
-                                  (
-                                    profile ? 
+                              <div style={{position: 'relative', height: '450px', display: 'flex', flexDirection: 'row'}}>
+                                <div style={{position: 'relative', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
+                                  {profile ? 
                                   <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
                                   : 
                                   <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
-                                  )
                                   }
                                   <div className="file-upload" style={{marginBottom: '8px'}}>
-                                    <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
-                                    <input 
-                                      type="file"
-                                      id="formFile" 
-                                      accept="image/*,image/jpeg" 
-                                      name="photo"
-                                      onChange={(e) => onFileChange(e)}
-                                      style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
-                                    />
+                                    
                                   </div>
 
                                   <div className="menu-reyting">
@@ -1199,11 +1192,11 @@ const Client = () => {
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
                                         :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
-                                          <img className='star-icon' src={StarActive} alt='' /> 
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive1(!starActive1)} src={starActive1 ? StarActive : Star} alt='' /> 
+                                          <img className='star-icon' onClick={()=>setStarActive2(!starActive2)} src={starActive2 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive3(!starActive3)} src={starActive3 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive4(!starActive4)} src={starActive4 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive5(!starActive5)} src={starActive5 ? StarActive : Star} alt='' />
                                         </div>
                                         }
                                       </div>
@@ -1226,7 +1219,27 @@ const Client = () => {
                                     </div>
                                   </div> 
 
-                                  <div>
+                                  <label className='title-label'>Telegram</label>
+                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
+                                      alt="" 
+                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      pattern="[0-9]*"
+                                      name="telegram" 
+                                      id="telegram" 
+                                      value={telegram} 
+                                      onChange={handleTg} 
+                                      style={{width: '250px'}}
+                                    />
+                                  </div>
+
+                                  {/* <div>
                                     <label className='title-label'>Договор</label>
                                     <div style={{display: 'flex'}}>
                                       <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
@@ -1234,9 +1247,9 @@ const Client = () => {
                                         <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
                                       </div> 
                                     </div>
-                                  </div>  
+                                  </div>   */}
                                    
-                                  <div style={{position:'relative'}}>
+                                  {/* <div style={{position:'relative'}}>
                                     <label className='title-label'>ИНН</label>
                                     <div className="text-field">
                                       <InputMask
@@ -1253,7 +1266,7 @@ const Client = () => {
                                       >
                                       </InputMask>
                                     </div> 
-                                  </div>
+                                  </div> */}
                                   
                                 </div>
                                   <img src={imgBlock18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: block18 ? '1' : '0' }}/>                                 
@@ -1373,11 +1386,7 @@ const Client = () => {
                                       />
                                   </div>
 
-                                  {/* email */}
-                                  <label className='title-label'>Почта</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
-                                  </div> 
+                                  
 
                                   {/* <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
@@ -1432,6 +1441,12 @@ const Client = () => {
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
                                     </div>
                                   </div>
+
+                                  {/* email */}
+                                  <label className='title-label'>Почта</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
+                                  </div> 
                             
 
                                   <label className='title-label'>Комтег</label>
@@ -1441,7 +1456,7 @@ const Client = () => {
                                         setTags={setComteg}
                                         options={comtegs}
                                         onChange={changeSpec}
-                                        heightStyle={'125px'}
+                                        heightStyle={'40px'}
                                       />
                                   </div>
 
@@ -1461,7 +1476,7 @@ const Client = () => {
                                 <div style={{marginLeft: '40px', marginTop: '46px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
 
                                   {/* phone */}
-                                  <label className='title-label'>Телефон №1</label>
+                                  <label className='title-label'>Телефон</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
                                     <img 
                                       src={Disketa} 
@@ -1487,55 +1502,10 @@ const Client = () => {
                                     
                                   </div> 
 
-                                  {/* phone2 */}
-                                  <label className='title-label' >Телефон №2</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
-                                    <img 
-                                      src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(phone)}} 
-                                      alt="" 
-                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    />
-                                    {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
-                                    <InputMask
-                                        className="text-field__input" 
-                                        style={{width: '250px'}}
-                                        type="text" 
-                                        name="phone2" 
-                                        id="phone2"
-                                        mask="+7 (999) 999-99-99"
-                                        disabled={!blockProfile}
-                                        maskChar=""
-                                        onChange={(e) => setPhone2(e.target.value)} 
-                                        value={phone2}
-                                        placeholder=''
-                                    >
-                                    </InputMask>
-                                    
-                                  </div>
-
-                                  <label className='title-label'>Telegram</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
-                                    <img 
-                                      src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
-                                      alt="" 
-                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    />
-                                    <input 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      pattern="[0-9]*"
-                                      name="telegram" 
-                                      id="telegram" 
-                                      value={telegram} 
-                                      onChange={handleTg} 
-                                      style={{width: '250px'}}
-                                    />
-                                  </div>
+                                  
 
                                   {/* ник */}
-                                  <label className='title-label'>Никнейм </label>
+                                  {/* <label className='title-label'>Никнейм </label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
                                     <img 
                                       src={Disketa} 
@@ -1544,12 +1514,12 @@ const Client = () => {
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
                                     <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
-                                  </div> 
+                                  </div>  */}
 
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '120px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '294px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
