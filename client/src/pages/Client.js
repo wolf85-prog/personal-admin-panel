@@ -69,6 +69,7 @@ import merchData from 'src/data/merchData';
 import cities from 'src/data/cities';
 import sferaData from 'src/data/sfera';
 import dolgnostData from 'src/data/dolgnostData';
+import { _startAction } from 'mobx';
 
 //Workers.js
 const Client = () => {
@@ -200,6 +201,30 @@ const Client = () => {
   //   setShowClear(text === '' ? false : true)
   // }, [text]);
 
+  useEffect(() => {
+    let count = 0
+    if (starActive1) {
+      count = 1
+      console.log("reyting: ", 1)
+    }
+    if (starActive2) {
+      count = 2
+      console.log("reyting: ", 2)
+    }
+    if (starActive3) {
+      count = 3
+      console.log("reyting: ", 3)
+    }
+    if (starActive4) {
+      count = 4
+      console.log("reyting: ", 4)
+    }
+    if (starActive5) {
+      count = 5
+      console.log("reyting: ", 5)
+    }
+    setReyting(count)
+  }, [starActive1, starActive2, starActive3, starActive4, starActive5]);
 
   useEffect(()=> {
 
@@ -251,29 +276,9 @@ const Client = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        let str_spec = ''
-        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-        })
-
-        let str_skill = ''
-        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-        })
-
-        let str_merch = ''
-        worker.merch && JSON.parse(worker.merch).map((item, index)=> {
-          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-        })
-
         let str_komteg = ''
         worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
           str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        })
-
-        let str_komteg2 = ''
-        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
         })
 
         let str_company = ''
@@ -286,36 +291,18 @@ const Client = () => {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
         })
 
-        let str_comment2 = ''
-        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-        })
-
         const newWorker = {
           id: worker.id,
           fio: worker.fio,
           chatId: worker.chatId, 
           phone: worker.phone, 
-          phone2: worker.phone2,
-          speclist: str_spec,
           city: worker.city, 
-          skill: str_skill,
-          promo: worker.promoId === '0' ? '' : worker.promoId, 
-          rank: worker.rank, 
-          merch: str_merch,  
           company: str_company, 
           comteg: str_komteg, 
-          comteg2: str_komteg2, 
           comment: str_comment, 
-          comment2: str_comment2, 
           age: worker.age, 
           reyting: worker.reyting, 
-          inn: worker.inn, 
-          passport: worker.passport, 
           profile: worker.profile, 
-          dogovor: worker.dogovor ? '🟢' : '🔴', 
-          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
-          passportScan: worker.passportScan, 
           email: worker.email, 
           //blockW: worker.blockW,
           block18: worker.block18,
@@ -733,34 +720,6 @@ const Client = () => {
     setShowClose(true)
     console.log(id)
 
-    let specArr = []
-    let strSpec = ''
-
-    speclist.map((item, index) => {
-      specData.map((category)=> {
-          category.models.map((work)=> {
-              if (work.name === item){
-                  const obj = {
-                      spec: item,
-                      cat: category.icon,
-                  }
-                  strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
-                  specArr.push(obj)
-              }
-          })
-      })
-      if (item === 'Blacklist') {
-        const obj = {
-            spec: item,
-            cat: 'Blacklist',
-        }
-        strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
-        specArr.push(obj) 
-      }
-    })
-
-    console.log("specArr: ", specArr)
-
 
     let companyArr = []
     let strCompany = ''
@@ -804,7 +763,7 @@ const Client = () => {
       comteg: JSON.stringify(comtegArr),
       comment: JSON.stringify(commentArr),
       profile,
-      inn,
+      reyting,
       email,
       block18,
       krest,
@@ -829,7 +788,7 @@ const Client = () => {
         comment: strComment,
         chatId: telegram,
         profile,
-        inn,
+        reyting,
         email,
         block18,
         krest,
