@@ -110,6 +110,7 @@ const Client = () => {
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
 
+  const [clientId, setClientId] = useState('');
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
@@ -453,8 +454,8 @@ const Client = () => {
     setComment(worker.comment)
     setComment2(worker.comment2)
     setProfile(worker.profile)
-    setSfera(worker.sfera ? worker.sfera.split(',') : [])
-    setDolgnost(worker.dolgnost ? worker.dolgnost.split(',') : [])
+    setSfera(worker.sfera)
+    setDolgnost(worker.dolgnost)
 
     setPassport(worker.passport)
     setDogovor(worker.dogovor)
@@ -783,17 +784,6 @@ const Client = () => {
     })
 
 
-    let sferaArr = []
-    let strSfera = ''
-    sfera.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
-      sferaArr.push(obj)
-    })
-
-
     //комментарии 1
     let commentArr = []
     let strComment = ''
@@ -819,7 +809,7 @@ const Client = () => {
       block18,
       krest,
       dolgnost,
-      sfera: JSON.stringify(sferaArr),
+      sfera,
     }
     console.log(saveData)
 
@@ -844,7 +834,7 @@ const Client = () => {
         block18,
         krest,
         dolgnost,
-        sfera: strSfera,
+        sfera,
       };
 
       console.log("update user: ", usersCopy[userIndex])
@@ -876,6 +866,11 @@ const Client = () => {
 
   }, [client]);
 
+
+  const handleId = event => {
+    const result = event.target.value.replace(/\D/g, '');
+    setClientId(result);
+  };
 
   const handleTg = event => {
     const result = event.target.value.replace(/\D/g, '');
@@ -1147,7 +1142,7 @@ const Client = () => {
                                   <label className='title-label'>ID</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={id} style={{width: '250px'}}/>
+                                      <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" value={clientId} onChange={handleId} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
 
@@ -1170,35 +1165,6 @@ const Client = () => {
                                       style={{width: '250px'}}
                                     />
                                   </div>
-
-                                  {/* <div>
-                                    <label className='title-label'>Договор</label>
-                                    <div style={{display: 'flex'}}>
-                                      <input className="text-field__input" type="text" name="inn" id="inn" value='01.01.2024' onChange={(e) => setInn(e.target.value)} style={{width: '100%', paddingLeft: '5px', fontSize: '12px'}}/>
-                                      <div className="text-field" style={{marginLeft:'-10px', backgroundColor: '#131c21'}}>
-                                        <input className="text-field__input" type="text" name="samozanjatost" id="samozanjatost" value={samozanjatost} onChange={(e) => setSamozanjatost(e.target.value)} style={{width: '40px', padding: '0', fontSize: '20px'}}/>
-                                      </div> 
-                                    </div>
-                                  </div>   */}
-                                   
-                                  {/* <div style={{position:'relative'}}>
-                                    <label className='title-label'>ИНН</label>
-                                    <div className="text-field">
-                                      <InputMask
-                                          className="text-field__input" 
-                                          style={{width: '250px'}}
-                                          type="text" 
-                                          name="inn" 
-                                          id="inn"
-                                          mask="9999-999999-99"
-                                          maskChar=""
-                                          onChange={(e) => setInn(e.target.value)} 
-                                          value={inn}
-                                          placeholder=''
-                                      >
-                                      </InputMask>
-                                    </div> 
-                                  </div> */}
                                   
                                 </div>
                                   <img src={imgBlock18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: block18 ? '1' : '0' }}/>                                 
@@ -1230,20 +1196,6 @@ const Client = () => {
                                   {/* Город */}
                                   <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
-                                      {/* <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={cities}
-                                        selected={city}
-                                        setSelected={setCity}
-                                        // onChange={addCity}
-                                      /> */}
-                                      {/* <CFormSelect 
-                                        aria-label="Default select example"
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={sortedCities}
-                                        value={cityValue}
-                                        onChange={(e)=>addCity(e)}
-                                      /> */}
                                       <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -1300,22 +1252,12 @@ const Client = () => {
 
                                   <label className='title-label'>Должность</label>
                                   <div className="text-field"> 
-                                      <MyDropdown3
-                                        tags={dolgnost}
-                                        setTags={setDolgnost}
-                                        options={dolgnostData}
-                                        style={{minHeight: '40px !important'}}
-                                      />
+                                    <input className="text-field__input" type="text" name="dolgnost" id="dolgnost" value={dolgnost} onChange={(e) => setDolgnost(e.target.value)} style={{width: '320px'}}/>
                                   </div>
 
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field"> 
-                                      <MyDropdown3
-                                        tags={sfera}
-                                        setTags={setSfera}
-                                        options={sferaData}
-                                        style={{minHeight: '40px !important'}}
-                                      />
+                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
                                   </div>
 
                                   {/* email */}
@@ -1323,43 +1265,13 @@ const Client = () => {
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
                                   </div> 
-
-                                  {/* <label className='title-label'>Комтеги</label>
-                                  <div className="text-field"> 
-                                      <MyDropdown2
-                                        tags={comteg}
-                                        setTags={setComteg}
-                                        options={comtegs}
-                                        //onChange={changeSpec}
-                                      />
-                                  </div>
-
-                                  <label className='title-label'>Комментарии</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment" 
-                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
-                                    />
-                                  </div>  */}
                                   
                                 </div>
 {/* 3 */}
                                 <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px'}}>
-                                  {/* <div className="uley-line" style={{left: '670px', top: '60px', width: '70px'}}></div> */}
-                                  <div className="uley-line" style={{left: '705px', top: '60px', width: '50px'}}></div>
-                                  <div className="uley-line" style={{left: '870px', top: '60px', width: '50px'}}></div>
+                                  <div className="uley-line" style={{left: '685px', top: '60px', width: '85px'}}></div>
+                                  <div className="uley-line" style={{left: '850px', top: '60px', width: '85px'}}></div>
                                   <div style={{display: 'flex'}}>
-                                    {/* возраст */}
-                                    {/* <div className="text-field">
-                                      <input disabled className="text-field__input" type="text" name="age2" id="age2" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
-                                    </div> */}
-                                    {/* год рождения */}
-                                    {/* <div className="text-field">
-                                      <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
-                                    </div> */}
                                     {/* проекты за месяц */}
                                     <div className="text-field" style={{marginRight: '8px'}}>
                                       <input className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{marginRight: '8px'}}/>
@@ -1397,7 +1309,7 @@ const Client = () => {
                                       name="comment" 
                                       id="comment" 
                                       value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '210px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                      style={{resize: 'none', width: '320px', height: '209px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
@@ -1431,24 +1343,9 @@ const Client = () => {
                                     
                                   </div> 
 
-                                  
-
-                                  {/* ник */}
-                                  {/* <label className='title-label'>Никнейм </label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
-                                    <img 
-                                      src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(nik)}} 
-                                      alt="" 
-                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    />
-                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
-                                  </div>  */}
-
-
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '294px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '293px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
