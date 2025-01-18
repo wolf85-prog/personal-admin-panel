@@ -414,6 +414,42 @@ const Client = () => {
 
     const currentYear = new Date().getFullYear()
 
+    if (worker.reyting === 1) {
+      setStarActive1(true)
+      setStarActive2(false)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (worker.reyting === 2) {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (worker.reyting === 3) {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(false)
+      setStarActive5(false)
+    }
+    if (worker.reyting === 4) {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(false)
+    }
+    if (worker.reyting === 5) {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(true)
+    }
+
     setId(worker.id)
     setFio(worker.fio)
     setCity(worker.city ? worker.city : '')
@@ -431,12 +467,10 @@ const Client = () => {
     setSfera(worker.sfera)
     setDolgnost(worker.dolgnost)
     
-    if (userbots) {
-      setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
-      //setDateReg(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.createdAt)
-      //setDateReg(worker.createdAt)
-    }
-    setDateReg(worker.createdAt)
+    // if (userbots) {
+    //   setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
+    // }
+    //setDateReg(worker.createdAt)
 
     //setBlockW(worker.blockW)
     setBlock18(worker.block18)
@@ -599,30 +633,12 @@ const Client = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        let str_spec = ''
-        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-        })
-
-        let str_skill = ''
-        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-        })
-
-        let str_merch = ''
-        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
-          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-        })
 
         let str_komteg = ''
         worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
           str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
         })
 
-        let str_komteg2 = ''
-        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
-        })
 
         let str_company = ''
         worker.company && JSON.parse(worker.company).map((item, index)=> {
@@ -632,39 +648,21 @@ const Client = () => {
         let str_comment = ''
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
-        })
-
-        let str_comment2 = ''
-        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-        })
-        
+        })     
 
 				const newWorker = {
           id: worker.id,
           fio: worker.fio,
           chatId: worker.chatId, 
           phone: worker.phone, 
-          phone2: worker.phone2,
-          speclist: str_spec,
           city: worker.city, 
-          skill: str_skill,
-          promo: worker.promoId === '0' ? '' : worker.promoId, 
           rank: worker.rank, 
-          merch: str_merch,  
           company: str_company, 
           comteg: str_komteg, 
-          comteg2: str_komteg, 
           comment: str_comment, 
-          comment2: str_comment2, 
           age: worker.age, 
           reyting: worker.reyting, 
-          inn: worker.inn, 
-          passport: worker.passport, 
           profile: worker.profile, 
-          dogovor: worker.dogovor ? '🟢' : '🔴', 
-          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
-          passportScan: worker.passportScan, 
           email: worker.email, 
           //blockW: worker.blockW,
           block18: worker.block18,
@@ -1195,6 +1193,56 @@ const Client = () => {
                                       style={{minHeight: '40px !important'}}
                                     />
                                   </div>
+                                  {/* <div className="text-field"> 
+                                  <Autocomplete
+                                        sx={{
+                                            display: 'inline-block',
+                                            '& input': {zIndex: '25',
+                                              width: '100%',
+                                              border: 'none',
+                                              height: '40px',
+                                              padding: '5px 4px',
+                                              fontFamily: 'inherit',
+                                              fontSize: '14px',
+                                              fontWeight: '700',
+                                              lineHeight: '1.5',
+                                              textAlign: 'center',
+                                              color: '#ffffff',
+                                              backgroundColor: 'transparent',
+                                            }
+                                        }}
+                                        className="text-field__input" 
+                                        openOnFocus
+                                        id="custom-input-demo"
+                                        options={companysData}
+                                        style={{width: '100%', padding: '0'}}
+                                        onInputChange={(e)=>onChangeCompany(e)}
+                                        //onInputChange={(e)=>console.log(e.target.value)}
+                                        isOptionEqualToValue={(option, value) => option.value === value.value}
+                                        onChange={(event, newValue) => {
+                                            if (newValue && newValue.length) {
+                                                const comp = companysAll.find(item=> item.title === newValue)
+                                                console.log("comp: ", comp)
+                                                if (comp) {
+                                                  setCompanyName(comp.title)
+                                                  setCompany(comp.id)
+                                                  setProfile(comp.office)
+                                                }
+                                            }  
+                                        }}
+                                        value={companyName}
+                                        inputValue={companyName}
+                                        renderInput={(params) => (
+                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                            <input 
+                                                className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder=''
+                                            />
+                                        </div>
+                                        )}
+                                      />
+                                  </div> */}
 
                                   <label className='title-label'>Должность</label>
                                   <div className="text-field"> 
