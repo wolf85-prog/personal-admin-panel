@@ -105,6 +105,12 @@ const Specialist = () => {
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
 
+  const [starActive1, setStarActive1] = useState(true)
+  const [starActive2, setStarActive2] = useState(true)
+  const [starActive3, setStarActive3] = useState(true)
+  const [starActive4, setStarActive4] = useState(false)
+  const [starActive5, setStarActive5] = useState(false)
+
   const [id, setId] = useState('');
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
@@ -1161,8 +1167,8 @@ const Specialist = () => {
                                 
                               )
                               :
-                              <div style={{position: 'relative', height: '765px', display: 'flex', flexDirection: 'row'}}>
-                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
+                              <div style={{position: 'relative', height: '665px', display: 'flex', flexDirection: 'row'}}>
+                                <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
                                   :
@@ -1192,11 +1198,11 @@ const Specialist = () => {
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
                                         :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
-                                          <img className='star-icon' src={StarActive} alt='' /> 
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive1(!starActive1)} src={starActive1 ? StarActive : Star} alt='' /> 
+                                          <img className='star-icon' onClick={()=>setStarActive2(!starActive2)} src={starActive2 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive3(!starActive3)} src={starActive3 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive4(!starActive4)} src={starActive4 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive5(!starActive5)} src={starActive5 ? StarActive : Star} alt='' />
                                         </div>
                                         }
                                       </div>
@@ -1215,8 +1221,40 @@ const Specialist = () => {
                                   <label className='title-label'>ID</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={''} style={{width: '250px'}}/>
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={id} style={{width: '250px'}}/>
                                     </div>
+                                  </div> 
+
+                                  <label className='title-label'>Telegram</label>
+                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
+                                      alt="" 
+                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      pattern="[0-9]*"
+                                      name="telegram" 
+                                      id="telegram" 
+                                      value={telegram} 
+                                      onChange={handleTg} 
+                                      style={{width: '250px'}}
+                                    />
+                                  </div>
+
+                                  {/* ник */}
+                                  <label className='title-label'>Никнейм</label>
+                                  <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(nik)}} 
+                                      alt="" 
+                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                    />
+                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
                                   <label className='title-label'>Трудоустройство</label>
@@ -1227,22 +1265,6 @@ const Specialist = () => {
                                         </div> 
                                       </div>
 
-                                   
-                                  <div style={{position:'relative'}}>
-                                    <label className='title-label'>Паспорт</label>
-                                    <div className="text-field" style={{marginBottom: '0px'}}>
-                                      <textarea 
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="passport" 
-                                        id="passport" 
-                                        value={passport} 
-                                        onChange={(e) => setPassport(e.target.value)} 
-                                        style={{resize: 'none', width: '250px', height: '270px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
-                                    </div> 
-                                    <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
-                                  </div>
-                                  
                                 </div>
                                   <img src={imgBlock18} className="block-img"  width={50} alt='' style={{position: 'absolute', top: '0px', left: '195px', opacity: block18 ? '1' : '0' }}/>                                 
                                   <div className="menu-content-block">
@@ -1340,27 +1362,27 @@ const Specialist = () => {
                                         onChange={changeSpec}
                                       />
                                   </div>
-
-                                  <label className='title-label'>Комтеги</label>
+                                  
+                                  <label className='title-label'>Навык</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        tags={comteg}
-                                        setTags={setComteg}
-                                        options={comtegs}
-                                        //onChange={changeSpec}
+                                        tags={skill}
+                                        setTags={setSkill}
+                                        options={skills}
+                                        onChange={changeSpec}
                                       />
                                   </div>
 
-                                  <label className='title-label'>Комментарии</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment" 
-                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
-                                    />
-                                  </div> 
+                                  <label className='title-label'>Мерч</label>
+                                  <div className="text-field"> 
+                                      <MyDropdown2
+                                        tags={merch}
+                                        setTags={setMerch}
+                                        options={merchData}
+                                        onChange={changeSpec}
+                                      />
+                                  </div>
+                                  
                                   
                                 </div>
 {/* 3 */}
@@ -1394,25 +1416,41 @@ const Specialist = () => {
                                       <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
                                     </div>
                                   </div>
-                                  
-                                  <label className='title-label'>Навык</label>
+
+                                  <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
                                       <MyDropdown2
-                                        tags={skill}
-                                        setTags={setSkill}
-                                        options={skills}
-                                        onChange={changeSpec}
+                                        tags={comteg}
+                                        setTags={setComteg}
+                                        options={comtegs}
+                                        //onChange={changeSpec}
                                       />
                                   </div>
 
-                                  <label className='title-label'>Мерч</label>
-                                  <div className="text-field"> 
-                                      <MyDropdown2
-                                        tags={merch}
-                                        setTags={setMerch}
-                                        options={merchData}
-                                        onChange={changeSpec}
-                                      />
+                                  <label className='title-label'>Комментарии</label>
+                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <textarea 
+                                      className="text-field__input" 
+                                      type="text" 
+                                      name="comment" 
+                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
+                                      style={{resize: 'none', width: '320px', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                    />
+                                  </div> 
+                                  
+                                  <div style={{position:'relative'}}>
+                                    <label className='title-label'>Паспорт</label>
+                                    <div className="text-field" style={{marginBottom: '0px'}}>
+                                      <textarea 
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="passport" 
+                                        id="passport" 
+                                        value={passport} 
+                                        onChange={(e) => setPassport(e.target.value)} 
+                                        style={{resize: 'none', width: '320px', height: '270px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
+                                    </div> 
+                                    <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
 
                                 </div>
@@ -1447,39 +1485,9 @@ const Specialist = () => {
                                     
                                   </div> 
 
-                                  <label className='title-label'>Telegram</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave2(true)} onMouseOut={()=>setShowSave2(false)}>
-                                    <img 
-                                      src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(telegram)}} 
-                                      alt="" 
-                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    />
-                                    <input 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      pattern="[0-9]*"
-                                      name="telegram" 
-                                      id="telegram" 
-                                      value={telegram} 
-                                      onChange={handleTg} 
-                                      style={{width: '250px'}}
-                                    />
-                                  </div>
+                                  
 
-                                  {/* ник */}
-                                  <label className='title-label'>Никнейм</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
-                                    <img 
-                                      src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(nik)}} 
-                                      alt="" 
-                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    />
-                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
-                                  </div> 
-
-                                  <label className='title-label'>ИНН</label>
+                                  {/* <label className='title-label'>ИНН</label>
                                   <div className="text-field">
                                     <InputMask
                                         className="text-field__input" 
@@ -1494,7 +1502,7 @@ const Specialist = () => {
                                         placeholder=''
                                     >
                                     </InputMask>
-                                  </div> 
+                                  </div>  */}
 
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
@@ -1511,7 +1519,7 @@ const Specialist = () => {
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '170px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '250px', height: '336px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 

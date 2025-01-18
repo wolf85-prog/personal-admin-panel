@@ -65,7 +65,7 @@ import specOnlyData from 'src/data/specOnlyData';
 import comtegs from 'src/data/comtegs';
 import skills from 'src/data/skills';
 import merchData from 'src/data/merchData';
-import companys from 'src/data/companys';
+//import companys from 'src/data/companys';
 import cities from 'src/data/cities';
 import sferaData from 'src/data/sfera';
 import dolgnostData from 'src/data/dolgnostData';
@@ -77,10 +77,12 @@ const Client = () => {
   //console.log("workerId: ", workerId)
 
   const { userId, clientAll, setClientAll, client, setClient,
-    clientsCount, setClientsCount } = useUsersContext();
+    clientsCount, setClientsCount, companysAll } = useUsersContext();
 
   const [clientCount, setClientCount] = useState([]);
   const [filterAll, setFilterAll] = useState([]);
+
+  const [companyData, setCompanyData] = useState([]);
 
   const [userbots, setUserbots] = useState([]);
 
@@ -219,6 +221,17 @@ const Client = () => {
     })
     const newSorted = [...one, ...city]
     setSortedCities(newSorted)
+
+    let arrCompany = []
+    //компании
+    companysAll.map((item, index)=> {
+      const obj = {
+        label: item.title,
+        value: index+1
+      }
+      arrCompany.push(obj)
+    })
+    setCompanyData(arrCompany)
 
     const fetchData = async() => {
 
@@ -747,15 +760,6 @@ const Client = () => {
 
     console.log("specArr: ", specArr)
 
-    let skillArr = []
-    let strSkill = ''
-    skill.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strSkill = strSkill + item + (index+1 !== skill.length ? ', ' : '')
-      skillArr.push(obj)
-    })
 
     let companyArr = []
     let strCompany = ''
@@ -767,15 +771,6 @@ const Client = () => {
       companyArr.push(obj)
     })
 
-    let merchArr = []
-    let strMerch = ''
-    merch.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strMerch = strMerch + item + (index+1 !== merch.length ? ', ' : '')
-      merchArr.push(obj)
-    })
 
     let comtegArr = []
     let strComteg = ''
@@ -787,15 +782,17 @@ const Client = () => {
       comtegArr.push(obj)
     })
 
-    let comtegArr2 = []
-    let strComteg2 = ''
-    comteg2.map((item, index)=> {
+
+    let sferaArr = []
+    let strSfera = ''
+    sfera.map((item, index)=> {
       const obj = {
         name: item,
       }
-      strComteg2 = strComteg2 + item + (index+1 !== comteg2.length ? ', ' : '')
-      comtegArr2.push(obj)
+      strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
+      sferaArr.push(obj)
     })
+
 
     //комментарии 1
     let commentArr = []
@@ -806,15 +803,6 @@ const Client = () => {
     strComment = comment
     commentArr.push(obj1)
 
-    //комментарии 2
-    let commentArr2 = []
-    let strComment2 = ''
-    const obj2 = {
-       content: comment2,
-    }
-    strComment2 = comment2
-    commentArr2.push(obj2)
-
 
     const saveData = {
       fio,
@@ -822,22 +810,16 @@ const Client = () => {
       chatId: telegram,
       city: city,
       age: age ? age+'-01-01' : '', 
-      speclist: JSON.stringify(specArr),
       company: JSON.stringify(companyArr),
-      skill: JSON.stringify(skillArr),
-      merch: JSON.stringify(merchArr),
       comteg: JSON.stringify(comtegArr),
-      comteg2: JSON.stringify(comtegArr2),
       comment: JSON.stringify(commentArr),
-      comment2: JSON.stringify(commentArr2),
       profile,
       inn,
       email,
-      promo,
-      passport,
-      //blockW,
       block18,
-      krest
+      krest,
+      dolgnost,
+      sfera: JSON.stringify(sferaArr),
     }
     console.log(saveData)
 
@@ -852,23 +834,17 @@ const Client = () => {
         phone, 
         city: city, 
         age: age ? age+'-01-01' : '', 
-        speclist: strSpec,
         company: strCompany,
-        skill: strSkill,
-        merch: strMerch,
         comteg: strComteg,
-        comteg2: strComteg2,
         comment: strComment,
-        comment2: strComment2,
         chatId: telegram,
         profile,
         inn,
         email,
-        promo,
-        passport,
-        //blockW,
         block18,
         krest,
+        dolgnost,
+        sfera: strSfera,
       };
 
       console.log("update user: ", usersCopy[userIndex])
@@ -1061,26 +1037,15 @@ const Client = () => {
                                         <CTableHeaderCell className='myfio-th widthSpace' onClick={onSortFio}>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthTg' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthPhone'>Телефон</CTableHeaderCell> 
-                                        <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>   
                                         <CTableHeaderCell className='my-th widthSpace'>Год</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell>                         
-                                        <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Промокод</CTableHeaderCell>                                       
-                                        <CTableHeaderCell className='my-th widthSpace'>Мерч</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Прокатная компания</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Компания</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комтег №2</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии №2</CTableHeaderCell>                                        
                                         <CTableHeaderCell className='my-th widthSpace'>Рейтинг</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>ИНН</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Паспорт</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Профиль</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Д</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>С</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Паспорт [скан]</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Почта</CTableHeaderCell>
                                       </CTableRow>
                                     </CTableHead>
@@ -1099,9 +1064,6 @@ const Client = () => {
                                           <CTableDataCell className="text-center">
                                             {item.phone}
                                           </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.speclist ? (item.speclist.length > 30 ? item.speclist.substr(0, 30) + '...' : item.speclist) : ''}
-                                          </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.city ? (item.city.length > 30 ? item.city.substr(0, 30) + '...' : item.city) : ''}
                                           </CTableDataCell>
@@ -1112,32 +1074,14 @@ const Client = () => {
                                           {item.rank}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.phone2}
-                                          </CTableDataCell> 
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.skill}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.promo}
-                                          </CTableDataCell>                                         
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.merch}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
                                           {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.comteg ? (item.comteg.length > 30 ? item.comteg.substr(0, 30) + '...' : item.comteg) : ''}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg2 ? (item.comteg2.length > 30 ? item.comteg2.substr(0, 30) + '...' : item.comteg2) : ''}
-                                          </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.comment2 ? (item.comment2.length > 30 ? item.comment2.substr(0, 30) + '...' : item.comment2) : ''}
-                                          </CTableDataCell>                                         
+                                          </CTableDataCell>                                       
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.reyting}
                                           </CTableDataCell>
@@ -1145,19 +1089,7 @@ const Client = () => {
                                           {item.inn}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.passport ? (item.passport.length > 30 ? item.passport.substr(0, 30) + '...' : item.passport) : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.profile ? (item.profile.length > 30 ? item.profile.substr(0, 30) + '...' : item.profile) : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.dogovor}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.samozanjatost}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.passportScan}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.email}
@@ -1215,7 +1147,7 @@ const Client = () => {
                                   <label className='title-label'>ID</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={''} style={{width: '250px'}}/>
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={id} style={{width: '250px'}}/>
                                     </div>
                                   </div> 
 
@@ -1361,7 +1293,7 @@ const Client = () => {
                                     <MyDropdown3
                                       tags={company}
                                       setTags={setCompany}
-                                      options={companys}
+                                      options={companyData}
                                       style={{minHeight: '40px !important'}}
                                     />
                                   </div>
@@ -1386,7 +1318,11 @@ const Client = () => {
                                       />
                                   </div>
 
-                                  
+                                  {/* email */}
+                                  <label className='title-label'>Почта</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
+                                  </div> 
 
                                   {/* <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
@@ -1442,21 +1378,14 @@ const Client = () => {
                                     </div>
                                   </div>
 
-                                  {/* email */}
-                                  <label className='title-label'>Почта</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
-                                  </div> 
-                            
-
                                   <label className='title-label'>Комтег</label>
                                   <div className="text-field"> 
-                                      <MyDropdown2
+                                      <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={comtegs}
                                         onChange={changeSpec}
-                                        heightStyle={'40px'}
+                                        style={{minHeight: '40px !important'}}
                                       />
                                   </div>
 
@@ -1468,7 +1397,7 @@ const Client = () => {
                                       name="comment" 
                                       id="comment" 
                                       value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                      style={{resize: 'none', width: '320px', height: '210px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
