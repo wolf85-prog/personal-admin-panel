@@ -426,7 +426,7 @@ const ProfileCompany = () => {
                                       
                               <CSpinner/> :
 
-                              <div style={{position: 'relative', height: showManagers ? 'auto' : '456px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: showManagers ? 'auto' : '398px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -476,7 +476,7 @@ const ProfileCompany = () => {
                                       </div>
                                   </div> */}
 
-                                  <label className='title-label' style={{marginTop: '56px'}}>ID</label>
+                                  <label className='title-label'>ID</label>
                                   <div className="text-field" >
                                     <input disabled={true} className="text-field__input" type="text" name="companyId" id="companyId" value={id} style={{width: '250px', marginRight: '25px'}}/>
                                   </div>
@@ -514,7 +514,7 @@ const ProfileCompany = () => {
 {/* 2 */}
                                 <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
                                   {/* Город */}
-                                  <label className='title-label' style={{position: 'absolute', top: '55px', marginLeft: '10%'}}>Город</label>
+                                  <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
                                       <Autocomplete
                                               sx={{
@@ -580,7 +580,7 @@ const ProfileCompany = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton onClick={()=>setShowManagers(!showManagers)} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
+                                  <CButton onClick={()=>setShowManagers(!showManagers)} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
@@ -643,46 +643,73 @@ const ProfileCompany = () => {
                                   </div>
 
                                   {/* Договор */}
-                                  <label className='title-label'>Договор</label>
+                                  {/* <label className='title-label'>Договор</label>
                                   <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Договор
                                     </span>
-                                  </CButton> 
+                                  </CButton>  */}
                                     
                                   
                                 </div>
 
 {/* 3 */}
                                 <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
-                                  <div className="uley-line" style={{left: '645px', width: '85px'}}></div>
-                                  <div className="uley-line" style={{left: '810px', width: '85px'}}></div>
-                                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                    
-                                    {/* проекты за месяц */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value='' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
-                                    {/* проекты всего */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value='' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
+                                  {/* phone */}
+                                  <label className='title-label'>Телефон</label>
+                                  <div className="text-field" >
+                                      {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{width: '300px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={!blockProfile}
+                                          maskChar=""
+                                          onChange={(e) => setBugalterPhone(e.target.value)} 
+                                          value={bugalterPhone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>    
+                                  </div> 
 
-                                    {/* проекты за месяц */}
-                                    <div className="text-field" >
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value='' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
-                                    {/* проекты всего */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value='' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
-                                  </div>
-                                  
+                                  {/* email */}
+                                  <label className='title-label'>Почта</label>
+                                  <div className="text-field">
+                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '300px'}}/>
+                                  </div> 
+
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
                                     <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '300px'}}/>
                                   </div>
+
+                                  <div style={{position: 'relative'}}>
+                                    <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '24px'}}>                                   
+                                      {/* проекты за месяц */}
+                                      <div style={{marginRight: '10px'}}>
+                                        <label className='title-label'>За месяц</label>
+                                        <div className="text-field">
+                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '100%', marginRight: '8px'}}/>
+                                        </div>
+                                      </div>
+                                      {/* проекты всего */}
+                                      <div> 
+                                        <label className='title-label'>Всего</label>
+                                        <div className="text-field">
+                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{width: '100%', marginRight: '8px'}}/>
+                                        </div>
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                                  
+                                  
+                                  
       
 
                                   {/* + добавить менеджера */}
@@ -715,9 +742,9 @@ const ProfileCompany = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
 
-                                  <label className='title-label'>Бухгалтерия</label>
+                                  {/* <label className='title-label'>Бухгалтерия</label>
                                   <div className="text-field">
                                     <input 
                                       className="text-field__input" 
@@ -728,40 +755,15 @@ const ProfileCompany = () => {
                                       onChange={(e)=>setBugalterFio(e.target.value)} 
                                       style={{width: '300px'}}
                                     />
-                                  </div>
-
-                                  {/* phone */}
-                                  <label className='title-label'>Телефон</label>
-                                  <div className="text-field" >
-                                      {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
-                                      <InputMask
-                                          className="text-field__input" 
-                                          style={{width: '300px'}}
-                                          type="text" 
-                                          name="phone" 
-                                          id="phone"
-                                          mask="+7 (999) 999-99-99"
-                                          disabled={!blockProfile}
-                                          maskChar=""
-                                          onChange={(e) => setBugalterPhone(e.target.value)} 
-                                          value={bugalterPhone}
-                                          placeholder=''
-                                      >
-                                      </InputMask>    
-                                  </div> 
-
-                                  {/* email */}
-                                  <label className='title-label'>Почта</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '300px'}}/>
-                                  </div> 
-
+                                  </div> */}
+                                  
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '300px', height: showManagers ? '533px' : '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '300px', height: showManagers ? '533px' : '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
+                                  
                                 </div>
 
 

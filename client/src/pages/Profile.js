@@ -164,9 +164,10 @@ const Profile = () => {
             console.log("file:", file)
             const data = new FormData();
             data.append("name", file.name);
-            data.append("avatar", file);
-            
-            let response = await uploadAvatar(data) //distribFile(data) // uploadFile(data)
+            data.append("photo", file);
+            console.log("data: ", data)
+
+            let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
             console.log("response: ", response.data.path)
   
             setImage(response.data.path.split('.team')[1]);
@@ -313,7 +314,7 @@ const Profile = () => {
                                       type="file"
                                       id="formFile" 
                                       accept="image/*,image/jpeg" 
-                                      name="avatar"
+                                      name="photo"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
                                     />
@@ -351,7 +352,7 @@ const Profile = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={managerProfile?.fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '550px'}}></input>
+                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={managerProfile?.fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '650px'}}></input>
                                     </div>
                                     <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
@@ -501,7 +502,7 @@ const Profile = () => {
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '100%', height: '295px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: '291px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
