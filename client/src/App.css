@@ -809,5 +809,23 @@ th.widthCompany {
     color: white; 
   }
 
+
+
+  .password {
+    position: relative;
+  }
+  .password-control {
+    position: absolute;
+    top: 11px;
+    right: 6px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    /* background: url('./view.svg') 0 0 no-repeat; */
+  }
+  .password-control.view {
+    /* background: url(no-view) 0 0 no-repeat; */
+  }
+
   
   

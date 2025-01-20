@@ -189,6 +189,7 @@ const Login = observer(() => {
                                       value={password}
                                       onChange={e => setPassword(e.target.value)}
                                     />
+                                    <a href="#" className="password-control"></a>
                                   </CInputGroup>
                                   <CInputGroup className="mb-4">
                                     <CInputGroupText>
