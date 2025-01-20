@@ -17,6 +17,7 @@ import {
     ESTIMATE_ROUTE,
     PARTNER_ROUTE,
     DOCUMENT_ROUTE,
+    DOCUMENT_COMPLECT_ROUTE
 
 } from "./utils/consts";
 
@@ -25,13 +26,18 @@ const Profile = React.lazy(() => import('./pages/Profile'))
 const ProfileCompany = React.lazy(() => import('./pages/ProfileCompany'))
 const Projects = React.lazy(() => import('./pages/Projects'))
 
-const Air = React.lazy(() => import('./pages/Air'))
+// const Air = React.lazy(() => import('./pages/Air'))
+const Air = React.lazy(() => import('./views/projects/onair/OnAir'))
 
 const Specialist = React.lazy(() => import('./pages/Specialist'))
 const Companys = React.lazy(() => import('./pages/Companys'))
 const Platforms = React.lazy(() => import('./pages/Platforms'))
 
 const PayRate = React.lazy(() => import('./views/estimates/PayRate'))
+const Companies = React.lazy(() => import('./views/companies/Companies'))
+const Document = React.lazy(() => import('./views/documents/Document'))
+const DocumentsGenerator = React.lazy(() => import('./views/documents/DocumentsGenerator'))
+
 
 const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
 const ChatManager = React.lazy(() => import('./pages/ChatManager'))
@@ -62,4 +68,10 @@ export const authRoutes = [
     { path: PROFILECOMPANY_ROUTE, name: 'Профиль компании', Component: ProfileCompany },
     { path: SETTINGS_ROUTE, name: 'Настройки', Component: Settings },
     { path: PAY_RATE_ROUTE, name: 'Ставки', Component: PayRate },
+
+    { path: PARTNER_ROUTE, name: 'Компаний', Component: Companies },
+    { path: DOCUMENT_ROUTE, name: 'Докумненты', Component: DocumentsGenerator },
+    { path: DOCUMENT_COMPLECT_ROUTE, name: 'Комплекты документов', Component: Document },
+    
+
 ]

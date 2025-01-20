@@ -35,3 +35,5 @@ export const PAY_RATE_ROUTE = '/rate'
 export const ESTIMATE_ROUTE = '/estimate'
 export const PARTNER_ROUTE = '/partner'
 export const DOCUMENT_ROUTE = '/document'
+export const DOCUMENT_COMPLECT_ROUTE = '/document/complect'
+
