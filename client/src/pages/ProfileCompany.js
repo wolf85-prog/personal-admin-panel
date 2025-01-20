@@ -453,7 +453,7 @@ const ProfileCompany = () => {
                                     />
                                   </div>
 
-                                  <div className="menu-reyting" style={{marginBottom: '16px'}}>
+                                  {/* <div className="menu-reyting" style={{marginBottom: '16px'}}>
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
@@ -474,9 +474,9 @@ const ProfileCompany = () => {
                                           <span>Изменить рейтинг</span>
                                           <span style={{cursor: 'pointer'}}>Рейтинг</span>
                                       </div>
-                                  </div>
+                                  </div> */}
 
-                                  <label className='title-label'>ID</label>
+                                  <label className='title-label' style={{marginTop: '56px'}}>ID</label>
                                   <div className="text-field" >
                                     <input disabled={true} className="text-field__input" type="text" name="companyId" id="companyId" value={id} style={{width: '250px', marginRight: '25px'}}/>
                                   </div>
@@ -710,27 +710,6 @@ const ProfileCompany = () => {
                                     </div>
                                   ))}
                                   </div>
-
-                                  <label className='title-label'>Комтеги</label>
-                                  <div className="text-field"> 
-                                      <DropdownClient
-                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px', }}
-                                        options={comtegs}
-                                        tags={comteg}
-                                        setTags={setComteg}
-                                      />
-                                  </div>
-
-                                  <label className='title-label'>Комментарии</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <textarea 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="comment" 
-                                      id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '300px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
-                                    />
-                                  </div> 
 
 
                                 </div>
