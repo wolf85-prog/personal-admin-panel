@@ -176,9 +176,35 @@ const ProfileCompany = () => {
  
       const result = await getCompanyProfId(userId)
       console.log("Company: ", result)
+
+
+      let str_komteg = ''
+      result.comteg && JSON.parse(result.comteg).map((item, index)=> {
+          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(result.comteg).length ? ', ' : '')
+      })
+
+      let str_sfera = ''
+      result.comteg && JSON.parse(result.comteg).map((item, index)=> {
+        str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(result.comteg).length ? ', ' : '')
+      })
+
+
       setId(result?.id)
       setTitle(result?.title)
       setCity(result.city ? result.city : '')
+
+      setOffice(result.office ? result.office : '')
+      setSklad(result.sklad ? result.sklad : '')
+      setManagers(result.managers ? result.managers.split(', ') : [])
+      setManagersObj(result.managersObj ? result.managersObj.split(', ') : [])
+      setBugalterFio(result.bugalterFio ? result.bugalterFio : '')
+      setBugalterEmail(result.bugalterEmail ? result.bugalterEmail : '')
+      setBugalterPhone(result.bugalterPhone ? result.bugalterPhone : '')
+      setProfile(result.profile)
+      setSfera(result.sfera ? str_sfera.split(', ') : [])
+      setComteg(result.comteg ? str_komteg.split(', ') : [])
+      setComment(result.comment)
+      setShowBlacklist(result.sfera ? result.sfera.includes('Blacklist') : false)
 
       setLoading(false)
     }
@@ -279,13 +305,13 @@ const ProfileCompany = () => {
   
   
       //комментарии 
-      let commentArr = []
-      let strComment = ''
-      const obj1 = {
-         content: comment,
-      }
-      strComment = comment
-      commentArr.push(obj1)
+      // let commentArr = []
+      // let strComment = ''
+      // const obj1 = {
+      //    content: comment,
+      // }
+      // strComment = comment
+      // commentArr.push(obj1)
 
   
       const saveData = { 
@@ -294,7 +320,7 @@ const ProfileCompany = () => {
         city,
         office,
         sklad,
-        comment: JSON.stringify(commentArr),
+        comment,
         //projects: JSON.stringify(projectsArr),
         managers: JSON.stringify(managersObjArr),
         dogovorDate, 
@@ -468,7 +494,7 @@ const ProfileCompany = () => {
 
                               <div style={{position: 'relative', height: showManagers ? 'auto' : '456px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
-                                <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
+                                <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
                                   :

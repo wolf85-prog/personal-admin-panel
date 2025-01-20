@@ -56,7 +56,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { array } from 'prop-types';
 
-import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
+import DropdownClient from 'src/components/DropdownClient/DropdownClient';
 
 import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
@@ -287,6 +287,8 @@ const Client = () => {
           block18: worker.block18,
           krest: worker.krest,
           createdAt: worker.createdAt,
+          dolgnost: worker.dolgnost,
+          sfera: worker.sfera,
         }
         arrWorkers.push(newWorker)
 
@@ -393,35 +395,35 @@ const Client = () => {
 
     const currentYear = new Date().getFullYear()
 
-    if (worker.reyting === 1) {
+    if (worker.reyting === '1') {
       setStarActive1(true)
       setStarActive2(false)
       setStarActive3(false)
       setStarActive4(false)
       setStarActive5(false)
     } 
-    if (worker.reyting === 2) {
+    if (worker.reyting === '2') {
       setStarActive1(true)
       setStarActive2(true)
       setStarActive3(false)
       setStarActive4(false)
       setStarActive5(false)
     } 
-    if (worker.reyting === 3) {
+    if (worker.reyting === '3') {
       setStarActive1(true)
       setStarActive2(true)
       setStarActive3(true)
       setStarActive4(false)
       setStarActive5(false)
     }
-    if (worker.reyting === 4) {
+    if (worker.reyting === '4') {
       setStarActive1(true)
       setStarActive2(true)
       setStarActive3(true)
       setStarActive4(true)
       setStarActive5(false)
     }
-    if (worker.reyting === 5) {
+    if (worker.reyting === '5') {
       setStarActive1(true)
       setStarActive2(true)
       setStarActive3(true)
@@ -440,11 +442,10 @@ const Client = () => {
     setReyting(worker.reyting === null ? '' : worker.reyting)
 
     const compTitle = companysAll.find(item=> item.id.toString() === worker.company)
-    setCompanyName(compTitle?.title ? compTitle?.title : '')
+    setCompanyName(compTitle?.title ? {name: worker.company} : {name: ''})
+    setCompany(worker.company ?  worker.company : '')
 
-    //setCompany(worker.company ? worker.company.split(',') : [])
-
-    //setComteg(worker.comteg ? worker.comteg.split(',') : [])
+    setComteg(worker.comteg ? worker.comteg : '')
     setEmail(worker.email)
     setComment(worker.comment)
     setProfile(worker.profile)
@@ -562,8 +563,8 @@ const Client = () => {
       chatId: telegram,
       city: city,
       age: age ? age+'-01-01' : '', 
-      company: companysAll.find((item)=>item.title === companyName)?.id,
-      comteg: '', //JSON.stringify(comtegArr),
+      company: company, //companysAll.find((item)=>item.title === companyName)?.id,
+      comteg, //JSON.stringify(comtegArr),
       comment: JSON.stringify(commentArr),
       profile,
       reyting,
@@ -586,8 +587,8 @@ const Client = () => {
         phone, 
         city: city, 
         age: age ? age+'-01-01' : '', 
-        company: '', //strCompany,
-        comteg: '', //strComteg,
+        company, //strCompany,
+        comteg, //strComteg,
         comment: strComment,
         chatId: telegram,
         profile,
@@ -1025,7 +1026,7 @@ const Client = () => {
                                   <label className='title-label'>ID</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input disabled={false} className="text-field__input" type="text" name="dateReg" id="dateReg" value={clientId} onChange={handleId} style={{width: '250px'}}/>
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={id}  style={{width: '250px'}}/>
                                     </div>
                                   </div> 
 
@@ -1125,17 +1126,11 @@ const Client = () => {
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                    {/* <MyDropdown3
+                                    <DropdownClient
+                                      style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                      options={companyData}
                                       tags={company}
                                       setTags={setCompany}
-                                      options={companyData}
-                                      style={{minHeight: '40px !important'}}
-                                    /> */}
-                                    <MyDropdown4
-                                      style={{backgroundColor: '#131c21'}}
-                                      options={companyData}
-                                      selected={company}
-                                      setSelected={setCompany}
                                     />
                                   </div>
                           
@@ -1189,11 +1184,11 @@ const Client = () => {
                                         onChange={changeSpec}
                                         style={{minHeight: '40px !important'}}
                                       /> */}
-                                      <MyDropdown4
-                                        style={{backgroundColor: '#131c21'}}
+                                      <DropdownClient
+                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px', }}
                                         options={comtegs}
-                                        selected={comteg}
-                                        setSelected={setComteg}
+                                        tags={comteg}
+                                        setTags={setComteg}
                                       />
                                   </div>
 

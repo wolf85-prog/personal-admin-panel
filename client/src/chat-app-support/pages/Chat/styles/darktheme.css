@@ -219,7 +219,7 @@
     color: rgb(223, 51, 51);
 }
 
-.dropdown-menu {
+/* .dropdown-menu {
     --bs-dropdown-zindex: 1000;
     --bs-dropdown-min-width: 10rem;
     --bs-dropdown-padding-x: 0;
@@ -269,4 +269,4 @@
     padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
     text-align: inherit;
     width: 100%;
-}
+} */
