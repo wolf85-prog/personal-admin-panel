@@ -110,33 +110,34 @@ const PayRate = () => {
   const { mutate: mutateSpeciality } = useMutation({
     mutationFn: updateSpeciality,
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['rates'] })
+      return await queryClient.invalidateQueries(['groups','rates'] )
     },
   })
   const { mutate: mutateGroup } = useMutation({
-    mutationFn: createSpecialityGroup,
+    mutationFn: createSpecialityGroup,   
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['groups', 'rates'] })
+      return await queryClient.invalidateQueries(['groups', 'rates'])
+      
     },
   })
 
   const { mutate: updateGroup } = useMutation({
     mutationFn: updateSpecialityGroup,
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['groups', 'rates'] })
+      return await queryClient.invalidateQueries(['groups', 'rates'])
     },
   })
 
   const { mutate: mutatePaument } = useMutation({
     mutationFn: updateRateItem,
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['rates'] })
+      return await queryClient.invalidateQueries( ['groups','rates'] )
     },
   })
   const { mutate: mutateHours } = useMutation({
     mutationFn: updateRateHour,
     onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ['rates'] })
+      return await queryClient.invalidateQueries(['groups','rates'])
     },
   })
 
