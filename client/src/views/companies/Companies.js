@@ -1072,7 +1072,7 @@ const Companies = () => {
                                         }}
                                       >
                                         <Link
-                                          to={'/document/complect'}
+                                          to={'/complect'}
                                           state={{ complectId: document.id }}
                                           className="nav-link"
                                         >
