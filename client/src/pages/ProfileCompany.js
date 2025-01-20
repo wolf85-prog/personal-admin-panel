@@ -580,7 +580,7 @@ const ProfileCompany = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton onClick={()=>setShowManagers(!showManagers)} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
+                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>

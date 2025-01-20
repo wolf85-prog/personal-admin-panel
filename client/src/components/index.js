@@ -11,9 +11,11 @@ import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
 import Chart from './Chart'
 import Plan from './Plan'
+import AppMobileWarning from './AppMobileWarning'
 
 export {
   AppBreadcrumb,
+  AppMobileWarning,
   AppContent,
   AppFooter,
   AppHeader,

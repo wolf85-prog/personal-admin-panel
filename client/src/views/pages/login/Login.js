@@ -183,7 +183,7 @@ const Login = observer(() => {
                                       <CIcon icon={cilLockLocked} />
                                     </CInputGroupText>
                                     <CFormInput
-                                      type="password"
+                                      type="text"
                                       placeholder="Пароль"
                                       autoComplete="new-password"
                                       value={password}
@@ -196,7 +196,7 @@ const Login = observer(() => {
                                       <CIcon icon={cilLockLocked} />
                                     </CInputGroupText>
                                     <CFormInput
-                                      type="password"
+                                      type="text"
                                       placeholder="Повторить пароль"
                                       autoComplete="new-password"
                                       value={password2}

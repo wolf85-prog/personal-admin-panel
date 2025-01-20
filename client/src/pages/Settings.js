@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { CContainer, CSpinner } from '@coreui/react'
-import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { AppSidebar, AppFooter, AppHeader, AppMobileWarning } from '../components/index'
 
 import {
   CRow,

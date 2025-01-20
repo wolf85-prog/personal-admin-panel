@@ -52,6 +52,7 @@ import InputMask from 'react-input-mask';
 
 import Chart from './../components/Chart'
 import ChartBar from './../components/Chart2'
+import AppMobileWarning from 'src/components/AppMobileWarning'
 
 const Admin = () => {
 
@@ -138,169 +139,177 @@ const Admin = () => {
 
   return (
     <div className='dark-theme'>
-      <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-        <AppHeader tabs={tabhub}/>
-        <div className="body flex-grow-1 px-3">
-
-            <CContainer lg>
-              <Suspense fallback={<CSpinner color="primary" />}>
-
-              <>
-                <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100', width: '100px'}}/>
-                
-                <WidgetsDropdown2/>
-
-                {/* График Год */}
-                <CWidgetStatsA
-                  ref={grafik}
-                  className="mb-4 box"
-                  color="gray"
-                  value={<></>}
-                  title={new Date().getFullYear()}
-                  //action={}
-                  chart={
-                    <Chart 
-                      range={800}
-                      data={[
-                        { name: 'Январь', value: 0 },
-                        { name: 'Февраль', value: 100 },
-                        { name: 'Март', value: 0 },
-                        { name: 'Апрель', value: 50 },
-                        { name: 'Май', value: 10 },
-                        { name: 'Июнь', value: 0 },
-                        { name: 'Июль', value: 0 },
-                        { name: 'Август', value: 200 },
-                        { name: 'Сентябрь', value: 300 },
-                        { name: 'Октябрь', value: 0 },
-                        { name: 'Ноябрь', value: 150 },
-                        { name: 'Декабрь', value: 0 },
-                      ]}
-                      //data2={[]} 
-                      data2={
-                        []
-                      }
-                      width={widthGrafik} height={350} 
-                    />             
-                  }
-                />
-
-                <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
-
-{/*---------------------------------------- Renthub ------------------------------------  */} 
-                  <CCardBody id="Renthub">
-                          <CRow>
-                              <CCol md={6} style={{textAlign: 'left'}}>
-                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>
-                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Неделя</CButton>
-                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Месяц</CButton>
-                                <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Год</CButton>
-                              </CCol>
-                              <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
-                                <InputMask 
-                                  mask="99.99.9999"
-                                  value={periodDate1}
-                                  //onChange={changeDate1}
-                                >
-                                  {(inputProps) => <CFormInput 
-                                                    {...inputProps} 
-                                                    placeholder="01.01.2025" 
-                                                    disableUnderline
-                                                    aria-label="sm input example"
-                                                    style={{marginLeft: '10px'}}    
-                                                  />}
-                                </InputMask>
-
-                                <InputMask 
-                                  mask="99.99.9999"
-                                  value={periodDate2}
-                                  //onChange={changeDate2}
-                                >
-                                  {(inputProps) => <CFormInput 
-                                                    {...inputProps} 
-                                                    placeholder="31.12.2025" 
-                                                    disableUnderline
-                                                    aria-label="sm input example"
-                                                    style={{marginLeft: '10px'}} 
-                                                  />}
-                                </InputMask>                             
-                                            
-                                <CButton color="dark" style={{marginLeft: '10px'}}>Применить</CButton>
-                              </CCol>      
-                            </CRow>
-                            
-                            <br/>
-
-
-                            <CRow>
-                              <CCol xs={12} md={6} xl={6}>
-                                <CRow>
-                                  <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-info py-1 px-3">
-                                      <div className="text-medium-emphasis small">Новые клиенты</div>
-                                      <div className="fs-5 fw-semibold">{newClients.length}</div>
-                                    </div>
-                                  </CCol>
-                                  <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Постоянные клиенты</div>
-                                      <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
-                                    </div>
-                                  </CCol>
-                                </CRow>
-                              </CCol>
-
-                              <CCol xs={12} md={6} xl={6}>
-                                <CRow>
-                                  <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Просмотры</div>
-                                      <div className="fs-5 fw-semibold">-</div>
-                                    </div>
-                                  </CCol>
-                                  <CCol sm={6}>
-                                    <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                                      <div className="text-medium-emphasis small">Другое</div>
-                                      <div className="fs-5 fw-semibold">-</div>
-                                    </div>
-                                  </CCol>
-                                </CRow>
-
-                                <div className="mb-5"></div>
-
-                              </CCol>
-                            </CRow>
-
-
-                            <CTable align="middle" className="mb-0 border" hover responsive>
-                              <CTableHead className='table-dark'>
-                                <CTableRow>
-                                  <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
-                                  <CTableHeaderCell className="text-center" style={{width: '100px'}}>
-                                    <CIcon icon={cilPeople} />
-                                  </CTableHeaderCell>
-                                  <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
-                                  <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
-                                  <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
-                                  <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
-                                  <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
-                                  <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
-                                  <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
-                                </CTableRow>
-                              </CTableHead>
-                              <CTableBody>
-                                
-                              </CTableBody>
-                            </CTable>
-                          
-                  </CCardBody>
-                </CCard>
-              </>
-              </Suspense>
-            </CContainer>
-        </div>
-        <AppFooter />
+      {/* Мобильная версия */}
+      <div className="app__mobile-content">
+        <AppMobileWarning />
       </div>
+      {/* ПК */}
+      <div className="app-content">
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+          <AppHeader tabs={tabhub}/>
+          <div className="body flex-grow-1 px-3">
+
+              <CContainer lg>
+                <Suspense fallback={<CSpinner color="primary" />}>
+
+                <>
+                  <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100', width: '100px'}}/>
+                  
+                  <WidgetsDropdown2/>
+
+                  {/* График Год */}
+                  <CWidgetStatsA
+                    ref={grafik}
+                    className="mb-4 box"
+                    color="gray"
+                    value={<></>}
+                    title={new Date().getFullYear()}
+                    //action={}
+                    chart={
+                      <Chart 
+                        range={800}
+                        data={[
+                          { name: 'Январь', value: 0 },
+                          { name: 'Февраль', value: 100 },
+                          { name: 'Март', value: 0 },
+                          { name: 'Апрель', value: 50 },
+                          { name: 'Май', value: 10 },
+                          { name: 'Июнь', value: 0 },
+                          { name: 'Июль', value: 0 },
+                          { name: 'Август', value: 200 },
+                          { name: 'Сентябрь', value: 300 },
+                          { name: 'Октябрь', value: 0 },
+                          { name: 'Ноябрь', value: 150 },
+                          { name: 'Декабрь', value: 0 },
+                        ]}
+                        //data2={[]} 
+                        data2={
+                          []
+                        }
+                        width={widthGrafik} height={350} 
+                      />             
+                    }
+                  />
+
+                  <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
+
+  {/*---------------------------------------- Renthub ------------------------------------  */} 
+                    <CCardBody id="Renthub">
+                            <CRow>
+                                <CCol md={6} style={{textAlign: 'left'}}>
+                                  <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>
+                                  <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Неделя</CButton>
+                                  <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Месяц</CButton>
+                                  <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Год</CButton>
+                                </CCol>
+                                <CCol md={6} style={{textAlign: 'center', display: 'flex'}}>
+                                  <InputMask 
+                                    mask="99.99.9999"
+                                    value={periodDate1}
+                                    //onChange={changeDate1}
+                                  >
+                                    {(inputProps) => <CFormInput 
+                                                      {...inputProps} 
+                                                      placeholder="01.01.2025" 
+                                                      disableUnderline
+                                                      aria-label="sm input example"
+                                                      style={{marginLeft: '10px'}}    
+                                                    />}
+                                  </InputMask>
+
+                                  <InputMask 
+                                    mask="99.99.9999"
+                                    value={periodDate2}
+                                    //onChange={changeDate2}
+                                  >
+                                    {(inputProps) => <CFormInput 
+                                                      {...inputProps} 
+                                                      placeholder="31.12.2025" 
+                                                      disableUnderline
+                                                      aria-label="sm input example"
+                                                      style={{marginLeft: '10px'}} 
+                                                    />}
+                                  </InputMask>                             
+                                              
+                                  <CButton color="dark" style={{marginLeft: '10px'}}>Применить</CButton>
+                                </CCol>      
+                              </CRow>
+                              
+                              <br/>
+
+
+                              <CRow>
+                                <CCol xs={12} md={6} xl={6}>
+                                  <CRow>
+                                    <CCol sm={6}>
+                                      <div className="border-start border-start-4 border-start-info py-1 px-3">
+                                        <div className="text-medium-emphasis small">Новые клиенты</div>
+                                        <div className="fs-5 fw-semibold">{newClients.length}</div>
+                                      </div>
+                                    </CCol>
+                                    <CCol sm={6}>
+                                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Постоянные клиенты</div>
+                                        <div className="fs-5 fw-semibold">{oldClients.length-1}</div>
+                                      </div>
+                                    </CCol>
+                                  </CRow>
+                                </CCol>
+
+                                <CCol xs={12} md={6} xl={6}>
+                                  <CRow>
+                                    <CCol sm={6}>
+                                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Просмотры</div>
+                                        <div className="fs-5 fw-semibold">-</div>
+                                      </div>
+                                    </CCol>
+                                    <CCol sm={6}>
+                                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">Другое</div>
+                                        <div className="fs-5 fw-semibold">-</div>
+                                      </div>
+                                    </CCol>
+                                  </CRow>
+
+                                  <div className="mb-5"></div>
+
+                                </CCol>
+                              </CRow>
+
+
+                              <CTable align="middle" className="mb-0 border" hover responsive>
+                                <CTableHead className='table-dark'>
+                                  <CTableRow>
+                                    <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '100px'}}>
+                                      <CIcon icon={cilPeople} />
+                                    </CTableHeaderCell>
+                                    <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
+                                    <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
+                                    <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
+                                  </CTableRow>
+                                </CTableHead>
+                                <CTableBody>
+                                  
+                                </CTableBody>
+                              </CTable>
+                            
+                    </CCardBody>
+                  </CCard>
+                </>
+                </Suspense>
+              </CContainer>
+          </div>
+          <AppFooter />
+        </div>
+      </div>
+      
     </div>
   )
 }
