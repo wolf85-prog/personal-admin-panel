@@ -139,7 +139,7 @@ const Login = observer(() => {
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
                       <CFormInput
-                        type="password"
+                        type="text"
                         placeholder="Введите ваш пароль..."
                         autoComplete="current-password"
                         value={password}

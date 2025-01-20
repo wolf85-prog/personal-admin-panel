@@ -45,8 +45,10 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static(path.resolve(__dirname, 'images')))
 app.use(express.static(path.resolve(__dirname, 'uploads')))
+app.use(express.static(path.resolve(__dirname, 'avatars')))
 app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.use('/avatars', express.static(path.join(__dirname, 'avatars')))
 
 app.use('/api', Route);
 

@@ -48,7 +48,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
-import MyDropdown3 from 'src/components/Dropdown3/Dropdown3';
+import DropdownClient from 'src/components/DropdownClient/DropdownClient';
 
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
@@ -103,8 +103,8 @@ const ProfileCompany = () => {
 
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
-  const [comteg, setComteg] = useState([]);
-  const [sfera, setSfera] = useState([]);
+  const [comteg, setComteg] = useState('');
+  const [sfera, setSfera] = useState('');
   const [dogovorDate, setDogovorDate] = useState('');
   const [dogovorNumber, setDogovorNumber] = useState('');
   const [dateReg, setDateReg] = useState('');
@@ -178,17 +178,6 @@ const ProfileCompany = () => {
       console.log("Company: ", result)
 
 
-      let str_komteg = ''
-      result.comteg && JSON.parse(result.comteg).map((item, index)=> {
-          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(result.comteg).length ? ', ' : '')
-      })
-
-      let str_sfera = ''
-      result.comteg && JSON.parse(result.comteg).map((item, index)=> {
-        str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(result.comteg).length ? ', ' : '')
-      })
-
-
       setId(result?.id)
       setTitle(result?.title)
       setCity(result.city ? result.city : '')
@@ -201,8 +190,8 @@ const ProfileCompany = () => {
       setBugalterEmail(result.bugalterEmail ? result.bugalterEmail : '')
       setBugalterPhone(result.bugalterPhone ? result.bugalterPhone : '')
       setProfile(result.profile)
-      setSfera(result.sfera ? str_sfera.split(', ') : [])
-      setComteg(result.comteg ? str_komteg.split(', ') : [])
+      setSfera(result.sfera ? result.sfera : '')
+      setComteg(result.comteg ? result.comteg : '')
       setComment(result.comment)
       setShowBlacklist(result.sfera ? result.sfera.includes('Blacklist') : false)
 
@@ -246,25 +235,6 @@ const ProfileCompany = () => {
       setShowClose(true)
       console.log("managersObj: ", managersObj)
   
-      let sferaArr = []
-      let strSfera = ''
-      sfera.map((item, index)=> {
-        const obj = {
-          name: item,
-        }
-        strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
-        sferaArr.push(obj)
-      })
-
-      let comtegArr = []
-      let strComteg = ''
-      comteg.map((item, index)=> {
-        const obj = {
-          name: item,
-        }
-        strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
-        comtegArr.push(obj)
-      })
   
       let managersArr = []
       let strManagers = ''
@@ -292,8 +262,9 @@ const ProfileCompany = () => {
           office,
           sklad,
           comment,
-          sfera: strSfera,
-          comteg: strComteg,
+          sfera,
+          comteg,
+          profile,
         }
 
         console.log("saveCompany: ", saveData)
@@ -302,16 +273,6 @@ const ProfileCompany = () => {
         await editCompany(saveData, JSON.parse(item).id)
       })
       console.log(managersObjArr)
-  
-  
-      //комментарии 
-      // let commentArr = []
-      // let strComment = ''
-      // const obj1 = {
-      //    content: comment,
-      // }
-      // strComment = comment
-      // commentArr.push(obj1)
 
   
       const saveData = { 
@@ -330,8 +291,8 @@ const ProfileCompany = () => {
         bugalterPhone,  
         inn, //инн компании
         profile,
-        sfera: JSON.stringify(sferaArr),
-        comteg: JSON.stringify(comtegArr),
+        sfera,
+        comteg,
       }
       console.log("saveData: ", saveData)
   
@@ -356,8 +317,8 @@ const ProfileCompany = () => {
           bugalterPhone,  
           inn, //инн компании
           profile,
-          sfera: strSfera,
-          comteg: strComteg,
+          sfera,
+          comteg,
         };
   
         console.log("update user: ", usersCopy[userIndex])
@@ -404,33 +365,6 @@ const ProfileCompany = () => {
     setBlock(!block)
   } 
 
-  //открыть компанию
-  const clickTitle = (user)=> {
-    console.log("user: ", user)
-
-    setShowProfile(true)
-    //setModalUser(user)
-    setShowSearch(false)
-    setShowClear(false)
-
-    const currentYear = new Date().getFullYear()
-
-    setId(user.id)
-    setTitle(user.title ? user.title : '')
-    setCity(user.city ? user.city : '')
-    setOffice(user.office ? user.office : '')
-    setSklad(user.sklad ? user.sklad : '')
-    setManagers(user.managers ? user.managers.split(', ') : [])
-    setManagersObj(user.managersObj ? user.managersObj.split(', ') : [])
-    setBugalterFio(user.bugalterFio ? user.bugalterFio : '')
-    setBugalterEmail(user.bugalterEmail ? user.bugalterEmail : '')
-    setBugalterPhone(user.bugalterPhone ? user.bugalterPhone : '')
-    setProfile(user.profile)
-    setSfera(user.sfera ? user.sfera.split(', ') : [])
-    setComteg(user.comteg ? user.comteg.split(', ') : [])
-    setComment(user.comment)
-    setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
-  }
 
   const onChangeManager = (e, index) => {
     console.log(e.target.value, index)
@@ -519,7 +453,7 @@ const ProfileCompany = () => {
                                     />
                                   </div>
 
-                                  <div className="menu-reyting" style={{marginBottom: '20px'}}>
+                                  <div className="menu-reyting" style={{marginBottom: '16px'}}>
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
@@ -548,7 +482,7 @@ const ProfileCompany = () => {
                                   </div>
 
                                   <label className='title-label'>Реквизиты</label>
-                                  <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '6px'}}>
+                                  <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
                                     <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -580,14 +514,8 @@ const ProfileCompany = () => {
 {/* 2 */}
                                 <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
                                   {/* Город */}
+                                  <label className='title-label' style={{position: 'absolute', top: '55px', marginLeft: '10%'}}>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
-                                      {/* <MyDropdown
-                                        style={{backgroundColor: '#131c21'}}
-                                        options={sortedCities}
-                                        selected={city}
-                                        setSelected={setCity}
-                                        // onChange={addCity}
-                                      /> */}
                                       <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -753,13 +681,9 @@ const ProfileCompany = () => {
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
-                                      <MyDropdown3
-                                        tags={[...sfera].filter(item=> item !== 'Blacklist')}
-                                        setTags={setSfera}
-                                        options={sferaData}
-                                        style={{minHeight: '40px !important'}}
-                                      />
+                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '300px'}}/>
                                   </div>
+      
 
                                   {/* + добавить менеджера */}
                                   <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
@@ -789,11 +713,11 @@ const ProfileCompany = () => {
 
                                   <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
-                                      <MyDropdown3
+                                      <DropdownClient
+                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px', }}
+                                        options={comtegs}
                                         tags={comteg}
                                         setTags={setComteg}
-                                        options={comtegs}
-                                        style={{minHeight: '40px !important'}}
                                       />
                                   </div>
 
@@ -815,7 +739,7 @@ const ProfileCompany = () => {
                                 <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
 
                                   <label className='title-label'>Бухгалтерия</label>
-                                  <div className="text-field" style={{marginBottom: '44px'}}>
+                                  <div className="text-field">
                                     <input 
                                       className="text-field__input" 
                                       type="text" 
@@ -828,7 +752,8 @@ const ProfileCompany = () => {
                                   </div>
 
                                   {/* phone */}
-                                  <div className="text-field" style={{marginBottom: '44px'}}>
+                                  <label className='title-label'>Телефон</label>
+                                  <div className="text-field" >
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
@@ -847,7 +772,7 @@ const ProfileCompany = () => {
                                   </div> 
 
                                   {/* email */}
-                                  <label> </label>
+                                  <label className='title-label'>Почта</label>
                                   <div className="text-field">
                                     <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '300px'}}/>
                                   </div> 

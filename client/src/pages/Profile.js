@@ -144,7 +144,7 @@ const Profile = () => {
 
       const result = await getCompanyProfId(userId)
       console.log("Company: ", result)
-      setTitle(result.title)
+      setTitle(result?.title)
 
 		  setLoading(false)  
 		}
@@ -414,7 +414,7 @@ const Profile = () => {
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                    <input className="text-field__input" type="text" name="company" id="company" value={title} onChange={(e)=>changeCompany(e)}  />
+                                    <input disabled className="text-field__input" type="text" name="company" id="company" value={title} onChange={(e)=>changeCompany(e)}  />
                                   </div>
 
                                   <label className='title-label'>Должность</label>
