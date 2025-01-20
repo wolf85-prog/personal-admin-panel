@@ -575,7 +575,8 @@ th.widthCompany {
     padding: 5px 4px;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 400;
+    /* font-weight: 400; */
+    font-weight: 700;
     line-height: 1.5;
     text-align: center;
     /* color: #858585; */

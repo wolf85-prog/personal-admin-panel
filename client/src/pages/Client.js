@@ -56,9 +56,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { array } from 'prop-types';
 
-import MyDropdown from 'src/components/Dropdown/Dropdown';
-import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
-import MyDropdown3 from 'src/components/Dropdown3/Dropdown3';
+import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
 
 import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
@@ -116,32 +114,22 @@ const Client = () => {
   const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
-  const [age2, setAge2] = useState(0);
   const [speclist, setSpeclist] = useState([]);
   const [phone, setPhone] = useState('');
-  const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
-  const [skill, setSkill] = useState('');
   const [reyting, setReyting] = useState('');
-  const [promo, setPromo] = useState('');
-  const [rank, setRank] = useState('');
-  const [merch, setMerch] = useState('');
-  const [company, setCompany] = useState('');
-  const [inn, setInn] = useState('');
   const [comteg, setComteg] = useState('');
-  const [comteg2, setComteg2] = useState('');
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
-  const [comment2, setComment2] = useState('');
-  const [passport, setPassport] = useState('');
-  const [dogovor, setDogovor] = useState('');
-  const [samozanjatost, setSamozanjatost] = useState('');
-  const [passportScan, setPassportScan] = useState('');
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
   const [sfera, setSfera] = useState('');
   const [dolgnost, setDolgnost] = useState('');
+
+  const [company, setCompany] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [companysData, setCompanysData] = useState([]);
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -276,15 +264,6 @@ const Client = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        let str_komteg = ''
-        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        })
-
-        let str_company = ''
-        worker.company && JSON.parse(worker.company).map((item, index)=> {
-          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-        })
 
         let str_comment = ''
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
@@ -297,8 +276,8 @@ const Client = () => {
           chatId: worker.chatId, 
           phone: worker.phone, 
           city: worker.city, 
-          company: str_company, 
-          comteg: str_komteg, 
+          company: worker.company, 
+          comteg: worker.comteg, 
           comment: str_comment, 
           age: worker.age, 
           reyting: worker.reyting, 
@@ -459,8 +438,13 @@ const Client = () => {
     setTelegram(worker.chatId)
 
     setReyting(worker.reyting === null ? '' : worker.reyting)
-    setCompany(worker.company ? worker.company.split(',') : [])
-    setComteg(worker.comteg ? worker.comteg.split(',') : [])
+
+    const compTitle = companysAll.find(item=> item.id.toString() === worker.company)
+    setCompanyName(compTitle?.title ? compTitle?.title : '')
+
+    //setCompany(worker.company ? worker.company.split(',') : [])
+
+    //setComteg(worker.comteg ? worker.comteg.split(',') : [])
     setEmail(worker.email)
     setComment(worker.comment)
     setProfile(worker.profile)
@@ -484,135 +468,7 @@ const Client = () => {
     window.prompt("", text);
   }
 
-  //сортировка по ФИО
-  const onSortFio = () => {
-    setCountPress(countPress + 1)
-    
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
-    }
-    console.log("check sort", countPress + 1)
 
-    if (countPress + 1 === 1) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else if (countPress + 1 === 2) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var fioA = a.id, fioB = b.id 
-        return fioB-fioA  //сортировка по убыванию 
-      })
-      setClient(sortedWorker)
-    }
-    
-  }
-
-  //сортировка по telegram
-  const onSortTG = () => {
-    setCountPressTG(countPressTG + 1)
-    
-    if (countPressTG + 1 >= 3) {
-      setCountPressTG(0)
-    }
-    console.log("check sort", countPressTG + 1)
-
-    if (countPressTG + 1 === 1) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var tgA = a.telegram, tgB = b.telegram 
-        return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else if (countPressTG + 1 === 2) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var tgA = a.telegram, tgB = b.telegram 
-        return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var fioA = a.id, fioB = b.id 
-        return fioB-fioA  //сортировка по убыванию 
-      })
-
-      //setClientCount(sortedWorker)
-      setClient(sortedWorker)
-    }
-    
-  }
-
-  //сортировка по Городу
-  const onSortCity = () => {
-    setCountPressCity(countPressCity + 1)
-    
-    if (countPressCity + 1 >= 3) {
-      setCountPressCity(0)
-    }
-    //console.log("check sort", countPressTG + 1)
-
-    if (countPressCity + 1 === 1) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else if (countPressCity + 1 === 2) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var idA = a.id, idB = b.id 
-        return idB-idA  //сортировка по убыванию 
-      })
-
-      //setClientCount(sortedWorker)
-      setClient(sortedWorker)
-    }
-    
-  }
-
-  //сортировка по Специальности
-  const onSortCategory = () => {
-    setCountPressCategory(countPressCategory + 1)
-    
-    if (countPressCategory + 1 >= 3) {
-      setCountPressCity(0)
-    }
-    //console.log("check sort", countPressTG + 1)
-
-    if (countPressCategory + 1 === 1) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else if (countPressCategory + 1 === 2) {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setClient(sortedWorker)
-    } else {
-      const sortedWorker = [...client].sort((a, b) => {       
-        var idA = a.id, idB = b.id 
-        return idB-idA  //сортировка по убыванию 
-      })
-
-      //setClientCount(sortedWorker)
-      setClient(sortedWorker)
-    }
-    
-  }
 
   //ЕЩЁ
   const clickNext = async() => {
@@ -633,18 +489,6 @@ const Client = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-
-        let str_komteg = ''
-        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        })
-
-
-        let str_company = ''
-        worker.company && JSON.parse(worker.company).map((item, index)=> {
-          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-        })
-
         let str_comment = ''
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
@@ -657,8 +501,8 @@ const Client = () => {
           phone: worker.phone, 
           city: worker.city, 
           rank: worker.rank, 
-          company: str_company, 
-          comteg: str_komteg, 
+          company: '', //str_company, 
+          comteg: '', //str_komteg, 
           comment: str_comment, 
           age: worker.age, 
           reyting: worker.reyting, 
@@ -701,27 +545,6 @@ const Client = () => {
     console.log(id)
 
 
-    let companyArr = []
-    let strCompany = ''
-    company.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strCompany = strCompany + item + (index+1 !== company.length ? ', ' : '')
-      companyArr.push(obj)
-    })
-
-
-    let comtegArr = []
-    let strComteg = ''
-    comteg.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
-      comtegArr.push(obj)
-    })
-
 
     //комментарии 1
     let commentArr = []
@@ -739,8 +562,8 @@ const Client = () => {
       chatId: telegram,
       city: city,
       age: age ? age+'-01-01' : '', 
-      company: JSON.stringify(companyArr),
-      comteg: JSON.stringify(comtegArr),
+      company: companysAll.find((item)=>item.title === companyName)?.id,
+      comteg: '', //JSON.stringify(comtegArr),
       comment: JSON.stringify(commentArr),
       profile,
       reyting,
@@ -763,8 +586,8 @@ const Client = () => {
         phone, 
         city: city, 
         age: age ? age+'-01-01' : '', 
-        company: strCompany,
-        comteg: strComteg,
+        company: '', //strCompany,
+        comteg: '', //strComteg,
         comment: strComment,
         chatId: telegram,
         profile,
@@ -821,21 +644,6 @@ const Client = () => {
     setTelegram(result);
   };
 
-  const handleInn = event => {
-    const result = event.target.value.replace(/\D/g, '');
-    setInn(result);
-  };
-
-  const handlePromo = event => {
-    const result = event.target.value.replace(/\D/g, '');
-    setPromo(result);
-  };
-
-  const changeSpec = (e) => {
-    console.log(e.target.innerText)
-    setSpeclist([...client, e.target.innerText])
-    setShowSpec(false)
-  }
 
   const onChangeReyting = () => {
     setShowBlacklist(false)
@@ -919,6 +727,137 @@ const Client = () => {
     setCity('')
     setCityValue(0)
   }
+
+
+    //сортировка по ФИО
+    const onSortFio = () => {
+      setCountPress(countPress + 1)
+      
+      if (countPress + 1 >= 3) {
+        setCountPress(0)
+      }
+      console.log("check sort", countPress + 1)
+  
+      if (countPress + 1 === 1) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+          return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else if (countPress + 1 === 2) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+          return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var fioA = a.id, fioB = b.id 
+          return fioB-fioA  //сортировка по убыванию 
+        })
+        setClient(sortedWorker)
+      }
+      
+    }
+  
+    //сортировка по telegram
+    const onSortTG = () => {
+      setCountPressTG(countPressTG + 1)
+      
+      if (countPressTG + 1 >= 3) {
+        setCountPressTG(0)
+      }
+      console.log("check sort", countPressTG + 1)
+  
+      if (countPressTG + 1 === 1) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var tgA = a.telegram, tgB = b.telegram 
+          return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else if (countPressTG + 1 === 2) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var tgA = a.telegram, tgB = b.telegram 
+          return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var fioA = a.id, fioB = b.id 
+          return fioB-fioA  //сортировка по убыванию 
+        })
+  
+        //setClientCount(sortedWorker)
+        setClient(sortedWorker)
+      }
+      
+    }
+  
+    //сортировка по Городу
+    const onSortCity = () => {
+      setCountPressCity(countPressCity + 1)
+      
+      if (countPressCity + 1 >= 3) {
+        setCountPressCity(0)
+      }
+      //console.log("check sort", countPressTG + 1)
+  
+      if (countPressCity + 1 === 1) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else if (countPressCity + 1 === 2) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var idA = a.id, idB = b.id 
+          return idB-idA  //сортировка по убыванию 
+        })
+  
+        //setClientCount(sortedWorker)
+        setClient(sortedWorker)
+      }
+      
+    }
+  
+    //сортировка по Специальности
+    const onSortCategory = () => {
+      setCountPressCategory(countPressCategory + 1)
+      
+      if (countPressCategory + 1 >= 3) {
+        setCountPressCity(0)
+      }
+      //console.log("check sort", countPressTG + 1)
+  
+      if (countPressCategory + 1 === 1) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else if (countPressCategory + 1 === 2) {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setClient(sortedWorker)
+      } else {
+        const sortedWorker = [...client].sort((a, b) => {       
+          var idA = a.id, idB = b.id 
+          return idB-idA  //сортировка по убыванию 
+        })
+  
+        //setClientCount(sortedWorker)
+        setClient(sortedWorker)
+      }
+      
+    }
 
 
   return (
@@ -1186,63 +1125,20 @@ const Client = () => {
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                    <MyDropdown3
+                                    {/* <MyDropdown3
                                       tags={company}
                                       setTags={setCompany}
                                       options={companyData}
                                       style={{minHeight: '40px !important'}}
+                                    /> */}
+                                    <MyDropdown4
+                                      style={{backgroundColor: '#131c21'}}
+                                      options={companyData}
+                                      selected={company}
+                                      setSelected={setCompany}
                                     />
                                   </div>
-                                  {/* <div className="text-field"> 
-                                  <Autocomplete
-                                        sx={{
-                                            display: 'inline-block',
-                                            '& input': {zIndex: '25',
-                                              width: '100%',
-                                              border: 'none',
-                                              height: '40px',
-                                              padding: '5px 4px',
-                                              fontFamily: 'inherit',
-                                              fontSize: '14px',
-                                              fontWeight: '700',
-                                              lineHeight: '1.5',
-                                              textAlign: 'center',
-                                              color: '#ffffff',
-                                              backgroundColor: 'transparent',
-                                            }
-                                        }}
-                                        className="text-field__input" 
-                                        openOnFocus
-                                        id="custom-input-demo"
-                                        options={companysData}
-                                        style={{width: '100%', padding: '0'}}
-                                        onInputChange={(e)=>onChangeCompany(e)}
-                                        //onInputChange={(e)=>console.log(e.target.value)}
-                                        isOptionEqualToValue={(option, value) => option.value === value.value}
-                                        onChange={(event, newValue) => {
-                                            if (newValue && newValue.length) {
-                                                const comp = companysAll.find(item=> item.title === newValue)
-                                                console.log("comp: ", comp)
-                                                if (comp) {
-                                                  setCompanyName(comp.title)
-                                                  setCompany(comp.id)
-                                                  setProfile(comp.office)
-                                                }
-                                            }  
-                                        }}
-                                        value={companyName}
-                                        inputValue={companyName}
-                                        renderInput={(params) => (
-                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                            <input 
-                                                className="text-field__input" 
-                                                type="text" {...params.inputProps} 
-                                                placeholder=''
-                                            />
-                                        </div>
-                                        )}
-                                      />
-                                  </div> */}
+                          
 
                                   <label className='title-label'>Должность</label>
                                   <div className="text-field"> 
@@ -1272,26 +1168,32 @@ const Client = () => {
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field" style={{marginRight: '8px'}}>
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{marginRight: '8px'}}/>
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{marginRight: '8px'}}/>
                                     </div>
                                     {/* опоздания */}
                                     <div className="text-field" style={{marginRight: '8px'}}>
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{marginRight: '8px', color: 'red'}}/>
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{marginRight: '8px', color: 'red'}}/>
                                     </div>
                                     {/* невыходы */}
                                     <div className="text-field" >
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{color: 'red'}}/>
+                                      <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{color: 'red'}}/>
                                     </div>
                                   </div>
 
                                   <label className='title-label'>Комтег</label>
                                   <div className="text-field"> 
-                                      <MyDropdown3
+                                      {/* <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={comtegs}
                                         onChange={changeSpec}
                                         style={{minHeight: '40px !important'}}
+                                      /> */}
+                                      <MyDropdown4
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={comtegs}
+                                        selected={comteg}
+                                        setSelected={setComteg}
                                       />
                                   </div>
 
