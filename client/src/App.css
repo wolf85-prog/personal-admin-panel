@@ -846,6 +846,9 @@ th.widthCompany {
     /* .app {
         padding: 20px;
     } */
+    .app__mobile-content {
+        display: none;
+    }
     .app-content {
         height: calc(100vh - 110px);
     }

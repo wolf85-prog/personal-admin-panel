@@ -293,7 +293,7 @@ const Profile = () => {
                                                              
                               <CSpinner/>                        
                               :
-                              <div style={{position: 'relative', height: '400px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: '402px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 

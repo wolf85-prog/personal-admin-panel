@@ -426,7 +426,7 @@ const ProfileCompany = () => {
                                       
                               <CSpinner/> :
 
-                              <div style={{position: 'relative', height: showManagers ? 'auto' : '398px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: showManagers ? 'auto' : '402px', display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -436,7 +436,7 @@ const ProfileCompany = () => {
                                     profile ? 
                                   <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
                                   : 
-                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '0'}}>
+                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', marginBottom: '3px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
                                   )
@@ -453,29 +453,6 @@ const ProfileCompany = () => {
                                     />
                                   </div>
 
-                                  {/* <div className="menu-reyting" style={{marginBottom: '16px'}}>
-                                      <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
-                                        {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
-                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
-                                          <img className='star-icon' src={StarActive} alt='' /> 
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                        </div>
-                                        }
-                                      </div>
-                                      <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
-                                          <span>Изменить рейтинг</span>
-                                          <span style={{cursor: 'pointer'}}>Blacklist</span>
-                                      </div>
-                                      <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
-                                          <span>Изменить рейтинг</span>
-                                          <span style={{cursor: 'pointer'}}>Рейтинг</span>
-                                      </div>
-                                  </div> */}
-
                                   <label className='title-label'>ID</label>
                                   <div className="text-field" >
                                     <input disabled={true} className="text-field__input" type="text" name="companyId" id="companyId" value={id} style={{width: '250px', marginRight: '25px'}}/>
@@ -483,7 +460,7 @@ const ProfileCompany = () => {
 
                                   <label className='title-label'>Реквизиты</label>
                                   <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
-                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                    <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
                                   </CButton>
@@ -512,7 +489,7 @@ const ProfileCompany = () => {
                                 </div>
 
 {/* 2 */}
-                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* Город */}
                                   <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
@@ -580,8 +557,8 @@ const ProfileCompany = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
-                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                  <CButton className='uley_add_user' style={{width: '320px', height: '42px', marginLeft: '0'}}>
+                                    <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
                                   </CButton>
@@ -642,26 +619,17 @@ const ProfileCompany = () => {
                                     )}
                                   </div>
 
-                                  {/* Договор */}
-                                  {/* <label className='title-label'>Договор</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
-                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                      Договор
-                                    </span>
-                                  </CButton>  */}
-                                    
-                                  
                                 </div>
 
 {/* 3 */}
-                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                   {/* phone */}
                                   <label className='title-label'>Телефон</label>
                                   <div className="text-field" >
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '300px'}}
+                                          style={{width: '320px'}}
                                           type="text" 
                                           name="phone" 
                                           id="phone"
@@ -678,13 +646,13 @@ const ProfileCompany = () => {
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '300px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '320px'}}/>
                                   </div> 
 
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
-                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '300px'}}/>
+                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
                                   </div>
 
                                   <div style={{position: 'relative'}}>
@@ -742,24 +710,11 @@ const ProfileCompany = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
-
-                                  {/* <label className='title-label'>Бухгалтерия</label>
-                                  <div className="text-field">
-                                    <input 
-                                      className="text-field__input" 
-                                      type="text" 
-                                      name="bugalterFio" 
-                                      id="bugalterFio" 
-                                      value={bugalterFio} 
-                                      onChange={(e)=>setBugalterFio(e.target.value)} 
-                                      style={{width: '300px'}}
-                                    />
-                                  </div> */}
+                                <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '250px'}}>
                                   
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '300px', height: showManagers ? '533px' : '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: showManagers ? '533px' : '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
