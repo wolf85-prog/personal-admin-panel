@@ -186,7 +186,7 @@ const DocumentsGenerator = () => {
       services: newServices,
     }
     createComplects(formValues)
-    navigate('/business/partner')
+    navigate('/partner')
   }
 
   const handleAddServiceItem = () => {
