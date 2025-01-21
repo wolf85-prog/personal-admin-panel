@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, Suspense, useContext } from 'react'
-import { format } from '../../utils/formater'
+import { format } from 'src/utils/formater'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   CCard,

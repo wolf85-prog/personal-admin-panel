@@ -32,6 +32,7 @@ export const TRASH_ROUTE = '/trash'
 
 export const PAY_RATE_ROUTE = '/rate'
 
+export const ESTIMATE_LIST_ROUTE = '/estimate_all'
 export const ESTIMATE_ROUTE = '/estimate'
 export const PARTNER_ROUTE = '/partner'
 export const DOCUMENT_ROUTE = '/document'
