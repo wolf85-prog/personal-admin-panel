@@ -593,11 +593,11 @@ useEffect(() => {
 				createDate: user.createdAt,
 				avatar: user.profile,
 				//from: user.from,
-				promoId: user.promoId,
 				blockW: user.blockW,
 				deleted: user.deleted,
 				comment: user.comment,
 				comteg: user.comteg,
+				nik: user.nik,
 				}
 		
 				arrayWorkerAll.push(newWorker)
@@ -622,17 +622,15 @@ useEffect(() => {
 					phone: user.phone,
 					dateborn: user.age,
 					city: user.city, 
-					//newcity: user.newcity, 
 					companys: user.company,
-					//stag: user.stag,
 					worklist:  user.specialization,
 					chatId: user.chatId,
 					createDate: user.createdAt,
 					avatar: user.profile,
 					//from: user.from,
-					promoId: user.promoId,
 					blockW: user.blockW,
 					deleted: user.deleted,
+					nik: user.nik,
 				}
 		
 				arrayWorker.push(newWorker)

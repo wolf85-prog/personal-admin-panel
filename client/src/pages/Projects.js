@@ -102,7 +102,7 @@ const Projects = () => {
   //const navigate = useNavigate();
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { userId, companysAll, managersAll, workersAll, platformsAll } = useUsersContext();
+  const { userId, companysAll, clientAll, workersAll, platformsAll } = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -134,8 +134,9 @@ const Projects = () => {
   const [managerName, setManagerName] = useState('');
   const [managerName2, setManagerName2] = useState('');
 
-  const [managersData, setManagersData] = useState([]);
+  const [clientsData, setClientsData] = useState([]);
   const [workersData, setWorkersData] = useState([]);
+
   const [specialistName, setSpecialistName] = useState([]);
 
   const [locationProject, setLocationProject] = useState('');
@@ -263,7 +264,7 @@ const Projects = () => {
 
     //2
     let arrManagers = []
-    managersAll.map((item, index)=> {
+    clientAll.map((item, index)=> {
       if (item.fio) {
         arrManagers.push(item.fio)
       }  
@@ -272,7 +273,7 @@ const Projects = () => {
       return (a < b) ? -1 : (a > b) ? 1 : 0;  //сортировка по возрастанию 
     })
     //console.log("sortedManager: ", sortedManager)
-    setManagersData(sortedManager)
+    setClientsData(sortedManager)
 
     //3
     let arrWorkers = []
@@ -339,37 +340,9 @@ const Projects = () => {
     const resProj = await getProjectId(id)
     console.log("resProj: ", resProj)
 
-    // const resPretendents = await getPretendentProjectId(id)
-    // console.log("pretendents: ", resPretendents)
-
-    
-
+  
     let newArray = []
     let colorStatus = ''
-    // resPretendents.map((item)=> {
-    //   const fioSpec = workersAll.find(el=> el.id === parseInt(item.workerId))
-    //   //console.log("workers: ", workersAll)
-    //   //console.log("fioSpec: ", fioSpec)
-    //   const localDate = new Date(item.createdAt).toLocaleString().split(',')[0] + " | " + new Date(item.createdAt).toLocaleString().split(',')[1].slice(1, 6)
-
-    //   if (item.status === 'В Проект') colorStatus = 'green'
-    //   if (item.status === 'Отказано') colorStatus = 'yellow'
-
-    //   const newObj = {
-    //     id: item.id,
-    //     data: localDate,
-    //     status: item.status ? JSON.stringify({name: item.status, color: colorStatus}) : '',
-    //     fio: fioSpec?.userfamily + " " + fioSpec?.username, 
-    //     workerId: fioSpec?.id,
-    //     projectId: item.projectId,
-    //     receiverId: item.receiverId,
-    //     spec: JSON.parse(fioSpec?.worklist)[0]?.spec,
-    //     comment: JSON.parse(fioSpec?.comment),
-    //     comteg: JSON.parse(fioSpec?.comteg),
-    //   }
-    //   newArray.push(newObj)
-    // })
-    // setPretendents(newArray)
 
     setId(id)
     setCrmID(resProj.crmID)
@@ -391,20 +364,20 @@ const Projects = () => {
     //console.log("companyName: ", compTitle?.title ? compTitle?.title : '')
     setCompanyName(compTitle?.title ? compTitle?.title : '')
 
-    const managerFio = managersAll.find(item=> item.id.toString() === resProj.managerId)
+    const managerFio = clientAll.find(item=> item.id.toString() === resProj.managerId)
     setManagerName(managerFio?.fio)
 
-    const comp = managersAll.find(item=> item.fio === managerFio?.fio)
+    const comp = clientAll.find(item=> item.fio === managerFio?.fio)
     if (comp) {
       setPhone(comp.phone)
     } else {
       setPhone('')
     }
 
-    const managerFio2 = managersAll.find(item=> item.id.toString() === resProj.managerId2)
+    const managerFio2 = workersAll.find(item=> item.id.toString() === resProj.managerId2)
     setManagerName2(managerFio2?.fio)
 
-    const comp2 = managersAll.find(item=> item.fio === managerFio2?.fio)
+    const comp2 = workersAll.find(item=> item.fio === managerFio2?.fio)
     if (comp2) {
       setPhone2(comp2.phone)
     } else {
@@ -558,8 +531,8 @@ ${loc.url}`;
     console.log("id: ", id)
     console.log("start: ", startDate)
     console.log("end: ", endDate)
-    console.log("managerId: ", managersAll.find(item=> item.fio === managerName)?.id)
-    console.log("managerId2: ", managersAll.find(item=> item.fio === managerName)?.id)
+    console.log("managerId: ", clientAll.find(item=> item.fio === managerName)?.id)
+    console.log("managerId2: ", workersAll.find(item=> item.fio === managerName)?.id)
     console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
     console.log("startProject: ", startProject)
 
@@ -1250,8 +1223,8 @@ ${loc.url}`;
                               </div>
                               <div style={{display: 'flex', alignItems: 'center'}}>
                                 <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>
-                                <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                {/* <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                 <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                 <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                 <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1270,7 +1243,7 @@ ${loc.url}`;
                                   <Calendar2 openProject={openProject} projects={projects} setProjects={setProjects} showSidebar={showSidebar} setShowSidebar={setShowSidebar} setShowProject={setShowProject} setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} setHeight={setHeight}/>
                                   : 
                                   (showProject ? 
-                                    <div style={{position: 'relative', height: '581px', display: 'flex', flexDirection: 'row'}}>
+                                    <div style={{position: 'relative', height: '435px', display: 'flex', flexDirection: 'row'}}>
 
                                           {/* 1 */}                               
                                           <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
@@ -1376,19 +1349,6 @@ ${loc.url}`;
                                                 />
                                                 {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '40px'}}/> */}
                                               </div>
-
-                                              <label className='title-label'>Комментарии</label>
-                                              <div className="text-field" style={{marginBottom: '0px'}}>
-                                                <textarea 
-                                                  className="text-field__input" 
-                                                  type="text" 
-                                                  name="comment" 
-                                                  id="comment"
-                                                  style={{resize: 'none', width: '230px', height: '80px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
-                                                  value={comment}
-                                                  onChange={(e)=>setComment(e.target.value)}
-                                                />
-                                              </div> 
                                         </div>
 
                                         {/* 2 */}   
@@ -1455,12 +1415,6 @@ ${loc.url}`;
 
                                           <label className='title-label'>Город</label>
                                           <div className="text-field">
-                                            {/* <MyDropdown
-                                              style={{backgroundColor: '#131c21'}}
-                                              options={sortedCities}
-                                              selected={city}
-                                              setSelected={setCity}
-                                            /> */}
                                             <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -1574,26 +1528,11 @@ ${loc.url}`;
 
                                           </div>
 
-                                          <div style={{position:'relative'}}>
-                                            <label className='title-label'>Как добраться</label>
-                                            <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
-                                              <textarea 
-                                                className="text-field__input" 
-                                                type="text" 
-                                                name="treck" 
-                                                id="treck"
-                                                value={track}
-                                                style={{resize: 'none', width: '320px', height: '80px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
-                                              />
-                                            </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '288px', cursor: 'pointer', width: '25px', height: '25px'}}/>
-                                          </div>
-                                          
                                         </div>
 
                                         {/* 3 */}   
                                         <div style={{textAlign: 'center', marginTop: '10px', width: '320px', marginRight: '40px'}}>
-                                          <label className='title-label'>Менеджер</label>
+                                          <label className='title-label'>Заказчик</label>
                                           <div className="text-field">
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
                                             <Autocomplete
@@ -1615,7 +1554,7 @@ ${loc.url}`;
                                               }}
                                               className="text-field__input" 
                                               id="custom-input-manager"
-                                              options={managersData}
+                                              options={clientsData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               //filterOptions={filterOptions}
@@ -1625,7 +1564,7 @@ ${loc.url}`;
                                               }}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
-                                                  const comp = managersAll.find(item=> item.fio === newValue)
+                                                  const comp = clientAll.find(item=> item.fio === newValue)
                                                   console.log("comp: ", comp)
                                                   if (comp) {
                                                     setPhone(comp.phone)
@@ -1670,13 +1609,13 @@ ${loc.url}`;
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-manager2"
-                                              options={managersData}
+                                              options={workersData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={onChangeManager2}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
-                                                  const comp = managersAll.find(item=> item.fio === newValue)
+                                                  const comp = workersAll.find(item=> item.fio === newValue)
                                                   console.log("comp: ", comp)
                                                   if (comp) {
                                                     setPhone2(comp.phone)
@@ -1711,7 +1650,7 @@ ${loc.url}`;
                                             />
                                           </div> 
 
-                                          <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '387px', right: '200px'}}>Техническое Задание</label>
+                                          {/* <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '387px', right: '200px'}}>Техническое Задание</label>
 
                                           <div  style={{display: 'flex', flexDirection: 'row', marginTop: '45px'}}>
                                             <div>
@@ -1732,7 +1671,7 @@ ${loc.url}`;
                                                 </div>
                                               </div>
                                             </div>
-                                          </div>
+                                          </div> */}
                                         </div>
 
                                         {/* 4 */}   
@@ -1775,7 +1714,35 @@ ${loc.url}`;
                                             </InputMask>
                                           </div>
 
-                                          <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
+                                          <div style={{position:'relative'}}>
+                                            <label className='title-label'>Как добраться</label>
+                                            <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
+                                              <textarea 
+                                                className="text-field__input" 
+                                                type="text" 
+                                                name="treck" 
+                                                id="treck"
+                                                value={track}
+                                                style={{resize: 'none', width: '278px', height: '92px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
+                                              />
+                                            </div> 
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '288px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                          </div>
+
+                                          <label className='title-label'>Комментарии</label>
+                                          <div className="text-field" style={{marginBottom: '0px'}}>
+                                                <textarea 
+                                                  className="text-field__input" 
+                                                  type="text" 
+                                                  name="comment" 
+                                                  id="comment"
+                                                  style={{resize: 'none', width: '278px', height: '92px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
+                                                  value={comment}
+                                                  onChange={(e)=>setComment(e.target.value)}
+                                                />
+                                            </div> 
+
+                                          {/* <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
                                             <label className='title-label' style={{marginTop: '15px'}}>Предварительная смета</label>
 
                                             <label className='title-label' style={{marginTop: '20px'}}>Финальная смета</label>
@@ -1783,9 +1750,9 @@ ${loc.url}`;
                                             <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
 
                                             <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
-                                          </div>
+                                          </div> */}
 
-                                          <div style={{marginTop: '93px', marginLeft: '-40px'}}>
+                                          {/* <div style={{marginTop: '93px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
                                                 <div className="text-field" style={{marginBottom: '0px'}}>
                                                   <input disabled={false} className="text-field__input" type="text" name="teh5" id="teh5" value={teh5} onChange={(e)=>setTeh5(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
@@ -1802,22 +1769,20 @@ ${loc.url}`;
                                                   <input disabled={false} className="text-field__input" type="text" name="teh8" id="teh8" value={teh8} onChange={(e)=>setTeh8(e.target.value)} style={{textAlign: 'left', width: '160px', marginRight: '0px'}}/>
                                                 </div>
                                               </div>
-                                          </div>
+                                          </div> */}
                                         </div>
 
                                         {/* 5 */}   
                                         <div style={{textAlign: 'center', marginTop: '10px'}}>
-                                          {/* <label className='title-label'> </label> */}
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
                                             <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          {/* <label className='title-label'> </label> */}
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '44px'}}>
                                             <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
+                                          {/* <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
                                             {
                                               playPredSmeta ? 
                                               (donePredSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
@@ -1857,7 +1822,7 @@ ${loc.url}`;
                                               )
                                               : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
                                             }
-                                          </div>
+                                          </div> */}
                                         </div>
                                         
                             {/* </CCollapse> */}
