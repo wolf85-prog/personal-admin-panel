@@ -891,7 +891,7 @@ const Document = () => {
                     <CCardBody style={{ cursor: 'pointer' }} onClick={() => setVisible('invoice')}>
                       <DisplayThumbnailExample
                         pageIndex={0}
-                        fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.invoice.document_url}`}
+                        fileUrl={`https://storage.yandexcloud.net/uley/${complect.invoice.document_url}`}
                       />
                     </CCardBody>
                     {visible === 'invoice' && (
@@ -908,7 +908,7 @@ const Document = () => {
                           theme={{
                             theme: 'dark',
                           }}
-                          fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.invoice.document_url}`}
+                          fileUrl={`https://storage.yandexcloud.net/uley/${complect.invoice.document_url}`}
                           // plugins={[fullScreenPluginInstance]}
                         />
                       </CModal>
@@ -918,7 +918,7 @@ const Document = () => {
                     <CCardBody style={{ cursor: 'pointer' }} onClick={() => setVisible('act')}>
                       <DisplayThumbnailExample
                         pageIndex={0}
-                        fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.act.document_url}`}
+                        fileUrl={`https://storage.yandexcloud.net/uley/${complect.act.document_url}`}
                       />
                     </CCardBody>
                     {visible === 'act' && (
@@ -935,7 +935,7 @@ const Document = () => {
                           theme={{
                             theme: 'dark',
                           }}
-                          fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.act.document_url}`}
+                          fileUrl={`https://storage.yandexcloud.net/uley/${complect.act.document_url}`}
                           // plugins={[fullScreenPluginInstance]}
                         />
                       </CModal>
@@ -949,7 +949,7 @@ const Document = () => {
                     >
                       <DisplayThumbnailExample
                         pageIndex={0}
-                        fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.application.document_url}`}
+                        fileUrl={`https://storage.yandexcloud.net/uley/${complect.application.document_url}`}
                       />
                     </CCardBody>
                     {visible === 'application' && (
@@ -966,7 +966,7 @@ const Document = () => {
                           theme={{
                             theme: 'dark',
                           }}
-                          fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.application.document_url}`}
+                          fileUrl={`https://storage.yandexcloud.net/uley/${complect.application.document_url}`}
                           // plugins={[fullScreenPluginInstance]}
                         />
                       </CModal>
@@ -979,7 +979,7 @@ const Document = () => {
                     >
                       <DisplayThumbnailExample
                         pageIndex={0}
-                        fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.contract.document_url}`}
+                        fileUrl={`https://storage.yandexcloud.net/uley/${complect.contract.document_url}`}
                       />
                     </CCardBody>
                     {visible === 'contract' && (
@@ -997,7 +997,7 @@ const Document = () => {
                           theme={{
                             theme: 'dark',
                           }}
-                          fileUrl={`https://storage.yandexcloud.net/ota-stor/${complect.contract.document_url}`}
+                          fileUrl={`https://storage.yandexcloud.net/uley/${complect.contract.document_url}`}
                           // plugins={[defaultLayoutPluginInstance]}
                         />
                       </CModal>
