@@ -5,7 +5,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 
 const AppMobileWarning = () => {
   return (
-    <CContainer lg>
+    <CContainer lg style={{ margin: 'auto'}}>
       <Suspense fallback={<CSpinner color="primary" />}>
         <h5>Внимание!</h5>
         <p> Мобильная версия приложения</p>  

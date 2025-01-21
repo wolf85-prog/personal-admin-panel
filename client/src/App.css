@@ -829,20 +829,20 @@ th.widthCompany {
 
 
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 540px) {
     .app__mobile-content {
+        display: flex;
+        height: 100vh;
         text-align: center;
         font-size: 1.2rem;
-        display: block;
         color: #f3f3f3;
-        margin: auto;
     }
     .app-content {
         display: none;
     }
 }
 
-@media screen and (min-width: 1450px) {
+@media screen and (min-width: 541px) {
     /* .app {
         padding: 20px;
     } */

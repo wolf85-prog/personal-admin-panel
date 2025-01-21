@@ -140,7 +140,7 @@ const Admin = () => {
   return (
     <div className='dark-theme'>
       {/* Мобильная версия */}
-      <div className="app__mobile-content" style={{display: 'flex', height: '100vh'}}>
+      <div className="app__mobile-content">
         <AppMobileWarning />
       </div>
       {/* ПК */}
