@@ -182,7 +182,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Сметы',
-      to: '/estimate',
+      to: '/estimate_all',
       //icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       icon: <img src={SmetaIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       style: {backgroundColor: '#0078d421'},
