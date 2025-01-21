@@ -47,7 +47,7 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
-import MyDropdown3 from 'src/components/Dropdown3/Dropdown3';
+import DropdownClient from 'src/components/DropdownClient/DropdownClient';
 
 import comtegs from 'src/data/comtegs';
 import companys from 'src/data/companys';
@@ -883,7 +883,7 @@ const Companys = () => {
                                     />
                                   </div>
 
-                                  <div className="menu-reyting" style={{marginBottom: '20px'}}>
+                                  <div className="menu-reyting" style={{marginBottom: '8px'}}>
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
@@ -908,7 +908,7 @@ const Companys = () => {
 
                                   <label className='title-label'>Реквизиты</label>
                                   <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '6px'}}>
-                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                    <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
                                   </CButton>
@@ -937,8 +937,9 @@ const Companys = () => {
                                 </div>
 
 {/* 2 */}
-                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div style={{marginLeft: '37px', marginTop: '55px', display: 'flex', flexDirection: 'column', width: '300px'}}>
                                   {/* Город */}
+                                  <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
                                       {/* <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
@@ -1017,8 +1018,8 @@ const Companys = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton onClick={()=>setShowManagers(!showManagers)} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
-                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
+                                    <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
                                   </CButton>
@@ -1082,7 +1083,7 @@ const Companys = () => {
                                   {/* Договор */}
                                   <label className='title-label'>Договор</label>
                                   <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
-                                    <span style={{fontSize: '20px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                    <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Договор
                                     </span>
                                   </CButton> 
@@ -1118,12 +1119,7 @@ const Companys = () => {
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
-                                      <MyDropdown3
-                                        tags={[...sfera].filter(item=> item !== 'Blacklist')}
-                                        setTags={setSfera}
-                                        options={sferaData}
-                                        style={{minHeight: '40px !important'}}
-                                      />
+                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '300px'}}/>
                                   </div>
 
                                   {/* + добавить менеджера */}
@@ -1154,11 +1150,17 @@ const Companys = () => {
 
                                   <label className='title-label'>Комтеги</label>
                                   <div className="text-field"> 
-                                      <MyDropdown3
+                                      {/* <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={comtegs}
                                         style={{minHeight: '40px !important'}}
+                                      /> */}
+                                      <DropdownClient
+                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px', }}
+                                        options={comtegs}
+                                        tags={comteg}
+                                        setTags={setComteg}
                                       />
                                   </div>
 
@@ -1180,7 +1182,7 @@ const Companys = () => {
                                 <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
 
                                   <label className='title-label'>Бухгалтерия</label>
-                                  <div className="text-field" onMouseOver={()=>setShowSaveFio(true)} onMouseOut={()=>setShowSaveFio(false)} style={{marginBottom: '44px'}}>
+                                  <div className="text-field" onMouseOver={()=>setShowSaveFio(true)} onMouseOut={()=>setShowSaveFio(false)} >
                                     <img 
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(bugalterFio)}} 
@@ -1199,7 +1201,8 @@ const Companys = () => {
                                   </div>
 
                                   {/* phone */}
-                                  <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} style={{marginBottom: '44px'}}>
+                                  <label className='title-label'>Телефон</label>
+                                  <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} >
                                       <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
@@ -1224,7 +1227,7 @@ const Companys = () => {
                                   </div> 
 
                                   {/* email */}
-                                  <label> </label>
+                                  <label className='title-label'>Почта</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
                                     <img 
                                       src={Disketa} 

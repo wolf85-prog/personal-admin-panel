@@ -854,8 +854,8 @@ ${loc.url}`;
         comteg: '',
         comment: '',
         stavka: JSON.stringify({label: '№1', name: '№1'}),
-        taxi: '',
-        merch: '',
+        taxi: false,
+        merch: false,
         projectId: id,
         number: parseInt(eventkey.split(' ')[2])+1,
       })
@@ -986,6 +986,42 @@ ${loc.url}`;
       
       const checkedvalue = mainspec.map((user)=>
       user.id === parseInt(name) ? {...user, isChecked: checked} : user)
+      console.log("checkedvalue: ", checkedvalue)
+      setMainspec(checkedvalue)
+    }
+  }
+
+  const handleChangeMerch=(e)=> {
+    const {name, checked} = e.target
+    console.log("checked: ", name, checked)
+
+    if (name ==='allselect') {
+      const checkedvalue = mainspec.map((user)=>{ return {...user, merch: checked}})
+      console.log(checkedvalue)
+      setMainspec(checkedvalue)
+    } else {
+      console.log("mainspec: ", mainspec)
+      
+      const checkedvalue = mainspec.map((user)=>
+      user.id === parseInt(name) ? {...user, merch: checked} : user)
+      console.log("checkedvalue: ", checkedvalue)
+      setMainspec(checkedvalue)
+    }
+  }
+
+  const handleChangeTaxi=(e)=> {
+    const {name, checked} = e.target
+    console.log("checked: ", name, checked)
+
+    if (name ==='allselect') {
+      const checkedvalue = mainspec.map((user)=>{ return {...user, taxi: checked}})
+      console.log(checkedvalue)
+      setMainspec(checkedvalue)
+    } else {
+      console.log("mainspec: ", mainspec)
+      
+      const checkedvalue = mainspec.map((user)=>
+      user.id === parseInt(name) ? {...user, taxi: checked} : user)
       console.log("checkedvalue: ", checkedvalue)
       setMainspec(checkedvalue)
     }
@@ -1793,11 +1829,11 @@ ${loc.url}`;
                                         {/* 5 */}   
                                         <div style={{textAlign: 'center', marginTop: '10px'}}>
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
-                                            <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                            <img src={Trubka} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '44px'}}>
-                                            <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                            <img src={Trubka} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
                                           {/* <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
@@ -2050,16 +2086,16 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
                                       <CFormCheck 
                                         name={item.id}
-                                        checked={item?.isChecked || false}
-                                        onChange={handleChange}
+                                        checked={item?.merch || false}
+                                        onChange={handleChangeMerch}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
                                       />
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
                                       <CFormCheck 
                                         name={item.id}
-                                        checked={item?.isChecked || false}
-                                        onChange={handleChange}
+                                        checked={item?.taxi || false}
+                                        onChange={handleChangeTaxi}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
                                       />
                                     </CTableDataCell>           
