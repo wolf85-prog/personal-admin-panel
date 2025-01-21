@@ -2,7 +2,7 @@ import {$authHost, $host, $host_worker} from "./index";
 
 export const getSpecialist = async (userId) =>{
     try {
-       let response = await $host.get(`api/specialist/user/get/${userId}`);
+       let response = await $host.get(`api/workers/user/get/${userId}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getSpecialist api", error.message);
@@ -11,7 +11,7 @@ export const getSpecialist = async (userId) =>{
 
 export const getSpecCount = async (userId, count, prev) =>{
     try {
-       let response = await $host.get(`api/specialist/count/get/${userId}/${count}/${prev}`);
+       let response = await $host.get(`api/workers/count/get/${userId}/${count}/${prev}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getSpecCount api", error.message);
@@ -20,7 +20,7 @@ export const getSpecCount = async (userId, count, prev) =>{
 
 export const editSpecialist = async (data, id) =>{
     try {
-        await $host.patch(`api/specialist/update/${id}`, data); 
+        await $host.patch(`api/workers/update/${id}`, data); 
     } catch (error) {
         console.log("error while calling editSpecialist api",error.message);
     }
@@ -28,7 +28,7 @@ export const editSpecialist = async (data, id) =>{
 
 export const addSpecialist = async (data) =>{
     try {
-        let response = await $host.post(`api/specialist/add`, data); 
+        let response = await $host.post(`api/workers/add`, data); 
         return response.data;
     } catch (error) {
         console.log("error while calling addSpecialist api",error.message);
@@ -37,7 +37,7 @@ export const addSpecialist = async (data) =>{
 
 export const deleteSpecialist = async (id) =>{
     try {
-        await $host.get(`api/specialist/delete/${id}`); 
+        await $host.get(`api/workers/delete/${id}`); 
     } catch (error) {
         console.log("error while calling deleteSpecialist api",error.message);
     }
@@ -45,7 +45,7 @@ export const deleteSpecialist = async (id) =>{
 
 export const getSpecialistId = async (id) =>{
     try {
-       let response = await $host.get(`api/specialist/${id}`);
+       let response = await $host.get(`api/workers/${id}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getSpecialistId api", error.message);
@@ -54,7 +54,7 @@ export const getSpecialistId = async (id) =>{
 
 export const getSpecialistChatId = async (id) =>{
     try {
-       let response = await $host.get(`api/specialist/chat/${id}`);
+       let response = await $host.get(`api/workers/chat/${id}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getSpecialistChatId api", error.message);
@@ -63,7 +63,7 @@ export const getSpecialistChatId = async (id) =>{
 
 export const blockedSpecialist = async (id) =>{
     try {
-       let response = await $host.get(`api/specialist/block/${id}`);
+       let response = await $host.get(`api/workers/block/${id}`);
        return response.data;
     } catch (error) {
         console.log("error while calling blockedSpecialist api", error.message);
@@ -73,7 +73,7 @@ export const blockedSpecialist = async (id) =>{
 
 export const sendSpecialistOtkaz = async (id, data) =>{
     try {
-       let response = await $host_worker.post(`api/specialist/otkaz/send/${id}`, data);
+       let response = await $host_worker.post(`api/workers/otkaz/send/${id}`, data);
        return response.data;
     } catch (error) {
         console.log("error while calling sendSpecialistOtkaz api", error.message);

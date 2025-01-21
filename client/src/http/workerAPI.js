@@ -1,35 +1,5 @@
 import {$authHost, $host, $host_worker} from "./index";
 
-export const getWorkerNotionId = async (id) =>{
-    try {
-       let response = await $host_worker.get(`api/workers/${id}`);
-       //console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getWorkerNotionId api", error.message);
-    }
-}
-
-export const getWorkersNotion = async (id) =>{
-    try {
-       let response = await $host_worker.get(`api/workers`);
-       //console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getWorkersNotion api", error.message);
-    }
-}
-
-export const getWorkersNotion100 = async (id) =>{
-    try {
-       let response = await $host_worker.get(`api/workers100`);
-       //console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getWorkersNotion100 api", error.message);
-    }
-}
-
 export const getWorkerChildrenId = async (id) =>{
     try {
        let response = await $host_worker.get(`api/workers/children/${id}`);
@@ -64,6 +34,15 @@ export const getWorker = async (id) =>{
        return response.data;
     } catch (error) {
         console.log("error while calling getWorker api", error.message);
+    }
+}
+
+export const addWorker = async (data) =>{
+    try {
+       let response = await $host.post(`api/workers/add`, data);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling addWorker api", error.message);
     }
 }
 

@@ -38,7 +38,7 @@ import {
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 import { getSpecialist, getSpecCount, editSpecialist, addSpecialist, deleteSpecialist } from './../http/specAPI'
-import { getWorkersCount, getWContacts} from '../http/workerAPI'
+import { getWContacts } from './../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
 import Close from "../assets/images/clear.svg"
@@ -218,7 +218,7 @@ const Specialist = () => {
 
     const fetchData = async() => {
       // 2 специалисты 20 чел.
-      let workers = await getWorkersCount(userId, 20, specialist.length)
+      let workers = await getSpecCount(userId, 20, specialist.length)
       console.log("specialist: ", workers)
 
       let arrWorkers = []
