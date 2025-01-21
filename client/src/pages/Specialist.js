@@ -818,15 +818,10 @@ const Specialist = () => {
       speclist: JSON.stringify(specArr),
       company: JSON.stringify(companyArr),
       skill: JSON.stringify(skillArr),
-      merch: JSON.stringify(merchArr),
       comteg: JSON.stringify(comtegArr),
-      comteg2: JSON.stringify(comtegArr2),
       comment: JSON.stringify(commentArr),
-      comment2: JSON.stringify(commentArr2),
       profile,
-      inn,
       email,
-      promo,
       passport,
       //blockW,
       block18,
@@ -848,16 +843,11 @@ const Specialist = () => {
         speclist: strSpec,
         company: strCompany,
         skill: strSkill,
-        merch: strMerch,
         comteg: strComteg,
-        comteg2: strComteg2,
         comment: strComment,
-        comment2: strComment2,
         chatId: telegram,
         profile,
-        inn,
         email,
-        promo,
         passport,
         //blockW,
         block18,
@@ -873,6 +863,11 @@ const Specialist = () => {
     await editSpecialist(saveData, id)
 
     addToast(exampleToast) //ваши данные сохранены
+
+    setTimeout(()=> {
+      //setShowModal(false)
+      closeProfile()
+    }, 500)
   }
 
   const blockedProfile = () => { 
@@ -1248,13 +1243,13 @@ const Specialist = () => {
                                   {/* ник */}
                                   <label className='title-label'>Никнейм</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
-                                    <img 
+                                    {/* <img 
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(nik)}} 
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    />
-                                    <input disabled className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
+                                    /> */}
+                                    <input className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
                                   </div> 
 
 
