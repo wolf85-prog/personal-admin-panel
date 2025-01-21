@@ -62,6 +62,7 @@ import MyDropdown52 from 'src/components/Dropdown52/Dropdown52';
 import MyDropdown6 from 'src/components/Dropdown6/Dropdown6';
 
 
+import DeleteIcon from "../assets/images/delete_icon.png"
 import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
 import zamok2 from "../assets/images/замок2.png"
@@ -85,7 +86,7 @@ import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
 import specifikaData from 'src/data/specifikaData';
 import vids from 'src/data/vids';
-import comtegs from 'src/data/comtegs';
+import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
@@ -109,9 +110,11 @@ const Projects = () => {
   const [showCalendar2, setShowCalendar2] = useState(true)
   const [showProject, setShowProject] = useState(false)
   const [showHeader, setShowHeader] = useState(false)
+  const [showSaveLocation, setShowSaveLocation] = useState(false)
   const [showSaveAddress, setShowSaveAddress] = useState(false)
+  const [showSaveTreck, setShowSaveTreck] = useState(false)
 
-  const [height, setHeight] = useState(600)
+  const [height, setHeight] = useState(435)
 
   const [projects, setProjects] = useState([]);
 
@@ -154,6 +157,7 @@ const Projects = () => {
   const [teh7, setTeh7] = useState('');
   const [teh8, setTeh8] = useState('');
   const [tehText, setTehText] = useState('');
+  const [location, setLocation] = useState('');
   const [address, setAddress] = useState('');
   const [track, setTrack] = useState('');
   const [geoId, setGeoId] = useState('');
@@ -174,6 +178,7 @@ const Projects = () => {
   const [showPosterTable, setShowPosterTable] = useState(false)
   const [showDots, setShowDots] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showModalEmpty, setShowModalEmpty] = useState(false)
 
   const [playPredSmeta, setPlayPredSmeta] = useState(false)
   const [donePredSmeta, setDonePredSmeta] = useState(false)
@@ -396,6 +401,7 @@ ${loc.url}`;
       setAddress(loc.address)
       setTrack(text)
       setLocationProject(loc.title)
+      setLocation(text)
     } else {
       setLocationProject('')
       setAddress('')
@@ -513,7 +519,7 @@ ${loc.url}`;
 
 
     setTimeout(()=> {
-      setHeight(559)
+      setHeight(435)
     }, 200)
     
   }
@@ -1222,12 +1228,20 @@ ${loc.url}`;
                                 <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
                               </div>
                               <div style={{display: 'flex', alignItems: 'center'}}>
-                                <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/>
+                                <CTooltip content="Удалить проекты" placement="bottom">
+                                  {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
+                                  <img src={DeleteIcon} onClick={closeProfile} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                </CTooltip>
                                 {/* <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                 <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
-                                <img src={zamok}  style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                <img src={zamok} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                <CTooltip content="Сохранить проект" placement="bottom">
+                                  <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                </CTooltip>
+                                <CTooltip content="Закрыть окно" placement="bottom">
+                                  <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                </CTooltip>
+                                
                               </div>                 
                             </div>
                           </CCardHeader>                    
@@ -1460,7 +1474,7 @@ ${loc.url}`;
                                           </div>
 
                                           <label className='title-label'>Локация</label>
-                                          <div className="text-field" style={{width: '320px'}}>
+                                          <div className="text-field" style={{width: '320px'}} onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
                                             <Autocomplete
                                               sx={{
@@ -1500,6 +1514,7 @@ ${loc.url}`;
                                                         setAddress(loc.address)
                                                         setTrack(text)
                                                         setGeoId(loc.id)
+                                                        setLocation(text)
                                                       }
                                                   }  
                                               }}
@@ -1515,17 +1530,19 @@ ${loc.url}`;
                                               </div>
                                               )}
                                             />
+
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
 
                                           <label className='title-label'>Адрес</label>
-                                          <div className="text-field" style={{width: '320px'}}>
+                                          <div className="text-field" style={{width: '320px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
                                             <input disabled={false} className="text-field__input" type="text" 
                                               name="address" 
                                               id="address" 
                                               style={{width: '320px'}}
                                               value={address}
                                             />
-
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
 
                                         </div>
@@ -1716,7 +1733,7 @@ ${loc.url}`;
 
                                           <div style={{position:'relative'}}>
                                             <label className='title-label'>Как добраться</label>
-                                            <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
+                                            <div className="text-field" style={{marginBottom: '0px'}} >
                                               <textarea 
                                                 className="text-field__input" 
                                                 type="text" 
@@ -1724,9 +1741,10 @@ ${loc.url}`;
                                                 id="treck"
                                                 value={track}
                                                 style={{resize: 'none', width: '278px', height: '92px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
+                                                onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
                                               />
                                             </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '288px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '238px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
 
                                           <label className='title-label'>Комментарии</label>
@@ -1856,7 +1874,7 @@ ${loc.url}`;
 
                         
                         <CCard className="mb-4" style={{display: showMainTable ? 'block' : 'none'}}>
-                          <CCardHeader onClick={() => setVisibleA(!visibleA)}>Специалисты</CCardHeader>
+                          <CCardHeader onClick={() => setVisibleA(!visibleA)}>Сотрудники</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody style={{padding: '12px'}}>
                               <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
@@ -2029,12 +2047,21 @@ ${loc.url}`;
                                       ></input>
                                       }
                                     </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      {/* ✅ */}
+                                    <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
+                                      <CFormCheck 
+                                        name={item.id}
+                                        checked={item?.isChecked || false}
+                                        onChange={handleChange}
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
+                                      />
                                     </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      {/* ✅ */}
-                                      {item.numder}
+                                    <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
+                                      <CFormCheck 
+                                        name={item.id}
+                                        checked={item?.isChecked || false}
+                                        onChange={handleChange}
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
+                                      />
                                     </CTableDataCell>           
                                     </CTableRow>
                                   ))
@@ -2213,6 +2240,17 @@ ${loc.url}`;
                     >
                       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
                         Идёт сохранение данных...
+                      </CModalBody>
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModalEmpty}
+                      onClose={() => setShowModalEmpty(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
+                        ...
                       </CModalBody>
                     </CModal>
 
