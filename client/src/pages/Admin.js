@@ -140,7 +140,7 @@ const Admin = () => {
   return (
     <div className='dark-theme'>
       {/* Мобильная версия */}
-      <div className="app__mobile-content">
+      <div className="app__mobile-content" style={{display: 'flex', height: '100vh'}}>
         <AppMobileWarning />
       </div>
       {/* ПК */}
@@ -278,28 +278,6 @@ const Admin = () => {
                                 </CCol>
                               </CRow>
 
-
-                              <CTable align="middle" className="mb-0 border" hover responsive>
-                                <CTableHead className='table-dark'>
-                                  <CTableRow>
-                                    <CTableHeaderCell style={{width: '30px'}}>№</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{width: '100px'}}>
-                                      <CIcon icon={cilPeople} />
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell style={{width: '160px'}}>Пользователь</CTableHeaderCell>                             
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Организация</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{width: '160px'}}>Телефон</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{width: '80px'}}>Город</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{width: '100px'}}>TG ID</CTableHeaderCell>
-                                    <CTableHeaderCell style={{width: '100px'}}>Использование</CTableHeaderCell>
-                                    <CTableHeaderCell style={{width: '100px'}}>Активность</CTableHeaderCell>
-                                  </CTableRow>
-                                </CTableHead>
-                                <CTableBody>
-                                  
-                                </CTableBody>
-                              </CTable>
-                            
                     </CCardBody>
                   </CCard>
                 </>

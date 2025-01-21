@@ -831,11 +831,11 @@ th.widthCompany {
 
   @media screen and (max-width: 500px) {
     .app__mobile-content {
-        margin-top: 50%;
         text-align: center;
         font-size: 1.2rem;
         display: block;
         color: #f3f3f3;
+        margin: auto;
     }
     .app-content {
         display: none;
