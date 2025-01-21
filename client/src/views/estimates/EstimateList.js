@@ -84,9 +84,37 @@ const EstimateList = () => {
     enableRowSelection: true,
     getRowCanExpand: () => true,
   })
-  if (isPending) return <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Загрузка...</div>
+  if (isPending)
+    return (
+      <div className="dark-theme">
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+          <AppHeader />
+          <div className="body flex-grow-1 px-3">
+            <CContainer lg>
+              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Загрузка...</div>
+            </CContainer>
+          </div>
+          <AppFooter />
+        </div>
+      </div>
+    )
 
-  if (error) return <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке смет</div>
+  if (error)
+    return (
+      <div className="dark-theme">
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+          <AppHeader />
+          <div className="body flex-grow-1 px-3">
+            <CContainer lg>
+              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке смет</div>
+            </CContainer>
+          </div>
+          <AppFooter />
+        </div>
+      </div>
+    )
 
   return (
     <div className="dark-theme">
@@ -94,62 +122,64 @@ const EstimateList = () => {
       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
         <AppHeader />
         <div className="body flex-grow-1 px-3">
-          <CContainer lg> <CRow className="mt-2">
-        <CCol xs>
-          <CCard className="mb-4">
-            {/* <CCardHeader>Сметы</CCardHeader> */}
+          <CContainer lg>
+            {' '}
+            <CRow className="mt-2">
+              <CCol xs>
+                <CCard className="mb-4">
+                  {/* <CCardHeader>Сметы</CCardHeader> */}
 
-            <CCardBody style={{ padding: '16px' }}>
-              <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
-              <CTable
-                style={{ overflow: 'hidden', borderRadius: '5px' }}
-                align="middle"
-                className="mb-0 border"
-                hover
-                responsive
-              >
-                <CTableHead className="text-center" color="light">
-                  {table.getHeaderGroups().map((headerGroup) => {
-                    return (
-                      <CTableRow key={headerGroup.id}>
-                        {headerGroup.headers.map((header) => {
+                  <CCardBody style={{ padding: '16px' }}>
+                    <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+                    <CTable
+                      style={{ overflow: 'hidden', borderRadius: '5px' }}
+                      align="middle"
+                      className="mb-0 border"
+                      hover
+                      responsive
+                    >
+                      <CTableHead className="text-center" color="light">
+                        {table.getHeaderGroups().map((headerGroup) => {
                           return (
-                            <TableHeader
-                              key={header.id}
-                              header={header}
-                              //
-                            />
+                            <CTableRow key={headerGroup.id}>
+                              {headerGroup.headers.map((header) => {
+                                return (
+                                  <TableHeader
+                                    key={header.id}
+                                    header={header}
+                                    //
+                                  />
+                                )
+                              })}
+                            </CTableRow>
                           )
                         })}
-                      </CTableRow>
-                    )
-                  })}
-                </CTableHead>
-                <CTableBody>
-                  {table.getRowModel().rows.map((row) => {
-                    return (
-                      <CTableRow key={row.id} className="text-center">
-                        {row.getVisibleCells().map((cell) => {
+                      </CTableHead>
+                      <CTableBody>
+                        {table.getRowModel().rows.map((row) => {
                           return (
-                            <CTableDataCell
-                              key={cell.id}
-                              style={{
-                                height: '30px',
-                                minHeight: '30px',
-                                maxHeight: '30px',
-                                padding: '0',
-                                //   padding: '0.4rem 0.4rem',
-                              }}
-                            >
-                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </CTableDataCell>
+                            <CTableRow key={row.id} className="text-center">
+                              {row.getVisibleCells().map((cell) => {
+                                return (
+                                  <CTableDataCell
+                                    key={cell.id}
+                                    style={{
+                                      height: '30px',
+                                      minHeight: '30px',
+                                      maxHeight: '30px',
+                                      padding: '0',
+                                      //   padding: '0.4rem 0.4rem',
+                                    }}
+                                  >
+                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                  </CTableDataCell>
+                                )
+                              })}
+                            </CTableRow>
                           )
                         })}
-                      </CTableRow>
-                    )
-                  })}
-                </CTableBody>
-                {/* <CTableFoot>
+                      </CTableBody>
+                      {/* <CTableFoot>
                   {table.getFooterGroups().map((footerGroup) => {
                     return (
                       <CTableRow>
@@ -166,17 +196,18 @@ const EstimateList = () => {
                     )
                   })}
                 </CTableFoot> */}
-              </CTable>
-              <FiltersButtom
-                styleClass={'mt-2 justify-content-between'}
-                columnFilters={columnFilters}
-                setColumnFilters={setColumnFilters}
-                estimates={estimates}
-              />
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow></CContainer>
+                    </CTable>
+                    <FiltersButtom
+                      styleClass={'mt-2 justify-content-between'}
+                      columnFilters={columnFilters}
+                      setColumnFilters={setColumnFilters}
+                      estimates={estimates}
+                    />
+                  </CCardBody>
+                </CCard>
+              </CCol>
+            </CRow>
+          </CContainer>
         </div>
         <AppFooter />
       </div>
