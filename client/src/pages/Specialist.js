@@ -242,20 +242,12 @@ const Specialist = () => {
           str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
         })
 
-        let str_merch = ''
-        worker.merch && JSON.parse(worker.merch).map((item, index)=> {
-          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-        })
 
         let str_komteg = ''
         worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
           str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
         })
 
-        let str_komteg2 = ''
-        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
-        })
 
         let str_company = ''
         worker.company && JSON.parse(worker.company).map((item, index)=> {
@@ -267,37 +259,26 @@ const Specialist = () => {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
         })
 
-        let str_comment2 = ''
-        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-        })
 
         const newWorker = {
           id: worker.id,
           fio: worker.fio,
           chatId: worker.chatId, 
           phone: worker.phone, 
-          phone2: worker.phone2,
           speclist: str_spec,
           city: worker.city, 
           skill: str_skill,
-          promo: worker.promoId === '0' ? '' : worker.promoId, 
           rank: worker.rank, 
-          merch: str_merch,  
           company: str_company, 
           comteg: str_komteg, 
-          comteg2: str_komteg2, 
           comment: str_comment, 
-          comment2: str_comment2, 
           age: worker.age, 
           reyting: worker.reyting, 
-          inn: worker.inn, 
           passport: worker.passport, 
           profile: worker.profile, 
-          dogovor: worker.dogovor ? '🟢' : '🔴', 
-          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
+          nik: worker.nik,
           //blockW: worker.blockW,
           block18: worker.block18,
           krest: worker.krest,
@@ -413,39 +394,29 @@ const Specialist = () => {
     setCity(worker.city ? worker.city : '')
     setAge(worker.age ? worker.age.split('-')[0] : '')
     setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
-
     setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
-
     setShowBlacklist(worker.speclist.includes('Blacklist'))
-
     setPhone(worker.phone)
-    setPhone2(worker.phone2)
     setTelegram(worker.chatId)
     setSkill(worker.skill ? worker.skill.split(', ') : [])
-
     setReyting(worker.reyting === null ? '' : worker.reyting)
-    setPromo(worker.promo)
     setRank(worker.rank === null ? '' : worker.rank)
-    setMerch(worker.merch ? worker.merch.split(',') : [])
     setCompany(worker.company ? worker.company.split(',') : [])
-    setInn(worker.inn === null ? '' : worker.inn)
     setComteg(worker.comteg ? worker.comteg.split(',') : [])
-    setComteg2(worker.comteg2 ? worker.comteg2.split(',') : [])
     setEmail(worker.email)
     setComment(worker.comment)
-    setComment2(worker.comment2)
     setProfile(worker.profile)
-
     setPassport(worker.passport)
-    setDogovor(worker.dogovor)
-    setSamozanjatost(worker.samozanjatost)
     setPassportScan(worker.passportScan)
+
+    setNik(worker.nik)
     
-    if (userbots) {
-      setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
+    //if (userbots) {
+      //setNik(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.username)
       //setDateReg(userbots.find((user) => user.chatId?.toString() === worker.chatId?.toString())?.createdAt)
       //setDateReg(worker.createdAt)
-    }
+    //}
+
     setDateReg(worker.createdAt)
 
     //setBlockW(worker.blockW)
@@ -458,136 +429,6 @@ const Specialist = () => {
 
   const copyText = (text)=> {
     window.prompt("", text);
-  }
-
-  //сортировка по ФИО
-  const onSortFio = () => {
-    setCountPress(countPress + 1)
-    
-    if (countPress + 1 >= 3) {
-      setCountPress(0)
-    }
-    console.log("check sort", countPress + 1)
-
-    if (countPress + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-        return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else if (countPress + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
-        return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var fioA = a.id, fioB = b.id 
-        return fioB-fioA  //сортировка по убыванию 
-      })
-      setSpecialist(sortedWorker)
-    }
-    
-  }
-
-  //сортировка по telegram
-  const onSortTG = () => {
-    setCountPressTG(countPressTG + 1)
-    
-    if (countPressTG + 1 >= 3) {
-      setCountPressTG(0)
-    }
-    console.log("check sort", countPressTG + 1)
-
-    if (countPressTG + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var tgA = a.telegram, tgB = b.telegram 
-        return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else if (countPressTG + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var tgA = a.telegram, tgB = b.telegram 
-        return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var fioA = a.id, fioB = b.id 
-        return fioB-fioA  //сортировка по убыванию 
-      })
-
-      //setSpecialistCount(sortedWorker)
-      setSpecialist(sortedWorker)
-    }
-    
-  }
-
-  //сортировка по Городу
-  const onSortCity = () => {
-    setCountPressCity(countPressCity + 1)
-    
-    if (countPressCity + 1 >= 3) {
-      setCountPressCity(0)
-    }
-    //console.log("check sort", countPressTG + 1)
-
-    if (countPressCity + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else if (countPressCity + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var idA = a.id, idB = b.id 
-        return idB-idA  //сортировка по убыванию 
-      })
-
-      //setSpecialistCount(sortedWorker)
-      setSpecialist(sortedWorker)
-    }
-    
-  }
-
-  //сортировка по Специальности
-  const onSortCategory = () => {
-    setCountPressCategory(countPressCategory + 1)
-    
-    if (countPressCategory + 1 >= 3) {
-      setCountPressCity(0)
-    }
-    //console.log("check sort", countPressTG + 1)
-
-    if (countPressCategory + 1 === 1) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else if (countPressCategory + 1 === 2) {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var cityA = a.city, cityB = b.city
-        return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setSpecialist(sortedWorker)
-    } else {
-      const sortedWorker = [...specialist].sort((a, b) => {       
-        var idA = a.id, idB = b.id 
-        return idB-idA  //сортировка по убыванию 
-      })
-
-      //setSpecialistCount(sortedWorker)
-      setSpecialist(sortedWorker)
-    }
-    
   }
 
   //ЕЩЁ
@@ -619,20 +460,11 @@ const Specialist = () => {
           str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
         })
 
-        let str_merch = ''
-        worker.skill && JSON.parse(worker.merch).map((item, index)=> {
-          str_merch = str_merch + item.name + (index+1 !== JSON.parse(worker.merch).length ? ', ' : '')
-        })
-
         let str_komteg = ''
         worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
           str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
         })
 
-        let str_komteg2 = ''
-        worker.comteg2 && JSON.parse(worker.comteg2).map((item, index)=> {
-          str_komteg2 = str_komteg2 + item.name + (index+1 !== JSON.parse(worker.comteg2).length ? ', ' : '')
-        })
 
         let str_company = ''
         worker.company && JSON.parse(worker.company).map((item, index)=> {
@@ -643,11 +475,6 @@ const Specialist = () => {
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
           str_comment = str_comment + item.content + (index+1 !== JSON.parse(worker.comment).length ? ', ' : '')
         })
-
-        let str_comment2 = ''
-        worker.comment2 && JSON.parse(worker.comment2).map((item, index)=> {
-          str_comment2 = str_comment2 + item.content + (index+1 !== JSON.parse(worker.comment2).length ? ', ' : '')
-        })
         
 
 				const newWorker = {
@@ -655,31 +482,24 @@ const Specialist = () => {
           fio: worker.fio,
           chatId: worker.chatId, 
           phone: worker.phone, 
-          phone2: worker.phone2,
           speclist: str_spec,
           city: worker.city, 
           skill: str_skill,
-          promo: worker.promoId === '0' ? '' : worker.promoId, 
           rank: worker.rank, 
-          merch: str_merch,  
           company: str_company, 
           comteg: str_komteg, 
-          comteg2: str_komteg, 
           comment: str_comment, 
-          comment2: str_comment2, 
           age: worker.age, 
-          reyting: worker.reyting, 
-          inn: worker.inn, 
+          reyting: worker.reyting,  
           passport: worker.passport, 
           profile: worker.profile, 
-          dogovor: worker.dogovor ? '🟢' : '🔴', 
-          samozanjatost: worker.samozanjatost ? '🟢' : '🔴', 
           passportScan: worker.passportScan, 
           email: worker.email, 
           //blockW: worker.blockW,
           block18: worker.block18,
           krest: worker.krest,
           createdAt: worker.createdAt,
+          nik: worker.nik,
         }
 		
 				arrayWorker.push(newWorker)
@@ -760,15 +580,6 @@ const Specialist = () => {
       companyArr.push(obj)
     })
 
-    let merchArr = []
-    let strMerch = ''
-    merch.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strMerch = strMerch + item + (index+1 !== merch.length ? ', ' : '')
-      merchArr.push(obj)
-    })
 
     let comtegArr = []
     let strComteg = ''
@@ -780,15 +591,6 @@ const Specialist = () => {
       comtegArr.push(obj)
     })
 
-    let comtegArr2 = []
-    let strComteg2 = ''
-    comteg2.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strComteg2 = strComteg2 + item + (index+1 !== comteg2.length ? ', ' : '')
-      comtegArr2.push(obj)
-    })
 
     //комментарии 1
     let commentArr = []
@@ -798,15 +600,6 @@ const Specialist = () => {
     }
     strComment = comment
     commentArr.push(obj1)
-
-    //комментарии 2
-    let commentArr2 = []
-    let strComment2 = ''
-    const obj2 = {
-       content: comment2,
-    }
-    strComment2 = comment2
-    commentArr2.push(obj2)
 
 
     const saveData = {
@@ -823,9 +616,11 @@ const Specialist = () => {
       profile,
       email,
       passport,
+      passportScan,
       //blockW,
       block18,
-      krest
+      krest,
+      nik
     }
     console.log(saveData)
 
@@ -849,9 +644,11 @@ const Specialist = () => {
         profile,
         email,
         passport,
+        passportScan,
         //blockW,
         block18,
         krest,
+        nik,
       };
 
       console.log("update user: ", usersCopy[userIndex])
@@ -994,6 +791,136 @@ const Specialist = () => {
   }
 
 
+    //сортировка по ФИО
+    const onSortFio = () => {
+      setCountPress(countPress + 1)
+      
+      if (countPress + 1 >= 3) {
+        setCountPress(0)
+      }
+      console.log("check sort", countPress + 1)
+  
+      if (countPress + 1 === 1) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+          return (fioA < fioB) ? -1 : (fioA > fioB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else if (countPress + 1 === 2) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var fioA = a.fio.toUpperCase(), fioB = b.fio.toUpperCase(); 
+          return (fioA > fioB) ? -1 : (fioA < fioB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var fioA = a.id, fioB = b.id 
+          return fioB-fioA  //сортировка по убыванию 
+        })
+        setSpecialist(sortedWorker)
+      }
+      
+    }
+  
+    //сортировка по telegram
+    const onSortTG = () => {
+      setCountPressTG(countPressTG + 1)
+      
+      if (countPressTG + 1 >= 3) {
+        setCountPressTG(0)
+      }
+      console.log("check sort", countPressTG + 1)
+  
+      if (countPressTG + 1 === 1) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var tgA = a.telegram, tgB = b.telegram 
+          return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else if (countPressTG + 1 === 2) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var tgA = a.telegram, tgB = b.telegram 
+          return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var fioA = a.id, fioB = b.id 
+          return fioB-fioA  //сортировка по убыванию 
+        })
+  
+        //setSpecialistCount(sortedWorker)
+        setSpecialist(sortedWorker)
+      }
+      
+    }
+  
+    //сортировка по Городу
+    const onSortCity = () => {
+      setCountPressCity(countPressCity + 1)
+      
+      if (countPressCity + 1 >= 3) {
+        setCountPressCity(0)
+      }
+      //console.log("check sort", countPressTG + 1)
+  
+      if (countPressCity + 1 === 1) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else if (countPressCity + 1 === 2) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var idA = a.id, idB = b.id 
+          return idB-idA  //сортировка по убыванию 
+        })
+  
+        //setSpecialistCount(sortedWorker)
+        setSpecialist(sortedWorker)
+      }
+      
+    }
+  
+    //сортировка по Специальности
+    const onSortCategory = () => {
+      setCountPressCategory(countPressCategory + 1)
+      
+      if (countPressCategory + 1 >= 3) {
+        setCountPressCity(0)
+      }
+      //console.log("check sort", countPressTG + 1)
+  
+      if (countPressCategory + 1 === 1) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else if (countPressCategory + 1 === 2) {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var cityA = a.city, cityB = b.city
+          return (cityA > cityB) ? -1 : (cityA < cityB) ? 1 : 0;  //сортировка по возрастанию 
+        })
+        setSpecialist(sortedWorker)
+      } else {
+        const sortedWorker = [...specialist].sort((a, b) => {       
+          var idA = a.id, idB = b.id 
+          return idB-idA  //сортировка по убыванию 
+        })
+  
+        //setSpecialistCount(sortedWorker)
+        setSpecialist(sortedWorker)
+      }
+      
+    }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1048,26 +975,19 @@ const Specialist = () => {
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
                                         <CTableHeaderCell className='myfio-th widthSpace' onClick={onSortFio}>ФИО</CTableHeaderCell>  
                                         <CTableHeaderCell className='my-th widthTg' onClick={onSortTG}>Телеграм</CTableHeaderCell> 
+                                        <CTableHeaderCell className='my-th widthTg'>Никнейм</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthPhone'>Телефон</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace'>Специальность</CTableHeaderCell> 
                                         <CTableHeaderCell className='my-th widthSpace' onClick={onSortCity}>Город</CTableHeaderCell>   
                                         <CTableHeaderCell className='my-th widthSpace'>Год</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthPhone'>Телефон №2</CTableHeaderCell>                         
-                                        <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Промокод</CTableHeaderCell>                                       
-                                        <CTableHeaderCell className='my-th widthSpace'>Мерч</CTableHeaderCell>
+                                        <CTableHeaderCell className='my-th widthSpace'>Проекты</CTableHeaderCell>                     
+                                        <CTableHeaderCell className='my-th widthSpace'>Навык</CTableHeaderCell>                                     
                                         <CTableHeaderCell className='my-th widthSpace'>Прокатная компания</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Комтег</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комтег №2</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии №2</CTableHeaderCell>                                        
+                                        <CTableHeaderCell className='my-th widthSpace'>Комментарии</CTableHeaderCell>                                       
                                         <CTableHeaderCell className='my-th widthSpace'>Рейтинг</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>ИНН</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Паспорт</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Профиль</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>Д</CTableHeaderCell>
-                                        <CTableHeaderCell className='my-th widthSpace'>С</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Паспорт [скан]</CTableHeaderCell>
                                         <CTableHeaderCell className='my-th widthSpace'>Почта</CTableHeaderCell>
                                       </CTableRow>
@@ -1083,6 +1003,9 @@ const Specialist = () => {
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                             {item.chatId}
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center widthSpace">
+                                            {item.nik}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center">
                                             {item.phone}
@@ -1100,49 +1023,25 @@ const Specialist = () => {
                                           {item.rank}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
-                                          {item.phone2}
-                                          </CTableDataCell> 
-                                          <CTableDataCell className="text-center widthSpace">
                                           {item.skill}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.promo}
-                                          </CTableDataCell>                                         
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.merch}
-                                          </CTableDataCell>
+                                          </CTableDataCell>                                       
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.company ? (item.company.length > 20 ? item.company.substr(0, 20) + '...' : item.company) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.comteg ? (item.comteg.length > 30 ? item.comteg.substr(0, 30) + '...' : item.comteg) : ''}
                                           </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.comteg2 ? (item.comteg2.length > 30 ? item.comteg2.substr(0, 30) + '...' : item.comteg2) : ''}
-                                          </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.comment ? (item.comment.length > 30 ? item.comment.substr(0, 30) + '...' : item.comment) : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
-                                          {item.comment2 ? (item.comment2.length > 30 ? item.comment2.substr(0, 30) + '...' : item.comment2) : ''}
-                                          </CTableDataCell>                                         
+                                          </CTableDataCell>                                        
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.reyting}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.inn}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.passport ? (item.passport.length > 30 ? item.passport.substr(0, 30) + '...' : item.passport) : ''}
                                           </CTableDataCell>
                                           <CTableDataCell className="widthSpace" style={{textAlign: 'left'}}>
                                           {item.profile ? (item.profile.length > 30 ? item.profile.substr(0, 30) + '...' : item.profile) : ''}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.dogovor}
-                                          </CTableDataCell>
-                                          <CTableDataCell className="text-center widthSpace">
-                                          {item.samozanjatost}
                                           </CTableDataCell>
                                           <CTableDataCell className="text-center widthSpace">
                                           {item.passportScan}
