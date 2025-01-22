@@ -71,8 +71,8 @@ const Document = () => {
   const [editing, setEditing] = useState(false)
   const [showModalEmpty, setShowModalEmpty] = useState(false)
   const queryClient = useQueryClient()
-  const [refetch, setRefetch] = useState(false)
-  const [, updateState] = useState()
+  
+  
 
 
 
