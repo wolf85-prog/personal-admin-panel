@@ -1822,7 +1822,7 @@ ${loc.url}`;
                                                   value={comment}
                                                   onChange={(e)=>setComment(e.target.value)}
                                                 />
-                                            </div> 
+                                            </div>
 
                                           {/* <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
                                             <label className='title-label' style={{marginTop: '15px'}}>Предварительная смета</label>
@@ -1858,8 +1858,7 @@ ${loc.url}`;
                                         <div style={{textAlign: 'center', marginTop: '10px'}}>
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
                                             <img src={Trubka} onClick={()=>{
-                                              const comp = clientAll.find(item=> item.userfamily === managerName)
-                                              console.log(comp)
+                                              const comp = clientAll.find(item=> item.userfamily === managerName).id                                              
                                               clickToCall(comp, 'c')
                                             }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
