@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Link } from 'react-router-dom'
 import { createColumnHelper } from '@tanstack/react-table'
-import { CFormCheck } from '@coreui/react'
+import { CFormCheck, CModal,CModalBody } from '@coreui/react'
 import { useMemo, useState, useEffect } from 'react'
 import { format, formatPhoneNumber, formatDate, formatDocumentStatus } from 'src/utils/formater'
 import { ReactComponent as RobotSvg } from './robot.svg'
@@ -14,6 +14,7 @@ export const useTableData = () => {
   const [data, setData] = useState(onairStatuses.filter((pItem) => pItem.project_id === 1))
   const [projectFilter, setProjectFilter] = useState(1)
   const [columnFilters, setColumnFilters] = useState()
+  const [showModalEmpty, setShowModalEmpty] = useState(false)
   const columnHelper = createColumnHelper()
 
   const handleChangeProject = (projectId) => {
@@ -192,8 +193,25 @@ export const useTableData = () => {
         cell: ({ row }) => {
           return (
             <>
-              <PhoneSvg style={{ cursor: 'pointer', marginRight: '5px' }} />
-              <RobotSvg style={{ cursor: 'pointer' }} />
+              <CModal
+                alignment="center"
+                visible={showModalEmpty}
+                onClose={() => setShowModalEmpty(false)}
+                aria-labelledby="VerticallyCenteredExample"
+              >
+                <CModalBody
+                  style={{
+                    height: '100px',
+                    textAlign: 'center',
+                    fontSize: '18px',
+                    paddingTop: '15px',
+                  }}
+                >
+                   Функция не доступна по данному тарифу
+                </CModalBody>
+              </CModal>
+              <div style={{display: 'inline-block'}} onClick={()=> setShowModalEmpty(true)}><PhoneSvg style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
+              <div style={{display: 'inline-block'}} onClick={()=> setShowModalEmpty(true)}><RobotSvg style={{ cursor: 'pointer' }} /></div>
             </>
           )
         },
