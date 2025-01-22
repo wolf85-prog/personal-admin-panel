@@ -90,7 +90,7 @@ import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
-import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster } from '../http/adminAPI'
+import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
@@ -195,7 +195,18 @@ const Projects = () => {
   const [pretendents, setPretendents] = useState([])
 
   const [countPressDate, setCountPressDate] = useState(0);
+  
+  const clickToCall = async(id, callType) => {
+		// Button begins to shake
+		// setPress(true);
+		// console.log(press)
+        
+		// Buttons stops to shake after 2 seconds
+		// setTimeout(() => setPress(false), 200);
 
+		// audioIshodCall.play();
+		await getCompanySendCall(id, callType)
+	}
 
   const table = useReactTable({
     defaultColumn: {
@@ -1837,11 +1848,18 @@ ${loc.url}`;
                                         {/* 5 */}   
                                         <div style={{textAlign: 'center', marginTop: '10px'}}>
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
-                                            <img src={Trubka} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                            <img src={Trubka} onClick={()=>{
+                                              const comp = clientAll.find(item=> item.userfamily === managerName)
+                                              console.log(comp)
+                                              clickToCall(comp, 'c')
+                                            }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '44px'}}>
-                                            <img src={Trubka} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                            <img src={Trubka} onClick={()=>{
+                                              const comp = workersAll.find(item=> item.userfamily === managerName2).id                                              
+                                              clickToCall(comp, 'w')
+                                            }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
                                           {/* <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>

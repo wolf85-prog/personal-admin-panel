@@ -642,6 +642,23 @@ export const startSoundNotif = async()=>{
 
 //------------------------------------------------------------------------------------------
 
+//call company Db
+export const getCompanySendCall = async(id, callType)=>{
+    console.log(id)
+    try {
+        const response = await $host_call.post('/calls/company-calls', {
+            "id": id,
+            "type": callType
+        });
+        console.log("call: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getSendCall api", error.message);
+    }
+}
+
+
+
 //call
 export const getSendCall = async(tg_id)=>{
     try {
