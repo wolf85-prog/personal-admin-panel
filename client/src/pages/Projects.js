@@ -1776,7 +1776,7 @@ ${loc.url}`;
                                           </div>
 
                                           <div style={{position:'relative'}}>
-                                            <label className='title-label'>Как добраться</label>
+                                            <label className='title-label' style={{marginLeft: '50px'}}>Как добраться</label>
                                             <div className="text-field" style={{marginBottom: '0px'}} >
                                               <textarea 
                                                 className="text-field__input" 
@@ -1791,7 +1791,7 @@ ${loc.url}`;
                                             <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '238px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
 
-                                          <label className='title-label'>Комментарии</label>
+                                          <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>
                                           <div className="text-field" style={{marginBottom: '0px'}}>
                                                 <textarea 
                                                   className="text-field__input" 
