@@ -270,14 +270,15 @@ const Projects = () => {
     //2
     let arrManagers = []
     clientAll.map((item, index)=> {
-      if (item.fio) {
-        arrManagers.push(item.fio)
+      console.log("item client: ", item)
+      if (item.userfamily) {
+        arrManagers.push(item.userfamily)
       }  
     })
     const sortedManager = [...arrManagers].sort((a, b) => {       
       return (a < b) ? -1 : (a > b) ? 1 : 0;  //сортировка по возрастанию 
     })
-    //console.log("sortedManager: ", sortedManager)
+    console.log("sortedManager: ", sortedManager)
     setClientsData(sortedManager)
 
     //3
@@ -370,9 +371,10 @@ const Projects = () => {
     setCompanyName(compTitle?.title ? compTitle?.title : '')
 
     const managerFio = clientAll.find(item=> item.id.toString() === resProj.managerId)
-    setManagerName(managerFio?.fio)
+    setManagerName(managerFio?.userfamily)
 
-    const comp = clientAll.find(item=> item.fio === managerFio?.fio)
+    const comp = clientAll.find(item=> item.userfamily === managerFio?.userfamily)
+    console.log("comp2: ", comp)
     if (comp) {
       setPhone(comp.phone)
     } else {
@@ -383,11 +385,11 @@ const Projects = () => {
     setManagerName2(managerFio2?.fio)
 
     const comp2 = workersAll.find(item=> item.fio === managerFio2?.fio)
-    if (comp2) {
-      setPhone2(comp2.phone)
-    } else {
-      setPhone2('')
-    }
+    // if (comp2) {
+    //   setPhone2(comp2.phone)
+    // } else {
+    //   setPhone2('')
+    // }
 
     //setLocationProject(resProj.geo)
     const loc = platformsAll.find(item=> item.id === parseInt(resProj?.geo))
@@ -1442,7 +1444,7 @@ ${loc.url}`;
                                                       if (comp) {
                                                         setCompanyName(comp.title)
                                                         setCompany(comp.id)
-                                                        setPhone()
+                                                        //setPhone()
                                                         // setInn(comp.inn) 
                                                         // setSklad(comp.sklad)
                                                         // setOffice(comp.office)
@@ -1665,7 +1667,10 @@ ${loc.url}`;
                                               options={workersData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={onChangeManager2}
+                                              //onInputChange={onChangeManager2}
+                                              onInputChange={(event, newInputValue) => {
+                                                setManagerName2(newInputValue);
+                                              }}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {                                                      
                                                   const comp = workersAll.find(item=> item.fio === newValue)

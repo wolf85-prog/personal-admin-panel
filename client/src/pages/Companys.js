@@ -102,8 +102,8 @@ const Companys = () => {
 
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
-  const [comteg, setComteg] = useState([]);
-  const [sfera, setSfera] = useState([]);
+  const [comteg, setComteg] = useState('');
+  const [sfera, setSfera] = useState('');
   const [dogovorDate, setDogovorDate] = useState('');
   const [dogovorNumber, setDogovorNumber] = useState('');
   const [dateReg, setDateReg] = useState('');
@@ -208,15 +208,15 @@ const Companys = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        let str_sfera = ''
-        user.sfera && JSON.parse(user.sfera).map((item, index)=> {
-          str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
-        })
+        // let str_sfera = ''
+        // user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+        //   str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+        // })
 
-        let str_comteg = ''
-        user.comteg && JSON.parse(user.comteg).map((item, index)=> {
-          str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
-        })
+        // let str_comteg = ''
+        // user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+        //   str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+        // })
 
         let str_comment = ''
         user.comment && JSON.parse(user.comment).map((item, index)=> {
@@ -249,8 +249,8 @@ const Companys = () => {
           bugalterEmail: user.bugalterEmail,
           bugalterPhone: user.bugalterPhone,
           profile: user.profile,
-          sfera: str_sfera,
-          comteg: str_comteg,
+          sfera: user.sfera,
+          comteg: user.comteg,
 
         }
         arrCompanys.push(newUser)
@@ -447,10 +447,10 @@ const Companys = () => {
     setShowMenu2(false)
 
     //убрать из списка специальностей Blacklist
-    const res = sfera.filter(item=>item !== 'Blacklist')
-    console.log("sfera: ", res)
+    // const res = sfera.filter(item=>item !== 'Blacklist')
+    // console.log("sfera: ", res)
 
-    setSfera(res)
+    // setSfera(res)
   }
 
   const onChangeBlacklist = () => {
@@ -459,11 +459,11 @@ const Companys = () => {
 
     //добавить в список специальностей Blacklist
 
-    const arr = [...sfera]
-    arr.push('Blacklist')
-    console.log("sfera: ", arr)
+    // const arr = [...sfera]
+    // arr.push('Blacklist')
+    // console.log("sfera: ", arr)
 
-    setSfera(arr)
+    // setSfera(arr)
   }
 //------ загрузить аватар-------------
   useEffect(() => {
@@ -525,25 +525,25 @@ const Companys = () => {
       setShowClose(true)
       console.log("managersObj: ", managersObj)
   
-      let sferaArr = []
-      let strSfera = ''
-      sfera.map((item, index)=> {
-        const obj = {
-          name: item,
-        }
-        strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
-        sferaArr.push(obj)
-      })
+      // let sferaArr = []
+      // let strSfera = ''
+      // sfera.map((item, index)=> {
+      //   const obj = {
+      //     name: item,
+      //   }
+      //   strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
+      //   sferaArr.push(obj)
+      // })
 
-      let comtegArr = []
-      let strComteg = ''
-      comteg.map((item, index)=> {
-        const obj = {
-          name: item,
-        }
-        strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
-        comtegArr.push(obj)
-      })
+      // let comtegArr = []
+      // let strComteg = ''
+      // comteg.map((item, index)=> {
+      //   const obj = {
+      //     name: item,
+      //   }
+      //   strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
+      //   comtegArr.push(obj)
+      // })
   
       let managersArr = []
       let strManagers = ''
@@ -602,8 +602,8 @@ const Companys = () => {
         bugalterPhone,  
         inn, //инн компании
         profile,
-        sfera: JSON.stringify(sferaArr),
-        comteg: JSON.stringify(comtegArr),
+        sfera,
+        comteg,
       }
       console.log("saveData: ", saveData)
   
@@ -628,8 +628,8 @@ const Companys = () => {
           bugalterPhone,  
           inn, //инн компании
           profile,
-          sfera: strSfera,
-          comteg: strComteg,
+          sfera,
+          comteg,
         };
   
         console.log("update user: ", usersCopy[userIndex])
@@ -692,8 +692,8 @@ const Companys = () => {
     setBugalterEmail(user.bugalterEmail ? user.bugalterEmail : '')
     setBugalterPhone(user.bugalterPhone ? user.bugalterPhone : '')
     setProfile(user.profile)
-    setSfera(user.sfera ? user.sfera.split(', ') : [])
-    setComteg(user.comteg ? user.comteg.split(', ') : [])
+    setSfera(user.sfera ? user.sfera : '')
+    setComteg(user.comteg ? user.comteg : '')
     setComment(user.comment)
     setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
   }
@@ -1202,13 +1202,13 @@ const Companys = () => {
 
                                   {/* phone */}
                                   <label className='title-label'>Телефон</label>
-                                  <div className="text-field" onMouseOver={()=>showSavePhone(true)} onMouseOut={()=>showSavePhone(false)} >
-                                      <img 
+                                  <div className="text-field" >
+                                      {/* <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                         alt="" 
                                         style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                      />
+                                      /> */}
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 

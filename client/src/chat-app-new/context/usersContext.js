@@ -361,18 +361,13 @@ useEffect(() => {
 			userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
 			username: '',//user.username,
 			phone: user.phone,
-			phone2: user.phone2,
 			dateborn: user.age,
 			city: user.city, 
-			//newcity: user.newcity, 
 			companys: user.company,
-			//stag: user.stag,
 			worklist:  user.specialization,
 			chatId: user.chatId,
 			createDate: user.createdAt,
 			avatar: user.profile,
-			//from: user.from,
-			promoId: user.promoId,
 			blockW: user.blockW,
 			deleted: user.deleted,
 			comment: user.comment,
@@ -585,14 +580,11 @@ useEffect(() => {
 				phone: user.phone,
 				dateborn: user.age,
 				city: user.city, 
-				//newcity: user.newcity, 
 				companys: user.company,
-				//stag: user.stag,
 				worklist:  user.specialization,
 				chatId: user.chatId,
 				createDate: user.createdAt,
 				avatar: user.profile,
-				//from: user.from,
 				blockW: user.blockW,
 				deleted: user.deleted,
 				comment: user.comment,
@@ -602,9 +594,8 @@ useEffect(() => {
 		
 				arrayWorkerAll.push(newWorker)
 			})
-		
-			setWorkersAll(arrayWorkerAll)
-			
+
+			setWorkersAll(arrayWorkerAll)	
 
 
 			//1 все специалисты 100
