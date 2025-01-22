@@ -236,7 +236,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Инструкция"
               placement="bottom"
             >
-              <CNavLink onClick={()=>handleLinkClick('https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc')} style={{position: 'relative', cursor: 'pointer'}}>
+              <CNavLink  style={{position: 'relative', cursor: 'pointer'}}>
                 <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
@@ -322,42 +322,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           </CNavItem>
           
           {/* Обновление данных */}
-          <CNavItem>
-            <CNavLink style={{position: 'relative'}}>
-              <CTooltip
-                content="Обновление данных"
-                placement="bottom"
-              >
-                <CIcon icon={cilList} size="lg" onClick={()=>setShowBar(!showBar)}/>
-              </CTooltip>
-              <div 
-                  style={{
-                    backgroundColor: '#2a2f32', 
-                    // width: '250px', 
-                    height: '44px', 
-                    position: 'absolute', 
-                    top: '50px', 
-                    right: '10px',
-                    display: showBar ? 'flex' : 'none',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '10px',
-                    border: '1px solid #4b4b4b',
-                    padding: '10px',
-                  }}>
-                      <div className='dark-theme' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '200px'}}>
-                            <div style={{width:'100%', position: 'relative', textAlign: 'center'}}>
-                              <CProgress color="primery" height={10} value={workerUpdate}/>
-                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
-                            </div>
-                            <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
-                              Д
-                            </CButton>
-                      </div>
-              </div>
-            </CNavLink>
-              {/* <AppHeaderDropdown2 /> */}
-          </CNavItem>
+          
 
           {/* Mango */}
           <CNavItem>
@@ -365,7 +330,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Mango"
               placement="bottom"
             >
-              <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
+              <CNavLink style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
                 <CIcon icon={cilPhone} size="lg"/>
               </CNavLink>
             </CTooltip>
@@ -520,7 +485,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Удаленные проекты"
               placement="bottom"
             >
-              <CNavLink href="/trash" style={{position: 'relative'}}>
+              <CNavLink href="#" style={{position: 'relative'}}>
                 <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
@@ -544,7 +509,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               content="Звуковые уведомления"
               placement="bottom"
             >
-              <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
+              <CNavLink href="#" style={{position: 'relative'}}>
                 <CIcon icon={cilBell} size="lg" />
                 {/* <CBadge color="success" className="ms-2">
                   5

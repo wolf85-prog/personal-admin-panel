@@ -58,6 +58,7 @@ import { array } from 'prop-types';
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
 import MyDropdown2 from 'src/components/Dropdown2/Dropdown2';
+import DropdownClient from 'src/components/DropdownClient/DropdownClient';
 
 import specData from 'src/data/specData';
 import specOnlyData from 'src/data/specOnlyData';
@@ -66,6 +67,7 @@ import skills from 'src/data/skills';
 import merchData from 'src/data/merchData';
 import companys from 'src/data/companys';
 import cities from 'src/data/cities';
+import comtegsWorker from 'src/data/comtegsWorker';
 
 //Workers.js
 const Specialist = () => {
@@ -116,25 +118,18 @@ const Specialist = () => {
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
   const [age2, setAge2] = useState(0);
-  const [speclist, setSpeclist] = useState([]);
+  const [speclist, setSpeclist] = useState('');
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
   const [telegram, setTelegram] = useState('');
   const [skill, setSkill] = useState('');
   const [reyting, setReyting] = useState('');
-  const [promo, setPromo] = useState('');
   const [rank, setRank] = useState('');
-  const [merch, setMerch] = useState('');
   const [company, setCompany] = useState('');
-  const [inn, setInn] = useState('');
   const [comteg, setComteg] = useState('');
-  const [comteg2, setComteg2] = useState('');
   const [email, setEmail] = useState('');
   const [comment, setComment] = useState('');
-  const [comment2, setComment2] = useState('');
   const [passport, setPassport] = useState('');
-  const [dogovor, setDogovor] = useState('');
-  const [samozanjatost, setSamozanjatost] = useState('');
   const [passportScan, setPassportScan] = useState('');
   const [nik, setNik] = useState('');
   const [dateReg, setDateReg] = useState('');
@@ -232,27 +227,27 @@ const Specialist = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        let str_spec = ''
-        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-        })
+        // let str_spec = ''
+        // worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+        //   str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+        // })
 
-        let str_skill = ''
-        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-        })
-
-
-        let str_komteg = ''
-        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        })
+        // let str_skill = ''
+        // worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+        //   str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+        // })
 
 
-        let str_company = ''
-        worker.company && JSON.parse(worker.company).map((item, index)=> {
-          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-        })
+        // let str_komteg = ''
+        // worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+        //   str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+        // })
+
+
+        // let str_company = ''
+        // worker.company && JSON.parse(worker.company).map((item, index)=> {
+        //   str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+        // })
 
         let str_comment = ''
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
@@ -265,12 +260,12 @@ const Specialist = () => {
           fio: worker.fio,
           chatId: worker.chatId, 
           phone: worker.phone, 
-          speclist: str_spec,
+          speclist: worker.specialization,
           city: worker.city, 
-          skill: str_skill,
+          skill: worker.skill,
           rank: worker.rank, 
-          company: str_company, 
-          comteg: str_komteg, 
+          //company: str_company, 
+          comteg: worker.comteg, 
           comment: str_comment, 
           age: worker.age, 
           reyting: worker.reyting, 
@@ -357,12 +352,8 @@ const Specialist = () => {
         fio: res?.fio, 
         speclist: '',
         skill: '',
-        merch: '',  
-        company: '', 
         comteg: '', 
-        comteg2: '', 
         comment: '', 
-        comment2: '', 
     })
 
     const sortedUser = [...specialist].sort((a, b) => {       
@@ -394,15 +385,15 @@ const Specialist = () => {
     setCity(worker.city ? worker.city : '')
     setAge(worker.age ? worker.age.split('-')[0] : '')
     setAge2(worker.age ? parseInt(currentYear) - parseInt(worker.age ? worker.age.split('-')[0] : 0) : '')
-    setSpeclist(worker.speclist ? worker.speclist.split(', ') : [])
-    setShowBlacklist(worker.speclist.includes('Blacklist'))
+    setSpeclist(worker.speclist ? worker.speclist : '')
+    //setShowBlacklist(worker.speclist.includes('Blacklist'))
     setPhone(worker.phone)
     setTelegram(worker.chatId)
-    setSkill(worker.skill ? worker.skill.split(', ') : [])
+    setSkill(worker.skill ? worker.skill : '')
     setReyting(worker.reyting === null ? '' : worker.reyting)
     setRank(worker.rank === null ? '' : worker.rank)
-    setCompany(worker.company ? worker.company.split(',') : [])
-    setComteg(worker.comteg ? worker.comteg.split(',') : [])
+    //setCompany(worker.company ? worker.company.split(',') : [])
+    setComteg(worker.comteg ? worker.comteg : '')
     setEmail(worker.email)
     setComment(worker.comment)
     setProfile(worker.profile)
@@ -450,26 +441,26 @@ const Specialist = () => {
         
         const newDate = `${day}.${month} ${chas}:${min}`;
 
-        let str_spec = ''
-        worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-          str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-        })
+        // let str_spec = ''
+        // worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
+        //   str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
+        // })
 
-        let str_skill = ''
-        worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-          str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-        })
+        // let str_skill = ''
+        // worker.skill && JSON.parse(worker.skill).map((item, index)=> {
+        //   str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
+        // })
 
-        let str_komteg = ''
-        worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-          str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        })
+        // let str_komteg = ''
+        // worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
+        //   str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
+        // })
 
 
-        let str_company = ''
-        worker.company && JSON.parse(worker.company).map((item, index)=> {
-          str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-        })
+        // let str_company = ''
+        // worker.company && JSON.parse(worker.company).map((item, index)=> {
+        //   str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
+        // })
 
         let str_comment = ''
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
@@ -482,12 +473,12 @@ const Specialist = () => {
           fio: worker.fio,
           chatId: worker.chatId, 
           phone: worker.phone, 
-          speclist: str_spec,
+          speclist:  worker.speclist,
           city: worker.city, 
-          skill: str_skill,
+          skill:  worker.skill,
           rank: worker.rank, 
-          company: str_company, 
-          comteg: str_komteg, 
+          //company: str_company, 
+          comteg:  worker.komteg, 
           comment: str_comment, 
           age: worker.age, 
           reyting: worker.reyting,  
@@ -535,64 +526,32 @@ const Specialist = () => {
     let specArr = []
     let strSpec = ''
 
-    speclist.map((item, index) => {
-      specData.map((category)=> {
-          category.models.map((work)=> {
-              if (work.name === item){
-                  const obj = {
-                      spec: item,
-                      cat: category.icon,
-                  }
-                  strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
-                  specArr.push(obj)
-              }
-          })
-      })
-      if (item === 'Blacklist') {
-        const obj = {
-            spec: item,
-            cat: 'Blacklist',
-        }
-        strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
-        specArr.push(obj) 
-      }
-    })
-
-    console.log("specArr: ", specArr)
-
-    let skillArr = []
-    let strSkill = ''
-    skill.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strSkill = strSkill + item + (index+1 !== skill.length ? ', ' : '')
-      skillArr.push(obj)
-    })
-
-    let companyArr = []
-    let strCompany = ''
-    company.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strCompany = strCompany + item + (index+1 !== company.length ? ', ' : '')
-      companyArr.push(obj)
-    })
-
-
-    let comtegArr = []
-    let strComteg = ''
-    comteg.map((item, index)=> {
-      const obj = {
-        name: item,
-      }
-      strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
-      comtegArr.push(obj)
-    })
+    // speclist.map((item, index) => {
+    //   specData.map((category)=> {
+    //       category.models.map((work)=> {
+    //           if (work.name === item){
+    //               const obj = {
+    //                   spec: item,
+    //                   cat: category.icon,
+    //               }
+    //               strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
+    //               specArr.push(obj)
+    //           }
+    //       })
+    //   })
+    //   if (item === 'Blacklist') {
+    //     const obj = {
+    //         spec: item,
+    //         cat: 'Blacklist',
+    //     }
+    //     strSpec = strSpec + item + (index+1 !== speclist.length ? ', ' : '')
+    //     specArr.push(obj) 
+    //   }
+    // })
 
 
     //комментарии 1
+    
     let commentArr = []
     let strComment = ''
     const obj1 = {
@@ -608,10 +567,10 @@ const Specialist = () => {
       chatId: telegram,
       city: city,
       age: age ? age+'-01-01' : '', 
-      speclist: JSON.stringify(specArr),
-      company: JSON.stringify(companyArr),
-      skill: JSON.stringify(skillArr),
-      comteg: JSON.stringify(comtegArr),
+      speclist,
+      //company: JSON.stringify(companyArr),
+      skill,
+      comteg,
       comment: JSON.stringify(commentArr),
       profile,
       email,
@@ -635,10 +594,10 @@ const Specialist = () => {
         phone, 
         city: city, 
         age: age ? age+'-01-01' : '', 
-        speclist: strSpec,
-        company: strCompany,
-        skill: strSkill,
-        comteg: strComteg,
+        speclist,
+        //company: strCompany,
+        skill,
+        comteg,
         comment: strComment,
         chatId: telegram,
         profile,
@@ -691,15 +650,6 @@ const Specialist = () => {
     setTelegram(result);
   };
 
-  const handleInn = event => {
-    const result = event.target.value.replace(/\D/g, '');
-    setInn(result);
-  };
-
-  const handlePromo = event => {
-    const result = event.target.value.replace(/\D/g, '');
-    setPromo(result);
-  };
 
   const changeSpec = (e) => {
     console.log(e.target.innerText)
@@ -712,10 +662,7 @@ const Specialist = () => {
     setShowMenu2(false)
 
     //убрать из списка специальностей Blacklist
-    const res = speclist.filter(item=>item !== 'Blacklist')
-    console.log("speclist: ", res)
-
-    setSpeclist(res)
+    
   }
 
   const onChangeBlacklist = () => {
@@ -723,10 +670,7 @@ const Specialist = () => {
     setShowMenu1(false)
 
     //добавить в список специальностей Blacklist
-    speclist.push('Blacklist')
-    console.log("speclist: ", speclist)
 
-    setSpeclist(speclist)
   }
 
   const onChangeBlock18 = () => {
@@ -1242,31 +1186,50 @@ const Specialist = () => {
 
                                   <label className='title-label'>Специальность</label>
                                   <div className="text-field"> 
-                                      <MyDropdown2
+                                      {/* <MyDropdown2
                                         tags={speclist.filter(item=>item !== 'Blacklist')}
                                         setTags={setSpeclist}
                                         options={specOnlyData}
                                         onChange={changeSpec}
+                                      /> */}
+                                      <DropdownClient
+                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                        options={specOnlyData}
+                                        tags={speclist}
+                                        setTags={setSpeclist}
                                       />
                                   </div>
                                   
                                   <label className='title-label'>Навык</label>
                                   <div className="text-field"> 
-                                      <MyDropdown2
+                                      {/* <MyDropdown2
                                         tags={skill}
                                         setTags={setSkill}
                                         options={skills}
                                         onChange={changeSpec}
+                                      /> */}
+                                      <DropdownClient
+                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                        options={skills}
+                                        tags={skill}
+                                        setTags={setSkill}
                                       />
                                   </div>
 
-                                  <label className='title-label'>Комтеги</label>
+                                  <label className='title-label'>Комтег</label>
                                   <div className="text-field"> 
-                                      <MyDropdown2
+                                      {/* <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
                                         options={comtegs}
-                                        //onChange={changeSpec}
+                                        onChange={changeSpec}
+                                        style={{minHeight: '40px !important'}}
+                                      /> */}
+                                      <DropdownClient
+                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                        options={comtegsWorker}
+                                        tags={comteg}
+                                        setTags={setComteg}
                                       />
                                   </div>
 

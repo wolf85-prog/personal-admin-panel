@@ -222,7 +222,7 @@ const AppHeader = (props) => {
               content="Инструкция"
               placement="bottom"
             >
-              <CNavLink onClick={()=>handleLinkClick('https://www.notion.so/amusienko/dfed170e9f0242f8af156b8d175f038e?v=d6a54b36fb4b4e2487256a2f2578ecbc')} style={{position: 'relative', cursor: 'pointer'}}>
+              <CNavLink style={{position: 'relative', cursor: 'pointer'}}>
                 <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
@@ -316,7 +316,7 @@ const AppHeader = (props) => {
               content="Mango"
               placement="bottom"
             >
-              <CNavLink onClick={clickPhone} style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
+              <CNavLink style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
                 <CIcon icon={cilPhone} size="lg"/>
               </CNavLink>
             </CTooltip>
@@ -472,7 +472,7 @@ const AppHeader = (props) => {
               content="Удаленные проекты"
               placement="bottom"
             >
-              <CNavLink href="/trash" style={{position: 'relative'}}>
+              <CNavLink href="#" style={{position: 'relative'}}>
                 <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
@@ -496,7 +496,7 @@ const AppHeader = (props) => {
               content="Звуковые уведомления"
               placement="bottom"
             >
-              <CNavLink href="/soundsnotif" style={{position: 'relative'}}>
+              <CNavLink href="#" style={{position: 'relative'}}>
                 <CIcon onClick={clickBell} icon={cilBell} size="lg" />
                 {/* <CBadge color="success" className="ms-2">
                   5

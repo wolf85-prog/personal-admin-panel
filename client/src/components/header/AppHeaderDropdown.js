@@ -10,6 +10,12 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+  CButton, 
 } from '@coreui/react'
 import {
   cilBell,
@@ -32,6 +38,8 @@ const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
   const { userId, setUserId } = useUsersContext();
   const [companyId, setCompanyId] = useState('');
+
+  const [visibleOut, setVisibleOut] = useState(false)
 
   const location = useLocation();
 
@@ -58,6 +66,7 @@ const AppHeaderDropdown = observer(() => {
   }
 
   return (
+    <>
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
         <CAvatar src={avatar} size="md" />
@@ -89,12 +98,33 @@ const AppHeaderDropdown = observer(() => {
 
         <CDropdownDivider />
 
-        <CDropdownItem onClick={()=> logOut()}>
+        <CDropdownItem onClick={()=> setVisibleOut(true)}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Выйти
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
+
+    <CModal
+                          backdrop="static"
+                          visible={visibleOut}
+                          onClose={() => setVisibleOut(false)}
+                          aria-labelledby="StaticBackdropExampleLabel"
+                        >
+                          <CModalHeader>
+                            <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
+                          </CModalHeader>
+                          <CModalBody>
+                            Вы точно хотите выйти из системы?
+                          </CModalBody>
+                          <CModalFooter>
+                            <CButton color="secondary" onClick={() => setVisibleOut(false)}>
+                              Отмена
+                            </CButton>
+                            <CButton color="primary" onClick={()=>logOut()}>Выйти</CButton>
+                          </CModalFooter>
+    </CModal>
+    </>
   )
 });
 
