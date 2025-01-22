@@ -27,11 +27,12 @@ import {
   CToastBody,
   CToastClose,
   CToaster,
-
+  CTooltip,
 } from '@coreui/react'
 //import Icon from "../chat-app-worker/components/Icon";
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 
+import DeleteIcon from "../assets/images/delete_icon.png"
 import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
 import zamok2 from "../assets/images/замок2.png"
@@ -507,7 +508,6 @@ const Companys = () => {
     console.log(id)
 
     setVisibleDelete(!visibleDelete)
-
   }
 
   //удаление специалиста
@@ -515,7 +515,7 @@ const Companys = () => {
     console.log(id)
     setVisibleDelete(false)
 
-    //await deleteSpecialist(id)
+    await deleteCompany(id)
     addToast(deleteToast) //ваши данные сохранены
   
   }
@@ -524,26 +524,6 @@ const Companys = () => {
   const saveProfile = async(id) => { 
       setShowClose(true)
       console.log("managersObj: ", managersObj)
-  
-      // let sferaArr = []
-      // let strSfera = ''
-      // sfera.map((item, index)=> {
-      //   const obj = {
-      //     name: item,
-      //   }
-      //   strSfera = strSfera + item + (index+1 !== sfera.length ? ', ' : '')
-      //   sferaArr.push(obj)
-      // })
-
-      // let comtegArr = []
-      // let strComteg = ''
-      // comteg.map((item, index)=> {
-      //   const obj = {
-      //     name: item,
-      //   }
-      //   strComteg = strComteg + item + (index+1 !== comteg.length ? ', ' : '')
-      //   comtegArr.push(obj)
-      // })
   
       let managersArr = []
       let strManagers = ''
@@ -926,9 +906,9 @@ const Companys = () => {
                                       <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-15px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
-                                      {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}
-                                      <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <CTooltip content="Удалить компанию" placement="bottom">
+                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1098,21 +1078,26 @@ const Companys = () => {
                                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     
                                     {/* проекты за месяц */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value='' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
-                                    {/* проекты всего */}
-                                    <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value='' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
+                                                                        <CTooltip content="Проекты за месяц" placement="bottom">
+                                                                          <div className="text-field" style={{marginRight: '8px'}}>
+                                                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '40px', marginRight: '8px'}}/>
+                                                                          </div>
+                                                                        </CTooltip>
+                                                                        
+                                                                        {/* проекты всего */}
+                                                                        <CTooltip content="Проекты всего" placement="bottom">
+                                                                          <div className="text-field" style={{marginRight: '8px'}}>
+                                                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{width: '40px', marginRight: '8px'}}/>
+                                                                          </div>
+                                                                        </CTooltip>
 
                                     {/* проекты за месяц */}
                                     <div className="text-field" >
-                                      <input className="text-field__input" type="text" name="reyting" id="reyting" value='' style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value='0' style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                     {/* проекты всего */}
                                     <div className="text-field">
-                                      <input className="text-field__input" type="text" name="rank" id="rank" value='' style={{width: '40px', marginRight: '8px'}}/>
+                                      <input disabled className="text-field__input" type="text" name="rank" id="rank" value='0' style={{width: '40px', marginRight: '8px'}}/>
                                     </div>
                                   </div>
                                   
@@ -1271,7 +1256,7 @@ const Companys = () => {
                         <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
                       </CModalHeader>
                       <CModalBody>
-                        Пользователь будет удален из базы!
+                        Компания будет удалена из базы данных!
                       </CModalBody>
                       <CModalFooter>
                         <CButton color="secondary" onClick={() => setVisibleDelete(false)}>

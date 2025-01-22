@@ -285,12 +285,12 @@ const Projects = () => {
     let arrWorkers = []
     console.log("workersAll: ", workersAll)
     workersAll.map((item, index)=> {
-      const obj = {
-        id: item.id,
-        label: item.userfamily + ' ' + item.username,
-        value: index,
-      }
-      arrWorkers.push(obj)
+      if (item.userfamily) {
+        arrWorkers.push(item.userfamily)
+      }  
+    })
+    const sortedWorker = [...arrWorkers].sort((a, b) => {       
+      return (a < b) ? -1 : (a > b) ? 1 : 0;  //сортировка по возрастанию 
     })
     //console.log("arrWorkers: ", arrWorkers)
     setWorkersData(arrWorkers)
@@ -382,14 +382,15 @@ const Projects = () => {
     }
 
     const managerFio2 = workersAll.find(item=> item.id.toString() === resProj.managerId2)
-    setManagerName2(managerFio2?.fio)
+    setManagerName2(managerFio2?.userfamily)
 
-    const comp2 = workersAll.find(item=> item.fio === managerFio2?.fio)
-    // if (comp2) {
-    //   setPhone2(comp2.phone)
-    // } else {
-    //   setPhone2('')
-    // }
+    const comp2 = workersAll.find(item=> item.userfamily === managerFio2?.userfamily)
+    console.log("comp2: ", comp)
+    if (comp2) {
+      setPhone2(comp2.phone)
+    } else {
+      setPhone2('')
+    }
 
     //setLocationProject(resProj.geo)
     const loc = platformsAll.find(item=> item.id === parseInt(resProj?.geo))
@@ -571,8 +572,8 @@ ${loc.url}`;
       teh7,
       teh8,
       geo: geoId, 
-      //managerId: managersAll.find(item=> item.fio === managerName)?.id, 
-      //managerId2: managersAll.find(item=> item.fio === managerName2)?.id,
+      managerId: clientAll.find(item=> item.userfamily === managerName)?.id, 
+      managerId2: workersAll.find(item=> item.userfamily === managerName2)?.id,
       companyId: companysAll.find(item=> item.title === companyName)?.id, 
       comment, 
       specifika: specifikaProject.name, 
@@ -1618,12 +1619,13 @@ ${loc.url}`;
                                                 setManagerName(newInputValue);
                                               }}
                                               onChange={(event, newValue) => {
-                                                if (newValue && newValue.length) {                                                      
-                                                  const comp = clientAll.find(item=> item.fio === newValue)
-                                                  console.log("comp: ", comp)
+                                                if (newValue && newValue.length) {   
+                                                  //console.log("clientAll: ", clientAll)                                                   
+                                                  const comp = clientAll.find(item=> item.userfamily === newValue)
+                                                  console.log("comp client: ", comp)
                                                   if (comp) {
                                                     setPhone(comp.phone)
-                                                    setManagerName(comp.fio)
+                                                    setManagerName(comp.userfamily)
                                                   }
                                                 } 
                                               }}
@@ -1672,12 +1674,13 @@ ${loc.url}`;
                                                 setManagerName2(newInputValue);
                                               }}
                                               onChange={(event, newValue) => {
-                                                if (newValue && newValue.length) {                                                      
-                                                  const comp = workersAll.find(item=> item.fio === newValue)
-                                                  console.log("comp: ", comp)
+                                                if (newValue) {  
+                                                  console.log("workersAll 2: ", workersAll)                                                     
+                                                  const comp = workersAll.find(item=> item.userfamily === newValue)
+                                                  console.log("comp worker: ", comp)
                                                   if (comp) {
                                                     setPhone2(comp.phone)
-                                                    setManagerName2(comp.fio)
+                                                    setManagerName2(comp.userfamily)
                                                   }
                                                 }  
                                               }}
@@ -1773,7 +1776,7 @@ ${loc.url}`;
                                           </div>
 
                                           <div style={{position:'relative'}}>
-                                            <label className='title-label'>Как добраться</label>
+                                            <label className='title-label' style={{marginLeft: '50px'}}>Как добраться</label>
                                             <div className="text-field" style={{marginBottom: '0px'}} >
                                               <textarea 
                                                 className="text-field__input" 
@@ -1788,7 +1791,7 @@ ${loc.url}`;
                                             <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '238px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
 
-                                          <label className='title-label'>Комментарии</label>
+                                          <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>
                                           <div className="text-field" style={{marginBottom: '0px'}}>
                                                 <textarea 
                                                   className="text-field__input" 
