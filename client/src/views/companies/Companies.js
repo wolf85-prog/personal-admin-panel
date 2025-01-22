@@ -29,6 +29,7 @@ import {
   CToastBody,
   CToastClose,
   CToaster,
+  CPopover,
 } from '@coreui/react'
 
 import Close from '../../assets/images/clear.svg'
@@ -48,10 +49,11 @@ import arrowDown from 'src/assets/images/arrowDown.svg'
 import MyDropdown from 'src/components/Dropdown/Dropdown'
 
 import MyDropdown3 from 'src/components/Dropdown3/Dropdown3'
+import MyDropdownCompany from 'src/components/DropdownCompany/DropdownCompany'
 
 import comtegs from 'src/data/comtegs'
 
-import sferaData from 'src/data/sfera'
+import sferaData from 'src/data/sfera2'
 
 import Icon from 'src/components/Icon'
 import Filters from './table/Filters'
@@ -230,18 +232,20 @@ const Companies = () => {
     )
 
   if (error)
-    return <div className="dark-theme">
-            <AppSidebar />
-            <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-              <AppHeader />
-              <div className="body flex-grow-1 px-3">
-                <CContainer lg>
-                  <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке ставок</div>
-                </CContainer>
-              </div>
-              <AppFooter />
-            </div>
+    return (
+      <div className="dark-theme">
+        <AppSidebar />
+        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+          <AppHeader />
+          <div className="body flex-grow-1 px-3">
+            <CContainer lg>
+              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке ставок</div>
+            </CContainer>
           </div>
+          <AppFooter />
+        </div>
+      </div>
+    )
 
   return (
     <div className="dark-theme">
@@ -482,7 +486,15 @@ const Companies = () => {
                                   marginLeft: '20px',
                                 }}
                               />
-                              <img
+                              <CPopover
+                                content="Сохранить данные"
+                                placement="top"
+                                trigger={['hover']}
+                                className='uley-pop-company'
+                                // style={{ width: '150px',  lineHeight: '1.2', backgroundColor: '#131c21', color: '#fff' }}
+                                style={{ '--cui-popover-bg': '#131c21', '--cui-popover-body-color': 'white' }}
+                              >
+                                <img
                                 alt=""
                                 src={Disketa}
                                 // onClick={() => saveProfile(id)}
@@ -493,18 +505,28 @@ const Companies = () => {
                                   marginLeft: '20px',
                                 }}
                               />
-                              <img
-                                alt=""
-                                src={Close}
-                                onClick={() => setShowCompanyProfile(false)}
-                                style={{
-                                  display: showClose ? 'block' : 'block',
-                                  cursor: 'pointer',
-                                  width: '19px',
-                                  height: '24px',
-                                  marginLeft: '20px',
-                                }}
-                              />
+                              </CPopover>
+                              
+                              <CPopover
+                                content="Закрыть окно"
+                                placement="top"
+                                trigger={['hover']}
+                                // style={{ width: '150px',  lineHeight: '1.2', backgroundColor: '#131c21', color: '#fff' }}
+                                style={{  '--cui-popover-bg': '#131c21','--cui-popover-body-color': 'white'  }}
+                              >
+                                <img
+                                  alt=""
+                                  src={Close}
+                                  onClick={() => setShowCompanyProfile(false)}
+                                  style={{
+                                    display: showClose ? 'block' : 'block',
+                                    cursor: 'pointer',
+                                    width: '19px',
+                                    height: '24px',
+                                    marginLeft: '20px',
+                                  }}
+                                />
+                              </CPopover>
                             </div>
                           </div>
                         </div>
@@ -597,7 +619,7 @@ const Companies = () => {
                                     position: 'relative',
                                   }}
                                 >
-                                  <MyDropdown3
+                                  <MyDropdownCompany
                                     tags={[...sfera].filter((item) => item !== 'Blacklist')}
                                     setTags={setSfera}
                                     options={sferaData}
@@ -616,11 +638,11 @@ const Companies = () => {
                               <div style={{ marginTop: '22px' }}>
                                 <div className="text-medium-emphasis small">Комтеги</div>
                                 <div style={{ position: 'relative' }}>
-                                  <MyDropdown3
+                                  <MyDropdownCompany
                                     tags={comteg}
                                     setTags={setComteg}
                                     options={comtegs}
-                                    style={{ minHeight: '40px !important' }}
+                                    style={{ minHeight: '40px !important', width: '300px' }}
                                   />
                                 </div>
                                 {/* <div className="text-medium-emphasis small">Склад</div>
