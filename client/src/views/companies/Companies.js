@@ -926,7 +926,7 @@ const Companies = () => {
                                   position: 'relative',
                                   borderRadius: '5px',
                                   overflow: 'hidden',
-                                  width: '1270px',
+                                  width: '1262px',
                                 }}
                                 align="middle"
                                 className="mb-0 border"
@@ -1208,7 +1208,7 @@ const Companies = () => {
                             position: 'relative',
                             borderRadius: '5px',
                             overflow: 'hidden',
-                            width: '1270px',
+                            width: '1262px',
                           }}
                           align="middle"
                           className="mb-0 border"
