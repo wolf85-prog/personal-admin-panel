@@ -1921,7 +1921,7 @@ ${loc.url}`;
                           <CCardHeader onClick={() => setVisibleA(!visibleA)}>Сотрудники</CCardHeader>
                           <CCollapse visible={visibleA}>
                             <CCardBody style={{padding: '12px'}}>
-                              <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
+                              <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '56px'}}>

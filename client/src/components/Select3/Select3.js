@@ -9,7 +9,7 @@ const Select3 = ({menuShow, setMenuShow, selected}) => {
             onClick={()=> setMenuShow(!menuShow)}
             // style={{borderColor: `${selected.color}`}}
         >
-            <span style={{color: `${selected.color}`, fontWeight: 'bold'}}>
+            <span style={{color: `${selected.color}`}}>
                 {selected.name}
             </span>
             {/* <div className={`${cl.caret} ${menuShow && cl.caretRotate}`}></div> */}

@@ -914,7 +914,7 @@ const Specialist = () => {
                                   <div className="table-head-content2"></div>
                                   <div className="table-head-content3"></div>
                                   {/* <div className="table-col-content"></div> */}
-                                  <CTable align="middle" className="mb-0 border my-table" hover bordered>
+                                  <CTable align="middle" className="mb-0 border my-table table-dark" hover bordered>
                                     <CTableHead className='table-light'>
                                       <CTableRow>
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 
@@ -1116,7 +1116,7 @@ const Specialist = () => {
                                     <div style={{display: 'flex'}}>
                                       <CTooltip content="Удалить клиента" placement="bottom">
                                         {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
-                                        <img src={DeleteIcon} onClick={clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>

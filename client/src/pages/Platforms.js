@@ -605,7 +605,7 @@ const onSortAddress = () => {
                         
                         (loading ?                                      
                           <CSpinner/> :
-                          <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1400px', borderRadius: '5px' }}>
+                          <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1400px', borderRadius: '5px' }}>
                             <CTableHead className="text-center" color="light">
                                     <CTableRow>
                                       <CTableHeaderCell className="text-center" style={{width: '61px'}}>№</CTableHeaderCell> 

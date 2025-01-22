@@ -766,7 +766,7 @@ const Companys = () => {
                                   <div className="table-head-content2"></div>
                                   <div className="table-head-content3"></div>
                                   {/* <div className="table-col-content"></div> */}
-                                  <CTable align="middle" className="mb-0 border my-table" hover bordered>
+                                  <CTable align="middle" className="mb-0 border my-table table-dark" hover bordered>
                                     <CTableHead className='table-light'>
                                       <CTableRow>
                                         <CTableHeaderCell className='myid-th widthSpace'>№</CTableHeaderCell> 

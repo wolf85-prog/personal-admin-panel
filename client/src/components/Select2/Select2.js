@@ -26,7 +26,18 @@ const Select2 = ({menuShow, setMenuShow, clearShow, setClearShow, selected, el})
             className={`${cl.select} ${menuShow && cl.selectClicked}`}
             onClick={clickSelect}
         >
-            <span style={{color: `${element?.name === 'Отмена' ? 'red' : '#fff'}`}}>
+            <span style={{color: `${element?.name === 'Отмена' || 
+                element?.name === 'Опоздание' || 
+                element?.name === 'Невыход' || 
+                element?.name === 'Нарушение субординации' || 
+                element?.name === 'Неадекватное поведение' ||
+                element?.name === 'Нетрезвый вид' ||
+                element?.name === 'Не компетентен' ||
+                element?.name === 'Рецидивист' ||
+                element?.name === 'Без мерча' ||
+                element?.name === 'Фальшстарт' || 
+                element?.name === 'Невыход * *' || 
+                element?.name === 'Невыход * * *' ? 'red' : '#fff'}`}}>
                 {element?.name && element?.name.length > 25 ? element?.name.substr(0, 25) + '...' : element?.name}
             </span>
             
