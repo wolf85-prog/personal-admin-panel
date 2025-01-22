@@ -154,7 +154,7 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                  <img src={arrowUp} alt='' style={{position: 'absolute', top: '120px', right: '0', zIndex: '100', width: '100px'}}/>
+                  <img src={arrowUp} alt='' style={{position: 'absolute', top: '100px', right: '70px', zIndex: '100', width: '100px', transform: 'rotate(45deg)'}}/>
                   
                   <WidgetsDropdown2/>
 
@@ -192,10 +192,10 @@ const Admin = () => {
                     }
                   />
 
-                  <CCard className='rounded-bottom' style={{borderRadius: '0px', borderColor: '#131c21', borderTopRightRadius: '0.375rem'}}>
+                  <CCard style={{height: '150px', marginBottom: '25px'}}>
 
   {/*---------------------------------------- Renthub ------------------------------------  */} 
-                    <CCardBody id="Renthub">
+                    <CCardBody>
                             <CRow>
                                 <CCol md={6} style={{textAlign: 'left'}}>
                                   <CButton color="dark" style={{marginRight: '20px', width: '100px'}}>Сутки</CButton>

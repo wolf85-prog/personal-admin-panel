@@ -168,10 +168,10 @@ const AppHeader = (props) => {
         </CHeaderBrand>
 
         <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem>
+          <CNavItem style={{marginLeft: '50px'}}>
             <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти специалистов</CButton></a>
           </CNavItem>
-          <CNavItem>
+          <CNavItem style={{marginLeft: '50px'}}>
             <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '15px'}}><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти оборудование</CButton></a>
           </CNavItem>
 
