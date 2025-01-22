@@ -41,6 +41,7 @@ import { getClient, getClientCount, editClient, addClient, deleteClient } from '
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 
+import DeleteIcon from "../assets/images/delete_icon.png"
 import Close from "../assets/images/clear.svg"
 import zamok from "../assets/images/замок.png"
 import zamok2 from "../assets/images/замок2.png"
@@ -1067,7 +1068,10 @@ const Client = () => {
                                       <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
-                                      {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}
+                                      <CTooltip content="Удалить клиента" placement="bottom">
+                                        {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
+                                        <img src={DeleteIcon} onClick={clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>

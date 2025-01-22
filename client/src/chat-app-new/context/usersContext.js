@@ -230,15 +230,15 @@ const UsersProvider = ({ children }) => {
 				const min = String(d2.getMinutes()).padStart(2, "0");
 				const newDate = `${day}.${month} ${chas}:${min}`;
 		
-				let str_sfera = ''
-				user.sfera && JSON.parse(user.sfera).map((item, index)=> {
-				str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
-				})
+				// let str_sfera = ''
+				// user.sfera && JSON.parse(user.sfera).map((item, index)=> {
+				// str_sfera = str_sfera + item.name + (index+1 !== JSON.parse(user.sfera).length ? ', ' : '')
+				// })
 
-				let str_comteg = ''
-				user.comteg && JSON.parse(user.comteg).map((item, index)=> {
-				str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
-				})
+				// let str_comteg = ''
+				// user.comteg && JSON.parse(user.comteg).map((item, index)=> {
+				// str_comteg = str_comteg + item.name + (index+1 !== JSON.parse(user.comteg).length ? ', ' : '')
+				// })
 		
 				let str_comment = ''
 				user.comment && JSON.parse(user.comment).map((item, index)=> {
@@ -259,8 +259,8 @@ const UsersProvider = ({ children }) => {
 				bugalterEmail: user.bugalterEmail,
 				bugalterPhone: user.bugalterPhone,
 				profile: user.profile,
-				sfera: str_sfera,
-				comteg: str_comteg,
+				sfera: user.sfera,
+				comteg: user.comteg,
 				}
 				arrCompanys.push(newUser)
 		
