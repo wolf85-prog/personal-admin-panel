@@ -144,7 +144,7 @@ const Admin = () => {
         <AppMobileWarning />
       </div>
       {/* ПК */}
-      <div className="app-content">
+      <div className="app-pc">
         <AppSidebar />
         <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
           <AppHeader tabs={tabhub}/>
@@ -154,7 +154,7 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                  <img src={arrowUp} alt='' style={{position: 'absolute', top: '100px', right: '70px', zIndex: '100', width: '100px', transform: 'rotate(45deg)'}}/>
+                  <img src={arrowUp} alt='' style={{position: 'absolute', top: '50px', right: '55px', zIndex: '1030', width: '100px', transform: 'rotate(45deg)'}}/>
                   
                   <WidgetsDropdown2/>
 
@@ -193,8 +193,6 @@ const Admin = () => {
                   />
 
                   <CCard style={{height: '150px', marginBottom: '25px'}}>
-
-  {/*---------------------------------------- Renthub ------------------------------------  */} 
                     <CCardBody>
                             <CRow>
                                 <CCol md={6} style={{textAlign: 'left'}}>

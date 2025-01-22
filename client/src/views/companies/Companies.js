@@ -357,7 +357,7 @@ const Companies = () => {
                                       cursor: 'pointer',
                                       color: 'red',
                                       fontSize: '24px',
-                                      fontWeight: '700',
+                                      fontWeight: '400',
                                       marginBottom: '3px',
                                     }}
                                   >

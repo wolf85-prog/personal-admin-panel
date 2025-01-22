@@ -20,6 +20,8 @@ import {
   CCardBody,
   CModalHeader,
   CModalTitle,
+  CModal,
+  CModalBody,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Icon from "./../../src/chat-app-new/components/Icon";
@@ -70,6 +72,7 @@ const AppHeader = (props) => {
   const toaster = useRef()
 
   const [visibleModal, setVisibleModal] = useState(false);
+  const [showModalEmpty, setShowModalEmpty] = useState(false)
 
 
   const clickPhone = () => {
@@ -168,11 +171,11 @@ const AppHeader = (props) => {
         </CHeaderBrand>
 
         <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem style={{marginLeft: '50px'}}>
-            <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти специалистов</CButton></a>
+          <CNavItem>
+            <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent', marginLeft: '250px'}}>Найти специалистов</CButton></a>
           </CNavItem>
-          <CNavItem style={{marginLeft: '50px'}}>
-            <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '15px'}}><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти оборудование</CButton></a>
+          <CNavItem>
+            <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '15px'}}><CButton color="dark" style={{backgroundColor: 'transparent', marginLeft: '200px'}}>Найти оборудование</CButton></a>
           </CNavItem>
 
           {/* <CNavItem>
@@ -223,7 +226,7 @@ const AppHeader = (props) => {
               placement="bottom"
             >
               <CNavLink style={{position: 'relative', cursor: 'pointer'}}>
-                <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -317,7 +320,7 @@ const AppHeader = (props) => {
               placement="bottom"
             >
               <CNavLink style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
-                <CIcon icon={cilPhone} size="lg"/>
+                <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilPhone} size="lg"/>
               </CNavLink>
             </CTooltip>
             <div style={{
@@ -461,7 +464,7 @@ const AppHeader = (props) => {
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <img src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -473,7 +476,7 @@ const AppHeader = (props) => {
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -485,7 +488,7 @@ const AppHeader = (props) => {
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <img src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -497,7 +500,7 @@ const AppHeader = (props) => {
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <CIcon onClick={clickBell} icon={cilBell} size="lg" />
+                <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilBell} size="lg" />
                 {/* <CBadge color="success" className="ms-2">
                   5
                 </CBadge> */}
@@ -511,7 +514,7 @@ const AppHeader = (props) => {
           {/* Конверт */}
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
+              <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilEnvelopeOpen} size="lg" />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
@@ -526,6 +529,17 @@ const AppHeader = (props) => {
       </CContainer>
     </CHeader>
 
+
+    <CModal
+      alignment="center"
+      visible={showModalEmpty}
+      onClose={() => setShowModalEmpty(false)}
+      aria-labelledby="VerticallyCenteredExample"
+    >
+      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px', marginTop: '40px'}}>
+        Функция не доступна по данному тарифу
+      </CModalBody>
+    </CModal>
     
     </>
   )

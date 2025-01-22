@@ -576,7 +576,7 @@ th.widthCompany {
     font-family: inherit;
     font-size: 14px;
     /* font-weight: 400; */
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.5;
     text-align: center;
     /* color: #858585; */
@@ -594,7 +594,7 @@ th.widthCompany {
     padding: 0.375rem 0.75rem;
     font-family: inherit;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.5;
     color: #858585;
     background-color: #1d1f2b;
@@ -837,7 +837,7 @@ th.widthCompany {
         font-size: 1.2rem;
         color: #f3f3f3;
     }
-    .app-content {
+    .app-pc {
         display: none;
     }
 }
@@ -849,8 +849,8 @@ th.widthCompany {
     .app__mobile-content {
         display: none;
     }
-    .app-content {
-        height: calc(100vh - 110px);
+    .app-pc {
+        display: block;
     }
 }
 

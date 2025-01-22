@@ -379,7 +379,7 @@ const Profile = () => {
                                                 padding: '5px 4px',
                                                 fontFamily: 'inherit',
                                                 fontSize: '14px',
-                                                fontWeight: '700',
+                                                fontWeight: '400',
                                                 lineHeight: '1.5',
                                                 textAlign: 'center',
                                                 color: '#ffffff',

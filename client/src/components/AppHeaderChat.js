@@ -18,7 +18,10 @@ import {
   CToastClose,
   CTooltip,
   CCardBody,
+  CModal,
+  CModalBody,
 } from '@coreui/react'
+
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu, cilPhone } from '@coreui/icons'
 import logo from './../assets/brand/logo_04_light.png'
@@ -64,6 +67,7 @@ const AppHeaderChat = () => {
   const toaster = useRef()
 
   const [visibleModal, setVisibleModal] = useState(false);
+  const [showModalEmpty, setShowModalEmpty] = useState(false);
 
   const [workerCall2, setWorkerCall2] = useState({tg_id: '805436270', fio: 'Иванов Иван Ивановия', sity: 'Майкоп', year_of_birth: '01.01.1985', projects: '5', 
   specialities: 'Художник по свету,Звукорежиссер,Backline,Репортажная съемка,Диджей,Ведущий,Официант,Инженер Resolume,+18,Blacklist', 
@@ -182,10 +186,10 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти специалистов</CButton></a>
+            <a href='https://t.me/ULEY_Workhub_Bot'><CButton color="dark" style={{backgroundColor: 'transparent', marginLeft: '250px'}}>Найти специалистов</CButton></a>
           </CNavItem>
           <CNavItem>
-            <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '15px'}}><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти оборудование</CButton></a>
+            <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '250px'}}><CButton color="dark" style={{backgroundColor: 'transparent'}}>Найти оборудование</CButton></a>
           </CNavItem>
           {/* <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
@@ -237,7 +241,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink  style={{position: 'relative', cursor: 'pointer'}}>
-                <img src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -331,7 +335,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
-                <CIcon icon={cilPhone} size="lg"/>
+                <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilPhone} size="lg"/>
               </CNavLink>
             </CTooltip>
             <div style={{
@@ -474,7 +478,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <img src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -486,7 +490,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <img src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -498,7 +502,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <img src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
+                <img onClick={()=>setShowModalEmpty(true)} src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
               </CNavLink>
             </CTooltip>
           </CNavItem>
@@ -510,7 +514,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
               placement="bottom"
             >
               <CNavLink href="#" style={{position: 'relative'}}>
-                <CIcon icon={cilBell} size="lg" />
+                <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilBell} size="lg" />
                 {/* <CBadge color="success" className="ms-2">
                   5
                 </CBadge> */}
@@ -524,7 +528,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* Конверт */}
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
+              <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilEnvelopeOpen} size="lg" />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
@@ -545,6 +549,17 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     </CCardBody> 
 
     </MyModalSmall> 
+
+    <CModal
+          alignment="center"
+          visible={showModalEmpty}
+          onClose={() => setShowModalEmpty(false)}
+          aria-labelledby="VerticallyCenteredExample"
+        >
+          <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px', marginTop: '40px'}}>
+            Функция не доступна по данному тарифу
+          </CModalBody>
+        </CModal>
     </>
   )
 }

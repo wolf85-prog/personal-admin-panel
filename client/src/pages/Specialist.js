@@ -381,6 +381,42 @@ const Specialist = () => {
 
     const currentYear = new Date().getFullYear()
 
+    if (worker.reyting === '1') {
+      setStarActive1(true)
+      setStarActive2(false)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (worker.reyting === '2') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (worker.reyting === '3') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(false)
+      setStarActive5(false)
+    }
+    if (worker.reyting === '4') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(false)
+    }
+    if (worker.reyting === '5') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(true)
+    }
+
     setId(worker.id)
     setFio(worker.fio)
     setCity(worker.city ? worker.city : '')
@@ -441,27 +477,6 @@ const Specialist = () => {
         const min = String(d2.getMinutes()).padStart(2, "0");
         
         const newDate = `${day}.${month} ${chas}:${min}`;
-
-        // let str_spec = ''
-        // worker.specialization && JSON.parse(worker.specialization).map((item, index)=> {
-        //   str_spec = str_spec + item.spec + (index+1 !== JSON.parse(worker.specialization).length ? ', ' : '')
-        // })
-
-        // let str_skill = ''
-        // worker.skill && JSON.parse(worker.skill).map((item, index)=> {
-        //   str_skill = str_skill + item.name + (index+1 !== JSON.parse(worker.skill).length ? ', ' : '')
-        // })
-
-        // let str_komteg = ''
-        // worker.comteg && JSON.parse(worker.comteg).map((item, index)=> {
-        //   str_komteg = str_komteg + item.name + (index+1 !== JSON.parse(worker.comteg).length ? ', ' : '')
-        // })
-
-
-        // let str_company = ''
-        // worker.company && JSON.parse(worker.company).map((item, index)=> {
-        //   str_company = str_company + item.name + (index+1 !== JSON.parse(worker.company).length ? ', ' : '')
-        // })
 
         let str_comment = ''
         worker.comment && JSON.parse(worker.comment).map((item, index)=> {
@@ -574,6 +589,7 @@ const Specialist = () => {
       comteg,
       comment: JSON.stringify(commentArr),
       profile,
+      reyting,
       email,
       passport,
       passportScan,
@@ -602,6 +618,7 @@ const Specialist = () => {
         comment: strComment,
         chatId: telegram,
         profile,
+        reyting,
         email,
         passport,
         passportScan,
@@ -1154,7 +1171,7 @@ const Specialist = () => {
                                                       padding: '5px 4px',
                                                       fontFamily: 'inherit',
                                                       fontSize: '14px',
-                                                      fontWeight: '700',
+                                                      fontWeight: '400',
                                                       lineHeight: '1.5',
                                                       textAlign: 'center',
                                                       color: '#ffffff',
