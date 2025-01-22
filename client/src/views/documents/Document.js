@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from 'src/components/index'
 import { format, formatPhoneNumber, formatDate, formatDocumentStatus } from '../../utils/formater'
 import { Link, useLocation } from 'react-router-dom'
@@ -58,8 +58,7 @@ import {
   cilX,
 } from '@coreui/icons'
 import './Document.css'
-
-import { getComplect } from 'src/services/api/documents'
+import { getComplect, hiddenDocument } from 'src/services/api/documents'
 
 import { ReactComponent as Search } from 'src/assets/svg/search.svg'
 import { ReactComponent as ArrowD } from 'src/assets/svg/arrow-down.svg'
@@ -69,6 +68,13 @@ import { ReactComponent as Pencil } from 'src/assets/svg/pencil-square.svg'
 
 const Document = () => {
   const [visible, setVisible] = useState(false)
+  const [editing, setEditing] = useState(false)
+  const [showModalEmpty, setShowModalEmpty] = useState(false)
+  const queryClient = useQueryClient()
+  const [refetch, setRefetch] = useState(false)
+  const [, updateState] = useState()
+
+
 
   const { state } = useLocation()
 
@@ -81,16 +87,18 @@ const Document = () => {
     queryFn: () => getComplect(state.complectId),
   })
 
-  // const defaultLayoutPluginInstance = defaultLayoutPlugin()
-  // FullScreenPluginProps
-  // const zoomPluginInstance = zoomPlugin()
-  // const { ZoomInButton, ZoomOutButton, ZoomPopover } = zoomPluginInstance
-  // const fullScreenPluginInstance = fullScreenPlugin()
-  // const { EnterFullScreen } = fullScreenPluginInstance
+  const { mutate: mutateComplect } = useMutation({
+      mutationFn: hiddenDocument,   
+      onSettled: async () => {
+        return await queryClient.invalidateQueries(['complect'])
+        
+      },
+    })
 
-  // const fullScreenPluginInvoice = fullScreenPlugin()
-
-  // const scrollModePluginInstance = scrollModePlugin()
+  const handleHiddenDocument = (item) => {
+    
+    mutateComplect(item)
+  }
 
   const [showPdfBlock, setShowPdfBlock] = useState(true)
   const handleSetShowPdfBlock = () => {
@@ -129,10 +137,22 @@ const Document = () => {
       </div>
     )
 
-  console.log(complect)
+  
 
   return (
     <div className="dark-theme">
+      <CModal
+        alignment="center"
+        visible={showModalEmpty}
+        onClose={() => setShowModalEmpty(false)}
+        aria-labelledby="VerticallyCenteredExample"
+      >
+        <CModalBody
+          style={{ height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px' }}
+        >
+           Функция не доступна по данному тарифу
+        </CModalBody>
+      </CModal>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
         <AppHeader />
@@ -179,7 +199,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              // className="py-2 uley-data-main editing-style"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.date}
                             </div>
@@ -188,7 +210,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.number}
                             </div>
@@ -199,7 +222,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Период</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM')}-
                               {dayjs(complect.contract.end_date).format('DD.MM.YYYY')}
@@ -209,7 +233,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Основание</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
                             </div>
@@ -220,7 +245,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат </div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
                               {complect.contract.signature_date}
@@ -230,9 +256,10 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Сумма</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
-                              {complect.invoice.service_price}
+                              {format(complect.invoice.service_price)}
                             </div>
                           </div>
                         </div>
@@ -248,7 +275,8 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
                             </div>
@@ -256,7 +284,11 @@ const Document = () => {
                         </div>
                         <div style={{ marginBottom: '40px' }}>
                           <div className="text-medium-emphasis small">Контрагент</div>
-                          <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                          <div
+                            style={{ height: '40px' }}
+                            className="py-2 uley-data-main"
+                            onClick={() => setShowModalEmpty(true)}
+                          >
                             {complect.contract.company.name}
                           </div>
                         </div>
@@ -308,6 +340,7 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() => setEditing(!editing)}
                           >
                             <Pencil />
                           </div>
@@ -332,6 +365,14 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() =>
+                              handleHiddenDocument({
+                                invoice_id: complect.invoice.id,
+                                act_id: null,
+                                application_id: null,
+                                contract_id: null,
+                              })
+                            }
                           >
                             <Trash />
                           </div>
@@ -359,7 +400,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.act.date}
                             </div>
@@ -368,7 +410,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.act.number}
                             </div>
@@ -379,7 +422,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Период</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM')}-
                               {dayjs(complect.contract.end_date).format('DD.MM.YYYY')}
@@ -389,7 +433,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Основание</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
                             </div>
@@ -400,7 +445,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат </div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
                               {complect.contract.signature_date}
@@ -410,9 +456,10 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Сумма</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
-                              {complect.invoice.service_price}
+                              {format(complect.invoice.service_price)}
                             </div>
                           </div>
                         </div>
@@ -428,7 +475,8 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
                             </div>
@@ -488,6 +536,7 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() => setEditing(!editing)}
                           >
                             <Pencil />
                           </div>
@@ -512,6 +561,14 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() =>
+                              handleHiddenDocument({
+                                act_id: complect.act.id,
+                                invoice_id: null,
+                                application_id: null,
+                                contract_id: null,
+                              })
+                            }
                           >
                             <Trash />
                           </div>
@@ -539,7 +596,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.application.date}
                             </div>
@@ -548,7 +606,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.application.number}
                             </div>
@@ -559,7 +618,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Период</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM')}-
                               {dayjs(complect.contract.end_date).format('DD.MM.YYYY')}
@@ -569,7 +629,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Основание</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
                             </div>
@@ -580,7 +641,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат </div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
                               {complect.contract.signature_date}
@@ -590,9 +652,10 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Сумма</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
-                              {complect.invoice.service_price}
+                              {format(complect.invoice.service_price)}
                             </div>
                           </div>
                         </div>
@@ -608,7 +671,8 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
                             </div>
@@ -668,6 +732,7 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() => setEditing(!editing)}
                           >
                             <Pencil />
                           </div>
@@ -692,6 +757,14 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() =>
+                              handleHiddenDocument({
+                                application_id: complect.application.id,
+                                invoice_id: null,
+                                act_id: null,
+                                contract_id: null,
+                              })
+                            }
                           >
                             <Trash />
                           </div>
@@ -725,7 +798,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата начала</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM.YYYY')}
                             </div>
@@ -734,7 +808,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата окончания</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.end_date).format('DD.MM.YYYY')}
                             </div>
@@ -745,7 +820,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата подписи</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               -
                             </div>
@@ -754,7 +830,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
                             </div>
@@ -765,7 +842,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
                               {complect.contract.signature_date}
@@ -775,7 +853,8 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Статус</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               -
                             </div>
@@ -793,7 +872,8 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className="py-2 uley-data-main"
+                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
                             </div>
@@ -853,6 +933,7 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() => setEditing(!editing)}
                           >
                             <Pencil />
                           </div>
@@ -877,6 +958,14 @@ const Document = () => {
                               padding: '5px',
                             }}
                             className="uley-data-main"
+                            onClick={() =>
+                              handleHiddenDocument({
+                                contract_id: complect.contract.id,
+                                invoice_id: null,
+                                act_id: null,
+                                application_id: null,
+                              })
+                            }
                           >
                             <Trash />
                           </div>
@@ -887,7 +976,14 @@ const Document = () => {
                 </CCard>
 
                 <div style={{ display: 'flex', gap: '20px', marginBottom: '5px' }}>
-                  <CCard id="1" style={{ width: '315px', height: '410px' }}>
+                  <CCard
+                    id="1"
+                    style={{
+                      width: '315px',
+                      height: '410px',
+                      visibility: complect.invoice.visibility,
+                    }}
+                  >
                     <CCardBody style={{ cursor: 'pointer' }} onClick={() => setVisible('invoice')}>
                       <DisplayThumbnailExample
                         pageIndex={0}
@@ -914,7 +1010,10 @@ const Document = () => {
                       </CModal>
                     )}
                   </CCard>
-                  <CCard id="2" style={{ width: '315px', height: '404px' }}>
+                  <CCard
+                    id="2"
+                    style={{ width: '315px', height: '404px', visibility: complect.act.visibility }}
+                  >
                     <CCardBody style={{ cursor: 'pointer' }} onClick={() => setVisible('act')}>
                       <DisplayThumbnailExample
                         pageIndex={0}
@@ -942,7 +1041,14 @@ const Document = () => {
                     )}
                   </CCard>
 
-                  <CCard id="3" style={{ width: '315px', height: '410px' }}>
+                  <CCard
+                    id="3"
+                    style={{
+                      width: '315px',
+                      height: '410px',
+                      visibility: complect.application.visibility,
+                    }}
+                  >
                     <CCardBody
                       style={{ cursor: 'pointer' }}
                       onClick={() => setVisible('application')}
@@ -972,7 +1078,14 @@ const Document = () => {
                       </CModal>
                     )}
                   </CCard>
-                  <CCard id="4" style={{ width: '315px', height: '410px' }}>
+                  <CCard
+                    id="4"
+                    style={{
+                      width: '315px',
+                      height: '410px',
+                      visibility: complect.contract.visibility,
+                    }}
+                  >
                     <CCardBody
                       style={{ cursor: 'pointer', overflow: 'auto' }}
                       onClick={() => setVisible('contract')}
