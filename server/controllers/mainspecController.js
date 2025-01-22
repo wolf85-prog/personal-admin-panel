@@ -58,6 +58,8 @@ class MainspecController {
                 hr,
                 number,
                 count,
+                merch,
+                taxi,
             } = req.body
 
             const newUser = await MainSpec.update(
@@ -73,6 +75,8 @@ class MainspecController {
                     hr,
                     number,
                     count,
+                    merch,
+                    taxi,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);

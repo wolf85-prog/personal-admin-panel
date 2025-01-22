@@ -134,6 +134,9 @@ const Projects = () => {
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
 
+  const [merch, setMerch] = useState(false);
+  const [taxi, setTaxi] = useState(false);
+
   const [managerName, setManagerName] = useState('');
   const [managerName2, setManagerName2] = useState('');
 
@@ -613,6 +616,8 @@ ${loc.url}`;
               projectId: item.projectId,
               number: index+1,
               hr: item.hr,
+              merch,
+              taxi,
             },
             item.id
           )
@@ -631,6 +636,8 @@ ${loc.url}`;
               projectId: item.projectId,
               number: index+1,
               hr: item.hr,
+              // merch,
+              // taxi,
             }
           )
         }
