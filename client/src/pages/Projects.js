@@ -490,6 +490,8 @@ ${loc.url}`;
           hr: item.hr,  
           count: item.count,  
           projectId: id,
+          merch: item.merch,
+          taxi: item.taxi,
         }
 
         arr.push(newObj)
@@ -616,8 +618,8 @@ ${loc.url}`;
               projectId: item.projectId,
               number: index+1,
               hr: item.hr,
-              merch,
-              taxi,
+              merch: item.merch,
+              taxi: item.taxi,
             },
             item.id
           )

@@ -116,6 +116,7 @@ const Company = sequelize.define('company', {
     profile: {type: DataTypes.STRING},
     sfera: {type: DataTypes.TEXT},
     comteg: {type: DataTypes.TEXT},
+    reyting: {type: DataTypes.STRING},
 })
 
 const CompanyProf = sequelize.define('companyprof', {

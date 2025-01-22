@@ -188,6 +188,32 @@ const Specialist = () => {
   //   setShowClear(text === '' ? false : true)
   // }, [text]);
 
+  useEffect(() => {
+      let count = 0
+      if (starActive1) {
+        count = 1
+        console.log("reyting: ", 1)
+      }
+      if (starActive2) {
+        count = 2
+        console.log("reyting: ", 2)
+      }
+      if (starActive3) {
+        count = 3
+        console.log("reyting: ", 3)
+      }
+      if (starActive4) {
+        count = 4
+        console.log("reyting: ", 4)
+      }
+      if (starActive5) {
+        count = 5
+        console.log("reyting: ", 5)
+      }
+      setReyting(count)
+  }, [starActive1, starActive2, starActive3, starActive4, starActive5]);
+  
+
 
   useEffect(()=> {
 

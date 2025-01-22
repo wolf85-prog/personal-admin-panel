@@ -93,6 +93,7 @@ class CompanysController {
                 profile,
                 sfera,
                 comteg,
+                reyting,
             } = req.body
 
             const newUser = await Company.update(
@@ -114,6 +115,7 @@ class CompanysController {
                     profile,
                     sfera,
                     comteg,
+                    reyting,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);

@@ -86,6 +86,12 @@ const Companys = () => {
   const [showSaveOffice, setShowSaveOffice] = useState(false)
   const [showSaveSklad, setShowSaveSklad] = useState(false)
 
+    const [starActive1, setStarActive1] = useState(true)
+    const [starActive2, setStarActive2] = useState(true)
+    const [starActive3, setStarActive3] = useState(true)
+    const [starActive4, setStarActive4] = useState(false)
+    const [starActive5, setStarActive5] = useState(false)
+
   const [id, setId] = useState('');
   const [title, setTitle] = useState('Название компании');
   const [city, setCity] = useState('');
@@ -111,6 +117,7 @@ const Companys = () => {
   const [profile, setProfile] = useState('');
   const [projects, setProjects] = useState('');
   const [inn, setInn] = useState('');
+  const [reyting, setReyting] = useState('');
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -164,6 +171,31 @@ const Companys = () => {
   }, [text]);
 
 
+  useEffect(() => {
+      let count = 0
+      if (starActive1) {
+        count = 1
+        console.log("reyting: ", 1)
+      }
+      if (starActive2) {
+        count = 2
+        console.log("reyting: ", 2)
+      }
+      if (starActive3) {
+        count = 3
+        console.log("reyting: ", 3)
+      }
+      if (starActive4) {
+        count = 4
+        console.log("reyting: ", 4)
+      }
+      if (starActive5) {
+        count = 5
+        console.log("reyting: ", 5)
+      }
+      setReyting(count)
+  }, [starActive1, starActive2, starActive3, starActive4, starActive5]);
+  
 
   //-----------------------------------------------------------------------------------------
   //			get managers
@@ -661,6 +693,42 @@ const Companys = () => {
 
     const currentYear = new Date().getFullYear()
 
+    if (user.reyting === '1') {
+      setStarActive1(true)
+      setStarActive2(false)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (user.reyting === '2') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (user.reyting === '3') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(false)
+      setStarActive5(false)
+    }
+    if (user.reyting === '4') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(false)
+    }
+    if (user.reyting === '5') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(true)
+    }
+
     setId(user.id)
     setTitle(user.title ? user.title : '')
     setCity(user.city ? user.city : '')
@@ -867,12 +935,12 @@ const Companys = () => {
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
                                         {showBlacklist ?
                                         <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
-                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
-                                          <img className='star-icon' src={StarActive} alt='' /> 
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
+                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}}>
+                                          <img className='star-icon' onClick={()=>setStarActive1(!starActive1)} src={starActive1 ? StarActive : Star} alt='' /> 
+                                          <img className='star-icon' onClick={()=>setStarActive2(!starActive2)} src={starActive2 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive3(!starActive3)} src={starActive3 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive4(!starActive4)} src={starActive4 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive5(!starActive5)} src={starActive5 ? StarActive : Star} alt='' />
                                         </div>
                                         }
                                       </div>
