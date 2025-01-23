@@ -1493,11 +1493,11 @@ const fetchAdminSupport = (data) => {
 	setUserSupport((userSupport) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
 
-		//console.log("userWorkers: ", userSupport)
+		console.log("userSupport: ", userSupport)
 
-		let userIndex = userSupport.findIndex((user) => user.chatId.toString() === senderId.toString());
+		let userIndex = userSupport.findIndex((user) => user.id.toString() === senderId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-		console.log("userIndex: ", userIndex)
+		console.log("userIndex: ",  userIndex)
 
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
@@ -1526,11 +1526,7 @@ const fetchAdminSupport = (data) => {
 		}
 		
 		const userObject = usersCopy[userIndex];
-		if (isBot) {
-			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
-		} else {
-			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
-		}
+		usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
 		
 
 		//сортировка
@@ -1539,7 +1535,7 @@ const fetchAdminSupport = (data) => {
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 
-		//console.log(userSort)
+		console.log(userSort)
 
 		return userSort;
 	});
