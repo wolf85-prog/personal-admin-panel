@@ -17,6 +17,10 @@ export const getComplect = async (id) => {
   return (await axiosInstance.get(`documents/complect/${id}`)).data
 }
 
+export const hiddenDocument = async (item) => {
+  return (await axiosInstance.post('documents/hidden/', item))
+}
+
 
 // Компании
 export const getCompanies = async () => {
