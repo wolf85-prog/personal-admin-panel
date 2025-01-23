@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Link } from 'react-router-dom'
 import { createColumnHelper } from '@tanstack/react-table'
-import { CFormCheck, CModal,CModalBody } from '@coreui/react'
+import { CFormCheck, CModal, CModalBody } from '@coreui/react'
 import { useMemo, useState, useEffect } from 'react'
 import { format, formatPhoneNumber, formatDate, formatDocumentStatus } from 'src/utils/formater'
 import { ReactComponent as RobotSvg } from './robot.svg'
@@ -9,6 +9,7 @@ import { ReactComponent as CheckSvgGreen } from './check-mark.svg'
 import { ReactComponent as CheckSvgRed } from './check-mark-red.svg'
 import { ReactComponent as PhoneSvg } from './telephone.svg'
 import onairStatuses from '../data'
+import robot from "src/chat-app-worker/assets/images/robot.png";
 
 export const useTableData = () => {
   const [data, setData] = useState(onairStatuses.filter((pItem) => pItem.project_id === 1))
@@ -193,9 +194,13 @@ export const useTableData = () => {
         cell: ({ row }) => {
           return (
             <>
-              
-              <div style={{display: 'inline-block'}} onClick={()=> setShowModalEmpty(true)}><PhoneSvg style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
-              <div style={{display: 'inline-block'}} onClick={()=> setShowModalEmpty(true)}><RobotSvg style={{ cursor: 'pointer' }} /></div>
+              <div style={{ display: 'inline-block' }} onClick={() => setShowModalEmpty(true)}>
+                <PhoneSvg style={{ cursor: 'pointer', marginRight: '5px' }} />
+              </div>
+              <div style={{ display: 'inline-block' }} onClick={() => setShowModalEmpty(true)}>
+                {/* <RobotSvg style={{ cursor: 'pointer' }} /> */}
+                <img src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+              </div>
             </>
           )
         },
@@ -221,6 +226,6 @@ export const useTableData = () => {
     projectFilter,
     handleChangeProject,
     showModalEmpty,
-    setShowModalEmpty
+    setShowModalEmpty,
   }
 }
