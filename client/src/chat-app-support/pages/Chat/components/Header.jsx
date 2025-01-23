@@ -53,31 +53,6 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 		e.target.src = avatarDefault
 	}
 
-
-	const clickToCall = async(id) => {
-		// Button begins to shake
-		setPress(true);
-		console.log(id)
-        
-		// Buttons stops to shake after 2 seconds
-		setTimeout(() => setPress(false), 200);
-
-		audioIshodCall.play();
-		await getSendCall(id)
-	}
-
-	const clickToCallRaut = async(id) => {
-		// Button begins to shake
-		//setPress(true);
-		//console.log(id)
-        
-		// Buttons stops to shake after 2 seconds
-		//setTimeout(() => setPress(false), 200);
-
-		audioIshodCall.play();
-		await getSendCallRaut(id)
-	}
-
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
@@ -122,32 +97,6 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 			<div className="chat__actions">
 				{clearFile ? <CButton color="danger" onClick={clickClearFile}>Очистить</CButton> : ''}
 
-				<button
-					className="chat__action"
-					aria-label="robot"
-					onClick={()=>clickToCallRaut(user?.id)}
-				>
-					<img className='star-icon' src={robot} width={25} alt='' style={{verticalAlign: 'text-top'}} />
-				</button>
-
-				<Link to={'/specialist'} state={{ workerId: worker[0]?.id, }}>
-					<button
-						className="chat__action"
-						aria-label="profile"
-						//onClick={()=>console.log(user?.id)}
-					>
-						<img src={editIcon} width={18} alt='' style={{verticalAlign: 'text-bottom'}} />
-					</button>
-				</Link>
-
-				<button
-					className="chat__action"
-					aria-label="Phone"
-					onClick={()=>clickToCall(user?.id)} 
-					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
-				>
-					<CIcon icon={cilPhone} size="lg"/>
-				</button>
 				
 				<button
 					className="chat__action"

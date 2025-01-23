@@ -15,7 +15,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "../../../assets/images/sp-i-m-image-placeholder.svg";
 
 const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
-	const { personW } = useContext(AccountContext);
+	//console.log("allMessages: ", allMessages, convId)
+
+	const { personS } = useContext(AccountContext);
 	
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
@@ -37,11 +39,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { delWMessageContext } = useUsersContext();
 
 	useEffect(() => {
-		if (allMessages && allMessages.length > 0) {
+		console.log("allMessages: ", allMessages)
+		if (allMessages) {
 			setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
 			setNewMessages(allMessages)
 
-			//console.log("array: ", allMessages)
+			console.log("array: ", allMessages)
 
 			const objDate = Object.keys(allMessages)
 			
@@ -53,7 +56,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		}
 		
 		
-	}, [allMessages])
+	}, [])
 
 	useEffect(() => {
 		setDates(Object.keys(newMessages))  //['01/01/2023', 'Сегодня']
@@ -259,12 +262,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		console.log("message: ", message)
 
 		//удалить сообщение через сокет
-		delWMessageContext(message.id, message.date, message.chatId)
+		//delWMessageContext(message.id, message.date, message.chatId)
 
 		//удалить сообщение в базе данных
 		await delWMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personS.id}&message_id=${message.id}`
 
 		const delToTelegram = await $host.get(url_del_msg);
 
@@ -298,7 +301,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 
 	return dates.map((date, dateIndex) => {
-		const messages = newMessages[date] //allMessages[date]; 
+		const messages = newMessages[date]; //allMessages
 		
 		return (
 			<div key={dateIndex}>
@@ -306,9 +309,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 					<>
 						<div className="chat__date-wrapper">{loading && <CSpinner/>}</div>
 					
-						<div className="chat__date-wrapper" style={{cursor: 'pointer', textAlign: 'end'}}>
+						{/* <div className="chat__date-wrapper" style={{cursor: 'pointer', textAlign: 'end'}}>
 							<span className="chat__date" onClick={startLoadMessages}>Загрузить ещё</span>
-						</div>
+						</div> */}
 					</>
 				)}
 				
@@ -362,11 +365,11 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
 											: (
-											<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem', position: 'relative'}}>
-												{showImage[msgIndex + personW.id]  
+											<figure style={{margin:showImage[msgIndex + personS.id] ? '0 0 3rem': '0 0 1rem', position: 'relative'}}>
+												{showImage[msgIndex + personS.id]  
 												? <a href={message.content} target="_blank" rel="noreferrer"><img src={message.content} alt="" className="chat__img" /></a>	
 												: <div 
-													onClick={()=>handleClick(msgIndex + personW.id)}
+													onClick={()=>handleClick(msgIndex + personS.id)}
 													style={{
 														width: '100%', 
 														height: '100px', 
@@ -417,7 +420,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 											<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenuBottom}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personS.id})}>Удалить</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>	
 
@@ -474,7 +477,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personS.id})}>Удалить</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>									
 									</p>
@@ -508,7 +511,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												<Dropdown.Toggle as={CustomToggle2} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu2}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personS.id})}>Удалить</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>
 										</div>

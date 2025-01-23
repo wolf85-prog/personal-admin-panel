@@ -1,46 +1,5 @@
 import {$authHost, $host} from "./index";
 
-export const getContacts = async () =>{
-    try {
-       let response = await $host.get('api/userbots/get');
-       //console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getUsers api", error.message);
-    }
-}
-
-export const getContactId = async (id) =>{
-    try {
-       let response = await $host.get(`api/userbots/get/${id}`);
-       //console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling getUser api", error.message);
-    }
-}
-
-export const editContact = async (data, id) =>{
-    try {
-       let response = await $host.patch(`api/userbots/update/${id}`, data);
-       console.log(response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling editContact api", error.message);
-    }
-}
-
-
-export const editContactAvatar = async (data, id) =>{
-    try {
-       let response = await $host.patch(`api/userbots/updatefile/${id}`, data);
-       console.log("response: ", response);
-       return response.data;
-    } catch (error) {
-        console.log("error while calling editContactAvatar api", error.message);
-    }
-}
-
 
 export const addConversation= async (data)=>{
     try {
@@ -51,7 +10,7 @@ export const addConversation= async (data)=>{
     }
 }
 
-export const getConversation= async (id)=>{
+export const getSConversation= async (id)=>{
     try {
        let response= await $host.get(`api/sconversation/get/${id}`);
        if (response.data === null) {
@@ -64,7 +23,7 @@ export const getConversation= async (id)=>{
     }
 }
 
-export const getConversations= async ()=>{
+export const getSConversations= async ()=>{
     try {
        let response= await $host.get(`api/sconversations/get`);
        return response.data;
@@ -82,7 +41,7 @@ export const newMessage = async (data) =>{
     }
 }
 
-export const delMessage = async (id) =>{
+export const delSMessage = async (id) =>{
     try {
         await $host.delete(`api/smessage/delete/${id}`); 
     } catch (error) {
@@ -91,7 +50,7 @@ export const delMessage = async (id) =>{
 }
 
 
-export const getMessages = async(id)=>{
+export const getSMessages = async(id)=>{
     try {
         let response= await $host.get(`api/smessage/get/${id}`);
         
@@ -102,7 +61,7 @@ export const getMessages = async(id)=>{
     }
 }
 
-export const getLastMessages = async(id)=>{
+export const getSLastMessages = async(id)=>{
     try {
         let response= await $host.get(`api/smessage/last/get/${id}`);
         
@@ -113,7 +72,7 @@ export const getLastMessages = async(id)=>{
     }
 }
 
-export const getAllMessages = async()=>{
+export const getSAllMessages = async()=>{
     try {
         let response= await $host.get(`api/smessage/get`);
         
@@ -124,7 +83,7 @@ export const getAllMessages = async()=>{
     }
 }
 
-export const getMessagesCount = async(count)=>{
+export const getSMessagesCount = async(count)=>{
     try {
         let response= await $host.get(`api/smessage/get/count/${count}`);
         
