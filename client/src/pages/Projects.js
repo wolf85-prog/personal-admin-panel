@@ -90,6 +90,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
@@ -1275,6 +1276,31 @@ ${loc.url}`;
     setStartDate(date)
   }
 
+
+  const clickToCall2 = async(id) => {
+		// Button begins to shake
+		// setPress(true);
+		// console.log(id)
+        
+		// // Buttons stops to shake after 2 seconds
+		// setTimeout(() => setPress(false), 200);
+
+		//audioIshodCall.play();
+		await getSendCall(id)
+	}
+
+	const clickToCallRaut = async(id) => {
+		// Button begins to shake
+		//setPress(true);
+		//console.log(id)
+        
+		// Buttons stops to shake after 2 seconds
+		//setTimeout(() => setPress(false), 200);
+
+		//audioIshodCall.play();
+		await getSendCallRaut(id)
+	}
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -2072,10 +2098,10 @@ ${loc.url}`;
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img onClick={()=>clickToCall2(item.id)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img onClick={()=>clickToCallRaut(item.id)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                     {item.hr ?
