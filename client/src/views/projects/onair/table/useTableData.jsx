@@ -193,23 +193,7 @@ export const useTableData = () => {
         cell: ({ row }) => {
           return (
             <>
-              <CModal
-                alignment="center"
-                visible={showModalEmpty}
-                onClose={() => setShowModalEmpty(false)}
-                aria-labelledby="VerticallyCenteredExample"
-              >
-                <CModalBody
-                  style={{
-                    height: '100px',
-                    textAlign: 'center',
-                    fontSize: '18px',
-                    paddingTop: '15px',
-                  }}
-                >
-                   Функция не доступна по данному тарифу
-                </CModalBody>
-              </CModal>
+              
               <div style={{display: 'inline-block'}} onClick={()=> setShowModalEmpty(true)}><PhoneSvg style={{ cursor: 'pointer', marginRight: '5px' }} /></div>
               <div style={{display: 'inline-block'}} onClick={()=> setShowModalEmpty(true)}><RobotSvg style={{ cursor: 'pointer' }} /></div>
             </>
@@ -236,5 +220,7 @@ export const useTableData = () => {
     setProjectFilter,
     projectFilter,
     handleChangeProject,
+    showModalEmpty,
+    setShowModalEmpty
   }
 }
