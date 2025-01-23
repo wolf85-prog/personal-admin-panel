@@ -232,7 +232,19 @@ class SpecialistController {
         const {id} = req.params
         try {
             const worker = await Worker.findOne({where: {
-                [Op.or]: [{phone: id.toString()}, {phone2: id.toString()}]
+                [Op.or]: [{phone: id.toString()}]
+            }})
+            return res.status(200).json(worker);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
+    async getSpecialistByPhone(req, res) {
+        const {phone, phone2, phone3} = req.body        
+        try {
+            const worker = await Worker.findOne({where: {
+                [Op.or]: [{phone: phone.toString()}, {phone: phone2.toString()}, {phone: phone3.toString()}]
             }})
             return res.status(200).json(worker);
         } catch (err) {

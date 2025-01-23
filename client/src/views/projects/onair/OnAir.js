@@ -23,12 +23,13 @@ import {
   CTableHeaderCell,
   CTableRow,
   CContainer,
+  CModal,
+  CModalBody,
 } from '@coreui/react'
 
 import { useTableData } from './table/useTableData'
 import TableHeader from './table/TableHeader'
 import Projects from './Projects'
-
 
 const OnAir = () => {
   const {
@@ -40,6 +41,8 @@ const OnAir = () => {
     setProjectFilter,
     projectFilter,
     handleChangeProject,
+    showModalEmpty,
+    setShowModalEmpty,
   } = useTableData()
 
   const table = useReactTable({
@@ -79,79 +82,95 @@ const OnAir = () => {
 
   return (
     <div className="dark-theme">
-        <AppSidebar />
-        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-          <AppHeader />
-          <div className="body flex-grow-1 px-3">
-            <CContainer lg>
+      <CModal
+        alignment="center"
+        visible={showModalEmpty}
+        onClose={() => setShowModalEmpty(false)}
+        aria-labelledby="VerticallyCenteredExample"
+      >
+        <CModalBody
+          style={{
+            textAlign: 'center',
+            fontSize: '18px',
+            paddingTop: '15px',
+          }}
+        >
+           Функция не доступна по данному тарифу
+        </CModalBody>
+      </CModal>
+      <AppSidebar />
+      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+        <AppHeader />
+        <div className="body flex-grow-1 px-3">
+          <CContainer lg>
             <CRow className="mt-2">
-        <CCol xs>
-          <CCard className="mb-4">
-            {/* <CCardHeader>Сметы</CCardHeader> */}
+              <CCol xs>
+                <CCard className="mb-4">
+                  {/* <CCardHeader>Сметы</CCardHeader> */}
 
-            <CCardBody style={{ padding: '16px' }}>
-              {/* <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> */}
-              <Projects
-                styleClass={'mb-3 justify-content-between'}
-                setProjectFilter={handleChangeProject}
-                projectFilter={projectFilter}
-              />
-              <CTable
-                style={{ overflow: 'hidden', borderRadius: '5px' }}
-                align="middle"
-                className="mb-0 border"
-                hover
-                responsive
-              >
-                <CTableHead className="text-center" color="light">
-                  {table.getHeaderGroups().map((headerGroup) => {
-                    return (
-                      <CTableRow key={headerGroup.id}>
-                        {headerGroup.headers.map((header) => {
+                  <CCardBody style={{ padding: '16px' }}>
+                    {/* <Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> */}
+                    <Projects
+                      styleClass={'mb-3 justify-content-between'}
+                      setProjectFilter={handleChangeProject}
+                      projectFilter={projectFilter}
+                    />
+                    <CTable
+                      style={{ overflow: 'hidden', borderRadius: '5px' }}
+                      align="middle"
+                      className="mb-0 border"
+                      hover
+                      responsive
+                    >
+                      <CTableHead className="text-center" color="light">
+                        {table.getHeaderGroups().map((headerGroup) => {
                           return (
-                            <TableHeader
-                              header={header}
-                              //
-                            />
+                            <CTableRow key={headerGroup.id}>
+                              {headerGroup.headers.map((header) => {
+                                return (
+                                  <TableHeader
+                                    header={header}
+                                    //
+                                  />
+                                )
+                              })}
+                            </CTableRow>
                           )
                         })}
-                      </CTableRow>
-                    )
-                  })}
-                </CTableHead>
-                <CTableBody>
-                  {table.getRowModel().rows.map((row) => {
-                    return (
-                      <CTableRow className="text-center">
-                        {row.getVisibleCells().map((cell) => {
+                      </CTableHead>
+                      <CTableBody>
+                        {table.getRowModel().rows.map((row) => {
                           return (
-                            <CTableDataCell
-                              style={{
-                                height: '30px',
-                                minHeight: '30px',
-                                maxHeight: '30px',
-                                padding: '0',
-                                //   padding: '0.4rem 0.4rem',
-                              }}
-                            >
-                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </CTableDataCell>
+                            <CTableRow className="text-center">
+                              {row.getVisibleCells().map((cell) => {
+                                return (
+                                  <CTableDataCell
+                                    style={{
+                                      height: '30px',
+                                      minHeight: '30px',
+                                      maxHeight: '30px',
+                                      padding: '0',
+                                      //   padding: '0.4rem 0.4rem',
+                                    }}
+                                  >
+                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                  </CTableDataCell>
+                                )
+                              })}
+                            </CTableRow>
                           )
                         })}
-                      </CTableRow>
-                    )
-                  })}
-                </CTableBody>
-              </CTable>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-            </CContainer>
-          </div>
-          <AppFooter />
+                      </CTableBody>
+                    </CTable>
+                  </CCardBody>
+                </CCard>
+              </CCol>
+            </CRow>
+          </CContainer>
         </div>
+        <AppFooter />
       </div>
+    </div>
   )
 }
 

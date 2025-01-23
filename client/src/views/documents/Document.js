@@ -40,6 +40,7 @@ import {
   CModalFooter,
   CButton,
   CContainer,
+  CTooltip,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
@@ -68,13 +69,13 @@ import { ReactComponent as Pencil } from 'src/assets/svg/pencil-square.svg'
 
 const Document = () => {
   const [visible, setVisible] = useState(false)
-  const [editing, setEditing] = useState(false)
+  const [editingAct, setEditingAct] = useState(false)
+  const [editingContarct, setEditingContarct] = useState(false)
+  const [editingInvoice, setEditingInvoice] = useState(false)
+  const [editingApp, setEditingApp] = useState(false)
+
   const [showModalEmpty, setShowModalEmpty] = useState(false)
   const queryClient = useQueryClient()
-  
-  
-
-
 
   const { state } = useLocation()
 
@@ -88,15 +89,13 @@ const Document = () => {
   })
 
   const { mutate: mutateComplect } = useMutation({
-      mutationFn: hiddenDocument,   
-      onSettled: async () => {
-        return await queryClient.invalidateQueries(['complect'])
-        
-      },
-    })
+    mutationFn: hiddenDocument,
+    onSettled: async () => {
+      return await queryClient.invalidateQueries(['complect'])
+    },
+  })
 
   const handleHiddenDocument = (item) => {
-    
     mutateComplect(item)
   }
 
@@ -137,8 +136,6 @@ const Document = () => {
       </div>
     )
 
-  
-
   return (
     <div className="dark-theme">
       <CModal
@@ -147,9 +144,7 @@ const Document = () => {
         onClose={() => setShowModalEmpty(false)}
         aria-labelledby="VerticallyCenteredExample"
       >
-        <CModalBody
-          style={{ height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px' }}
-        >
+        <CModalBody style={{ textAlign: 'center', fontSize: '18px', paddingTop: '15px' }}>
            Функция не доступна по данному тарифу
         </CModalBody>
       </CModal>
@@ -200,7 +195,9 @@ const Document = () => {
                             <div
                               style={{ height: '40px', width: '140px' }}
                               // className="py-2 uley-data-main editing-style"
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.date}
@@ -210,7 +207,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.number}
@@ -222,7 +221,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Период</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM')}-
@@ -233,7 +234,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Основание</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
@@ -245,7 +248,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат </div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
@@ -256,7 +261,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Сумма</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {format(complect.invoice.service_price)}
@@ -275,7 +282,9 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingInvoice ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
@@ -284,11 +293,7 @@ const Document = () => {
                         </div>
                         <div style={{ marginBottom: '40px' }}>
                           <div className="text-medium-emphasis small">Контрагент</div>
-                          <div
-                            style={{ height: '40px' }}
-                            className="py-2 uley-data-main"
-                            onClick={() => setShowModalEmpty(true)}
-                          >
+                          <div style={{ height: '40px' }} className="py-2 uley-data-main">
                             {complect.contract.company.name}
                           </div>
                         </div>
@@ -319,7 +324,7 @@ const Document = () => {
                       )}
                     </EnterFullScreen> */}
 
-                          <div className="">
+                          <CTooltip style={{ color: '#fff' }} content="Скачать" placement="bottom">
                             <div
                               style={{
                                 height: '40px',
@@ -328,54 +333,68 @@ const Document = () => {
                                 padding: '5px',
                               }}
                               className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               <ArrowD />
                             </div>
-                          </div>
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() => setEditing(!editing)}
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content=" Редактировать"
+                            placement="bottom"
                           >
-                            <Pencil />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setEditingInvoice(!editingInvoice)}
+                            >
+                              <Pencil />
+                            </div>
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content=" Загрузить"
+                            placement="bottom"
                           >
-                            <ArrowU />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() =>
-                              handleHiddenDocument({
-                                invoice_id: complect.invoice.id,
-                                act_id: null,
-                                application_id: null,
-                                contract_id: null,
-                              })
-                            }
-                          >
-                            <Trash />
-                          </div>
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
+                            >
+                              <ArrowU />
+                            </div>
+                          </CTooltip>
+                          <CTooltip style={{ color: '#fff' }} content=" Удалить" placement="bottom">
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() =>
+                                handleHiddenDocument({
+                                  invoice_id: complect.invoice.id,
+                                  act_id: null,
+                                  application_id: null,
+                                  contract_id: null,
+                                })
+                              }
+                            >
+                              <Trash />
+                            </div>
+                          </CTooltip>
                         </div>
                       </div>
                       <div className="div2-document">
@@ -400,7 +419,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.act.date}
@@ -410,7 +429,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.act.number}
@@ -422,7 +441,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Период</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM')}-
@@ -433,7 +452,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Основание</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
@@ -445,7 +464,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат </div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
@@ -456,7 +475,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Сумма</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {format(complect.invoice.service_price)}
@@ -475,7 +494,7 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingAct ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
@@ -515,7 +534,7 @@ const Document = () => {
                       )}
                     </EnterFullScreen> */}
 
-                          <div className="">
+                          <CTooltip style={{ color: '#fff' }} content="Скачать" placement="bottom">
                             <div
                               style={{
                                 height: '40px',
@@ -524,54 +543,69 @@ const Document = () => {
                                 padding: '5px',
                               }}
                               className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               <ArrowD />
                             </div>
-                          </div>
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() => setEditing(!editing)}
-                          >
-                            <Pencil />
-                          </div>
+                          </CTooltip>
 
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Редактировать"
+                            placement="bottom"
                           >
-                            <ArrowU />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() =>
-                              handleHiddenDocument({
-                                act_id: complect.act.id,
-                                invoice_id: null,
-                                application_id: null,
-                                contract_id: null,
-                              })
-                            }
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setEditingAct(!editingAct)}
+                            >
+                              <Pencil />
+                            </div>
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Загрузить"
+                            placement="bottom"
                           >
-                            <Trash />
-                          </div>
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
+                            >
+                              <ArrowU />
+                            </div>
+                          </CTooltip>
+                          <CTooltip style={{ color: '#fff' }} content="Удалить" placement="bottom">
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() =>
+                                handleHiddenDocument({
+                                  act_id: complect.act.id,
+                                  invoice_id: null,
+                                  application_id: null,
+                                  contract_id: null,
+                                })
+                              }
+                            >
+                              <Trash />
+                            </div>
+                          </CTooltip>
                         </div>
                       </div>
                       <div className="div3-document">
@@ -596,7 +630,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.application.date}
@@ -606,7 +640,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.application.number}
@@ -618,7 +652,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Период</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM')}-
@@ -629,7 +663,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Основание</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
@@ -641,7 +675,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат </div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
@@ -652,7 +686,7 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Сумма</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {format(complect.invoice.service_price)}
@@ -671,7 +705,7 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${editingApp ? '' : ' editing-style'}`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
@@ -711,7 +745,7 @@ const Document = () => {
                       )}
                     </EnterFullScreen> */}
 
-                          <div className="">
+                          <CTooltip style={{ color: '#fff' }} content="Скачать" placement="bottom">
                             <div
                               style={{
                                 height: '40px',
@@ -720,54 +754,68 @@ const Document = () => {
                                 padding: '5px',
                               }}
                               className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               <ArrowD />
                             </div>
-                          </div>
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() => setEditing(!editing)}
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Редактировать"
+                            placement="bottom"
                           >
-                            <Pencil />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setEditingApp(!editingApp)}
+                            >
+                              <Pencil />
+                            </div>
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Загрузить"
+                            placement="bottom"
                           >
-                            <ArrowU />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() =>
-                              handleHiddenDocument({
-                                application_id: complect.application.id,
-                                invoice_id: null,
-                                act_id: null,
-                                contract_id: null,
-                              })
-                            }
-                          >
-                            <Trash />
-                          </div>
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
+                            >
+                              <ArrowU />
+                            </div>
+                          </CTooltip>
+                          <CTooltip style={{ color: '#fff' }} content="Удалить" placement="bottom">
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() =>
+                                handleHiddenDocument({
+                                  application_id: complect.application.id,
+                                  invoice_id: null,
+                                  act_id: null,
+                                  contract_id: null,
+                                })
+                              }
+                            >
+                              <Trash />
+                            </div>
+                          </CTooltip>
                         </div>
                       </div>
                       <div className="div4-document">
@@ -798,7 +846,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата начала</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.start_date).format('DD.MM.YYYY')}
@@ -808,7 +858,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата окончания</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {dayjs(complect.contract.end_date).format('DD.MM.YYYY')}
@@ -820,7 +872,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Дата подписи</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               -
@@ -830,7 +884,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Номер</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.number}
@@ -842,7 +898,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Формат</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.contract.signature_type} |{' '}
@@ -853,7 +911,9 @@ const Document = () => {
                             <div className="text-medium-emphasis small">Статус</div>
                             <div
                               style={{ height: '40px', width: '140px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               -
@@ -872,7 +932,9 @@ const Document = () => {
                           >
                             <div
                               style={{ maxHeight: '120px', minHeight: '114px', padding: '5px' }}
-                              className={`py-2 uley-data-main${editing ? '' : ' editing-style'}`}
+                              className={`py-2 uley-data-main${
+                                editingContarct ? '' : ' editing-style'
+                              }`}
                               onClick={() => setShowModalEmpty(true)}
                             >
                               {complect.invoice.service_name}
@@ -912,7 +974,7 @@ const Document = () => {
                       )}
                     </EnterFullScreen> */}
 
-                          <div className="">
+                          <CTooltip style={{ color: '#fff' }} content="Скачать" placement="bottom">
                             <div
                               style={{
                                 height: '40px',
@@ -921,54 +983,72 @@ const Document = () => {
                                 padding: '5px',
                               }}
                               className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
                             >
                               <ArrowD />
                             </div>
-                          </div>
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() => setEditing(!editing)}
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Редактировать"
+                            placement="bottom"
                           >
-                            <Pencil />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setEditingContarct(!editingContarct)}
+                            >
+                              <Pencil />
+                            </div>
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Загрузить"
+                            placement="bottom"
                           >
-                            <ArrowU />
-                          </div>
-
-                          <div
-                            style={{
-                              height: '40px',
-                              width: '40px',
-                              cursor: 'pointer',
-                              padding: '5px',
-                            }}
-                            className="uley-data-main"
-                            onClick={() =>
-                              handleHiddenDocument({
-                                contract_id: complect.contract.id,
-                                invoice_id: null,
-                                act_id: null,
-                                application_id: null,
-                              })
-                            }
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() => setShowModalEmpty(true)}
+                            >
+                              <ArrowU />
+                            </div>
+                          </CTooltip>
+                          <CTooltip
+                            style={{ color: '#fff' }}
+                            content="Удалить"
+                            placement="bottom"
                           >
-                            <Trash />
-                          </div>
+                            <div
+                              style={{
+                                height: '40px',
+                                width: '40px',
+                                cursor: 'pointer',
+                                padding: '5px',
+                              }}
+                              className="uley-data-main"
+                              onClick={() =>
+                                handleHiddenDocument({
+                                  contract_id: complect.contract.id,
+                                  invoice_id: null,
+                                  act_id: null,
+                                  application_id: null,
+                                })
+                              }
+                            >
+                              <Trash />
+                            </div>
+                          </CTooltip>
                         </div>
                       </div>
                     </div>

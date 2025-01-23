@@ -21,7 +21,7 @@ const { getProjectsAll,
 const { getSpecialist, getSpecCount, editSpecialist, 
     getSpecialistId, addSpecialist, deleteSpecialist, 
     getSpecCountAll, getSpecialistPhone, getSpecialistChatId, 
-    blockSpecialist } = require('../controllers/specialistController')
+    blockSpecialist,getSpecialistByPhone} = require('../controllers/specialistController')
 
 const { getManagers, getManagerCount, editManager, getManagerId, 
     addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
@@ -117,6 +117,9 @@ route.get("/workers/count/get", getSpecCountAll);
 route.get("/workers/phone/:id", getSpecialistPhone);
 route.get("/workers/chat/:id", getSpecialistChatId);
 route.get('/workers/block/:id', blockSpecialist)
+route.post("/workers/phone", getSpecialistByPhone);
+
+
 
 
 //----------------- Менеджеры ---------------------------------
