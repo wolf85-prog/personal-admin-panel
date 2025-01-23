@@ -90,6 +90,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
@@ -1274,6 +1275,31 @@ ${loc.url}`;
     console.log(e.target.value)
     setStartDate(date)
   }
+
+
+  const clickToCall2 = async(id) => {
+		// Button begins to shake
+		// setPress(true);
+		// console.log(id)
+        
+		// // Buttons stops to shake after 2 seconds
+		// setTimeout(() => setPress(false), 200);
+
+		//audioIshodCall.play();
+		await getSendCall(id)
+	}
+
+	const clickToCallRaut = async(id) => {
+		// Button begins to shake
+		//setPress(true);
+		//console.log(id)
+        
+		// Buttons stops to shake after 2 seconds
+		//setTimeout(() => setPress(false), 200);
+
+		//audioIshodCall.play();
+		await getSendCallRaut(id)
+	}
 
   return (
     <div className='dark-theme'>
