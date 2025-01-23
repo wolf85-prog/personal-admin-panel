@@ -56,7 +56,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		}
 		
 		
-	}, [])
+	}, [allMessages])
 
 	useEffect(() => {
 		setDates(Object.keys(newMessages))  //['01/01/2023', 'Сегодня']

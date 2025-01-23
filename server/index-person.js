@@ -35,7 +35,14 @@ const $host = axios.create({
 const app = express();
 
 const corsOptions = {
-    origin: ['https://uley.company:2001', 'http://localhost:3000', 'https://uley.company', 'https://tm.uley.team:7878/','https://localhost:7878/'],//(https://your-client-app.com)
+    origin: [
+        'https://uley.company:2001', 
+        'http://localhost:3000', 
+        'https://uley.company', 
+        'https://tm.uley.team:7878/',
+        'https://localhost:7878/', 
+        'https://proj.uley.team:3001'
+    ], //(https://your-client-app.com)
     optionsSuccessStatus: 200,
 };
 

@@ -795,7 +795,7 @@ useEffect(() => {
 			const arrayClientAll = []
 		
 			const newClient = {
-				//id: user.id,
+				id: JSON.parse(user)?.id,
 				userfamily: 'U.L.E.Y', //user.userfamily != null ? user.userfamily : '',
 				username: '',//user.username,
 				phone: '',
@@ -835,33 +835,7 @@ useEffect(() => {
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
 
-				let messages = []
-				let messages2 = []
-				
-				//messages = messagesAll.filter(item => item.conversationId === conversationId.toString()) //await getWMessages(conversationId)
-				//messagesAll.reverse()
-
-				//выбрать из всех сообщений только пользователя в кол-ве 10 шт.
-				// for (let i = messagesAll.length-1; i >= 0; i--) {
-				// 	if (messagesAll[i].conversationId === conversationId.toString())
-				// 		messages.push(messagesAll[i])
-					
-				// 	if (messages.length === 20)
-				// 	break;
-				// }
-
-				console.log("messages: ", messagesAll)
-
-				//получить последнее сообщение (без сообщений из рассылки)
-				// if (messages.length > 0) {
-				// 	[...messages].reverse().map((message) => {
-				// 		if (message.isBot === false || message.isBot === null) {
-				// 			messages2.push(message)
-				// 		}	
-				// 	})
-				// }
-
-				//console.log("last messages: ", user, messages2)
+				//console.log("messages: ", messagesAll)
 					
 				const messageDates = Object.keys(messagesAll); //messages
 
@@ -916,7 +890,7 @@ useEffect(() => {
 				
 				if (client) {
 					const newUser = {
-						//id: client?.id,
+						id: client?.chatId,
 						username: 'Менеджер', 
 						name: client?.userfamily + " " + client?.username, 
 						city: client?.city, 
@@ -952,6 +926,8 @@ useEffect(() => {
 
 //------------------------------------------------------------------------------------
 	useEffect(() => {
+		console.log("socket uley.company work!")
+
 		socket.on("getMessageCustomer", fetchMessageCustomerResponse);
 		socket.on("getAdminCustomer", fetchAdminCustomer);	
 		socket.on("getDelAdminCustomer", fetchDelAdminCustomer);
@@ -1486,26 +1462,26 @@ const fetchMessageSupportResponse = async(data) => {
 
 //получить исходящее сообщение в админку workhub
 const fetchAdminSupport = (data) => {
-	//console.log("Пришло сообщение в Админку: ", data)
+	console.log("Пришло сообщение в Админку: ", data)
 
 	setUserSupport((userSupport) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
 
-		//console.log("userWorkers: ", userWorkers)
+		console.log("userSupport: ", userSupport)
 
-		let userIndex = userSupport.findIndex((user) => user.chatId === receiverId.toString());
+		let userIndex = 0 //userSupport.findIndex((user) => user.id.toString() === senderId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-		//console.log("usersCopy: ", usersCopy)
+		//console.log("userIndex: ",  userIndex)
 
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
 			content: text,
 			image: type === 'image' ? true : false,
 			descript: buttons ? buttons : '',
-			sender: senderId,
+			sender: receiverId,
 			time: new Date().toLocaleTimeString(),
 			status: 'delivered',
-			id: messageId,
+			//id: messageId,
 		};
 
 		const currentDate = new Date().toLocaleDateString()
@@ -1524,11 +1500,7 @@ const fetchAdminSupport = (data) => {
 		}
 		
 		const userObject = usersCopy[userIndex];
-		if (isBot) {
-			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
-		} else {
-			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
-		}
+		usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
 		
 
 		//сортировка
@@ -1537,7 +1509,7 @@ const fetchAdminSupport = (data) => {
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 
-		//console.log(userSort)
+		console.log(userSort)
 
 		return userSort;
 	});
@@ -1566,17 +1538,17 @@ const fetchDelAdminSupport = (data) => {
 
 //отправить сообщение из админки workhub
 const addNewMessage3 = (userId, message, type, textButton, convId, messageId, isBot) => {
-	console.log("isBot: ", isBot)
+	//console.log("isBot: ", isBot)
 
 	socket.emit("sendAdminSupport", { 
-		senderId: chatAdminId,
-		receiverId: userId,
+		senderId: userId,
+		receiverId: chatAdminId,
 		text: message,
 		type: type,
 		buttons: textButton,
 		convId: convId,
-		messageId,
-		isBot: isBot,
+		//messageId,
+		//isBot: isBot,
 	})
 };
 

@@ -223,7 +223,7 @@ const Chat = () => {
 	}
 
 	const submitNewMessage = () => {
-		audio.play();
+		//audio.play();
 		sendText();
 
 		setMess("");
