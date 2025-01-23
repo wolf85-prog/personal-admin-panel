@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 
 import routes from '../routes'
 
+import arrowUp from 'src/assets/images/ArrowUp.png'
+
 import { CBreadcrumb, CBreadcrumbItem, CButton } from '@coreui/react'
 
 const AppBreadcrumb = (props) => {
@@ -47,7 +49,7 @@ const AppBreadcrumb = (props) => {
       })}
 
       <div style={{marginLeft: '330px'}}>
-        
+        <img src={arrowUp} alt='' style={{position: 'absolute', top: '60px', right: '55px', width: '80px', transform: 'rotate(45deg)'}}/>                         
       </div>
     </CBreadcrumb>
   )

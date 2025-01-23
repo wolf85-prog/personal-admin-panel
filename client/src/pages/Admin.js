@@ -154,8 +154,8 @@ const Admin = () => {
                 <Suspense fallback={<CSpinner color="primary" />}>
 
                 <>
-                  <img src={arrowUp} alt='' style={{position: 'absolute', top: '50px', right: '55px', zIndex: '1030', width: '100px', transform: 'rotate(45deg)'}}/>
-                  
+                  {/* <img src={arrowUp} alt='' style={{position: 'absolute', top: '50px', right: '55px', zIndex: '1030', width: '100px', transform: 'rotate(45deg)'}}/>
+                   */}
                   <WidgetsDropdown2/>
 
                   {/* График Год */}

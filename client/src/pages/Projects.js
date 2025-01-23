@@ -70,6 +70,7 @@ import addAvatar from "../assets/images/add_avatar.png"
 import Krestik from './../assets/images/krestik.png';
 import imgBlock18 from "./../assets/images/block18.png";
 import Trubka from "./../assets/images/trubka.png";
+import robot from "src/chat-app-worker/assets/images/robot.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
@@ -300,14 +301,20 @@ const Projects = () => {
     console.log("workersAll: ", workersAll)
     workersAll.map((item, index)=> {
       if (item.userfamily) {
-        arrWorkers.push(item.userfamily)
+        const obj = {
+          id: item.id,
+          label: item.userfamily,
+          value: index,
+        }
+        arrWorkers.push(obj)
+        //arrWorkers.push(item.userfamily)
       }  
     })
     const sortedWorker = [...arrWorkers].sort((a, b) => {       
-      return (a < b) ? -1 : (a > b) ? 1 : 0;  //сортировка по возрастанию 
+      return (a.label < b.label) ? -1 : (a.label > b.label) ? 1 : 0;  //сортировка по возрастанию 
     })
-    //console.log("arrWorkers: ", arrWorkers)
-    setWorkersData(arrWorkers)
+    console.log("arrWorkers: ", sortedWorker)
+    setWorkersData(sortedWorker)
 
     //4
     let arrPlatfroms = []
@@ -1962,10 +1969,9 @@ ${loc.url}`;
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Вид работ</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
                                     <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Ставка</CTableHeaderCell>
-                                    {/* <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell> */}
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Комтег</CTableHeaderCell>                         
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Мерч</CTableHeaderCell>
@@ -2066,7 +2072,10 @@ ${loc.url}`;
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      {/* <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
+                                      <img src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
+                                      <img src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                     {item.hr ?

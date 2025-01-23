@@ -44,7 +44,7 @@ import Delete2 from "./../assets/images/cart2.png";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
-import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
+
 
 import MyModalSmall from './MyModalSmall/MyModalSmall'
 import Close from "./../assets/images/close.svg"
@@ -53,9 +53,8 @@ const AppHeaderChat = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
-    workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
-    soundVolume, setSoundVolume, soundMute, setSoundMute, showDistrib, setShowDistrib} = useUsersContext();
+  const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
+    soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [showBar, setShowBar] = useState(false)
@@ -137,24 +136,6 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     } 
   }
 
-  const updateD = async() => {
-    // показать предупреждение о рассылке
-    if (showDistrib) {
-      setVisibleModal(true)
-    } 
-    else {
-      if (showUpdate) {
-        setShowUpdate(false);
-      } else {
-        setShowUpdate(true);
-      }
-
-      //обновление данных
-      setWorkerUpdate(0)
-      const resUpdate = await getUpdateWorkers()
-    }
-    
-  }
 
   const handleLinkClick = (url) => {
     // Open the link in a new tab with desired features (optional)

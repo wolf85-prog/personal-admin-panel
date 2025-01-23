@@ -9,7 +9,9 @@ import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 import { getAllMessages, getContacts, getConversation, getConversations, getMessages, getMessagesCount } from '../../http/chatAPI'
 
 import { getWContacts, getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
-	getWMessagesCount, getWorkersCount} from '../../http/workerAPI'
+	getWMessagesCount, getWorkersCount} from '../../http/workerAPI' 
+
+import { getSpecialistChatId} from '../../http/specAPI' 
 
 import { getCompany } from '../../http/companyAPI'
 
@@ -940,6 +942,10 @@ useEffect(() => {
 		socket.on("getPersonSupport", fetchAdminSupport);	
 		socket.on("getDelAdminSupport", fetchDelAdminSupport);
 
+
+
+		socket.on("getNotif", fetchNotifAdmin);
+
 		//socket.on("start_typing", setUserAsTyping);
 		//socket.on("stop_typing", setUserAsNotTyping);
 		
@@ -1579,6 +1585,87 @@ const delWMessageContext3 = (messageId, messageDate, chatId) => {
 
 function isObjectEmpty(obj) {
 	return Object.keys(obj).length === 0;
+}
+
+
+
+
+
+//===============================================================
+//                  Notifications
+//===============================================================
+const fetchNotifAdmin = async (dataAll) => {
+	console.log("Получено уведомление: ", dataAll)
+	const { task, 
+		tg_id,
+		fio,
+		sity,
+		year_of_birth, 
+		rating, 
+		projects, 
+		specialities, 
+		comtags, 
+		phone,
+		telegram_id, 
+		srm_id, 
+		chat_link,
+	} = dataAll;
+
+	if (task === 100) {
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioNarush.volume = parseFloat(savedVolume)
+		   	audioNarush.play();
+		} 
+	}
+	else if (task === 101) {
+		const savedVolume = localStorage.getItem("soundVolume");
+		const savedMute = localStorage.getItem("soundMute");
+
+		if (savedMute === 'false') {
+			console.log("savedMute: ", savedMute)
+			audioNarush2.volume = parseFloat(savedVolume)
+			audioNarush2.play();
+		} 
+	}
+	//звонок специалиста
+	else if (task === 200) {
+		//console.log("fio: ", fio)
+
+		const worker = await getSpecialistChatId(tg_id)
+		console.log("worker: ", worker)
+		setWorkerCall({
+			tg_id,
+			fio,
+            sity,
+            year_of_birth, 
+            rating, 
+            projects, 
+            specialities, 
+            comtags,
+			avatar: worker?.profile,
+		})
+
+		setShowCallCard(true)
+
+		setCallIndex(2)
+		setCallIndex2(1)
+	}
+	//неизвестный номер
+	else if (task === 201) {
+		//console.log("fio: ", data)
+		setShowCallCardNo(true)
+
+		setWorkerCallNo(phone)
+
+
+		setCallIndex(1)
+		setCallIndex2(2)
+	}
+
 }
 
 	return (

@@ -260,6 +260,28 @@ io.on("connection", (socket) => {
     })
 
 
+
+    // Notifications
+    //------------------------------------------------------------------
+    //send and get message in workers
+    socket.on("sendNotif", ({task, tg_id, fio, sity, year_of_birth, rating, projects, specialities, 
+        comtags, foto, phone})=>{
+        io.emit("getNotif", {
+            task,
+            tg_id,
+            fio,
+            sity,
+            year_of_birth, 
+            rating, 
+            projects, 
+            specialities, 
+            comtags, 
+            foto,
+            phone,
+        })
+    }) 
+
+
     //when disconnect
     socket.on("disconnect", ()=> {
         removeUser(socket.id);
