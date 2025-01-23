@@ -2098,10 +2098,10 @@ ${loc.url}`;
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img onClick={()=>clickToCall2(item.id)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img onClick={()=>clickToCallRaut(item.id)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                     {item.hr ?
@@ -2354,8 +2354,8 @@ ${loc.url}`;
                       onClose={() => setShowModalEmpty(false)}
                       aria-labelledby="VerticallyCenteredExample"
                     >
-                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
-                        ...
+                      <CModalBody style={{ textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
+                      Функция доступна в расширенной версии. Подробности – в техподдержке.
                       </CModalBody>
                     </CModal>
 

@@ -145,7 +145,7 @@ const Document = () => {
         aria-labelledby="VerticallyCenteredExample"
       >
         <CModalBody style={{ textAlign: 'center', fontSize: '18px', paddingTop: '15px' }}>
-           Функция не доступна по данному тарифу
+         Функция доступна в расширенной версии. Подробности – в техподдержке.
         </CModalBody>
       </CModal>
       <AppSidebar />

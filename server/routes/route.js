@@ -42,7 +42,7 @@ const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 const { getClient, getClientCount, editClient, 
     getClientId, addClient, deleteClient, 
     getClientCountAll, getClientPhone, getClientChatId, 
-    blockClient } = require('../controllers/clientController')
+    blockClient,getClientByPhone } = require('../controllers/clientController')
 
 
 const { newConversationSupport, getConversationSupport, getConversationsSupport } = require('../controllers/sconversationController')
@@ -183,6 +183,7 @@ route.get("/client/count/get", getClientCountAll);
 route.get("/client/phone/:id", getClientPhone);
 route.get("/client/chat/:id", getClientChatId);
 route.get('/client/block/:id', blockClient)
+route.post("/client/phone/", getClientByPhone);
 
 //----------------- SUPPORT ---------------------------------
 route.post('/sconversation/add', newConversationSupport)
