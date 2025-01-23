@@ -202,6 +202,9 @@ const Chat = () => {
 
 				//сохранить в контексте
 				addNewMessage3(userId, mess, 'text', '', conv.id, null, null);
+
+				//получить сообщение у абонента
+				sendMessSupport(userId, mess, 'text', conv.id, null, null)
 			} else {
 				message = {
 					senderId: userId, 

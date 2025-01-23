@@ -127,6 +127,22 @@ io.on("connection", (socket) => {
         })
     })
 
+    //send and get message in workers
+    socket.on("sendMessagePersonSupport", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessagePersonSupport", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+            replyId,
+            isBot, 
+        })
+    })
+
+
+
     //send and get message
     socket.on("sendAdminSupport", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
         io.emit("getAdminSupport", {

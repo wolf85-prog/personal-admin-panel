@@ -936,7 +936,7 @@ useEffect(() => {
 		socket.on("getAdminWorker", fetchAdminWorker);	
 		socket.on("getDelAdminWorker", fetchDelAdminWorker);
 
-		socket.on("getMessageSupport", fetchMessageSupportResponse);
+		socket.on("getMessagePersonSupport", fetchMessageSupportResponse);
 		socket.on("getPersonSupport", fetchAdminSupport);	
 		socket.on("getDelAdminSupport", fetchDelAdminSupport);
 
@@ -1556,7 +1556,7 @@ const addNewMessage3 = (userId, message, type, textButton, convId, messageId, is
 const sendMessSupport = (userId, message, type, convId, messageId, isBot) => {
 	//console.log("isBot: ", isBot)
 
-	socket.emit("sendMessageSupport", { 
+	socket.emit("sendMessagePersonSupport", { 
 		senderId: userId,
         text: message,
         type: type,
