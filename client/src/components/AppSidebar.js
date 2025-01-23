@@ -225,7 +225,7 @@ const AppSidebar = () => {
     // },
     {
       component: CNavItem,
-      name: 'Техническая поддержка',
+      name: 'Тех. поддержка',
       to: '/support',
       icon: <img src={SupportIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
