@@ -1493,11 +1493,11 @@ const fetchAdminSupport = (data) => {
 	setUserSupport((userSupport) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
 
-		//console.log("userWorkers: ", userWorkers)
+		//console.log("userWorkers: ", userSupport)
 
-		let userIndex = userSupport.findIndex((user) => user.chatId === receiverId.toString());
+		let userIndex = userSupport.findIndex((user) => user.chatId.toString() === receiverId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-		//console.log("usersCopy: ", usersCopy)
+		console.log("usersCopy: ", usersCopy)
 
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
