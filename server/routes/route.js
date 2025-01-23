@@ -183,7 +183,7 @@ route.get("/client/count/get", getClientCountAll);
 route.get("/client/phone/:id", getClientPhone);
 route.get("/client/chat/:id", getClientChatId);
 route.get('/client/block/:id', blockClient)
-route.post("/client/phone/", getClientByPhone);
+route.post("/client/phone", getClientByPhone);
 
 //----------------- SUPPORT ---------------------------------
 route.post('/sconversation/add', newConversationSupport)
