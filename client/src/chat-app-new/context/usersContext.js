@@ -937,7 +937,7 @@ useEffect(() => {
 		socket.on("getDelAdminWorker", fetchDelAdminWorker);
 
 		socket.on("getMessageSupport", fetchMessageSupportResponse);
-		socket.on("getAdminSupport", fetchAdminSupport);	
+		socket.on("getPersonSupport", fetchAdminSupport);	
 		socket.on("getDelAdminSupport", fetchDelAdminSupport);
 
 		//socket.on("start_typing", setUserAsTyping);
@@ -1540,7 +1540,7 @@ const fetchDelAdminSupport = (data) => {
 const addNewMessage3 = (userId, message, type, textButton, convId, messageId, isBot) => {
 	//console.log("isBot: ", isBot)
 
-	socket.emit("sendAdminSupport", { 
+	socket.emit("sendPersonSupport", { 
 		senderId: userId,
 		receiverId: chatAdminId,
 		text: message,
@@ -1549,6 +1549,21 @@ const addNewMessage3 = (userId, message, type, textButton, convId, messageId, is
 		convId: convId,
 		//messageId,
 		//isBot: isBot,
+	})
+};
+
+//отправить сообщение из админки workhub
+const sendMessSupport = (userId, message, type, convId, messageId, isBot) => {
+	//console.log("isBot: ", isBot)
+
+	socket.emit("sendMessageSupport", { 
+		senderId: userId,
+        text: message,
+        type: type,
+        convId: convId,
+        // messageId,
+        // replyId,
+        // isBot, 
 	})
 };
 
@@ -1646,6 +1661,7 @@ function isObjectEmpty(obj) {
 			delWMessageContext,
 			delWMessageContext2,
 			delWMessageContext3,
+			sendMessSupport,
 		}}>
 			{children}
 		</UsersContext.Provider>

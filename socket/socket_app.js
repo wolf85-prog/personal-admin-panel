@@ -142,6 +142,20 @@ io.on("connection", (socket) => {
     })
 
     //send and get message
+    socket.on("sendPersonSupport", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getPersonSupport", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
+    //send and get message
     socket.on("delAdminSupport", ({messageId, messageDate, chatId})=>{
         io.emit("getDelAdminSupport", {
             messageId,

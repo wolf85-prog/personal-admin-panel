@@ -33,7 +33,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userId, userSupport, setUserAsUnread, addNewMessage3, sconversations, support } = useUsersContext();
+	const { userId, userSupport, setUserAsUnread, addNewMessage3, sconversations, support, sendMessSupport } = useUsersContext();
 	const { personS } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -218,6 +218,9 @@ const Chat = () => {
 
 				//сохранить в контексте
 				addNewMessage3(userId, host + image, 'image', '', conv.id, null, null);
+
+				//получить сообщение у абонента
+				sendMessSupport(userId, mess, 'text', conv.id, null, null)
 			}
 			console.log("message send: ", message);
 	}
