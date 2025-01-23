@@ -1495,9 +1495,9 @@ const fetchAdminSupport = (data) => {
 
 		//console.log("userWorkers: ", userSupport)
 
-		let userIndex = userSupport.findIndex((user) => user.chatId.toString() === receiverId.toString());
+		let userIndex = userSupport.findIndex((user) => user.chatId.toString() === senderId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-		console.log("usersCopy: ", usersCopy)
+		console.log("userIndex: ", userIndex)
 
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
@@ -1507,7 +1507,7 @@ const fetchAdminSupport = (data) => {
 			sender: senderId,
 			time: new Date().toLocaleTimeString(),
 			status: 'delivered',
-			id: messageId,
+			//id: messageId,
 		};
 
 		const currentDate = new Date().toLocaleDateString()
