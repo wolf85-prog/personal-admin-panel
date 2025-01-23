@@ -795,7 +795,7 @@ useEffect(() => {
 			const arrayClientAll = []
 		
 			const newClient = {
-				//id: user.id,
+				id: JSON.parse(user)?.id,
 				userfamily: 'U.L.E.Y', //user.userfamily != null ? user.userfamily : '',
 				username: '',//user.username,
 				phone: '',
@@ -835,33 +835,7 @@ useEffect(() => {
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
 
-				let messages = []
-				let messages2 = []
-				
-				//messages = messagesAll.filter(item => item.conversationId === conversationId.toString()) //await getWMessages(conversationId)
-				//messagesAll.reverse()
-
-				//выбрать из всех сообщений только пользователя в кол-ве 10 шт.
-				// for (let i = messagesAll.length-1; i >= 0; i--) {
-				// 	if (messagesAll[i].conversationId === conversationId.toString())
-				// 		messages.push(messagesAll[i])
-					
-				// 	if (messages.length === 20)
-				// 	break;
-				// }
-
-				console.log("messages: ", messagesAll)
-
-				//получить последнее сообщение (без сообщений из рассылки)
-				// if (messages.length > 0) {
-				// 	[...messages].reverse().map((message) => {
-				// 		if (message.isBot === false || message.isBot === null) {
-				// 			messages2.push(message)
-				// 		}	
-				// 	})
-				// }
-
-				//console.log("last messages: ", user, messages2)
+				//console.log("messages: ", messagesAll)
 					
 				const messageDates = Object.keys(messagesAll); //messages
 
@@ -916,7 +890,7 @@ useEffect(() => {
 				
 				if (client) {
 					const newUser = {
-						//id: client?.id,
+						id: client?.chatId,
 						username: 'Менеджер', 
 						name: client?.userfamily + " " + client?.username, 
 						city: client?.city, 
