@@ -1495,9 +1495,9 @@ const fetchAdminSupport = (data) => {
 
 		console.log("userSupport: ", userSupport)
 
-		let userIndex = userSupport.findIndex((user) => user.id.toString() === senderId.toString());
+		let userIndex = 0 //userSupport.findIndex((user) => user.id.toString() === senderId.toString());
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-		console.log("userIndex: ",  userIndex)
+		//console.log("userIndex: ",  userIndex)
 
 		const newMsgObject = {
 			date: new Date().toLocaleDateString(),
