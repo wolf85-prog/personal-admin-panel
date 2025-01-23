@@ -952,6 +952,8 @@ useEffect(() => {
 
 //------------------------------------------------------------------------------------
 	useEffect(() => {
+		console.log("socket uley.company work!")
+
 		socket.on("getMessageCustomer", fetchMessageCustomerResponse);
 		socket.on("getAdminCustomer", fetchAdminCustomer);	
 		socket.on("getDelAdminCustomer", fetchDelAdminCustomer);
@@ -1486,7 +1488,7 @@ const fetchMessageSupportResponse = async(data) => {
 
 //получить исходящее сообщение в админку workhub
 const fetchAdminSupport = (data) => {
-	//console.log("Пришло сообщение в Админку: ", data)
+	console.log("Пришло сообщение в Админку: ", data)
 
 	setUserSupport((userSupport) => {
 		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
@@ -1566,17 +1568,17 @@ const fetchDelAdminSupport = (data) => {
 
 //отправить сообщение из админки workhub
 const addNewMessage3 = (userId, message, type, textButton, convId, messageId, isBot) => {
-	console.log("isBot: ", isBot)
+	//console.log("isBot: ", isBot)
 
 	socket.emit("sendAdminSupport", { 
-		senderId: chatAdminId,
-		receiverId: userId,
+		senderId: userId,
+		receiverId: chatAdminId,
 		text: message,
 		type: type,
 		buttons: textButton,
 		convId: convId,
-		messageId,
-		isBot: isBot,
+		//messageId,
+		//isBot: isBot,
 	})
 };
 
