@@ -1504,7 +1504,7 @@ const fetchAdminSupport = (data) => {
 			content: text,
 			image: type === 'image' ? true : false,
 			descript: buttons ? buttons : '',
-			sender: senderId,
+			sender: receiverId,
 			time: new Date().toLocaleTimeString(),
 			status: 'delivered',
 			//id: messageId,
