@@ -241,7 +241,7 @@ class SpecialistController {
     }
 
     async getSpecialistByPhone(req, res) {
-        const {phone, phone2, phone3} = req.body        
+        const {phone, phone2, phone3} = req.body
         try {
             const worker = await Worker.findOne({where: {
                 [Op.or]: [{phone: phone.toString()}, {phone: phone2.toString()}, {phone: phone3.toString()}]
