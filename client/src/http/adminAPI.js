@@ -657,11 +657,10 @@ export const getCompanySendCall = async(id, callType)=>{
     }
 }
 
-export const getCompanySendCallRaut = async(id, callType)=>{
+export const getCompanySendCallRaut = async(id)=>{
     try {
         const response = await $host_call.post('/calls/company-wake', {
-            "id": id,
-            "type": callType
+            "id": id,            
         });
         console.log("call raut: ", response.data);
         return response.data;
