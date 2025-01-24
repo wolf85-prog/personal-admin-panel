@@ -2086,6 +2086,7 @@ ${loc.url}`;
                                         style={{width: '370px'}}
                                       />
                                     }
+                                    
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
