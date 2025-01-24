@@ -175,12 +175,12 @@ const ProfileCompany = () => {
     const fetchData = async() => {
  
       const result = await getCompanyProfId(userId)
-      console.log("Company: ", result)
+      console.log("Company: ", result, userId)
 
 
       setId(result?.id)
       setTitle(result?.title)
-      setCity(result.city ? result.city : '')
+      setCity(result ? (result.city ? result.city : '') : '')
 
       setOffice(result.office ? result.office : '')
       setSklad(result.sklad ? result.sklad : '')

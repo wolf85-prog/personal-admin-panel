@@ -203,21 +203,6 @@ const UsersProvider = ({ children }) => {
 		
 	},[showCallCard, showCallCardNo])
 
-
-
-	useEffect(()=> { 
-		const fetchData = async() => {
-
-			const user = localStorage.getItem('user')
-		  
-		  	const result = await getCompanyProfId(JSON.parse(user)?.id)
-		  	console.log("Company: ", result)
-		  	setCompanyId(result?.id)
-		  
-		}
-		fetchData()
-	  }, [])
-
 	
 	//-----------------------------------------------------------------------------------------
 	//			get profile
@@ -241,18 +226,21 @@ const UsersProvider = ({ children }) => {
 		
 		
 		const fetchData = async() => {
+
+			const user = localStorage.getItem('user')
 		  
-		  const user = localStorage.getItem('user')
-		  //console.log("user: ", JSON.parse(user))
 	
 		  if (user) {
 			setUserId(JSON.parse(user)?.id)
 			setEmail(JSON.parse(user)?.email)
 			
 			const result = await getManagerId(JSON.parse(user)?.id)
-		  	//console.log("Manager: ", result)
-	
+		  	console.log("Manager: ", result)
 		  	setManagerProfile(result)
+
+			const result2 = await getCompanyProfId(JSON.parse(user)?.id)
+		  	console.log("Company: ", result2)
+		  	setCompanyId(result2?.id)
 		  }
 		  
 		}
