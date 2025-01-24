@@ -834,14 +834,14 @@ useEffect(() => {
 			const arrayClientAll = []
 		
 			const newClient = {
-				id: JSON.parse(user)?.id,
+				id: user ? JSON.parse(user)?.id : '',
 				userfamily: 'U.L.E.Y', //user.userfamily != null ? user.userfamily : '',
 				username: '',//user.username,
 				phone: '',
 				phone2: '',
 				dateborn: '',
 				city: '', 
-				chatId: JSON.parse(user)?.id,
+				chatId: user ? JSON.parse(user)?.id : '',
 				createDate: '',
 				avatar: '',
 				blockW: '',
