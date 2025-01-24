@@ -1881,7 +1881,7 @@ ${loc.url}`;
                                         <div style={{textAlign: 'center', marginTop: '10px'}}>
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
                                             <img src={Trubka} onClick={()=>{
-                                              const comp = clientAll.find(item=> item.userfamily === managerName).id                                              
+                                              const comp = clientAll.find(item=> item.userfamily === managerName).id
                                               clickToCall(comp, 'c')
                                             }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
@@ -2089,7 +2089,10 @@ ${loc.url}`;
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
-                                      <img onClick={()=>clickToCall(item.id, 'w')} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img onClick={()=>{
+                                              const worker = workersAll.find(item2=> item2.userfamily === item.userfamily).id
+                                              clickToCall(worker, 'w')
+                                            }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
