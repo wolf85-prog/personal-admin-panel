@@ -92,7 +92,7 @@ import comtegs from 'src/data/comtegsWorker';
 
 import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
-import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall } from '../http/adminAPI'
+import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall, getCompanySendCallRaut } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
@@ -201,17 +201,7 @@ const Projects = () => {
 
   const [countPressDate, setCountPressDate] = useState(0);
   
-  const clickToCall = async(id, callType) => {
-		// Button begins to shake
-		// setPress(true);
-		// console.log(press)
-        
-		// Buttons stops to shake after 2 seconds
-		// setTimeout(() => setPress(false), 200);
-
-		// audioIshodCall.play();
-		await getCompanySendCall(id, callType)
-	}
+  
 
   const table = useReactTable({
     defaultColumn: {
@@ -1277,16 +1267,16 @@ ${loc.url}`;
   }
 
 
-  const clickToCall2 = async(id) => {
+  const clickToCall = async(id, callType) => {
 		// Button begins to shake
 		// setPress(true);
-		// console.log(id)
+		// console.log(press)
         
-		// // Buttons stops to shake after 2 seconds
+		// Buttons stops to shake after 2 seconds
 		// setTimeout(() => setPress(false), 200);
 
-		//audioIshodCall.play();
-		await getSendCall(id)
+		// audioIshodCall.play();
+		await getCompanySendCall(id, callType)
 	}
 
 	const clickToCallRaut = async(id) => {
@@ -1298,7 +1288,7 @@ ${loc.url}`;
 		//setTimeout(() => setPress(false), 200);
 
 		//audioIshodCall.play();
-		await getSendCallRaut(id)
+		await getCompanySendCallRaut(id)
 	}
 
   return (
@@ -2098,10 +2088,12 @@ ${loc.url}`;
                                     }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
+                                      <img onClick={()=>clickToCall(item.id, 'w')} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      {/* <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
+                                      <img onClick={()=>clickToCallRaut(item.id)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                     {item.hr ?
