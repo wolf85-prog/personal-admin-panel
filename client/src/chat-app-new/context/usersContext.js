@@ -115,8 +115,8 @@ const UsersProvider = ({ children }) => {
 
 	const [showCallCardNo, setShowCallCardNo] = useState(false);
 	const [workerCallNo, setWorkerCallNo] = useState('');
-	const [callIndex, setCallIndex] = useState(0)
-	const [callIndex2, setCallIndex2] = useState(0)
+	const [callIndex, setCallIndex] = useState(1)
+	const [callIndex2, setCallIndex2] = useState(1)
 
 	//show distrib
 	const [showDistrib, setShowDistrib] = useState(false);
@@ -1651,8 +1651,8 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		setShowCallCard(true)
 
-		setCallIndex(2)
-		setCallIndex2(1)
+		setCallIndex(3)
+		setCallIndex2(2)
 	}
 	//неизвестный номер
 	else if (task === 201) {
@@ -1662,8 +1662,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		setWorkerCallNo(phone)
 
 
-		setCallIndex(1)
-		setCallIndex2(2)
+		setCallIndex(2)
+		setCallIndex2(3)
 	}
 
 }

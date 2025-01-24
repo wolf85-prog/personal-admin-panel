@@ -105,7 +105,7 @@ const Projects = () => {
   //const navigate = useNavigate();
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { userId, companysAll, clientAll, workersAll, platformsAll } = useUsersContext();
+  const { userId, companysAll, clientAll, workersAll, platformsAll, setShowCallCard } = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -2093,6 +2093,7 @@ ${loc.url}`;
                                       <img onClick={()=>{
                                               const worker = workersAll.find(item2=> item2.id === item.specId)
                                               console.log("worker id: ", worker?.id)
+                                              setShowCallCard(true)
                                               clickToCall(worker?.id, 'w')
                                             }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
@@ -2101,6 +2102,7 @@ ${loc.url}`;
                                       <img onClick={()=>{
                                           const worker = workersAll.find(item2=> item2.id === item.specId)
                                           console.log("worker id: ", worker?.id)
+                                          setShowCallCard(true)
                                           clickToCallRaut(worker?.id)
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
