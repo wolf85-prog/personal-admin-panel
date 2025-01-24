@@ -527,7 +527,7 @@ const AppHeader = (props) => {
       aria-labelledby="VerticallyCenteredExample"
     >
       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px', marginTop: '40px'}}>
-        Функция не доступна по данному тарифу
+        Функция доступна в расширенной версии. Подробности – в техподдержке
       </CModalBody>
     </CModal>
     

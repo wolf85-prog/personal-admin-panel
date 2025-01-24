@@ -538,7 +538,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           aria-labelledby="VerticallyCenteredExample"
         >
           <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px', marginTop: '40px'}}>
-            Функция не доступна по данному тарифу
+          Функция доступна в расширенной версии. Подробности – в техподдержке
           </CModalBody>
         </CModal>
     </>
