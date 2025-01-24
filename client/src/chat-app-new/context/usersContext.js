@@ -36,7 +36,7 @@ import sound5 from './../../assets/sound/5_minut_ULEY.mp3';
 import sound10 from './../../assets/sound/10_minut_ULEY.mp3';
 import soundNarush from './../../assets/sound/narush_ULEY.mp3';
 import soundNarush2 from './../../assets/sound/narush2_ULEY.mp3';
-import soundCall from './../../assets/sound/Skype.mp3';
+import soundCall from './../../assets/sound/call_in.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
 
 
@@ -168,6 +168,39 @@ const UsersProvider = ({ children }) => {
 		localStorage.setItem("soundMute", soundMute);
 		
 	}, [soundVolume, soundMute]);
+
+	//------------------------------------------------------------------------------------------
+	//звонок по телефону
+	useEffect(()=>{
+		if (showCallCard) {
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioCall.volume = parseFloat(savedVolume)
+				audioCall.play();
+			} 
+		} else {
+			//audioCall.pause()
+		}
+
+		if (showCallCardNo) {
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioCall2.volume = parseFloat(savedVolume)
+				audioCall2.play();
+			}
+		} else {
+			//audioCall2.pause()
+		}
+		
+	},[showCallCard, showCallCardNo])
+
+
 
 	
 	//-----------------------------------------------------------------------------------------

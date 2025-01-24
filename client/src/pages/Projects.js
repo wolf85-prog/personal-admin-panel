@@ -83,6 +83,9 @@ import btnRed from 'src/assets/images/button_red.png'
 import btnGreen from 'src/assets/images/button_green.jpg'
 import btnYellow from 'src/assets/images/button_yellow.jpg'
 
+import vhodCall from 'src/assets/sound/call_in.mp3';
+import ishodCall from 'src/assets/sound/call_out.mp3';
+
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
 import specifikaData from 'src/data/specifikaData';
@@ -103,6 +106,9 @@ import {
 
 const Projects = () => {
   //const navigate = useNavigate();
+
+  const audioVhodCall = new Audio(vhodCall);
+	const audioIshodCall = new Audio(ishodCall);
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { userId, companysAll, clientAll, workersAll, platformsAll, setShowCallCard } = useUsersContext();
@@ -1268,26 +1274,12 @@ ${loc.url}`;
 
 
   const clickToCall = async(id, callType) => {
-		// Button begins to shake
-		// setPress(true);
-		// console.log(press)
-        
-		// Buttons stops to shake after 2 seconds
-		// setTimeout(() => setPress(false), 200);
-
-		// audioIshodCall.play();
+		audioIshodCall.play();
 		await getCompanySendCall(id, callType)
 	}
 
 	const clickToCallRaut = async(id) => {
-		// Button begins to shake
-		//setPress(true);
-		//console.log(id)
-        
-		// Buttons stops to shake after 2 seconds
-		//setTimeout(() => setPress(false), 200);
-
-		//audioIshodCall.play();
+		audioIshodCall.play();
 		await getCompanySendCallRaut(id)
 	}
 

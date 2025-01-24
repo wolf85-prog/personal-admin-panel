@@ -47,6 +47,7 @@ import Error from "./../assets/images/error.png";
 import Error2 from "./../assets/images/error2.png";
 import Delete from "./../assets/images/cart.png";
 import Delete2 from "./../assets/images/cart2.png";
+import ULEY from "./../assets/images/home_chat.jpeg";
 
 
 import './DropdownHeader.css'
@@ -337,17 +338,7 @@ const AppHeader = (props) => {
                     <div style={{display: 'flex'}}>
                       {workerCall.avatar ? 
                       <img src={workerCall.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
-                      : <svg
-                          className="rounded me-2"
-                          width="314"
-                          height="314"
-                          xmlns="http://www.w3.org/2000/svg"
-                          preserveAspectRatio="xMidYMid slice"
-                          focusable="false"
-                          role="img"
-                      >
-                        <rect width="314px" height="314px" fill="#007aff"></rect> 
-                      </svg>
+                      : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
                       }
                       <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
