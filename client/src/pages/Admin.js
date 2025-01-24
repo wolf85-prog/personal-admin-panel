@@ -54,6 +54,8 @@ import Chart from './../components/Chart'
 import ChartBar from './../components/Chart2'
 import AppMobileWarning from 'src/components/AppMobileWarning'
 
+import { getCompanyProfId } from '../http/companyAPI'
+
 const Admin = () => {
 
   const grafik = useRef(null);
@@ -63,7 +65,7 @@ const Admin = () => {
   const { projects: projs } = useUsersContext();
   const { companys: comps } = useUsersContext();
   const { userWorkers: specusers } = useUsersContext();
-  const { workersAll, workers, setWorkers, managers, setManagers } = useUsersContext();
+  const { workersAll, workers, setWorkers, managers, setManagers, companyId, setCompanyId } = useUsersContext();
 
   const [contacts, setContacts] = useState([]);
   const [contacts2, setContacts2] = useState([]);
@@ -135,7 +137,19 @@ const Admin = () => {
   
   useEffect(()=>{
     setWdthGrafik(grafik.current ? grafik.current.clientWidth - 100 : 0)
+
+    const fetchData = async() => {
+  
+      const user = localStorage.getItem('user')
+      
+      const result = await getCompanyProfId(JSON.parse(user)?.id)
+      console.log("Company: ", result)
+      setCompanyId(result?.id)  
+    }
+
+    fetchData()
   },[])
+      
 
   return (
     <div className='dark-theme'>
