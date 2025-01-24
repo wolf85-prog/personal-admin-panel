@@ -2091,13 +2091,18 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                              const worker = workersAll.find(item2=> item2.userfamily === item.userfamily).id
+                                              const worker = workersAll.find(item2=> item2.id === item.specId)
+                                              console.log("worker id: ", worker?.id)
                                               clickToCall(worker, 'w')
                                             }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
-                                      <img onClick={()=>clickToCallRaut(item.id)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      <img onClick={()=>{
+                                          const worker = workersAll.find(item2=> item2.id === item.specId)
+                                          console.log("worker id: ", worker?.id)
+                                          clickToCallRaut(worker)
+                                        }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                     {item.hr ?
