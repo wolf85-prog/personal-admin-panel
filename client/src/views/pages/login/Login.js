@@ -71,6 +71,8 @@ const Login = observer(() => {
 
             user.setUser(data)
             user.setIsAuth(true)
+            localStorage.setItem('user', JSON.stringify({id: data.id, email: data.email}))
+
             navigate(ADMIN_ROUTE)
           } else {
             alert("Пароли не совпадают!")

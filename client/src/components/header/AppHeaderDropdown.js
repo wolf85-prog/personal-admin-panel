@@ -48,6 +48,7 @@ const AppHeaderDropdown = observer(() => {
     user.setUser({})
     user.setIsAuth(false)
     setUserId('')
+    localStorage.setItem('user', '')
   }
 
   
