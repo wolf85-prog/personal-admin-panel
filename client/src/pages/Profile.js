@@ -84,6 +84,7 @@ const Profile = () => {
 
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
+  const [fio, setFio] = useState('');
   const [city, setCity] = useState('');
   const [phone, setPhone] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -142,9 +143,13 @@ const Profile = () => {
 		const fetchData = async() => {
 		  //setShowProfile(true)
 
-      const result = await getCompanyProfId(userId)
-      console.log("Company: ", result)
-      setTitle(result?.title)
+      const result = await getManagerId(userId)
+      console.log("Manager: ", result)
+      setManagerProfile(result)
+
+      const result2 = await getCompanyProfId(userId)
+      console.log("Company: ", result2)
+      setTitle(result2?.title)
 
 		  setLoading(false)  
 		}
@@ -155,7 +160,8 @@ const Profile = () => {
     //setManagerProfile({...managerProfile, city: city})
     setCity(managerProfile?.city)
     setAvatar(managerProfile?.avatar)
-  }, [])
+    setFio(managerProfile?.fio)
+  }, [managerProfile])
 
   useEffect(() => {
       const getImage = async () => {
@@ -352,7 +358,7 @@ const Profile = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
                                     <div className="text-field">
-                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={managerProfile?.fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '650px'}}></input>
+                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '650px'}}></input>
                                     </div>
                                     <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
