@@ -45,7 +45,7 @@ export default function Projects({ styleClass, setProjectFilter, projectFilter }
             }
             onClick={() => setProjectFilter(1)}
           >
-            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>09.10</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>24.01</p>
             <p style={{ margin: 0, padding: '5px' }}>Проект №1</p>
             <p style={{ margin: 0, padding: '5px', color: 'gray' }}>JamTech</p>
             <p style={{ margin: 0, padding: '5px', color: '#00ff00' }}>В эфире</p>
@@ -60,11 +60,11 @@ export default function Projects({ styleClass, setProjectFilter, projectFilter }
             }
             onClick={() => setProjectFilter(2)}
           >
-            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>09.10</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>24.01</p>
             <p style={{ margin: 0, padding: '5px' }}>Проект №2</p>
             <p style={{ margin: 0, padding: '5px', color: 'gray' }}>LSL</p>
             <p style={{ margin: 0, padding: '5px', color: '#00ff00' }}>В эфире</p>
-            <p style={{ margin: 0, padding: '5px', textAlign: 'end' }}>09:00</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'end' }}>10:00</p>
           </div>
           <div
             style={{ height: '157px', minWidth: '306px', cursor: 'pointer', marginBottom: 0 }}
@@ -75,11 +75,11 @@ export default function Projects({ styleClass, setProjectFilter, projectFilter }
             }
             onClick={() => setProjectFilter(3)}
           >
-            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>09.10</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>24.01</p>
             <p style={{ margin: 0, padding: '5px' }}>Проект №3</p>
             <p style={{ margin: 0, padding: '5px', color: 'gray' }}>Luxury Sound</p>
             <p style={{ margin: 0, padding: '5px', color: '#00ff00' }}>В эфире</p>
-            <p style={{ margin: 0, padding: '5px', textAlign: 'end' }}>09:00</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'end' }}>10:30</p>
           </div>
           <div
             style={{ height: '157px', minWidth: '306px', cursor: 'pointer', marginBottom: 0 }}
@@ -90,11 +90,11 @@ export default function Projects({ styleClass, setProjectFilter, projectFilter }
             }
             onClick={() => setProjectFilter(4)}
           >
-            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>09.10</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'left' }}>24.01</p>
             <p style={{ margin: 0, padding: '5px' }}>Проект №4</p>
             <p style={{ margin: 0, padding: '5px', color: 'gray' }}>Soundcafe</p>
             <p style={{ margin: 0, padding: '5px', color: '#00ff00' }}>В эфире</p>
-            <p style={{ margin: 0, padding: '5px', textAlign: 'end' }}>09:00</p>
+            <p style={{ margin: 0, padding: '5px', textAlign: 'end' }}>14:00</p>
           </div>
         </CCol>
       </CRow>
