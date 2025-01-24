@@ -39,6 +39,7 @@ import soundNarush2 from './../../assets/sound/narush2_ULEY.mp3';
 import soundCall from './../../assets/sound/call_in.mp3';
 import sendSound from './../assets/sounds/sendmessage.mp3';
 
+import { getCompanyProfId } from '../../http/companyAPI'
 
 const UsersContext = createContext();
 
@@ -93,6 +94,8 @@ const UsersProvider = ({ children }) => {
 	const [managersCount, setManagersCount] = useState(0)
 	const [companysCount, setCompanysCount] = useState(0)
 	const [clientsCount, setClientsCount] = useState(0)
+
+	const [companyId, setCompanyId] = useState('');
 
 
 	const [countMessageWork, setCountMessageWork] = useState(() => {
@@ -201,6 +204,19 @@ const UsersProvider = ({ children }) => {
 	},[showCallCard, showCallCardNo])
 
 
+
+	useEffect(()=> { 
+		const fetchData = async() => {
+
+			const user = localStorage.getItem('user')
+		  
+		  	const result = await getCompanyProfId(JSON.parse(user)?.id)
+		  	console.log("Company: ", result)
+		  	setCompanyId(result?.id)
+		  
+		}
+		fetchData()
+	  }, [])
 
 	
 	//-----------------------------------------------------------------------------------------
@@ -1707,6 +1723,9 @@ const fetchNotifAdmin = async (dataAll) => {
 			setUserId,
 			users, 
 			setUsers,
+
+			companyId, 
+			setCompanyId,
 
 			specialist,
 			setSpecialist,

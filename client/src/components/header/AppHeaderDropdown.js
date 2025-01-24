@@ -36,8 +36,8 @@ import { getCompanyProfId } from '../../http/companyAPI'
 
 const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
-  const { userId, setUserId } = useUsersContext();
-  const [companyId, setCompanyId] = useState('');
+  const { userId, setUserId, companyId } = useUsersContext();
+  // const [companyId, setCompanyId] = useState('');
 
   const [visibleOut, setVisibleOut] = useState(false)
 
@@ -50,16 +50,7 @@ const AppHeaderDropdown = observer(() => {
     setUserId('')
   }
 
-  useEffect(()=> { 
-    const fetchData = async() => {
-      
-      const result = await getCompanyProfId(userId)
-      console.log("Company: ", result)
-      setCompanyId(result?.id)
-      
-    }
-    fetchData()
-  }, [])
+  
 
   const openProfile = () => { 
     //location("/profile")
@@ -73,7 +64,7 @@ const AppHeaderDropdown = observer(() => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>
-        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Компания ID: {'000'+ companyId}</CDropdownHeader>
+        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Компания ID: {companyId ? '000'+ companyId : ''}</CDropdownHeader>
 
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
 
