@@ -975,7 +975,7 @@ useEffect(() => {
 		socket.on("getAdminWorker", fetchAdminWorker);	
 		socket.on("getDelAdminWorker", fetchDelAdminWorker);
 
-		socket.on("getMessagePersonSupport", fetchMessageSupportResponse);
+		socket.on("getMessageSupport", fetchMessageSupportResponse);
 		socket.on("getPersonSupport", fetchAdminSupport);	
 		socket.on("getDelAdminSupport", fetchDelAdminSupport);
 
