@@ -1304,7 +1304,7 @@ ${loc.url}`;
                               <div style={{display: 'flex', alignItems: 'center'}}>
                                 <CTooltip content="Удалить проекты" placement="bottom">
                                   {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
-                                  <img src={DeleteIcon} onClick={closeProfile} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                  <img src={DeleteIcon} onClick={() => setVisibleDelete(true)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                 </CTooltip>
                                 {/* <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                 <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
