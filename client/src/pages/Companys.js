@@ -547,8 +547,14 @@ const Companys = () => {
     console.log(id)
     setVisibleDelete(false)
 
+    //удаление проекта из БД
     await deleteCompany(id)
-    addToast(deleteToast) //ваши данные сохранены
+    
+    //addToast(deleteToast) //ваши данные сохранены
+    
+    setCompanys([...companys].filter(item=>item.id !== id))
+    
+    closeProfile()
   
   }
 

@@ -148,7 +148,7 @@ class CompanysController {
     async deleteCompany(req, res) {      
         const {id} = req.params 
         try {              
-            await Manager.destroy({
+            await Company.destroy({
                 where: { id: String(id) },
             })
             return res.status(200).json("Данные успешно удалены!");
