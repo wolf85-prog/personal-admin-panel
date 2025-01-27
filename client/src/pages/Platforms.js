@@ -54,8 +54,9 @@ import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
 import Disketa from "./../assets/images/disketa.png";
-import arrowDown from 'src/assets/images/arrowDown.svg'
-import threeDots from 'src/assets/images/three-dots.svg'
+import arrowDown from './../assets/images/arrowDown.svg'
+import threeDots from './../assets/images/three-dots.svg'
+import DeleteIcon from "./../assets/images/delete_icon.png"
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
@@ -558,7 +559,6 @@ const onSortAddress = () => {
     //удаление платформы из БД
     await deletePlatform(id)
 
-
     //addToast(deleteToast) //ваши данные сохранены
 
     setPlatforms([...platforms].filter(item=>item.id !== id))
@@ -711,12 +711,17 @@ const onSortAddress = () => {
                                       <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                     <div style={{display: 'flex'}}>
-                                      {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}
-                                      <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Tg} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <CTooltip content="Удалить локацию" placement="bottom">
+                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
                                       <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      {/* <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>   */}
+                                      <CTooltip content="Сохранить локацию" placement="bottom">
+                                        <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      </CTooltip>
+                                      <CTooltip content="Закрыть окно" placement="bottom">
+                                        <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
                                     </div>
                                   </div>
                                       {/* 2 */}
