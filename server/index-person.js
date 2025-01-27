@@ -38,6 +38,7 @@ const corsOptions = {
     origin: [
         'https://uley.company:2001', 
         'http://localhost:3000', 
+        'http://localhost:3001', 
         'https://uley.company', 
         'https://tm.uley.team:7878',
         'https://tm.uley.team',
