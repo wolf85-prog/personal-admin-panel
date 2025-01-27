@@ -13,6 +13,7 @@ const host_admin2 = process.env.HOST_ADMIN2
 const host_admin3 = process.env.HOST_ADMIN3
 const host_local = process.env.HOST_LOCAL
 const host = process.env.HOST
+const host_local2 = 'http://localhost:3001'
 
 const app = express();
 app.use(cors())
@@ -43,7 +44,7 @@ httpsServer.listen(PORT, () => {
 // Socket setup
 const io = socket(httpsServer, {
     cors: {
-        origin: [host_admin, host_admin2, host_admin3, host, host_local],
+        origin: [host_admin, host_admin2, host_admin3, host, host_local, host_local2],
         optionsSuccessStatus: 200 // For legacy browser support
     }
 });
