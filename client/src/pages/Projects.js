@@ -112,6 +112,7 @@ const Projects = () => {
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { userId, companysAll, clientAll, workersAll, platformsAll, setShowCallCard } = useUsersContext();
+  const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -2083,20 +2084,21 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                              // const worker = workersAll.find(item2=> item2.id === item.specId)
-                                              // console.log("worker id: ", worker?.id)
-                                              console.log("worker id: ", item.specId)
-                                              setShowCallCard(true)
+                                              const worker = workersAll.find(item2=> item2.id.toString() === item.specId)
+                                              //console.log("worker id: ", item.specId, worker.userfamily)
+                                              setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, dateborn: worker?.dateborn, comteg: worker?.comteg})
+                                              setShowCallCardWorker(true)
                                               clickToCall(item.specId, 'w')
                                             }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                          // const worker = workersAll.find(item2=> item2.id === item.specId)
+                                          const worker = workersAll.find(item2=> item2.id.toString() === item.specId)
                                           // console.log("worker id: ", worker?.id)
                                           console.log("worker id: ", item.specId)
-                                          setShowCallCard(true)
+                                          setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, dateborn: worker?.dateborn, comteg: worker?.comteg})
+                                          setShowCallCardWorker(true)
                                           clickToCallRaut(item.specId)
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>

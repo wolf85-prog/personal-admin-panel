@@ -121,6 +121,10 @@ const UsersProvider = ({ children }) => {
 	const [callIndex, setCallIndex] = useState(1)
 	const [callIndex2, setCallIndex2] = useState(1)
 
+
+	const [showCallCardWorker, setShowCallCardWorker] = useState(false);
+	const [workerIshod, setWorkerIshod] = useState({});
+
 	//show distrib
 	const [showDistrib, setShowDistrib] = useState(false);
 
@@ -1781,6 +1785,12 @@ const fetchNotifAdmin = async (dataAll) => {
 			workerCallNo,
 			callIndex,
 			callIndex2,
+
+			//исходящий звонок сотруднику
+			showCallCardWorker,
+			setShowCallCardWorker,
+			workerIshod, 
+			setWorkerIshod,
 
 			addNewMessage,
 			addNewMessage2,
