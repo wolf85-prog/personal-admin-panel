@@ -10,13 +10,13 @@ const host_server = process.env.HOST_SERVER
 const storage = multer.diskStorage({
     destination(req, file, cd) {
         
-        cd(null, `${host_server}/upload`)
+        cd(null, `uploads`)
     },
 
     //замена оригинального названия файла на название текущей даты в миллесекундах
     filename(req, file, cb) {
         const ras = file.originalname.split('.')
-        console.log("Расширение файла: ", ras[ras.length - 1])
+        //console.log("Расширение файла: ", ras[ras.length - 1])
 
 
         const filename = new Date().toISOString() + '.' + ras[ras.length - 1] //Date.now()
