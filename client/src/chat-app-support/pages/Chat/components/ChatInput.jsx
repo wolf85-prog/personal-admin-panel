@@ -147,27 +147,27 @@ const ChatInput = ({
 						</button>
 
 						<button className="chat__attach-btn" aria-label="attachVideo" key="attachVideo">
-							<label htmlFor='fileInput' style={{color: '#f3f3f3'}}>
+							<label htmlFor='fileInput2' style={{color: '#f3f3f3'}}>
 								{/* <Icon id="attachImage" className="chat__attach-icon" /> */}
 								Видео
 							</label>
 							<input
 								type="file"
-								id="fileInput"
-								name="video"
+								id="fileInput2"
+								name="photo"
 								style={{ display: "none" }}
 								onChange={(e)=>onFileChange(e, 'video')}
 							/>								
 						</button>
 
 						<button className="chat__attach-btn" aria-label="Choose document" key="Choose document">
-							<label htmlFor='fileInput2' style={{color: '#f3f3f3'}}>
+							<label htmlFor='fileInput3' style={{color: '#f3f3f3'}}>
 								{/* <Icon id="attachDocument" className="chat__attach-icon" /> */}
 								Документы
 							</label>
 							<input
 								type="file"
-								id="fileInput2"
+								id="fileInput3"
 								name="photo"
 								style={{ display: "none" }}
 								onChange={(e)=>onFileChange(e, 'doc')}

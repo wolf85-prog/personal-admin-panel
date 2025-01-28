@@ -1,8 +1,6 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
-const {Plan, Distributionw} = require('./models/models')
-const { Op } = require('sequelize')
 const cors = require('cors')
 const fs = require('fs');
 const https = require('https')
@@ -22,8 +20,6 @@ const axios = require("axios");
 const {io} = require("socket.io-client")
 const socketUrl = process.env.SOCKET_APP_URL
 
-
-let tasks = []
 
 // Port that the webserver listens to
 const port = process.env.PORT || 2000;
@@ -52,12 +48,12 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true}));
-app.use(express.static(path.resolve(__dirname, 'images')))
+//app.use(express.static(path.resolve(__dirname, 'images')))
 app.use(express.static(path.resolve(__dirname, 'uploads')))
-app.use(express.static(path.resolve(__dirname, 'avatars')))
-app.use('/images', express.static(path.join(__dirname, 'images')))
+//app.use(express.static(path.resolve(__dirname, 'avatars')))
+//app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-app.use('/avatars', express.static(path.join(__dirname, 'avatars')))
+//app.use('/avatars', express.static(path.join(__dirname, 'avatars')))
 
 app.use('/api', Route);
 
