@@ -480,7 +480,7 @@ const AppHeader = (props) => {
                         </div>
                         {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span> */}
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.city}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.specialities} / {workerIshod.dolgnost}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.worklist} / {workerIshod.dolgnost}</span> 
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>

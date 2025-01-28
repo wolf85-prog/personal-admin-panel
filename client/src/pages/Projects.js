@@ -2086,7 +2086,7 @@ ${loc.url}`;
                                       <img onClick={()=>{
                                               const worker = workersAll.find(item2=> item2.id.toString() === item.specId)
                                               //console.log("worker id: ", item.specId, worker.userfamily)
-                                              setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, dateborn: worker?.dateborn, comteg: worker?.comteg})
+                                              setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg})
                                               setShowCallCardWorker(true)
                                               clickToCall(item.specId, 'w')
                                             }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
@@ -2097,7 +2097,7 @@ ${loc.url}`;
                                           const worker = workersAll.find(item2=> item2.id.toString() === item.specId)
                                           // console.log("worker id: ", worker?.id)
                                           console.log("worker id: ", item.specId)
-                                          setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, dateborn: worker?.dateborn, comteg: worker?.comteg})
+                                          setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg})
                                           setShowCallCardWorker(true)
                                           clickToCallRaut(item.specId)
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
