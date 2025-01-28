@@ -582,9 +582,13 @@ textarea:focus {
     transition-delay: 0.1s;
 }
 
-.chat__attach--active .chat__attach-btn {
+.chat__attach--active  {
     transform: scale(1);
     opacity: 1;
+
+    background: #3f3b3b; 
+    padding: 15px;
+    border-radius: 15px;
 }
 
 .chat__attach-btn {

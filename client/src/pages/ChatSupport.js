@@ -44,7 +44,7 @@ const ChatSupport = () => {
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>                 
                   
-                  <div className="app">
+                  <div className="app" style={{background: 'transparent'}}>
                     <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
                     <div className="app-content" style={{justifyContent: 'center', width: '70%'}}>
                       {/* <Sidebar /> */}

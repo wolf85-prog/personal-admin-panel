@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import Icon from "../../../components/Icon";
 import EmojiPicker from 'emoji-picker-react';
 
@@ -25,6 +25,8 @@ const ChatInput = ({
 	onFileChange,
 	setSelectedElement,
 }) => {
+
+	console.log(" showPicker", showPicker)
 
 	const textAreaRef = useRef(null);
 	//useAutosizeTextArea(textAreaRef.current, mess);
@@ -87,8 +89,8 @@ const ChatInput = ({
 	}
 
 	const clickEmojis = () => {
-		setShowPicker(true)
-		setShowEmojis(true)
+		setShowPicker(!showEmojis)
+		setShowEmojis(!showEmojis)
 	}
 
 	const clickClose = () => {
@@ -98,11 +100,11 @@ const ChatInput = ({
 
 	return (
 		<div className="chat__input-wrapper">
-			{showEmojis && (
+			{/* {showEmojis && (
 				<button aria-label="Close emojis" onClick={clickClose}>
 					<Icon id="cancel" className="chat__input-icon" />
 				</button>
-			)}
+			)} */}
 			<button aria-label="Emojis" onClick={clickEmojis}>
 				<Icon
 					id="smiley"
@@ -139,7 +141,8 @@ const ChatInput = ({
 							// onClick={()=>console.log("Choose document")}
 						>
 							<label htmlFor='fileInput2'>
-								<Icon id="attachDocument" className="chat__attach-icon" />
+								{/* <Icon id="attachDocument" className="chat__attach-icon" /> */}
+								Документы
 							</label>
 							<input
 								type="file"
@@ -158,7 +161,8 @@ const ChatInput = ({
 							// onClick={()=>console.log("Choose image")}
 						>
 							<label htmlFor='fileInput'>
-								<Icon id="attachImage" className="chat__attach-icon" />
+								{/* <Icon id="attachImage" className="chat__attach-icon" /> */}
+								Фото
 							</label>
 							<input
 								type="file"
@@ -170,54 +174,6 @@ const ChatInput = ({
 							
 						</button>
 				</div>
-
-
-			</div>
-
-			<div style={{marginLeft: '8px', marginRight: '8px'}}>
-				{/* <Dropdown onSelect={change}>
-					<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
-					</Dropdown.Toggle>
-					<Dropdown.Menu as={CustomMenu}>
-					<Dropdown.Item eventKey="">Удалить сообщение</Dropdown.Item>
-					</Dropdown.Menu>
-				</Dropdown> */}
-
-				<DropdownButton
-					onSelect={change}
-					as={ButtonGroup}
-					id={`dropdown-button-drop-up`}
-					drop='up'
-					variant="secondary"
-					title=''
-					// 
-				>
-					<Dropdown.Item class="dropdown-menu" eventKey="0">Стандартный ответ</Dropdown.Item>
-					<Dropdown.Item eventKey="1">Паспорт</Dropdown.Item>
-					<Dropdown.Item eventKey="2">Кнопка с номером</Dropdown.Item>
-					<Dropdown.Item eventKey="3">Запас</Dropdown.Item>
-					<Dropdown.Item eventKey="4">Офис U.L.E.Y</Dropdown.Item>
-					<Dropdown.Item eventKey="5">Оплата / смета</Dropdown.Item>
-					<Dropdown.Item eventKey="6">Заявка отклонена</Dropdown.Item>
-					<Dropdown.Item eventKey="7">Заявка одобрена</Dropdown.Item>
-					<Dropdown.Item eventKey="8">Запрос ключевых данных</Dropdown.Item>
-					<Dropdown.Divider />
-					<Dropdown.Item eventKey="9">Первый проект</Dropdown.Item>
-					<Dropdown.Item eventKey="10">Постер</Dropdown.Item>
-				</DropdownButton>
-				{/* <CFormSelect 
-						style={{marginTop: '10px', marginBottom: '10px',  display: "block"}}
-                        aria-label="Default select example"
-                        options={scenarios}  
-						// value={scenari}
-						selectedElement={selectedElement}
-                    	setSelectedElement={setSelectedElement}
-                        onChange={onSelectChange}
-				/> */}
-				{/* <button className="profile__action-right" style={{padding: '6px'}}>
-					<CIcon icon={cilMediaPlay} 
-					<Icon id="downArrow" style={{color: 'white'}}/>{" "} 
-				</button> */}
 			</div>
 			
 			<textarea
