@@ -123,9 +123,9 @@ const Chat = () => {
 			// 	})
 			// 	}).catch(err => console.log(err))
 
-               setImage(response.data.path.split('.team')[1]);
+               setImage(baseURL + response.data.path);
 			   //сообщение с ссылкой на файл
-			   setMess(host + response.data.path.split('.team')[1])
+			   setMess(baseURL + response.data.path)
             }
         }
         getImage();
@@ -209,9 +209,9 @@ const Chat = () => {
 				message = {
 					senderId: userId, 
 					receiverId: chatAdminId,
-					conversationId: conv.id,
+					conversationId: conv?.id,
 					type: "image",
-					text: host + image,
+					text: image,
 					//isBot: null,
 					//messageId: sendToTelegram.data.result.message_id,
 				}
@@ -220,10 +220,10 @@ const Chat = () => {
 				await newMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage3(userId, host + image, 'image', '', conv.id, null, null);
+				addNewMessage3(userId, image, 'image', '', conv?.id, null, null);
 
 				//получить сообщение у абонента
-				sendMessSupport(userId, mess, 'text', conv.id, null, null)
+				sendMessSupport(userId, mess, 'text', conv?.id, null, null)
 			}
 			console.log("message send: ", message);
 	}
