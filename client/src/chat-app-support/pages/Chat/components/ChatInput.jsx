@@ -26,8 +26,6 @@ const ChatInput = ({
 	setSelectedElement,
 }) => {
 
-	console.log(" showPicker", showPicker)
-
 	const textAreaRef = useRef(null);
 	//useAutosizeTextArea(textAreaRef.current, mess);
 
@@ -134,33 +132,8 @@ const ChatInput = ({
 				</button>
 
 				<div className={`chat__attach ${showAttach ? "chat__attach--active" : ""}`}>
-						<button
-							className="chat__attach-btn"
-							aria-label="Choose document"
-							key="Choose document"
-							// onClick={()=>console.log("Choose document")}
-						>
-							<label htmlFor='fileInput2'>
-								{/* <Icon id="attachDocument" className="chat__attach-icon" /> */}
-								Документы
-							</label>
-							<input
-								type="file"
-								id="fileInput2"
-								name="photo"
-								style={{ display: "none" }}
-								onChange={(e)=>onFileChange(e, 'doc')}
-							/>							
-							
-						</button>
-
-						<button
-							className="chat__attach-btn"
-							aria-label="attachImage"
-							key="attachImage"
-							// onClick={()=>console.log("Choose image")}
-						>
-							<label htmlFor='fileInput'>
+						<button className="chat__attach-btn" aria-label="attachImage" key="attachImage">
+							<label htmlFor='fileInput' style={{color: '#f3f3f3'}}>
 								{/* <Icon id="attachImage" className="chat__attach-icon" /> */}
 								Фото
 							</label>
@@ -170,9 +143,38 @@ const ChatInput = ({
 								name="photo"
 								style={{ display: "none" }}
 								onChange={(e)=>onFileChange(e, 'image')}
-							/>							
-							
+							/>								
 						</button>
+
+						<button className="chat__attach-btn" aria-label="attachVideo" key="attachVideo">
+							<label htmlFor='fileInput' style={{color: '#f3f3f3'}}>
+								{/* <Icon id="attachImage" className="chat__attach-icon" /> */}
+								Видео
+							</label>
+							<input
+								type="file"
+								id="fileInput"
+								name="video"
+								style={{ display: "none" }}
+								onChange={(e)=>onFileChange(e, 'video')}
+							/>								
+						</button>
+
+						<button className="chat__attach-btn" aria-label="Choose document" key="Choose document">
+							<label htmlFor='fileInput2' style={{color: '#f3f3f3'}}>
+								{/* <Icon id="attachDocument" className="chat__attach-icon" /> */}
+								Документы
+							</label>
+							<input
+								type="file"
+								id="fileInput2"
+								name="photo"
+								style={{ display: "none" }}
+								onChange={(e)=>onFileChange(e, 'doc')}
+							/>								
+						</button>
+
+						
 				</div>
 			</div>
 			

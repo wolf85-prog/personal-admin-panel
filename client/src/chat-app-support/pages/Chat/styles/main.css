@@ -552,17 +552,18 @@ textarea:focus {
 .chat__attach {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     position: absolute;
     bottom: 50px;
 }
 
 .chat__attach-btn {
-    transform: scale(0);
+    /* transform: scale(0); */
     opacity: 0;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease; */
 }
 
-.chat__attach-btn:nth-of-type(1) {
+/* .chat__attach-btn:nth-of-type(1) {
     transition-delay: 0.5s;
 }
 
@@ -580,15 +581,17 @@ textarea:focus {
 
 .chat__attach-btn:nth-of-type(5) {
     transition-delay: 0.1s;
-}
+} */
 
 .chat__attach--active  {
-    transform: scale(1);
-    opacity: 1;
-
-    background: #3f3b3b; 
+    background: #2a2f32; 
     padding: 15px;
     border-radius: 15px;
+}
+
+.chat__attach--active .chat__attach-btn  {
+    /* transform: scale(1); */
+    opacity: 1;
 }
 
 .chat__attach-btn {
