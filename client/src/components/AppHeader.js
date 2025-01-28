@@ -478,23 +478,15 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span>
+                        {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span> */}
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.city}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.specialities} / {workerIshod.dolgnost}</span> 
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerIshod.projects}
                           </li>
                         </ul>
-                        <div style={{overflow: 'auto', height: '70px'}}>
-                          <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                            {workerIshod.specialities ? workerIshod.specialities.split(',').map((item, index)=> 
-                              (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
-                                {item}
-                              </li>)
-                            ) : null}    
-                          </ul>
-                        </div>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
@@ -507,21 +499,6 @@ const AppHeader = (props) => {
                         </ul>
                       </div>
                     </div>
-                      
-                    {
-                      workerCall.specialities ? 
-                      (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '590px'}}/>
-                      : "")
-                      : ""
-                    }
-                    {
-                      workerCall.specialities ? 
-                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={50} alt='' style={{position: 'absolute', top: '10px', right: '580px'}}/>
-                      : "")
-                      : ""
-                    }
 
                   </CToastBody>
                   {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}

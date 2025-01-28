@@ -190,7 +190,7 @@ const Chat = () => {
 				message = {
 					senderId: userId, 
 					receiverId: chatAdminId,
-					conversationId: conv.id,
+					conversationId: conv?.id,
 					type: "text",
 					text: mess,
 					//isBot: null,
@@ -229,7 +229,7 @@ const Chat = () => {
 	}
 
 	const submitNewMessage = () => {
-		//audio.play();
+		audio.play();
 		sendText();
 
 		setMess("");
