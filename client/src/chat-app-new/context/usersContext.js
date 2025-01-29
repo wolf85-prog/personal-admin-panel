@@ -116,6 +116,11 @@ const UsersProvider = ({ children }) => {
 	const [showCallCard, setShowCallCard] = useState(false);
 	const [workerCall, setWorkerCall] = useState('');
 
+	const [showCallCard2, setShowCallCard2] = useState(false);
+	const [clientCall, setClientCall] = useState('');
+	const [callIndex3, setCallIndex3] = useState(1)
+	const [callIndex4, setCallIndex4] = useState(1)
+
 	const [showCallCardNo, setShowCallCardNo] = useState(false);
 	const [workerCallNo, setWorkerCallNo] = useState('');
 	const [callIndex, setCallIndex] = useState(1)
@@ -124,6 +129,9 @@ const UsersProvider = ({ children }) => {
 
 	const [showCallCardWorker, setShowCallCardWorker] = useState(false);
 	const [workerIshod, setWorkerIshod] = useState({});
+
+	const [showCallCardClient, setShowCallCardClient] = useState(false);
+	const [clientIshod, setClientIshod] = useState({});
 
 	//show distrib
 	const [showDistrib, setShowDistrib] = useState(false);
@@ -1786,11 +1794,21 @@ const fetchNotifAdmin = async (dataAll) => {
 			callIndex,
 			callIndex2,
 
+			clientCall,
+			showCallCard2,
+			setShowCallCard2,
+			callIndex3,
+			callIndex4,
+
 			//исходящий звонок сотруднику
 			showCallCardWorker,
 			setShowCallCardWorker,
 			workerIshod, 
 			setWorkerIshod,
+			showCallCardClient, 
+			setShowCallCardClient,
+			clientIshod,
+			setClientIshod,
 
 			addNewMessage,
 			addNewMessage2,

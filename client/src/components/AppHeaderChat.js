@@ -56,6 +56,9 @@ const AppHeaderChat = () => {
   const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
     soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
 
+      const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
+    const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
+
   const [soundCount, setSoundCount] = useState(100)
   const [showBar, setShowBar] = useState(false)
   const [showBarHelp, setShowBarHelp] = useState(false)
