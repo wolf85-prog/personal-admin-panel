@@ -48,6 +48,7 @@ import Error2 from "./../assets/images/error2.png";
 import Delete from "./../assets/images/cart.png";
 import Delete2 from "./../assets/images/cart2.png";
 import ULEY from "./../assets/images/home_chat.jpeg";
+import robot from "src/chat-app-worker/assets/images/robot.png";
 
 
 import './DropdownHeader.css'
@@ -66,6 +67,7 @@ const AppHeader = (props) => {
 
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
+  const { robotIshod, setRobotIshod, showCallCardRobot, setShowCallCardRobot} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [showBar, setShowBar] = useState(false)
@@ -328,6 +330,7 @@ const AppHeader = (props) => {
                 <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilPhone} size="lg"/>
               </CNavLink>
             </CTooltip>
+
             {/* Входящий сотрудник */}
             <div style={{
               display: showCallCard ? 'block' : 'none', 
@@ -663,6 +666,53 @@ const AppHeader = (props) => {
                   />
                 </div>
             </div> 
+
+
+            {/* Исходящий робот */}
+            <div style={{
+              display: showCallCardRobot ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              border: '1px solid #4b4b4b',
+              padding: '8px',
+              zIndex: callIndex}
+            }>
+                <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                  <CToastBody>
+                    <div style={{display: 'flex'}}>
+                      {workerIshod.avatar ? 
+                      <img src={workerIshod.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      }
+                      <CToastClose onClick={()=>setShowCallCardRobot(false)} white style={{position: 'absolute'}}/>
+                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{workerIshod.fio ? workerIshod.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerIshod.fio ? workerIshod.fio?.split(' ')[1] : ''} {workerIshod.fio ? workerIshod.fio?.split(' ')[2]: ''}</span>
+                        <div className="star-block" style={{marginTop: '85px'}}>
+                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
+                        </div>
+
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Система оповещения активирована</span>
+                        
+                      </div>
+                    </div>
+
+                  </CToastBody>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={robot} 
+                    onClick={()=>setShowCallCardRobot(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
+                </div>
+            </div>
           </CNavItem>
 
           {/* Next*/}

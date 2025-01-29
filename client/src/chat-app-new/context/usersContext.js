@@ -133,6 +133,9 @@ const UsersProvider = ({ children }) => {
 	const [showCallCardClient, setShowCallCardClient] = useState(false);
 	const [clientIshod, setClientIshod] = useState({});
 
+	const [showCallCardRobot, setShowCallCardRobot] = useState(false);
+	const [robotIshod, setRobotIshod] = useState({});
+
 	//show distrib
 	const [showDistrib, setShowDistrib] = useState(false);
 
@@ -1809,6 +1812,12 @@ const fetchNotifAdmin = async (dataAll) => {
 			setShowCallCardClient,
 			clientIshod,
 			setClientIshod,
+
+			//исходящий звонок робот
+			showCallCardRobot,
+			setShowCallCardRobot,
+			robotIshod, 
+			setRobotIshod,
 
 			addNewMessage,
 			addNewMessage2,

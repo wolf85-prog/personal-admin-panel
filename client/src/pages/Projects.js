@@ -85,6 +85,7 @@ import btnYellow from 'src/assets/images/button_yellow.jpg'
 
 import vhodCall from 'src/assets/sound/call_in.mp3';
 import ishodCall from 'src/assets/sound/call_out.mp3';
+import ishodRobotCall from 'src/assets/sound/ishod_robot.mp3';
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
@@ -109,10 +110,13 @@ const Projects = () => {
 
   const audioVhodCall = new Audio(vhodCall);
 	const audioIshodCall = new Audio(ishodCall);
+  const audioIshodRobotCall = new Audio(ishodRobotCall);
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { userId, companysAll, clientAll, workersAll, platformsAll, setShowCallCard } = useUsersContext();
+  const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
+  const { robotIshod, setRobotIshod, showCallCardRobot, setShowCallCardRobot} = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -1280,7 +1284,7 @@ ${loc.url}`;
 	}
 
 	const clickToCallRaut = async(id) => {
-		audioIshodCall.play();
+		audioIshodRobotCall.play();
 		await getCompanySendCallRaut(id)
 	}
 
@@ -1873,17 +1877,26 @@ ${loc.url}`;
                                         {/* 5 */}   
                                         <div style={{textAlign: 'center', marginTop: '10px'}}>
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '24px'}}>
-                                            <img src={Trubka} onClick={()=>{
-                                              const comp = clientAll.find(item=> item.userfamily === managerName).id
-                                              clickToCall(comp, 'c')
-                                            }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                            <img src={Trubka}
+                                              onClick={()=>{
+                                                const client = clientAll.find(item=> item.userfamily === managerName)
+                                                console.log("client: ", clientAll, client)
+                                                setClientIshod({fio: client?.userfamily, city: client?.city, avatar: client?.avatar, comteg: client?.comteg})
+                                                setShowCallCardClient(true)
+                                                clickToCall(client.id, 'c')
+                                              }} 
+                                              style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', padding: '5px', marginTop: '44px'}}>
-                                            <img src={Trubka} onClick={()=>{
-                                              const comp = workersAll.find(item=> item.userfamily === managerName2).id                                              
-                                              clickToCall(comp, 'w')
-                                            }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
+                                            <img src={Trubka} 
+                                              onClick={()=>{
+                                                const comp = workersAll.find(item2=> item2.userfamily === managerName2)
+                                                console.log("worker id: ", comp)
+                                                setWorkerIshod({fio: comp?.userfamily, city: comp?.city, avatar: comp?.avatar, worklist: comp?.worklist, dateborn: comp?.dateborn, comteg: comp?.comteg})
+                                                setShowCallCardWorker(true)                                            
+                                                clickToCall(comp?.id, 'w')
+                                              }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
                                           {/* <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
@@ -2084,8 +2097,8 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                              const worker = workersAll.find(item2=> item2.id.toString() === item.specId)
-                                              //console.log("worker id: ", item.specId, worker.userfamily)
+                                              const worker = workersAll.find(item2=> item2.id === item.specId)
+                                              console.log("worker id: ", item.specId, worker)
                                               setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg})
                                               setShowCallCardWorker(true)
                                               clickToCall(item.specId, 'w')
@@ -2094,11 +2107,11 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {/* <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                          const worker = workersAll.find(item2=> item2.id.toString() === item.specId)
+                                          const worker = workersAll.find(item2=> item2.id === item.specId)
                                           // console.log("worker id: ", worker?.id)
-                                          console.log("worker id: ", item.specId)
+                                          console.log("worker id: ", worker, item.specId)
                                           setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg})
-                                          setShowCallCardWorker(true)
+                                          setShowCallCardRobot(true)
                                           clickToCallRaut(item.specId)
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
