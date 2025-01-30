@@ -223,7 +223,7 @@ const Chat = () => {
 				addNewMessage3(userId, image, 'image', '', conv?.id, null, null);
 
 				//получить сообщение у абонента
-				sendMessSupport(userId, mess, 'text', conv?.id, null, null)
+				sendMessSupport(userId, mess, 'image', conv?.id, null, null)
 			}
 			console.log("message send: ", message);
 	}
