@@ -1527,39 +1527,41 @@ const fetchAdminSupport = (data) => {
 
 		console.log("userSupport: ", userSupport)
 
-		let userIndex = 0 //userSupport.findIndex((user) => user.id.toString() === senderId.toString());
+		let userIndex = userSupport.findIndex((user) => user.id.toString() === senderId.toString());
+		console.log("userIndex: ",  userIndex)
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-		//console.log("userIndex: ",  userIndex)
 
-		const newMsgObject = {
-			date: new Date().toLocaleDateString(),
-			content: text,
-			image: type === 'image' ? true : false,
-			descript: buttons ? buttons : '',
-			sender: receiverId,
-			time: new Date().toLocaleTimeString(),
-			status: 'delivered',
-			//id: messageId,
-		};
+		if (userIndex >= 0) {
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				image: type === 'image' ? true : false,
+				descript: buttons ? buttons : '',
+				sender: receiverId,
+				time: new Date().toLocaleTimeString(),
+				status: 'delivered',
+				//id: messageId,
+			};
 
-		const currentDate = new Date().toLocaleDateString()
+			const currentDate = new Date().toLocaleDateString()
 
-		//if (usersCopy[userIndex].messages[currentDate]) {
-		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
-			if (usersCopy[userIndex].messages[currentDate]) {
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			//if (usersCopy[userIndex].messages[currentDate]) {
+			if (!isObjectEmpty(usersCopy[userIndex].messages)) {
+				if (usersCopy[userIndex].messages[currentDate]) {
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				} else {
+					usersCopy[userIndex].messages[currentDate] = [];
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				}
 			} else {
 				usersCopy[userIndex].messages[currentDate] = [];
 				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
 			}
-		} else {
-			usersCopy[userIndex].messages[currentDate] = [];
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+			
 		}
-		
-		const userObject = usersCopy[userIndex];
-		usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
-		
 
 		//сортировка
 		const userSort = [...usersCopy].sort((a, b) => {       
@@ -1567,7 +1569,7 @@ const fetchAdminSupport = (data) => {
 			return dateB-dateA  //сортировка по убывающей дате  
 		})
 
-		console.log(userSort)
+		//console.log(userSort)
 
 		return userSort;
 	});
