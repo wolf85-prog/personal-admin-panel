@@ -363,11 +363,6 @@ const AppHeader = (props) => {
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            Проекты: {workerCall.projects}
-                          </li>
-                        </ul>
                         <div style={{overflow: 'auto', height: '70px'}}>
                           <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                             {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
@@ -377,6 +372,13 @@ const AppHeader = (props) => {
                             ) : null}    
                           </ul>
                         </div>
+
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            Проекты: {workerCall.projects}
+                          </li>
+                        </ul>
+                        
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
@@ -572,15 +574,22 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
-                        {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span> */}
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.city}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.worklist} / {workerIshod.dolgnost}</span> 
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerIshod.projects}
                           </li>
                         </ul>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.worklist}</span>
+
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Возраст: </span>
+
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Навык: </span>
+
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Комментарий: </span>
+
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
