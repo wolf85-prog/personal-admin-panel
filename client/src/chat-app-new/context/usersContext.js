@@ -1433,77 +1433,81 @@ const fetchMessageSupportResponse = async(data) => {
 	//const kol = await getCountMessage()
 	//setCountMessageWork(count + 1)
 	//const res = await newCountWMessage(kol.workers + 1)
-	console.log("Пришло новое сообщение в Support: ", count + 1)
+	
+		
 
-	if (!isBot || isBot === null) {
+	setUserSupport((userSupport) => {
+		const { senderId, text, type, messageId, convId, replyId, isBot } = data;
+		console.log("userSupport: ", userSupport)
+		let userIndex = userSupport.findIndex((user) => user.chatId.toString() === senderId.toString());
+		console.log("userIndex: ", userIndex)
+		const usersCopy = JSON.parse(JSON.stringify(userSupport));
+
+		// if (userIndex === -1) {
+		// 	const newUser = {
+		// 		id: usersCopy.length,
+		// 		name: 'Новый клиент',
+		// 		chatId: `${senderId}`,
+		// 		avatar: '',
+		// 		conversationId: convId,
+		// 		unread: 0, 
+		// 		pinned: false,
+		// 		typing: false,
+		// 		message:  '',
+		// 		date: '2000-01-01T00:00:00',
+		// 		messages: {}, 
+		// 	}	
+		// 	usersCopy.push(newUser)
+		// 	//console.log("usersCopy: ", usersCopy)
+
+		// 	userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
+
+		// 	//("userIndex new: ", userIndex)
+		// }
+		if (userIndex !== -1) {
+			console.log("Пришло новое сообщение в Support: ", count + 1)
+
 			//play sound
 			//audioMessageW.play();
 			const savedVolume = localStorage.getItem("soundVolume");
 			const savedMute = localStorage.getItem("soundMute");
 
 			if (savedMute === 'false') {
-				console.log("savedMute: ", savedMute)
-				audioMessageW.volume = parseFloat(savedVolume)
-				audioMessageW.play();
+						console.log("savedMute: ", savedMute)
+						audioMessageW.volume = parseFloat(savedVolume)
+						audioMessageW.play();
 			}	
-	} 
-		
 
-	setUserSupport((userSupport) => {
-		const { senderId, text, type, messageId, convId, replyId, isBot } = data;
-		//console.log("users: ", users)
-		let userIndex = userSupport.findIndex((user) => user.chatId === senderId.toString());
-		const usersCopy = JSON.parse(JSON.stringify(userSupport));
-
-		if (userIndex === -1) {
-			const newUser = {
-				id: usersCopy.length,
-				name: 'Новый клиент',
-				chatId: `${senderId}`,
-				avatar: '',
-				conversationId: convId,
-				unread: 0, 
-				pinned: false,
-				typing: false,
-				message:  '',
-				date: '2000-01-01T00:00:00',
-				messages: {}, 
-			}	
-			usersCopy.push(newUser)
-			//console.log("usersCopy: ", usersCopy)
-
-			userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
-
-			//("userIndex new: ", userIndex)
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				image: type === 'image' ? true : false,
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: null,
+				id: messageId,
+				reply: replyId,
+				isBot: isBot,  
+			};
+	
+			const currentDate = new Date().toLocaleDateString()
+	
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+			
+			const userObject = usersCopy[userIndex];
+			if (isBot) {
+				usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+			} else {
+				usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			}
 		}
-		
-		const newMsgObject = {
-			date: new Date().toLocaleDateString(),
-			content: text,
-			image: type === 'image' ? true : false,
-			sender: senderId,
-			time: new Date().toLocaleTimeString(),
-			status: null,
-			id: messageId,
-			reply: replyId,
-			isBot: isBot,  
-		};
 
-		const currentDate = new Date().toLocaleDateString()
-
-		if (usersCopy[userIndex].messages[currentDate]) {
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		} else {
-			usersCopy[userIndex].messages[currentDate] = [];
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		}
 		
-		const userObject = usersCopy[userIndex];
-		if (isBot) {
-			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
-		} else {
-			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
-		}
 		
 
 		//сортировка
