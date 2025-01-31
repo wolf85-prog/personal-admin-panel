@@ -573,22 +573,21 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={StarActive} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
-                        </div>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.city}</span>
+                        </div> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerIshod.projects}
                           </li>
                         </ul>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod.worklist}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.worklist}</span>
 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Возраст: </span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Возраст: {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}</span>
 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Навык: </span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Навык: {workerIshod?.skill}</span>
 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Комментарий: </span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.comment && JSON.parse(workerIshod?.comment)[0].content}</span>
 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
@@ -636,22 +635,16 @@ const AppHeader = (props) => {
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientIshod.fio ? clientIshod.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientIshod.fio ? clientIshod.fio?.split(' ')[1] : ''} {workerIshod.fio ? workerIshod.fio?.split(' ')[2]: ''}</span>
-                        <div className="star-block" style={{marginTop: '85px'}}>
-                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
-                          <img className='star-icon' src={StarActive} width={25} alt='' />
-                          <img className='star-icon' src={StarActive} width={25} alt='' />
-                          <img className='star-icon' src={Star} width={25} alt='' />
-                          <img className='star-icon' src={Star} width={25} alt='' />
-                        </div>
-                        {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod.dateborn}</span> */}
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.city}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.worklist}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientIshod.city}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.companys}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.dolgnost}</span> 
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {clientIshod.projects}
                           </li>
                         </ul>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.sfera}</span> 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>

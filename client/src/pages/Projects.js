@@ -1881,7 +1881,7 @@ ${loc.url}`;
                                               onClick={()=>{
                                                 const client = clientAll.find(item=> item.userfamily === managerName)
                                                 console.log("client: ", clientAll, client)
-                                                setClientIshod({fio: client?.userfamily, city: client?.city, avatar: client?.avatar, comteg: client?.comteg})
+                                                setClientIshod({fio: client?.userfamily, city: client?.city, avatar: client?.avatar, comteg: client?.comteg, dolgnost: client?.dolgnost, companys: client?.companys, sfera: client?.sfera})
                                                 setShowCallCardClient(true)
                                                 clickToCall(client.id, 'c')
                                               }} 
@@ -1893,7 +1893,7 @@ ${loc.url}`;
                                               onClick={()=>{
                                                 const comp = workersAll.find(item2=> item2.userfamily === managerName2)
                                                 console.log("worker id: ", comp)
-                                                setWorkerIshod({fio: comp?.userfamily, city: comp?.city, avatar: comp?.avatar, worklist: comp?.worklist, dateborn: comp?.dateborn, comteg: comp?.comteg})
+                                                setWorkerIshod({fio: comp?.userfamily, city: comp?.city, avatar: comp?.avatar, worklist: comp?.worklist, dateborn: comp?.dateborn, comteg: comp?.comteg, comment: comp?.comment, skill: comp?.skill})
                                                 setShowCallCardWorker(true)                                            
                                                 clickToCall(comp?.id, 'w')
                                               }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
@@ -2095,22 +2095,19 @@ ${loc.url}`;
                                     
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      {/* <img onClick={() => setShowModalEmpty(true)} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                              const worker = workersAll.find(item2=> item2.id === item.specId)
-                                              console.log("worker id: ", item.specId, worker)
-                                              setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg})
+                                              const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
+                                              //console.log("worker id: ", item.specId, workersAll)
+                                              setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg, comment: worker?.comment, skill: worker?.skill})
                                               setShowCallCardWorker(true)
                                               clickToCall(item.specId, 'w')
                                             }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      {/* <img onClick={() => setShowModalEmpty(true)} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/> */}
                                       <img onClick={()=>{
-                                          const worker = workersAll.find(item2=> item2.id === item.specId)
-                                          // console.log("worker id: ", worker?.id)
+                                          const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
                                           console.log("worker id: ", worker, item.specId)
-                                          setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg})
+                                          setWorkerIshod({fio: worker?.userfamily})
                                           setShowCallCardRobot(true)
                                           clickToCallRaut(item.specId)
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>

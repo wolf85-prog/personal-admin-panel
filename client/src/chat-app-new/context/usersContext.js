@@ -428,6 +428,8 @@ useEffect(() => {
 			deleted: user.deleted,
 			comment: user.comment,
 			comteg: user.comteg,
+			sfera: user.sfera,
+			dolgnost: user.dolgnost,
 			}
 			//console.log("newClient: ", newClient)
 			arrayClientAll.push(newClient)
@@ -646,6 +648,7 @@ useEffect(() => {
 				comment: user.comment,
 				comteg: user.comteg,
 				nik: user.nik,
+				skill: user.skill,
 				}
 		
 				arrayWorkerAll.push(newWorker)
