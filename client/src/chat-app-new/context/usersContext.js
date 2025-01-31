@@ -1676,6 +1676,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		dolgnost,
 		sfera,
 		comteg,
+		company,
 	} = dataAll;
 
 	if (task === 100) {
