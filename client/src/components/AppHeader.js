@@ -363,6 +363,12 @@ const AppHeader = (props) => {
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
                         
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            Проекты: {workerCall.projects}
+                          </li>
+                        </ul>
+
                         <div style={{overflow: 'auto', height: '70px'}}>
                           <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                             {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
@@ -372,21 +378,18 @@ const AppHeader = (props) => {
                             ) : null}    
                           </ul>
                         </div>
+                        
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Возраст: {parseInt(new Date().getFullYear()) - parseInt(workerCall?.dateborn?.split('-')[0])}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Навык: {workerCall?.skill}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall?.comment && JSON.parse(workerCall?.comment)[0].content}</span>
 
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            Проекты: {workerCall.projects}
-                          </li>
-                        </ul>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                              {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
-                                (<span key={index}>
-                                  {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
-                                </span>)
-                              ) : null}
+                              {workerCall.comteg ? 
+                                workerCall.comteg
+                               : ''}
                             </div>
                             
                           </li>
@@ -442,38 +445,24 @@ const AppHeader = (props) => {
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
-                        <div className="star-block" style={{marginTop: '85px'}}>
-                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
-                          <img className='star-icon' src={StarActive} width={25} alt='' />
-                          <img className='star-icon' src={StarActive} width={25} alt='' />
-                          <img className='star-icon' src={Star} width={25} alt='' />
-                          <img className='star-icon' src={Star} width={25} alt='' />
-                        </div>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        
+                        {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span> */}
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{workerCall.sity}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.companys ? workerCall.companys : '-'}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.dolgnost ? workerCall.dolgnost : '-'}</span> 
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerCall.projects}
                           </li>
                         </ul>
-                        <div style={{overflow: 'auto', height: '70px'}}>
-                          <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                            {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
-                              (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
-                                {item}
-                              </li>)
-                            ) : null}    
-                          </ul>
-                        </div>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sfera}</span> 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                              {workerCall.comtags ? workerCall.comtags.split(',').map((item, index)=> 
-                                (<span key={index}>
-                                  {item} {index === workerCall.comtags.split(',').length-1 ? '' : '| '}
-                                </span>)
-                              ) : null}
+                              {workerCall.comteg ? 
+                                workerCall.comteg
+                               : ''}
                             </div>
                             
                           </li>
