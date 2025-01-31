@@ -387,8 +387,8 @@ const AppHeader = (props) => {
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                              {workerCall.comteg ? 
-                                workerCall.comteg
+                              {workerCall.comtags ? 
+                                workerCall.comtags
                                : ''}
                             </div>
                             

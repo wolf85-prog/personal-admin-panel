@@ -11,7 +11,7 @@ import { getAllMessages, getContacts, getConversation, getConversations, getMess
 import { getWContacts, getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI' 
 
-import { getSpecialistChatId} from '../../http/specAPI' 
+import { getSpecialist, getSpecialistChatId} from '../../http/specAPI' 
 
 import { getCompany } from '../../http/companyAPI'
 
@@ -1670,6 +1670,12 @@ const fetchNotifAdmin = async (dataAll) => {
 		telegram_id, 
 		srm_id, 
 		chat_link,
+		skill,
+		comment,
+		city,
+		dolgnost,
+		sfera,
+		comteg,
 	} = dataAll;
 
 	if (task === 100) {
@@ -1696,7 +1702,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	else if (task === 200) {
 		//console.log("fio: ", fio)
 
-		const worker = await getSpecialistChatId(tg_id)
+		const worker = await getSpecialist(userId)
 		console.log("worker: ", worker)
 		setWorkerCall({
 			tg_id,
@@ -1707,6 +1713,8 @@ const fetchNotifAdmin = async (dataAll) => {
             projects, 
             specialities, 
             comtags,
+			comment,
+			skill,
 			avatar: worker?.profile,
 		})
 
@@ -1725,6 +1733,31 @@ const fetchNotifAdmin = async (dataAll) => {
 
 		setCallIndex(2)
 		setCallIndex2(3)
+	}
+	//звонок клиента
+	else if (task === 202) {
+		//console.log("fio: ", fio)
+
+		const client = await getClient(userId)
+		console.log("worker: ", client)
+		setClientCall({
+			tg_id,
+			fio,
+            city,
+            companys, 
+            rating, 
+            projects, 
+            dolgnost, 
+			sfera,
+            comteg,
+			comment,
+			avatar: client?.profile,
+		})
+
+		setShowCallCard(true)
+
+		setCallIndex(3)
+		setCallIndex2(2)
 	}
 
 }
