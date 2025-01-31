@@ -396,21 +396,6 @@ const AppHeader = (props) => {
                         </ul>
                       </div>
                     </div>
-                      
-                    {
-                      workerCall.specialities ? 
-                      (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '590px'}}/>
-                      : "")
-                      : ""
-                    }
-                    {
-                      workerCall.specialities ? 
-                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={50} alt='' style={{position: 'absolute', top: '10px', right: '580px'}}/>
-                      : "")
-                      : ""
-                    }
 
                   </CToastBody>
                   {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
@@ -443,25 +428,25 @@ const AppHeader = (props) => {
                       }
                       <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         
                         {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span> */}
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{workerCall.sity}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.companys ? workerCall.companys : '-'}</span> 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.dolgnost ? workerCall.dolgnost : '-'}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.sity}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.companys ? clientCall.companys : '-'}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.dolgnost ? clientCall.dolgnost : '-'}</span> 
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            Проекты: {workerCall.projects}
+                            Проекты: {clientCall.projects}
                           </li>
                         </ul>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sfera}</span> 
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.sfera}</span> 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                              {workerCall.comteg ? 
-                                workerCall.comteg
+                              {clientCall.comteg ? 
+                                clientCall.comteg
                                : ''}
                             </div>
                             
@@ -469,21 +454,6 @@ const AppHeader = (props) => {
                         </ul>
                       </div>
                     </div>
-                      
-                    {
-                      workerCall.specialities ? 
-                      (workerCall.specialities.split(',').find(item => item === 'Blacklist') ? 
-                      <img src={Krestik} width={30} alt='' style={{position: 'absolute', top: '280px', right: '590px'}}/>
-                      : "")
-                      : ""
-                    }
-                    {
-                      workerCall.specialities ? 
-                      (workerCall.specialities.split(',').find(item => item === '+18') ? 
-                      <img src={block18} width={50} alt='' style={{position: 'absolute', top: '10px', right: '580px'}}/>
-                      : "")
-                      : ""
-                    }
 
                   </CToastBody>
                   {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
