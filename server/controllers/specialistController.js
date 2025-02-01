@@ -17,6 +17,19 @@ const socketUrl = process.env.SOCKET_APP_URL
 
 class SpecialistController {
 
+    async getSpecialistAll(req, res) {
+        try {
+            const workers = await Worker.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC, ASC
+                ],
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getSpecialist(req, res) {
         const {userId} = req.params
         try {

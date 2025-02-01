@@ -18,7 +18,7 @@ const { getProjectsAll,
     getProjectCreate, getProjectUpdate, 
     getProjectDel, getProjectChatId } = require('../controllers/projectController')
 
-const { getSpecialist, getSpecCount, editSpecialist, 
+const { getSpecialistAll, getSpecialist, getSpecCount, editSpecialist, 
     getSpecialistId, addSpecialist, deleteSpecialist, 
     getSpecCountAll, getSpecialistPhone, getSpecialistChatId, 
     blockSpecialist,getSpecialistByPhone} = require('../controllers/specialistController')
@@ -39,7 +39,7 @@ const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec,
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
-const { getClient, getClientCount, editClient, 
+const { getClientAll, getClient, getClientCount, editClient, 
     getClientId, addClient, deleteClient, 
     getClientCountAll, getClientPhone, getClientChatId, 
     blockClient,getClientByPhone } = require('../controllers/clientController')
@@ -107,6 +107,7 @@ route.get('/projects/chat/get/:id', getProjectChatId)
 
 
 //----------------- Сотрудники ---------------------------------
+route.get('/workers/all/get', getSpecialistAll)
 route.get('/workers/user/get/:userId', getSpecialist)
 route.get("/workers/:id", getSpecialistId);
 route.get('/workers/count/get/:userId/:count/:prev', getSpecCount) //еще
@@ -173,6 +174,7 @@ route.get("/crmid/get", getCrmID);
 
 
 //----------------- Клиенты ---------------------------------
+route.get('/client/all/get', getClientAll)
 route.get('/client/user/get/:userId', getClient)
 route.get("/client/:id", getClientId);
 route.get('/client/count/get/:userId/:count/:prev', getClientCount) //еще
