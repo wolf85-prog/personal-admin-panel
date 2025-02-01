@@ -331,76 +331,7 @@ const AppHeader = (props) => {
               </CNavLink>
             </CTooltip>
 
-            {/* Входящий сотрудник */}
-            <div style={{
-              display: showCallCard ? 'block' : 'none', 
-              position: 'absolute', top: '65px', right: '0', 
-              width: '900px', height: '330px', 
-              backgroundColor: '#2a2f32', 
-              borderRadius: '15px', 
-              border: '1px solid #4b4b4b',
-              padding: '8px',
-              zIndex: callIndex}
-            }>
-                <div className="d-flex" style={{justifyContent: 'space-between'}}>
-                  <CToastBody>
-                    <div style={{display: 'flex'}}>
-                      {workerCall.avatar ? 
-                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
-                      : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
-                      }
-                      <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
-                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
-                        <div className="star-block" style={{marginTop: '85px'}}>
-                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
-                          <img className='star-icon' src={StarActive} width={25} alt='' />
-                          <img className='star-icon' src={StarActive} width={25} alt='' />
-                          <img className='star-icon' src={Star} width={25} alt='' />
-                          <img className='star-icon' src={Star} width={25} alt='' />
-                        </div>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
-                        
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            Проекты: {workerCall.projects}
-                          </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {workerCall.worklist}
-                          </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {workerCall?.skill}
-                          </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {workerCall?.comment && JSON.parse(workerCall?.comment)[0].content}
-                          </li>
-                        </ul>    
-                        
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
-                          <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
-                            <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                              {workerCall.comtags ? 
-                                workerCall.comtags
-                               : ''}
-                            </div>
-                            
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-
-                  </CToastBody>
-                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
-                  <img 
-                    src={Trubka} 
-                    onClick={()=>setShowCallCard(false)} 
-                    width={70} alt='' 
-                    style={{position: 'absolute', top: '20px', right: '20px'}}
-                  />
-                </div>
-            </div> 
+            
 
             {/* Входящий клиент */}
             <div style={{
@@ -436,7 +367,7 @@ const AppHeader = (props) => {
                             Проекты: {clientCall.projects}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {clientCall.projects}
+                            {clientCall.sfera ? clientCall.sfera : ' '}
                           </li>
                         </ul>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
@@ -462,6 +393,69 @@ const AppHeader = (props) => {
                   />
                 </div>
             </div>
+
+            {/* Исходящий клиент */}
+            <div style={{
+              display: showCallCardClient ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              border: '1px solid #4b4b4b',
+              padding: '8px',
+              zIndex: callIndex}
+            }>
+                <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                  <CToastBody>
+                    <div style={{display: 'flex'}}>
+                      {clientIshod.avatar ? 
+                      <img src={clientIshod.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      }
+                      <CToastClose onClick={()=>setShowCallCardClient(false)} white style={{position: 'absolute'}}/>
+                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientIshod.fio ? clientIshod.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientIshod.fio ? clientIshod.fio?.split(' ')[1] : ''} {workerIshod.fio ? workerIshod.fio?.split(' ')[2]: ''}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientIshod.city}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.companys}</span> 
+                        
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {clientIshod.dolgnost ? clientIshod.dolgnost : ' '}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            Проекты: {clientIshod.projects ? clientIshod.projects : '0'}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {clientIshod.sfera}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {clientIshod.comment && JSON.parse(clientIshod.comment)[0].content}
+                          </li>
+                        </ul>
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
+                          <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
+                            <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                              {clientIshod.comteg ? 
+                                clientIshod.comteg
+                               : ''}
+                            </div>
+                            
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </CToastBody>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={Trubka} 
+                    onClick={()=>setShowCallCard(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
+                </div>
+            </div> 
 
             {/* Входящий неизвестный */}
             <div style={{
@@ -501,6 +495,78 @@ const AppHeader = (props) => {
                 </div>
             </div>
 
+
+            {/* Входящий сотрудник */}
+            <div style={{
+              display: showCallCard ? 'block' : 'none', 
+              position: 'absolute', top: '65px', right: '0', 
+              width: '900px', height: '330px', 
+              backgroundColor: '#2a2f32', 
+              borderRadius: '15px', 
+              border: '1px solid #4b4b4b',
+              padding: '8px',
+              zIndex: callIndex}
+            }>
+                <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                  <CToastBody>
+                    <div style={{display: 'flex'}}>
+                      {workerCall.avatar ? 
+                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      }
+                      <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
+                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[0] : ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{workerCall.fio ? workerCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <div className="star-block" style={{marginTop: '85px'}}>
+                          <img className='star-icon' src={StarActive} width={25} alt='' /> 
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={StarActive} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
+                          <img className='star-icon' src={Star} width={25} alt='' />
+                        </div>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            Проекты: {workerCall.projects ? workerCall.projects : '0'}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerCall.worklist}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerCall?.skill}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerCall?.comment && JSON.parse(workerCall?.comment)[0].content}
+                          </li>
+                        </ul>    
+                        
+                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
+                          <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
+                            <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                              {workerCall.comtags ? 
+                                workerCall.comtags
+                               : ''}
+                            </div>
+                            
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </CToastBody>
+                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                  <img 
+                    src={Trubka} 
+                    onClick={()=>setShowCallCard(false)} 
+                    width={70} alt='' 
+                    style={{position: 'absolute', top: '20px', right: '20px'}}
+                  />
+                </div>
+            </div> 
+
             {/* Исходящий сотрудник */}
             <div style={{
               display: showCallCardWorker ? 'block' : 'none', 
@@ -535,10 +601,10 @@ const AppHeader = (props) => {
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            Проекты: {workerIshod.projects}
+                            Проекты: {workerIshod.projects ? workerIshod.projects : '0'}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}
+                            Возраст: { workerIshod?.dateborn ? parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0]) : ''}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {workerIshod.worklist}
@@ -575,61 +641,7 @@ const AppHeader = (props) => {
                 </div>
             </div> 
 
-            {/* Исходящий клиент */}
-            <div style={{
-              display: showCallCardClient ? 'block' : 'none', 
-              position: 'absolute', top: '65px', right: '0', 
-              width: '900px', height: '330px', 
-              backgroundColor: '#2a2f32', 
-              borderRadius: '15px', 
-              border: '1px solid #4b4b4b',
-              padding: '8px',
-              zIndex: callIndex}
-            }>
-                <div className="d-flex" style={{justifyContent: 'space-between'}}>
-                  <CToastBody>
-                    <div style={{display: 'flex'}}>
-                      {clientIshod.avatar ? 
-                      <img src={clientIshod.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
-                      : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
-                      }
-                      <CToastClose onClick={()=>setShowCallCardClient(false)} white style={{position: 'absolute'}}/>
-                      <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientIshod.fio ? clientIshod.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientIshod.fio ? clientIshod.fio?.split(' ')[1] : ''} {workerIshod.fio ? workerIshod.fio?.split(' ')[2]: ''}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientIshod.city}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.companys}</span> 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.dolgnost}</span> 
-                        
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            Проекты: {clientIshod.projects}
-                          </li>
-                        </ul>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientIshod.sfera}</span> 
-                        <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
-                          <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
-                            <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
-                              {clientIshod.comteg ? 
-                                clientIshod.comteg
-                               : ''}
-                            </div>
-                            
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-
-                  </CToastBody>
-                  {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
-                  <img 
-                    src={Trubka} 
-                    onClick={()=>setShowCallCard(false)} 
-                    width={70} alt='' 
-                    style={{position: 'absolute', top: '20px', right: '20px'}}
-                  />
-                </div>
-            </div> 
+            
 
 
             {/* Исходящий робот */}

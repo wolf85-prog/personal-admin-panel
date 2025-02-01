@@ -1881,7 +1881,7 @@ ${loc.url}`;
                                               onClick={()=>{
                                                 const client = clientAll.find(item=> item.userfamily === managerName)
                                                 console.log("client: ", clientAll, client)
-                                                setClientIshod({fio: client?.userfamily, city: client?.city, avatar: client?.avatar, comteg: client?.comteg, dolgnost: client?.dolgnost, companys: client?.companys, sfera: client?.sfera})
+                                                setClientIshod({fio: client?.userfamily, city: client?.city, avatar: client?.avatar, comteg: client?.comteg, dolgnost: client?.dolgnost, companys: client?.companys, sfera: client?.sfera, comment: client?.comment})
                                                 setShowCallCardClient(true)
                                                 clickToCall(client.id, 'c')
                                               }} 

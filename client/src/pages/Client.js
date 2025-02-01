@@ -40,6 +40,9 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { getClient, getClientCount, editClient, addClient, deleteClient } from '../http/clientAPI'
 import { getWContacts} from '../http/workerAPI'
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
+import { getCompanySendCall } from '../http/adminAPI'
+
+import ishodCall from '../assets/sound/call_out.mp3';
 
 import DeleteIcon from "../assets/images/delete_icon.png"
 import Close from "../assets/images/clear.svg"
@@ -76,8 +79,11 @@ const Client = () => {
   const workerId= location.state?.workerId
   //console.log("workerId: ", workerId)
 
+  const audioIshodCall = new Audio(ishodCall);
+
   const { userId, clientAll, setClientAll, client, setClient,
     clientsCount, setClientsCount, companysAll } = useUsersContext();
+  const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
 
   const [clientCount, setClientCount] = useState([]);
   const [filterAll, setFilterAll] = useState([]);
@@ -861,6 +867,11 @@ const Client = () => {
       
     }
 
+    const clickToCall = async(id, callType) => {
+      audioIshodCall.play();
+      await getCompanySendCall(id, callType)
+    }
+
 
   return (
     <div className='dark-theme'>
@@ -1072,8 +1083,15 @@ const Client = () => {
                                         {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
-                                      {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
+                                      <img src={Trubka} onClick={()=>{
+                                                // const client = clientAll.find(item=> item.userfamily === managerName)
+                                                // console.log("client: ", clientAll, client)
+                                                // setClientIshod({fio: client?.userfamily, city: client?.city, avatar: client?.avatar, comteg: client?.comteg, dolgnost: client?.dolgnost, companys: client?.companys, sfera: client?.sfera, comment: client?.comment})
+                                                // setShowCallCardClient(true)
+                                                // clickToCall(client.id, 'c')
+                                              }}  
+                                        style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                       {/* <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       <CTooltip content="Сохранить" placement="bottom">
                                         <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
