@@ -2096,20 +2096,28 @@ ${loc.url}`;
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       <img onClick={()=>{
-                                              const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
-                                              //console.log("worker id: ", item.specId, workersAll)
+                                          if (item.specId) {
+                                            const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
+                                            //console.log("worker id: ", item.specId, workersAll)
+                                            if (worker) {
                                               setWorkerIshod({fio: worker?.userfamily, city: worker?.city, avatar: worker?.avatar, worklist: worker?.worklist, dateborn: worker?.dateborn, comteg: worker?.comteg, comment: worker?.comment, skill: worker?.skill})
                                               setShowCallCardWorker(true)
                                               clickToCall(item.specId, 'w')
-                                            }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                            }
+                                          }
+                                      }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       <img onClick={()=>{
-                                          const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
-                                          console.log("worker id: ", worker, item.specId)
-                                          setWorkerIshod({fio: worker?.userfamily})
-                                          setShowCallCardRobot(true)
-                                          clickToCallRaut(item.specId)
+                                          if (item.specId) {
+                                            const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
+                                            console.log("worker id: ", worker, item.specId)
+                                            if (worker) {
+                                              setWorkerIshod({fio: worker?.userfamily})
+                                              setShowCallCardRobot(true)
+                                              clickToCallRaut(item.specId)
+                                            }
+                                          }   
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">

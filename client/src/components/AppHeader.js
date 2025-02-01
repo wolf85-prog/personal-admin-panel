@@ -47,7 +47,7 @@ import Error from "./../assets/images/error.png";
 import Error2 from "./../assets/images/error2.png";
 import Delete from "./../assets/images/cart.png";
 import Delete2 from "./../assets/images/cart2.png";
-import ULEY from "./../assets/images/home_chat.jpeg";
+import ULEY from "./../assets/images/home_chat.png";
 import robot from "src/chat-app-worker/assets/images/robot.png";
 
 
@@ -534,19 +534,24 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div> 
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
-                        
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.dateborn}</span>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerIshod.projects}
                           </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerIshod.worklist}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerIshod?.skill}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerIshod?.comment && JSON.parse(workerIshod?.comment)[0].content}
+                          </li>
                         </ul>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.worklist}</span>
-
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Возраст: {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}</span>
-
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Навык: {workerIshod?.skill}</span>
-
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.comment && JSON.parse(workerIshod?.comment)[0].content}</span>
 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
@@ -659,7 +664,9 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Система оповещения активирована</span>
+                        <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center', marginTop: '9%'}}>ВНИМАНИЕ!</span>
+                        <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center'}}>Роботизированная система оповещения
+                        активирована!</span>
                         
                       </div>
                     </div>
