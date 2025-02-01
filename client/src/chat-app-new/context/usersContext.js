@@ -1755,6 +1755,7 @@ const fetchNotifAdmin = async (dataAll) => {
             comteg,
 			comment,
 			// avatar: client?.profile,
+			avatar: null,
 		})
 		console.log("ClientCall:", clientCall)
 
