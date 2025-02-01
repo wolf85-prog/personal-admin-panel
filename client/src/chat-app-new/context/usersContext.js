@@ -1739,6 +1739,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	else if (task === 202) {
 		//console.log("fio: ", fio)
 
+		console.log("userId: ", userId)
 		const client = await getClient(userId)
 		console.log("worker: ", client)
 		setClientCall({
@@ -1754,6 +1755,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			comment,
 			avatar: client?.profile,
 		})
+		console.log("ClientCall:", clientCall)
 
 		setShowCallCard(true)
 
