@@ -425,17 +425,20 @@ const AppHeader = (props) => {
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
                         
-                        {/* <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span> */}
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.sity}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.companys ? clientCall.companys : '-'}</span> 
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.dolgnost ? clientCall.dolgnost : '-'}</span> 
-                        
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.companys ? clientCall.companys : ' '}</span> 
+
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {clientCall.dolgnost ? clientCall.dolgnost : ' '}
+                          </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {clientCall.projects}
                           </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {clientCall.projects}
+                          </li>
                         </ul>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.sfera}</span> 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
                             <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
@@ -535,17 +538,17 @@ const AppHeader = (props) => {
                             Проекты: {workerIshod.projects}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {workerIshod.worklist}
                           </li>
-                          {/* <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}
-                          </li> */}
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {workerIshod?.skill}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          {/* <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {workerIshod?.comment && JSON.parse(workerIshod?.comment)[0].content}
-                          </li>
+                          </li> */}
                         </ul>
 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
