@@ -367,22 +367,16 @@ const AppHeader = (props) => {
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerCall.projects}
                           </li>
-                        </ul>
-
-                        <div style={{overflow: 'auto', height: '70px'}}>
-                          <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                            {workerCall.specialities ? workerCall.specialities.split(',').map((item, index)=> 
-                              (<li key={index} style={{fontSize: '16px', color: '#858585'}}>
-                                {item}
-                              </li>)
-                            ) : null}    
-                          </ul>
-                        </div>
-                        
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Возраст: {parseInt(new Date().getFullYear()) - parseInt(workerCall?.dateborn?.split('-')[0])}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>Навык: {workerCall?.skill}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall?.comment && JSON.parse(workerCall?.comment)[0].content}</span>
-
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerCall.worklist}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerCall?.skill}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                            {workerCall?.comment && JSON.parse(workerCall?.comment)[0].content}
+                          </li>
+                        </ul>    
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
                           <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
@@ -533,8 +527,9 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div> 
+                        
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod?.dateborn ? '01.01.'+ workerIshod?.dateborn.split('-')[0] : ''}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.dateborn}</span>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             Проекты: {workerIshod.projects}
@@ -542,9 +537,9 @@ const AppHeader = (props) => {
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {workerIshod.worklist}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          {/* <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0])}
-                          </li>
+                          </li> */}
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
                             {workerIshod?.skill}
                           </li>
@@ -664,7 +659,10 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
 
-                        <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center', marginTop: '9%'}}>ВНИМАНИЕ!</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod?.dateborn ? '01.01.'+ workerIshod?.dateborn.split('-')[0] : ''}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
+
+                        <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center', marginTop: '4%'}}>ВНИМАНИЕ!</span>
                         <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center'}}>Роботизированная система оповещения
                         активирована!</span>
                         

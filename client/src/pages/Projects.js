@@ -2113,7 +2113,7 @@ ${loc.url}`;
                                             const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
                                             console.log("worker id: ", worker, item.specId)
                                             if (worker) {
-                                              setWorkerIshod({fio: worker?.userfamily})
+                                              setWorkerIshod({fio: worker?.userfamily, city: worker?.city, dateborn: worker?.dateborn,})
                                               setShowCallCardRobot(true)
                                               clickToCallRaut(item.specId)
                                             }
