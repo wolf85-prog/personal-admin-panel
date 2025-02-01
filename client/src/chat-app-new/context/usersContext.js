@@ -1740,7 +1740,8 @@ const fetchNotifAdmin = async (dataAll) => {
 		//console.log("fio: ", fio)
 
 		console.log("userId: ", userId)
-		const client = await getClient(userId)
+		// const client = await getClient(userId)
+		
 		console.log("worker: ", client)
 		setClientCall({
 			tg_id,
@@ -1753,7 +1754,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			sfera,
             comteg,
 			comment,
-			avatar: client?.profile,
+			// avatar: client?.profile,
 		})
 		console.log("ClientCall:", clientCall)
 
