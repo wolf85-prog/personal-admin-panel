@@ -61,9 +61,9 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
-    soundVolume, setSoundVolume, soundMute, setSoundMute, clientCall} = useUsersContext();
+    soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
 
-  // const { clientCall, showCallCard2, setShowCallCard2, callIndex3, callIndex4} = useUsersContext();
+  const { clientCall, showCallCard2, setShowCallCard2, callIndex3, callIndex4} = useUsersContext();
 
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
@@ -354,7 +354,7 @@ const AppHeader = (props) => {
                       <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[0] : ''}</span>
-                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[1] : ''} {workerCall.fio ? workerCall.fio?.split(' ')[2]: ''}</span>
+                        <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[1] : ''} {clientCall.fio ? clientCall.fio?.split(' ')[2]: ''}</span>
                         
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.sity}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.companys ? clientCall.companys : ' '}</span> 
