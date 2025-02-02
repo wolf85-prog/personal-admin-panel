@@ -61,9 +61,9 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
-    soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
+    soundVolume, setSoundVolume, soundMute, setSoundMute, clientCall} = useUsersContext();
 
-  const { clientCall, showCallCard2, setShowCallCard2, callIndex3, callIndex4} = useUsersContext();
+  // const { clientCall, showCallCard2, setShowCallCard2, callIndex3, callIndex4} = useUsersContext();
 
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
