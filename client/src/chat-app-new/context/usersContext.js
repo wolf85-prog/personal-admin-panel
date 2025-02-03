@@ -1701,9 +1701,10 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//звонок специалиста
 	else if (task === 200) {
-		//console.log("fio: ", fio)
-		console.log("userId: ", userId)
-		const worker = await getSpecialist(userId)
+		const user = localStorage.getItem('user')
+		console.log("userId: ", JSON.parse(user)?.id)
+
+		const worker = await getSpecialist(JSON.parse(user)?.id)
 		console.log("worker: ", worker)
 		setWorkerCall({
 			tg_id,
@@ -1738,9 +1739,9 @@ const fetchNotifAdmin = async (dataAll) => {
 	}
 	//звонок клиента
 	else if (task === 202) {
-		//console.log("fio: ", fio)
-		console.log("userId: ", userId)
-		const client = await getClient(userId)		
+		const user = localStorage.getItem('user')
+		console.log("userId: ", JSON.parse(user)?.id)
+		const client = await getClient(JSON.parse(user)?.id)		
 		console.log("worker: ", client)
 		setClientCall({
 			tg_id,
@@ -1757,10 +1758,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		})
 		console.log("ClientCall:", clientCall)
 
-		setShowCallCard(true)
+		setShowCallCard2(true)
 
-		setCallIndex(3)
-		setCallIndex2(2)
+		setCallIndex3(3)
+		setCallIndex4(2)
 	}
 
 }

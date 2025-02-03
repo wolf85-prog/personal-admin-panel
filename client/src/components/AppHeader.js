@@ -335,28 +335,28 @@ const AppHeader = (props) => {
 
             {/* Входящий клиент */}
             <div style={{
-              display: showCallCard ? 'block' : 'none', 
+              display: showCallCard2 ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
               width: '900px', height: '330px', 
               backgroundColor: '#2a2f32', 
               borderRadius: '15px', 
               border: '1px solid #4b4b4b',
               padding: '8px',
-              zIndex: callIndex}
+              zIndex: callIndex3}
             }>
                 <div className="d-flex" style={{justifyContent: 'space-between'}}>
                   <CToastBody>
                     <div style={{display: 'flex'}}>
                       {clientCall.avatar ? 
-                      <img src={workerCall.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                      <img src={clientCall.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
                       : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
                       }
-                      <CToastClose onClick={()=>setShowCallCard(false)} white style={{position: 'absolute'}}/>
+                      <CToastClose onClick={()=>setShowCallCard2(false)} white style={{position: 'absolute'}}/>
                       <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[1] : ''} {clientCall.fio ? clientCall.fio?.split(' ')[2]: ''}</span>
                         
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.sity}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.city}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.companys ? clientCall.companys : ' '}</span> 
 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
