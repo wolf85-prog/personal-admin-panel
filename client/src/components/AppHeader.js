@@ -356,7 +356,7 @@ const AppHeader = (props) => {
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[0] : ''}</span>
                         <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{clientCall.fio ? clientCall.fio?.split(' ')[1] : ''} {clientCall.fio ? clientCall.fio?.split(' ')[2]: ''}</span>
                         
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.city}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{clientCall.city ? clientCall.city : ''}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{clientCall.companys ? clientCall.companys : ' '}</span> 
 
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
@@ -526,7 +526,7 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity ? workerCall.sity : (workerCall.city ? workerCall.city : '')}</span>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>

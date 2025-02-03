@@ -50,6 +50,7 @@ const UsersProvider = ({ children }) => {
 	const [userId, setUserId] = useState(''); 
 	const [users, setUsers] = useState([]); //все специалисты;
 	const [email, setEmail] = useState('');
+	const [role, setRole] = useState('Пользователь')
 
 	const [contacts, setContacts] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -203,6 +204,19 @@ const UsersProvider = ({ children }) => {
 			//audioCall.pause()
 		}
 
+		if (showCallCard2) {
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioCall.volume = parseFloat(savedVolume)
+				audioCall.play();
+			} 
+		} else {
+			//audioCall.pause()
+		}
+
 		if (showCallCardNo) {
 			const savedVolume = localStorage.getItem("soundVolume");
 			const savedMute = localStorage.getItem("soundMute");
@@ -216,7 +230,7 @@ const UsersProvider = ({ children }) => {
 			//audioCall2.pause()
 		}
 		
-	},[showCallCard, showCallCardNo])
+	},[showCallCard, showCallCard2, showCallCardNo])
 
 	
 	//-----------------------------------------------------------------------------------------
@@ -248,6 +262,7 @@ const UsersProvider = ({ children }) => {
 		  if (user) {
 			setUserId(JSON.parse(user)?.id)
 			setEmail(JSON.parse(user)?.email)
+			setRole(JSON.parse(user)?.role)
 			
 			const result = await getManagerId(JSON.parse(user)?.id)
 		  	console.log("Manager: ", result)
@@ -1719,7 +1734,19 @@ const fetchNotifAdmin = async (dataAll) => {
 			skill,
 			avatar: worker?.profile,
 		})
-		console.log("workerCall:", workerCall)
+		console.log("workerCall:", {
+			tg_id,
+			fio,
+            sity,
+            year_of_birth, 
+            rating, 
+            projects, 
+            specialities, 
+            comtags,
+			comment,
+			skill,
+			avatar: worker?.profile,
+		})
 
 		setShowCallCard(true)
 
@@ -1742,7 +1769,7 @@ const fetchNotifAdmin = async (dataAll) => {
 		const user = localStorage.getItem('user')
 		console.log("userId: ", JSON.parse(user)?.id)
 		const client = await getClient(JSON.parse(user)?.id)		
-		console.log("worker: ", client)
+		console.log("client: ", client)
 		setClientCall({
 			tg_id,
 			fio,
@@ -1756,7 +1783,19 @@ const fetchNotifAdmin = async (dataAll) => {
 			comment,
 			avatar: client?.profile,
 		})
-		console.log("ClientCall:", clientCall)
+		console.log("ClientCall:", {
+			tg_id,
+			fio,
+            city,
+            companys, 
+            rating, 
+            projects, 
+            dolgnost, 
+			sfera,
+            comteg,
+			comment,
+			avatar: client?.profile,
+		})
 
 		setShowCallCard2(true)
 
@@ -1772,6 +1811,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			setUserId,
 			users, 
 			setUsers,
+			role,
 
 			companyId, 
 			setCompanyId,

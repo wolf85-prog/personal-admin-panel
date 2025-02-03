@@ -36,7 +36,7 @@ import { getCompanyProfId } from '../../http/companyAPI'
 
 const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
-  const { userId, setUserId, companyId } = useUsersContext();
+  const { userId, setUserId, companyId, role } = useUsersContext();
   // const [companyId, setCompanyId] = useState('');
 
   const [visibleOut, setVisibleOut] = useState(false)
@@ -67,7 +67,7 @@ const AppHeaderDropdown = observer(() => {
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Компания ID: {companyId ? '000'+ companyId : ''}</CDropdownHeader>
 
-        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: Пользователь</CDropdownHeader>
+        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: {role ? role.split(' ')[0] : ''}</CDropdownHeader>
 
         <CDropdownDivider />
 
