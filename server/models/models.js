@@ -6,7 +6,13 @@ const User = sequelize.define('user', {
     username: {type: DataTypes.STRING, allowNull: true},
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
-    role: {type: DataTypes.STRING, defaultValue: "USER"},
+    role: {type: DataTypes.STRING, defaultValue: 1},
+})
+
+const Role = sequelize.define('role', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    role: {type: DataTypes.STRING},
+    comment: {type: DataTypes.STRING},
 })
 
 const Manager = sequelize.define('manager', {
