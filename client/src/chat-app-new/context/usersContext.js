@@ -50,7 +50,7 @@ const UsersProvider = ({ children }) => {
 	const [userId, setUserId] = useState(''); 
 	const [users, setUsers] = useState([]); //все специалисты;
 	const [email, setEmail] = useState('');
-	const [role, setRole] = useState('Пользователь')
+	const [role, setRole] = useState('')
 
 	const [contacts, setContacts] = useState([]); //useState(contacts);
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID

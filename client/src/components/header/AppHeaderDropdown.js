@@ -67,7 +67,7 @@ const AppHeaderDropdown = observer(() => {
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Компания ID: {companyId ? '000'+ companyId : ''}</CDropdownHeader>
 
-        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: {role ? role.split(' ')[0] : ''}</CDropdownHeader>
+        <CDropdownHeader className="dark:bg-white fw-semibold py-2">Роль: {role ? (role === '1' ? 'Руководитель' : 'Менеджер') : ''}</CDropdownHeader>
 
         <CDropdownDivider />
 
