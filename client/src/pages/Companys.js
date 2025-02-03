@@ -64,7 +64,7 @@ import { CollectionsOutlined } from '@mui/icons-material';
 //Workers.js
 const Companys = () => {
 
-  const { userId, companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll } = useUsersContext();
+  const { userId, companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll, role } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [companyCount, setCompanyCount] = useState([]); 
 
@@ -195,6 +195,10 @@ const Companys = () => {
       }
       setReyting(count)
   }, [starActive1, starActive2, starActive3, starActive4, starActive5]);
+
+  useEffect(() => {
+    console.log("role: ", role)
+  }, [role])
   
 
   //-----------------------------------------------------------------------------------------
@@ -1072,7 +1076,11 @@ const Companys = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
+                                  <CButton onClick={()=> {
+                                    if (role === '1') {
+                                      setShowManagers(!showManagers)
+                                    }
+                                  }} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>

@@ -51,7 +51,6 @@ const AppHeaderDropdown = observer(() => {
     localStorage.setItem('user', '')
   }
 
-  
 
   const openProfile = () => { 
     //location("/profile")

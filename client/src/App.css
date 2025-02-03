@@ -854,5 +854,30 @@ th.widthCompany {
     }
 }
 
+
+/* Small (sm) – устройства от 576px */
+@media (min-width: 576px) {
+  /* стили для экранов шириной ≥ 576px */
+}
+
+/* Medium (md) – устройства от 768px */
+@media (min-width: 768px) {
+  /* стили для экранов шириной ≥ 768px */
+}
+
+/* Large (lg) – устройства от 992px */
+@media (min-width: 992px) {
+  /* стили для экранов шириной ≥ 992px */
+}
+
+/* Extra large (xl) – устройства от 1200px */
+@media (min-width: 1200px) {
+  /* Стили для экранов шириной ≥ 1200px */
+}
+
+/* Extra extra large (xxl) – устройства от 1400px */
+@media (min-width: 1400px) {
+  /* cтили для экранов шириной ≥ 1400px */
+}
   
   
