@@ -58,7 +58,7 @@ import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
 import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar, getCompanyProfId, addCompanyProf, editCompanyProf } from '../http/companyAPI'
-import { getManager, editManager } from 'src/http/managerAPI';
+import { getManager, editManager, getManagerId } from 'src/http/managerAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
 
 //Workers.js
@@ -330,12 +330,25 @@ const ProfileCompany = () => {
 
       const result = await getCompanyProfId(userId)
       console.log("Company: ", result)
+
+      const saveData2 = { 
+        companyId: result?.id
+      }
       
       if (!result) {
         const resAdd = await addCompanyProf(saveData)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+        
       } else {
         //сохранить изменения в базе
         const resUpdate = await editCompanyProf(saveData, result?.id)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
       }
   
       addToast(exampleToast) //ваши данные сохранены

@@ -59,7 +59,7 @@ const Login = observer(() => {
     const clickReg = async () => {
       try {
           if (password === password2) {
-            const data = await registration(email, password, 'USER');
+            const data = await registration(email, password, '2');
             console.log(data)
 
             //создание менеджера
