@@ -494,14 +494,14 @@ const ProfileCompany = () => {
                                                                     </div>
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small">ИНН</div>
+                                                                    <div className="text-medium-emphasis small">Контрагент</div>
                                                                     <div style={{ height: '40px' }} className="py-2 uley-data-main">
                                                                       
                                                                     </div>
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Расчетный счет</div>
+                                                                    <div className="text-medium-emphasis small ">Контрагент</div>
                                                                     <div style={{ height: '40px' }} className="py-2 uley-data-main">
                                                                       
                                                                     </div>
@@ -628,6 +628,20 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                 <div>
+
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small">ИНН</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">Расчетный счет</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <div className="text-medium-emphasis small ">
@@ -638,19 +652,7 @@ const ProfileCompany = () => {
                                                                     </div>
                                                                   </div>
                                   
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">БИК</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
-                                                                  </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">ОГРН</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
-                                                                  </div> 
+                                                                   
                                                                 </div> 
                                                               </div>                              
                                                             </>
@@ -728,27 +730,26 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                 <div>
-
-                                                                  <div>
+                                                                  <div style={{ marginTop: '4px' }}>
+                                                                    <div className="text-medium-emphasis small ">БИК</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">ОГРН</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                                                  <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small ">Банк</div>
                                                                     <div style={{ height: '40px' }} className="py-2 uley-data-main">
                                                                       
                                                                     </div>
                                                                   </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Телефон</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
-                                                                  </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Почта</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
-                                                                  </div>
+
                                                                 </div>
                                                               </div>
                                                               
@@ -773,11 +774,24 @@ const ProfileCompany = () => {
                                   {showRekviz ? (
                                                             <>
                                                               <div className="div7">
+                                                                <div style={{ marginTop: '5px' }}>
+                                                                    <div className="text-medium-emphasis small ">Телефон</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">Почта</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
 
-                                                                <div style={{ marginTop: '5px' }} className="div8">
+                                                                <div style={{ marginTop: '22px' }} className="div8">
                                                                   <div className="text-medium-emphasis small ">Юридический адрес</div>
                                                                   <div
-                                                                    style={{ height: '205px', textAlign: 'left', paddingLeft: '5px' }}
+                                                                    style={{ height: '40px', textAlign: 'left', paddingLeft: '5px' }}
                                                                     className="py-2 uley-data-main"
                                                                   >
 
