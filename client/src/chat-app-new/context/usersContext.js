@@ -1813,6 +1813,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			setUsers,
 			email,
 			role,
+			setRole,
 
 			companyId, 
 			setCompanyId,
@@ -1868,7 +1869,6 @@ const fetchNotifAdmin = async (dataAll) => {
 			managerProfile, 
 			setManagerProfile,
 			sortedCities,
-			email,
 
 			soundVolume, 
 			setSoundVolume,

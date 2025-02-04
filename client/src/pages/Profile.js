@@ -56,7 +56,7 @@ import { getCompanyProfId } from '../http/companyAPI'
 const Profile = () => {
   //const {user} = useContext(Context)
   const navigate = useNavigate()
-  const { userId, sortedCities, email, managerProfile, setManagerProfile } = useUsersContext();
+  const { userId, sortedCities, email, managerProfile, setManagerProfile, setRole } = useUsersContext();
   // const [managerProfile, setManagerProfile] = useState({});
 
   
@@ -142,6 +142,12 @@ const Profile = () => {
 	
 		const fetchData = async() => {
 		  //setShowProfile(true)
+
+      const user = localStorage.getItem('user')
+		  
+		  if (user) {
+        setRole(JSON.parse(user)?.role)
+      }
 
       const result = await getManagerId(userId)
       console.log("Manager: ", result)

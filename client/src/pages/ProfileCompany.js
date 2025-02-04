@@ -440,7 +440,7 @@ const ProfileCompany = () => {
                                       
                               <CSpinner/> :
 
-                              <div style={{position: 'relative', height: showManagers ? 'auto' : '402px', display: 'flex', flexDirection: 'row'}}>
+                              <div style={{position: 'relative', height: showManagers ? 'auto' : (showRekviz ? 'auto' : '402px'), display: 'flex', flexDirection: 'row'}}>
 {/* 1 */}                               
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -475,6 +475,7 @@ const ProfileCompany = () => {
                                   <label className='title-label'>Реквизиты</label>
                                   <CButton onClick={()=> {
                                         if (role === '1') {
+                                          setShowManagers(false)
                                           setShowRekviz(!showRekviz)
                                         }
                                       }} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
@@ -483,8 +484,34 @@ const ProfileCompany = () => {
                                     </span>
                                   </CButton>
 
-
+                                  {showRekviz ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <div className="text-medium-emphasis small">Контрагент</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small">ИНН</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
                                   
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">Расчетный счет</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                                              </div>
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
+
                                   <img src={Krestik} width={25} alt='' style={{position: 'absolute', top: '215px', left: '215px', opacity: block ? '1' : '0' }}/>
                                   <div className="menu-content-krest">
                                     <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{block ? 'Убрать' : 'Добавить'}</span>
@@ -577,6 +604,7 @@ const ProfileCompany = () => {
                                   <label className='title-label'>Менеджеры</label>
                                   <CButton onClick={()=> {
                                         if (role === '1') {
+                                          setShowRekviz(false)
                                           setShowManagers(!showManagers)
                                         }
                                       }}  className='uley_add_user' style={{width: '320px', height: '42px', marginLeft: '0'}}>
@@ -595,6 +623,40 @@ const ProfileCompany = () => {
                                     </div>)
                                     )}
                                   </div>
+
+                                  {showRekviz ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                <div>
+                                  
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <div className="text-medium-emphasis small ">
+                                                                      Корреспондентский счет
+                                                                    </div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">БИК</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">ОГРН</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div> 
+                                                                </div> 
+                                                              </div>                              
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
 
                                 </div>
 
@@ -642,7 +704,7 @@ const ProfileCompany = () => {
 
                                   <div style={{position: 'relative'}}>
                                     <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
-                                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '24px'}}>                                   
+                                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0px'}}>                                   
                                       {/* проекты за месяц */}
                                       <div style={{marginRight: '10px'}}>
                                         <label className='title-label'>За месяц</label>
@@ -662,6 +724,40 @@ const ProfileCompany = () => {
                                   </div>
 
 
+                                  {showRekviz ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                <div>
+
+                                                                  <div>
+                                                                    <div className="text-medium-emphasis small ">Банк</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">Телефон</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <div className="text-medium-emphasis small ">Почта</div>
+                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
+                                                                      
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                              
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
+
+
                                 </div>
 
 {/* 4 */}
@@ -669,10 +765,30 @@ const ProfileCompany = () => {
                                   
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '100%', height: showManagers ? '533px' : '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: showManagers ? '380px' : '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
+
+                                  {showRekviz ? (
+                                                            <>
+                                                              <div className="div7">
+
+                                                                <div style={{ marginTop: '5px' }} className="div8">
+                                                                  <div className="text-medium-emphasis small ">Юридический адрес</div>
+                                                                  <div
+                                                                    style={{ height: '40px', textAlign: 'left', paddingLeft: '5px' }}
+                                                                    className="py-2 uley-data-main"
+                                                                  >
+
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                                          )}
                                   
                                 </div>
 
