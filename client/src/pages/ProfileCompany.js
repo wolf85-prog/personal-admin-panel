@@ -617,7 +617,7 @@ const ProfileCompany = () => {
                                     {managersObj.map((item, index) => (
                                     <div className="text-field" key={index} style={{position: 'relative'}}>
                                       <div className="text-field">
-                                        <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '280px', marginTop: '45px'}}/>
+                                        <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).email} style={{width: '280px', marginTop: '45px'}}/>
                                       </div> 
                                       <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img>
                                     </div>)
@@ -777,7 +777,7 @@ const ProfileCompany = () => {
                                                                 <div style={{ marginTop: '5px' }} className="div8">
                                                                   <div className="text-medium-emphasis small ">Юридический адрес</div>
                                                                   <div
-                                                                    style={{ height: '40px', textAlign: 'left', paddingLeft: '5px' }}
+                                                                    style={{ height: '205px', textAlign: 'left', paddingLeft: '5px' }}
                                                                     className="py-2 uley-data-main"
                                                                   >
 
