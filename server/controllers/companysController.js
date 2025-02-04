@@ -161,9 +161,9 @@ class CompanysController {
         const {userId} = req.params
         try {
             const count = await Company.count({
-                where: {
-                    userId: userId
-                }
+                // where: {
+                //     userId: userId
+                // }
             });
 
             return res.status(200).json(count);
