@@ -27,7 +27,7 @@ const { getManagers, getManagerCount, editManager, getManagerId,
     addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
 
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, 
-    addCompany, deleteCompany, getCompanyCountAll, addCompanyProf, editCompanyProf, getCompanyProfId } = require('../controllers/companysController')
+    addCompany, deleteCompany, getCompanyCountAll, addCompanyProf, editCompanyProf, getCompanyProfId, getCompanyProf } = require('../controllers/companysController')
 
 const { getPlatforms, getPlatformCount, editPlatform, getPlatformId, 
     addPlatform, deletePlatform, getPlatformCountAll } = require('../controllers/platformsController')
@@ -142,6 +142,7 @@ route.get("/companys/delete/:id", deleteCompany);
 route.post("/companys/add", addCompany);
 route.get("/companys/count/get", getCompanyCountAll);
 
+route.get('/companyprof/get', getCompanyProf)
 route.post("/companyprof/add", addCompanyProf);
 route.patch('/companyprof/update/:id', editCompanyProf)
 route.get("/companyprof/:userId", getCompanyProfId);

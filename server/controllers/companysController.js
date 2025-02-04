@@ -250,6 +250,15 @@ class CompanysController {
         }
     }
 
+    async getCompanyProf(req, res) {
+        try {
+            const company = await CompanyProf.findAll()
+            return res.status(200).json(company);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
 }
 
 module.exports = new CompanysController()
