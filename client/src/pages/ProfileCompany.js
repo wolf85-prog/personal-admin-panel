@@ -64,7 +64,7 @@ import { CollectionsOutlined } from '@mui/icons-material';
 //Workers.js
 const ProfileCompany = () => {
   const navigate = useNavigate()
-  const { userId, companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll } = useUsersContext();
+  const { userId, companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll, role } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [companyCount, setCompanyCount] = useState([]); 
 
@@ -122,6 +122,7 @@ const ProfileCompany = () => {
   const [showMenu2, setShowMenu2] = useState(false)
   const [showManagers, setShowManagers] = useState(false)
   const [showClearCity, setShowClearCity] = useState(false)
+  const [showRekviz, setShowRekviz] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
@@ -459,7 +460,11 @@ const ProfileCompany = () => {
                                   </div>
 
                                   <label className='title-label'>Реквизиты</label>
-                                  <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
+                                  <CButton onClick={()=> {
+                                        if (role === '1') {
+                                          setShowRekviz(!showRekviz)
+                                        }
+                                      }} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -557,7 +562,11 @@ const ProfileCompany = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton className='uley_add_user' style={{width: '320px', height: '42px', marginLeft: '0'}}>
+                                  <CButton onClick={()=> {
+                                        if (role === '1') {
+                                          setShowManagers(!showManagers)
+                                        }
+                                      }}  className='uley_add_user' style={{width: '320px', height: '42px', marginLeft: '0'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
@@ -566,54 +575,9 @@ const ProfileCompany = () => {
                                   <div style={{display: showManagers ? 'block' : 'none'}}>
                                     {managersObj.map((item, index) => (
                                     <div className="text-field" key={index} style={{position: 'relative'}}>
-                                      <Autocomplete
-                                        sx={{
-                                            display: 'inline-block',
-                                            '& input': {zIndex: '25',
-                                                width: '100%',
-                                                border: 'none',
-                                                height: '40px',
-                                                padding: '5px 4px',
-                                                fontFamily: 'inherit',
-                                                fontSize: '14px',
-                                                fontWeight: '400',
-                                                lineHeight: '1.5',
-                                                textAlign: 'center',
-                                                color: '#ffffff',
-                                                backgroundColor: 'transparent', 
-                                            }
-                                        }}
-                                        className="text-field__input" 
-                                        openOnFocus
-                                        id="custom-input-demo"
-                                        options={managersData}
-                                        style={{width: '100%', padding: '0'}}
-                                        isOptionEqualToValue={(option, value) => option.value === value.value}
-                                        onInputChange={(e)=>onChangeManager(e, index)}
-                                        onChange={(event, newValue) => {
-                                            if (newValue && newValue.length) {
-                                                setManagersObj((managersObj) => { 
-                                                  const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-                                                  const userObject = JSON.parse(usersCopy[index]);
-                                                  const managerId = managersAll.find(a=>a.fio === newValue)
-                                                  usersCopy[index] = JSON.stringify({ ...userObject, id:managerId.id, fio: newValue, companyId: id});	                       
-                                                  //console.log(usersCopy)
-                                                  return usersCopy;
-                                                });
-                                            }  
-                                        }}
-                                        value={item ? JSON.parse(item).fio : ''} 
-                                        inputValue={item ? JSON.parse(item).fio : ''}
-                                        renderInput={(params) => (
-                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                            <input 
-                                                className="text-field__input" 
-                                                type="text" {...params.inputProps} 
-                                                placeholder='ФИО'
-                                            />
-                                        </div>
-                                        )}
-                                      />
+                                      <div className="text-field">
+                                        <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '280px', marginTop: '45px'}}/>
+                                      </div> 
                                       <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img>
                                     </div>)
                                     )}
@@ -651,9 +615,17 @@ const ProfileCompany = () => {
 
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
-                                  <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
+                                  <div className="text-field" style={{marginBottom: showManagers ? '45px' : '20px'}}> 
                                     <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
                                   </div>
+
+                                  {/* + добавить менеджера */}
+                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
+                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
+                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
+                                      +</span>
+                                    </CButton>
+                                  </div>   
 
                                   <div style={{position: 'relative'}}>
                                     <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
@@ -674,36 +646,6 @@ const ProfileCompany = () => {
                                       </div>
                                       
                                     </div>
-                                  </div>
-                                  
-                                  
-                                  
-      
-
-                                  {/* + добавить менеджера */}
-                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
-                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
-                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
-                                      +</span>
-                                    </CButton>
-                                  </div>                                 
-
-                                  {/*Должность и телефон менеджера  */}
-                                  <div style={{display: showManagers ? 'block' : 'none'}}>
-                                  {managersObj.map((item, index) => (
-                                    <div key={index} className="text-field" style={{display: 'flex', justifyContent: 'space-between', height: '40px'}}>
-                                      <div>
-                                      {/* <label>Должность</label> */}
-                                        <div className="text-field">
-                                          <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).dolgnost} style={{width: '130px'}}/>
-                                        </div> 
-                                      </div>
-                                      {/* phone */}
-                                      <div className="text-field"  style={{marginBottom: '44px'}}>
-                                        <input className="text-field__input" type="text" name="phone" id="phone" value={JSON.parse(item).phone} onChange={(e) => setPhone(e.target.value)} style={{width: '150px'}}/>  
-                                      </div> 
-                                    </div>
-                                  ))}
                                   </div>
 
 

@@ -1076,11 +1076,7 @@ const Companys = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton onClick={()=> {
-                                    if (role === '1') {
-                                      setShowManagers(!showManagers)
-                                    }
-                                  }} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
+                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
