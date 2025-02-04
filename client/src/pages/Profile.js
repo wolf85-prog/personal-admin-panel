@@ -195,7 +195,7 @@ const Profile = () => {
   //сохранить профиль
   const saveProfile = async(id) => { 
       setShowClose(true)
-      console.log(id)
+      console.log("managerProfile: ", managerProfile)
 
 
       const saveData = {
@@ -203,7 +203,7 @@ const Profile = () => {
         chatId: managerProfile?.chatId,
         phone: managerProfile?.phone, 
         phone2: managerProfile?.phone2,
-        city, 
+        city: managerProfile?.city, 
         dolgnost: managerProfile?.dolgnost,
         companyId: managerProfile?.companyId,
         avatar: avatar, 
