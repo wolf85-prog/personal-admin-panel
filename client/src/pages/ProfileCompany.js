@@ -111,6 +111,38 @@ const ProfileCompany = () => {
   const [profile, setProfile] = useState('');
   const [projects, setProjects] = useState('');
   const [inn, setInn] = useState('');
+  const [raschet, setRaschet] = useState('');
+  const [corschet, setCorschet] = useState('');
+  const [bik, setBik] = useState('');
+  const [ogrn, setOgrn] = useState('');
+  const [bank, setBank] = useState('');
+  const [phoneK, setPhoneK] = useState('');
+  const [emailK, setEmailK] = useState('');
+  const [urAddress, setUrAddress] = useState('');
+
+  const [inn2, setInn2] = useState('');
+  const [raschet2, setRaschet2] = useState('');
+  const [corschet2, setCorschet2] = useState('');
+  const [bik2, setBik2] = useState('');
+  const [ogrn2, setOgrn2] = useState('');
+  const [bank2, setBank2] = useState('');
+  const [phoneK2, setPhoneK2] = useState('');
+  const [emailK2, setEmailK2] = useState('');
+  const [urAddress2, setUrAddress2] = useState('');
+
+  const [inn3, setInn3] = useState('');
+  const [raschet3, setRaschet3] = useState('');
+  const [corschet3, setCorschet3] = useState('');
+  const [bik3, setBik3] = useState('');
+  const [ogrn3, setOgrn3] = useState('');
+  const [bank3, setBank3] = useState('');
+  const [phoneK3, setPhoneK3] = useState('');
+  const [emailK3, setEmailK3] = useState('');
+  const [urAddress3, setUrAddress3] = useState('');
+
+  const [contragent1, setContragent1] = useState('')
+  const [contragent2, setContragent2] = useState('')
+  const [contragent3, setContragent3] = useState('')
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -489,22 +521,16 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <div className="text-medium-emphasis small">Контрагент</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} onChange={(e)=>setContragent1(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small">Контрагент</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} onChange={(e)=>setContragent2(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small ">Контрагент</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} onChange={(e)=>setContragent3(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                                               </div>
                                                             </>
@@ -631,25 +657,19 @@ const ProfileCompany = () => {
 
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small">ИНН</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e)=>setInn(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small ">Расчетный счет</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <div className="text-medium-emphasis small ">
                                                                       Корреспондентский счет
                                                                     </div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                    
@@ -732,22 +752,16 @@ const ProfileCompany = () => {
                                                                 <div>
                                                                   <div style={{ marginTop: '4px' }}>
                                                                     <div className="text-medium-emphasis small ">БИК</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="bik" id="bik" value={bik} onChange={(e)=>setBik(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small ">ОГРН</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small ">Банк</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="bank" id="bank" value={bank} onChange={(e)=>setBank(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
 
                                                                 </div>
@@ -776,26 +790,17 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                 <div style={{ marginTop: '5px' }}>
                                                                     <div className="text-medium-emphasis small ">Телефон</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <div className="text-medium-emphasis small ">Почта</div>
-                                                                    <div style={{ height: '40px' }} className="py-2 uley-data-main">
-                                                                      
-                                                                    </div>
+                                                                    <input className="text-field__input" type="text" name="emailK" id="ogrn" value={emailK} onChange={(e)=>setEmailK(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
 
                                                                 <div style={{ marginTop: '22px' }} className="div8">
                                                                   <div className="text-medium-emphasis small ">Юридический адрес</div>
-                                                                  <div
-                                                                    style={{ height: '40px', textAlign: 'left', paddingLeft: '5px' }}
-                                                                    className="py-2 uley-data-main"
-                                                                  >
-
-                                                                  </div>
+                                                                  <input className="text-field__input" type="text" name="urAddress" id="urAddress" value={urAddress} onChange={(e)=>setUrAddress(e.target.value)} style={{ height: '40px' }} />
                                                                 </div>
                                                               </div>
 

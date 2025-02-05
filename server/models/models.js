@@ -144,6 +144,7 @@ const CompanyProf = sequelize.define('companyprof', {
     profile: {type: DataTypes.STRING},
     sfera: {type: DataTypes.TEXT},
     comteg: {type: DataTypes.TEXT},
+    rekviziti: {type: DataTypes.TEXT},
 })
 
 const MainSpec = sequelize.define('mainspec', {
