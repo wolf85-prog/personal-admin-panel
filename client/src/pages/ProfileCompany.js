@@ -140,9 +140,9 @@ const ProfileCompany = () => {
   const [emailK3, setEmailK3] = useState('');
   const [urAddress3, setUrAddress3] = useState('');
 
-  const [contragent1, setContragent1] = useState('')
-  const [contragent2, setContragent2] = useState('')
-  const [contragent3, setContragent3] = useState('')
+  const [contragent1, setContragent1] = useState('Тест')
+  const [contragent2, setContragent2] = useState('Тест2')
+  const [contragent3, setContragent3] = useState('Тест3')
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -448,6 +448,11 @@ const ProfileCompany = () => {
     );
   }
 
+  const changeKontra = (item) => {
+    console.log(item)
+    setInn(item)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -516,17 +521,17 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <div className="text-medium-emphasis small">Контрагент</div>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} onChange={(e)=>setContragent1(e.target.value)} style={{ height: '40px' }} />
+                                                                    <label className='title-label'>Контрагент</label>
+                                                                    <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small">Контрагент</div>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} onChange={(e)=>setContragent2(e.target.value)} style={{ height: '40px' }} />
+                                                                    <label className='title-label'>Контрагент</label>
+                                                                    <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Контрагент</div>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} onChange={(e)=>setContragent3(e.target.value)} style={{ height: '40px' }} />
+                                                                    <label className='title-label'>Контрагент</label>
+                                                                    <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>
                                                             </>
@@ -652,19 +657,17 @@ const ProfileCompany = () => {
                                                                 <div>
 
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small">ИНН</div>
+                                                                    <label className='title-label'>ИНН</label>
                                                                     <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e)=>setInn(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Расчетный счет</div>
+                                                                    <label className='title-label'>Расчетный счет</label>
                                                                     <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <div className="text-medium-emphasis small ">
-                                                                      Корреспондентский счет
-                                                                    </div>
+                                                                    <label className='title-label'>Корреспондентский счет</label>
                                                                     <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
@@ -747,16 +750,16 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                 <div>
                                                                   <div style={{ marginTop: '4px' }}>
-                                                                    <div className="text-medium-emphasis small ">БИК</div>
+                                                                    <label className='title-label'>БИК</label>
                                                                     <input className="text-field__input" type="text" name="bik" id="bik" value={bik} onChange={(e)=>setBik(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">ОГРН</div>
+                                                                    <label className='title-label'>ОГРН</label>
                                                                     <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Банк</div>
+                                                                    <label className='title-label'>Банк</label>
                                                                     <input className="text-field__input" type="text" name="bank" id="bank" value={bank} onChange={(e)=>setBank(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
 
@@ -785,17 +788,17 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                 <div style={{ marginTop: '5px' }}>
-                                                                    <div className="text-medium-emphasis small ">Телефон</div>
+                                                                    <label className='title-label'>Телефон</label>
                                                                     <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <div className="text-medium-emphasis small ">Почта</div>
+                                                                    <label className='title-label'>Почта</label>
                                                                     <input className="text-field__input" type="text" name="emailK" id="ogrn" value={emailK} onChange={(e)=>setEmailK(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
 
                                                                 <div style={{ marginTop: '22px' }} className="div8">
-                                                                  <div className="text-medium-emphasis small ">Юридический адрес</div>
+                                                                  <label className='title-label'>Юридический адрес</label>
                                                                   <input className="text-field__input" type="text" name="urAddress" id="urAddress" value={urAddress} onChange={(e)=>setUrAddress(e.target.value)} style={{ height: '40px' }} />
                                                                 </div>
                                                               </div>

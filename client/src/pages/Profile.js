@@ -56,7 +56,7 @@ import { getCompanyProfId } from '../http/companyAPI'
 const Profile = () => {
   //const {user} = useContext(Context)
   const navigate = useNavigate()
-  const { userId, sortedCities, email, managerProfile, setManagerProfile, setRole } = useUsersContext();
+  const { userId, sortedCities, email, setEmail, managerProfile, setManagerProfile, setRole } = useUsersContext();
   // const [managerProfile, setManagerProfile] = useState({});
 
   
@@ -147,6 +147,7 @@ const Profile = () => {
 		  
 		  if (user) {
         setRole(JSON.parse(user)?.role)
+        setEmail(JSON.parse(user)?.email)
       }
 
       const result = await getManagerId(userId)
@@ -280,8 +281,10 @@ const Profile = () => {
     //console.log(e.target.value)
     if (e) {
       setCity(e.target.value)  
+      setManagerProfile({...managerProfile, city: e.target.value})  
     } else {
       setCity('')  
+      setManagerProfile({...managerProfile, city: ''})  
     }    
   }
 
@@ -407,11 +410,13 @@ const Profile = () => {
                                         onInputChange={(e)=>changeCity(e)}
                                         onChange={(event, newValue) => {
                                           if (newValue && newValue.length) {                                                      
-                                            setCity(newValue)
+                                            //setCity(newValue)
+                                            setCity(newValue)  
+                                            setManagerProfile({...managerProfile, city: newValue}) 
                                           }  
                                         }}
-                                        value={city} 
-                                        inputValue={city}
+                                        value={managerProfile?.city ? managerProfile?.city : ''} 
+                                        inputValue={managerProfile?.city ? managerProfile?.city : ''}
                                         renderInput={(params) => (
                                         <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                             <input 
