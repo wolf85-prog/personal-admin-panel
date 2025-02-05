@@ -218,7 +218,7 @@ const ProfileCompany = () => {
       setOffice(result?.office ? result.office : '')
       setSklad(result?.sklad ? result.sklad : '')
       setManagers(result?.managers ? result.managers.split(', ') : [])
-      setManagersObj(result?.managersObj ? result.managersObj.split(', ') : [])
+      setManagersObj(result?.managers ? result.managers.split(', ') : [])
       setBugalterFio(result?.bugalterFio ? result.bugalterFio : '')
       setBugalterEmail(result?.bugalterEmail ? result.bugalterEmail : '')
       setBugalterPhone(result?.bugalterPhone ? result.bugalterPhone : '')
@@ -272,21 +272,21 @@ const ProfileCompany = () => {
       let managersArr = []
       let strManagers = ''
       managers.map((item, index)=> {
-        const obj = {
-          name: item,
-        }
+        // const obj = {
+        //   name: item,
+        // }
         strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
-        managersArr.push(obj)
+        managersArr.push(item)
       })
 
       let managersObjArr = []
       let strManagersObj = ''
       managersObj.map(async(item, index)=> {
-        const obj = {
-          name: JSON.parse(item).id,
-        }
-        strManagersObj = strManagersObj + JSON.parse(item).fio + (index+1 !== managersObj.length ? ', ' : '')
-        managersObjArr.push(obj)
+        // const obj = {
+        //   name: JSON.parse(item).id,
+        // }
+        strManagersObj = strManagersObj + item + (index+1 !== managersObj.length ? ', ' : '')
+        managersObjArr.push(item)
 
         const saveData = {
           companyId: JSON.parse(item).companyId,
@@ -316,7 +316,7 @@ const ProfileCompany = () => {
         sklad,
         comment,
         //projects: JSON.stringify(projectsArr),
-        managers: JSON.stringify(managersObjArr),
+        managers: strManagersObj,
         dogovorDate, 
         dogovorNumber, 
         bugalterFio, 
@@ -417,37 +417,33 @@ const ProfileCompany = () => {
 
     setManagersObj((managersObj) => {                                           
       const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-      const userObject = JSON.parse(usersCopy[index]);
-      usersCopy[index] = JSON.stringify({ ...userObject, fio: e.target.value});		
+      //const userObject = JSON.parse(usersCopy[index]);
+      usersCopy[index] = e.target.value;		
       //console.log(usersCopy) 
       return usersCopy;
     });   
   }
 
   useEffect(()=> {
-    //console.log("managersObj: ", managersObj)
+    console.log("managersObj: ", managersObj)
   }, [managersObj])
 
   //добавить менеджера
   const addManager = () => {
     
     //console.log("managersObj: ", managersObj)
-    const obj = {id: '', chatId: '', fio: '', companyId: ''}
+    //const obj = {id: '', chatId: '', fio: '', companyId: ''}
     setManagersObj([ // with a new array
       ...managersObj, // that contains all the old items
-      JSON.stringify(obj) // and one new item at the end
+      'id/email' // and one new item at the end
     ])
-    // console.log([ // with a new array
-    //   ...managersObj, // that contains all the old items
-    //   JSON.stringify(obj) // and one new item at the end
-    // ])
   }
 
   //удалить менеджера
   const deleteManager = (item) => {
     setManagersObj(
       managersObj.filter(a =>
-        a.id !== item.id
+        a !== item
       )
     );
   }
@@ -643,7 +639,7 @@ const ProfileCompany = () => {
                                     {managersObj.map((item, index) => (
                                     <div className="text-field" key={index} style={{position: 'relative'}}>
                                       <div className="text-field">
-                                        <input className="text-field__input" type="text" name="email" id="email" value={JSON.parse(item).email} style={{width: '280px', marginTop: '45px'}}/>
+                                        <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{width: '280px', marginTop: '45px'}}/>
                                       </div> 
                                       <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img>
                                     </div>)
