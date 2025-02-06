@@ -1136,7 +1136,7 @@ const Specialist = () => {
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     /> */}
-                                    <input className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value)} style={{width: '250px'}}/>
+                                    <input className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value.replace(/[А-Яа-я]/g, ''))} style={{width: '250px'}}/>
                                   </div> 
 
 
