@@ -144,6 +144,8 @@ const ProfileCompany = () => {
   const [contragent2, setContragent2] = useState('Тест2')
   const [contragent3, setContragent3] = useState('Тест3')
 
+  const [rekviziti, setRekviziti] = useState('');
+
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
   const [countPressCity, setCountPressCity] = useState(0);
@@ -267,6 +269,21 @@ const ProfileCompany = () => {
   const saveProfile = async(id) => { 
       setShowClose(true)
       console.log("managersObj: ", managersObj)
+
+      //реквизиты
+      const strRek = JSON.stringify({
+        inn,
+        raschet,
+        corschet,
+        bik,
+        ogrn,
+        bank,
+        phoneK,
+        emailK,
+        urAddress,
+      })
+      console.log("реквизиты", strRek)
+      setRekviziti(strRek)
   
   
       let managersArr = []
@@ -281,6 +298,7 @@ const ProfileCompany = () => {
 
       let managersObjArr = []
       let strManagersObj = ''
+      
       managersObj.map(async(item, index)=> {
         // const obj = {
         //   name: JSON.parse(item).id,
@@ -326,6 +344,7 @@ const ProfileCompany = () => {
         profile,
         sfera,
         comteg,
+        rekviziti: strRek,
       }
       console.log("saveData: ", saveData)
   
@@ -352,6 +371,7 @@ const ProfileCompany = () => {
           profile,
           sfera,
           comteg,
+          rekviziti: strRek,
         };
   
         console.log("update user: ", usersCopy[userIndex])
