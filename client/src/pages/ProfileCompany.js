@@ -144,6 +144,7 @@ const ProfileCompany = () => {
   const [contragent2, setContragent2] = useState('Тест2')
   const [contragent3, setContragent3] = useState('Тест3')
 
+  const [mans, setMans] = useState([])
   const [rekviziti, setRekviziti] = useState('');
 
   const [countPress, setCountPress] = useState(0);
@@ -295,6 +296,15 @@ const ProfileCompany = () => {
       })
       console.log("реквизиты", strRek)
       setRekviziti(strRek)
+
+      //реквизиты
+      const strMan = JSON.stringify({
+        email: mans[0].email,
+        fio: mans[0].fio,
+        dolgnost: mans[0].dolgnost,
+        phone: mans[0].phone,
+      })
+      console.log("менеджеры", strMan)
   
   
       let managersArr = []
@@ -491,7 +501,7 @@ const ProfileCompany = () => {
         <AppHeader />
         <div className="body flex-grow-1 px-3">
 
-          <CContainer lg>
+        <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>
                   {/* <h2>Менеджеры</h2> */}
                   <CToaster ref={toaster} push={toast} placement="top-end" /> 
@@ -563,6 +573,28 @@ const ProfileCompany = () => {
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
                                                                     <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                                              </div>
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
+
+                                  {showManagers ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>Почта / 01</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].email} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Почта / 02</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].email} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Почта / 03</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].email} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>
                                                             </>
@@ -746,6 +778,28 @@ const ProfileCompany = () => {
                                                             ''
                                   )}
 
+                                  {showManagers ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>ФИО</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].fio} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>ФИО</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>ФИО</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                                              </div>
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
+
                                 </div>
 
 {/* 3 */}
@@ -778,17 +832,17 @@ const ProfileCompany = () => {
 
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
-                                  <div className="text-field" style={{marginBottom: showManagers ? '45px' : '20px'}}> 
+                                  <div className="text-field" style={{marginBottom: '20px'}}> 
                                     <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
                                   </div>
 
                                   {/* + добавить менеджера */}
-                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
+                                  {/* <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
                                     <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginBottom: '20px', marginLeft: '0'}}>
                                       <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
                                       +</span>
                                     </CButton>
-                                  </div>   
+                                  </div>    */}
 
                                   <div style={{position: 'relative'}}>
                                     <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
@@ -862,6 +916,28 @@ const ProfileCompany = () => {
                                                             ''
                                   )}
 
+                                  {showManagers ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                  <div >
+                                                                    <label className='title-label'>Должность</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Должность</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Должность</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                                              </div>
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
+
 
                                 </div>
 
@@ -870,7 +946,7 @@ const ProfileCompany = () => {
                                   
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '100%', height: showManagers ? '380px' : '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
@@ -910,6 +986,28 @@ const ProfileCompany = () => {
                                                           ) : (
                                                             ''
                                                           )}
+
+                                  {showManagers ? (
+                                                            <>
+                                                              <div className="div7">
+                                                                  <div style={{ marginTop: '5px' }}>
+                                                                    <label className='title-label'>Телефон</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].phone} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Телефон</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Телефон</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div>
+                                                              </div>
+                                                            </>
+                                                          ) : (
+                                                            ''
+                                  )}
                                   
                                 </div>
 
