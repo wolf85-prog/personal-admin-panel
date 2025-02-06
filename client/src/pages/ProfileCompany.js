@@ -658,17 +658,53 @@ const ProfileCompany = () => {
 
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>ИНН</label>
-                                                                    <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e)=>setInn(e.target.value)} style={{ height: '40px' }} />
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="inn" 
+                                                                        id="inn"
+                                                                        mask="999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setInn(e.target.value)} 
+                                                                        value={inn}
+                                                                        placeholder=''
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e)=>setInn(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Расчетный счет</label>
-                                                                    <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} />
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="raschet" 
+                                                                        id="raschet"
+                                                                        mask="40999999999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setRaschet(e.target.value)} 
+                                                                        value={raschet}
+                                                                        placeholder=''
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Корреспондентский счет</label>
-                                                                    <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} />
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="corschet" 
+                                                                        id="corschet"
+                                                                        mask="30199999999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setCorschet(e.target.value)} 
+                                                                        value={corschet}
+                                                                        placeholder=''
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                    
@@ -751,12 +787,36 @@ const ProfileCompany = () => {
                                                                 <div>
                                                                   <div style={{ marginTop: '4px' }}>
                                                                     <label className='title-label'>БИК</label>
-                                                                    <input className="text-field__input" type="text" name="bik" id="bik" value={bik} onChange={(e)=>setBik(e.target.value)} style={{ height: '40px' }} />
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="bik" 
+                                                                        id="bik"
+                                                                        mask="049999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setBik(e.target.value)} 
+                                                                        value={bik}
+                                                                        placeholder=''
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="bik" id="bik" value={bik} onChange={(e)=>setBik(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>ОГРН</label>
-                                                                    <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} />
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="ogrn" 
+                                                                        id="ogrn"
+                                                                        mask="999999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setOgrn(e.target.value)} 
+                                                                        value={ogrn}
+                                                                        placeholder=''
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Банк</label>
@@ -789,7 +849,19 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                 <div style={{ marginTop: '5px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} />
+                                                                    <InputMask
+                                                                      className="text-field__input" 
+                                                                      type="text" 
+                                                                      name="phoneK" 
+                                                                      id="phoneK"
+                                                                      mask="+7 (999) 999-99-99"
+                                                                      maskChar=""
+                                                                      onChange={(e) => setPhoneK(e.target.value)} 
+                                                                      value={phoneK}
+                                                                      placeholder=''
+                                                                  >
+                                                                  </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
