@@ -212,6 +212,17 @@ const ProfileCompany = () => {
       const result = await getCompanyProfId(userId)
       console.log("Company: ", result, userId)
 
+      const objRekviz = result ? JSON.parse(result.rekviziti) : ''
+      console.log("objRekviz: ", objRekviz)
+      setInn(objRekviz?.inn)
+      setRaschet(objRekviz?.raschet)
+      setCorschet(objRekviz?.corschet)
+      setBik(objRekviz?.bik)
+      setOgrn(objRekviz?.ogrn)
+      setBank(objRekviz?.bank)
+      setPhoneK(objRekviz?.phoneK)
+      setEmailK(objRekviz?.emailK)
+      setUrAddress(objRekviz?.urAddress)
 
       setId(result?.id)
       setTitle(result?.title)
@@ -307,7 +318,7 @@ const ProfileCompany = () => {
         managersObjArr.push(item)
 
         const saveData = {
-          companyId: JSON.parse(item).companyId,
+          companyId: '',//JSON.parse(item).companyId,
           title, 
           city,
           office,
@@ -321,7 +332,7 @@ const ProfileCompany = () => {
         console.log("saveCompany: ", saveData)
 
         //сохранить изменения в базе
-        await editCompany(saveData, JSON.parse(item).id)
+        //await editCompany(saveData, JSON.parse(item).id)
       })
       console.log(managersObjArr)
 
