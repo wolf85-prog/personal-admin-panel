@@ -525,22 +525,25 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{'01.01.' + workerCall.year_of_birth.split('.')[0]}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity ? workerCall.sity : (workerCall.city ? workerCall.city : '')}</span>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             Проекты: {workerCall.projects ? workerCall.projects : '0'}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {workerCall.worklist}
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
+                            Возраст: { workerCall?.year_of_birth ? parseInt(new Date().getFullYear()) - parseInt(workerCall?.year_of_birth?.split('-')[0]) : ''}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
+                            {workerCall.specialities}
+                          </li>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             {workerCall?.skill}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          {/* <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             {workerCall?.comment && JSON.parse(workerCall?.comment)[0].content}
-                          </li>
+                          </li> */}
                         </ul>    
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
@@ -600,16 +603,16 @@ const AppHeader = (props) => {
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod?.dateborn ? '01.01.'+ workerIshod?.dateborn.split('-')[0] : ''}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             Проекты: {workerIshod.projects ? workerIshod.projects : '0'}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             Возраст: { workerIshod?.dateborn ? parseInt(new Date().getFullYear()) - parseInt(workerIshod?.dateborn?.split('-')[0]) : ''}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             {workerIshod.worklist}
                           </li>
-                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
+                          <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             {workerIshod?.skill}
                           </li>
                           {/* <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
@@ -677,8 +680,8 @@ const AppHeader = (props) => {
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerIshod?.dateborn ? '01.01.'+ workerIshod?.dateborn.split('-')[0] : ''}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerIshod?.city}</span>
 
-                        <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center', marginTop: '4%'}}>ВНИМАНИЕ!</span>
-                        <span style={{fontSize: '23px', color: '#858585', fontWeight: '700', textAlign: 'center'}}>Роботизированная система оповещения
+                        <span style={{fontSize: '23px', color: 'rgb(51 146 255)', fontWeight: '700', textAlign: 'center', marginTop: '4%'}}>ВНИМАНИЕ!</span>
+                        <span style={{fontSize: '23px', color: 'rgb(51 146 255)', fontWeight: '700', textAlign: 'center'}}>Роботизированная система оповещения
                         активирована!</span>
                         
                       </div>
