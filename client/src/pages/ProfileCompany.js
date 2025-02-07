@@ -110,6 +110,7 @@ const ProfileCompany = () => {
   const [dateReg, setDateReg] = useState('');
   const [profile, setProfile] = useState('');
   const [projects, setProjects] = useState('');
+
   const [inn, setInn] = useState('');
   const [raschet, setRaschet] = useState('');
   const [corschet, setCorschet] = useState('');
@@ -119,6 +120,16 @@ const ProfileCompany = () => {
   const [phoneK, setPhoneK] = useState('');
   const [emailK, setEmailK] = useState('');
   const [urAddress, setUrAddress] = useState('');
+
+  const [innEr, setInnEr] = useState(false);
+  const [raschetEr, setRaschetEr] = useState(false);
+  const [corschetEr, setCorschetEr] = useState(false);
+  const [bikEr, setBikEr] = useState(false);
+  const [ogrnEr, setOgrnEr] = useState(false);
+  const [bankEr, setBankEr] = useState(false);
+  const [phoneKEr, setPhoneKEr] = useState(false);
+  const [emailKEr, setEmailKEr] = useState(false);
+  const [urAddressEr, setUrAddressEr] = useState(false);
 
   const [inn2, setInn2] = useState('');
   const [raschet2, setRaschet2] = useState('');
@@ -158,6 +169,9 @@ const ProfileCompany = () => {
   const [showManagers, setShowManagers] = useState(false)
   const [showClearCity, setShowClearCity] = useState(false)
   const [showRekviz, setShowRekviz] = useState(false)
+  const [showSave, setShowSave] = useState(true)
+
+  const [showModal, setShowModal] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
@@ -279,109 +293,129 @@ const ProfileCompany = () => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
-      setShowClose(true)
+      
+      //setShowClose(true)
       console.log("managersObj: ", managersObj)
 
-      //реквизиты
-      const strRek = JSON.stringify({
-        inn,
-        raschet,
-        corschet,
-        bik,
-        ogrn,
-        bank,
-        phoneK,
-        emailK,
-        urAddress,
-      })
-      console.log("реквизиты", strRek)
-      setRekviziti(strRek)
-
-      //реквизиты
-      const strMan = JSON.stringify({
-        email: mans[0].email,
-        fio: mans[0].fio,
-        dolgnost: mans[0].dolgnost,
-        phone: mans[0].phone,
-      })
-      console.log("менеджеры", strMan)
-  
-  
-      let managersArr = []
-      let strManagers = ''
-      managers.map((item, index)=> {
-        // const obj = {
-        //   name: item,
-        // }
-        strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
-        managersArr.push(item)
-      })
-
-      let managersObjArr = []
-      let strManagersObj = ''
-      
-      managersObj.map(async(item, index)=> {
-        // const obj = {
-        //   name: JSON.parse(item).id,
-        // }
-        strManagersObj = strManagersObj + item + (index+1 !== managersObj.length ? ', ' : '')
-        managersObjArr.push(item)
-
-        const saveData = {
-          companyId: '',//JSON.parse(item).companyId,
-          title, 
-          city,
-          office,
-          sklad,
-          comment,
-          sfera,
-          comteg,
-          profile,
-        }
-
-        console.log("saveCompany: ", saveData)
-
-        //сохранить изменения в базе
-        //await editCompany(saveData, JSON.parse(item).id)
-      })
-      console.log(managersObjArr)
-
-  
-      const saveData = { 
-        userId,  
-        title, 
-        city,
-        office,
-        sklad,
-        comment,
-        //projects: JSON.stringify(projectsArr),
-        managers: strManagersObj,
-        dogovorDate, 
-        dogovorNumber, 
-        bugalterFio, 
-        bugalterEmail,
-        bugalterPhone,  
-        inn, //инн компании
-        profile,
-        sfera,
-        comteg,
-        rekviziti: strRek,
+      if (bank.length === 0) {
+        setBankEr(true)
+        setShowSave(false)
       }
-      console.log("saveData: ", saveData)
-  
-      setCompanys((companys) => {	
-  
-        let userIndex = companys.findIndex((comp) => comp.id === id);
-        const usersCopy = JSON.parse(JSON.stringify(companys));
-  
-        const userObject = usersCopy[userIndex];
-        usersCopy[userIndex] = { ...userObject, 
+
+      if (inn.length < 10) {
+        setInnEr(true)
+        setShowSave(false)
+      }
+
+      if (raschet.length < 20) {
+        setRaschetEr(true)
+        setShowSave(false)
+      }
+
+      if (corschet.length < 10) {
+        setCorschetEr(true)
+      }
+
+      if (bik.length < 9) {
+        setBikEr(true)
+        setShowSave(false)
+      }
+
+      if (ogrn.length < 13) {
+        setOgrnEr(true)
+        setShowSave(false)
+      }
+
+      if (phoneK.length < 11) {
+        setPhoneKEr(true)
+        setShowSave(false)
+      }
+
+
+      if (bank.length > 0 && 
+        inn.length >= 10 && 
+        raschet.length >= 20 && 
+        corschet.length >= 10 && 
+        bik.length >= 9 &&
+        ogrn.length >= 13 &&
+        phoneK.length >= 11 || 
+        role !== '1') {
+        setShowSave(true)
+        setShowModal(true)
+
+        //реквизиты
+        const strRek = JSON.stringify({
+          inn,
+          raschet,
+          corschet,
+          bik,
+          ogrn,
+          bank,
+          phoneK,
+          emailK,
+          urAddress,
+        })
+        console.log("реквизиты", strRek)
+        setRekviziti(strRek)
+
+        //реквизиты
+        const strMan = JSON.stringify({
+          email: mans[0]?.email,
+          fio: mans[0]?.fio,
+          dolgnost: mans[0]?.dolgnost,
+          phone: mans[0]?.phone,
+        })
+        console.log("менеджеры", strMan)
+    
+    
+        let managersArr = []
+        let strManagers = ''
+        managers.map((item, index)=> {
+          // const obj = {
+          //   name: item,
+          // }
+          strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
+          managersArr.push(item)
+        })
+
+        let managersObjArr = []
+        let strManagersObj = ''
+        
+        managersObj.map(async(item, index)=> {
+          // const obj = {
+          //   name: JSON.parse(item).id,
+          // }
+          strManagersObj = strManagersObj + item + (index+1 !== managersObj.length ? ', ' : '')
+          managersObjArr.push(item)
+
+          const saveData = {
+            companyId: '',//JSON.parse(item).companyId,
+            title, 
+            city,
+            office,
+            sklad,
+            comment,
+            sfera,
+            comteg,
+            profile,
+          }
+
+          console.log("saveCompany: ", saveData)
+
+          //сохранить изменения в базе
+          //await editCompany(saveData, JSON.parse(item).id)
+        })
+        console.log(managersObjArr)
+
+    
+        const saveData = { 
+          userId,  
           title, 
           city,
           office,
           sklad,
           comment,
-          projects,
+          //projects: JSON.stringify(projectsArr),
           managers: strManagersObj,
           dogovorDate, 
           dogovorNumber, 
@@ -393,42 +427,78 @@ const ProfileCompany = () => {
           sfera,
           comteg,
           rekviziti: strRek,
-        };
-  
-        console.log("update user: ", usersCopy[userIndex])
-  
-        return usersCopy;
-      });
+        }
+        console.log("saveData: ", saveData)
+    
+        setCompanys((companys) => {	
+    
+          let userIndex = companys.findIndex((comp) => comp.id === id);
+          const usersCopy = JSON.parse(JSON.stringify(companys));
+    
+          const userObject = usersCopy[userIndex];
+          usersCopy[userIndex] = { ...userObject, 
+            title, 
+            city,
+            office,
+            sklad,
+            comment,
+            projects,
+            managers: strManagersObj,
+            dogovorDate, 
+            dogovorNumber, 
+            bugalterFio, 
+            bugalterEmail,
+            bugalterPhone,  
+            inn, //инн компании
+            profile,
+            sfera,
+            comteg,
+            rekviziti: strRek,
+          };
+    
+          console.log("update user: ", usersCopy[userIndex])
+    
+          return usersCopy;
+        });
 
 
-      const result = await getCompanyProfId(userId)
-      console.log("Company: ", result)
+        const result = await getCompanyProfId(userId)
+        console.log("Company: ", result)
 
-      const saveData2 = { 
-        companyId: result?.id
-      }
-      
-      if (!result) {
-        const resAdd = await addCompanyProf(saveData)
-
-        //добавить Id компании в профиль
-        const result2 = await getManagerId(userId)
-        const resAdd2 = await editManager(saveData2, result2?.id)
+        const saveData2 = { 
+          companyId: result?.id
+        }
         
+        if (!result) {
+          const resAdd = await addCompanyProf(saveData)
+
+          //добавить Id компании в профиль
+          const result2 = await getManagerId(userId)
+          const resAdd2 = await editManager(saveData2, result2?.id)
+          
+        } else {
+          //сохранить изменения в базе
+          const resUpdate = await editCompanyProf(saveData, result?.id)
+
+          //добавить Id компании в профиль
+          const result2 = await getManagerId(userId)
+          const resAdd2 = await editManager(saveData2, result2?.id)
+        }
+    
+        //addToast(exampleToast) //ваши данные сохранены
+
+        setTimeout(()=> {
+          setShowModal(false)
+          closeProfile()
+        }, 2000)  
+
       } else {
-        //сохранить изменения в базе
-        const resUpdate = await editCompanyProf(saveData, result?.id)
+        setShowModal(true)
 
-        //добавить Id компании в профиль
-        const result2 = await getManagerId(userId)
-        const resAdd2 = await editManager(saveData2, result2?.id)
+        setTimeout(()=> {
+          setShowModal(false)
+        }, 2000)
       }
-  
-      addToast(exampleToast) //ваши данные сохранены
-
-      setTimeout(()=> {
-        closeProfile()
-      }, 2000)
   }
   
   const blockedProfile = () => { 
@@ -436,12 +506,6 @@ const ProfileCompany = () => {
   }
 
   const closeProfile = () => { 
-    // setShowProfile(false)
-    // setShowClose(false)
-    // setShowSearch(true)
-
-    // setShowClear(true)
-    // setFilePreview('')
 
     navigate("/dashboard")
   }
@@ -731,6 +795,7 @@ const ProfileCompany = () => {
                                                                         onChange={(e) => setInn(e.target.value)} 
                                                                         value={inn}
                                                                         placeholder=''
+                                                                        style={{borderColor: innEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e)=>setInn(e.target.value)} style={{ height: '40px' }} /> */}
@@ -743,11 +808,12 @@ const ProfileCompany = () => {
                                                                         type="text" 
                                                                         name="raschet" 
                                                                         id="raschet"
-                                                                        mask="40999999999999999999"
+                                                                        mask="99999999999999999999"
                                                                         maskChar=""
                                                                         onChange={(e) => setRaschet(e.target.value)} 
                                                                         value={raschet}
                                                                         placeholder=''
+                                                                        style={{borderColor: raschetEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} /> */}
@@ -760,11 +826,12 @@ const ProfileCompany = () => {
                                                                         type="text" 
                                                                         name="corschet" 
                                                                         id="corschet"
-                                                                        mask="30199999999999999999"
+                                                                        mask="99999999999999999999"
                                                                         maskChar=""
                                                                         onChange={(e) => setCorschet(e.target.value)} 
                                                                         value={corschet}
                                                                         placeholder=''
+                                                                        style={{borderColor: corschetEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} /> */}
@@ -877,11 +944,12 @@ const ProfileCompany = () => {
                                                                         type="text" 
                                                                         name="bik" 
                                                                         id="bik"
-                                                                        mask="049999999"
+                                                                        mask="999999999"
                                                                         maskChar=""
                                                                         onChange={(e) => setBik(e.target.value)} 
                                                                         value={bik}
                                                                         placeholder=''
+                                                                        style={{borderColor: bikEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="bik" id="bik" value={bik} onChange={(e)=>setBik(e.target.value)} style={{ height: '40px' }} /> */}
@@ -899,13 +967,20 @@ const ProfileCompany = () => {
                                                                         onChange={(e) => setOgrn(e.target.value)} 
                                                                         value={ogrn}
                                                                         placeholder=''
+                                                                        style={{borderColor: ogrnEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Банк</label>
-                                                                    <input className="text-field__input" type="text" name="bank" id="bank" value={bank} onChange={(e)=>setBank(e.target.value)} style={{ height: '40px' }} />
+                                                                    <input 
+                                                                      className="text-field__input" 
+                                                                      type="text" name="bank" id="bank" 
+                                                                      value={bank} 
+                                                                      onChange={(e)=>setBank(e.target.value)} 
+                                                                      style={{ height: '40px', borderColor: bankEr ? 'red' : '' }} 
+                                                                    />
                                                                   </div>
 
                                                                 </div>
@@ -966,6 +1041,7 @@ const ProfileCompany = () => {
                                                                       onChange={(e) => setPhoneK(e.target.value)} 
                                                                       value={phoneK}
                                                                       placeholder=''
+                                                                      style={{borderColor: phoneKEr ? 'red' : '' }}
                                                                   >
                                                                   </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} /> */}
@@ -1018,6 +1094,17 @@ const ProfileCompany = () => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+                    <CModal
+                                          alignment="center"
+                                          visible={showModal}
+                                          onClose={() => setShowModal(false)}
+                                          aria-labelledby="VerticallyCenteredExample"
+                                        >
+                                          <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                                            {showSave ? 'Данные успешно сохранены' : 'Некорректно заполненные данные!'}
+                                          </CModalBody>
+                                        </CModal>
                   
                 </Suspense>
             </CContainer>
