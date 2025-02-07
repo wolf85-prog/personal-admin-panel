@@ -528,7 +528,7 @@ const AppHeader = (props) => {
                           <img className='star-icon' src={Star} width={25} alt='' />
                           <img className='star-icon' src={Star} width={25} alt='' />
                         </div>
-                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth ? '01.01.' + workerCall.year_of_birth.split('.')[0] : ''}</span>
+                        <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '10px'}}>{workerCall.year_of_birth}</span>
                         <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{workerCall.sity ? workerCall.sity : (workerCall.city ? workerCall.city : '')}</span>
                         
                         <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
@@ -536,7 +536,7 @@ const AppHeader = (props) => {
                             Проекты: {workerCall.projects ? workerCall.projects : '0'}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
-                            Возраст: { workerCall?.year_of_birth ? parseInt(new Date().getFullYear()) - parseInt(workerCall?.year_of_birth?.split('-')[0]) : ''}
+                            Возраст: { workerCall?.year_of_birth ? parseInt(new Date().getFullYear()) - parseInt(workerCall?.year_of_birth?.split('.')[2]) : ''}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
                             {workerCall.specialities}
