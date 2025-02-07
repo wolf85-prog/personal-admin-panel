@@ -717,10 +717,10 @@ ${loc.url}`;
     });
 
 
-    setTimeout(()=> {
+    setTimeout(()=> {     
       setShowModal(false)
       closeProfile()
-    }, 500)
+    }, 2000)
   }
 
   const closeProfile = () => {
@@ -2360,8 +2360,8 @@ ${loc.url}`;
                       onClose={() => setShowModal(false)}
                       aria-labelledby="VerticallyCenteredExample"
                     >
-                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
-                        Идёт сохранение данных...
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
                       </CModalBody>
                     </CModal>
 

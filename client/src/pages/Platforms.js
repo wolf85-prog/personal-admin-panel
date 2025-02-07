@@ -299,7 +299,7 @@ const openPlatform = (resPlatform) => {
   setTimeout(()=> {
     setShowModal(false)
     closeProfile()
-  }, 500)
+  }, 2000)
  
 }
 
@@ -876,8 +876,8 @@ const onSortAddress = () => {
                       onClose={() => setShowModal(false)}
                       aria-labelledby="VerticallyCenteredExample"
                     >
-                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
-                        Данные успешно сохранены!
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
                       </CModalBody>
                     </CModal>
 

@@ -584,16 +584,16 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <label className='title-label'>Почта / 01</label>
+                                                                    <label className='title-label'>Почта / ID</label>
                                                                     <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].email} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Почта / 02</label>
+                                                                    <label className='title-label'>Почта / ID</label>
                                                                     <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].email} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Почта / 03</label>
+                                                                    <label className='title-label'>Почта / ID</label>
                                                                     <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].email} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>

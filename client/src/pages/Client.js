@@ -115,6 +115,7 @@ const Client = () => {
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const [clientId, setClientId] = useState('');
   const [id, setId] = useState('');
@@ -549,7 +550,11 @@ const Client = () => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
-    setShowClose(true)
+
+    //Toast
+    setShowModal(true)
+
+    //setShowClose(true)
     console.log(id)
 
 
@@ -615,12 +620,12 @@ const Client = () => {
     //сохранить изменения в базе
     await editClient(saveData, id)
 
-    addToast(exampleToast) //ваши данные сохранены
+    //addToast(exampleToast) //ваши данные сохранены
 
     setTimeout(()=> {
-      //setShowModal(false)
+      setShowModal(false)
       closeProfile()
-    }, 500)
+    }, 2000)
   }
 
   const blockedProfile = () => { 
@@ -1291,6 +1296,17 @@ const Client = () => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
+                      </CModalBody>
+                    </CModal>
 
                     <CModal
                       backdrop="static"
