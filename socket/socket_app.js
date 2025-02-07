@@ -270,6 +270,7 @@ io.on("connection", (socket) => {
         comtags, foto, phone, skill,comment,city,dolgnost,sfera,comteg,company,})=>{
         io.emit("getNotif", {
             task,
+            id,
             tg_id,
             fio,
             sity,
