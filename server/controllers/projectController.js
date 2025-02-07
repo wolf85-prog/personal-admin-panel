@@ -4,6 +4,26 @@ const sequelize = require('../db')
 const { Op, QueryTypes  } = require('sequelize')
 
 class ProjectController {
+    async getProjectsByDate(req, res) {
+        const { dateFilter } = req.body;
+        console.log(dateFilter)
+        console.log(dayjs(dateFilter))
+        
+        try {     
+    
+          const projects = await Project.findAll({
+            order: [["id", "DESC"]],
+            where: {
+              updatedAt: {
+                [Op.gte]: Date.parse(dateFilter),
+              },
+            },
+          });
+          return res.status(200).json(projects);
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+      }
 
     async getProjects(req, res) {
         try {

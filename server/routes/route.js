@@ -16,7 +16,7 @@ const { newConversationWorker, getConversationWorker, getConversationsW } = requ
 const { getProjectsAll, 
     getProjectsDelete, getProjectId, 
     getProjectCreate, getProjectUpdate, 
-    getProjectDel, getProjectChatId } = require('../controllers/projectController')
+    getProjectDel, getProjectChatId, getProjectsByDate} = require('../controllers/projectController')
 
 const { getSpecialistAll, getSpecialist, getSpecCount, editSpecialist, 
     getSpecialistId, addSpecialist, deleteSpecialist, 
@@ -103,6 +103,7 @@ route.post('/projects/add', getProjectCreate)
 route.patch('/projects/update/:id', getProjectUpdate)
 route.get('/projects/delete/:id', getProjectDel)
 route.get('/projects/chat/get/:id', getProjectChatId)
+route.post('/projects/get', getProjectsByDate)
 
 
 
