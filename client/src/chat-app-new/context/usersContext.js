@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { useSocketContext } from "./socketContext";
 
-import { getClient, getClientCount } from "./../../http/clientAPI"
+import { getClient, getClientId, getClientCount } from "./../../http/clientAPI"
 
 import { addManager, getManagerId, editManager } from 'src/http/managerAPI';
 
@@ -11,7 +11,7 @@ import { getAllMessages, getContacts, getConversation, getConversations, getMess
 import { getWContacts, getWConversations, getWMessages, getWorkers, getWorker, getAllWMessages, 
 	getWMessagesCount, getWorkersCount} from '../../http/workerAPI' 
 
-import { getSpecialist, getSpecialistChatId} from '../../http/specAPI' 
+import { getSpecialist, getSpecialistId, getSpecialistChatId} from '../../http/specAPI' 
 
 import { getCompany } from '../../http/companyAPI'
 
@@ -1673,6 +1673,7 @@ function isObjectEmpty(obj) {
 const fetchNotifAdmin = async (dataAll) => {
 	console.log("Получено уведомление: ", dataAll)
 	const { task, 
+		id,
 		tg_id,
 		fio,
 		sity,
@@ -1719,9 +1720,10 @@ const fetchNotifAdmin = async (dataAll) => {
 		const user = localStorage.getItem('user')
 		console.log("userId: ", JSON.parse(user)?.id)
 
-		const worker = await getSpecialist(JSON.parse(user)?.id)
+		const worker = await getSpecialistId(id)
 		console.log("worker: ", worker)
 		setWorkerCall({
+			id,
 			tg_id,
 			fio,
             sity,
@@ -1735,6 +1737,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			avatar: worker?.profile,
 		})
 		console.log("workerCall:", {
+			id,
 			tg_id,
 			fio,
             sity,
@@ -1768,9 +1771,11 @@ const fetchNotifAdmin = async (dataAll) => {
 	else if (task === 202) {
 		const user = localStorage.getItem('user')
 		console.log("userId: ", JSON.parse(user)?.id)
-		const client = await getClient(JSON.parse(user)?.id)		
+		const client = await getClientId(id)
+
 		console.log("client: ", client)
 		setClientCall({
+			id,
 			tg_id,
 			fio,
             city,
@@ -1784,6 +1789,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			avatar: client?.profile,
 		})
 		console.log("ClientCall:", {
+			id,
 			tg_id,
 			fio,
             city,
