@@ -627,16 +627,19 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{ height: '40px', cursor: 'pointer' }}>{contragent1}</div>
+                                                                    {/* <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <div onClick={()=>changeKontra(2)} className="py-2 uley-data-main" style={{ height: '40px', cursor: 'pointer' }}>{contragent2}</div>
+                                                                    {/* <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <div onClick={()=>changeKontra(3)} style={{ height: '40px', cursor: 'pointer' }} className="py-2 uley-data-main">{contragent3}</div>
+                                                                    {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                                               </div>
                                                             </>
