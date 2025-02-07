@@ -266,7 +266,7 @@ io.on("connection", (socket) => {
     // Notifications
     //------------------------------------------------------------------
     //send and get message in workers
-    socket.on("sendNotif", ({task, tg_id, fio, sity, year_of_birth, rating, projects, specialities, 
+    socket.on("sendNotif", ({task, id, tg_id, fio, sity, year_of_birth, rating, projects, specialities, 
         comtags, foto, phone, skill,comment,city,dolgnost,sfera,comteg,company,})=>{
         io.emit("getNotif", {
             task,
