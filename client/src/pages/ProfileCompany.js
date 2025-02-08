@@ -652,16 +652,16 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].email} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].email} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.email} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].email} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.email} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>
                                                             </>
@@ -853,16 +853,16 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>ФИО</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].fio} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.fio} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>ФИО</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>ФИО</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>
                                                             </>
@@ -999,16 +999,16 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div >
                                                                     <label className='title-label'>Должность</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Должность</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Должность</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>
                                                             </>
@@ -1071,16 +1071,16 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '5px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0].phone} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.phone} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1].phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2].phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                                               </div>
                                                             </>
