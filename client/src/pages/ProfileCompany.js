@@ -131,6 +131,16 @@ const ProfileCompany = () => {
   const [emailKEr, setEmailKEr] = useState(false);
   const [urAddressEr, setUrAddressEr] = useState(false);
 
+  const [inn1, setInn1] = useState('');
+  const [raschet1, setRaschet1] = useState('');
+  const [corschet1, setCorschet1] = useState('');
+  const [bik1, setBik1] = useState('');
+  const [ogrn1, setOgrn1] = useState('');
+  const [bank1, setBank1] = useState('');
+  const [phoneK1, setPhoneK1] = useState('');
+  const [emailK1, setEmailK1] = useState('');
+  const [urAddress1, setUrAddress1] = useState('');
+
   const [inn2, setInn2] = useState('');
   const [raschet2, setRaschet2] = useState('');
   const [corschet2, setCorschet2] = useState('');
@@ -154,6 +164,8 @@ const ProfileCompany = () => {
   const [contragent1, setContragent1] = useState('Тест')
   const [contragent2, setContragent2] = useState('Тест2')
   const [contragent3, setContragent3] = useState('Тест3')
+
+  const [selectContr, setSelectContr] = useState(0);
 
   const [mans, setMans] = useState([])
   const [rekviziti, setRekviziti] = useState('');
@@ -344,17 +356,39 @@ const ProfileCompany = () => {
         setShowModal(true)
 
         //реквизиты
-        const strRek = JSON.stringify({
-          inn,
-          raschet,
-          corschet,
-          bik,
-          ogrn,
-          bank,
-          phoneK,
-          emailK,
-          urAddress,
+        let strRek = ''
+        strRek = JSON.stringify({
+            inn1,
+            raschet1,
+            corschet1,
+            bik1,
+            ogrn1,
+            bank1,
+            phoneK1,
+            emailK1,
+            urAddress1,
+
+            inn2,
+            raschet2,
+            corschet2,
+            bik2,
+            ogrn2,
+            bank2,
+            phoneK2,
+            emailK2,
+            urAddress2,
+
+            inn3,
+            raschet3,
+            corschet3,
+            bik3,
+            ogrn3,
+            bank3,
+            phoneK3,
+            emailK3,
+            urAddress3,
         })
+        
         console.log("реквизиты", strRek)
         setRekviziti(strRek)
 
@@ -555,7 +589,15 @@ const ProfileCompany = () => {
 
   const changeKontra = (item) => {
     console.log(item)
-    setInn(item)
+    setSelectContr(item)
+    if (item === 1) {
+      setInn(inn1)
+    } else if (item === 2) {
+      setInn(inn2)
+    } else if (item === 3) {
+      setInn(inn3)
+    }
+    
   }
 
   return (
@@ -627,18 +669,18 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{ height: '40px', cursor: 'pointer' }}>{contragent1}</div>
+                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
                                                                     {/* <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <div onClick={()=>changeKontra(2)} className="py-2 uley-data-main" style={{ height: '40px', cursor: 'pointer' }}>{contragent2}</div>
+                                                                    <div onClick={()=>changeKontra(2)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
                                                                     {/* <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <div onClick={()=>changeKontra(3)} style={{ height: '40px', cursor: 'pointer' }} className="py-2 uley-data-main">{contragent3}</div>
+                                                                    <div onClick={()=>changeKontra(3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
                                                                     {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                                               </div>
@@ -650,11 +692,36 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                  <div style={{ marginTop: '20px' }}>
+                                                              {managersObj && managersObj.length > 0 ? managersObj.map((item, index) => (
+                                                                <div className="text-field" key={index} style={{position: 'relative'}}>
+                                                                  <label className='title-label'>Почта / ID</label>
+                                                                  <div className="text-field">
+                                                                    <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{width: '280px', marginTop: '45px'}}/>
+                                                                  </div> 
+                                                                  {/* <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img> */}
+                                                                </div>)
+                                                                ) :
+                                                                <div style={{ marginTop: '20px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+                                                                  <div style={{width: '80%'}}>
                                                                     <label className='title-label'>Почта / ID</label>
                                                                     <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
-                                                                  </div>
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  </div> 
+                                                                  
+                                                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
+                                                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginLeft: '0'}}>
+                                                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
+                                                                      +</span>
+                                                                    </CButton>
+                                                                  </div> 
+                                                                </div>
+
+                                                                  
+                                                              }
+                                                                  {/* <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>Почта / ID</label>
+                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div> */}
+                                                                  {/* <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Почта / ID</label>
                                                                     <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.email} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
@@ -662,7 +729,7 @@ const ProfileCompany = () => {
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Почта / ID</label>
                                                                     <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.email} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
+                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -770,7 +837,7 @@ const ProfileCompany = () => {
                                     </span>
                                   </CButton>
 
-                                  <div style={{display: showManagers ? 'block' : 'none'}}>
+                                  {/* <div style={{display: showManagers ? 'block' : 'none'}}>
                                     {managersObj.map((item, index) => (
                                     <div className="text-field" key={index} style={{position: 'relative'}}>
                                       <div className="text-field">
@@ -779,7 +846,7 @@ const ProfileCompany = () => {
                                       <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img>
                                     </div>)
                                     )}
-                                  </div>
+                                  </div> */}
 
                                   {showRekviz ? (
                                                             <>
@@ -851,19 +918,22 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                  <div style={{ marginTop: '20px' }}>
+                                                                  {managersObj && managersObj.length > 0 ? 
+                                                                    <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>ФИО</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.fio} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.fio} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  :''
+                                                                  }
+                                                                  {/* <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>ФИО</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>ФИО</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -997,19 +1067,26 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                  <div >
+                                                                {managersObj && managersObj.length > 0 ? 
+                                                                    <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Должность</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  :''
+                                                                  }
+                                                                  {/* <div >
                                                                     <label className='title-label'>Должность</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div> */}
+                                                                  {/* <div style={{ marginTop: '22px' }}>
+                                                                    <label className='title-label'>Должность</label>
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Должность</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -1069,19 +1146,22 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                  <div style={{ marginTop: '5px' }}>
+                                                                {managersObj && managersObj.length > 0 ? 
+                                                                    <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.phone} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.phone} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  :''
+                                                                  }
+                                                                  {/* <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Телефон</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
+                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
