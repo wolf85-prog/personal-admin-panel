@@ -649,7 +649,7 @@ const ProfileCompany = () => {
                                           setShowManagers(false)
                                           setShowRekviz(!showRekviz)
                                         }
-                                      }} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
+                                      }} className='text-field uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -684,13 +684,21 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                               {managersObj && managersObj.length > 0 ? managersObj.map((item, index) => (
-                                                                <div className="text-field" key={index} style={{position: 'relative'}}>
-                                                                  <label className='title-label'>Почта / ID</label>
-                                                                  <div className="text-field">
-                                                                    <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{width: '280px', marginTop: '45px'}}/>
+                                                                <div key={index}  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                                  <div className="text-field" style={{position: 'relative', width: '80%'}}>
+                                                                    <label className='title-label'>Почта / ID</label>
+                                                                    <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
+                                                                    {/* <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img> */}
+                                                                  </div>
+                                                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none', marginTop: '4px'}}>
+                                                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginLeft: '0'}}>
+                                                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
+                                                                      +</span>
+                                                                    </CButton>
                                                                   </div> 
-                                                                  {/* <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img> */}
-                                                                </div>)
+                                                                </div>
+                                                                
+                                                                )
                                                                 ) :
                                                                 <div style={{ marginTop: '20px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                                                                   <div style={{width: '80%'}}>
@@ -1059,7 +1067,7 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                 {managersObj && managersObj.length > 0 ? 
-                                                                    <div style={{ marginTop: '20px' }}>
+                                                                  <div>
                                                                     <label className='title-label'>Должность</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
@@ -1138,7 +1146,7 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                 {managersObj && managersObj.length > 0 ? 
-                                                                    <div style={{ marginTop: '20px' }}>
+                                                                  <div>
                                                                     <label className='title-label'>Телефон</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.phone} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
