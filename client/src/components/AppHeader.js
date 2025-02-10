@@ -370,7 +370,7 @@ const AppHeader = (props) => {
                             {clientCall.sfera ? clientCall.sfera : ' '}
                           </li>
                           <li style={{fontSize: '16px', color: '#858585', paddingTop: '5px'}}>
-                            {clientCall.comment && JSON.parse(clientCall.comment)[0].content.length > 105 ? JSON.parse(clientCall.comment)[0].content.substr(0, 105) + '...' : JSON.parse(clientCall.comment)[0].content}
+                            {clientCall.comment && (JSON.parse(clientCall.comment)[0].conten > 50 ? JSON.parse(clientCall.comment)[0].content.substr(0, 50)+'...' : JSON.parse(clientCall.comment)[0].content)}
                           </li>
                         </ul>
                         <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '5px'}}>
