@@ -169,6 +169,7 @@ const ProfileCompany = () => {
 
   const [mans, setMans] = useState([])
   const [rekviziti, setRekviziti] = useState('');
+  const [objRekviz, setObjRekviz] = useState([]);
 
   const [countPress, setCountPress] = useState(0);
   const [countPressTG, setCountPressTG] = useState(0);
@@ -239,17 +240,18 @@ const ProfileCompany = () => {
       const result = await getCompanyProfId(userId)
       console.log("Company: ", result, userId)
 
-      const objRekviz = result ? JSON.parse(result.rekviziti) : ''
+      const objRekviz = result.rekviziti ? JSON.parse(result.rekviziti) : ''
+      setObjRekviz(objRekviz)
       console.log("objRekviz: ", objRekviz)
-      setInn(objRekviz?.inn)
-      setRaschet(objRekviz?.raschet)
-      setCorschet(objRekviz?.corschet)
-      setBik(objRekviz?.bik)
-      setOgrn(objRekviz?.ogrn)
-      setBank(objRekviz?.bank)
-      setPhoneK(objRekviz?.phoneK)
-      setEmailK(objRekviz?.emailK)
-      setUrAddress(objRekviz?.urAddress)
+      setInn(objRekviz[0]?.inn ? objRekviz[0]?.inn : '')
+      setRaschet(objRekviz[0]?.raschet ? objRekviz[0]?.raschet : '')
+      setCorschet(objRekviz[0]?.corschet ? objRekviz[0]?.corschet : '')
+      setBik(objRekviz[0]?.bik ? objRekviz[0]?.bik : '')
+      setOgrn(objRekviz[0]?.ogrn ? objRekviz[0]?.ogrn : '')
+      setBank(objRekviz[0]?.bank ? objRekviz[0]?.bank : '')
+      setPhoneK(objRekviz[0]?.phoneK ? objRekviz[0]?.phoneK : '')
+      setEmailK(objRekviz[0]?.emailK ? objRekviz[0]?.emailK : '')
+      setUrAddress(objRekviz[0]?.urAddress ? objRekviz[0]?.urAddress : '')
 
       setId(result?.id)
       setTitle(result?.title)
@@ -272,6 +274,19 @@ const ProfileCompany = () => {
     }
     fetchData()
   }, [])
+
+
+  useEffect(()=> {
+    setInn(objRekviz[selectContr]?.inn ? objRekviz[selectContr].inn : '')
+    setRaschet(objRekviz[selectContr]?.raschet ? objRekviz[selectContr]?.raschet : '')
+    setCorschet(objRekviz[selectContr]?.corschet ? objRekviz[selectContr]?.corschet : '')
+    setBik(objRekviz[selectContr]?.bik ? objRekviz[selectContr]?.bik : '')
+    setOgrn(objRekviz[selectContr]?.ogrn ? objRekviz[selectContr]?.ogrn : '')
+    setBank(objRekviz[selectContr]?.bank ? objRekviz[selectContr]?.bank : '')
+    setPhoneK(objRekviz[selectContr]?.phoneK ? objRekviz[selectContr]?.phoneK : '')
+    setEmailK(objRekviz[selectContr]?.emailK ? objRekviz[selectContr]?.emailK : '')
+    setUrAddress(objRekviz[selectContr]?.urAddress ? objRekviz[selectContr]?.urAddress : '')
+  }, [selectContr, objRekviz])
 
 
 //------ загрузить аватар-------------
@@ -308,6 +323,7 @@ const ProfileCompany = () => {
       
       //setShowClose(true)
       console.log("managersObj: ", managersObj)
+      console.log("bank: ", bank)
 
       if (bank.length === 0) {
         setBankEr(true)
@@ -357,42 +373,17 @@ const ProfileCompany = () => {
 
         //реквизиты
         let strRek = ''
-        strRek = JSON.stringify({
-            inn1,
-            raschet1,
-            corschet1,
-            bik1,
-            ogrn1,
-            bank1,
-            phoneK1,
-            emailK1,
-            urAddress1,
-
-            inn2,
-            raschet2,
-            corschet2,
-            bik2,
-            ogrn2,
-            bank2,
-            phoneK2,
-            emailK2,
-            urAddress2,
-
-            inn3,
-            raschet3,
-            corschet3,
-            bik3,
-            ogrn3,
-            bank3,
-            phoneK3,
-            emailK3,
-            urAddress3,
-        })
         
-        console.log("реквизиты", strRek)
-        setRekviziti(strRek)
+        let arr = []
 
-        //реквизиты
+        const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
+        const userObject = rekvizCopy[selectContr];
+			  rekvizCopy[selectContr] = { ...userObject, inn, raschet, corschet, bik, ogrn, bank, phoneK, emailK, urAddress};
+        
+        console.log("реквизиты", rekvizCopy)
+        setRekviziti(JSON.stringify(rekvizCopy))
+
+        //менеджеры
         const strMan = JSON.stringify({
           email: mans[0]?.email,
           fio: mans[0]?.fio,
@@ -460,7 +451,7 @@ const ProfileCompany = () => {
           profile,
           sfera,
           comteg,
-          rekviziti: strRek,
+          rekviziti: JSON.stringify(rekvizCopy),
         }
         console.log("saveData: ", saveData)
     
@@ -487,7 +478,7 @@ const ProfileCompany = () => {
             profile,
             sfera,
             comteg,
-            rekviziti: strRek,
+            rekviziti: JSON.stringify(rekvizCopy),
           };
     
           console.log("update user: ", usersCopy[userIndex])
@@ -590,13 +581,13 @@ const ProfileCompany = () => {
   const changeKontra = (item) => {
     console.log(item)
     setSelectContr(item)
-    if (item === 1) {
-      setInn(inn1)
-    } else if (item === 2) {
-      setInn(inn2)
-    } else if (item === 3) {
-      setInn(inn3)
-    }
+    // if (item === 0) {
+    //   setInn(inn1)
+    // } else if (item === 1) {
+    //   setInn(inn2)
+    // } else if (item === 2) {
+    //   setInn(inn3)
+    // }
     
   }
 
@@ -669,18 +660,18 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
+                                                                    <div onClick={()=>changeKontra(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 0 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
                                                                     {/* <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <div onClick={()=>changeKontra(2)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
+                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
                                                                     {/* <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '22px' }}>
                                                                     <label className='title-label'>Контрагент</label>
-                                                                    <div onClick={()=>changeKontra(3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
+                                                                    <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
                                                                     {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                                               </div>
