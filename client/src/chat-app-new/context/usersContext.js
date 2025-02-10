@@ -641,7 +641,7 @@ useEffect(() => {
 
 			//0 все специалисты
 			let all = await getWorkers(JSON.parse(user)?.id)
-			//console.log("Workers all: ", all)
+			console.log("Workers all: ", all)
 
 			const arrayWorkerAll = []
 		

@@ -137,15 +137,15 @@ const Contact = ({ contact, worker }) => {
 			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
 				{
 					contact.avatar
-					? <> {contact.blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+					? <> 
 						<img src={`${contact.avatar}`} alt='' onError={onImageError} className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
-					: <> {contact.blockW ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
+					: <> 
 						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 					</>
 				}
 				
-				{
+				{/* {
                     worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
                     <img src={avatarKrest} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
@@ -159,7 +159,7 @@ const Contact = ({ contact, worker }) => {
                     <img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
                     : "")
                     : ""
-                }
+                } */}
 
 				
 			</div>
