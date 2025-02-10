@@ -109,7 +109,7 @@ const UsersProvider = ({ children }) => {
 
 	const [conversations, setConversations] = useState([]); 
 	const [wconversations, setWConversations] = useState([]); 
-	const [sconversations, setSConversations] = useState([]); 
+	const [sconversation, setSConversation] = useState([]); 
 
 	const [wuserbots, setWuserbots] = useState([]); 
 
@@ -860,7 +860,7 @@ useEffect(() => {
 		//---------get UserClients-----------------------------------------
 		const fetchUserSupportData = async () => {
 			const user = localStorage.getItem('user')
-			//console.log("userId: ", JSON.parse(user)?.id)
+			console.log("userId: ", JSON.parse(user)?.id)
 				
 			//0 клиент ULEY
 
@@ -882,7 +882,7 @@ useEffect(() => {
 				comment: '',
 				comteg: '',
 			}
-			console.log("newClient ULEY: ", newClient)
+			//console.log("newClient ULEY: ", newClient)
 			arrayClientAll.push(newClient)
 		
 			setSupport(arrayClientAll)	
@@ -890,16 +890,18 @@ useEffect(() => {
 			const arrayContact = []
 
 			//3 все беседы (conversations)
-			let convers = await getSConversations()
-			//console.log("sconversations: ", convers)
-			setSConversations(convers)
+			let conver = await getSConversation(JSON.parse(user)?.id)
+			let arr = []
+			arr.push(conver)
+			console.log("sconversation: ", conver)
+			setSConversation(conver)
 
 			//4 все сообщения бота
-			let messagesAll = await getSMessages(JSON.parse(user)?.id) //getWMessagesCount(1000) //getAllWMessages()
-			//console.log("messagesAll Support: ", messagesAll.length)
+			let messagesAll = await getSMessages(conver?.id) //getWMessagesCount(1000) //getAllWMessages()
+			console.log("messagesAll Support: ", messagesAll.length)
 
 			let count = 0
-			convers.forEach(async (user, index) => {
+			arr.forEach(async (user, index) => {
 				//console.log("user S: ", arrayClientAll)
 
 				let client = arrayClientAll.find((item)=> item.chatId.toString() === user.members[0])
@@ -1853,7 +1855,7 @@ const fetchNotifAdmin = async (dataAll) => {
 
 			conversations,
 			wconversations,
-			sconversations,
+			sconversation,
 
 			userWorkers,
 			workersAll,

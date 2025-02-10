@@ -33,7 +33,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userId, userSupport, setUserAsUnread, addNewMessage3, sconversations, support, sendMessSupport } = useUsersContext();
+	const { userId, userSupport, setUserAsUnread, addNewMessage3, sconversation, support, sendMessSupport } = useUsersContext();
 	const { personS } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
