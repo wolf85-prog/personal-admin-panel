@@ -73,7 +73,7 @@ const Login = observer(() => {
             user.setIsAuth(true)
 
             setUserId(data.id)
-            localStorage.setItem('user', JSON.stringify({id: data.id, email: data.email}))
+            localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
 
             navigate(ADMIN_ROUTE)
           } else {
