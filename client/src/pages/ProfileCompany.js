@@ -340,7 +340,7 @@ const ProfileCompany = () => {
         setShowSave(false)
       }
 
-      if (corschet.length < 10) {
+      if (corschet.length < 20) {
         setCorschetEr(true)
       }
 
@@ -368,7 +368,7 @@ const ProfileCompany = () => {
       if (bank.length > 0 && 
         inn.length >= 10 && 
         raschet.length >= 20 && 
-        corschet.length >= 10 && 
+        corschet.length >= 20 && 
         bik.length >= 9 &&
         ogrn.length >= 13 &&
         urAddress.length > 0 || 
