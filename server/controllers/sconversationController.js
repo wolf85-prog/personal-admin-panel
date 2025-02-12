@@ -26,6 +26,7 @@ class SconversationController {
             conversation = await Conversation.create({
                 members: [senderId, receiverId]
             }) 
+            console.log("conversation: ", conversation)
             return res.status(200).json(conversation)
         } catch (error) {
             return res.status(500).json(error.message)
