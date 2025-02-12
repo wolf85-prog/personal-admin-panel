@@ -1606,7 +1606,7 @@ const fetchDelAdminSupport = (data) => {
 	setUserSupport((userSupport) => {
 		const { messageId, messageDate, chatId } = data;
 
-		let userIndex = userSupport.findIndex((user) => user.chatId === chatId);
+		let userIndex = userSupport.findIndex((user) => user.id.toString() === chatId);
 		const usersCopy = JSON.parse(JSON.stringify(userSupport));
 
 		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
@@ -1631,7 +1631,7 @@ const addNewMessage3 = (userId, message, type, textButton, convId, messageId, is
 		type: type,
 		buttons: textButton,
 		convId: convId,
-		//messageId,
+		messageId,
 		//isBot: isBot,
 	})
 };
@@ -1645,7 +1645,7 @@ const sendMessSupport = (userId, message, type, convId, messageId, isBot) => {
         text: message,
         type: type,
         convId: convId,
-        // messageId,
+        messageId,
         // replyId,
         // isBot, 
 	})

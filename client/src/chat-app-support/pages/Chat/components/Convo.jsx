@@ -461,12 +461,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 											</div>
 											: <></>}
 											<span>
-												{/* {message.content?.startsWith('http') 
+												{message.content?.startsWith('http') 
 												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
-												: message.content.includes('_reply_') ? message.content.split('_reply_')[1] : message.content}  */}
-												{message.content?.includes('_reply_') 
+												: message.content.includes('_reply_') ? message.content.split('_reply_')[1] : message.content} 
+												{/* {message.content?.includes('_reply_') 
 												? message.content.split('_reply_')[1] 
-												: message.content}
+												: message.content} */}
 											</span>
 											<span className="chat__msg-filler"> </span>
 											<span className="chat__msg-footer">

@@ -58,6 +58,8 @@ const Chat = () => {
 	const [showCloseButton, setShowCloseButton] = useState(false)
 	const [showErrorFile, setShowErrorFile] = useState(false);
 
+	const [showModal, setShowModal] = useState(false);
+
 	//select
     const [selectedElement, setSelectedElement] = useState("")
 	const [scenari, setScenari] = useState("")
@@ -134,11 +136,18 @@ const Chat = () => {
 	const onFileChange = (e, key) => {	
 		setProgess(0)
 		const file = e.target.files[0]; // доступ к файлу
-		console.log("key: ", key);
-		setFileType(key)
-		console.log(file);
-		setFile(file); // сохранение файла
-		setShowAttach(false)
+		console.log("key: ", key);	
+
+		if (key === 'video')	{
+			setShowModal(true)
+			setShowAttach(false)
+		} else {
+			setFileType(key)
+			console.log(file);
+			setFile(file); // сохранение файла
+			setShowAttach(false)
+		}
+		
     }
 
 	const openSidebar = (cb) => {
@@ -350,6 +359,17 @@ const Chat = () => {
 			>
 				<Profile user={user} />
 			</ChatSidebarProfile> */}
+
+			<CModal
+				alignment="center"
+				visible={showModal}
+				onClose={() => setShowModal(false)}
+				aria-labelledby="VerticallyCenteredExample"
+			>
+				<CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+					Функция находится в разработке
+				</CModalBody>
+			</CModal>
 
 		</div>
 	);
