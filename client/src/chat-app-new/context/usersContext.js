@@ -260,15 +260,15 @@ const UsersProvider = ({ children }) => {
 		  
 	
 		  if (user) {
-			setUserId(JSON.parse(user)?.id)
-			setEmail(JSON.parse(user)?.email)
-			setRole(JSON.parse(user)?.role)
+			setUserId(user && JSON.parse(user)?.id)
+			setEmail(user && JSON.parse(user)?.email)
+			setRole(user && JSON.parse(user)?.role)
 			
-			const result = await getManagerId(JSON.parse(user)?.id)
+			const result = await getManagerId(user && JSON.parse(user)?.id)
 		  	console.log("Manager: ", result)
 		  	setManagerProfile(result)
 
-			const result2 = await getCompanyProfId(JSON.parse(user)?.id)
+			const result2 = await getCompanyProfId(user && JSON.parse(user)?.id)
 		  	console.log("Company: ", result2)
 		  	setCompanyId(result2?.id)
 		  }
@@ -286,7 +286,7 @@ const UsersProvider = ({ children }) => {
 
 			const user = localStorage.getItem('user')
 
-			let company = await getCompany(JSON.parse(user)?.id);
+			let company = await getCompany(user && JSON.parse(user)?.id);
 			//console.log("companys context: ", company)
 
 		
@@ -363,7 +363,7 @@ const UsersProvider = ({ children }) => {
 		const fetchData = async () => {
 			const user = localStorage.getItem('user')
 			
-			let platforms = await getPlatforms(JSON.parse(user)?.id);
+			let platforms = await getPlatforms(user && JSON.parse(user)?.id);
 			//console.log("platforms context: ", platforms)
 		
 			let arrCompanys = []
@@ -418,10 +418,10 @@ useEffect(() => {
 	//---------get UserClients-----------------------------------------
 	const fetchUserClientData = async () => {
 		const user = localStorage.getItem('user')
-		//console.log("userId: ", JSON.parse(user)?.id)
+		//console.log("userId: ", user && user && JSON.parse(user)?.id)
 			
 		//0 все клиенты
-		let all = await getClient(JSON.parse(user)?.id)
+		let all = await getClient(user && JSON.parse(user)?.id)
 		//console.log("Client all: ", all)
 
 		const arrayClientAll = []
@@ -454,7 +454,7 @@ useEffect(() => {
 
 
 		//1 все специалисты 100
-		//let response = await getClientCount(JSON.parse(user)?.id, 100, client.length);
+		//let response = await getClientCount(user && user && JSON.parse(user)?.id, 100, client.length);
 		//console.log("client 100: ", response)
 	
 		const arrayClient = []
@@ -637,10 +637,10 @@ useEffect(() => {
 		const fetchUserWorkerData = async () => {
 
 			const user = localStorage.getItem('user')
-			//console.log("userId: ", JSON.parse(user)?.id)
+			//console.log("userId: ", user && user && JSON.parse(user)?.id)
 
 			//0 все специалисты
-			let all = await getWorkers(JSON.parse(user)?.id)
+			let all = await getWorkers(user && JSON.parse(user)?.id)
 			console.log("Workers all: ", all)
 
 			const arrayWorkerAll = []
@@ -673,8 +673,8 @@ useEffect(() => {
 
 
 			//1 все специалисты 100
-			let response = await getWorkersCount(JSON.parse(user)?.id, 100, workers.length);
-			//let response = await getClientCount(JSON.parse(user)?.id, 100, client.length);
+			let response = await getWorkersCount(user && JSON.parse(user)?.id, 100, workers.length);
+			//let response = await getClientCount(user && user && JSON.parse(user)?.id, 100, client.length);
 			//console.log("worker 100: ", response)
 		
 			const arrayWorker = []
@@ -860,7 +860,7 @@ useEffect(() => {
 		//---------get UserClients-----------------------------------------
 		const fetchUserSupportData = async () => {
 			const user = localStorage.getItem('user')
-			console.log("userId: ", JSON.parse(user)?.id)
+			console.log("userId: ", user && JSON.parse(user)?.id)
 				
 			//0 клиент ULEY
 
@@ -890,7 +890,7 @@ useEffect(() => {
 			const arrayContact = []
 
 			//3 все беседы (conversations)
-			let conver = await getSConversation(JSON.parse(user)?.id)
+			let conver = await getSConversation(user && JSON.parse(user)?.id)
 			let arr = []
 			arr.push(conver)
 			console.log("sconversation: ", conver)
@@ -1720,7 +1720,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	//звонок специалиста
 	else if (task === 200) {
 		const user = localStorage.getItem('user')
-		console.log("userId: ", JSON.parse(user)?.id)
+		console.log("userId: ", user && JSON.parse(user)?.id)
 
 		const worker = await getSpecialistId(id)
 		console.log("worker: ", worker)
@@ -1772,7 +1772,7 @@ const fetchNotifAdmin = async (dataAll) => {
 	//звонок клиента
 	else if (task === 202) {
 		const user = localStorage.getItem('user')
-		console.log("userId: ", JSON.parse(user)?.id)
+		console.log("userId: ", user && JSON.parse(user)?.id)
 		const client = await getClientId(id)
 
 		console.log("client: ", client)

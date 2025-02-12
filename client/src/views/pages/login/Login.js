@@ -110,15 +110,15 @@ const Login = observer(() => {
       console.log("conv: ", conv)
 
       const mess = 'Менеджер успешно зарегистрировался в личном кабинете!'
-    
+      
       const message = {
-        senderId: id, 
-        receiverId: chatAdminId,
-        conversationId: conv?.id,
-        type: "text",
-        text: mess
-        //isBot: null,
-        //messageId: sendToTelegram.data.result.message_id,
+          senderId: id, 
+          receiverId: chatAdminId,
+          conversationId: conv?.id,
+          type: "text",
+          text: mess
+          //isBot: null,
+          //messageId: sendToTelegram.data.result.message_id,
       }
     
       //сохранение сообщения в базе данных
@@ -131,6 +131,7 @@ const Login = observer(() => {
       sendMessSupport(id, mess, 'text', conv.id, null, null)
           
       console.log("message send: ", message);
+      
     }
 
   return (
