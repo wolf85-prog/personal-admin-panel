@@ -3,7 +3,11 @@ import {$authHost, $host} from "./index";
 
 export const addConversation= async (data)=>{
     try {
-        await $host.post('api/sconversation/add', data);
+        let response = await $host.post('api/sconversation/add', data);
+        if (response.data === null) {
+            return null;
+        }
+        return response.data
     } catch (error) {
         console.log("error while calling setConversation api", error.message);
         

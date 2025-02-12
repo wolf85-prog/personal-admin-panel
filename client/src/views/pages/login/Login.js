@@ -125,10 +125,10 @@ const Login = observer(() => {
       await newMessage(message)	
     
       //сохранить в контексте
-      addNewMessage3(id, mess, 'text', '', conv.id, null, null);
+      addNewMessage3(id, mess, 'text', '', conv?.id, null, null);
     
       //получить сообщение у абонента
-      sendMessSupport(id, mess, 'text', conv.id, null, null)
+      sendMessSupport(id, mess, 'text', conv?.id, null, null)
           
       console.log("message send: ", message);
       
