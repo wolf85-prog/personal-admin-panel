@@ -342,6 +342,7 @@ const ProfileCompany = () => {
 
       if (corschet.length < 20) {
         setCorschetEr(true)
+        setShowSave(false)
       }
 
       if (bik.length < 9) {
