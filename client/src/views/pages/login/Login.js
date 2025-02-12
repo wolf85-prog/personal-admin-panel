@@ -27,6 +27,7 @@ import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 
 import {addManager} from "../../../http/managerAPI";
 import {addCompanyProf} from "../../../http/companyAPI";
+import { addConversation, newMessage } from 'src/http/supportAPI'
 
 const Login = observer(() => {
     const {user} = useContext(Context)
@@ -37,7 +38,9 @@ const Login = observer(() => {
     const [showLogin, setShowLogin] = useState(true)
     const [activeKey, setActiveKey] = useState(1)
 
-    const { userId, setUserId } = useUsersContext();
+    const { userId, setUserId, addNewMessage3, sendMessSupport } = useUsersContext();
+
+    const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
     const clickLogin = async () => {
         try {
@@ -75,6 +78,8 @@ const Login = observer(() => {
             setUserId(data.id)
             localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
 
+            sendText(data.id)
+
             navigate(ADMIN_ROUTE)
           } else {
             alert("Пароли не совпадают!")
@@ -94,6 +99,38 @@ const Login = observer(() => {
         setShowLogin(false)
         setActiveKey(2)
       }
+    }
+
+    //функция отправки сообщения
+    const sendText = async (id) => {
+      //отправка сообщения
+    
+      //создать беседу
+      const conv = await addConversation({senderId: id, receiverId: chatAdminId})
+      console.log("conv: ", conv)
+
+      const mess = 'Менеджер успешно зарегистрировался в личном кабинете!'
+    
+      const message = {
+        senderId: id, 
+        receiverId: chatAdminId,
+        conversationId: conv?.id,
+        type: "text",
+        text: mess
+        //isBot: null,
+        //messageId: sendToTelegram.data.result.message_id,
+      }
+    
+      //сохранение сообщения в базе данных
+      await newMessage(message)	
+    
+      //сохранить в контексте
+      addNewMessage3(id, mess, 'text', '', conv.id, null, null);
+    
+      //получить сообщение у абонента
+      sendMessSupport(id, mess, 'text', conv.id, null, null)
+          
+      console.log("message send: ", message);
     }
 
   return (
