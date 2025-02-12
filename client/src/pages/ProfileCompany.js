@@ -354,8 +354,13 @@ const ProfileCompany = () => {
         setShowSave(false)
       }
 
-      if (phoneK.length < 11) {
-        setPhoneKEr(true)
+      // if (phoneK.length < 11) {
+      //   setPhoneKEr(true)
+      //   setShowSave(false)
+      // }
+
+      if (urAddress.length === 0) {
+        setUrAddressEr(true)
         setShowSave(false)
       }
 
@@ -366,7 +371,7 @@ const ProfileCompany = () => {
         corschet.length >= 10 && 
         bik.length >= 9 &&
         ogrn.length >= 13 &&
-        phoneK.length >= 11 || 
+        urAddress.length > 0 || 
         role !== '1') {
         setShowSave(true)
         setShowModal(true)
@@ -649,7 +654,7 @@ const ProfileCompany = () => {
                                           setShowManagers(false)
                                           setShowRekviz(!showRekviz)
                                         }
-                                      }} className='text-field uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
+                                      }} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -1119,8 +1124,7 @@ const ProfileCompany = () => {
                                                                       maskChar=""
                                                                       onChange={(e) => setPhoneK(e.target.value)} 
                                                                       value={phoneK}
-                                                                      placeholder=''
-                                                                      style={{borderColor: phoneKEr ? 'red' : '' }}
+                                                                      placeholder=''  
                                                                   >
                                                                   </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} /> */}
@@ -1133,7 +1137,15 @@ const ProfileCompany = () => {
 
                                                                 <div style={{ marginTop: '22px' }} className="div8">
                                                                   <label className='title-label'>Юридический адрес</label>
-                                                                  <input className="text-field__input" type="text" name="urAddress" id="urAddress" value={urAddress} onChange={(e)=>setUrAddress(e.target.value)} style={{ height: '40px' }} />
+                                                                  <input 
+                                                                    className="text-field__input" 
+                                                                    type="text" 
+                                                                    name="urAddress" 
+                                                                    id="urAddress" 
+                                                                    value={urAddress} 
+                                                                    onChange={(e)=>setUrAddress(e.target.value)} 
+                                                                    style={{borderColor: urAddressEr ? 'red' : '', height: '40px' }}
+                                                                  />
                                                                 </div>
                                                               </div>
 

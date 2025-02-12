@@ -10,11 +10,22 @@ import Home from "../chat-app-new/pages/Home";
 import Sidebar from "../chat-app-worker/components/Sidebar";
 import Chat from "../chat-app-worker/pages/Chat";
 
+import { 
+	CButton,
+	CModal,
+	CModalHeader,
+	CModalTitle,
+	CModalBody,
+	CModalFooter
+  } from '@coreui/react'
+
 import { AccountContext } from "../chat-app-new/context/AccountProvider";
 
 const ChatsWorker = () => {
 
   const { personW } = useContext(AccountContext); 
+
+  const [showModal, setShowModal] = useState(true);
 
 	useEffect(() => {
 		document.body.classList.add("dark-theme");
@@ -38,6 +49,17 @@ const ChatsWorker = () => {
                       {Object.keys(personW).length ? <Chat /> : <Home /> }
                     </div>
                   </div>
+
+                  <CModal
+                          alignment="center"
+                          visible={showModal}
+                          onClose={() => setShowModal(false)}
+                          aria-labelledby="VerticallyCenteredExample"
+                        >
+                          <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                            Функция находится в разработке
+                          </CModalBody>
+                  </CModal>
 
                 </Suspense>
             </CContainer>

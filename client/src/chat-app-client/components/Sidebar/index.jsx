@@ -27,6 +27,7 @@ const Sidebar = () => {
 		// 	return dateB-dateA //сортировка по убывающей дате  
 		// })
 		console.log("userClients: ", userClients)
+		setLoading(false)
 		
 		const arr = []
 
