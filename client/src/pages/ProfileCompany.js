@@ -111,6 +111,7 @@ const ProfileCompany = () => {
   const [profile, setProfile] = useState('');
   const [projects, setProjects] = useState('');
 
+  const [direktor, setDirektor] = useState('');
   const [inn, setInn] = useState('');
   const [raschet, setRaschet] = useState('');
   const [corschet, setCorschet] = useState('');
@@ -680,6 +681,19 @@ const ProfileCompany = () => {
                                                                     <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
                                                                     {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
+
+                                                                  <div style={{ marginTop: '46px', display: 'flex', justifyContent: 'space-between'}}>
+                                                                    <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
+                                                                      <span style={{fontSize: '16px', color: 'blue', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                        Добавить
+                                                                      </span>
+                                                                    </CButton>
+                                                                    <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
+                                                                      <span style={{fontSize: '16px', color: 'red', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                        Удалить
+                                                                      </span>
+                                                                    </CButton>      
+                                                                  </div>
                                                               </div>
                                                             </>
                                                           ) : (
@@ -691,8 +705,8 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                               {managersObj && managersObj.length > 0 ? managersObj.map((item, index) => (
                                                                 <div key={index}  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                                  <div className="text-field" style={{position: 'relative', width: '80%'}}>
-                                                                    <label className='title-label'>Почта / ID</label>
+                                                                  <div className="text-field" style={{position: 'relative'}}>
+                                                                    <label className='title-label'>Менеджер №</label>
                                                                     <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
                                                                     {/* <img src={Close} onClick={()=> deleteManager(item)} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px',  cursor: 'pointer'}}></img> */}
                                                                   </div>
@@ -706,35 +720,43 @@ const ProfileCompany = () => {
                                                                 
                                                                 )
                                                                 ) :
-                                                                <div style={{ marginTop: '20px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                                                                  <div style={{width: '80%'}}>
-                                                                    <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
-                                                                  </div> 
-                                                                  
-                                                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none'}}>
-                                                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginLeft: '0'}}>
-                                                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
-                                                                      +</span>
-                                                                    </CButton>
-                                                                  </div> 
+                                                                <>
+                                                                <div style={{ marginTop: '20px'}}>
+                                                                  <div>
+                                                                    <label className='title-label'>Менеджер №1</label>
+                                                                    <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>            
                                                                 </div>
 
+                                                                <div style={{ marginTop: '20px'}}>
+                                                                  <div>
+                                                                    <label className='title-label'>Менеджер №2</label>
+                                                                    <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>                                            
+                                                                </div>
+
+                                                                <div style={{ marginTop: '20px'}}>
+                                                                  <div>
+                                                                    <label className='title-label'>Менеджер №3</label>
+                                                                    <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                  </div>        
+                                                                </div>
+
+                                                                <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'space-between'}}>
+                                                                  <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
+                                                                    <span style={{fontSize: '16px', color: 'blue', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                      Добавить
+                                                                    </span>
+                                                                  </CButton>
+                                                                  <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
+                                                                    <span style={{fontSize: '16px', color: 'red', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                      Удалить
+                                                                    </span>
+                                                                  </CButton>      
+                                                                </div>
+                                                              </>
                                                                   
                                                               }
-                                                                  {/* <div style={{ marginTop: '20px' }}>
-                                                                    <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.email} style={{ height: '40px', cursor: 'pointer'}} />
-                                                                  </div> */}
-                                                                  {/* <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.email} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Почта / ID</label>
-                                                                    <input className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.email} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -858,8 +880,34 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                 <div>
 
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>ИНН</label>
+                                                                <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>Руководитель</label>
+                                                                    {/* <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="direktor" 
+                                                                        id="direktor"
+                                                                        mask="999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setDirektor(e.target.value)} 
+                                                                        value={inn}
+                                                                        placeholder=''
+                                                                        style={{borderColor: direktorEr ? 'red' : '' }}
+                                                                    >
+                                                                    </InputMask> */}
+                                                                    <input 
+                                                                      className="text-field__input" 
+                                                                      type="text" 
+                                                                      name="direktor" 
+                                                                      id="direktor" 
+                                                                      value={direktor} 
+                                                                      onChange={(e)=>setDirektor(e.target.value)} 
+                                                                      style={{ height: '40px' }} 
+                                                                    />
+                                                                  </div>
+
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>ИНН / КПП</label>
                                                                     <InputMask
                                                                         className="text-field__input" 
                                                                         type="text" 
@@ -875,41 +923,41 @@ const ProfileCompany = () => {
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="inn" id="inn" value={inn} onChange={(e)=>setInn(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Расчетный счет</label>
+
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>ОКПО</label>
                                                                     <InputMask
                                                                         className="text-field__input" 
                                                                         type="text" 
-                                                                        name="raschet" 
-                                                                        id="raschet"
-                                                                        mask="99999999999999999999"
+                                                                        name="ogrn" 
+                                                                        id="ogrn"
+                                                                        mask="999999999999999"
                                                                         maskChar=""
-                                                                        onChange={(e) => setRaschet(e.target.value)} 
-                                                                        value={raschet}
+                                                                        onChange={(e) => setOgrn(e.target.value)} 
+                                                                        value={ogrn}
                                                                         placeholder=''
-                                                                        style={{borderColor: raschetEr ? 'red' : '' }}
+                                                                        style={{borderColor: ogrnEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
-                                                                    {/* <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} /> */}
+                                                                    {/* <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <label className='title-label'>Корреспондентский счет</label>
+                                                                    <label className='title-label'>ОГРН</label>
                                                                     <InputMask
                                                                         className="text-field__input" 
                                                                         type="text" 
-                                                                        name="corschet" 
-                                                                        id="corschet"
-                                                                        mask="99999999999999999999"
+                                                                        name="ogrn" 
+                                                                        id="ogrn"
+                                                                        mask="999999999999999"
                                                                         maskChar=""
-                                                                        onChange={(e) => setCorschet(e.target.value)} 
-                                                                        value={corschet}
+                                                                        onChange={(e) => setOgrn(e.target.value)} 
+                                                                        value={ogrn}
                                                                         placeholder=''
-                                                                        style={{borderColor: corschetEr ? 'red' : '' }}
+                                                                        style={{borderColor: ogrnEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
-                                                                    {/* <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} /> */}
+                                                                    {/* <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
                                                                    
@@ -928,17 +976,24 @@ const ProfileCompany = () => {
                                                                     <label className='title-label'>ФИО</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.fio} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  :''
+                                                                  :
+                                                                  <>
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>ФИО</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div>
+                                    
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>ФИО</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div>
+
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>ФИО</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div>
+                                                                  </>
                                                                   }
-                                                                  {/* <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>ФИО</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>ФИО</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -1013,9 +1068,45 @@ const ProfileCompany = () => {
 
                                   {showRekviz ? (
                                                             <>
+                                                              <div style={{ marginTop: '4px' }}>
+                                                                    <label className='title-label'>Расчетный счет</label>
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="raschet" 
+                                                                        id="raschet"
+                                                                        mask="99999999999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setRaschet(e.target.value)} 
+                                                                        value={raschet}
+                                                                        placeholder=''
+                                                                        style={{borderColor: raschetEr ? 'red' : '' }}
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="raschet" id="raschet" value={raschet} onChange={(e)=>setRaschet(e.target.value)} style={{ height: '40px' }} /> */}
+                                                                  </div>
+                                  
+                                                                  <div style={{ marginTop: '20px' }}>
+                                                                    <label className='title-label'>Корреспондентский счет</label>
+                                                                    <InputMask
+                                                                        className="text-field__input" 
+                                                                        type="text" 
+                                                                        name="corschet" 
+                                                                        id="corschet"
+                                                                        mask="99999999999999999999"
+                                                                        maskChar=""
+                                                                        onChange={(e) => setCorschet(e.target.value)} 
+                                                                        value={corschet}
+                                                                        placeholder=''
+                                                                        style={{borderColor: corschetEr ? 'red' : '' }}
+                                                                    >
+                                                                    </InputMask>
+                                                                    {/* <input className="text-field__input" type="text" name="corschet" id="raschet" value={corschet} onChange={(e)=>setCorschet(e.target.value)} style={{ height: '40px' }} /> */}
+                                                                  </div>
+
                                                               <div className="div7">
                                                                 <div>
-                                                                  <div style={{ marginTop: '4px' }}>
+                                                                  <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>БИК</label>
                                                                     <InputMask
                                                                         className="text-field__input" 
@@ -1033,24 +1124,8 @@ const ProfileCompany = () => {
                                                                     {/* <input className="text-field__input" type="text" name="bik" id="bik" value={bik} onChange={(e)=>setBik(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>ОГРН</label>
-                                                                    <InputMask
-                                                                        className="text-field__input" 
-                                                                        type="text" 
-                                                                        name="ogrn" 
-                                                                        id="ogrn"
-                                                                        mask="999999999999999"
-                                                                        maskChar=""
-                                                                        onChange={(e) => setOgrn(e.target.value)} 
-                                                                        value={ogrn}
-                                                                        placeholder=''
-                                                                        style={{borderColor: ogrnEr ? 'red' : '' }}
-                                                                    >
-                                                                    </InputMask>
-                                                                    {/* <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} /> */}
-                                                                  </div>
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  
+                                                                  <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Банк</label>
                                                                     <input 
                                                                       className="text-field__input" 
@@ -1077,21 +1152,24 @@ const ProfileCompany = () => {
                                                                     <label className='title-label'>Должность</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  :''
+                                                                  :
+                                                                  <>
+                                                                    <div style={{ marginTop: '5px' }}>
+                                                                      <label className='title-label'>Должность</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    </div>
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>Должность</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div>
+                                    
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>Должность</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div>
+                                                                  </>
                                                                   }
-                                                                  {/* <div >
-                                                                    <label className='title-label'>Должность</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
-                                                                  </div> */}
-                                                                  {/* <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Должность</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Должность</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div> */}
+
                                                               </div>
                                                             </>
                                                           ) : (
@@ -1105,7 +1183,7 @@ const ProfileCompany = () => {
                                 <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '250px'}}>
                                   
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div className="text-field" style={{marginBottom: '-10px'}}>
                                     <ul className='spec-style' style={{width: '100%', height: '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
@@ -1113,8 +1191,21 @@ const ProfileCompany = () => {
 
                                   {showRekviz ? (
                                                             <>
+                                                              <div style={{ marginTop: '20px' }} className="div8">
+                                                                  <label className='title-label'>Юридический адрес</label>
+                                                                  <input 
+                                                                    className="text-field__input" 
+                                                                    type="text" 
+                                                                    name="urAddress" 
+                                                                    id="urAddress" 
+                                                                    value={urAddress} 
+                                                                    onChange={(e)=>setUrAddress(e.target.value)} 
+                                                                    style={{borderColor: urAddressEr ? 'red' : '', height: '40px' }}
+                                                                  />
+                                                                </div>
+
                                                               <div className="div7">
-                                                                <div style={{ marginTop: '5px' }}>
+                                                                <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Телефон</label>
                                                                     <InputMask
                                                                       className="text-field__input" 
@@ -1131,23 +1222,23 @@ const ProfileCompany = () => {
                                                                     {/* <input className="text-field__input" type="text" name="phoneK" id="phoneK" value={phoneK} onChange={(e)=>setPhoneK(e.target.value)} style={{ height: '40px' }} /> */}
                                                                   </div>
                                   
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Почта</label>
                                                                     <input className="text-field__input" type="text" name="emailK" id="ogrn" value={emailK} onChange={(e)=>setEmailK(e.target.value)} style={{ height: '40px' }} />
                                                                   </div>
 
-                                                                <div style={{ marginTop: '22px' }} className="div8">
-                                                                  <label className='title-label'>Юридический адрес</label>
-                                                                  <input 
-                                                                    className="text-field__input" 
-                                                                    type="text" 
-                                                                    name="urAddress" 
-                                                                    id="urAddress" 
-                                                                    value={urAddress} 
-                                                                    onChange={(e)=>setUrAddress(e.target.value)} 
-                                                                    style={{borderColor: urAddressEr ? 'red' : '', height: '40px' }}
-                                                                  />
-                                                                </div>
+                                                                <div style={{ marginTop: '45px', display: 'flex', justifyContent: 'space-between'}}>
+                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
+                                                                        <span style={{fontSize: '16px', color: 'yellow', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                          Изменить
+                                                                        </span>
+                                                                      </CButton>
+                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                                                        <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                          Сохранить
+                                                                        </span>
+                                                                      </CButton>      
+                                                                    </div>
                                                               </div>
 
                                                             </>
@@ -1163,17 +1254,36 @@ const ProfileCompany = () => {
                                                                     <label className='title-label'>Телефон</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.phone} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  :''
+                                                                  :<>
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>Телефон</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div>
+                                    
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>Телефон</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div> 
+
+                                                                    <div style={{ marginTop: '20px' }}>
+                                                                      <label className='title-label'>Телефон</label>
+                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    </div> 
+
+                                                                    <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between'}}>
+                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
+                                                                        <span style={{fontSize: '16px', color: 'yellow', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                          Изменить
+                                                                        </span>
+                                                                      </CButton>
+                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                                                        <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                                                          Сохранить
+                                                                        </span>
+                                                                      </CButton>      
+                                                                    </div>
+                                                                  </>
                                                                   }
-                                                                  {/* <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Телефон</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div>
-                                  
-                                                                  <div style={{ marginTop: '22px' }}>
-                                                                    <label className='title-label'>Телефон</label>
-                                                                    <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                  </div> */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -1181,7 +1291,7 @@ const ProfileCompany = () => {
                                   )}
                                   
                                 </div>
-
+                                  
 
                               </div>
                               }
