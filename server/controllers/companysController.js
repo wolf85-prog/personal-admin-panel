@@ -254,7 +254,11 @@ class CompanysController {
 
     async getCompanyProf(req, res) {
         try {
-            const company = await CompanyProf.findAll()
+            const company = await CompanyProf.findAll({
+                order: [
+                    ['id', 'DESC'], //DESC, ASC
+                ],
+            })
             return res.status(200).json(company);
         } catch (err) {
             return res.status(500).json(err);
