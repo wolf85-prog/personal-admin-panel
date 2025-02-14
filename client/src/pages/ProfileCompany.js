@@ -356,6 +356,7 @@ const ProfileCompany = () => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
+      console.log("save profile id: ", id)
       
       //setShowClose(true)
       
@@ -630,6 +631,8 @@ const ProfileCompany = () => {
       
       console.log("реквизиты", rekvizCopy)
       setRekviziti(JSON.stringify(rekvizCopy))
+
+      saveProfile(id)
     }
 
 
@@ -735,13 +738,13 @@ const ProfileCompany = () => {
                                                                     <div onClick={()=>changeKontra(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 0 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
                                                                     {/* <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
                                                                     <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
                                                                     {/* <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} /> */}
                                                                   </div>
                                   
-                                                                  <div style={{ marginTop: '22px' }}>
+                                                                  <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
                                                                     <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
                                                                     {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
@@ -1141,7 +1144,7 @@ const ProfileCompany = () => {
 
                                   {showRekviz ? (
                                                             <>
-                                                              <div style={{ marginTop: '4px' }}>
+                                                              <div style={{ marginTop: '2px' }}>
                                                                     <label className='title-label'>Расчетный счет</label>
                                                                     <InputMask
                                                                         className="text-field__input" 
@@ -1227,7 +1230,7 @@ const ProfileCompany = () => {
                                                                   </div>
                                                                   : */}
                                                                   <>
-                                                                    <div style={{ marginTop: '5px' }}>
+                                                                    <div style={{ marginTop: '2px' }}>
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
@@ -1270,7 +1273,7 @@ const ProfileCompany = () => {
 
                                   {showRekviz ? (
                                                             <>
-                                                              <div style={{ marginTop: '20px' }} className="div8">
+                                                              <div style={{ marginTop: '17px' }} className="div8">
                                                                   <label className='title-label'>Юридический адрес</label>
                                                                   <input 
                                                                     className="text-field__input" 
@@ -1342,7 +1345,7 @@ const ProfileCompany = () => {
                                                                       </CTooltip>
                                                                     </div>
                                     
-                                                                    <div style={{ marginTop: '20px' }}>
+                                                                    <div style={{ marginTop: '17px' }}>
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
