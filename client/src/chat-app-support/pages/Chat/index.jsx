@@ -138,15 +138,15 @@ const Chat = () => {
 		const file = e.target.files[0]; // доступ к файлу
 		console.log("key: ", key);	
 
-		if (key === 'video')	{
-			setShowModal(true)
-			setShowAttach(false)
-		} else {
+		// if (key === 'video')	{
+		// 	setShowModal(true)
+		// 	setShowAttach(false)
+		// } else {
 			setFileType(key)
 			console.log(file);
 			setFile(file); // сохранение файла
 			setShowAttach(false)
-		}
+		//}
 		
     }
 
@@ -337,6 +337,7 @@ const Chat = () => {
 							submitNewMessage={submitNewMessage}
 							setSelectedElement={setSelectedElement}
 							chosenEmoji={chosenEmoji}
+							setShowModal={setShowModal}
 						/>
 
 						{/* <div className="progessBar" style={{ width: progress, height: '1rem', width: '0%',  backgroundColor: 'rgb(68, 212, 231)', color: 'white',  padding: '2px' }}>

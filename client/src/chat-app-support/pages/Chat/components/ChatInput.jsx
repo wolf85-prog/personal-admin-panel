@@ -19,6 +19,7 @@ const ChatInput = ({
 	showPicker,
 	setShowPicker,
 	chosenEmoji,
+	setShowModal,
 	mess,
 	setMess,
 	submitNewMessage,
@@ -96,6 +97,15 @@ const ChatInput = ({
 		setShowPicker(false)
 	}
 
+	const clickVideo = () => {
+		setShowModal(true)
+
+		setTimeout(()=> {
+			setShowAttach(false)
+			setShowModal(false)
+		}, 2000)
+	}
+
 	return (
 		<div className="chat__input-wrapper">
 			{/* {showEmojis && (
@@ -146,18 +156,18 @@ const ChatInput = ({
 							/>								
 						</button>
 
-						<button className="chat__attach-btn" aria-label="attachVideo" key="attachVideo">
+						<button onClick={clickVideo} className="chat__attach-btn" aria-label="attachVideo" key="attachVideo">
 							<label htmlFor='fileInput2' style={{color: '#f3f3f3'}}>
 								{/* <Icon id="attachImage" className="chat__attach-icon" /> */}
 								Видео
 							</label>
-							<input
+							{/* <input
 								type="file"
 								id="fileInput2"
 								name="photo"
 								style={{ display: "none" }}
 								onChange={(e)=>onFileChange(e, 'video')}
-							/>								
+							/>								 */}
 						</button>
 
 						<button className="chat__attach-btn" aria-label="Choose document" key="Choose document">
