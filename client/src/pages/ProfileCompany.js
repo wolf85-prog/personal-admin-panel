@@ -28,6 +28,7 @@ import {
   CToastBody,
   CToastClose,
   CToaster,
+  CTooltip,
 
 } from '@coreui/react'
 //import Icon from "../chat-app-worker/components/Icon";
@@ -169,6 +170,9 @@ const ProfileCompany = () => {
   const [contragent3, setContragent3] = useState('Тест3')
 
   const [selectContr, setSelectContr] = useState(0);
+
+  const [selectRekviz, setSelectRekviz] = useState(false);
+  const [selectManager, setSelectManager] = useState(false);
 
   const [mans, setMans] = useState([])
   const [rekviziti, setRekviziti] = useState('');
@@ -316,6 +320,11 @@ const ProfileCompany = () => {
   }, [selectContr, objRekviz, rekviziti])
 
 
+  useEffect(()=> {
+    console.log("managersObj: ", managersObj)
+  }, [managersObj])
+
+
 //------ загрузить аватар-------------
   useEffect(() => {
     const getImage = async () => {
@@ -349,11 +358,12 @@ const ProfileCompany = () => {
   const saveProfile = async(id) => { 
       
       //setShowClose(true)
-      console.log("managersObj: ", managersObj)
+      
 
       setShowSave(true)
       setShowModal(true)
 
+      //реквизиты
       const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
       const userObject = rekvizCopy[selectContr];
       rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
@@ -361,57 +371,16 @@ const ProfileCompany = () => {
       console.log("реквизиты", rekvizCopy)
       setRekviziti(JSON.stringify(rekvizCopy))
 
-      //менеджеры
-      const strMan = JSON.stringify({
-          email: mans[0]?.email,
-          fio: mans[0]?.fio,
-          dolgnost: mans[0]?.dolgnost,
-          phone: mans[0]?.phone,
+      let managersObjArr = []
+      let strManagersObj = ''
+          
+      managersObj.map(async(item, index)=> {
+        strManagersObj = strManagersObj + item + (index+1 !== managersObj.length ? ', ' : '')
+        managersObjArr.push(item)
       })
-      console.log("менеджеры", strMan)
+      console.log("managersObjArr: ", managersObjArr)
     
-    
-        let managersArr = []
-        let strManagers = ''
-        managers.map((item, index)=> {
-          // const obj = {
-          //   name: item,
-          // }
-          strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
-          managersArr.push(item)
-        })
-
-        let managersObjArr = []
-        let strManagersObj = ''
-        
-        managersObj.map(async(item, index)=> {
-          // const obj = {
-          //   name: JSON.parse(item).id,
-          // }
-          strManagersObj = strManagersObj + item + (index+1 !== managersObj.length ? ', ' : '')
-          managersObjArr.push(item)
-
-          const saveData = {
-            companyId: '',//JSON.parse(item).companyId,
-            title, 
-            city,
-            office,
-            sklad,
-            comment,
-            sfera,
-            comteg,
-            profile,
-          }
-
-          console.log("saveCompany: ", saveData)
-
-          //сохранить изменения в базе
-          //await editCompany(saveData, JSON.parse(item).id)
-        })
-        console.log(managersObjArr)
-
-    
-        const saveData = { 
+      const saveData = { 
           userId,  
           title, 
           city,
@@ -670,6 +639,28 @@ const ProfileCompany = () => {
 
   }
 
+  const saveManager = () => {
+    console.log("managersObj: ", managersObj)
+
+    //менеджеры
+    const strMan = JSON.stringify({
+      email: mans[0]?.email,
+      fio: mans[0]?.fio,
+      dolgnost: mans[0]?.dolgnost,
+      phone: mans[0]?.phone,
+    })
+    console.log("менеджеры", strMan)
+
+    let managersArr = []
+    let strManagers = ''
+    managers.map((item, index)=> {
+      strManagers = strManagers + item + (index+1 !== managers.length ? ', ' : '')
+      managersArr.push(item)
+    })
+
+    
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -725,10 +716,12 @@ const ProfileCompany = () => {
                                   <label className='title-label'>Реквизиты</label>
                                   <CButton onClick={()=> {
                                         if (role === '1') {
+                                          setSelectRekviz(!selectRekviz)
+                                          setSelectManager(false)
                                           setShowManagers(false)
                                           setShowRekviz(!showRekviz)
                                         }
-                                      }} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px'}}>
+                                      }} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '1px', boxShadow: selectRekviz ?'0 0 0 1px #2684ff' : ''}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -927,10 +920,12 @@ const ProfileCompany = () => {
                                   <label className='title-label'>Менеджеры</label>
                                   <CButton onClick={()=> {
                                         if (role === '1') {
+                                          setSelectManager(!selectManager)
+                                          setSelectRekviz(false) 
                                           setShowRekviz(false)
                                           setShowManagers(!showManagers)
                                         }
-                                      }}  className='uley_add_user' style={{width: '320px', height: '42px', marginLeft: '0'}}>
+                                      }}  className='uley_add_user' style={{width: '320px', height: '42px', marginLeft: '0',  boxShadow: selectManager ?'0 0 0 1px #2684ff' : ''}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
@@ -1043,29 +1038,35 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                  {managersObj && managersObj.length > 0 ? 
+                                                                  {/* {managersObj && managersObj.length > 0 ? 
                                                                     <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>ФИО</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.fio} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  :
+                                                                  : */}
                                                                   <>
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>ФИО</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
                                     
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>ФИО</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
 
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>ФИО</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.fio} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
                                                                   </>
-                                                                  }
+                                                                  {/* } */}
                                                               </div>
                                                             </>
                                                           ) : (
@@ -1219,28 +1220,34 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                {managersObj && managersObj.length > 0 ? 
+                                                                {/* {managersObj && managersObj.length > 0 ? 
                                                                   <div>
                                                                     <label className='title-label'>Должность</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  :
+                                                                  : */}
                                                                   <>
                                                                     <div style={{ marginTop: '5px' }}>
                                                                       <label className='title-label'>Должность</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.dolgnost} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Должность</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
                                     
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Должность</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.dolgnost} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
                                                                   </>
-                                                                  }
+                                                                  {/* } */}
 
                                                               </div>
                                                             </>
@@ -1321,25 +1328,32 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                                {managersObj && managersObj.length > 0 ? 
+                                                                {/* {managersObj && managersObj.length > 0 ? 
                                                                   <div>
                                                                     <label className='title-label'>Телефон</label>
                                                                     <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[0]?.phone} style={{ height: '40px', cursor: 'pointer'}} />
                                                                   </div>
-                                                                  :<>
+                                                                  : */}
+                                                                  <>
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Телефон</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[1]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div>
                                     
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Телефон</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div> 
 
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Телефон</label>
-                                                                      <input disabled className="text-field__input" type="text" name="contragent1" id="contragent1" value={mans[2]?.phone} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                        <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      </CTooltip>
                                                                     </div> 
 
                                                                     <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between'}}>
@@ -1348,14 +1362,14 @@ const ProfileCompany = () => {
                                                                           Изменить
                                                                         </span>
                                                                       </CButton>
-                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                                                      <CButton onClick={saveManager} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
                                                                         <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                           Сохранить
                                                                         </span>
                                                                       </CButton>      
                                                                     </div>
                                                                   </>
-                                                                  }
+                                                                  {/* } */}
                                                               </div>
                                                             </>
                                                           ) : (
