@@ -873,31 +873,35 @@ ${loc.url}`;
 
       //добавить строку в основной состав
 		  const resAdd = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: parseInt(eventkey.split(' ')[2])+1, stavka: "№1"})
-      console.log("resAdd: ", resAdd.id)
 
-      const arrayCopy = JSON.parse(JSON.stringify(mainspec));
-      //readyArray.splice(2, 0, 60);
-      arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-        id: resAdd.id,
-        date: startDate+'T'+startTime,
-        specId: '', 
-        vidWork: '', 
-        specialization: '', 
-        comteg: '',
-        comment: '',
-        stavka: JSON.stringify({label: '№1', name: '№1'}),
-        taxi: false,
-        merch: false,
-        projectId: id,
-        number: parseInt(eventkey.split(' ')[2])+1,
-      })
-      console.log("arrayCopy: ", arrayCopy)
-      setMainspec(arrayCopy)
+      if (resAdd) {
+        console.log("resAdd: ", resAdd.id)
+
+        const arrayCopy = JSON.parse(JSON.stringify(mainspec));
+        //readyArray.splice(2, 0, 60);
+        arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
+          id: resAdd.id,
+          date: startDate+'T'+startTime,
+          specId: '', 
+          vidWork: '', 
+          specialization: '', 
+          comteg: '',
+          comment: '',
+          stavka: JSON.stringify({label: '№1', name: '№1'}),
+          taxi: false,
+          merch: false,
+          projectId: id,
+          number: parseInt(eventkey.split(' ')[2])+1,
+        })
+        console.log("arrayCopy: ", arrayCopy)
+        setMainspec(arrayCopy)
+      }
 
     } else
 
     //дублировать
     if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
+      console.log("eventkey: ", parseInt(eventkey.split(' ')[2]))
 
       const checkedItem = mainspec.find((item)=>item.isChecked === true)
 
@@ -905,60 +909,64 @@ ${loc.url}`;
         console.log("edit all checked")
         handleAllEdit(eventkey)
       } else {
-        const dublSpec = mainspec.find((item)=>item.id === parseInt(eventkey.split(' ')[1]))
+        const dublSpec = mainspec.find((item, index)=> index === parseInt(eventkey.split(' ')[2]))
         console.log("dublSpec: ", dublSpec)
         
         const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
+
+        if (resAdd) {
+          console.log("resAddId: ", resAdd.id)
+
+          const arrayCopy = JSON.parse(JSON.stringify(mainspec));   
+          arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
+            id: resAdd.id,
+            date: dublSpec.date,
+            specId: dublSpec.specId,
+            vidWork: dublSpec.vidWork, //JSON.stringify({name: resAdd.vidWork, color: ''}),
+            specialization: dublSpec.specialization, //JSON.stringify({name: resAdd.specialization, color: ''}),
+            stavka: dublSpec.stavka, //JSON.stringify({name: resAdd.stavka, color: ''}),
+            taxi: dublSpec.number,
+            merch: dublSpec.merch,
+            comment: dublSpec.comment,
+            comteg: dublSpec.comteg, //JSON.stringify({name: resAdd.comteg, color: ''}),
+            hr: dublSpec.hr,
+            projectId: dublSpec.projectId,
+          })
+          console.log("arrayCopy: ", arrayCopy)
+          setMainspec(arrayCopy)
+        }    
+      }
+    } 
+    
+    //добавить разделитель
+    else if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
+      //добавить строку в основной состав
+		  const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
+
+      if (resAdd) {
         console.log("resAddId: ", resAdd.id)
 
-        const arrayCopy = JSON.parse(JSON.stringify(mainspec));
-        
+        const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
           id: resAdd.id,
-          date: dublSpec.date,
-          specId: dublSpec.specId,
-          vidWork: dublSpec.vidWork, //JSON.stringify({name: resAdd.vidWork, color: ''}),
-          specialization: dublSpec.specialization, //JSON.stringify({name: resAdd.specialization, color: ''}),
-          stavka: dublSpec.stavka, //JSON.stringify({name: resAdd.stavka, color: ''}),
-          taxi: dublSpec.number,
-          merch: dublSpec.merch,
-          comment: dublSpec.comment,
-          comteg: dublSpec.comteg, //JSON.stringify({name: resAdd.comteg, color: ''}),
-          hr: dublSpec.hr,
-          projectId: dublSpec.projectId,
+          date: '',
+          specId: '', 
+          vidWork: '', 
+          specialization: '', 
+          comteg: '',
+          comment: '',
+          stavka: '',
+          taxi: '',
+          merch: '',
+          projectId: id,
+          hr: true,
         })
         console.log("arrayCopy: ", arrayCopy)
         setMainspec(arrayCopy)
-      }
-    } else
-    //добавить разделитель
-    if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
-      //добавить строку в основной состав
-		  const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
-      console.log("resAddId: ", resAdd.id)
-
-      const arrayCopy = JSON.parse(JSON.stringify(mainspec));
-      
-      arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-        id: resAdd.id,
-        date: '',
-        specId: '', 
-        vidWork: '', 
-        specialization: '', 
-        comteg: '',
-        comment: '',
-        stavka: '',
-        taxi: '',
-        merch: '',
-        projectId: id,
-        hr: true,
-      })
-      console.log("arrayCopy: ", arrayCopy)
-      setMainspec(arrayCopy)
-    } else
-
+      }     
+    } 
     //удалить
-    if (eventkey.split(' ')[0] === '4') {
+    else if (eventkey.split(' ')[0] === '4') {
       console.log("index: ", eventkey.split(' ')[1])
       const checkedItem = mainspec.find((item)=>item.isChecked === true)
       //console.log("checkedItem: ", checkedItem)
@@ -2095,7 +2103,9 @@ ${loc.url}`;
                                     
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img onClick={()=>{
+                                    {item.hr ?
+                                      <></>
+                                      :<img onClick={()=>{
                                           if (item.specId) {
                                             const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
                                             //console.log("worker id: ", item.specId, workersAll)
@@ -2106,9 +2116,12 @@ ${loc.url}`;
                                             }
                                           }
                                       }} src={Trubka} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                    }
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img onClick={()=>{
+                                    {item.hr ?
+                                      <></>
+                                      :<img onClick={()=>{
                                           if (item.specId) {
                                             const worker = workersAll.find(item2=> item2.id.toString() === item.specId.toString())
                                             console.log("worker id: ", worker, item.specId)
@@ -2119,6 +2132,7 @@ ${loc.url}`;
                                             }
                                           }   
                                         }} src={robot} alt='' style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                      }
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                     {item.hr ?
@@ -2170,20 +2184,26 @@ ${loc.url}`;
                                       }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
-                                      <CFormCheck 
+                                      {item.hr ?
+                                      <></>
+                                      :<CFormCheck 
                                         name={item.id}
                                         checked={item?.merch || false}
                                         onChange={handleChangeMerch}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
                                       />
+                                      }
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
-                                      <CFormCheck 
+                                      {item.hr ?
+                                      <></>
+                                      :<CFormCheck 
                                         name={item.id}
                                         checked={item?.taxi || false}
                                         onChange={handleChangeTaxi}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
                                       />
+                                    }
                                     </CTableDataCell>           
                                     </CTableRow>
                                   ))
