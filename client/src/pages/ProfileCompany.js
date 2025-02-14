@@ -116,6 +116,7 @@ const ProfileCompany = () => {
   const [raschet, setRaschet] = useState('');
   const [corschet, setCorschet] = useState('');
   const [bik, setBik] = useState('');
+  const [okpo, setOkpo] = useState('');
   const [ogrn, setOgrn] = useState('');
   const [bank, setBank] = useState('');
   const [phoneK, setPhoneK] = useState('');
@@ -126,6 +127,7 @@ const ProfileCompany = () => {
   const [raschetEr, setRaschetEr] = useState(false);
   const [corschetEr, setCorschetEr] = useState(false);
   const [bikEr, setBikEr] = useState(false);
+  const [okpoEr, setOkpoEr] = useState(false);
   const [ogrnEr, setOgrnEr] = useState(false);
   const [bankEr, setBankEr] = useState(false);
   const [phoneKEr, setPhoneKEr] = useState(false);
@@ -244,10 +246,13 @@ const ProfileCompany = () => {
       const objRekviz = result.rekviziti ? JSON.parse(result.rekviziti) : ''
       setObjRekviz(objRekviz)
       console.log("objRekviz: ", objRekviz)
+
+      setDirektor(objRekviz[0]?.direktor ? objRekviz[0]?.direktor : '')
       setInn(objRekviz[0]?.inn ? objRekviz[0]?.inn : '')
       setRaschet(objRekviz[0]?.raschet ? objRekviz[0]?.raschet : '')
       setCorschet(objRekviz[0]?.corschet ? objRekviz[0]?.corschet : '')
       setBik(objRekviz[0]?.bik ? objRekviz[0]?.bik : '')
+      setOkpo(objRekviz[0]?.okpo ? objRekviz[0]?.okpo : '')
       setOgrn(objRekviz[0]?.ogrn ? objRekviz[0]?.ogrn : '')
       setBank(objRekviz[0]?.bank ? objRekviz[0]?.bank : '')
       setPhoneK(objRekviz[0]?.phoneK ? objRekviz[0]?.phoneK : '')
@@ -278,16 +283,37 @@ const ProfileCompany = () => {
 
 
   useEffect(()=> {
-    setInn(objRekviz[selectContr]?.inn ? objRekviz[selectContr].inn : '')
-    setRaschet(objRekviz[selectContr]?.raschet ? objRekviz[selectContr]?.raschet : '')
-    setCorschet(objRekviz[selectContr]?.corschet ? objRekviz[selectContr]?.corschet : '')
-    setBik(objRekviz[selectContr]?.bik ? objRekviz[selectContr]?.bik : '')
-    setOgrn(objRekviz[selectContr]?.ogrn ? objRekviz[selectContr]?.ogrn : '')
-    setBank(objRekviz[selectContr]?.bank ? objRekviz[selectContr]?.bank : '')
-    setPhoneK(objRekviz[selectContr]?.phoneK ? objRekviz[selectContr]?.phoneK : '')
-    setEmailK(objRekviz[selectContr]?.emailK ? objRekviz[selectContr]?.emailK : '')
-    setUrAddress(objRekviz[selectContr]?.urAddress ? objRekviz[selectContr]?.urAddress : '')
-  }, [selectContr, objRekviz])
+
+    const objRekviz2 = rekviziti ? JSON.parse(rekviziti) : ''
+
+    if (objRekviz2) {
+      setDirektor(objRekviz2[selectContr]?.direktor ? objRekviz2[selectContr].direktor : '')
+      setInn(objRekviz2[selectContr]?.inn ? objRekviz2[selectContr].inn : '')
+      setRaschet(objRekviz2[selectContr]?.raschet ? objRekviz2[selectContr]?.raschet : '')
+      setCorschet(objRekviz2[selectContr]?.corschet ? objRekviz2[selectContr]?.corschet : '')
+      setBik(objRekviz2[selectContr]?.bik ? objRekviz2[selectContr]?.bik : '')
+      setOkpo(objRekviz2[selectContr]?.okpo ? objRekviz2[selectContr]?.okpo : '')
+      setOgrn(objRekviz2[selectContr]?.ogrn ? objRekviz2[selectContr]?.ogrn : '')
+      setBank(objRekviz2[selectContr]?.bank ? objRekviz2[selectContr]?.bank : '')
+      setPhoneK(objRekviz2[selectContr]?.phoneK ? objRekviz2[selectContr]?.phoneK : '')
+      setEmailK(objRekviz2[selectContr]?.emailK ? objRekviz2[selectContr]?.emailK : '')
+      setUrAddress(objRekviz2[selectContr]?.urAddress ? objRekviz2[selectContr]?.urAddress : '')
+    } else {
+      setDirektor(objRekviz[selectContr]?.direktor ? objRekviz[selectContr].direktor : '')
+      setInn(objRekviz[selectContr]?.inn ? objRekviz[selectContr].inn : '')
+      setRaschet(objRekviz[selectContr]?.raschet ? objRekviz[selectContr]?.raschet : '')
+      setCorschet(objRekviz[selectContr]?.corschet ? objRekviz[selectContr]?.corschet : '')
+      setBik(objRekviz[selectContr]?.bik ? objRekviz[selectContr]?.bik : '')
+      setOkpo(objRekviz[selectContr]?.okpo ? objRekviz[selectContr]?.okpo : '')
+      setOgrn(objRekviz[selectContr]?.ogrn ? objRekviz[selectContr]?.ogrn : '')
+      setBank(objRekviz[selectContr]?.bank ? objRekviz[selectContr]?.bank : '')
+      setPhoneK(objRekviz[selectContr]?.phoneK ? objRekviz[selectContr]?.phoneK : '')
+      setEmailK(objRekviz[selectContr]?.emailK ? objRekviz[selectContr]?.emailK : '')
+      setUrAddress(objRekviz[selectContr]?.urAddress ? objRekviz[selectContr]?.urAddress : '')
+    }
+
+
+  }, [selectContr, objRekviz, rekviziti])
 
 
 //------ загрузить аватар-------------
@@ -324,80 +350,25 @@ const ProfileCompany = () => {
       
       //setShowClose(true)
       console.log("managersObj: ", managersObj)
-      console.log("bank: ", bank)
 
-      if (bank.length === 0) {
-        setBankEr(true)
-        setShowSave(false)
-      }
+      setShowSave(true)
+      setShowModal(true)
 
-      if (inn.length < 10) {
-        setInnEr(true)
-        setShowSave(false)
-      }
+      const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
+      const userObject = rekvizCopy[selectContr];
+      rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
+      
+      console.log("реквизиты", rekvizCopy)
+      setRekviziti(JSON.stringify(rekvizCopy))
 
-      if (raschet.length < 20) {
-        setRaschetEr(true)
-        setShowSave(false)
-      }
-
-      if (corschet.length < 20) {
-        setCorschetEr(true)
-        setShowSave(false)
-      }
-
-      if (bik.length < 9) {
-        setBikEr(true)
-        setShowSave(false)
-      }
-
-      if (ogrn.length < 13) {
-        setOgrnEr(true)
-        setShowSave(false)
-      }
-
-      // if (phoneK.length < 11) {
-      //   setPhoneKEr(true)
-      //   setShowSave(false)
-      // }
-
-      if (urAddress.length === 0) {
-        setUrAddressEr(true)
-        setShowSave(false)
-      }
-
-
-      if (bank.length > 0 && 
-        inn.length >= 10 && 
-        raschet.length >= 20 && 
-        corschet.length >= 20 && 
-        bik.length >= 9 &&
-        ogrn.length >= 13 &&
-        urAddress.length > 0 || 
-        role !== '1') {
-        setShowSave(true)
-        setShowModal(true)
-
-        //реквизиты
-        let strRek = ''
-        
-        let arr = []
-
-        const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
-        const userObject = rekvizCopy[selectContr];
-			  rekvizCopy[selectContr] = { ...userObject, inn, raschet, corschet, bik, ogrn, bank, phoneK, emailK, urAddress};
-        
-        console.log("реквизиты", rekvizCopy)
-        setRekviziti(JSON.stringify(rekvizCopy))
-
-        //менеджеры
-        const strMan = JSON.stringify({
+      //менеджеры
+      const strMan = JSON.stringify({
           email: mans[0]?.email,
           fio: mans[0]?.fio,
           dolgnost: mans[0]?.dolgnost,
           phone: mans[0]?.phone,
-        })
-        console.log("менеджеры", strMan)
+      })
+      console.log("менеджеры", strMan)
     
     
         let managersArr = []
@@ -524,13 +495,13 @@ const ProfileCompany = () => {
           closeProfile()
         }, 2000)  
 
-      } else {
-        setShowModal(true)
+      //} else {
+       // setShowModal(true)
 
-        setTimeout(()=> {
-          setShowModal(false)
-        }, 2000)
-      }
+       // setTimeout(()=> {
+       //   setShowModal(false)
+        //}, 2000)
+      //}
   }
   
   const blockedProfile = () => { 
@@ -596,6 +567,107 @@ const ProfileCompany = () => {
     //   setInn(inn3)
     // }
     
+  }
+
+  const saveRekviz = () => {
+    if (bank.length === 0) {
+      setBankEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setBankEr(false)
+    }
+
+    if (inn.length < 10) {
+      setInnEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setInnEr(false)
+    }
+
+    if (raschet.length < 20) {
+      setRaschetEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setRaschetEr(false)
+    }
+
+    if (corschet.length < 20) {
+      setCorschetEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setCorschetEr(false)
+    }
+
+    if (bik.length < 9) {
+      setBikEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setBikEr(false)
+    }
+
+    if (okpo.length < 13) {
+      setOkpoEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setOkpoEr(false)
+    }
+
+    if (ogrn.length < 13) {
+      setOgrnEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setOgrnEr(false)
+    }
+
+    // if (phoneK.length < 11) {
+    //   setPhoneKEr(true)
+    //   setShowSave(false)
+    // }
+
+    if (urAddress.length === 0) {
+      setUrAddressEr(true)
+      setShowSave(false)
+      setShowModal(true)
+    } else {
+      setUrAddressEr(false)
+    }
+
+    if (bank.length > 0 && 
+      inn.length >= 10 && 
+      raschet.length >= 20 && 
+      corschet.length >= 20 && 
+      bik.length >= 9 &&
+      okpo.length >= 13 &&
+      ogrn.length >= 13 &&
+      urAddress.length > 0) {
+      setShowSave(true)
+      setShowModal(true)
+
+      //реквизиты
+      let strRek = ''
+      
+      let arr = []
+
+      const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
+      const userObject = rekvizCopy[selectContr];
+      rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
+      
+      console.log("реквизиты", rekvizCopy)
+      setRekviziti(JSON.stringify(rekvizCopy))
+    }
+
+
+    setTimeout(()=> {
+      setShowModal(false)
+    }, 2000)
+
   }
 
   return (
@@ -913,7 +985,7 @@ const ProfileCompany = () => {
                                                                         type="text" 
                                                                         name="inn" 
                                                                         id="inn"
-                                                                        mask="999999999999"
+                                                                        mask="999999999999 / 999999999"
                                                                         maskChar=""
                                                                         onChange={(e) => setInn(e.target.value)} 
                                                                         value={inn}
@@ -929,14 +1001,14 @@ const ProfileCompany = () => {
                                                                     <InputMask
                                                                         className="text-field__input" 
                                                                         type="text" 
-                                                                        name="ogrn" 
-                                                                        id="ogrn"
+                                                                        name="okpo" 
+                                                                        id="okpo"
                                                                         mask="999999999999999"
                                                                         maskChar=""
-                                                                        onChange={(e) => setOgrn(e.target.value)} 
-                                                                        value={ogrn}
+                                                                        onChange={(e) => setOkpo(e.target.value)} 
+                                                                        value={okpo}
                                                                         placeholder=''
-                                                                        style={{borderColor: ogrnEr ? 'red' : '' }}
+                                                                        style={{borderColor: okpoEr ? 'red' : '' }}
                                                                     >
                                                                     </InputMask>
                                                                     {/* <input className="text-field__input" type="text" name="ogrn" id="ogrn" value={ogrn} onChange={(e)=>setOgrn(e.target.value)} style={{ height: '40px' }} /> */}
@@ -1233,7 +1305,7 @@ const ProfileCompany = () => {
                                                                           Изменить
                                                                         </span>
                                                                       </CButton>
-                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                                                      <CButton onClick={saveRekviz} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
                                                                         <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                           Сохранить
                                                                         </span>
