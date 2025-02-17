@@ -256,13 +256,17 @@ const ProfileCompany = () => {
       let arr = []
       const massManager = result?.managers.split(', ')
       massManager.map((item)=> {
-        const res = managerBD.find(item2=> item2.email === item)
-        const obj = {
-          fio: res?.fio,
-          dolgnost: res?.dolgnost,
-          phone: res?.phone,
+        const res = managerBD.find(item2=> item2.email === item && item)
+        console.log("res: ", res)
+        if (res) {
+          const obj = {
+            fio: res.fio,
+            dolgnost: res.dolgnost,
+            phone: res.phone,
+          }
+          arr.push(obj)
         }
-        arr.push(obj)
+        
       })
       setManData(arr)
 
@@ -391,6 +395,7 @@ const ProfileCompany = () => {
       //реквизиты
       const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
       const userObject = rekvizCopy[selectContr];
+      console.log("userObject: ", userObject)
       rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
       
       console.log("реквизиты", rekvizCopy)
@@ -504,6 +509,117 @@ const ProfileCompany = () => {
         //}, 2000)
       //}
   }
+
+  const saveProfileManager = async(id) => { 
+    console.log("save profile id: ", id)
+    
+    setShowSave(true)
+    setShowModal(true)
+
+    let managersObjArr = []
+    let strManagersObj = ''
+
+    //менеджеры
+    let strMan = ''
+        
+    man.map(async(item, index)=> {
+      strMan = strMan + item + (index+1 !== man.length ? ', ' : '')
+      //managersObjArr.push(item)
+    })
+    //console.log("managersObjArr: ", managersObjArr)
+  
+    const saveData = { 
+        userId,  
+        title, 
+        city,
+        office,
+        sklad,
+        comment,
+        //projects: JSON.stringify(projectsArr),
+        managers: strMan,
+        dogovorDate, 
+        dogovorNumber, 
+        bugalterFio, 
+        bugalterEmail,
+        bugalterPhone,  
+        inn, //инн компании
+        profile,
+        sfera,
+        comteg,
+        //rekviziti: JSON.stringify(rekvizCopy),
+      }
+      console.log("saveData: ", saveData)
+  
+      setCompanys((companys) => {	
+  
+        let userIndex = companys.findIndex((comp) => comp.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(companys));
+  
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          title, 
+          city,
+          office,
+          sklad,
+          comment,
+          projects,
+          managers: strManagersObj,
+          dogovorDate, 
+          dogovorNumber, 
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,  
+          inn, //инн компании
+          profile,
+          sfera,
+          comteg,
+          //rekviziti: JSON.stringify(rekvizCopy),
+        };
+  
+        console.log("update user: ", usersCopy[userIndex])
+  
+        return usersCopy;
+      });
+
+
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+
+      const saveData2 = { 
+        companyId: result?.id
+      }
+      
+      if (!result) {
+        const resAdd = await addCompanyProf(saveData)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+        
+      } else {
+        //сохранить изменения в базе
+        const resUpdate = await editCompanyProf(saveData, result?.id)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+      }
+  
+      //addToast(exampleToast) //ваши данные сохранены
+
+      setTimeout(()=> {
+        setShowModal(false)
+        closeProfile()
+      }, 2000)  
+
+    //} else {
+     // setShowModal(true)
+
+     // setTimeout(()=> {
+     //   setShowModal(false)
+      //}, 2000)
+    //}
+}
   
   const blockedProfile = () => { 
       setBlockProfile(!blockProfile)
@@ -1067,7 +1183,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>ФИО</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[0].fio}
+                                                                          {manData[0]?.fio}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1076,7 +1192,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>ФИО</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[1].fio}
+                                                                          {manData[1]?.fio}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1085,7 +1201,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>ФИО</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                        {manData[2].fio}
+                                                                        {manData[2]?.fio}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1255,7 +1371,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[0].dolgnost}
+                                                                          {manData[0]?.dolgnost}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1263,7 +1379,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[1].dolgnost}
+                                                                          {manData[1]?.dolgnost}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1272,7 +1388,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[2].dolgnost}
+                                                                          {manData[2]?.dolgnost}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1369,7 +1485,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[0].phone}
+                                                                          {manData[0]?.phone}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1378,7 +1494,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[1].phone}
+                                                                          {manData[1]?.phone}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div> 
@@ -1387,7 +1503,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[2].phone}
+                                                                          {manData[2]?.phone}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div> 
@@ -1398,7 +1514,7 @@ const ProfileCompany = () => {
                                                                           Изменить
                                                                         </span>
                                                                       </CButton>
-                                                                      <CButton onClick={()=>saveProfile(id)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                                                      <CButton onClick={()=>saveProfileManager(id)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
                                                                         <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                           Сохранить
                                                                         </span>
