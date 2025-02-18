@@ -168,6 +168,11 @@ const ProfileCompany = () => {
   const [contragent1, setContragent1] = useState('Тест')
   const [contragent2, setContragent2] = useState('Тест2')
   const [contragent3, setContragent3] = useState('Тест3')
+  const [contragent4, setContragent4] = useState('Тест4')
+
+  const [showContr4, setShowContr4] = useState(false)
+  const [showEditContr, setShowEditContr] = useState(false)
+
 
   const [selectContr, setSelectContr] = useState(0);
 
@@ -385,31 +390,15 @@ const ProfileCompany = () => {
   //сохранить профиль
   const saveProfile = async(id) => { 
       console.log("save profile id: ", id)
-      
-      //setShowClose(true)
-      
 
       setShowSave(true)
       setShowModal(true)
-
-      //реквизиты
-      const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
-      const userObject = rekvizCopy[selectContr];
-      console.log("userObject: ", userObject)
-      rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
-      
-      console.log("реквизиты", rekvizCopy)
-      setRekviziti(JSON.stringify(rekvizCopy))
 
       let managersObjArr = []
       let strManagersObj = ''
 
       //менеджеры
       let strMan = ''
-      //const strMan = man1 + (man2 ? ', ' + man2 : '') + (man3 ? ', ' + man3 : '')
-      //console.log("менеджеры", strMan)
-
-
           
       man.map(async(item, index)=> {
         strMan = strMan + item + (index+1 !== man.length ? ', ' : '')
@@ -435,7 +424,7 @@ const ProfileCompany = () => {
           profile,
           sfera,
           comteg,
-          rekviziti: JSON.stringify(rekvizCopy),
+          //rekviziti: JSON.stringify(rekvizCopy),
         }
         console.log("saveData: ", saveData)
     
@@ -462,7 +451,7 @@ const ProfileCompany = () => {
             profile,
             sfera,
             comteg,
-            rekviziti: JSON.stringify(rekvizCopy),
+            //rekviziti: JSON.stringify(rekvizCopy),
           };
     
           console.log("update user: ", usersCopy[userIndex])
@@ -686,7 +675,7 @@ const ProfileCompany = () => {
     
   }
 
-  const saveRekviz = () => {
+  const saveRekviz = async() => {
     if (bank.length === 0) {
       setBankEr(true)
       setShowSave(false)
@@ -772,14 +761,87 @@ const ProfileCompany = () => {
       
       let arr = []
 
-      const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
+      const rekvizCopy = objRekviz.length > 0 ? JSON.parse(JSON.stringify(objRekviz)) : [];
       const userObject = rekvizCopy[selectContr];
       rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
       
       console.log("реквизиты", rekvizCopy)
       setRekviziti(JSON.stringify(rekvizCopy))
 
-      saveProfile(id)
+      //saveProfile(id)
+      const saveData = { 
+        userId,  
+        title, 
+        city,
+        office,
+        sklad,
+        comment,
+        dogovorDate, 
+        dogovorNumber, 
+        bugalterFio, 
+        bugalterEmail,
+        bugalterPhone,  
+        inn, //инн компании
+        profile,
+        sfera,
+        comteg,
+        rekviziti: JSON.stringify(rekvizCopy),
+      }
+      console.log("saveData: ", saveData)
+  
+      setCompanys((companys) => {	
+  
+        let userIndex = companys.findIndex((comp) => comp.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(companys));
+  
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          title, 
+          city,
+          office,
+          sklad,
+          comment,
+          projects,
+          dogovorDate, 
+          dogovorNumber, 
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,  
+          inn, //инн компании
+          profile,
+          sfera,
+          comteg,
+          rekviziti: JSON.stringify(rekvizCopy),
+        };
+  
+        console.log("update user: ", usersCopy[userIndex])
+  
+        return usersCopy;
+      });
+
+
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+
+      const saveData2 = { 
+        companyId: result?.id
+      }
+      
+      if (!result) {
+        const resAdd = await addCompanyProf(saveData)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+        
+      } else {
+        //сохранить изменения в базе
+        const resUpdate = await editCompanyProf(saveData, result?.id)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+      }
     }
 
 
@@ -793,6 +855,19 @@ const ProfileCompany = () => {
     let arr = JSON.parse(JSON.stringify(man)) 
     arr[index] = e.target.value 
     setMan(arr)
+  }
+
+
+  const addContragent = () => {
+    setShowContr4(true)
+  }
+
+  const delContragent = () => {
+    setShowContr4(false)
+  }
+
+  const editContragent = () => {
+    setShowEditContr(!showEditContr)
   }
 
 
@@ -867,28 +942,42 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
                                                                     <div onClick={()=>changeKontra(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 0 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
-                                                                    {/* <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} /> */}
+                                                                    :<input onChange={(e)=>setContragent1(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    }
                                                                   </div>
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
                                                                     <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
-                                                                    {/* <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} /> */}
+                                                                    :<input onChange={(e)=>setContragent2(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    }
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
                                                                     <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
-                                                                    {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
+                                                                    :<input onChange={(e)=>setContragent3(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    }
+                                                                  </div>
+
+                                                                  <div style={{ marginTop: '20px', display: showContr4 ? 'block' : 'none'}}>
+                                                                    <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
+                                                                    <div onClick={()=>changeKontra(3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent4}</div>
+                                                                    :<input onChange={(e)=>setContragent4(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent4} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    }
                                                                   </div>
 
                                                                   <div style={{ marginTop: '46px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                    <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
+                                                                    <CButton onClick={addContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
                                                                       <span style={{fontSize: '16px', color: 'blue', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                         Добавить
                                                                       </span>
                                                                     </CButton>
-                                                                    <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
+                                                                    <CButton onClick={delContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
                                                                       <span style={{fontSize: '16px', color: 'red', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                         Удалить
                                                                       </span>
@@ -1453,9 +1542,9 @@ const ProfileCompany = () => {
                                                                   </div>
 
                                                                 <div style={{ marginTop: '45px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
+                                                                      <CButton onClick={editContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
                                                                         <span style={{fontSize: '16px', color: 'yellow', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                                                          Изменить
+                                                                        {showEditContr ? 'Применить' : 'Изменить'}
                                                                         </span>
                                                                       </CButton>
                                                                       <CButton onClick={saveRekviz} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
