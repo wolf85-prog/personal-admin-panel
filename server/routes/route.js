@@ -16,7 +16,7 @@ const { newConversationWorker, getConversationWorker, getConversationsW } = requ
 const { getProjectsAll, 
     getProjectsDelete, getProjectId, 
     getProjectCreate, getProjectUpdate, 
-    getProjectDel, getProjectChatId, getProjectsByDate} = require('../controllers/projectController')
+    getProjectDel, getProjectChatId, getProjectsByDate, getProjectsByFilter} = require('../controllers/projectController')
 
 const { getSpecialistAll, getSpecialist, getSpecCount, editSpecialist, 
     getSpecialistId, addSpecialist, deleteSpecialist, 
@@ -35,7 +35,7 @@ const { getPlatforms, getPlatformCount, editPlatform, getPlatformId,
 const { uploadFile } = require( "../controllers/fileController")
 
 const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, 
-    addMainspec, getMainspecCountAll, deleteMainspecProject } = require('../controllers/mainspecController')
+    addMainspec, getMainspecCountAll, deleteMainspecProject,getMainSpecProjectDate } = require('../controllers/mainspecController')
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
@@ -104,6 +104,7 @@ route.patch('/projects/update/:id', getProjectUpdate)
 route.get('/projects/delete/:id', getProjectDel)
 route.get('/projects/chat/get/:id', getProjectChatId)
 route.post('/projects/get', getProjectsByDate)
+route.post('/projects/filter', getProjectsByFilter)
 
 
 
@@ -170,6 +171,8 @@ route.get("/mainspec/delete/:id", deleteMainspec);
 route.get("/mainspec/project/delete/:id", deleteMainspecProject);
 route.post("/mainspec/add", addMainspec);
 route.get("/mainspec/count/get/:userId", getMainspecCountAll);
+route.post('/mainspec/project/date', getMainSpecProjectDate)
+
 
 route.get("/crmid/add", addCrmID);
 route.get("/crmid/get", getCrmID);

@@ -18,6 +18,26 @@ const socketUrl = process.env.SOCKET_APP_URL
 
 class MainspecController {
 
+    async getMainSpecProjectDate(req, res) {
+        const {id, date} = req.body  
+        try {
+            const workers = await MainSpec.findAll({
+                order: [
+                    ['number', 'ASC'], //DESC, ASC
+                ],
+                where: {
+                    date: {
+                        [Op.eq]: date
+                    },
+                    projectId: id
+                }
+            })
+            return res.status(200).json(workers);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     async getMainSpecProject(req, res) {
         const {id} = req.params  
         try {
