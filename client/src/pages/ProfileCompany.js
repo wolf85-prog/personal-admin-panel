@@ -830,6 +830,7 @@ const ProfileCompany = () => {
           sfera,
           comteg,
           rekviziti: JSON.stringify(rekvizCopy),
+          contragent: JSON.stringify(arr),
         };
   
         console.log("update user: ", usersCopy[userIndex])

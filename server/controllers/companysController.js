@@ -212,6 +212,7 @@ class CompanysController {
                 sfera,
                 comteg,
                 rekviziti,
+                contragent,
             } = req.body
 
             const newUser = await CompanyProf.update(
@@ -234,6 +235,7 @@ class CompanysController {
                     sfera,
                     comteg,
                     rekviziti,
+                    contragent,
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);
