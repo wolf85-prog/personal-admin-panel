@@ -165,6 +165,7 @@ const ProfileCompany = () => {
   const [emailK3, setEmailK3] = useState('');
   const [urAddress3, setUrAddress3] = useState('');
 
+  const [contragents, setContragents] = useState([])
   const [contragent1, setContragent1] = useState('Тест')
   const [contragent2, setContragent2] = useState('Тест2')
   const [contragent3, setContragent3] = useState('Тест3')
@@ -278,6 +279,17 @@ const ProfileCompany = () => {
       const objRekviz = result.rekviziti ? JSON.parse(result.rekviziti) : ''
       setObjRekviz(objRekviz)
       console.log("objRekviz: ", objRekviz)
+
+
+      const objContragent = result.contragent ? JSON.parse(result.contragent) : ''
+      console.log("objContragent: ", objContragent)
+      if (objContragent && objContragent.length>0) {
+        setContragent1(objContragent[0])
+        setContragent2(objContragent[1])
+        setContragent3(objContragent[2])
+        setContragent4(objContragent[3])
+      }
+      
 
       setDirektor(objRekviz[0]?.direktor ? objRekviz[0]?.direktor : '')
       setInn(objRekviz[0]?.inn ? objRekviz[0]?.inn : '')
@@ -765,6 +777,11 @@ const ProfileCompany = () => {
       const userObject = rekvizCopy[selectContr];
       rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
       
+      arr.push(contragent1)
+      arr.push(contragent2)
+      arr.push(contragent3)
+      arr.push(contragent4)
+
       console.log("реквизиты", rekvizCopy)
       setRekviziti(JSON.stringify(rekvizCopy))
 
@@ -786,6 +803,7 @@ const ProfileCompany = () => {
         sfera,
         comteg,
         rekviziti: JSON.stringify(rekvizCopy),
+        contragent: JSON.stringify(arr),
       }
       console.log("saveData: ", saveData)
   
