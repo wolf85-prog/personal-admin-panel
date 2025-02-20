@@ -877,14 +877,27 @@ const ProfileCompany = () => {
   }
 
 
+  useEffect(()=> {
+    console.log("contragents: ", contragents)
+  }, [contragents])
+
+
+  //Добавить контрагента
   const addContragent = () => {
-    setShowContr4(true)
+    //setShowContr4(true)
+    
+    //let arr = []
+    //arr.push("Новый")
+
+    setContragents([...contragents, "Новый"])
   }
 
+  //Удалить контрагента
   const delContragent = () => {
-    setShowContr4(false)
+    setContragents(contragents.filter((item, index)=>index !== contragents.length-1))
   }
 
+  //Редактировать контрагента
   const editContragent = () => {
     setShowEditContr(!showEditContr)
   }
@@ -982,13 +995,19 @@ const ProfileCompany = () => {
                                                                     }
                                                                   </div>
 
-                                                                  <div style={{ marginTop: '20px', display: showContr4 ? 'block' : 'none'}}>
-                                                                    <label className='title-label'>Контрагент</label>
-                                                                    {!showEditContr ? 
-                                                                    <div onClick={()=>changeKontra(3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent4}</div>
-                                                                    :<input onChange={(e)=>setContragent4(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent4} style={{ height: '40px', cursor: 'pointer' }} />
-                                                                    }
-                                                                  </div>
+                                                                  {contragents && contragents.map((item, index)=> (
+                                                                    <div style={{ marginTop: '20px'}} key={index}>
+                                                                      <label className='title-label'>Контрагент</label>
+                                                                      {!showEditContr ? 
+                                                                      <div onClick={()=>changeKontra(index+3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === index+3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{item}</div> 
+                                                                      :<input onChange={(e)=>{
+                                                                        contragents[index] = e.target.value
+                                                                        setContragents(contragents)
+                                                                      }} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragents[index]} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      }
+                                                                    </div>
+                                                                  ))
+                                                                  }
 
                                                                   <div style={{ marginTop: '46px', display: 'flex', justifyContent: 'space-between'}}>
                                                                     <CButton onClick={addContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
