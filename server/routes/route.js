@@ -35,7 +35,7 @@ const { getPlatforms, getPlatformCount, editPlatform, getPlatformId,
 const { uploadFile } = require( "../controllers/fileController")
 
 const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, 
-    addMainspec, getMainspecCountAll, deleteMainspecProject,getMainSpecProjectDate } = require('../controllers/mainspecController')
+    addMainspec, getMainspecCountAll, deleteMainspecProject,getMainSpecProjectDate,getMainSpecByFilter } = require('../controllers/mainspecController')
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
@@ -171,7 +171,9 @@ route.get("/mainspec/delete/:id", deleteMainspec);
 route.get("/mainspec/project/delete/:id", deleteMainspecProject);
 route.post("/mainspec/add", addMainspec);
 route.get("/mainspec/count/get/:userId", getMainspecCountAll);
+route.post('/mainspec/filter', getMainSpecByFilter)
 route.post('/mainspec/project/date', getMainSpecProjectDate)
+
 
 
 route.get("/crmid/add", addCrmID);

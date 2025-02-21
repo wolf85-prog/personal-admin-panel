@@ -6,7 +6,7 @@ const { Op, QueryTypes  } = require('sequelize')
 class ProjectController {
 
     async getProjectsByFilter(req, res) {
-        const { crmId } = req.body;
+        const { crmId, ids } = req.body;        
         try {
 
             if (crmId) {
@@ -14,6 +14,17 @@ class ProjectController {
                     order: [["id", "DESC"]],
                     where: {
                       crmID: crmId,
+                    },
+                  });
+                  return res.status(200).json(projects);
+
+            }
+            if (ids) {
+                
+                const projects = await Project.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                      id: {[Op.in]: ids},
                     },
                   });
                   return res.status(200).json(projects);
@@ -29,6 +40,7 @@ class ProjectController {
 
     async getProjectsByDate(req, res) {
         const { dateFilter } = req.body;
+        console.log(dateFilter)
         try {     
     
           const projects = await Project.findAll({

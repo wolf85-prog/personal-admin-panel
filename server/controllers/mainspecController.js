@@ -17,6 +17,40 @@ const {io} = require("socket.io-client");
 const socketUrl = process.env.SOCKET_APP_URL
 
 class MainspecController {
+    async getMainSpecByFilter(req, res) {
+        const { dateFilter, mainSpecDateNotEmpty, projectId} = req.body;        
+        
+        try {
+
+            if (dateFilter) {
+                const workers = await MainSpec.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                        updatedAt: {
+                            [Op.gte]: Date.parse(dateFilter),
+                          },
+                    },
+                  });
+                  return res.status(200).json(workers);
+
+            }
+            if (mainSpecDateNotEmpty === "yes") {
+                
+                const workers = await MainSpec.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                        id: Number(projectId),
+                    },
+                  });
+                  return res.status(200).json(workers);
+
+            }
+    
+          
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+      }
 
     async getMainSpecProjectDate(req, res) {
         const {id, date} = req.body  
