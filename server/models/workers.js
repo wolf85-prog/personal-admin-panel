@@ -14,7 +14,7 @@ const Worker = sequelize.define('worker', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
     userId: {type: DataTypes.STRING}, 
     fio: {type: DataTypes.STRING},
-    chatId: {type: DataTypes.STRING, unique: false},
+    chatId: {type: DataTypes.STRING},
     phone: {type: DataTypes.STRING},
     specialization: {type: DataTypes.TEXT},  
     city: {type: DataTypes.STRING},
