@@ -39,7 +39,7 @@ class MainspecController {
                 const workers = await MainSpec.findAll({
                     order: [["id", "DESC"]],
                     where: {
-                        id: Number(projectId),
+                        projectId: Number(projectId),
                     },
                   });
                   return res.status(200).json(workers);
