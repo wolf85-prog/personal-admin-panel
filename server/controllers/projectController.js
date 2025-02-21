@@ -39,8 +39,7 @@ class ProjectController {
 
 
     async getProjectsByDate(req, res) {
-        const { dateFilter } = req.body;
-        console.log(dateFilter)
+        const { dateFilter } = req.body;        
         try {     
     
           const projects = await Project.findAll({
