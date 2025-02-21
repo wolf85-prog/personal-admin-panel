@@ -33,6 +33,8 @@ const app = express();
 const corsOptions = {
     origin: [
         'https://uley.company:2001', 
+        'https://uley.company:7979', 
+        'https://uley.company:6969', 
         'http://localhost:3000', 
         'http://localhost:3001', 
         'https://uley.company', 
