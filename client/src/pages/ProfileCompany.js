@@ -203,6 +203,7 @@ const ProfileCompany = () => {
   const [showModal, setShowModal] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
+  const [visibleClear, setVisibleClear] = useState(false)
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
@@ -884,7 +885,7 @@ const ProfileCompany = () => {
 
   //Добавить контрагента
   const addContragent = () => {
-    //setShowContr4(true)
+    setShowEditContr(false)
     
     //let arr = []
     //arr.push("Новый")
@@ -894,13 +895,23 @@ const ProfileCompany = () => {
 
   //Удалить контрагента
   const delContragent = () => {
-    setContragents(contragents.filter((item, index)=>index !== contragents.length-1))
+    setVisibleClear(false)
+    if (contragents.length !==0) {
+      setContragents(contragents.filter((item, index)=>index !== contragents.length-1))
+    } else {
+      console.log("Очистить контрагента", selectContr)
+      console.log(objRekviz)
+      setObjRekviz(objRekviz.filter((item, index)=>index !== selectContr))
+      //setRekviziti(rekviziti)
+    }
+    
   }
 
   //Редактировать контрагента
   const editContragent = () => {
     setShowEditContr(!showEditContr)
   }
+
 
 
   return (
@@ -1000,9 +1011,11 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Контрагент</label>
                                                                       {!showEditContr ? 
                                                                       <div onClick={()=>changeKontra(index+3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === index+3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{item}</div> 
-                                                                      :<input onChange={(e)=>{
+                                                                      :<input key={index} onChange={(e)=>{
                                                                         contragents[index] = e.target.value
+                                                                        console.log(contragents)
                                                                         setContragents(contragents)
+                                                                        setContragent4(e.target.value)
                                                                       }} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragents[index]} style={{ height: '40px', cursor: 'pointer' }} />
                                                                       }
                                                                     </div>
@@ -1015,7 +1028,7 @@ const ProfileCompany = () => {
                                                                         Добавить
                                                                       </span>
                                                                     </CButton>
-                                                                    <CButton onClick={delContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
+                                                                    <CButton onClick={()=>setVisibleClear(true)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
                                                                       <span style={{fontSize: '16px', color: 'red', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                         Удалить
                                                                       </span>
@@ -1104,7 +1117,7 @@ const ProfileCompany = () => {
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
@@ -1675,6 +1688,26 @@ const ProfileCompany = () => {
                                             {showSave ? 'Данные успешно сохранены' : 'Некорректно заполненные данные!'}
                                           </CModalBody>
                                         </CModal>
+
+                    <CModal
+                      backdrop="static"
+                      visible={visibleClear}
+                      onClose={() => setVisibleClear(false)}
+                      aria-labelledby="StaticBackdropExampleLabel"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
+                      </CModalHeader>
+                      <CModalBody>
+                        Вы уверены, что хотите удалить данные?
+                      </CModalBody>
+                      <CModalFooter>
+                                                          <CButton color="secondary" onClick={() => setVisibleClear(false)}>
+                                                            Отмена
+                                                          </CButton>
+                                                          <CButton color="primary" onClick={()=>delContragent()}>Да</CButton>
+                      </CModalFooter>
+                    </CModal>
                   
                 </Suspense>
             </CContainer>
