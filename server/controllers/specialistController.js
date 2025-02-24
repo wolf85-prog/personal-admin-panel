@@ -16,6 +16,28 @@ const {io} = require("socket.io-client");
 const socketUrl = process.env.SOCKET_APP_URL
 
 class SpecialistController {
+    async getSpecialistsByFilter(req, res) {
+        const { ids } = req.body;        
+        try {
+           
+            if (ids) {
+                
+                const workers = await Worker.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                      id: {[Op.in]: ids},
+                    },
+                  });
+                  return res.status(200).json(workers);
+
+            }
+    
+          
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+      }
+
 
     async getSpecialistAll(req, res) {
         try {
