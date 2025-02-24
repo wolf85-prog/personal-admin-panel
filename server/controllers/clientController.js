@@ -17,6 +17,39 @@ const socketUrl = process.env.SOCKET_APP_URL
 
 class ClientController {
 
+    async getClientByFilter(req, res) {
+        const { id, rezerv} = req.body;        
+        
+        try {
+
+            if (id) {
+                const workers = await MainSpec.findOne({
+                    order: [["id", "DESC"]],
+                    where: {
+                        id: id,
+                    },
+                  });
+                  return res.status(200).json(workers);
+
+            }
+            if (rezerv) {
+                
+                const workers = await MainSpec.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                        projectId: rezerv,
+                    },
+                  });
+                  return res.status(200).json(workers);
+
+            }
+    
+          
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+      }
+
     async getClientAll(req, res) {
         try {
             const workers = await Client.findAll({

@@ -40,6 +40,9 @@ class MainspecController {
                     order: [["id", "DESC"]],
                     where: {
                         projectId: projectId,
+                        date: {
+                            [Op.ne]: null
+                        }
                     },
                   });
                   return res.status(200).json(workers);
