@@ -165,9 +165,15 @@ const ProfileCompany = () => {
   const [emailK3, setEmailK3] = useState('');
   const [urAddress3, setUrAddress3] = useState('');
 
+  const [contragents, setContragents] = useState([])
   const [contragent1, setContragent1] = useState('Тест')
   const [contragent2, setContragent2] = useState('Тест2')
   const [contragent3, setContragent3] = useState('Тест3')
+  const [contragent4, setContragent4] = useState('Тест4')
+
+  const [showContr4, setShowContr4] = useState(false)
+  const [showEditContr, setShowEditContr] = useState(false)
+
 
   const [selectContr, setSelectContr] = useState(0);
 
@@ -197,6 +203,7 @@ const ProfileCompany = () => {
   const [showModal, setShowModal] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
+  const [visibleClear, setVisibleClear] = useState(false)
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
@@ -256,19 +263,34 @@ const ProfileCompany = () => {
       let arr = []
       const massManager = result?.managers.split(', ')
       massManager.map((item)=> {
-        const res = managerBD.find(item2=> item2.email === item)
-        const obj = {
-          fio: res?.fio,
-          dolgnost: res?.dolgnost,
-          phone: res?.phone,
+        const res = managerBD.find(item2=> item2.email === item && item)
+        console.log("res: ", res)
+        if (res) {
+          const obj = {
+            fio: res.fio,
+            dolgnost: res.dolgnost,
+            phone: res.phone,
+          }
+          arr.push(obj)
         }
-        arr.push(obj)
+        
       })
       setManData(arr)
 
       const objRekviz = result.rekviziti ? JSON.parse(result.rekviziti) : ''
       setObjRekviz(objRekviz)
       console.log("objRekviz: ", objRekviz)
+
+
+      const objContragent = result.contragent ? JSON.parse(result.contragent) : ''
+      console.log("objContragent: ", objContragent)
+      if (objContragent && objContragent.length>0) {
+        setContragent1(objContragent[0])
+        setContragent2(objContragent[1])
+        setContragent3(objContragent[2])
+        setContragent4(objContragent[3])
+      }
+      
 
       setDirektor(objRekviz[0]?.direktor ? objRekviz[0]?.direktor : '')
       setInn(objRekviz[0]?.inn ? objRekviz[0]?.inn : '')
@@ -381,30 +403,15 @@ const ProfileCompany = () => {
   //сохранить профиль
   const saveProfile = async(id) => { 
       console.log("save profile id: ", id)
-      
-      //setShowClose(true)
-      
 
       setShowSave(true)
       setShowModal(true)
-
-      //реквизиты
-      const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
-      const userObject = rekvizCopy[selectContr];
-      rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
-      
-      console.log("реквизиты", rekvizCopy)
-      setRekviziti(JSON.stringify(rekvizCopy))
 
       let managersObjArr = []
       let strManagersObj = ''
 
       //менеджеры
       let strMan = ''
-      //const strMan = man1 + (man2 ? ', ' + man2 : '') + (man3 ? ', ' + man3 : '')
-      //console.log("менеджеры", strMan)
-
-
           
       man.map(async(item, index)=> {
         strMan = strMan + item + (index+1 !== man.length ? ', ' : '')
@@ -430,7 +437,7 @@ const ProfileCompany = () => {
           profile,
           sfera,
           comteg,
-          rekviziti: JSON.stringify(rekvizCopy),
+          //rekviziti: JSON.stringify(rekvizCopy),
         }
         console.log("saveData: ", saveData)
     
@@ -457,7 +464,7 @@ const ProfileCompany = () => {
             profile,
             sfera,
             comteg,
-            rekviziti: JSON.stringify(rekvizCopy),
+            //rekviziti: JSON.stringify(rekvizCopy),
           };
     
           console.log("update user: ", usersCopy[userIndex])
@@ -504,6 +511,117 @@ const ProfileCompany = () => {
         //}, 2000)
       //}
   }
+
+  const saveProfileManager = async(id) => { 
+    console.log("save profile id: ", id)
+    
+    setShowSave(true)
+    setShowModal(true)
+
+    let managersObjArr = []
+    let strManagersObj = ''
+
+    //менеджеры
+    let strMan = ''
+        
+    man.map(async(item, index)=> {
+      strMan = strMan + item + (index+1 !== man.length ? ', ' : '')
+      //managersObjArr.push(item)
+    })
+    //console.log("managersObjArr: ", managersObjArr)
+  
+    const saveData = { 
+        userId,  
+        title, 
+        city,
+        office,
+        sklad,
+        comment,
+        //projects: JSON.stringify(projectsArr),
+        managers: strMan,
+        dogovorDate, 
+        dogovorNumber, 
+        bugalterFio, 
+        bugalterEmail,
+        bugalterPhone,  
+        inn, //инн компании
+        profile,
+        sfera,
+        comteg,
+        //rekviziti: JSON.stringify(rekvizCopy),
+      }
+      console.log("saveData: ", saveData)
+  
+      setCompanys((companys) => {	
+  
+        let userIndex = companys.findIndex((comp) => comp.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(companys));
+  
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          title, 
+          city,
+          office,
+          sklad,
+          comment,
+          projects,
+          managers: strManagersObj,
+          dogovorDate, 
+          dogovorNumber, 
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,  
+          inn, //инн компании
+          profile,
+          sfera,
+          comteg,
+          //rekviziti: JSON.stringify(rekvizCopy),
+        };
+  
+        console.log("update user: ", usersCopy[userIndex])
+  
+        return usersCopy;
+      });
+
+
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+
+      const saveData2 = { 
+        companyId: result?.id
+      }
+      
+      if (!result) {
+        const resAdd = await addCompanyProf(saveData)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+        
+      } else {
+        //сохранить изменения в базе
+        const resUpdate = await editCompanyProf(saveData, result?.id)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+      }
+  
+      //addToast(exampleToast) //ваши данные сохранены
+
+      setTimeout(()=> {
+        setShowModal(false)
+        closeProfile()
+      }, 2000)  
+
+    //} else {
+     // setShowModal(true)
+
+     // setTimeout(()=> {
+     //   setShowModal(false)
+      //}, 2000)
+    //}
+}
   
   const blockedProfile = () => { 
       setBlockProfile(!blockProfile)
@@ -570,7 +688,7 @@ const ProfileCompany = () => {
     
   }
 
-  const saveRekviz = () => {
+  const saveRekviz = async() => {
     if (bank.length === 0) {
       setBankEr(true)
       setShowSave(false)
@@ -656,14 +774,94 @@ const ProfileCompany = () => {
       
       let arr = []
 
-      const rekvizCopy = JSON.parse(JSON.stringify(objRekviz));
+      const rekvizCopy = objRekviz.length > 0 ? JSON.parse(JSON.stringify(objRekviz)) : [];
       const userObject = rekvizCopy[selectContr];
       rekvizCopy[selectContr] = { ...userObject, direktor, inn, raschet, corschet, bik, okpo, ogrn, bank, phoneK, emailK, urAddress};
       
+      arr.push(contragent1)
+      arr.push(contragent2)
+      arr.push(contragent3)
+      arr.push(contragent4)
+
       console.log("реквизиты", rekvizCopy)
       setRekviziti(JSON.stringify(rekvizCopy))
 
-      saveProfile(id)
+      //saveProfile(id)
+      const saveData = { 
+        userId,  
+        title, 
+        city,
+        office,
+        sklad,
+        comment,
+        dogovorDate, 
+        dogovorNumber, 
+        bugalterFio, 
+        bugalterEmail,
+        bugalterPhone,  
+        inn, //инн компании
+        profile,
+        sfera,
+        comteg,
+        rekviziti: JSON.stringify(rekvizCopy),
+        contragent: JSON.stringify(arr),
+      }
+      console.log("saveData: ", saveData)
+  
+      setCompanys((companys) => {	
+  
+        let userIndex = companys.findIndex((comp) => comp.id === id);
+        const usersCopy = JSON.parse(JSON.stringify(companys));
+  
+        const userObject = usersCopy[userIndex];
+        usersCopy[userIndex] = { ...userObject, 
+          title, 
+          city,
+          office,
+          sklad,
+          comment,
+          projects,
+          dogovorDate, 
+          dogovorNumber, 
+          bugalterFio, 
+          bugalterEmail,
+          bugalterPhone,  
+          inn, //инн компании
+          profile,
+          sfera,
+          comteg,
+          rekviziti: JSON.stringify(rekvizCopy),
+          contragent: JSON.stringify(arr),
+        };
+  
+        console.log("update user: ", usersCopy[userIndex])
+  
+        return usersCopy;
+      });
+
+
+      const result = await getCompanyProfId(userId)
+      console.log("Company: ", result)
+
+      const saveData2 = { 
+        companyId: result?.id
+      }
+      
+      if (!result) {
+        const resAdd = await addCompanyProf(saveData)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+        
+      } else {
+        //сохранить изменения в базе
+        const resUpdate = await editCompanyProf(saveData, result?.id)
+
+        //добавить Id компании в профиль
+        const result2 = await getManagerId(userId)
+        const resAdd2 = await editManager(saveData2, result2?.id)
+      }
     }
 
 
@@ -678,6 +876,42 @@ const ProfileCompany = () => {
     arr[index] = e.target.value 
     setMan(arr)
   }
+
+
+  useEffect(()=> {
+    console.log("contragents: ", contragents)
+  }, [contragents])
+
+
+  //Добавить контрагента
+  const addContragent = () => {
+    setShowEditContr(false)
+    
+    //let arr = []
+    //arr.push("Новый")
+
+    setContragents([...contragents, "Новый"])
+  }
+
+  //Удалить контрагента
+  const delContragent = () => {
+    setVisibleClear(false)
+    if (contragents.length !==0) {
+      setContragents(contragents.filter((item, index)=>index !== contragents.length-1))
+    } else {
+      console.log("Очистить контрагента", selectContr)
+      console.log(objRekviz)
+      setObjRekviz(objRekviz.filter((item, index)=>index !== selectContr))
+      //setRekviziti(rekviziti)
+    }
+    
+  }
+
+  //Редактировать контрагента
+  const editContragent = () => {
+    setShowEditContr(!showEditContr)
+  }
+
 
 
   return (
@@ -751,28 +985,50 @@ const ProfileCompany = () => {
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
                                                                     <div onClick={()=>changeKontra(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 0 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
-                                                                    {/* <input onClick={()=>changeKontra(1)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} /> */}
+                                                                    :<input onChange={(e)=>setContragent1(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    }
                                                                   </div>
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
                                                                     <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
-                                                                    {/* <input onClick={()=>changeKontra(2)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} /> */}
+                                                                    :<input onChange={(e)=>setContragent2(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    }
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
                                                                     <label className='title-label'>Контрагент</label>
+                                                                    {!showEditContr ? 
                                                                     <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
-                                                                    {/* <input onClick={()=>changeKontra(3)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} /> */}
+                                                                    :<input onChange={(e)=>setContragent3(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    }
                                                                   </div>
 
+                                                                  {contragents && contragents.map((item, index)=> (
+                                                                    <div style={{ marginTop: '20px'}} key={index}>
+                                                                      <label className='title-label'>Контрагент</label>
+                                                                      {!showEditContr ? 
+                                                                      <div onClick={()=>changeKontra(index+3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === index+3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{item}</div> 
+                                                                      :<input key={index} onChange={(e)=>{
+                                                                        contragents[index] = e.target.value
+                                                                        console.log(contragents)
+                                                                        setContragents(contragents)
+                                                                        setContragent4(e.target.value)
+                                                                      }} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragents[index]} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                      }
+                                                                    </div>
+                                                                  ))
+                                                                  }
+
                                                                   <div style={{ marginTop: '46px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                    <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
+                                                                    <CButton onClick={addContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
                                                                       <span style={{fontSize: '16px', color: 'blue', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                         Добавить
                                                                       </span>
                                                                     </CButton>
-                                                                    <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
+                                                                    <CButton onClick={()=>setVisibleClear(true)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
                                                                       <span style={{fontSize: '16px', color: 'red', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                         Удалить
                                                                       </span>
@@ -861,7 +1117,7 @@ const ProfileCompany = () => {
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </div>
                                   </div>
@@ -1067,7 +1323,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>ФИО</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[0].fio}
+                                                                          {manData[0]?.fio}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1076,7 +1332,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>ФИО</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[1].fio}
+                                                                          {manData[1]?.fio}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1085,7 +1341,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>ФИО</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                        {manData[2].fio}
+                                                                        {manData[2]?.fio}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1255,7 +1511,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[0].dolgnost}
+                                                                          {manData[0]?.dolgnost}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1263,7 +1519,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[1].dolgnost}
+                                                                          {manData[1]?.dolgnost}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1272,7 +1528,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Должность</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[2].dolgnost}
+                                                                          {manData[2]?.dolgnost}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1337,9 +1593,9 @@ const ProfileCompany = () => {
                                                                   </div>
 
                                                                 <div style={{ marginTop: '45px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
+                                                                      <CButton onClick={editContragent} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
                                                                         <span style={{fontSize: '16px', color: 'yellow', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                                                          Изменить
+                                                                        {showEditContr ? 'Применить' : 'Изменить'}
                                                                         </span>
                                                                       </CButton>
                                                                       <CButton onClick={saveRekviz} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
@@ -1369,7 +1625,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[0].phone}
+                                                                          {manData[0]?.phone}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div>
@@ -1378,7 +1634,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[1].phone}
+                                                                          {manData[1]?.phone}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div> 
@@ -1387,7 +1643,7 @@ const ProfileCompany = () => {
                                                                       <label className='title-label'>Телефон</label>
                                                                       <CTooltip content="Данные подгрузятся после сохранения профиля">
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
-                                                                          {manData[2].phone}
+                                                                          {manData[2]?.phone}
                                                                         </div>
                                                                       </CTooltip>
                                                                     </div> 
@@ -1398,7 +1654,7 @@ const ProfileCompany = () => {
                                                                           Изменить
                                                                         </span>
                                                                       </CButton>
-                                                                      <CButton onClick={()=>saveProfile(id)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                                                      <CButton onClick={()=>saveProfileManager(id)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
                                                                         <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                           Сохранить
                                                                         </span>
@@ -1432,6 +1688,26 @@ const ProfileCompany = () => {
                                             {showSave ? 'Данные успешно сохранены' : 'Некорректно заполненные данные!'}
                                           </CModalBody>
                                         </CModal>
+
+                    <CModal
+                      backdrop="static"
+                      visible={visibleClear}
+                      onClose={() => setVisibleClear(false)}
+                      aria-labelledby="StaticBackdropExampleLabel"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
+                      </CModalHeader>
+                      <CModalBody>
+                        Вы уверены, что хотите удалить данные?
+                      </CModalBody>
+                      <CModalFooter>
+                                                          <CButton color="secondary" onClick={() => setVisibleClear(false)}>
+                                                            Отмена
+                                                          </CButton>
+                                                          <CButton color="primary" onClick={()=>delContragent()}>Да</CButton>
+                      </CModalFooter>
+                    </CModal>
                   
                 </Suspense>
             </CContainer>

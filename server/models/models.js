@@ -67,6 +67,7 @@ const Worker = sequelize.define('worker', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
     userId: {type: DataTypes.STRING}, 
     fio: {type: DataTypes.STRING},
+    telegramId: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING},
     phone: {type: DataTypes.STRING},
     specialization: {type: DataTypes.TEXT},  
@@ -145,6 +146,7 @@ const CompanyProf = sequelize.define('companyprof', {
     sfera: {type: DataTypes.TEXT},
     comteg: {type: DataTypes.TEXT},
     rekviziti: {type: DataTypes.TEXT},
+    contragent: {type: DataTypes.TEXT},
 })
 
 const MainSpec = sequelize.define('mainspec', {

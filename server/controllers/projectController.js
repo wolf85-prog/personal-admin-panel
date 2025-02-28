@@ -4,11 +4,42 @@ const sequelize = require('../db')
 const { Op, QueryTypes  } = require('sequelize')
 
 class ProjectController {
+
+    async getProjectsByFilter(req, res) {
+        const { crmId, ids } = req.body;        
+        try {
+
+            if (crmId) {
+                const projects = await Project.findOne({
+                    order: [["id", "DESC"]],
+                    where: {
+                      crmID: crmId,
+                    },
+                  });
+                  return res.status(200).json(projects);
+
+            }
+            if (ids) {
+                
+                const projects = await Project.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                      id: {[Op.in]: ids},
+                    },
+                  });
+                  return res.status(200).json(projects);
+
+            }
+    
+          
+        } catch (error) {
+          return res.status(500).json(error.message);
+        }
+      }
+
+
     async getProjectsByDate(req, res) {
-        const { dateFilter } = req.body;
-        console.log(dateFilter)
-        console.log(dayjs(dateFilter))
-        
+        const { dateFilter } = req.body;        
         try {     
     
           const projects = await Project.findAll({

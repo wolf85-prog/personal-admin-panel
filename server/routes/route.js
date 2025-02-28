@@ -16,12 +16,12 @@ const { newConversationWorker, getConversationWorker, getConversationsW } = requ
 const { getProjectsAll, 
     getProjectsDelete, getProjectId, 
     getProjectCreate, getProjectUpdate, 
-    getProjectDel, getProjectChatId, getProjectsByDate} = require('../controllers/projectController')
+    getProjectDel, getProjectChatId, getProjectsByDate, getProjectsByFilter} = require('../controllers/projectController')
 
 const { getSpecialistAll, getSpecialist, getSpecCount, editSpecialist, 
     getSpecialistId, addSpecialist, deleteSpecialist, 
     getSpecCountAll, getSpecialistPhone, getSpecialistChatId, 
-    blockSpecialist,getSpecialistByPhone} = require('../controllers/specialistController')
+    blockSpecialist,getSpecialistByPhone, getSpecialistsByFilter} = require('../controllers/specialistController')
 
 const { getManagers, getManagerCount, editManager, getManagerId, 
     addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
@@ -35,14 +35,14 @@ const { getPlatforms, getPlatformCount, editPlatform, getPlatformId,
 const { uploadFile } = require( "../controllers/fileController")
 
 const { getMainSpecProject, getMainSpecId, editMainspec, deleteMainspec, 
-    addMainspec, getMainspecCountAll, deleteMainspecProject } = require('../controllers/mainspecController')
+    addMainspec, getMainspecCountAll, deleteMainspecProject,getMainSpecProjectDate,getMainSpecByFilter } = require('../controllers/mainspecController')
 
 const { addCrmID, getCrmID } = require('../controllers/crmIDController')
 
 const { getClientAll, getClient, getClientCount, editClient, 
     getClientId, addClient, deleteClient, 
     getClientCountAll, getClientPhone, getClientChatId, 
-    blockClient,getClientByPhone } = require('../controllers/clientController')
+    blockClient,getClientByPhone,getClientByFilter } = require('../controllers/clientController')
 
 
 const { newConversationSupport, getConversationSupport, getConversationsSupport } = require('../controllers/sconversationController')
@@ -104,6 +104,7 @@ route.patch('/projects/update/:id', getProjectUpdate)
 route.get('/projects/delete/:id', getProjectDel)
 route.get('/projects/chat/get/:id', getProjectChatId)
 route.post('/projects/get', getProjectsByDate)
+route.post('/projects/filter', getProjectsByFilter)
 
 
 
@@ -120,6 +121,7 @@ route.get("/workers/phone/:id", getSpecialistPhone);
 route.get("/workers/chat/:id", getSpecialistChatId);
 route.get('/workers/block/:id', blockSpecialist)
 route.post("/workers/phone", getSpecialistByPhone);
+route.post("/workers/filter", getSpecialistsByFilter);
 
 
 
@@ -170,6 +172,10 @@ route.get("/mainspec/delete/:id", deleteMainspec);
 route.get("/mainspec/project/delete/:id", deleteMainspecProject);
 route.post("/mainspec/add", addMainspec);
 route.get("/mainspec/count/get/:userId", getMainspecCountAll);
+route.post('/mainspec/filter', getMainSpecByFilter)
+route.post('/mainspec/project/date', getMainSpecProjectDate)
+
+
 
 route.get("/crmid/add", addCrmID);
 route.get("/crmid/get", getCrmID);
@@ -188,6 +194,7 @@ route.get("/client/phone/:id", getClientPhone);
 route.get("/client/chat/:id", getClientChatId);
 route.get('/client/block/:id', blockClient)
 route.post("/client/phone", getClientByPhone);
+route.post('/client/filter', getClientByFilter)
 
 //----------------- SUPPORT ---------------------------------
 route.post('/sconversation/add', newConversationSupport)

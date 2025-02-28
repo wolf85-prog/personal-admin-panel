@@ -610,7 +610,7 @@ const Specialist = () => {
     const saveData = {
       fio,
       phone,
-      chatId: telegram,
+      chatId: telegram !== '' ? telegram : null,
       city: city,
       age: age ? age+'-01-01' : '', 
       speclist,
@@ -646,7 +646,7 @@ const Specialist = () => {
         skill,
         comteg,
         comment: strComment,
-        chatId: telegram,
+        chatId: telegram !== '' ? telegram : null,
         profile,
         reyting,
         email,
