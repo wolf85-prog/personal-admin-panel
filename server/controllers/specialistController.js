@@ -227,7 +227,7 @@ class SpecialistController {
     }
 
     async getSpecCountAll(req, res) {
-        const {userId} = req.params
+        //const {userId} = req.params
         try {
             const count = await Worker.count({
                 // where: {

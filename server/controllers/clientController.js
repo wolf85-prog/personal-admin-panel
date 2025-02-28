@@ -221,12 +221,12 @@ class ClientController {
     }
 
     async getClientCountAll(req, res) {
-        const {userId} = req.params
+        //const {userId} = req.params
         try {
             const count = await Client.count({
-                where: {
-                    userId: userId
-                }
+                // where: {
+                //     userId: userId
+                // }
             });
 
             return res.status(200).json(count);
