@@ -488,6 +488,7 @@ ${loc.url}`;
 
         const newObj = {
           id: item.id,
+          userId,
           date: item.date,
           specId: item.specId,
           vidWork: JSON.stringify(obj),
@@ -511,13 +512,64 @@ ${loc.url}`;
 
     } else {
       //новый состав специалистов
+
       const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
       const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
-
       //console.log("startD: ", startD, startT)
 
+      //добавить строку в основной состав
+		  const resAdd1 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 1, stavka: "№1", userId})
+      const resAdd2 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 2, stavka: "№1", userId})
+      const resAdd3 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 3, stavka: "№1", userId})
+      const resAdd4 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 4, stavka: "№1", userId})    
+
       const data = {
-        //id: resProj.crmID+1,
+        id: resAdd1.id,
+        userId,
+        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
+        vidWork: null,
+        specId: null,
+        specialization: null,
+        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
+        comment: null,
+        comteg: null,
+        taxi: null,
+        merch: null,
+        projectId: id,    
+      }
+
+      const data2 = {
+        id: resAdd2.id,
+        userId,
+        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
+        vidWork: null,
+        specId: null,
+        specialization: null,
+        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
+        comment: null,
+        comteg: null,
+        taxi: null,
+        merch: null,
+        projectId: id,    
+      }
+
+      const data3 = {
+        id: resAdd3.id,
+        userId,
+        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
+        vidWork: null,
+        specId: null,
+        specialization: null,
+        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
+        comment: null,
+        comteg: null,
+        taxi: null,
+        merch: null,
+        projectId: id,    
+      }
+
+      const data4 = {
+        id: resAdd4.id,
         userId,
         date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
         vidWork: null,
@@ -534,7 +586,7 @@ ${loc.url}`;
       let arr = []
       setMainspec(
         //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
-        [...arr, data, data, data, data]
+        [...arr, data, data2, data3, data4]
       );
     }
 
@@ -617,6 +669,7 @@ ${loc.url}`;
         if (item.id) {
           const resEdit = await editMainspec(
             {
+              userId: item.userId,
               date: item.date,
               vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
               specId: item.specId,
@@ -881,6 +934,7 @@ ${loc.url}`;
         //readyArray.splice(2, 0, 60);
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
           id: resAdd.id,
+          userId,
           date: startDate+'T'+startTime,
           specId: '', 
           vidWork: '', 
@@ -920,6 +974,7 @@ ${loc.url}`;
           const arrayCopy = JSON.parse(JSON.stringify(mainspec));   
           arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
             id: resAdd.id,
+            userId,
             date: dublSpec.date,
             specId: dublSpec.specId,
             vidWork: dublSpec.vidWork, //JSON.stringify({name: resAdd.vidWork, color: ''}),
@@ -2011,9 +2066,9 @@ ${loc.url}`;
                                 <CTableBody> 
                                 { mainspec.length > 0 ?
                                  mainspec.map((item, index)=> (
-                                    <CTableRow key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
+                                  <CTableRow className="parent-element" key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>
                                     <CTableDataCell className="text-center" style={{position: 'relative', height: '30px'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '3px', top: '6px'}}>
+                                      <div style={{position: 'absolute', left: '3px', top: '6px'}}>
                                         <Dropdown onSelect={changeAddSpec}>
                                           <Dropdown.Toggle 
                                             as={CustomToggle} 
