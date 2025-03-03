@@ -669,7 +669,7 @@ ${loc.url}`;
         if (item.id) {
           const resEdit = await editMainspec(
             {
-              userId: item.userId,
+             // userId: item.userId,
               date: item.date,
               vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
               specId: item.specId,
@@ -687,23 +687,23 @@ ${loc.url}`;
           )
           console.log("resEdit: ", resEdit)
         } else {
-          await addMainspec(
-            {
-              userId,
-              date: item.date,
-              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-              specId: item.specId,
-              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-              comment: item.comment,
-              projectId: item.projectId,
-              number: index+1,
-              hr: item.hr,
-              // merch,
-              // taxi,
-            }
-          )
+          // await addMainspec(
+          //   {
+          //     userId,
+          //     date: item.date,
+          //     vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+          //     specId: item.specId,
+          //     specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+          //     stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+          //     comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+          //     comment: item.comment,
+          //     projectId: item.projectId,
+          //     number: index+1,
+          //     hr: item.hr,
+          //     // merch,
+          //     // taxi,
+          //   }
+          // )
         }
         
       //}, 500 * ++index)
@@ -925,7 +925,7 @@ ${loc.url}`;
       const startTime = resProj.dateStart.split('T')[1].slice(0,5)
 
       //добавить строку в основной состав
-		  const resAdd = await addMainspec({date: startDate+'T'+startTime, projectId: id, number: parseInt(eventkey.split(' ')[2])+1, stavka: "№1"})
+		  const resAdd = await addMainspec({userId, date: startDate+'T'+startTime, projectId: id, number: parseInt(eventkey.split(' ')[2])+1, stavka: "№1"})
 
       if (resAdd) {
         console.log("resAdd: ", resAdd.id)
@@ -966,7 +966,7 @@ ${loc.url}`;
         const dublSpec = mainspec.find((item, index)=> index === parseInt(eventkey.split(' ')[2]))
         console.log("dublSpec: ", dublSpec)
         
-        const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
+        const resAdd = await addMainspec({userId, projectId: dublSpec.projectId, hr: dublSpec.hr})
 
         if (resAdd) {
           console.log("resAddId: ", resAdd.id)
