@@ -11,7 +11,8 @@ export const getMainSpecProject = async (id) =>{
 
 export const editMainspec = async (data, id) =>{
     try {
-        await $host.patch(`api/mainspec/update/${id}`, data); 
+        let response = await $host.patch(`api/mainspec/update/${id}`, data); 
+        return response.data;
     } catch (error) {
         console.log("error while calling editMainspec api",error.message);
     }

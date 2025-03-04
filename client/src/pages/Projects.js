@@ -687,23 +687,23 @@ ${loc.url}`;
           )
           console.log("resEdit: ", resEdit)
         } else {
-          // await addMainspec(
-          //   {
-          //     userId,
-          //     date: item.date,
-          //     vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-          //     specId: item.specId,
-          //     specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-          //     stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-          //     comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-          //     comment: item.comment,
-          //     projectId: item.projectId,
-          //     number: index+1,
-          //     hr: item.hr,
-          //     // merch,
-          //     // taxi,
-          //   }
-          // )
+          await addMainspec(
+            {
+              userId,
+              date: item.date,
+              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
+              specId: item.specId,
+              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
+              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
+              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
+              comment: item.comment,
+              projectId: item.projectId,
+              number: index+1,
+              hr: item.hr,
+              // merch,
+              // taxi,
+            }
+          )
         }
         
       //}, 500 * ++index)
@@ -924,16 +924,14 @@ ${loc.url}`;
       const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
       const startTime = resProj.dateStart.split('T')[1].slice(0,5)
 
-      //добавить строку в основной состав
-		  const resAdd = await addMainspec({userId, date: startDate+'T'+startTime, projectId: id, number: parseInt(eventkey.split(' ')[2])+1, stavka: "№1"})
-
-      if (resAdd) {
-        console.log("resAdd: ", resAdd.id)
-
         const arrayCopy = JSON.parse(JSON.stringify(mainspec));
+
+        // если нужен элемент массива
+        let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
+ 
         //readyArray.splice(2, 0, 60);
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-          id: resAdd.id,
+          id: max.id,
           userId,
           date: startDate+'T'+startTime,
           specId: '', 
@@ -949,12 +947,10 @@ ${loc.url}`;
         })
         console.log("arrayCopy: ", arrayCopy)
         setMainspec(arrayCopy)
-      }
 
-    } else
-
+    } 
     //дублировать
-    if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
+    else if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
       console.log("eventkey: ", parseInt(eventkey.split(' ')[2]))
 
       const checkedItem = mainspec.find((item)=>item.isChecked === true)
@@ -965,60 +961,53 @@ ${loc.url}`;
       } else {
         const dublSpec = mainspec.find((item, index)=> index === parseInt(eventkey.split(' ')[2]))
         console.log("dublSpec: ", dublSpec)
-        
-        const resAdd = await addMainspec({userId, projectId: dublSpec.projectId, hr: dublSpec.hr})
-
-        if (resAdd) {
-          console.log("resAddId: ", resAdd.id)
-
-          const arrayCopy = JSON.parse(JSON.stringify(mainspec));   
-          arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-            id: resAdd.id,
+          
+          const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
+          // если нужен элемент массива
+          let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
+ 
+          const newObj = {
+            id: max.id + 1,
             userId,
             date: dublSpec.date,
             specId: dublSpec.specId,
             vidWork: dublSpec.vidWork, //JSON.stringify({name: resAdd.vidWork, color: ''}),
             specialization: dublSpec.specialization, //JSON.stringify({name: resAdd.specialization, color: ''}),
             stavka: dublSpec.stavka, //JSON.stringify({name: resAdd.stavka, color: ''}),
-            taxi: dublSpec.number,
+            taxi: dublSpec.taxi,
             merch: dublSpec.merch,
             comment: dublSpec.comment,
             comteg: dublSpec.comteg, //JSON.stringify({name: resAdd.comteg, color: ''}),
             hr: dublSpec.hr,
             projectId: dublSpec.projectId,
-          })
+          }
+
+          arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, newObj)
           console.log("arrayCopy: ", arrayCopy)
-          setMainspec(arrayCopy)
-        }    
+          setMainspec(arrayCopy)  
       }
     } 
     
     //добавить разделитель
     else if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
       //добавить строку в основной состав
-		  const resAdd = await addMainspec({projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
+		  //const resAdd = await addMainspec({userId, projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
 
-      if (resAdd) {
-        console.log("resAddId: ", resAdd.id)
+      //if (resAdd) {
 
         const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
+        // если нужен элемент массива
+        let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
+ 
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-          id: resAdd.id,
-          date: '',
-          specId: '', 
-          vidWork: '', 
-          specialization: '', 
-          comteg: '',
-          comment: '',
-          stavka: '',
-          taxi: '',
-          merch: '',
+          id: max.id,
+          userId,
           projectId: id,
           hr: true,
         })
         console.log("arrayCopy: ", arrayCopy)
         setMainspec(arrayCopy)
-      }     
+      //}     
     } 
     //удалить
     else if (eventkey.split(' ')[0] === '4') {
@@ -1140,45 +1129,36 @@ ${loc.url}`;
         const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
         console.log("dublSpec: ", dublSpec)
 
-        // const resAdd = await addMainspec({projectId: dublSpec.projectId, hr: dublSpec.hr})
-        // console.log("resAddId: ", resAdd.id)
-      
+        // если нужен элемент массива
+        let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
+        
         const newObj = {
-            //id: resAdd.id,
-            date: dublSpec.date,
-            specId: dublSpec.specId,
-            vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
-            specialization: dublSpec.specialization, //JSON.stringify({name: dublSpec.specialization, color: ''}),
-            stavka: dublSpec.stavka, //JSON.stringify({name: dublSpec.stavka, color: ''}),
-            taxi: dublSpec.number,
-            merch: dublSpec.merch,
-            comment: dublSpec.comment,
-            comteg: dublSpec.comteg, //JSON.stringify({name: dublSpec.comteg, color: ''}),
-            projectId: dublSpec.projectId, 
-            hr: dublSpec.hr,
+              id: max.id + 1,
+              userId,
+              date: dublSpec.date,
+              specId: dublSpec.specId,
+              vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
+              specialization: dublSpec.specialization, //JSON.stringify({name: dublSpec.specialization, color: ''}),
+              stavka: dublSpec.stavka, //JSON.stringify({name: dublSpec.stavka, color: ''}),
+              taxi: dublSpec.taxi,
+              merch: dublSpec.merch,
+              comment: dublSpec.comment,
+              comteg: dublSpec.comteg, //JSON.stringify({name: dublSpec.comteg, color: ''}),
+              projectId: dublSpec.projectId, 
+              hr: dublSpec.hr,
         }
-
         console.log("newObj: ", newObj)
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, newObj)
-      //}, 2000)   
+ 
+      //}, 2000)  
+      
+      console.log("newArr: ", arrayCopy)
+      const checkedvalue = arrayCopy.map((user)=>{ return {...user, isChecked: false}})
+      
+      setMainspec(checkedvalue)
     })
 
-    console.log("newArr: ", arrayCopy)
-    const checkedvalue = arrayCopy.map((user)=>{ return {...user, isChecked: false}})
-
-    // const newCheckArr = checkedvalue.map(async(item)=> {
-    //   if (!item.id) {
-    //     const resAdd = await addMainspec({projectId: item.projectId, hr: item.hr})
-    //     console.log("resAddId: ", resAdd.id)
-
-    //     return {...item, id: resAdd.id}
-    //   }
-    //   return item
-
-    // })
-    // //setMainspec(newCheckArr)
     
-    setMainspec(checkedvalue)
   }
 
   const handleAllDelete =()=> {
