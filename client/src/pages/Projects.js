@@ -663,10 +663,15 @@ ${loc.url}`;
     console.log("resSave: ", resSave)
 
     console.log("mainSpec save: ", mainspec)
+
+    const resMain = await getMainSpecProject(id)
+    console.log("mainSpec get: ", resMain)
+
     mainspec.map(async(item, index)=> {
       //setTimeout(async()=> {
-        console.log("id item: ", item.id)
-        if (item.id) {
+        //console.log("id item: ", resMain[index]?.id)
+        const resItem = resMain.find(item2 => item2.id === item.id)
+        if (resItem) {
           const resEdit = await editMainspec(
             {
              // userId: item.userId,
@@ -683,7 +688,7 @@ ${loc.url}`;
               merch: item.merch,
               taxi: item.taxi,
             },
-            item.id
+            resItem.id
           )
           console.log("resEdit: ", resEdit)
         } else {
