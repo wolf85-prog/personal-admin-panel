@@ -261,8 +261,9 @@ const ProfileCompany = () => {
       console.log("Company: ", result, userId)
 
       let arr = []
-      const massManager = result?.managers.split(', ')
-      massManager.map((item)=> {
+      const massManager = result?.managers?.split(', ')
+
+      massManager && massManager.map((item)=> {
         const res = managerBD.find(item2=> item2.email === item && item)
         console.log("res: ", res)
         if (res) {
