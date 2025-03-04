@@ -970,7 +970,7 @@ ${loc.url}`;
           const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
           // если нужен элемент массива
           let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
- 
+          console.log("max: ", max)
           const newObj = {
             id: max.id + 1,
             userId,
@@ -1003,9 +1003,9 @@ ${loc.url}`;
         const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
         // если нужен элемент массива
         let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
- 
+        console.log("max: ", max)
         arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-          id: max.id,
+          id: max.id + 1,
           userId,
           projectId: id,
           hr: true,
