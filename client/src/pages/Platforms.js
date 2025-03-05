@@ -818,19 +818,22 @@ const onSortAddress = () => {
                                     </div>
 
                                     {/* Проекты */}
-                                    <label className='title-label' style={{position: 'absolute', top: '-25px', left: '380px'}}>Проекты</label>
+                                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                                      <label className='title-label' style={{position: 'absolute', top: '-25px'}}>Проекты</label>
 
-                                    <CTooltip content="За месяц" placement="top">
-                                      <div className="text-field" style={{marginRight: '40px'}}>
-                                        <input disabled className="text-field__input" type="text" value={0} />
-                                      </div> 
-                                    </CTooltip>
+                                      <CTooltip content="За месяц" placement="bottom">
+                                        <div className="text-field" style={{marginRight: '40px'}}>
+                                          <input disabled className="text-field__input" type="text" value={0} />
+                                        </div> 
+                                      </CTooltip>
 
-                                    <CTooltip content="Всего" placement="top">
-                                      <div className="text-field">
-                                        <input disabled className="text-field__input" type="text" value={0} />
-                                      </div> 
-                                    </CTooltip>
+                                      <CTooltip content="Всего" placement="bottom">
+                                        <div className="text-field">
+                                          <input disabled className="text-field__input" type="text" value={0} />
+                                        </div> 
+                                      </CTooltip>
+                                    </div>
+                                    
                                   </div>
                                   
                                   

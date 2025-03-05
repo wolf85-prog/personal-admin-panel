@@ -331,12 +331,13 @@ const ProfileCompany = () => {
     if (role === '1') {
       fetchData()
     } else {
+      setLoading(false)
       setShowRazrab(true)
 
-      setTimeout(()=> {
-        setShowRazrab(false)
-        navigate("/")
-      }, 2000)
+      // setTimeout(()=> {
+      //   setShowRazrab(false)
+      //   navigate("/")
+      // }, 2000)
       
     }
     
@@ -953,18 +954,19 @@ const ProfileCompany = () => {
                                 {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-15px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input disabled={role==='1' ? false : true} type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-15px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
                                     </div>
                                   </div>
                                   {/* Кнопки */}
-                                  <div style={{display: 'flex', position: 'absolute', right: '0'}}>
+                                  { role==='1' ? <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                       {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                  </div>
+                                  </div>:''
+                                  }
 {/* 1 */} 
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -984,6 +986,7 @@ const ProfileCompany = () => {
                                     <input 
                                       type="file"
                                       id="formFile" 
+                                      disabled={role==='1' ? false : true}
                                       accept="image/*,image/jpeg" 
                                       name="avatar"
                                       onChange={(e) => onFileChange(e)}
@@ -1181,6 +1184,7 @@ const ProfileCompany = () => {
                                                       className="text-field__input" 
                                                       type="text" {...params.inputProps} 
                                                       placeholder=''
+                                                      disabled={role==='1' ? false : true}
                                                   />
                                               </div>
                                               )}
@@ -1197,13 +1201,13 @@ const ProfileCompany = () => {
                                       alt="" 
                                       style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
-                                    <input className="text-field__input" type="text" name="office" id="office" value={office} onChange={(e) => setOffice(e.target.value)}/>
+                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="office" id="office" value={office} onChange={(e) => setOffice(e.target.value)}/>
                                   </div> 
 
                                   {/*  */}
                                   <label className='title-label'>Склад</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} onChange={(e) => setSklad(e.target.value)}/>
+                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} onChange={(e) => setSklad(e.target.value)}/>
                                   </div> 
 
                                   {/* Менеджеры */}
@@ -1384,11 +1388,12 @@ const ProfileCompany = () => {
                                           name="phone" 
                                           id="phone"
                                           mask="+7 (999) 999-99-99"
-                                          disabled={!blockProfile}
+                                          //disabled={!blockProfile}
                                           maskChar=""
                                           onChange={(e) => setBugalterPhone(e.target.value)} 
                                           value={bugalterPhone}
                                           placeholder=''
+                                          disabled={role==='1' ? false : true}
                                       >
                                       </InputMask>    
                                   </div> 
@@ -1396,13 +1401,13 @@ const ProfileCompany = () => {
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '320px'}}/>
+                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '320px'}}/>
                                   </div> 
 
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: '20px'}}> 
-                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
+                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
                                   </div>
 
                                   {/* + добавить менеджера */}
