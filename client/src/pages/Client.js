@@ -379,7 +379,7 @@ const Client = () => {
   }
 
     client.push(newObj)
-    clientAll.push(newObj)
+    //clientAll.push(newObj)
 
     const sortedUser = [...client].sort((a, b) => {       
       var idA = a.id, idB = b.id 

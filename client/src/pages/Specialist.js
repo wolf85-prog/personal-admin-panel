@@ -384,7 +384,7 @@ const Specialist = () => {
   }
 
     specialist.push(newObj)
-    specialistAll.push(newObj)
+    //specialistAll.push(newObj)
 
     const sortedUser = [...specialist].sort((a, b) => {       
       var idA = a.id, idB = b.id 
