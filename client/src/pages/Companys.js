@@ -130,6 +130,7 @@ const Companys = () => {
   const [showMenu2, setShowMenu2] = useState(false)
   const [showManagers, setShowManagers] = useState(false)
   const [showClearCity, setShowClearCity] = useState(false)
+  const [showRazrab, setShowRazrab] = useState(false);
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
@@ -677,6 +678,13 @@ const Companys = () => {
         closeProfile()
       }, 2000)
   }
+
+  const clickManager = () => {
+    setShowRazrab(true)
+    setTimeout(()=> {     
+      setShowRazrab(false)
+    }, 2000)
+  }
   
   const blockedProfile = () => { 
       setBlockProfile(!blockProfile)
@@ -1082,7 +1090,7 @@ const Companys = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
+                                  <CButton onClick={clickManager} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
@@ -1266,6 +1274,7 @@ const Companys = () => {
                                       value={bugalterFio} 
                                       onChange={(e)=>setBugalterFio(e.target.value)} 
                                       style={{width: '300px'}}
+                                      placeholder='Фамилия Имя Отчество'
                                     />
                                   </div>
 
@@ -1361,7 +1370,16 @@ const Companys = () => {
                       </CModalFooter>
                     </CModal>
 
-                  
+                    <CModal
+                      alignment="center"
+                      visible={showRazrab}
+                      onClose={() => setShowRazrab(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Функция находится в разработке
+                      </CModalBody>
+                    </CModal>
                   
                 </Suspense>
             </CContainer>

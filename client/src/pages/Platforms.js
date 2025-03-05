@@ -65,6 +65,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { uploadFile } from './../http/chatAPI';
 import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
@@ -134,6 +135,11 @@ const Platforms = () => {
   const [countPressAddress, setCountPressAddress] = useState(0);
   const [countPressCity, setCountPressCity] = useState(0);
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedName, setSelectedName] = useState("");
+  const [imageKarta, setImageKarta]= useState("");
+
+  const API_URL_HOST = process.env.REACT_APP_HOST
 
     //поиск
   useEffect(() => {
@@ -566,6 +572,35 @@ const onSortAddress = () => {
     closeProfile()
   }
 
+
+  useEffect(() => {
+    const getImage = async () => {
+        if (selectedFile) {
+          console.log("file:", selectedFile)
+          const data = new FormData();
+          data.append("name", selectedName);
+          data.append("photo", selectedFile);
+          
+          let response = await uploadFile(data);
+          console.log("response: ", response.data.path)
+
+          setImage(API_URL_HOST + response.data.path.split('.team')[1]);
+          //сообщение с ссылкой на файл
+          console.log(API_URL_HOST + response.data.path.split('.team')[1])
+          //setValue(host + response.data.path)
+        }
+    }
+    getImage();
+  }, [selectedFile])
+
+  {/* Добавление файла */}
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setSelectedName(file.name);
+    // Additional validation logic
+  };
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -779,13 +814,20 @@ const onSortAddress = () => {
                                         />
                                     </div>
 
-                                    <div className="text-field" style={{marginRight: '40px'}}>
-                                      <input disabled className="text-field__input" type="text" />
-                                    </div> 
+                                    {/* Проекты */}
+                                    <label className='title-label' style={{position: 'absolute', top: '-25px', left: '380px'}}>Проекты</label>
 
-                                    <div className="text-field" >
-                                      <input disabled className="text-field__input" type="text" />
-                                    </div> 
+                                    <CTooltip content="За месяц" placement="top">
+                                      <div className="text-field" style={{marginRight: '40px'}}>
+                                        <input disabled className="text-field__input" type="text" value={0} />
+                                      </div> 
+                                    </CTooltip>
+
+                                    <CTooltip content="Всего" placement="top">
+                                      <div className="text-field">
+                                        <input disabled className="text-field__input" type="text" value={0} />
+                                      </div> 
+                                    </CTooltip>
                                   </div>
                                   
                                   
@@ -827,7 +869,8 @@ const onSortAddress = () => {
 
                                       <label className='title-label'>Карта</label>
                                       <div className="text-field">
-                                        <input disabled className="text-field__input" type="text" />
+                                        <input className='text-field__input' type="file"  name="photo"  onChange={handleFileChange} /> 
+                                        {/* <img src={uploadImg} alt="upload" width={30} height={30} /> */}
                                       </div> 
                                     </div>
 
