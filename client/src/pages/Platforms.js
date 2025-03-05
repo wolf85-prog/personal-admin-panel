@@ -684,6 +684,27 @@ const onSortAddress = () => {
                         )
                         :
                         <div style={{position: 'relative', height: '448px', display: 'flex', flexDirection: 'row'}}>
+                                {/* ФИО */}
+                                <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between'}}>   
+                                  <div className="text-field">
+                                    <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                  </div> 
+                                </div>
+                                {/* Кнопки */}
+                                <div style={{display: 'flex', position: 'absolute', right: '0'}}>
+                                      <CTooltip content="Удалить локацию" placement="bottom">
+                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
+                                      <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      {/* <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>   */}
+                                      <CTooltip content="Сохранить локацию" placement="bottom">
+                                        <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      </CTooltip>
+                                      <CTooltip content="Закрыть окно" placement="bottom">
+                                        <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
+                                </div>
+                    {/* 1 */} 
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {/* {
                                     profile ? 
@@ -740,26 +761,8 @@ const onSortAddress = () => {
                                     <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{blockW ? 'Убрать' : 'Добавить'}</span>
                                   </div>
 
-                                  {/* ФИО */}
-                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
-                                    <div className="text-field">
-                                      <input type="text" name="title" id="title" value={title} onChange={(e)=>setTitle(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
-                                    </div>
-                                    <div style={{display: 'flex'}}>
-                                      <CTooltip content="Удалить локацию" placement="bottom">
-                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
-                                      </CTooltip>
-                                      <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      {/* <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>   */}
-                                      <CTooltip content="Сохранить локацию" placement="bottom">
-                                        <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      </CTooltip>
-                                      <CTooltip content="Закрыть окно" placement="bottom">
-                                        <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                      </CTooltip>
-                                    </div>
-                                  </div>
-                                      {/* 2 */}
+                                  
+                                {/* 2 */}
                                 <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '100%', position: 'relative'}}>
                                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     {/* Город */}

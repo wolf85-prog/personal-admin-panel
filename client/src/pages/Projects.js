@@ -347,7 +347,7 @@ const Projects = () => {
 
     fetchData()
     
-}, [])
+}, [workersAll, clientAll, platformsAll])
 
 
 
@@ -1757,7 +1757,7 @@ ${loc.url}`;
                                               options={workersData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              //onInputChange={onChangeManager2}
+                                              //onInputChange={onChangeManager2} 
                                               onInputChange={(event, newInputValue) => {
                                                 setManagerName2(newInputValue);
                                               }}

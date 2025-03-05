@@ -309,6 +309,19 @@ const Profile = () => {
                               <CSpinner/>                        
                               :
                               <div style={{position: 'relative', height: '402px', display: 'flex', flexDirection: 'row'}}>
+                                  {/* ФИО */}
+                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between'}}>   
+                                    <div className="text-field">
+                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '650px'}}></input>
+                                    </div> 
+                                  </div>
+                                   {/* Кнопки */}
+                                  <div style={{display: 'flex', position: 'absolute', right: '0'}}>
+                                    <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                    <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                  </div>
+
+
 {/* 1 */}                               
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
@@ -362,22 +375,6 @@ const Profile = () => {
                                       style={{width: '250px'}}
                                     />
                                   </div> 
-
-
-                                  {/* ФИО */}
-                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', fontSize: '33px', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
-                                    <div className="text-field">
-                                      <input type="text" placeholder='Фамилия Имя Отчество' name="fio" id="fio" value={fio} onChange={(e)=>changeFio(e)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '650px'}}></input>
-                                    </div>
-                                    <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                    </div>
-                                  </div>
-
-                                  {/* 2 */}
-                                
-
                                 </div>
 
 {/* 2 */}

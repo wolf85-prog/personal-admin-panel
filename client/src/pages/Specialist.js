@@ -374,15 +374,17 @@ const Specialist = () => {
     //   await addNewSpecialist(res?.id, res?.fio, res?.profile)
     // }
 
-    specialist.push(
-      {
-        id: res?.id, 
-        fio: res?.fio, 
-        speclist: '',
-        skill: '',
-        comteg: '', 
-        comment: '', 
-    })
+    const newObj = {
+      id: res?.id, 
+      fio: res?.fio, 
+      speclist: '',
+      skill: '',
+      comteg: '', 
+      comment: '', 
+  }
+
+    specialist.push(newObj)
+    specialistAll.push(newObj)
 
     const sortedUser = [...specialist].sort((a, b) => {       
       var idA = a.id, idB = b.id 
@@ -390,6 +392,7 @@ const Specialist = () => {
     })
 
     setSpecialist(sortedUser)
+    setSpecialistAll(specialistAll)
   }
 
   const clickFio = (worker)=> {
@@ -1054,6 +1057,27 @@ const Specialist = () => {
                               )
                               :
                               <div style={{position: 'relative', height: '531px', display: 'flex', flexDirection: 'row'}}>
+                                  {/* ФИО */}
+                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between'}}>   
+                                    <div className="text-field">
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                    </div>
+                                    
+                                  </div>
+                                  
+                                  {/* Кнопки */}
+                                  <div style={{display: 'flex', position: 'absolute', right: '0'}}>
+                                      <CTooltip content="Удалить клиента" placement="bottom">
+                                        {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
+                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
+                                      <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                  </div>
+        {/* 1 */}                           
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
                                   <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
@@ -1155,23 +1179,6 @@ const Specialist = () => {
                                     <span onClick={onChangeKrest} style={{cursor: 'pointer'}}>{krest ? 'Убрать' : 'Добавить'}</span>
                                   </div>
 
-                                  {/* ФИО */}
-                                  <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   
-                                    <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
-                                    </div>
-                                    <div style={{display: 'flex'}}>
-                                      <CTooltip content="Удалить клиента" placement="bottom">
-                                        {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
-                                        <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
-                                      </CTooltip>
-                                      <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
-                                    </div>
-                                  </div>
 {/* 2 */}
                                 <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px', position: 'relative'}}>
                                   {/* Город */}
