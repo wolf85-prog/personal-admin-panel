@@ -39,40 +39,41 @@ import {
 import { DateCell2 } from 'src/components/table/DateCell2'
 import { MoneyCell } from 'src/components/table/MoneyCell'
 import { SpecialityCell } from 'src/components/table/SpecialityCell'
+import {estimates, estimateJobs, estimate, specialityList} from 'src/views/estimates/table/data/estimates'
 
 export const useTableEstimateJobs = () => {
   let { state } = useLocation()
 
-  const {
-    isPending: isPendingEstimate,
-    error: estimateError,
-    data: estimate,
-  } = useQuery({
-    queryKey: ['estimate'],
-    queryFn: () => getEstimate(state.estimateId),
-  })
+  // const {
+  //   isPending: isPendingEstimate,
+  //   error: estimateError,
+  //   data: estimate,
+  // } = useQuery({
+  //   queryKey: ['estimate'],
+  //   queryFn: () => getEstimate(state.estimateId),
+  // })
 
-  const {
-    isPending: isPendingJobs,
-    error: errorJobs,
-    data: estimateJobs,
-  } = useQuery({
-    queryKey: ['estimateJobs'],
-    queryFn: () => getEstimateJobs(state.estimateId),
-  })
+  // const {
+  //   isPending: isPendingJobs,
+  //   error: errorJobs,
+  //   data: estimateJobs,
+  // } = useQuery({
+  //   queryKey: ['estimateJobs'],
+  //   queryFn: () => getEstimateJobs(state.estimateId),
+  // })
 
-  const {
-    isPending: isPendingSpeciality,
-    error: errorSpeciality,
-    data: specialityList,
-  } = useQuery({
-    queryKey: ['speciality_list'],
-    queryFn: getSpecialities,
-  })
+  // const {
+  //   isPending: isPendingSpeciality,
+  //   error: errorSpeciality,
+  //   data: specialityList,
+  // } = useQuery({
+  //   queryKey: ['speciality_list'],
+  //   queryFn: getSpecialities,
+  // })
 
-  const updateJob = useMutation({
-    mutationFn: updateEstimateJob,
-  })
+  // const updateJob = useMutation({
+  //   mutationFn: updateEstimateJob,
+  // })
 
   // const [estimateJobs, setOfficeData] = useState(estimateJobs)
   const [jobsColumnFilters, setJobsColumnFilters] = useState()
@@ -588,10 +589,10 @@ export const useTableEstimateJobs = () => {
     estimate,
     jobsColumnFilters,
     setJobsColumnFilters,
-    isPendingEstimate,
-    isPendingJobs,
-    errorJobs,
-    estimateError,
-    updateJob,
+    // isPendingEstimate,
+    // isPendingJobs,
+    // errorJobs,
+    // estimateError,
+    // updateJob,
   }
 }
