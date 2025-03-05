@@ -392,7 +392,7 @@ const Specialist = () => {
     })
 
     setSpecialist(sortedUser)
-    setSpecialistAll(specialistAll)
+    //setSpecialistAll(specialistAll)
   }
 
   const clickFio = (worker)=> {

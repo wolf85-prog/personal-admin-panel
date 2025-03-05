@@ -387,7 +387,7 @@ const Client = () => {
     })
 
     setClient(sortedUser)
-    setClientAll(clientAll)
+    //setClientAll(clientAll)
   }
 
   const clickFio = (worker)=> {
