@@ -209,6 +209,8 @@ const ProfileCompany = () => {
   const [filePreview, setFilePreview] = useState();
   const [image, setImage]= useState("");
 
+  const [showRazrab, setShowRazrab] = useState(false);
+
   const host = process.env.REACT_APP_HOST
 
   const [toast, addToast] = useState(0)
@@ -325,7 +327,19 @@ const ProfileCompany = () => {
 
       setLoading(false)
     }
-    fetchData()
+
+    if (role === '1') {
+      fetchData()
+    } else {
+      setShowRazrab(true)
+
+      setTimeout(()=> {
+        setShowRazrab(false)
+        navigate("/")
+      }, 2000)
+      
+    }
+    
   }, [])
 
 
@@ -1709,6 +1723,17 @@ const ProfileCompany = () => {
                                                           </CButton>
                                                           <CButton color="primary" onClick={()=>delContragent()}>Да</CButton>
                       </CModalFooter>
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showRazrab}
+                      onClose={() => setShowRazrab(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                       Функция доступна для роли «Руководитель»
+                      </CModalBody>
                     </CModal>
                   
                 </Suspense>
