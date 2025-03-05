@@ -31,17 +31,18 @@ import TableHeader from './table/TableHeader'
 import Filters from 'src/components/table/Filters'
 import FiltersButtom from 'src/views/estimates/table/FiltersButtom'
 import { getEstimates } from 'src/services/api/estimate'
+import {estimates} from 'src/views/estimates/table/data/estimates'
 
 const EstimateList = () => {
-  const queryClient = useQueryClient()
-  const {
-    isPending,
-    error,
-    data: estimates,
-  } = useQuery({
-    queryKey: ['estimates'],
-    queryFn: getEstimates,
-  })
+  // const queryClient = useQueryClient()
+  // const {
+  //   isPending,
+  //   error,
+  //   data: estimates,
+  // } = useQuery({
+  //   queryKey: ['estimates'],
+  //   queryFn: getEstimates,
+  // })
   // const { mutate: mutatePaument } = useMutation({
   //   mutationFn: updateRateItem,
   //   onSettled: async () => {
@@ -84,37 +85,37 @@ const EstimateList = () => {
     enableRowSelection: true,
     getRowCanExpand: () => true,
   })
-  if (isPending)
-    return (
-      <div className="dark-theme">
-        <AppSidebar />
-        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-          <AppHeader />
-          <div className="body flex-grow-1 px-3">
-            <CContainer lg>
-              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Загрузка...</div>
-            </CContainer>
-          </div>
-          <AppFooter />
-        </div>
-      </div>
-    )
+  // if (isPending)
+  //   return (
+  //     <div className="dark-theme">
+  //       <AppSidebar />
+  //       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+  //         <AppHeader />
+  //         <div className="body flex-grow-1 px-3">
+  //           <CContainer lg>
+  //             <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Загрузка...</div>
+  //           </CContainer>
+  //         </div>
+  //         <AppFooter />
+  //       </div>
+  //     </div>
+  //   )
 
-  if (error)
-    return (
-      <div className="dark-theme">
-        <AppSidebar />
-        <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-          <AppHeader />
-          <div className="body flex-grow-1 px-3">
-            <CContainer lg>
-              <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке смет</div>
-            </CContainer>
-          </div>
-          <AppFooter />
-        </div>
-      </div>
-    )
+  // if (error)
+  //   return (
+  //     <div className="dark-theme">
+  //       <AppSidebar />
+  //       <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+  //         <AppHeader />
+  //         <div className="body flex-grow-1 px-3">
+  //           <CContainer lg>
+  //             <div style={{ color: 'hsla(0, 0%, 100%, .75)' }}>Ошибка при загрузке смет</div>
+  //           </CContainer>
+  //         </div>
+  //         <AppFooter />
+  //       </div>
+  //     </div>
+  //   )
 
   return (
     <div className="dark-theme">
