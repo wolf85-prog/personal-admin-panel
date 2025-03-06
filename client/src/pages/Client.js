@@ -1113,7 +1113,7 @@ const Client = () => {
 
                                   
 {/* 2 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px', position: 'relative'}}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
                                   {/* Город */}
                                   <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
@@ -1164,7 +1164,7 @@ const Client = () => {
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
                                     <DropdownClient
-                                      style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                      style={{backgroundColor: '#131c21', left: '160px'}}
                                       options={companyData}
                                       tags={company}
                                       setTags={setCompany}
@@ -1174,23 +1174,23 @@ const Client = () => {
 
                                   <label className='title-label'>Должность</label>
                                   <div className="text-field"> 
-                                    <input className="text-field__input" type="text" name="dolgnost" id="dolgnost" value={dolgnost} onChange={(e) => setDolgnost(e.target.value)} style={{width: '320px'}}/>
+                                    <input className="text-field__input" type="text" name="dolgnost" id="dolgnost" value={dolgnost} onChange={(e) => setDolgnost(e.target.value)} />
                                   </div>
 
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field"> 
-                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
+                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} />
                                   </div>
 
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '320px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                   </div> 
                                   
                                 </div>
 {/* 3 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', }}>
                                   <div className="uley-line" style={{left: '685px', top: '60px', width: '85px'}}></div>
                                   <div className="uley-line" style={{left: '850px', top: '60px', width: '85px'}}></div>
                                   <div style={{display: 'flex'}}>
@@ -1234,7 +1234,7 @@ const Client = () => {
                                         style={{minHeight: '40px !important'}}
                                       /> */}
                                       <DropdownClient
-                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px', }}
+                                        style={{backgroundColor: '#131c21', left: '160px', }}
                                         options={comtegs}
                                         tags={comteg}
                                         setTags={setComteg}
@@ -1249,12 +1249,12 @@ const Client = () => {
                                       name="comment" 
                                       id="comment" 
                                       value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '209px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
+                                      style={{resize: 'none', height: '209px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}/>
                                   </div> 
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '46px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
+                                <div className='widthBlock4' style={{marginLeft: '40px', marginTop: '46px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
 
                                   {/* phone */}
                                   <label className='title-label'>Телефон</label>
@@ -1268,7 +1268,6 @@ const Client = () => {
                                     {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                     <InputMask
                                         className="text-field__input" 
-                                        style={{width: '250px'}}
                                         type="text" 
                                         name="phone" 
                                         id="phone"
@@ -1284,8 +1283,8 @@ const Client = () => {
                                   </div> 
 
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '293px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                  <div className="text-field" style={{marginBottom: '0px', width: '100%'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: '293px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 

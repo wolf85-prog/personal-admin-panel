@@ -179,10 +179,18 @@ const AppHeader = (props) => {
 
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <a href='https://t.me/ULEY_Projects_Bot'><CButton color="dark" style={{backgroundColor: 'transparent', marginLeft: '250px'}}>Найти специалистов</CButton></a>
+            <a href='https://t.me/ULEY_Projects_Bot'>
+              <CButton className='leftButtonHeader' color="dark" style={{backgroundColor: 'transparent'}}>
+                Найти специалистов
+              </CButton>
+            </a>
           </CNavItem>
           <CNavItem>
-            <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '15px'}}><CButton color="dark" style={{backgroundColor: 'transparent', marginLeft: '200px'}}>Найти оборудование</CButton></a>
+            <a href='https://t.me/ULEY_Projects_Bot' style={{marginLeft: '15px'}}>
+              <CButton className='leftButtonHeader2' color="dark" style={{backgroundColor: 'transparent'}}>
+                Найти оборудование
+              </CButton>
+            </a>
           </CNavItem>
 
           {/* <CNavItem>

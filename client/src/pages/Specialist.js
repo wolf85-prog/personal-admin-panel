@@ -1180,7 +1180,7 @@ const Specialist = () => {
                                   </div>
 
 {/* 2 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px', position: 'relative'}}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
                                   {/* Город */}
                                   <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
@@ -1251,7 +1251,7 @@ const Specialist = () => {
                                         onChange={changeSpec}
                                       /> */}
                                       <DropdownClient
-                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                        style={{backgroundColor: '#131c21', left: '160px'}}
                                         options={specOnlyData}
                                         tags={speclist}
                                         setTags={setSpeclist}
@@ -1267,7 +1267,7 @@ const Specialist = () => {
                                         onChange={changeSpec}
                                       /> */}
                                       <DropdownClient
-                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                        style={{backgroundColor: '#131c21', left: '160px'}}
                                         options={skills}
                                         tags={skill}
                                         setTags={setSkill}
@@ -1284,7 +1284,7 @@ const Specialist = () => {
                                         style={{minHeight: '40px !important'}}
                                       /> */}
                                       <DropdownClient
-                                        style={{backgroundColor: '#131c21', width: '320px', left: '160px'}}
+                                        style={{backgroundColor: '#131c21', left: '160px'}}
                                         options={comtegsWorker}
                                         tags={comteg}
                                         setTags={setComteg}
@@ -1298,7 +1298,7 @@ const Specialist = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '320px', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{resize: 'none', height: '125px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
 
@@ -1306,7 +1306,7 @@ const Specialist = () => {
                                   
                                 </div>
 {/* 3 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column'}}>
                                   <div className="uley-line" style={{left: '670px', top: '60px', width: '70px'}}></div>
                                   <div className="uley-line" style={{left: '805px', top: '60px', width: '50px'}}></div>
                                   <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div>
@@ -1357,7 +1357,7 @@ const Specialist = () => {
                                   {/* скан паспорта */}
                                   <label className='title-label'>Скан паспорта</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{width: '320px', overflow: 'hidden', textOverflow: 'ellipsis'}}/>
+                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{overflow: 'hidden', textOverflow: 'ellipsis'}}/>
                                   </div> 
                                   
                                   <div style={{position:'relative'}}>
@@ -1370,7 +1370,7 @@ const Specialist = () => {
                                         id="passport" 
                                         value={passport} 
                                         onChange={(e) => setPassport(e.target.value)} 
-                                        style={{resize: 'none', width: '320px', height: '295px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
+                                        style={{resize: 'none', height: '295px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
                                     {/* <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/> */}
                                   </div>
@@ -1378,7 +1378,7 @@ const Specialist = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
+                                <div className='widthBlock4' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
 
                                   {/* phone */}
                                   <label className='title-label' style={{position: 'absolute', top: '-25px', left: '90px'}}>Телефон</label>
@@ -1392,7 +1392,7 @@ const Specialist = () => {
                                     {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                     <InputMask
                                         className="text-field__input" 
-                                        style={{width: '250px'}}
+                                        style={{width: '100%'}}
                                         type="text" 
                                         name="phone" 
                                         id="phone"
@@ -1411,13 +1411,13 @@ const Specialist = () => {
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{width: '250px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                                   </div> 
 
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '250px', height: '296px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: '296px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 

@@ -970,7 +970,7 @@ const ProfileCompany = () => {
 {/* 1 */} 
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
                                   {filePreview ? 
-                                  <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={250} height={250}/>
+                                  <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} className='avatarStyle'/>
                                   :
                                   (
                                     profile ? 
@@ -1143,7 +1143,7 @@ const ProfileCompany = () => {
                                 </div>
 
 {/* 2 */}
-                                <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column'}}>
                                   {/* Город */}
                                   <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
@@ -1376,14 +1376,13 @@ const ProfileCompany = () => {
                                 </div>
 
 {/* 3 */}
-                                <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column'}}>
                                   {/* phone */}
                                   <label className='title-label'>Телефон</label>
                                   <div className="text-field" >
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '320px'}}
                                           type="text" 
                                           name="phone" 
                                           id="phone"
@@ -1401,13 +1400,13 @@ const ProfileCompany = () => {
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '320px'}}/>
+                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} />
                                   </div> 
 
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: '20px'}}> 
-                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '320px'}}/>
+                                    <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} />
                                   </div>
 
                                   {/* + добавить менеджера */}
@@ -1566,7 +1565,7 @@ const ProfileCompany = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '250px'}}>
+                                <div className='widthBlock4' style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column'}}>
                                   
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '-10px'}}>

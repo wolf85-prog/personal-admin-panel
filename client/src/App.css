@@ -869,6 +869,10 @@ th.widthCompany {
     }
 }
 
+.avatarStyle {
+  width: 250px;
+  height: 250px;
+}
 
 /* Small (sm) – устройства от 576px */
 @media (min-width: 576px) {
@@ -878,21 +882,77 @@ th.widthCompany {
 /* Medium (md) – устройства от 768px */
 @media (min-width: 768px) {
   /* стили для экранов шириной ≥ 768px */
+  .widthBlock2 {
+    width: 250px;
+  }
+
+  .widthBlock4 {
+    width: 100px;
+  }
+
+  .leftButtonHeader {
+    margin-left: 50px
+  }
+  .leftButtonHeader2 {
+    margin-left: 50px
+  }
 }
 
 /* Large (lg) – устройства от 992px */
 @media (min-width: 992px) {
   /* стили для экранов шириной ≥ 992px */
+  .widthBlock2 {
+    width: 250px;
+  }
+
+  .widthBlock4 {
+    width: 100px;
+  }
+
+  .leftButtonHeader {
+    margin-left: 50px
+  }
+  .leftButtonHeader2 {
+    margin-left: 50px
+  }
 }
 
 /* Extra large (xl) – устройства от 1200px */
 @media (min-width: 1200px) {
   /* Стили для экранов шириной ≥ 1200px */
+  .widthBlock2 {
+    width: 300px;
+  }
+  .widthBlock4 {
+    width: 150px;
+  }
+
+  .leftButtonHeader {
+    margin-left: 60px
+  }
+  .leftButtonHeader2 {
+    margin-left: 60px
+  }
 }
 
 /* Extra extra large (xxl) – устройства от 1400px */
 @media (min-width: 1400px) {
   /* cтили для экранов шириной ≥ 1400px */
+
+  .widthBlock2 {
+    width: 320px;
+  }
+
+  .widthBlock4 {
+    width: 250px;
+  }
+
+  .leftButtonHeader {
+     margin-left: '250px'
+  }
+  .leftButtonHeader2 {
+    margin-left: '200px'
+  }
 }
   
   
