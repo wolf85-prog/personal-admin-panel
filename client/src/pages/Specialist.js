@@ -365,7 +365,7 @@ const Specialist = () => {
 
     const data = {
       userId,
-      fio: 'ФИО',
+      fio: 'Фамилия Имя Отчество',
     }
     const res = await addSpecialist(data)
     console.log("res: ", res)
@@ -1180,9 +1180,9 @@ const Specialist = () => {
                                   </div>
 
 {/* 2 */}
-                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
+                                <div className='widthBlock2' style={{textAlign: 'center', marginLeft: '40px', marginTop: '45px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
                                   {/* Город */}
-                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '140px'}}>Город</label>
+                                  <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
                                       {/* <MyDropdown
                                         style={{backgroundColor: '#131c21'}}
@@ -1378,10 +1378,10 @@ const Specialist = () => {
                                 </div>
 
 {/* 4 */}
-                                <div className='widthBlock4' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
+                                <div className='widthBlock4' style={{textAlign: 'center', marginLeft: '40px', marginTop: '45px', display: 'flex', flexDirection: 'column', position: 'relative'}}>
 
                                   {/* phone */}
-                                  <label className='title-label' style={{position: 'absolute', top: '-25px', left: '90px'}}>Телефон</label>
+                                  <label className='title-label'>Телефон</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
                                     <img 
                                       src={Disketa} 

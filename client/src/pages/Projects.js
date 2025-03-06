@@ -1492,11 +1492,11 @@ ${loc.url}`;
                                               </div>
                                         </div>
 
-                                        {/* 2 */}   
-                                        <div style={{textAlign: 'center', marginTop: '10px', width: '320px', marginRight: '40px'}}>
+{/* 2 */}   
+                                        <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
                                           <label className='title-label'>Проект</label>
                                           <div className="text-field">
-                                            <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)} style={{width: '320px'}}/>
+                                            <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/>
                                           </div>
 
                                           <label className='title-label'>Компания</label>
@@ -1601,7 +1601,7 @@ ${loc.url}`;
                                           </div>
 
                                           <label className='title-label'>Локация</label>
-                                          <div className="text-field" style={{width: '320px'}} onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
+                                          <div className="text-field widthBlock3"  onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
                                             <Autocomplete
                                               sx={{
@@ -1662,11 +1662,10 @@ ${loc.url}`;
                                           </div>
 
                                           <label className='title-label'>Адрес</label>
-                                          <div className="text-field" style={{width: '320px'}} onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
+                                          <div className="text-field" onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
                                             <input disabled={false} className="text-field__input" type="text" 
                                               name="address" 
                                               id="address" 
-                                              style={{width: '320px'}}
                                               value={address}
                                             />
                                             <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
@@ -1674,8 +1673,8 @@ ${loc.url}`;
 
                                         </div>
 
-                                        {/* 3 */}   
-                                        <div style={{textAlign: 'center', marginTop: '10px', width: '320px', marginRight: '40px'}}>
+{/* 3 */}   
+                                        <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
                                           <label className='title-label'>Заказчик</label>
                                           <div className="text-field">
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
@@ -1789,13 +1788,13 @@ ${loc.url}`;
                                           <label className='title-label'>Техническое Задание</label>
                                           <div className="text-field" style={{marginBottom: '0px'}}>
                                             <textarea 
-                                              className="text-field__input" 
+                                              className="text-field__input widthBlock3"
                                               type="text" 
                                               name="comment" 
                                               id="comment"
                                               value={tehText}
                                               onChange={(e)=>setTehText(e.target.value)}
-                                              style={{resize: 'none', width: '320px', height: '208px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
+                                              style={{resize: 'none', height: '208px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
                                             />
                                           </div> 
 
@@ -1823,14 +1822,14 @@ ${loc.url}`;
                                           </div> */}
                                         </div>
 
-                                        {/* 4 */}   
-                                        <div style={{textAlign: 'center', marginTop: '10px', width: '230px',marginRight: '10px'}}>
+{/* 4 */}   
+                                        <div className='widthBlock4' style={{textAlign: 'center', marginTop: '10px', marginRight: '10px'}}>
                                           <label className='title-label'>Телефон</label>
                                           <div className="text-field">
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
                                             <InputMask
                                                 className="text-field__input" 
-                                                style={{width: '230px', marginRight: '10px'}}
+                                                style={{marginRight: '10px'}}
                                                 type="text" 
                                                 name="phone" 
                                                 id="phone"
@@ -1849,7 +1848,7 @@ ${loc.url}`;
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
                                             <InputMask
                                                 className="text-field__input" 
-                                                style={{width: '230px', marginRight: '10px'}}
+                                                style={{marginRight: '10px'}}
                                                 type="text" 
                                                 name="phone2" 
                                                 id="phone2"
@@ -1867,12 +1866,12 @@ ${loc.url}`;
                                             <label className='title-label' style={{marginLeft: '50px'}}>Как добраться</label>
                                             <div className="text-field" style={{marginBottom: '0px'}} >
                                               <textarea 
-                                                className="text-field__input" 
+                                                className="text-field__input widthBlock5" 
                                                 type="text" 
                                                 name="treck" 
                                                 id="treck"
                                                 value={track}
-                                                style={{resize: 'none', width: '278px', height: '92px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
+                                                style={{resize: 'none',  height: '92px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
                                                 onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
                                               />
                                             </div> 
@@ -1882,11 +1881,11 @@ ${loc.url}`;
                                           <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>
                                           <div className="text-field" style={{marginBottom: '0px'}}>
                                                 <textarea 
-                                                  className="text-field__input" 
+                                                  className="text-field__input widthBlock5" 
                                                   type="text" 
                                                   name="comment" 
                                                   id="comment"
-                                                  style={{resize: 'none', width: '278px', height: '92px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
+                                                  style={{resize: 'none', height: '92px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginRight: '40px'}}
                                                   value={comment}
                                                   onChange={(e)=>setComment(e.target.value)}
                                                 />

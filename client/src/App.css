@@ -904,7 +904,9 @@ th.widthCompany {
   .widthBlock2 {
     width: 250px;
   }
-
+  .widthBlock3 {
+    width: 200px;
+  }
   .widthBlock4 {
     width: 100px;
   }
@@ -923,8 +925,15 @@ th.widthCompany {
   .widthBlock2 {
     width: 300px;
   }
+  .widthBlock3 {
+    width: 230px;
+  }
   .widthBlock4 {
     width: 150px;
+  }
+
+  .widthBlock5 {
+    width: 196px;
   }
 
   .leftButtonHeader {
@@ -940,6 +949,10 @@ th.widthCompany {
   /* cтили для экранов шириной ≥ 1400px */
 
   .widthBlock2 {
+    width: 320px;
+  }
+
+  .widthBlock3 {
     width: 320px;
   }
 

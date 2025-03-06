@@ -238,7 +238,7 @@ const Companys = () => {
 
       let arrCompanys = []
 
-      company.map(async (user, i) => {
+      company && company.map(async (user, i) => {
         const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
         const d2 = new Date(d)
         const month = String(d2.getMonth()+1).padStart(2, "0");
@@ -1010,7 +1010,7 @@ const Companys = () => {
                                 </div>
 
 {/* 2 */}
-                                <div style={{marginLeft: '37px', marginTop: '55px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div className='widthBlock3' style={{marginLeft: '37px', marginTop: '55px', display: 'flex', flexDirection: 'column'}}>
                                   {/* Город */}
                                   <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}>                                     
@@ -1091,7 +1091,7 @@ const Companys = () => {
 
                                   {/* Менеджеры */}
                                   <label className='title-label'>Менеджеры</label>
-                                  <CButton onClick={clickManager} className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
+                                  <CButton onClick={clickManager} className='uley_add_user' style={{width: '100%', height: '40px', marginLeft: '0', marginBottom: '20px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Менеджеры
                                     </span>
@@ -1155,7 +1155,7 @@ const Companys = () => {
 
                                   {/* Договор */}
                                   <label className='title-label'>Договор</label>
-                                  <CButton className='uley_add_user' style={{width: '300px', height: '40px', marginLeft: '0'}}>
+                                  <CButton className='uley_add_user' style={{width: '100%', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Договор
                                     </span>
@@ -1165,7 +1165,7 @@ const Companys = () => {
                                 </div>
 
 {/* 3 */}
-                                <div style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div className='widthBlock3' style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column'}}>
                                   <div className="uley-line" style={{left: '645px', width: '85px'}}></div>
                                   <div className="uley-line" style={{left: '810px', width: '85px'}}></div>
                                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -1197,7 +1197,7 @@ const Companys = () => {
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
                                   <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
-                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} style={{width: '300px'}}/>
+                                    <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} />
                                   </div>
 
                                   {/* + добавить менеджера */}
@@ -1249,7 +1249,7 @@ const Companys = () => {
                                       type="text" 
                                       name="comment" 
                                       id="comment" value={comment} onChange={(e) => setComment(e.target.value)} 
-                                      style={{resize: 'none', width: '300px', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
+                                      style={{resize: 'none', width: '100%', height: '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}
                                     />
                                   </div> 
 
@@ -1257,7 +1257,7 @@ const Companys = () => {
                                 </div>
 
 {/* 4 */}
-                                <div style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column', width: '300px'}}>
+                                <div className='widthBlock3' style={{marginLeft: '37px', marginTop: '56px', display: 'flex', flexDirection: 'column'}}>
 
                                   <label className='title-label'>Бухгалтерия</label>
                                   <div className="text-field" onMouseOver={()=>setShowSaveFio(true)} onMouseOut={()=>setShowSaveFio(false)} >
@@ -1274,7 +1274,6 @@ const Companys = () => {
                                       id="bugalterFio" 
                                       value={bugalterFio} 
                                       onChange={(e)=>setBugalterFio(e.target.value)} 
-                                      style={{width: '300px'}}
                                       placeholder='Фамилия Имя Отчество'
                                     />
                                   </div>
@@ -1291,7 +1290,6 @@ const Companys = () => {
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
-                                          style={{width: '300px'}}
                                           type="text" 
                                           name="phone" 
                                           id="phone"
@@ -1314,7 +1312,7 @@ const Companys = () => {
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
                                     />
-                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} style={{width: '300px'}}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)}/>
                                   </div> 
 
                                   
@@ -1322,7 +1320,7 @@ const Companys = () => {
 
                                   <label className='title-label'>Проекты</label>
                                   <div className="text-field" style={{marginBottom: '0px'}}>
-                                    <ul className='spec-style' style={{width: '300px', height: showManagers ? '533px' : '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
+                                    <ul className='spec-style' style={{width: '100%', height: showManagers ? '533px' : '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
                                   </div> 
