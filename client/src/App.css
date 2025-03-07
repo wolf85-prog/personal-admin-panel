@@ -896,6 +896,13 @@ th.widthCompany {
   .leftButtonHeader2 {
     margin-left: 50px
   }
+  .widthSearch {
+    width: 40px;
+  }
+
+  .widthFilter {
+    width: 80px !important;
+  }
 }
 
 /* Large (lg) – устройства от 992px */
@@ -916,6 +923,13 @@ th.widthCompany {
   }
   .leftButtonHeader2 {
     margin-left: 50px
+  }
+  .widthSearch {
+    width: 40px;
+  }
+
+  .widthFilter {
+    width: 80px !important;
   }
 }
 
@@ -942,6 +956,16 @@ th.widthCompany {
   .leftButtonHeader2 {
     margin-left: 60px
   }
+  .widthSearch {
+    width: 40px;
+  }
+  .widthFilter {
+    width: 100px !important;
+  }
+
+  .widthFilter2 {
+    width: 90px !important;
+  }
 }
 
 /* Extra extra large (xxl) – устройства от 1400px */
@@ -965,6 +989,18 @@ th.widthCompany {
   }
   .leftButtonHeader2 {
     margin-left: '200px'
+  }
+
+  .widthSearch {
+    width: 150px;
+  }
+
+  .widthFilter {
+    width: 189px !important;
+  }
+
+  .widthFilter2 {
+    width: 100px !important;
   }
 }
   

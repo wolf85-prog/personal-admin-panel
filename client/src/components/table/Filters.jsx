@@ -21,6 +21,11 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CButton,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from '@coreui/react'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -131,11 +136,18 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
   const [filter5, setFilter5] = useState(statusList)
   const [filter6, setFilter6] = useState(cityList)
 
+  const [showRazrab, setShowRazrab] = useState(false)
+
   const [countPress, setCountPress] = useState(0);
 
   const handleChangeFilterType = (selectedOption) => {
-    setFilterType(selectedOption)
-    setFilter(filters[selectedOption.value])
+    setShowRazrab(true)
+    setTimeout(()=> {
+      setShowRazrab(false)
+    }, 2000)
+
+    //setFilterType(selectedOption)
+    //setFilter(filters[selectedOption.value])
   }
 
   useEffect(() => {}, [columnFilters])
@@ -144,7 +156,12 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
     // setColumnFilters((prev) =>
     //   prev.filter((f) => f.id !== filterType.value).concat({ id: filterType, value: tt }),
     // )
-    setColumnFilters([{ id: filterType.value, value: tt.value }])
+
+    setShowRazrab(true)
+    setTimeout(()=> {
+      setShowRazrab(false)
+    }, 2000)
+    //setColumnFilters([{ id: filterType.value, value: tt.value }])
   }
 
   const clickChange = () => {
@@ -188,7 +205,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
         
         <CCol className="align-self-center" style={{ display: 'flex', justifyContent: 'flex-end', position: 'absolute', top: '12px', right: '10px'}} >
               <Select
-                className="uley_react_select"
+                className="uley_react_select widthFilter2"
                 options={options}
                 onChange={handleChangeFilterType}
                 defaultValue={filterType}
@@ -196,7 +213,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
                 autoFocus="true"
               />
               <Select
-                className="uley_react_select"
+                className="uley_react_select widthFilter"
                 onChange={handleFilterChange}
                 options={filter}
                 defaultValue={filter[0]}
@@ -209,11 +226,11 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
                 </span>
               </CButton>
 
-              <input className="form-control" style={{background: 'transparent', width: '150px', marginRight: '10px'}} placeholder='Поиск'></input>
+              <input className="form-control widthSearch" style={{background: 'transparent', marginRight: '10px'}} placeholder='Поиск'></input>
               
               <CCloseButton
                 className="uley_select_reset"
-                style={{ height: '28px', width: '28px',marginRight: '250px', marginLeft: '0' }}
+                style={{ height: '28px', width: '28px',marginRight: '180px', marginLeft: '0' }}
                 onClick={() => setColumnFilters([])}
               />
               
@@ -237,6 +254,17 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
         </CCol>
 
       </CRow>
+
+      <CModal
+                            alignment="center"
+                            visible={showRazrab}
+                            onClose={() => setShowRazrab(false)}
+                            aria-labelledby="VerticallyCenteredExample"
+                          >
+                            <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                             Функция находится в разработке
+                            </CModalBody>
+      </CModal>
     </>
   )
 }
