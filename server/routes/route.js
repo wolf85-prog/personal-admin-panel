@@ -144,8 +144,8 @@ route.get('/companys/count/get/:userId/:count/:prev', getCompanyCount) //еще
 route.patch('/companys/update/:id', editCompany)
 route.get("/companys/delete/:id", deleteCompany);
 route.post("/companys/add", addCompany);
-route.get("/companys/count/get", getCompanyCountAll);
 
+route.get("/companyprof/count/get", getCompanyCountAll);
 route.get('/companyprof/get', getCompanyProf)
 route.post("/companyprof/add", addCompanyProf);
 route.patch('/companyprof/update/:id', editCompanyProf)

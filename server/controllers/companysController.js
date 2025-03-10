@@ -160,7 +160,7 @@ class CompanysController {
     async getCompanyCountAll(req, res) {
         const {userId} = req.params
         try {
-            const count = await Company.count({
+            const count = await CompanyProf.count({
                 // where: {
                 //     userId: userId
                 // }
