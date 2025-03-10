@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute';
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'))
+const Login2 = React.lazy(() => import('./views/pages/login/Login2'))
 const Register = React.lazy(() => import('./views/pages/register/Register'))
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
@@ -23,6 +24,7 @@ const AppRouter = observer(() => {
       </Route>         
 
       <Route exact path="/login" name="Login Page" element={<Login />} />
+      <Route exact path="/login2" name="Login Page" element={<Login2 />} />
       <Route exact path="/register" name="Register Page" element={<Register />} />
       <Route exact path="/404" name="Page 404" element={<Page404 />} />
       <Route exact path="/500" name="Page 500" element={<Page500 />} />
