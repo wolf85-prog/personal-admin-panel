@@ -1130,7 +1130,7 @@ ${loc.url}`;
     const arrayCopy = JSON.parse(JSON.stringify(mainspec));
     let arr = []
 
-    checkedinputvalue.map(async(item, index)=> {
+    checkedinputvalue.reverse().map(async(item, index)=> {
       //setTimeout(async()=> {
         const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
         console.log("dublSpec: ", dublSpec)
@@ -1154,7 +1154,7 @@ ${loc.url}`;
               hr: dublSpec.hr,
         }
         console.log("newObj: ", newObj)
-        arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, newObj)
+        arrayCopy.splice(parseInt(eventkey.split(' ')[2]) + checkedinputvalue.length, 0, newObj)
  
       //}, 2000)  
       
