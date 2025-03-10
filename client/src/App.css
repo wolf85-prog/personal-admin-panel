@@ -948,6 +948,7 @@ th.widthCompany {
 
   .widthBlock5 {
     width: 196px;
+    /* width: 122%; */
   }
 
   .leftButtonHeader {
@@ -981,7 +982,11 @@ th.widthCompany {
   }
 
   .widthBlock4 {
-    width: 250px;
+    width: 230px;
+  }
+
+  .widthBlock5 {
+    width: 278px;
   }
 
   .leftButtonHeader {

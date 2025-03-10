@@ -390,7 +390,7 @@ const Projects = () => {
     setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === resProj.specifika)?.color})
 
     const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
-    //console.log("companyName: ", compTitle?.title ? compTitle?.title : '')
+    console.log("companysAll: ", companysAll)
     setCompanyName(compTitle?.title ? compTitle?.title : '')
 
     const managerFio = clientAll.find(item=> item.id.toString() === resProj.managerId)
@@ -416,6 +416,7 @@ const Projects = () => {
     }
 
     //setLocationProject(resProj.geo)
+    console.log("Платформы: ", platformsAll)
     const loc = platformsAll.find(item=> item.id === parseInt(resProj?.geo))
     console.log("platformsAll: ", platformsAll)
     console.log("geo: ", resProj?.geo)

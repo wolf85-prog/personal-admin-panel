@@ -287,7 +287,7 @@ const UsersProvider = ({ children }) => {
 			const user = localStorage.getItem('user')
 
 			let company = await getCompany(user && JSON.parse(user)?.id);
-			//console.log("companys context: ", company)
+			console.log("companys context: ", company)
 
 		
 			let arrCompanys = []
