@@ -268,6 +268,17 @@ class ProjectController {
             return res.status(500).json(error.message);
         }
     }
+
+    async getProjectCountAll(req, res) {
+        //const {userId} = req.params
+        try {
+            const count = await Project.count();
+
+            return res.status(200).json(count);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new ProjectController()
