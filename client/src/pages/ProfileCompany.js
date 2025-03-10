@@ -173,7 +173,7 @@ const ProfileCompany = () => {
 
   const [showContr4, setShowContr4] = useState(false)
   const [showEditContr, setShowEditContr] = useState(false)
-
+  const [showEditManager, setShowEditManager] = useState(false)
 
   const [selectContr, setSelectContr] = useState(0);
 
@@ -671,25 +671,7 @@ const ProfileCompany = () => {
     console.log("managersObj: ", managersObj)
   }, [managersObj])
 
-  //добавить менеджера
-  const addManager = () => {
-    
-    //console.log("managersObj: ", managersObj)
-    //const obj = {id: '', chatId: '', fio: '', companyId: ''}
-    setManagersObj([ // with a new array
-      ...managersObj, // that contains all the old items
-      'id/email' // and one new item at the end
-    ])
-  }
-
-  //удалить менеджера
-  const deleteManager = (item) => {
-    setManagersObj(
-      managersObj.filter(a =>
-        a !== item
-      )
-    );
-  }
+  
 
   const changeKontra = (item) => {
     console.log(item)
@@ -702,6 +684,11 @@ const ProfileCompany = () => {
     //   setInn(inn3)
     // }
     
+  }
+
+  const changeManager = (item) => {
+    console.log(item)
+    setSelectManager(item)   
   }
 
   const saveRekviz = async() => {
@@ -929,6 +916,32 @@ const ProfileCompany = () => {
   }
 
 
+   //Добавить менеджера
+   const addManager = () => {
+    setShowEditManager(false)
+
+    setManagers([...managers, "Новый"])
+  }
+
+  //Удалить менеджера
+  const delManager = () => {
+    setVisibleClear(false)
+    if (managers.length !==0) {
+      setManagers(managers.filter((item, index)=>index !== managers.length-1))
+    } else {
+      console.log("Очистить менеджера", selectContr)
+      console.log(objRekviz)
+      setObjRekviz(objRekviz.filter((item, index)=>index !== selectContr))
+    }
+    
+  }
+
+  //Редактировать менеджера
+  const editManager = () => {
+    setShowEditManager(!showEditManager)
+  }
+
+
 
   return (
     <div className='dark-theme'>
@@ -1076,51 +1089,58 @@ const ProfileCompany = () => {
                                   {showManagers ? (
                                                             <>
                                                               <div className="div7">
-                                                              {/* {managersObj && managersObj.length > 0 ? managersObj.map((item, index) => (
-                                                                <div key={index}  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                                  <div className="text-field" style={{position: 'relative'}}>
-                                                                    <label className='title-label'>Менеджер №</label>
-                                                                    <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
-                                                                  </div>
-                                                                  <div style={{textAlign: 'left', display: showManagers ? 'block' : 'none', marginTop: '4px'}}>
-                                                                    <CButton onClick={()=>addManager()} className='uley_add_user' style={{marginLeft: '0'}}>
-                                                                      <span style={{position: 'absolute', top: '-12px', left: '6px', fontSize: '36px', color: '#2d2e38'}}>
-                                                                      +</span>
-                                                                    </CButton>
-                                                                  </div> 
-                                                                </div>
-                                                                
-                                                                )
-                                                                ) : */}
                                                                 <>
                                                                 <div style={{ marginTop: '20px'}}>
                                                                   <div>
                                                                     <label className='title-label'>Менеджер №1</label>
-                                                                    <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent1" id="contragent1" value={man[0]} onChange={(e)=>changeMan(e, 0)} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    {!showEditManager ? 
+                                                                    <div onClick={()=>changeManager(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === 0 ?'0 0 0 1px #2684ff' : ''}}>{man[0]}</div>
+                                                                    :<input placeholder='Почта / ID' className="text-field__input" type="text" value={man[0]} onChange={(e)=>changeMan(e, 0)} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    }
+                                                                    {/* <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent1" id="contragent1" value={man[0]} onChange={(e)=>changeMan(e, 0)} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>            
                                                                 </div>
 
                                                                 <div style={{ marginTop: '20px'}}>
                                                                   <div>
                                                                     <label className='title-label'>Менеджер №2</label>
-                                                                    <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent2" id="contragent2" value={man[1]} onChange={(e)=>changeMan(e, 1)} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    {!showEditManager ? 
+                                                                    <div onClick={()=>changeManager(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === 0 ?'0 0 0 1px #2684ff' : ''}}>{man[1]}</div>
+                                                                    :<input placeholder='Почта / ID' className="text-field__input" type="text" value={man[1]} onChange={(e)=>changeMan(e, 1)} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    }
+                                                                    {/* <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent2" id="contragent2" value={man[1]} onChange={(e)=>changeMan(e, 1)} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>                                            
                                                                 </div>
 
                                                                 <div style={{ marginTop: '20px'}}>
                                                                   <div>
                                                                     <label className='title-label'>Менеджер №3</label>
-                                                                    <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent3" id="contragent3" value={man[2]} onChange={(e)=>changeMan(e, 2)} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    {!showEditManager ? 
+                                                                    <div onClick={()=>changeManager(2)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === 0 ?'0 0 0 1px #2684ff' : ''}}>{man[2]}</div>
+                                                                    :<input placeholder='Почта / ID' className="text-field__input" type="text" value={man[2]} onChange={(e)=>changeMan(e, 2)} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    }
+                                                                    {/* <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent3" id="contragent3" value={man[2]} onChange={(e)=>changeMan(e, 2)} style={{ height: '40px', cursor: 'pointer'}} /> */}
                                                                   </div>        
                                                                 </div>
 
+                                                                {managers && managers.length > 0 ? managers.map((item, index) => (
+                                                                <div key={index} >
+                                                                  <div className="text-field" style={{position: 'relative'}}>
+                                                                    <label className='title-label'>Менеджер №{index+4}</label>
+                                                                    <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
+                                                                  </div>
+                                                                </div>
+                                                                
+                                                                )
+                                                                ) : ""
+                                                                }
                                                                 <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                  <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
+                                                                  <CButton onClick={addManager} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'blue'}}>
                                                                     <span style={{fontSize: '16px', color: 'blue', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                       Добавить
                                                                     </span>
                                                                   </CButton>
-                                                                  <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
+                                                                  <CButton onClick={delManager}  className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'red'}}>
                                                                     <span style={{fontSize: '16px', color: 'red', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                       Удалить
                                                                     </span>
@@ -1669,9 +1689,9 @@ const ProfileCompany = () => {
                                                                     </div> 
 
                                                                     <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                      <CButton className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
+                                                                      <CButton onClick={editManager} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
                                                                         <span style={{fontSize: '16px', color: 'yellow', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                                                          Изменить
+                                                                          {showEditManager ? 'Применить' : 'Изменить'}
                                                                         </span>
                                                                       </CButton>
                                                                       <CButton onClick={()=>saveProfileManager(id)} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'green'}}>

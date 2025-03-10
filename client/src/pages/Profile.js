@@ -108,6 +108,8 @@ const Profile = () => {
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
+  const [showModal, setShowModal] = useState(false);
+
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
   const [image, setImage]= useState("");
@@ -262,7 +264,7 @@ const Profile = () => {
 
   const changeCompany = (e) => {
     console.log("company: ", e.target.value)
-    setManagerProfile({...managerProfile, companyId: e.target.value})
+    //setManagerProfile({...managerProfile, companyId: e.target.value})
   }
 
   const changeDolgnost = (e) => {
@@ -286,6 +288,13 @@ const Profile = () => {
       setCity('')  
       setManagerProfile({...managerProfile, city: ''})  
     }    
+  }
+
+  const clickCompany = ()=> {
+    setShowModal(true)
+    setTimeout(()=> {
+        setShowModal(false)
+    }, 2000)
   }
 
   return (
@@ -429,7 +438,7 @@ const Profile = () => {
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                    <input disabled className="text-field__input" type="text" name="company" id="company" value={title} onChange={(e)=>changeCompany(e)}  />
+                                    <div onClick={clickCompany} className="text-field__input" value={title} onChange={(e)=>changeCompany(e)}  />
                                   </div>
 
                                   <label className='title-label'>Должность</label>
@@ -529,6 +538,18 @@ const Profile = () => {
                           </CCard>
                         </CCol>
                     </CRow>
+
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal}
+                      onClose={() => setShowModal(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                    <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '14px', paddingTop: '35px'}}>
+                      Название компании редактируется в разделе Компания в правом верхнем меню
+                    </CModalBody>
+                    </CModal>
 
                 </Suspense>
             </CContainer>
