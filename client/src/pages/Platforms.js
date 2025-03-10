@@ -57,6 +57,7 @@ import Disketa from "./../assets/images/disketa.png";
 import arrowDown from './../assets/images/arrowDown.svg'
 import threeDots from './../assets/images/three-dots.svg'
 import DeleteIcon from "./../assets/images/delete_icon.png"
+import PaperIcon from "./../assets/images/paper-clip.png"
 
 import statusData from 'src/data/statusData';
 import cities from 'src/data/cities';
@@ -875,8 +876,10 @@ const onSortAddress = () => {
 
                                       <label className='title-label'>Карта</label>
                                       <div className="text-field">
-                                        <input className='text-field__input' type="file"  name="photo"  onChange={handleFileChange} /> 
-                                        {/* <img src={uploadImg} alt="upload" width={30} height={30} /> */}
+                                        <div className='text-field__input' style={{textAlign: 'start'}}>
+                                          <img src={PaperIcon} alt="upload" width={20} height={20} />
+                                          <input className='text-field__input' style={{position: 'absolute', top: '0', opacity: '0'}} type="file"  name="photo"  onChange={handleFileChange} />
+                                        </div>  
                                       </div> 
                                     </div>
 
