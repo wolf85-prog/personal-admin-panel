@@ -1708,9 +1708,9 @@ ${loc.url}`;
                                               }}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {   
-                                                  //console.log("clientAll: ", clientAll)                                                   
-                                                  const comp = clientAll.find(item=> item.userfamily === newValue)
-                                                  console.log("comp client: ", comp)
+                                                  console.log("clientAll: ", clientAll)                                                   
+                                                  const comp = clientAll.find(item=> item.userfamily === newValue.toString())
+                                                  console.log("comp client: ", comp, newValue)
                                                   if (comp) {
                                                     setPhone(comp.phone)
                                                     setManagerName(comp.userfamily)
@@ -1764,8 +1764,8 @@ ${loc.url}`;
                                               onChange={(event, newValue) => {
                                                 if (newValue) {  
                                                   console.log("workersAll 2: ", workersAll)                                                     
-                                                  const comp = workersAll.find(item=> item.userfamily === newValue)
-                                                  console.log("comp worker: ", comp)
+                                                  const comp = workersAll.find(item=> item.userfamily === newValue.label)
+                                                  console.log("comp worker: ", comp, newValue)
                                                   if (comp) {
                                                     setPhone2(comp.phone)
                                                     setManagerName2(comp.userfamily)
