@@ -1,4 +1,4 @@
-const {Company, CompanyProf} = require('../models/models')
+const {Company, CompanyProf, User} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
@@ -158,12 +158,11 @@ class CompanysController {
     }
 
     async getCompanyCountAll(req, res) {
-        const {userId} = req.params
         try {
-            const count = await CompanyProf.count({
-                // where: {
-                //     userId: userId
-                // }
+            const count = await User.count({
+                where: {
+                    role: "1"
+                }
             });
 
             return res.status(200).json(count);
