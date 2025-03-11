@@ -1165,24 +1165,25 @@ const Companys = () => {
                                 </div>
 
 {/* 3 */}
-                                <div className='widthBlock3' style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column'}}>
+                                <div className='widthBlock3' style={{marginLeft: '37px', marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                   <div className="uley-line" style={{left: '645px', width: '85px'}}></div>
                                   <div className="uley-line" style={{left: '810px', width: '85px'}}></div>
-                                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                  <label className='title-label' style={{position: 'absolute', top: '40px'}}>Проекты</label>
+                                  <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
                                     
                                     {/* проекты за месяц */}
-                                                                        <CTooltip content="Проекты за месяц" placement="bottom">
-                                                                          <div className="text-field" style={{marginRight: '8px'}}>
-                                                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '40px', marginRight: '8px'}}/>
-                                                                          </div>
-                                                                        </CTooltip>
+                                    <CTooltip content="Проекты за месяц" placement="bottom">
+                                      <div className="text-field" style={{marginRight: '8px'}}>
+                                        <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '40px', marginRight: '8px'}}/>
+                                      </div>
+                                    </CTooltip>                                    
                                                                         
-                                                                        {/* проекты всего */}
-                                                                        <CTooltip content="Проекты всего" placement="bottom">
-                                                                          <div className="text-field" style={{marginRight: '8px'}}>
-                                                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{width: '40px', marginRight: '8px'}}/>
-                                                                          </div>
-                                                                        </CTooltip>
+                                    {/* проекты всего */}
+                                    <CTooltip content="Проекты всего" placement="bottom">
+                                      <div className="text-field" style={{marginRight: '8px'}}>
+                                        <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{width: '40px', marginRight: '8px'}}/>
+                                      </div>
+                                    </CTooltip>
 
                                     {/* проекты за месяц */}
                                     <div className="text-field" >
@@ -1196,7 +1197,7 @@ const Companys = () => {
                                   
                                   {/*  */}
                                   <label className='title-label'>Сфера деятельности</label>
-                                  <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px'}}> 
+                                  <div className="text-field" style={{marginBottom: showManagers ? '129px' : '20px', width: '100%'}}> 
                                     <input className="text-field__input" type="text" name="sfera" id="sfera" value={sfera} onChange={(e) => setSfera(e.target.value)} />
                                   </div>
 
@@ -1227,7 +1228,7 @@ const Companys = () => {
                                   </div>
 
                                   <label className='title-label'>Комтеги</label>
-                                  <div className="text-field"> 
+                                  <div className="text-field" style={{width: '100%'}}> 
                                       {/* <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
@@ -1243,7 +1244,7 @@ const Companys = () => {
                                   </div>
 
                                   <label className='title-label'>Комментарии</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div className="text-field" style={{marginBottom: '0px', width: '100%'}}>
                                     <textarea 
                                       className="text-field__input" 
                                       type="text" 

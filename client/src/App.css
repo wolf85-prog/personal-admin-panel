@@ -758,17 +758,6 @@ th.widthCompany {
   }
 
 
-  .uley-line {
-    height: 10px;
-    position: absolute;
-    top: 65px;
-    
-    border-right: 1px solid #2d2e38;
-    border-left: 1px solid #2d2e38;
-    border-top: 1px solid #2d2e38;
-    padding: 0;
-  }
-
   .uley_add_user {
     height: 40px;
     width: 40px;
@@ -967,6 +956,20 @@ th.widthCompany {
   .widthFilter2 {
     width: 90px !important;
   }
+  .otstup {
+    margin-left: 40px;
+  }
+
+  .uley-line {
+    /* height: 10px;
+    position: absolute;
+    top: 65px; */
+    
+    /* border-right: 1px solid #2d2e38;
+    border-left: 1px solid #2d2e38;
+    border-top: 1px solid #2d2e38;
+    padding: 0; */
+  }
 }
 
 /* Extra extra large (xxl) – устройства от 1400px */
@@ -1006,6 +1009,21 @@ th.widthCompany {
 
   .widthFilter2 {
     width: 100px !important;
+  }
+
+  .otstup {
+    margin-left: 50px;
+  }
+
+  .uley-line {
+    height: 10px;
+    position: absolute;
+    top: 65px;
+    
+    border-right: 1px solid #2d2e38;
+    border-left: 1px solid #2d2e38;
+    border-top: 1px solid #2d2e38;
+    padding: 0;
   }
 }
   
