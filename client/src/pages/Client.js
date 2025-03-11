@@ -1190,9 +1190,10 @@ const Client = () => {
                                   
                                 </div>
 {/* 3 */}
-                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', }}>
+                                <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                   <div className="uley-line" style={{left: '685px', top: '60px', width: '85px'}}></div>
                                   <div className="uley-line" style={{left: '850px', top: '60px', width: '85px'}}></div>
+                                  <label className='title-label' style={{position: 'absolute', top: '40px'}}>Проекты</label>
                                   <div style={{display: 'flex'}}>
                                     {/* проекты за месяц */}
                                     <CTooltip content="Проекты за месяц" placement="bottom">
@@ -1225,7 +1226,7 @@ const Client = () => {
                                   </div>
 
                                   <label className='title-label'>Комтег</label>
-                                  <div className="text-field"> 
+                                  <div className="text-field" style={{width: '100%'}}> 
                                       {/* <MyDropdown3
                                         tags={comteg}
                                         setTags={setComteg}
@@ -1242,7 +1243,7 @@ const Client = () => {
                                   </div>
 
                                   <label className='title-label'>Комментарий</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div className="text-field" style={{marginBottom: '0px', width: '100%'}}>
                                     <textarea 
                                       className="text-field__input" 
                                       type="text" 

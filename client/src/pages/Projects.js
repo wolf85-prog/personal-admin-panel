@@ -1708,9 +1708,9 @@ ${loc.url}`;
                                               }}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {   
-                                                  //console.log("clientAll: ", clientAll)                                                   
-                                                  const comp = clientAll.find(item=> item.userfamily === newValue)
-                                                  console.log("comp client: ", comp)
+                                                  console.log("clientAll: ", clientAll)                                                   
+                                                  const comp = clientAll.find(item=> item.userfamily === newValue.toString())
+                                                  console.log("comp client: ", comp, newValue)
                                                   if (comp) {
                                                     setPhone(comp.phone)
                                                     setManagerName(comp.userfamily)
@@ -1764,8 +1764,8 @@ ${loc.url}`;
                                               onChange={(event, newValue) => {
                                                 if (newValue) {  
                                                   console.log("workersAll 2: ", workersAll)                                                     
-                                                  const comp = workersAll.find(item=> item.userfamily === newValue)
-                                                  console.log("comp worker: ", comp)
+                                                  const comp = workersAll.find(item=> item.userfamily === newValue.label)
+                                                  console.log("comp worker: ", comp, newValue)
                                                   if (comp) {
                                                     setPhone2(comp.phone)
                                                     setManagerName2(comp.userfamily)
@@ -1864,7 +1864,7 @@ ${loc.url}`;
                                           </div>
 
                                           <div style={{position:'relative'}}>
-                                            <label className='title-label' style={{marginLeft: '50px'}}>Как добраться</label>
+                                            <label className='title-label otstup'>Как добраться</label>
                                             <div className="text-field" style={{marginBottom: '0px'}} >
                                               <textarea 
                                                 className="text-field__input widthBlock5" 
@@ -1876,7 +1876,7 @@ ${loc.url}`;
                                                 onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
                                               />
                                             </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', left: '238px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-40px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
 
                                           <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>

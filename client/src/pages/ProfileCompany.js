@@ -658,11 +658,13 @@ const ProfileCompany = () => {
   const onChangeManager = (e, index) => {
     console.log(e.target.value, index)
 
+    managers[index] = e.target.value
+    console.log(contragents)
+    setManagers(managers)
+
     setManagersObj((managersObj) => {                                           
       const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-      //const userObject = JSON.parse(usersCopy[index]);
       usersCopy[index] = e.target.value;		
-      //console.log(usersCopy) 
       return usersCopy;
     });   
   }
@@ -920,7 +922,7 @@ const ProfileCompany = () => {
    const addManager = () => {
     setShowEditManager(false)
 
-    setManagers([...managers, "Новый"])
+    setManagers([...managers, ""])
   }
 
   //Удалить менеджера
@@ -1124,10 +1126,13 @@ const ProfileCompany = () => {
                                                                 </div>
 
                                                                 {managers && managers.length > 0 ? managers.map((item, index) => (
-                                                                <div key={index} >
-                                                                  <div className="text-field" style={{position: 'relative'}}>
+                                                                <div key={index} style={{ marginTop: '20px'}}>
+                                                                  <div style={{position: 'relative'}}>
                                                                     <label className='title-label'>Менеджер №{index+4}</label>
-                                                                    <input className="text-field__input" type="text" value={item}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
+                                                                    {!showEditManager ? 
+                                                                      <div onClick={()=>changeManager(index+3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === index+3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{item}</div> 
+                                                                      :<input placeholder='Почта / ID' className="text-field__input" type="text" value={managers[index]}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
+                                                                    }
                                                                   </div>
                                                                 </div>
                                                                 

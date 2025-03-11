@@ -109,6 +109,7 @@ const Profile = () => {
   const [visibleDelete, setVisibleDelete] = useState(false)
 
   const [showModal, setShowModal] = useState(false);
+  const [showModalSave, setShowModalSave] = useState(false);
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
@@ -203,6 +204,8 @@ const Profile = () => {
 
   //сохранить профиль
   const saveProfile = async(id) => { 
+      setShowModalSave(true)
+
       setShowClose(true)
       console.log("managerProfile: ", managerProfile)
 
@@ -230,9 +233,10 @@ const Profile = () => {
         const resUpdate = await editManager(saveData, result?.id)
       }
 
-      addToast(exampleToast) //ваши данные сохранены
+      //addToast(exampleToast) //ваши данные сохранены
 
       setTimeout(()=> {
+        setShowModalSave(false)
         closeProfile()
       }, 2000)
   }
@@ -546,9 +550,20 @@ const Profile = () => {
                       onClose={() => setShowModal(false)}
                       aria-labelledby="VerticallyCenteredExample"
                     >
-                    <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '14px', paddingTop: '35px'}}>
-                      Название компании редактируется в разделе Компания в правом верхнем меню
-                    </CModalBody>
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '14px', paddingTop: '35px'}}>
+                        Название компании редактируется в разделе Компания в правом верхнем меню
+                      </CModalBody>
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModalSave}
+                      onClose={() => setShowModalSave(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Данные успешно сохранены
+                      </CModalBody>
                     </CModal>
 
                 </Suspense>

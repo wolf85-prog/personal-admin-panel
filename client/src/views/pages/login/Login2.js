@@ -14,7 +14,8 @@ import {
   CRow,
   CNav,
   CNavItem,
-  CNavLink
+  CNavLink,
+  CFormCheck
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -245,6 +246,13 @@ const Login = observer(() => {
                                       onChange={e => setPassword2(e.target.value)}
                                     />
                                   </CInputGroup>
+                                  <div style={{position: 'absolute', top: '272px', fontSize: '14px'}}>
+                                    <CFormCheck 
+                                      id="flexCheckDefault" 
+                                      label="Согласие на обработку персональных данных"  
+                                    />
+                                  </div>
+                                  
                                   <div className="d-grid">
                                     <CButton onClick={clickReg} color="success">Создать</CButton>
                                   </div>
