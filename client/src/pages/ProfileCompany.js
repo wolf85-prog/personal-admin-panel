@@ -893,7 +893,7 @@ const ProfileCompany = () => {
     //let arr = []
     //arr.push("Новый")
 
-    setContragents([...contragents, "Новый"])
+    setContragents([...contragents, "Наименование контрагента"])
   }
 
   //Удалить контрагента
@@ -1030,34 +1030,34 @@ const ProfileCompany = () => {
                                                             <>
                                                               <div className="div7">
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <label className='title-label'>Контрагент</label>
+                                                                    <label className='title-label'>Контрагент №1</label>
                                                                     {!showEditContr ? 
-                                                                    <div onClick={()=>changeKontra(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 0 ?'0 0 0 1px #2684ff' : ''}}>{contragent1}</div>
-                                                                    :<input onChange={(e)=>setContragent1(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} />
+                                                                    <div onClick={()=>changeKontra(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 0 ?'0 0 0 1px #2684ff' : ''}}>{contragent1 ? contragent1 : 'Наименование контрагента'}</div>
+                                                                    :<input placeholder='Наименование контрагента' onChange={(e)=>setContragent1(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent1} style={{ height: '40px', cursor: 'pointer'}} />
                                                                     }
                                                                   </div>
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <label className='title-label'>Контрагент</label>
+                                                                    <label className='title-label'>Контрагент №2</label>
                                                                     {!showEditContr ? 
-                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent2}</div>
-                                                                    :<input onChange={(e)=>setContragent2(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <div onClick={()=>changeKontra(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 1 ?'0 0 0 1px #2684ff' : ''}}>{contragent2 ? contragent2 : 'Наименование контрагента'}</div>
+                                                                    :<input placeholder='Наименование контрагента' onChange={(e)=>setContragent2(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent2} style={{ height: '40px', cursor: 'pointer' }} />
                                                                     }
                                                                   </div>
                                   
                                                                   <div style={{ marginTop: '20px' }}>
-                                                                    <label className='title-label'>Контрагент</label>
+                                                                    <label className='title-label'>Контрагент №3</label>
                                                                     {!showEditContr ? 
-                                                                    <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3}</div>
-                                                                    :<input onChange={(e)=>setContragent3(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
+                                                                    <div onClick={()=>changeKontra(2)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === 2 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{contragent3 ? contragent3 : 'Наименование контрагента'}</div>
+                                                                    :<input placeholder='Наименование контрагента' onChange={(e)=>setContragent3(e.target.value)} className="text-field__input" type="text" name="contragent1" id="contragent1" value={contragent3} style={{ height: '40px', cursor: 'pointer' }} />
                                                                     }
                                                                   </div>
 
                                                                   {contragents && contragents.map((item, index)=> (
                                                                     <div style={{ marginTop: '20px'}} key={index}>
-                                                                      <label className='title-label'>Контрагент</label>
+                                                                      <label className='title-label'>Контрагент №{index+4}</label>
                                                                       {!showEditContr ? 
                                                                       <div onClick={()=>changeKontra(index+3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectContr === index+3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{item}</div> 
-                                                                      :<input key={index} onChange={(e)=>{
+                                                                      :<input placeholder='Наименование контрагента' key={index} onChange={(e)=>{
                                                                         contragents[index] = e.target.value
                                                                         console.log(contragents)
                                                                         setContragents(contragents)
