@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   CButton,
@@ -15,11 +15,14 @@ import {
   CNav,
   CNavItem,
   CNavLink,
-  CFormCheck
+  CFormCheck,
+  CFormLabel
 } from '@coreui/react'
 
+import InputMask from 'react-input-mask';
+
 import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+import { cilLockLocked, cilPhone, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {ADMIN_ROUTE} from "../../../utils/consts";
 import {login, registration} from "../../../http/userAPI";
@@ -36,12 +39,45 @@ const Login = observer(() => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
+    const [code, setCode] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [activeKey, setActiveKey] = useState(1)
+
+    const [showPassword, setShowPassword] = useState(false)
+    const [showCode, setShowCode] = useState(false)
+    const [checked, setChecked] = useState(false)
+    const [enterCode, setEnterCode] = useState(false)
 
     const { userId, setUserId, addNewMessage3, sendMessSupport } = useUsersContext();
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
+
+    useEffect(()=> {
+      console.log(phone.length)
+      if (phone.length === 18) {
+        setShowCode(true)
+      } else {
+        setShowCode(false)
+      }
+    }, [phone])
+
+    useEffect(()=> {
+      if (checked) {
+        //setShowCode(false)
+        //setShowPassword(true)
+      } else {
+        //setShowCode(false)
+        //setShowPassword(false)
+      }
+    }, [checked])
+
+    useEffect(()=> {
+      if (code.length > 0) {
+        setEnterCode(true)
+      } else {
+        setEnterCode(false)
+      }
+    }, [code])
 
     const clickLogin = async () => {
         try {
@@ -135,6 +171,11 @@ const Login = observer(() => {
       
     }
 
+    const clickEnterCode = () => {
+      setShowPassword(true)
+      setShowCode(false)
+    }
+
   return (
     <div className="bg-dark min-vh-100 d-flex flex-row align-items-center dark-theme bg-uley">
       <CContainer>
@@ -168,14 +209,20 @@ const Login = observer(() => {
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Войдите в свой аккаунт</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
-                        <CIcon icon={cilUser} />
+                        <CIcon icon={cilPhone} />
                       </CInputGroupText>
-                      <CFormInput 
-                        placeholder="Введите ваш телефон..." 
-                        autoComplete="username" 
+                      <InputMask
+                        className='form-control'
+                        type="text" 
+                        name="phone" 
+                        id="phone"
+                        mask="+7 (999) 999-99-99"
+                        maskChar=""
+                        onChange={(e) => setPhone(e.target.value)} 
                         value={phone}
-                        onChange={e => setPhone(e.target.value)}
-                      />
+                        placeholder="Введите ваш телефон..." 
+                      >
+                      </InputMask>
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -213,15 +260,24 @@ const Login = observer(() => {
                     <h1 style={{textAlign: 'center', color: '#fff'}}>U.L.E.Y</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Создайте свой аккаунт</p>
                                   <CInputGroup className="mb-3">
-                                    <CInputGroupText>@</CInputGroupText>
-                                    <CFormInput 
-                                      placeholder="Введите ваш телефон..." 
-                                      autoComplete="phone"
+                                    <CInputGroupText>
+                                      <CIcon icon={cilPhone} />
+                                    </CInputGroupText>
+                                    <InputMask
+                                      className='form-control'
+                                      type="text" 
+                                      name="phone" 
+                                      id="phone"
+                                      mask="+7 (999) 999-99-99"
+                                      maskChar=""
+                                      onChange={(e) => setPhone(e.target.value)} 
                                       value={phone}
-                                      onChange={e => setPhone(e.target.value)} 
-                                    />
+                                      placeholder="Введите ваш телефон..." 
+                                    >
+                                    </InputMask>
                                   </CInputGroup>
-                                  <CInputGroup className="mb-3">
+                                  {showPassword ? 
+                                  <><CInputGroup className="mb-3">
                                     <CInputGroupText>
                                       <CIcon icon={cilLockLocked} />
                                     </CInputGroupText>
@@ -245,17 +301,40 @@ const Login = observer(() => {
                                       value={password2}
                                       onChange={e => setPassword2(e.target.value)}
                                     />
-                                  </CInputGroup>
-                                  <div style={{position: 'absolute', top: '272px', fontSize: '14px'}}>
+                                  </CInputGroup></>
+                                  :''}
+                                  <div style={{fontSize: '14px', color: '#6d6b6b', marginBottom: '10px'}}>
                                     <CFormCheck 
                                       id="flexCheckDefault" 
-                                      label="Согласие на обработку персональных данных"  
+                                      label="Согласие на обработку персональных данных" 
+                                      checked={checked}
+                                      onChange={() => setChecked(!checked)}
                                     />
                                   </div>
+
+                                  {showCode ? 
+                                  <CCol xs="auto" style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
+                                    <div style={{width: '60%'}}>
+                                      <CFormInput 
+                                        type="text" 
+                                        id="code"
+                                        placeholder="Ввести код" 
+                                        value={code}
+                                        onChange={(e)=>setCode(e.target.value)}
+                                      />
+                                    </div>
+
+                                    <CButton onClick={clickEnterCode} color="primary" className="mb-3">
+                                      {enterCode ? 'Ввести код' : 'Получить код'}
+                                    </CButton>
+                                  </CCol>
+                                  : ''}
                                   
+                                  {showPassword ? 
                                   <div className="d-grid">
                                     <CButton onClick={clickReg} color="success">Создать</CButton>
                                   </div>
+                                  :''}
                                 </CForm>              
                 </CCardBody>
               </CCard>
