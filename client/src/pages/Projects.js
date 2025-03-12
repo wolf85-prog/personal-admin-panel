@@ -1122,17 +1122,21 @@ ${loc.url}`;
     for(let i=0; i<mainspec.length; i++) 
     {
       if (mainspec[i].isChecked === true) {
-        checkedinputvalue.push(parseInt(mainspec[i].id))
+        const obj = {
+          id: parseInt(mainspec[i].id),
+          element: i
+        }
+        checkedinputvalue.push(obj)
       }
     }
-    //console.log("checkedinputvalue: ", checkedinputvalue)
+    console.log("checkedinputvalue: ", checkedinputvalue)
 
     const arrayCopy = JSON.parse(JSON.stringify(mainspec));
     let arr = []
 
-    checkedinputvalue.reverse().map(async(item, index)=> {
+    checkedinputvalue.map(async(item, index)=> {
       //setTimeout(async()=> {
-        const dublSpec = mainspec.find((el)=>el.id === parseInt(item))
+        const dublSpec = mainspec.find((el)=>el.id === parseInt(item.id))
         console.log("dublSpec: ", dublSpec)
 
         // если нужен элемент массива
@@ -1154,7 +1158,7 @@ ${loc.url}`;
               hr: dublSpec.hr,
         }
         console.log("newObj: ", newObj)
-        arrayCopy.splice(parseInt(eventkey.split(' ')[2]) + checkedinputvalue.length, 0, newObj)
+        arrayCopy.splice(item.element + checkedinputvalue.length, 0, newObj)
  
       //}, 2000)  
       

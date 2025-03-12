@@ -313,7 +313,15 @@ const ProfileCompany = () => {
 
       setOffice(result?.office ? result.office : '')
       setSklad(result?.sklad ? result.sklad : '')
-      setManagers(result?.managers ? result.managers.split(', ') : [])
+
+      let arr2 = []
+      result?.managers && result.managers.split(', ').map((item, index)=> {
+        if (index > 2) {
+          arr2.push(item)
+        }     
+      })
+      setManagers(arr2)
+
       setManagersObj(result?.managers ? result.managers.split(', ') : [])
       setMan(result?.managers ? result.managers.split(', ') : [])
       setBugalterFio(result?.bugalterFio ? result.bugalterFio : '')
@@ -1096,7 +1104,7 @@ const ProfileCompany = () => {
                                                                   <div>
                                                                     <label className='title-label'>Менеджер №1</label>
                                                                     {!showEditManager ? 
-                                                                    <div onClick={()=>changeManager(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === 0 ?'0 0 0 1px #2684ff' : ''}}>{man[0]}</div>
+                                                                    <div onClick={()=>changeManager(0)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer'}}>{man[0]}</div>
                                                                     :<input placeholder='Почта / ID' className="text-field__input" type="text" value={man[0]} onChange={(e)=>changeMan(e, 0)} style={{ height: '40px', cursor: 'pointer'}} />
                                                                     }
                                                                     {/* <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent1" id="contragent1" value={man[0]} onChange={(e)=>changeMan(e, 0)} style={{ height: '40px', cursor: 'pointer'}} /> */}
@@ -1107,7 +1115,7 @@ const ProfileCompany = () => {
                                                                   <div>
                                                                     <label className='title-label'>Менеджер №2</label>
                                                                     {!showEditManager ? 
-                                                                    <div onClick={()=>changeManager(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === 0 ?'0 0 0 1px #2684ff' : ''}}>{man[1]}</div>
+                                                                    <div onClick={()=>changeManager(1)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer'}}>{man[1]}</div>
                                                                     :<input placeholder='Почта / ID' className="text-field__input" type="text" value={man[1]} onChange={(e)=>changeMan(e, 1)} style={{ height: '40px', cursor: 'pointer'}} />
                                                                     }
                                                                     {/* <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent2" id="contragent2" value={man[1]} onChange={(e)=>changeMan(e, 1)} style={{ height: '40px', cursor: 'pointer'}} /> */}
@@ -1118,7 +1126,7 @@ const ProfileCompany = () => {
                                                                   <div>
                                                                     <label className='title-label'>Менеджер №3</label>
                                                                     {!showEditManager ? 
-                                                                    <div onClick={()=>changeManager(2)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === 0 ?'0 0 0 1px #2684ff' : ''}}>{man[2]}</div>
+                                                                    <div onClick={()=>changeManager(2)} className="py-2 uley-data-main" style={{height: '40px', cursor: 'pointer'}}>{man[2]}</div>
                                                                     :<input placeholder='Почта / ID' className="text-field__input" type="text" value={man[2]} onChange={(e)=>changeMan(e, 2)} style={{ height: '40px', cursor: 'pointer'}} />
                                                                     }
                                                                     {/* <input className="text-field__input" type="text" placeholder='Почта / ID' name="contragent3" id="contragent3" value={man[2]} onChange={(e)=>changeMan(e, 2)} style={{ height: '40px', cursor: 'pointer'}} /> */}
@@ -1130,7 +1138,7 @@ const ProfileCompany = () => {
                                                                   <div style={{position: 'relative'}}>
                                                                     <label className='title-label'>Менеджер №{index+4}</label>
                                                                     {!showEditManager ? 
-                                                                      <div onClick={()=>changeManager(index+3)} style={{height: '40px', cursor: 'pointer', boxShadow: selectManager === index+3 ?'0 0 0 1px #2684ff' : ''}} className="py-2 uley-data-main">{item}</div> 
+                                                                      <div onClick={()=>changeManager(index+3)} style={{height: '40px', cursor: 'pointer'}} className="py-2 uley-data-main">{item}</div> 
                                                                       :<input placeholder='Почта / ID' className="text-field__input" type="text" value={managers[index]}  onChange={(e)=>onChangeManager(e, index)} style={{marginTop: '5px'}}/>
                                                                     }
                                                                   </div>
