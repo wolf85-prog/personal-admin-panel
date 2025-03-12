@@ -55,11 +55,15 @@ const Login = observer(() => {
     useEffect(()=> {
       console.log(phone.length)
       if (phone.length === 18) {
-        setShowCode(true)
+        if (checked) {
+          setShowCode(true)
+        } else {
+          setShowCode(false)
+        } 
       } else {
         setShowCode(false)
       }
-    }, [phone])
+    }, [phone, checked])
 
     useEffect(()=> {
       if (checked) {
@@ -98,29 +102,34 @@ const Login = observer(() => {
 
     const clickReg = async () => {
       try {
-          if (password === password2) {
-            const data = await registration(phone, password, '2');
-            console.log(data)
+          if (password.length !== 0) {
+            if (password === password2) {
+              const data = await registration(phone, password, '2');
+              console.log(data)
 
-            //создание менеджера
-            const resManager = await addManager({fio: "ФИО", userId: data?.id, phone: data?.role})
-            console.log("resManager: ", resManager)
+              //создание менеджера
+              const resManager = await addManager({fio: "ФИО", userId: data?.id, phone: data?.role})
+              console.log("resManager: ", resManager)
 
-            //создание компании
-            const resCompany = await addCompanyProf({userId: data?.id, title: 'Название компании' })
+              //создание компании
+              const resCompany = await addCompanyProf({userId: data?.id, title: 'Название компании' })
 
-            user.setUser(data)
-            user.setIsAuth(true)
+              user.setUser(data)
+              user.setIsAuth(true)
 
-            setUserId(data.id)
-            localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
+              setUserId(data.id)
+              localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
 
-            sendText(data.id)
+              sendText(data.id)
 
-            navigate(ADMIN_ROUTE)
+              navigate(ADMIN_ROUTE)
+            } else {
+              alert("Пароли не совпадают!")
+            }
           } else {
-            alert("Пароли не совпадают!")
+            alert("Введите пароль!")
           }
+          
           
       } catch (e) {
           alert(e.message)
@@ -172,8 +181,13 @@ const Login = observer(() => {
     }
 
     const clickEnterCode = () => {
-      setShowPassword(true)
-      setShowCode(false)
+      if (enterCode) {
+        setShowPassword(true)
+        setShowCode(false)
+      } else {
+        setShowPassword(false)
+        setShowCode(true)
+      }  
     }
 
   return (
@@ -303,6 +317,7 @@ const Login = observer(() => {
                                     />
                                   </CInputGroup></>
                                   :''}
+                                  {!showPassword ? 
                                   <div style={{fontSize: '14px', color: '#6d6b6b', marginBottom: '10px'}}>
                                     <CFormCheck 
                                       id="flexCheckDefault" 
@@ -311,10 +326,11 @@ const Login = observer(() => {
                                       onChange={() => setChecked(!checked)}
                                     />
                                   </div>
+                                  : ''}
 
                                   {showCode ? 
                                   <CCol xs="auto" style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-                                    <div style={{width: '60%'}}>
+                                    <div style={{width: '48%'}}>
                                       <CFormInput 
                                         type="text" 
                                         id="code"
@@ -324,7 +340,7 @@ const Login = observer(() => {
                                       />
                                     </div>
 
-                                    <CButton onClick={clickEnterCode} color="primary" className="mb-3">
+                                    <CButton onClick={clickEnterCode} color="primary" style={{width: '48%'}} className="mb-3">
                                       {enterCode ? 'Ввести код' : 'Получить код'}
                                     </CButton>
                                   </CCol>
