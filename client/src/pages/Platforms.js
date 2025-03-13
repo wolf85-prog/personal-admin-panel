@@ -193,6 +193,7 @@ const Platforms = () => {
           address: platform.address,
           track: platform.track,
           url: platform.url,
+          karta: platform.karta,
           comment: platform.comment, 
           createdAt: platform.createdAt,
         }
@@ -249,6 +250,7 @@ const openPlatform = (resPlatform) => {
     setAddress(resPlatform.address)
     setTrack(resPlatform.track)
     setUrl(resPlatform.url)
+    setImage(resPlatform.karta)
     setComment(resPlatform.comment)
   }
   
@@ -677,7 +679,7 @@ const onSortAddress = () => {
                                           {item.url && item.url.length > 20 ? item.url.substr(0, 20) + '...' : item.url} 
                                         </CTableDataCell>   
                                         <CTableDataCell className="text-center">
-                                          {item.karta} 
+                                          {item.karta && item.karta.length > 20 ? item.karta.substr(0, 20) + '...' : item.karta} 
                                         </CTableDataCell>            
                                       </CTableRow>
                                     ))
