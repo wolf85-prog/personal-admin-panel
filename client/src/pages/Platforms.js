@@ -140,7 +140,7 @@ const Platforms = () => {
   const [selectedName, setSelectedName] = useState("");
   const [imageKarta, setImageKarta]= useState("");
 
-  const API_URL_HOST = process.env.REACT_APP_HOST
+  const API_URL_HOST = process.env.REACT_APP_API_URL
 
     //поиск
   useEffect(() => {
@@ -272,6 +272,7 @@ const openPlatform = (resPlatform) => {
     address,
     track,
     url,
+    karta: image,
     comment,
   }
   console.log("saveData: ", saveData)
@@ -288,6 +289,7 @@ const openPlatform = (resPlatform) => {
       address,
       track,
       url,
+      karta: image,
       comment,
     };
 
@@ -585,9 +587,9 @@ const onSortAddress = () => {
           let response = await uploadFile(data);
           console.log("response: ", response.data.path)
 
-          setImage(API_URL_HOST + response.data.path.split('.team')[1]);
+          setImage(API_URL_HOST + response.data.path);
           //сообщение с ссылкой на файл
-          console.log(API_URL_HOST + response.data.path.split('.team')[1])
+          console.log(API_URL_HOST + response.data.path)
           //setValue(host + response.data.path)
         }
     }
@@ -879,6 +881,7 @@ const onSortAddress = () => {
                                         <div className='text-field__input' style={{textAlign: 'start'}}>
                                           <img src={PaperIcon} alt="upload" width={20} height={20} />
                                           <input className='text-field__input' style={{position: 'absolute', top: '0', opacity: '0'}} type="file"  name="photo"  onChange={handleFileChange} />
+                                          {image && image.length > 20 ? " " + image.substr(0, 20) + '...' : image}
                                         </div>  
                                       </div> 
                                     </div>

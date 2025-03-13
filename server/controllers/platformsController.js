@@ -82,6 +82,7 @@ class PlatformsController {
                 address,
                 track,
                 url,
+                karta,
                 comment,
             } = req.body
 
@@ -93,6 +94,7 @@ class PlatformsController {
                     address,
                     track,
                     url,
+                    karta,
                     comment,   
                 },
                 { where: {id: id} })
