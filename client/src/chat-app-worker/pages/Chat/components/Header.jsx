@@ -96,13 +96,13 @@ const Header = ({ user, worker, openProfileSidebar, openSearchSidebar, closeSide
 					</>
 				}
 				
-				{
+				{/* {
                     worker && worker.length !== 0 ?  
-                    ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
+                    ((worker[0].worklist && JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
                     <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
                     : "")
                     : ""
-                }
+                } */}
                 
 				{/* {
                     worker.length !== 0 ? 

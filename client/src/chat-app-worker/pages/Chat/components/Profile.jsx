@@ -122,32 +122,32 @@ const Profile = ({ user, closeSidebar }) => {
 	useEffect(()=>{
 
 		const fetch = async() => {
-			const pretendentArray = await getLastPretendent(user.chatId)
-			console.log("pretendentArray: ", pretendentArray)
+			//const pretendentArray = await getLastPretendent(user.chatId)
+			//console.log("pretendentArray: ", pretendentArray)
 			
-			if (pretendentArray.length > 0) {
-				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
-				const projectId2 = pretendentArray[pretendentArray.length-2]?.projectId
-				const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
+			// if (pretendentArray.length > 0) {
+			// 	const projectId = pretendentArray[pretendentArray.length-1]?.projectId
+			// 	const projectId2 = pretendentArray[pretendentArray.length-2]?.projectId
+			// 	const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
 				
-				//получить CrmId по id проекта
-				const project = await getProjectId(projectId)
-				console.log("project profile: ", project)
-				const project2 = await getProjectId(projectId2)
-				const project3 = await getProjectId(projectId3)
+			// 	//получить CrmId по id проекта
+			// 	const project = await getProjectId(projectId)
+			// 	console.log("project profile: ", project)
+			// 	const project2 = await getProjectId(projectId2)
+			// 	const project3 = await getProjectId(projectId3)
 
-				const crmId = project ? project.crmID : '—'
-				const crmId2 = project2 ? project2.crmID : '—'
-				const crmId3 = project3 ? project3.crmID : '—' 
+			// 	const crmId = project ? project.crmID : '—'
+			// 	const crmId2 = project2 ? project2.crmID : '—'
+			// 	const crmId3 = project3 ? project3.crmID : '—' 
 
-				console.log("crmId: ", crmId, crmId2, crmId3)
+			// 	console.log("crmId: ", crmId, crmId2, crmId3)
 
-				setCrmId(crmId)
-				setCrmId2(crmId2)
-				setCrmId3(crmId3)
-			} else {
-				setCrmId('—')
-			}	
+			// 	setCrmId(crmId)
+			// 	setCrmId2(crmId2)
+			// 	setCrmId3(crmId3)
+			// } else {
+			// 	setCrmId('—')
+			// }	
 			
 			const blocked = await getSpecialistChatId(user.chatId)
 			console.log("blocked: ", blocked, user.chatId)
@@ -254,7 +254,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker ? JSON.parse(worker.worklist)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table>
+							<table className="table-noborder">{worker && worker.worklist.length > 0 ? JSON.parse(worker.worklist)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table>
 						</span>	
 					</p>
 				</li>
