@@ -480,7 +480,7 @@ ${loc.url}`;
           color: ''
         }
 
-        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor = 'red'
+        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor2 = 'red'
 
         const obj3 = {
           name: item.comteg,
