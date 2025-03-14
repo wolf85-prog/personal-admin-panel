@@ -190,6 +190,11 @@ const Login = observer(() => {
       }  
     }
 
+    const handleCode = event => {
+      const result = event.target.value.replace(/\D/g, '');
+      setCode(result)
+    };
+
   return (
     <div className="bg-dark min-vh-100 d-flex flex-row align-items-center dark-theme bg-uley">
       <CContainer>
@@ -279,6 +284,7 @@ const Login = observer(() => {
                                     </CInputGroupText>
                                     <InputMask
                                       className='form-control'
+                                      style={{textAlign: 'center'}}
                                       type="text" 
                                       name="phone" 
                                       id="phone"
@@ -331,13 +337,26 @@ const Login = observer(() => {
                                   {showCode ? 
                                   <CCol xs="auto" style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
                                     <div style={{width: '48%'}}>
-                                      <CFormInput 
+                                      {/* <CFormInput 
                                         type="text" 
+                                        style={{paddingLeft: '50px'}}
                                         id="code"
                                         placeholder="Ввести код" 
                                         value={code}
-                                        onChange={(e)=>setCode(e.target.value)}
-                                      />
+                                        onChange={handleCode}
+                                      /> */}
+                                      <InputMask
+                                        className="text-field__input" 
+                                        type="text" 
+                                        name="code" 
+                                        id="inn"
+                                        mask="9999"
+                                        maskChar=""
+                                        onChange={(e) => setCode(e.target.value)} 
+                                        value={code}
+                                        placeholder='Ввести код'
+                                      >
+                                      </InputMask>
                                     </div>
 
                                     <CButton onClick={clickEnterCode} color="primary" style={{width: '48%'}} className="mb-3">
