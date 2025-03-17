@@ -25,7 +25,7 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilPhone, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {ADMIN_ROUTE} from "../../../utils/consts";
-import {login, registration} from "../../../http/userAPI";
+import {addCode, getCode, checkCode, login, registration} from "../../../http/userAPI";
 import {Context} from "../../../index";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 
@@ -187,13 +187,31 @@ const Login = observer(() => {
       
     }
 
-    const clickEnterCode = () => {
+    const clickEnterCode = async() => {
       if (enterCode) {
-        setShowPassword(true)
-        setShowCode(false)
+        const resGetCode = await getCode(phone, code)
+        console.log("resGetCode: ", resGetCode)
+
+        
+
+        if (parseInt(resGetCode) === parseInt(code)) {
+          setShowPassword(true)
+          setShowCode(false)
+        } else {
+          alert('Код неверный! Попробуйте еще раз!')
+          setShowPassword(false)
+          setShowCode(true)
+        }
+        
       } else {
         const code = getRandomIntInclusive(1000, 9999)
         console.log(code)
+
+        const resAddCode = await addCode(phone, code)
+        console.log("resAddCode: ", resAddCode)
+
+        const resCheckCode = await checkCode(phone, code)
+
         setShowPassword(false)
         setShowCode(true)
       }  

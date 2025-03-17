@@ -28,6 +28,10 @@ const $host_smeta = axios.create({
     baseURL: process.env.REACT_APP_WEBAPP_SMETA
 })
 
+const $host_sms = axios.create({
+    baseURL: process.env.REACT_APP_WEBAPP_SMS
+})
+
 const $authHost = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
@@ -47,5 +51,6 @@ export {
     $host_worker,
     $host_call,
     $host_smeta,
+    $host_sms,
     $authHost
 }
