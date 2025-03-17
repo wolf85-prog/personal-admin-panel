@@ -83,6 +83,13 @@ const Login = observer(() => {
       }
     }, [code])
 
+    const getRandomIntInclusive = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min); // Максимум и минимум включаются
+    }
+
+
     const clickLogin = async () => {
         try {
             const data = await login(phone, password);
@@ -185,6 +192,8 @@ const Login = observer(() => {
         setShowPassword(true)
         setShowCode(false)
       } else {
+        const code = getRandomIntInclusive(1000, 9999)
+        console.log(code)
         setShowPassword(false)
         setShowCode(true)
       }  

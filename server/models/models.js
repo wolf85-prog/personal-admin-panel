@@ -9,6 +9,12 @@ const User = sequelize.define('user', {
     role: {type: DataTypes.STRING, defaultValue: 1},
 })
 
+const Code = sequelize.define('code', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    phone: {type: DataTypes.STRING},
+    code: {type: DataTypes.INTEGER},
+})
+
 const Role = sequelize.define('role', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     role: {type: DataTypes.STRING},
@@ -193,6 +199,7 @@ const Client = sequelize.define('client', {
 
 module.exports = {
     User, 
+    Code,
     Manager,
     Project,
     Company,
