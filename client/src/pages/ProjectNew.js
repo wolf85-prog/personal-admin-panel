@@ -1378,111 +1378,162 @@ ${loc.url}`;
                             </div>
                           </CCardHeader>                    
 
-                          <CCardBody style={{padding: '12px', height: `${height}px`}}>
-                          <div style={{position: 'relative', height: '435px', display: 'flex', flexDirection: 'row'}}>
-                            {/* 1 */}                               
-                            <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
-                              
-                                <label className='title-label'></label>
-                                <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
+                          <CCardBody style={{padding: '12px'}}>
+                            <label className='title-label' style={{marginLeft: '32px'}}>ID</label>
+                            <div className="text-field" style={{marginBottom: '0px'}}>
+                              <input disabled={true} className="text-field__input" type="text" name="projectName" id="projectName" value='0' style={{width: '80px'}}/>
+                            </div>
+                            <div style={{position: 'relative', display: 'flex', flexDirection: 'row'}}>
+                              {/* 1 */}                               
+                              <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
+                                
+                                  <label className='title-label'></label>
+                                  <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
+                                    <div className="text-field">
+                                      {/*<input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>*/}
+                                      <DatePicker
+                                        className="uley-datepicker-control text-center text-field__input"
+                                        style={{ height: '40px', width: '120px'}}
+                                        selected={startDate}
+                                        onChange={(date, e) => changeDate(date, e)}
+                                        selectsStart
+                                        //startDate={startDate}
+                                        dateFormat="dd.MM.yyyy"
+                                      />
+                                    </div>
+                                    <div className="text-field">
+                                      {/* <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/> */}
+                                      <InputMask 
+                                        mask="99:99"
+                                        value={startTime}
+                                        onChange={(e)=>setStartTime(e.target.value)}>
+                                        {(inputProps) => <CFormInput 
+                                                          {...inputProps} 
+                                                          placeholder="" 
+                                                          disableUnderline
+                                                          aria-label="sm input example"
+                                                          className="text-field__input"
+                                                          style={{width: '90px'}} 
+                                                        />}
+                                      </InputMask>
+                                    </div>
+                                  </div>
+
+                                  <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/> */}
+                                      <DatePicker
+                                        className="uley-datepicker-control text-center text-field__input"
+                                        style={{ height: '40px', width: '120px'}}
+                                        selected={endDate}
+                                        onChange={(date) => setEndDate(date)}
+                                        selectsStart
+                                        //endDate={endDate}
+                                        dateFormat="dd.MM.yyyy"
+                                      />
+                                    </div>
+                                    <div className="text-field">
+                                      {/* <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/> */}
+                                      <InputMask 
+                                        mask="99:99"
+                                        value={endTime}
+                                        onChange={(e)=>setEndTime(e.target.value)}>
+                                        {(inputProps) => <CFormInput 
+                                                          {...inputProps} 
+                                                          placeholder="" 
+                                                          disableUnderline
+                                                          aria-label="sm input example"
+                                                          className="text-field__input"
+                                                          style={{width: '90px'}} 
+                                                        />}
+                                      </InputMask>
+                                    </div>
+                                  </div>
+
+
+                                  <label className='title-label'>Специфика</label>
                                   <div className="text-field">
-                                    {/*<input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>*/}
-                                    <DatePicker
-                                      className="uley-datepicker-control text-center text-field__input"
-                                      style={{ height: '40px', width: '120px'}}
-                                      selected={startDate}
-                                      onChange={(date, e) => changeDate(date, e)}
-                                      selectsStart
-                                      //startDate={startDate}
-                                      dateFormat="dd.MM.yyyy"
+                                    <MyDropdown4
+                                      style={{backgroundColor: '#131c21'}}
+                                      options={specifikaData}
+                                      selected={specifikaProject}
+                                      setSelected={setSpecifikaProject}
+                                      placeholder='Выбери специфику'
                                     />
                                   </div>
-                                  <div className="text-field">
-                                    {/* <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/> */}
-                                    <InputMask 
-                                      mask="99:99"
-                                      value={startTime}
-                                      onChange={(e)=>setStartTime(e.target.value)}>
-                                      {(inputProps) => <CFormInput 
-                                                        {...inputProps} 
-                                                        placeholder="" 
-                                                        disableUnderline
-                                                        aria-label="sm input example"
-                                                        className="text-field__input"
-                                                        style={{width: '90px'}} 
-                                                      />}
-                                    </InputMask>
-                                  </div>
-                                </div>
 
-                                <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
+                                  <label className='title-label'>Вид работ</label>
                                   <div className="text-field">
-                                    {/* <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/> */}
-                                    <DatePicker
-                                      className="uley-datepicker-control text-center text-field__input"
-                                      style={{ height: '40px', width: '120px'}}
-                                      selected={endDate}
-                                      onChange={(date) => setEndDate(date)}
-                                      selectsStart
-                                      //endDate={endDate}
-                                      dateFormat="dd.MM.yyyy"
+                                    <MyDropdown4
+                                      style={{backgroundColor: '#131c21'}}
+                                      options={vids}
+                                      selected={vidProject}
+                                      setSelected={setVidProject}
+                                      placeholder='Выбери вид работ'
                                     />
                                   </div>
-                                  <div className="text-field">
-                                    {/* <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/> */}
-                                    <InputMask 
-                                      mask="99:99"
-                                      value={endTime}
-                                      onChange={(e)=>setEndTime(e.target.value)}>
-                                      {(inputProps) => <CFormInput 
-                                                        {...inputProps} 
-                                                        placeholder="" 
-                                                        disableUnderline
-                                                        aria-label="sm input example"
-                                                        className="text-field__input"
-                                                        style={{width: '90px'}} 
-                                                      />}
-                                    </InputMask>
+                              </div>
+
+                              {/* 2 */}   
+                              <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
+                              <label className='title-label'>Проект</label>
+                              <div className="text-field">
+                                <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/>
+                              </div>
+
+                              <label className='title-label'>Город</label>
+                              <div className="text-field">
+                                <Autocomplete
+                                  sx={{
+                                      display: 'inline-block',
+                                      '& input': {zIndex: '25',
+                                          width: '100%',
+                                          border: 'none',
+                                          height: '40px',
+                                          padding: '5px 4px',
+                                          fontFamily: 'inherit',
+                                          fontSize: '14px',
+                                          fontWeight: '400',
+                                          lineHeight: '1.5',
+                                          textAlign: 'center',
+                                          color: '#ffffff',
+                                          backgroundColor: 'transparent', 
+                                      }
+                                  }}
+                                  className="text-field__input" 
+                                  openOnFocus
+                                  id="custom-input-demo"
+                                  options={sortedCities}
+                                  style={{width: '100%', padding: '0'}}
+                                  //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                  onInputChange={onChangeCity}
+                                  onChange={(event, newValue) => {
+                                    if (newValue && newValue.length) {                                                      
+                                      setCity(newValue)
+                                    }  
+                                  }}
+                                  value={city} 
+                                  inputValue={city}
+                                  renderInput={(params) => (
+                                  <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                      <input 
+                                          className="text-field__input" 
+                                          type="text" {...params.inputProps} 
+                                          placeholder=''
+                                          autoComplete='off'
+                                      />
                                   </div>
-                                </div>
+                                  )}
+                                />
+                              </div>
 
-
-                                <label className='title-label'>Специфика</label>
-                                <div className="text-field">
-                                  <MyDropdown4
-                                    style={{backgroundColor: '#131c21'}}
-                                    options={specifikaData}
-                                    selected={specifikaProject}
-                                    setSelected={setSpecifikaProject}
-                                    placeholder='Выбери специфику'
-                                  />
-                                </div>
-
-                                <label className='title-label'>Вид работ</label>
-                                <div className="text-field">
-                                  <MyDropdown4
-                                    style={{backgroundColor: '#131c21'}}
-                                    options={vids}
-                                    selected={vidProject}
-                                    setSelected={setVidProject}
-                                    placeholder='Выбери вид работ'
-                                  />
-                                </div>
-                            </div>
-
-                            {/* 2 */}   
-                            <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
-                            <label className='title-label'>Проект</label>
-                            <div className="text-field">
-                              <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/>
-                            </div>
-
-                            <label className='title-label'>Город</label>
-                            <div className="text-field">
-                              <Autocomplete
-                                sx={{
-                                    display: 'inline-block',
-                                    '& input': {zIndex: '25',
+                              <label className='title-label'>Локация</label>
+                              <div className="text-field widthBlock3"  onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
+                                {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                <Autocomplete
+                                  sx={{
+                                      display: 'inline-block',
+                                      '& input': {zIndex: '25',
                                         width: '100%',
                                         border: 'none',
                                         height: '40px',
@@ -1493,220 +1544,352 @@ ${loc.url}`;
                                         lineHeight: '1.5',
                                         textAlign: 'center',
                                         color: '#ffffff',
-                                        backgroundColor: 'transparent', 
-                                    }
-                                }}
-                                className="text-field__input" 
-                                openOnFocus
-                                id="custom-input-demo"
-                                options={sortedCities}
-                                style={{width: '100%', padding: '0'}}
-                                //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                onInputChange={onChangeCity}
-                                onChange={(event, newValue) => {
-                                  if (newValue && newValue.length) {                                                      
-                                    setCity(newValue)
-                                  }  
-                                }}
-                                value={city} 
-                                inputValue={city}
-                                renderInput={(params) => (
-                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                    <input 
-                                        className="text-field__input" 
-                                        type="text" {...params.inputProps} 
-                                        placeholder=''
-                                        autoComplete='off'
-                                    />
-                                </div>
-                                )}
-                              />
-                            </div>
-
-                            <label className='title-label'>Локация</label>
-                            <div className="text-field widthBlock3"  onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
-                              {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
-                              <Autocomplete
-                                sx={{
-                                    display: 'inline-block',
-                                    '& input': {zIndex: '25',
-                                      width: '100%',
-                                      border: 'none',
-                                      height: '40px',
-                                      padding: '5px 4px',
-                                      fontFamily: 'inherit',
-                                      fontSize: '14px',
-                                      fontWeight: '400',
-                                      lineHeight: '1.5',
-                                      textAlign: 'center',
-                                      color: '#ffffff',
-                                      backgroundColor: 'transparent',
-                                    }
-                                }}
-                                className="text-field__input" 
-                                openOnFocus
-                                id="custom-input-demo"
-                                options={platformsData}
-                                style={{width: '100%', padding: '0'}}
-                                onInputChange={(e)=>changeLocation(e)}
-                                //onInputChange={(e)=>console.log(e.target.value)}
-                                //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                onChange={(event, newValue) => {
-                                    if (newValue && newValue.length) {
-                                        setLocationProject(newValue)
-                                        
-                                        const loc = platformsAll.find(item=> item.title === newValue)
-                                        console.log("loc: ", loc)
-                                        if (loc) {
-                                          let text = `${loc.city}   
-                            ${loc.track}   
-                            ${loc.url}`;
-                                          setAddress(loc.address)
-                                          setTrack(text)
-                                          setGeoId(loc.id)
-                                          setLocation(text)
-                                        }
-                                    }  
-                                }}
-                                value={locationProject}
-                                inputValue={locationProject}
-                                renderInput={(params) => (
-                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                    <input 
-                                        className="text-field__input" 
-                                        type="text" {...params.inputProps} 
-                                        placeholder=''
-                                    />
-                                </div>
-                                )}
-                              />
-
-                              <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
-                            </div>
-
-                            <label className='title-label'>Адрес</label>
-                            <div className="text-field" onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
-                              <input disabled={false} className="text-field__input" type="text" 
-                                name="address" 
-                                id="address" 
-                                value={address}
-                              />
-                              <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
-                            </div>
-
-                            </div>
-
-                            {/* 3 */}   
-                            <div className='widthBlock2' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
-
-                              <div style={{display: 'flex'}}>
-                                <div>
-                                  <label className='title-label'>Старший</label>
-                                  <div className="text-field">
-                                    {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
-                                    <Autocomplete
-                                      sx={{
-                                          display: 'inline-block',
-                                          '& input': {zIndex: '25',
-                                              width: '100%',
-                                              border: 'none',
-                                              height: '40px',
-                                              padding: '5px 4px',
-                                              fontFamily: 'inherit',
-                                              fontSize: '14px',
-                                              fontWeight: '400',
-                                              lineHeight: '1.5',
-                                              textAlign: 'center',
-                                              color: '#ffffff',
-                                              backgroundColor: 'transparent', 
+                                        backgroundColor: 'transparent',
+                                      }
+                                  }}
+                                  className="text-field__input" 
+                                  openOnFocus
+                                  id="custom-input-demo"
+                                  options={platformsData}
+                                  style={{width: '100%', padding: '0'}}
+                                  onInputChange={(e)=>changeLocation(e)}
+                                  //onInputChange={(e)=>console.log(e.target.value)}
+                                  //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                  onChange={(event, newValue) => {
+                                      if (newValue && newValue.length) {
+                                          setLocationProject(newValue)
+                                          
+                                          const loc = platformsAll.find(item=> item.title === newValue)
+                                          console.log("loc: ", loc)
+                                          if (loc) {
+                                            let text = `${loc.city}   
+                              ${loc.track}   
+                              ${loc.url}`;
+                                            setAddress(loc.address)
+                                            setTrack(text)
+                                            setGeoId(loc.id)
+                                            setLocation(text)
                                           }
-                                      }}
-                                      className="text-field__input" 
-                                      openOnFocus
-                                      id="custom-input-manager2"
-                                      options={workersData}
-                                      style={{width: '100%', padding: '0'}}
-                                      //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                      //onInputChange={onChangeManager2} 
-                                      onInputChange={(event, newInputValue) => {
-                                        setManagerName2(newInputValue);
-                                      }}
-                                      onChange={(event, newValue) => {
-                                        if (newValue) {  
-                                          console.log("workersAll 2: ", workersAll)                                                     
-                                          const comp = workersAll.find(item=> item.userfamily === newValue.label)
-                                          console.log("comp worker: ", comp, newValue)
-                                          if (comp) {
-                                            setPhone2(comp.phone)
-                                            setManagerName2(comp.userfamily)
-                                          }
-                                        }  
-                                      }}
-                                      value={managerName2} 
-                                      inputValue={managerName2}
-                                      renderInput={(params) => (
-                                      <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                          <input 
-                                              className="text-field__input" 
-                                              type="text" {...params.inputProps} 
-                                              placeholder='ФИО'
-                                          />
-                                      </div>
-                                      )}
-                                    />
+                                      }  
+                                  }}
+                                  value={locationProject}
+                                  inputValue={locationProject}
+                                  renderInput={(params) => (
+                                  <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                      <input 
+                                          className="text-field__input" 
+                                          type="text" {...params.inputProps} 
+                                          placeholder=''
+                                      />
                                   </div>
-                                </div>
+                                  )}
+                                />
 
-                                <div className='widthBlock4' style={{textAlign: 'center', marginLeft: '10px'}}>
-                                  <label className='title-label'>Телефон</label>
-                                  <div className="text-field">
-                                    {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
-                                    <InputMask
-                                        className="text-field__input" 
-                                        style={{marginRight: '10px'}}
-                                        type="text" 
-                                        name="phone" 
-                                        id="phone"
-                                        mask="+7 (999) 999-99-99"
-                                        disabled={true}
-                                        maskChar=""
-                                        // onChange={(e) => setPhone(e.target.value)} 
-                                        value={phone}
-                                        placeholder=''
-                                    >
-                                    </InputMask>
-                                  </div>
-                                </div>
+                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                               </div>
-                              
 
-                            <label className='title-label'>Техническое Задание</label>
-                            <div className="text-field" style={{marginBottom: '0px'}}>
-                              <textarea 
-                                className="text-field__input widthBlock3"
-                                type="text" 
-                                name="comment" 
-                                id="comment"
-                                value={tehText}
-                                onChange={(e)=>setTehText(e.target.value)}
-                                style={{width: '100%', resize: 'none', height: '208px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
-                              />
-                            </div> 
+                              <label className='title-label'>Адрес</label>
+                              <div className="text-field" onMouseOver={()=>setShowSaveAddress(true)} onMouseOut={()=>setShowSaveAddress(false)}>
+                                <input disabled={false} className="text-field__input" type="text" 
+                                  name="address" 
+                                  id="address" 
+                                  value={address}
+                                />
+                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                              </div>
 
+                              </div>
+
+                              {/* 3 */}   
+                              <div className='widthBlock6' style={{textAlign: 'center', marginTop: '10px'}}>
+
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                  <div style={{width: '100%'}}>
+                                    <label className='title-label'>Старший</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                      <Autocomplete
+                                        sx={{
+                                            display: 'inline-block',
+                                            '& input': {zIndex: '25',
+                                                width: '100%',
+                                                border: 'none',
+                                                height: '40px',
+                                                padding: '5px 4px',
+                                                fontFamily: 'inherit',
+                                                fontSize: '14px',
+                                                fontWeight: '400',
+                                                lineHeight: '1.5',
+                                                textAlign: 'center',
+                                                color: '#ffffff',
+                                                backgroundColor: 'transparent', 
+                                            }
+                                        }}
+                                        className="text-field__input" 
+                                        openOnFocus
+                                        id="custom-input-manager2"
+                                        options={workersData}
+                                        style={{width: '100%', padding: '0'}}
+                                        //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                        //onInputChange={onChangeManager2} 
+                                        onInputChange={(event, newInputValue) => {
+                                          setManagerName2(newInputValue);
+                                        }}
+                                        onChange={(event, newValue) => {
+                                          if (newValue) {  
+                                            console.log("workersAll 2: ", workersAll)                                                     
+                                            const comp = workersAll.find(item=> item.userfamily === newValue.label)
+                                            console.log("comp worker: ", comp, newValue)
+                                            if (comp) {
+                                              setPhone2(comp.phone)
+                                              setManagerName2(comp.userfamily)
+                                            }
+                                          }  
+                                        }}
+                                        value={managerName2} 
+                                        inputValue={managerName2}
+                                        renderInput={(params) => (
+                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                            <input 
+                                                className="text-field__input" 
+                                                type="text" {...params.inputProps} 
+                                                placeholder='ФИО'
+                                            />
+                                        </div>
+                                        )}
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <label className='title-label'>Телефон</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{marginRight: '10px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={true}
+                                          maskChar=""
+                                          // onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+
+                              <label className='title-label'>Техническое Задание</label>
+                              <div className="text-field" style={{marginBottom: '0px'}}>
+                                <textarea 
+                                  className="text-field__input widthBlock3"
+                                  type="text" 
+                                  name="comment" 
+                                  id="comment"
+                                  value={tehText}
+                                  onChange={(e)=>setTehText(e.target.value)}
+                                  style={{width: '100%', resize: 'none', height: '208px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
+                                />
+                              </div> 
+
+                              </div>
                             </div>
 
-                            {/* 4 */}   
-                            
+                            {/* HR */}   
+                            <hr></hr>
 
-                          </div>
+                            <div style={{position: 'relative', height: '435px', display: 'flex', flexDirection: 'row'}}>
+                              {/* 1 */}                               
+                              <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
 
-                                    
+                                  <label className='title-label'>Формат</label>
+                                  <div className="text-field" style={{width: '230px'}}>
+                                    <MyDropdown4
+                                      style={{backgroundColor: '#131c21'}}
+                                      options={specifikaData}
+                                      selected={specifikaProject}
+                                      setSelected={setSpecifikaProject}
+                                      placeholder='Выбери формат'
+                                    />
+                                  </div>
 
+                                  <label className='title-label'>Вид работ</label>
+                                  <div className="text-field" style={{width: '230px'}}>
+                                    <MyDropdown4
+                                      style={{backgroundColor: '#131c21'}}
+                                      options={vids}
+                                      selected={vidProject}
+                                      setSelected={setVidProject}
+                                      placeholder='Выбери вид работ'
+                                    />
+                                  </div>
+                              </div>
+
+                              {/* 2 */}   
+                              <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
+
+                                <label className='title-label'>Категория</label>
+                                <div className="text-field">
+                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}} placeholder='Выбрать категорию'/>
+
+                                </div>
+
+                                <label className='title-label'>Специальность</label>
+                                <div className="text-field widthBlock3"  onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
+                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}} placeholder='Выбрать специальность'/>
+
+                                  <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                </div>
+
+                              </div>
+
+                              {/* 3 */}   
+                              <div className='widthBlock6' style={{textAlign: 'center', marginTop: '10px'}}>
+                                {/* 1 */}
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                  <div style={{width: '100%'}}>
+                                    <label className='title-label'>Консоль</label>
+                                    <div className="text-field">
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg"/>
+                                      
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <label className='title-label'>РА</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{marginRight: '10px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={true}
+                                          maskChar=""
+                                          // onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <label className='title-label'>???</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{marginRight: '10px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={true}
+                                          maskChar=""
+                                          // onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <label className='title-label'>Кол-во каналов</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{marginRight: '10px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={true}
+                                          maskChar=""
+                                          // onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                    </div>
+                                  </div>
+                                </div> 
+
+                                {/* 2 */}
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                  <div style={{width: '100%'}}>
+                                    <label className='title-label'>Количество</label>
+                                    <div className="text-field">
+                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" />
+
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <label className='title-label'>Смена</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{marginRight: '10px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={true}
+                                          maskChar=""
+                                          // onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <label className='title-label'>Ставка</label>
+                                    <div className="text-field">
+                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
+                                      <InputMask
+                                          className="text-field__input" 
+                                          style={{marginRight: '10px'}}
+                                          type="text" 
+                                          name="phone" 
+                                          id="phone"
+                                          mask="+7 (999) 999-99-99"
+                                          disabled={true}
+                                          maskChar=""
+                                          // onChange={(e) => setPhone(e.target.value)} 
+                                          value={phone}
+                                          placeholder=''
+                                      >
+                                      </InputMask>
+                                    </div>
+                                  </div>
+
+                                  <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <CButton  className='uley_edit_manager' style={{width: '100%', height: '40px', marginLeft: '1px', borderColor: 'green', marginTop: '22px'}}>
+                                      <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                        Добавить
+                                      </span>
+                                    </CButton> 
+                                  </div>
+                                </div> 
+
+                              </div>
+                            </div>
 
                           </CCardBody>
                         </CCard>
-
-
                       </CCol>
                     </CRow>
 
