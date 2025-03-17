@@ -58,6 +58,9 @@ route.get('/user/auth', authMiddleware, userController.check)
 route.get('/user/get', authMiddleware, userController.getAll)
 route.get('/user/get/:id', authMiddleware, userController.getOne)
 
+route.post('/user/code/get', userController.getCode)
+route.post('/user/code/add', userController.addCode)
+
 
 route.get('/userbots/get', getUsers)
 route.get('/userbots/get/:id', getUser)
