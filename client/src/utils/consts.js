@@ -1,6 +1,7 @@
 export const ADMIN_ROUTE = '/dashboard'
 
 export const PROJECTS_ROUTE = '/project'
+export const PROJECTNEW_ROUTE = '/project_new'
 export const AIR_ROUTE = '/on_air'
 export const COMPANYS_ROUTE = '/company'
 export const PLATFORMS_ROUTE = '/location'

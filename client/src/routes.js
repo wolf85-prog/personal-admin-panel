@@ -4,6 +4,7 @@ const Admin = React.lazy(() => import('./pages/Admin'))
 const Profile = React.lazy(() => import('./pages/Profile'))
 const ProfileCompany = React.lazy(() => import('./pages/ProfileCompany'))
 const Projects = React.lazy(() => import('./pages/Projects'))
+const ProjectNew = React.lazy(() => import('./pages/ProjectNew'))
 
 const Specialist = React.lazy(() => import('./pages/Specialist'))
 const Companys = React.lazy(() => import('./pages/Companys'))
@@ -40,6 +41,8 @@ const routes = [
   { path: "/rate", name: 'Ставки', Component: PayRate },
   { path: "/partner", name: 'Контрагенты', Component: Companies },
   { path: "/document", name: 'Документы', Component: Document },
+
+  { path: '/project_new', name: 'Добавить заявку', Component: ProjectNew },
 ]
 
 export default routes

@@ -4,6 +4,7 @@ import {
   PROFILE_ROUTE,
   PROFILECOMPANY_ROUTE,
   PROJECTS_ROUTE,
+  PROJECTNEW_ROUTE,
   COMPANYS_ROUTE,
   SPECIALIST_ROUTE,
   PLATFORMS_ROUTE,
@@ -25,6 +26,7 @@ const Admin = React.lazy(() => import('./pages/Admin'))
 const Profile = React.lazy(() => import('./pages/Profile'))
 const ProfileCompany = React.lazy(() => import('./pages/ProfileCompany'))
 const Projects = React.lazy(() => import('./pages/Projects'))
+const ProjectNew = React.lazy(() => import('./pages/ProjectNew'))
 
 // const Air = React.lazy(() => import('./pages/Air'))
 const Air = React.lazy(() => import('./views/projects/onair/OnAir'))
@@ -52,6 +54,7 @@ export const authRoutes = [
   { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },
 
   { path: PROJECTS_ROUTE, name: 'Проекты', Component: Projects },
+  { path: PROJECTNEW_ROUTE, name: 'Новая заявка', Component: ProjectNew },
   { path: AIR_ROUTE, name: 'В эфире', Component: Air },
   { path: COMPANYS_ROUTE, name: 'Компании', Component: Companys },
   { path: PLATFORMS_ROUTE, name: 'Локации', Component: Platforms },
