@@ -373,7 +373,7 @@ const Login = observer(() => {
                                       onChange={() => setChecked(!checked)}
                                       style={{
                                         backgroundColor: '#181924',
-                                        border: '1px solid #434343',
+                                        border: '1px solid #fff',
                                       }}
                                     />
                                   </div>

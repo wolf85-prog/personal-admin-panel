@@ -60,7 +60,7 @@ import MyDropdown4 from 'src/components/Dropdown4/Dropdown4';
 import MyDropdown5 from 'src/components/Dropdown5/Dropdown5';
 import MyDropdown52 from 'src/components/Dropdown52/Dropdown52';
 import MyDropdown6 from 'src/components/Dropdown6/Dropdown6';
-
+import MyDropdownCategory from 'src/components/DropdownCategory/Dropdown';
 
 import DeleteIcon from "../assets/images/delete_icon.png"
 import Close from "../assets/images/clear.svg"
@@ -101,6 +101,7 @@ import { getProjects, deleteProject, editProject, getProjectId } from '../http/p
 import { sendSpecialistOtkaz } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 import startData from 'src/data/startData';
+import specData from "../data/specData"
 import {
   getSpecialitiesFilter,
 } from 'src/services/api/speciality'
@@ -213,7 +214,21 @@ const ProjectNew = () => {
 
   const [countPressDate, setCountPressDate] = useState(0);
   
+
+  //категории
+  const [categories, setCategories] = useState([]);
+  //специальности
+  const [models, setModels] = useState([]);
   
+  //работник
+  const [worker, setWorker] = useState({id: '', cat: '', spec: '', count: 1, icon: ''})
+  const [worker2, setWorker2] = useState({id: '', cat: '', spec: '', count: 1, icon: ''})
+
+  //работники
+  const [workers, setWorkers] = useState([])
+
+  //select
+  const [selectedElement, setSelectedElement] = useState("")
 
   const table = useReactTable({
     defaultColumn: {
@@ -256,6 +271,73 @@ const ProjectNew = () => {
     initialData: []
   })
   
+
+  // при первой загрузке приложения выполнится код ниже
+  useEffect(() => {
+    const fetch = async() => {
+
+        // устанавливаем категории
+        if (specData.length > 0 && specData) {
+            setCategories(specData);
+            //console.log("specData: ", specData)
+        }
+    }
+
+    fetch()
+
+  }, []);
+
+  //---------------------------------------------------------------------------------------
+
+    // 1. при выборе нового значения в категории
+    const onCategoriesSelectChange = (e) => {
+
+      setSelectedElement(e.target.options.value);
+
+      // преобразуем выбранное значение опции списка в число - идентификатор категории
+      const categoryId = e.target.options[e.target.selectedIndex].value;
+
+      // получаем из массива категорий объект категории по соответствующему идентификатору
+      const category = categories.find(item => item.id === parseInt(categoryId));
+
+      const catSelect = category.icon; 
+      const iconCatSelect = category.icon;
+
+      setWorker({...worker, cat: catSelect, icon: iconCatSelect})
+
+      // выбираем все модели в категории, если таковые есть
+      // const models = category.models && category.models.length > 0
+      //     ? category.models
+      //     : [{ id: 0, name: 'Нет моделей', items: [] }];
+      const models = category.models
+
+      // меняем модели во втором списке
+      setModels(models);
+
+      //setDisabled(false)
+      //setShowSpec(true)
+
+      //setShowNotif3(false)
+      //setShowNotif4(true)
+  }
+
+  // 2. выбор специальности
+  const onSpecSelectChange = (e) => {
+      setSelectedElement(e.target.options.value);
+
+      const modelId = e.target.options[e.target.selectedIndex].value;
+      const model = models.find(item => item.id === parseInt(modelId));
+
+      setWorker({...worker, spec: model.name})
+      //setWorker2({...worker, spec: model.name})
+
+      // setDisabledBtn(false)  
+
+      // setShowNotif3(false)
+      // setShowNotif4(false)
+      // setShowNotif5(true)
+  }
+
 
 
   useEffect(()=> {
@@ -1073,9 +1155,15 @@ const ProjectNew = () => {
                               <div className='widthBlock3' style={{textAlign: 'center', marginTop: '2px', marginRight: '40px'}}>
 
                                 <label className='title-label'>Категория</label>
-                                <div className="text-field">
-                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}} placeholder='Выбрать категорию'/>
-
+                                <div className="text-field" style={{width: '320px'}}>
+                                  {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}} placeholder='Выбрать категорию'/> */}
+                                  <MyDropdownCategory
+                                      style={{backgroundColor: '#131c21', width: '320px'}}
+                                      options={categories}
+                                      selected={selectedElement}
+                                      setSelected={setSelectedElement}
+                                      placeholder='Выбрать категорию'
+                                    />
                                 </div>
 
                                 <label className='title-label'>Специальность</label>

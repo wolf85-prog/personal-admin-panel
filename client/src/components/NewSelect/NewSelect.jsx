@@ -1,9 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classes from './NewSelect.module.css';
 
-import Vector from "../../../image/new/vector.svg"
-import VectorUp from "../../../image/new/vector_up.svg"
-
 const NewSelect = ({id, options, titleCat, setTitleCat, onChange, disabled, heigthModal}) => {
 
     const [open, setOpen] = useState(false);
@@ -35,9 +32,6 @@ const NewSelect = ({id, options, titleCat, setTitleCat, onChange, disabled, heig
     return (
         <div>
             {!open && (<div className={classes.dropdown}>
-                <div className={classes.rec1}></div>
-                <div className={classes.rec2}></div>
-                <div className={classes.rec3}></div>
                 <div className={classes.dropdownWrapper} ref={menuRef}>
                     <div className={classes.dropdownContainer}>
                         <div
@@ -48,18 +42,15 @@ const NewSelect = ({id, options, titleCat, setTitleCat, onChange, disabled, heig
                             <div className={classes.dropdownTitle}>
                                 {titleCat}
                             </div>
-                            <img src={open ? VectorUp : Vector} className={'chevron-new'} alt='' style={{marginBottom: '5px'}}/>
+                            {/* <img src={open ? VectorUp : Vector} className={'chevron-new'} alt='' style={{marginBottom: '5px'}}/> */}
                         </div>
                     </div>
                 </div>
             </div>
             )}
 
-            {open && (<div className={classes.dropdownOpen} style={{height: heigthModal ? '254px' : (options.length+1)*41}}>
-                <div className={classes.rec1Open}></div>
-                <div className={classes.rec2Open}></div>
-                <div className={classes.rec3Open}></div>
-                <div className={classes.lineOpen}></div>
+            <div className={classes.dropdownOpen}>
+
                 <div className={classes.dropdownWrapper} ref={menuRef}>
                     <div className={classes.dropdownContainer}>
                         <div
@@ -70,10 +61,10 @@ const NewSelect = ({id, options, titleCat, setTitleCat, onChange, disabled, heig
                             <div className={classes.dropdownTitle}>
                                 {titleCat}
                             </div>
-                            <img src={open ? VectorUp : Vector} className={'chevron-new'} alt='' style={{marginBottom: '5px'}}/>
+                            {/* <img src={open ? VectorUp : Vector} className={'chevron-new'} alt='' style={{marginBottom: '5px'}}/> */}
                         </div>
 
-                        <ul className={classes.listitem} style={{height: heigthModal ? '200px' : options.length*41}}>
+                        <ul className={classes.listitem}>
                             {options.map((option, index) =>
                                 <li 
                                     key={id + index} 
@@ -94,7 +85,7 @@ const NewSelect = ({id, options, titleCat, setTitleCat, onChange, disabled, heig
                     </div>
                 </div>
 
-            </div>)}
+            </div>
         </div>
     );
 };
