@@ -6,15 +6,16 @@ const Dropdown = ({options, selected, setSelected}) => {
     const [menuShow, setMenuShow] = useState(false)
     // const [selected, setSelected] = useState(options[0])
 
-    console.log(options)
+    //console.log(options)
 
     const selectOption = e => {
+      console.log(e)
         setSelected(e.target.innerText)
         setMenuShow(!menuShow)
     }
 
     const dropdownList = options.map((option, i) =>
-        <li key={i} onClick={selectOption}>{option.label}</li>
+        <li key={i} onClick={selectOption}>{option.name}</li>
     )
 
     const wrapperRef = useRef(null);

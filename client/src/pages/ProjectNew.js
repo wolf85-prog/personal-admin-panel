@@ -148,6 +148,9 @@ const ProjectNew = () => {
   const [companyName, setCompanyName] = useState('');
   const [companysData, setCompanysData] = useState([]);
 
+  const [vidSpec, setVidSpec] = useState([]);
+  const [formatSpec, setFormatSpec] = useState([]);
+
   const [merch, setMerch] = useState(false);
   const [taxi, setTaxi] = useState(false);
 
@@ -229,6 +232,7 @@ const ProjectNew = () => {
 
   //select
   const [selectedElement, setSelectedElement] = useState("")
+  const [selectedElement2, setSelectedElement2] = useState("")
 
   const table = useReactTable({
     defaultColumn: {
@@ -287,55 +291,52 @@ const ProjectNew = () => {
 
   }, []);
 
+  useEffect(() => {
+    console.log("!!!!", selectedElement)
+    if (selectedElement !== '') {
+      onCategoriesSelectChange(selectedElement)
+    }
+    
+  }, [selectedElement])
+
+  useEffect(() => {
+    if (models.length !== 0) {
+      //onSpecSelectChange()
+    }
+    
+    console.log("!!!! models", selectedElement)
+  }, [models])
+
   //---------------------------------------------------------------------------------------
 
     // 1. при выборе нового значения в категории
-    const onCategoriesSelectChange = (e) => {
-
-      setSelectedElement(e.target.options.value);
-
-      // преобразуем выбранное значение опции списка в число - идентификатор категории
-      const categoryId = e.target.options[e.target.selectedIndex].value;
+    const onCategoriesSelectChange = (name) => {
 
       // получаем из массива категорий объект категории по соответствующему идентификатору
-      const category = categories.find(item => item.id === parseInt(categoryId));
+      const category = categories.find(item => item.name === name);
+      console.log(category)
 
       const catSelect = category.icon; 
       const iconCatSelect = category.icon;
 
-      setWorker({...worker, cat: catSelect, icon: iconCatSelect})
+      setWorker({...worker, cat: catSelect, icon: catSelect})
 
-      // выбираем все модели в категории, если таковые есть
-      // const models = category.models && category.models.length > 0
-      //     ? category.models
-      //     : [{ id: 0, name: 'Нет моделей', items: [] }];
       const models = category.models
+      console.log("models: ", models)
 
       // меняем модели во втором списке
       setModels(models);
-
-      //setDisabled(false)
-      //setShowSpec(true)
-
-      //setShowNotif3(false)
-      //setShowNotif4(true)
   }
 
   // 2. выбор специальности
-  const onSpecSelectChange = (e) => {
-      setSelectedElement(e.target.options.value);
+  const onSpecSelectChange = (name) => {
 
-      const modelId = e.target.options[e.target.selectedIndex].value;
-      const model = models.find(item => item.id === parseInt(modelId));
+      setSelectedElement2(name);
+
+      //const modelId = e.target.options[e.target.selectedIndex].value;
+      const model = models.find(item => item.name === name);
 
       setWorker({...worker, spec: model.name})
-      //setWorker2({...worker, spec: model.name})
-
-      // setDisabledBtn(false)  
-
-      // setShowNotif3(false)
-      // setShowNotif4(false)
-      // setShowNotif5(true)
   }
 
 
@@ -1133,8 +1134,8 @@ const ProjectNew = () => {
                                     <MyDropdown4
                                       style={{backgroundColor: '#131c21'}}
                                       options={specifikaData}
-                                      selected={specifikaProject}
-                                      setSelected={setSpecifikaProject}
+                                      selected={formatSpec}
+                                      setSelected={setFormatSpec}
                                       placeholder='Выбери формат'
                                     />
                                   </div>
@@ -1144,8 +1145,8 @@ const ProjectNew = () => {
                                     <MyDropdown4
                                       style={{backgroundColor: '#131c21'}}
                                       options={vids}
-                                      selected={vidProject}
-                                      setSelected={setVidProject}
+                                      selected={vidSpec}
+                                      setSelected={setVidSpec}
                                       placeholder='Выбери вид работ'
                                     />
                                   </div>
@@ -1167,10 +1168,14 @@ const ProjectNew = () => {
                                 </div>
 
                                 <label className='title-label'>Специальность</label>
-                                <div className="text-field widthBlock3"  onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
-                                  <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}} placeholder='Выбрать специальность'/>
-
-                                  <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                <div className="text-field widthBlock3">
+                                  <MyDropdownCategory
+                                      style={{backgroundColor: '#131c21', width: '320px'}}
+                                      options={models}
+                                      selected={selectedElement2}
+                                      setSelected={setSelectedElement2}
+                                      placeholder='Выбрать категорию'
+                                    />
                                 </div>
 
                               </div>
