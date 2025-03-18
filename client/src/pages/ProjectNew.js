@@ -205,6 +205,7 @@ const ProjectNew = () => {
   const [playPoster, setPlayPoster] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
   const [sortedCities, setSortedCities] = useState([])
+  const [sortedProjects, setSortedProjects] = useState([])
   const [mainspec, setMainspec] = useState([])
   const [dateProject, setDateProject] = useState([])
   const [timeProject, setTimeProject] = useState([])
@@ -334,15 +335,25 @@ const ProjectNew = () => {
     const fetchData = async() => {
       const projs = await getProjects(userId)
       console.log("projs: ", projs)
-      const sortProj = [...projs].sort((a, b) => {  
-        if (a.dateStart < b.dateStart)
-          return -1;
-        if (a.dateStart > b.dateStart)
-            return 1;
-        return 0;
+      // const sortProj = [...projs].sort((a, b) => {  
+      //   if (a.dateStart < b.dateStart)
+      //     return -1;
+      //   if (a.dateStart > b.dateStart)
+      //       return 1;
+      //   return 0;
+      // })
+
+      const newProjs = projs.map((item)=> { 
+        const newArr = item.name
+        return newArr
+      })
+ 
+      const sorted = newProjs.sort((a, b) => {       
+        var cityA = a, cityB = b
+        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;  //сортировка по возрастанию 
       })
 
-      setProjects(sortProj)
+      setSortedProjects(sorted)
     }
 
     fetchData()
@@ -350,260 +361,10 @@ const ProjectNew = () => {
 }, [workersAll, clientAll, platformsAll])
 
 
-
   useEffect(()=> {
     console.log("height: ", height)
   }, [height])
 
-
-// Открыть проект  
-  const openProject = async(month, item, number, id, name, end, status, start, timeStart, specifika) => {
-    console.log("item: ", month+1, item, number, specifika, end)
-
-    setShowHeader(true)
-    setShowProject(true)
-    setShowCalendar(false)
-    setShowCalendar2(false)
-    
-
-    const resProj = await getProjectId(id)
-    console.log("resProj: ", resProj)
-
-  
-    let newArray = []
-    let colorStatus = ''
-
-    setId(id)
-    setCrmID(resProj.crmID)
-    setProjectName(name)
-      
-    var d = new Date(resProj.dateStart); // создаём объект даты
-    var d2 = resProj.dateEnd ? new Date(resProj.dateEnd) : ''; // создаём объект даты
-    setStartDate(d.setHours(d.getHours() - 3))
-    setEndDate(d2 !== '' ? d2.setHours(d2.getHours() - 3) : '')
-
-    setStartTime(timeStart) 
-    setEndTime(resProj.dateEnd?.split('T')[1]?.slice(0, 5)) 
-
-    setStatusProject({name: status, color: statusData.find((stat)=> stat.label === resProj.status)?.color})
-    setStartProject({name: start, color: startData.find((stat)=> stat.label === resProj.start)?.color})
-    setSpecifikaProject({name: specifika, color: specifikaData.find((stat)=> stat.label === resProj.specifika)?.color})
-
-    const compTitle = companysAll.find(item=> item.id.toString() === resProj.companyId)
-    console.log("companysAll: ", companysAll)
-    setCompanyName(compTitle?.title ? compTitle?.title : '')
-
-    const managerFio = clientAll.find(item=> item.id.toString() === resProj.managerId)
-    setManagerName(managerFio?.userfamily)
-
-    const comp = clientAll.find(item=> item.userfamily === managerFio?.userfamily)
-    console.log("comp2: ", comp)
-    if (comp) {
-      setPhone(comp.phone)
-    } else {
-      setPhone('')
-    }
-
-    const managerFio2 = workersAll.find(item=> item.id.toString() === resProj.managerId2)
-    setManagerName2(managerFio2?.userfamily)
-
-    const comp2 = workersAll.find(item=> item.userfamily === managerFio2?.userfamily)
-    console.log("comp2: ", comp)
-    if (comp2) {
-      setPhone2(comp2.phone)
-    } else {
-      setPhone2('')
-    }
-
-    //setLocationProject(resProj.geo)
-    console.log("Платформы: ", platformsAll)
-    const loc = platformsAll.find(item=> item.id === parseInt(resProj?.geo))
-    console.log("platformsAll: ", platformsAll)
-    console.log("geo: ", resProj?.geo)
-    console.log("loc: ", loc)
-    if (loc) {
-      let text = `${loc.city}
-${loc.track}   
-${loc.url}`;
-      setAddress(loc.address)
-      setTrack(text)
-      setLocationProject(loc.title)
-      setLocation(text)
-    } else {
-      setLocationProject('')
-      setAddress('')
-      setTrack('')
-    }
-
-    setGeoId(resProj?.geo)
-
-    setCity(resProj.city)
-    setComment(resProj.comment) 
-
-    setTehText(resProj.teh)
-    setTeh1(resProj.teh1)
-    setTeh2(resProj.teh2)
-    setTeh3(resProj.teh3)
-    setTeh4(resProj.teh4)
-    setTeh5(resProj.teh5)
-    setTeh6(resProj.teh6)
-    setTeh7(resProj.teh7)
-    setTeh8(resProj.teh8)
-
-
-    //основной состав (специалисты)
-    let resMain
-    resMain = await getMainSpecProject(id)
-    console.log("resMain: ", resMain)
-
-    if (resMain.length > 0) {
-      let arr = []
-      let myColor = ''
-      let myColor2 = ''
-
-      resMain.map((item)=>{
-        if (item.vidWork === 'Фальшстарт' || item.vidWork === 'Отмена') myColor = 'red'
-        if (item.vidWork === 'Офис') myColor = 'purple'
-
-        const obj = {
-          name: item.vidWork,
-          color: myColor
-        }
-
-        const obj1 = {
-          name: item.specialization,
-          color: ''
-        }
-
-        const obj2 = {
-          name: item.stavka,
-          color: ''
-        }
-
-        if (item.comteg === 'Опоздание' || item.comteg === 'Невыход') myColor2 = 'red'
-
-        const obj3 = {
-          name: item.comteg,
-          color: myColor2
-        }
-
-        const newObj = {
-          id: item.id,
-          userId,
-          date: item.date,
-          specId: item.specId,
-          vidWork: JSON.stringify(obj),
-          specialization: JSON.stringify(obj1),
-          comteg: JSON.stringify(obj3),
-          comment: item.comment,
-          stavka: JSON.stringify(obj2),   
-          numder: item.number, 
-          hr: item.hr,  
-          count: item.count,  
-          projectId: id,
-          merch: item.merch,
-          taxi: item.taxi,
-        }
-
-        arr.push(newObj)
-      })
-
-      //console.log(arr)
-      setMainspec(arr)
-
-    } else {
-      //новый состав специалистов
-
-      const startD = new Date(resProj.dateStart?.split('T')[0]).toLocaleString().split(',')[0]
-      const startT = resProj.dateStart?.split('T')[1]?.slice(0, 5)
-      //console.log("startD: ", startD, startT)
-
-      //добавить строку в основной состав
-		  const resAdd1 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 1, stavka: "№1", userId})
-      const resAdd2 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 2, stavka: "№1", userId})
-      const resAdd3 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 3, stavka: "№1", userId})
-      const resAdd4 = await addMainspec({date: startD +'T'+ startT, projectId: id, number: 4, stavka: "№1", userId})    
-
-      const data = {
-        id: resAdd1.id,
-        userId,
-        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
-        vidWork: null,
-        specId: null,
-        specialization: null,
-        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
-        comment: null,
-        comteg: null,
-        taxi: null,
-        merch: null,
-        projectId: id,    
-      }
-
-      const data2 = {
-        id: resAdd2.id,
-        userId,
-        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
-        vidWork: null,
-        specId: null,
-        specialization: null,
-        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
-        comment: null,
-        comteg: null,
-        taxi: null,
-        merch: null,
-        projectId: id,    
-      }
-
-      const data3 = {
-        id: resAdd3.id,
-        userId,
-        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
-        vidWork: null,
-        specId: null,
-        specialization: null,
-        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
-        comment: null,
-        comteg: null,
-        taxi: null,
-        merch: null,
-        projectId: id,    
-      }
-
-      const data4 = {
-        id: resAdd4.id,
-        userId,
-        date: startD+'T'+resProj.dateStart?.split('T')[1].slice(0,5),
-        vidWork: null,
-        specId: null,
-        specialization: null,
-        stavka: JSON.stringify({label: '№1', name: '№1', color: ''}),
-        comment: null,
-        comteg: null,
-        taxi: null,
-        merch: null,
-        projectId: id,    
-      }
-
-      let arr = []
-      setMainspec(
-        //[...arr, {...data, id: parseInt(resProj.crmID)+1}, {...data, id: parseInt(resProj.crmID)+2}, {...data, id: parseInt(resProj.crmID)+3}, {...data, id: parseInt(resProj.crmID)+4}]
-        [...arr, data, data2, data3, data4]
-      );
-    }
-
-    
-    setVisibleA(true)
-    setVisibleB(true)
-    setShowMainTable(true)
-    setShowPretendentTable(true)
-    setShowPosterTable(true)
-
-
-    setTimeout(()=> {
-      setHeight(435)
-    }, 200)
-    
-  }
 
   useEffect(()=>{
     console.log("Основной состав: ", mainspec)
@@ -715,42 +476,6 @@ ${loc.url}`;
       //}, 500 * ++index)
     })
 
-
-    //send otkaz
-    // pretendents.map(async(item, index)=> {
-    //   console.log("pretendent: ", item, index)
-    //   setTimeout(async() => {
-    //     if (item.status) {
-    //       if (JSON.parse(item.status).name === 'Отказано') {
-
-    //         //сохранение отказа в базе
-    //         const newObj = {
-    //           projectId: item.projectId,
-    //           workerId: item.workerId.toString(),  
-    //           receiverId: item.receiverId, 
-    //           cancel: true
-    //         }
-    //         console.log("newObj: ", newObj)
-
-    //         //отправка сообщения об отказе
-    //         const retCanceled = await getCanceledId(newObj)
-    //         console.log("retCanceled: ", retCanceled)
-    //         if (!retCanceled) {
-    //           await sendSpecialistOtkaz(item.workerId, {projectId: item.projectId})
-    //         }
-
-    //         const resAdd = await addCanceled(newObj)
-    //         console.log("resAdd: ", resAdd)
-    //       }
-
-    //       await editPretendent(item.id, {status: JSON.parse(item.status).name})
-    //     } 
-    //   }, 1000 * ++index)
-      
-        
-    // })
-
-    //const resTable = await editMainspec({date: dateProject + 'T' + timeProject})
   
     setProjects((projects) => {	
       const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
@@ -829,15 +554,7 @@ ${loc.url}`;
   const onChangeManager = (e, index) => {
     //console.log(e.target.value, index)
 
-    setManagerName(e.target.value)
-
-    // setManagersObj((managersObj) => {                                           
-    //   const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-    //   const userObject = JSON.parse(usersCopy[index]);
-    //   usersCopy[index] = JSON.stringify({ ...userObject, fio: e.target.value});		
-    //   //console.log(usersCopy) 
-    //   return usersCopy;
-    // });   
+    setManagerName(e.target.value)   
   }
 
   const onChangeManager2 = (e, index) => {
@@ -855,180 +572,6 @@ ${loc.url}`;
 
   }
 
-  //удаление специалиста
-  const deleteProfile = async(id) => {
-    console.log(id)
-    setVisibleDelete(false)
-
-    //удаление проекта из БД
-    //await deleteProject(id)
-
-
-    //перемещение в корзину
-    const data = {
-      deleted: true
-    }
-    await editProject(data, id)
-
-    //addToast(deleteToast) //ваши данные сохранены
-
-    setProjects([...projects].filter(item=>item.id !== id))
-
-    closeProfile()
-  }
-
-
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <img 
-      src={threeDots} 
-      className='hidden-element' alt='' 
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      width={15} 
-      style={{ cursor: 'pointer'}}
-    >
-        {children}
-    </img>
-	));
-
-  CustomToggle.displayName = "Edit";
-  
-
-	const CustomMenu = React.forwardRef(
-		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-		  const [value, setValue] = useState('');
-	  
-		  return (
-			<div
-			  ref={ref}
-			  style={{backgroundColor: '#20272b', left: '5px', borderRadius: '6px', padding: '0 0 0 0', fontSize: '14px', top: '-45px', minWidth:'50px'}}
-			  className={className}
-			  aria-labelledby={labeledBy}
-			>
-			  <ul className="list-unstyled" style={{marginBottom: '0', padding: '5px 10px'}}>
-				{React.Children.toArray(children).filter(
-				  (child) =>
-					!value || child.props.children?.toLowerCase().startsWith(value),
-				)}
-			  </ul>
-			</div>
-		  );
-		},
-	);
-
-  CustomMenu.displayName = "Edit";
-
-  const changeAddSpec = async (eventkey) => {
-		console.log("spec: ", eventkey)
-
-    //Добавить
-    if (eventkey.split(' ')[0] === '1' || eventkey==='1') {
-      const resProj = await getProjectId(id)
-      const startDate = new Date(resProj.dateStart.split('T')[0]).toLocaleString().split(',')[0]
-      const startTime = resProj.dateStart.split('T')[1].slice(0,5)
-
-        const arrayCopy = JSON.parse(JSON.stringify(mainspec));
-
-        // если нужен элемент массива
-        let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
- 
-        //readyArray.splice(2, 0, 60);
-        arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-          id: max.id,
-          userId,
-          date: startDate+'T'+startTime,
-          specId: '', 
-          vidWork: '', 
-          specialization: '', 
-          comteg: '',
-          comment: '',
-          stavka: JSON.stringify({label: '№1', name: '№1'}),
-          taxi: false,
-          merch: false,
-          projectId: id,
-          number: parseInt(eventkey.split(' ')[2])+1,
-        })
-        console.log("arrayCopy: ", arrayCopy)
-        setMainspec(arrayCopy)
-
-    } 
-    //дублировать
-    else if (eventkey.split(' ')[0] === '2' || eventkey==='2') {
-      console.log("eventkey: ", parseInt(eventkey.split(' ')[2]))
-
-      const checkedItem = mainspec.find((item)=>item.isChecked === true)
-
-      if (checkedItem) {
-        console.log("edit all checked")
-        handleAllEdit(eventkey)
-      } else {
-        const dublSpec = mainspec.find((item, index)=> index === parseInt(eventkey.split(' ')[2]))
-        console.log("dublSpec: ", dublSpec)
-          
-          const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
-          // если нужен элемент массива
-          let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
-          console.log("max: ", max)
-          const newObj = {
-            id: max.id + 1,
-            userId,
-            date: dublSpec.date,
-            specId: dublSpec.specId,
-            vidWork: dublSpec.vidWork, //JSON.stringify({name: resAdd.vidWork, color: ''}),
-            specialization: dublSpec.specialization, //JSON.stringify({name: resAdd.specialization, color: ''}),
-            stavka: dublSpec.stavka, //JSON.stringify({name: resAdd.stavka, color: ''}),
-            taxi: dublSpec.taxi,
-            merch: dublSpec.merch,
-            comment: dublSpec.comment,
-            comteg: dublSpec.comteg, //JSON.stringify({name: resAdd.comteg, color: ''}),
-            hr: dublSpec.hr,
-            projectId: dublSpec.projectId,
-          }
-
-          arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, newObj)
-          console.log("arrayCopy: ", arrayCopy)
-          setMainspec(arrayCopy)  
-      }
-    } 
-    
-    //добавить разделитель
-    else if (eventkey.split(' ')[0] === '3' || eventkey==='3') {
-      //добавить строку в основной состав
-		  //const resAdd = await addMainspec({userId, projectId: id, hr: true, number: parseInt(eventkey.split(' ')[2])+1})
-
-      //if (resAdd) {
-
-        const arrayCopy = JSON.parse(JSON.stringify(mainspec));  
-        // если нужен элемент массива
-        let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
-        console.log("max: ", max)
-        arrayCopy.splice(parseInt(eventkey.split(' ')[2])+1, 0, {
-          id: max.id + 1,
-          userId,
-          projectId: id,
-          hr: true,
-        })
-        console.log("arrayCopy: ", arrayCopy)
-        setMainspec(arrayCopy)
-      //}     
-    } 
-    //удалить
-    else if (eventkey.split(' ')[0] === '4') {
-      console.log("index: ", eventkey.split(' ')[1])
-      const checkedItem = mainspec.find((item)=>item.isChecked === true)
-      //console.log("checkedItem: ", checkedItem)
-
-      if (checkedItem) {
-        handleAllDelete()
-      } else {
-        setMainspec([...mainspec].filter(item=>item.id !== parseInt(eventkey.split(' ')[1])))
-        deleteMainspec(eventkey.split(' ')[1])
-      }
-    }
-	}
 
   useEffect(()=> {
     if (endDate !== '' && endDate !== null) {
@@ -1047,150 +590,7 @@ ${loc.url}`;
     setMainspec(arr)
   }
 
-  const changeTimeProject=(e, index)=> {
-    //console.log(e.target.value, index)
-    let arr = JSON.parse(JSON.stringify(mainspec))
-    arr[index].date = arr[index].date.split('T')[0] + 'T'+ e.target.value
-    setMainspec(arr)
-  }
 
-  const changeCommentMain=(e, index)=> {
-    console.log(e.target.value, index)
-    let arr = []
-    arr = [...mainspec]
-    arr[index].comment = e.target.value
-    setMainspec(arr)
-  }
-
-
-  const handleChange=(e)=> {
-    const {name, checked} = e.target
-    console.log("checked: ", name, checked)
-
-    if (name ==='allselect') {
-      const checkedvalue = mainspec.map((user)=>{ return {...user, isChecked: checked}})
-      console.log(checkedvalue)
-      setMainspec(checkedvalue)
-    } else {
-      console.log("mainspec: ", mainspec)
-      
-      const checkedvalue = mainspec.map((user)=>
-      user.id === parseInt(name) ? {...user, isChecked: checked} : user)
-      console.log("checkedvalue: ", checkedvalue)
-      setMainspec(checkedvalue)
-    }
-  }
-
-  const handleChangeMerch=(e)=> {
-    const {name, checked} = e.target
-    console.log("checked: ", name, checked)
-
-    if (name ==='allselect') {
-      const checkedvalue = mainspec.map((user)=>{ return {...user, merch: checked}})
-      console.log(checkedvalue)
-      setMainspec(checkedvalue)
-    } else {
-      console.log("mainspec: ", mainspec)
-      
-      const checkedvalue = mainspec.map((user)=>
-      user.id === parseInt(name) ? {...user, merch: checked} : user)
-      console.log("checkedvalue: ", checkedvalue)
-      setMainspec(checkedvalue)
-    }
-  }
-
-  const handleChangeTaxi=(e)=> {
-    const {name, checked} = e.target
-    console.log("checked: ", name, checked)
-
-    if (name ==='allselect') {
-      const checkedvalue = mainspec.map((user)=>{ return {...user, taxi: checked}})
-      console.log(checkedvalue)
-      setMainspec(checkedvalue)
-    } else {
-      console.log("mainspec: ", mainspec)
-      
-      const checkedvalue = mainspec.map((user)=>
-      user.id === parseInt(name) ? {...user, taxi: checked} : user)
-      console.log("checkedvalue: ", checkedvalue)
-      setMainspec(checkedvalue)
-    }
-  }
-
-  const handleAllEdit = async(eventkey)=> {
-    const checkedinputvalue=[]
-    for(let i=0; i<mainspec.length; i++) 
-    {
-      if (mainspec[i].isChecked === true) {
-        const obj = {
-          id: parseInt(mainspec[i].id),
-          element: i
-        }
-        checkedinputvalue.push(obj)
-      }
-    }
-    console.log("checkedinputvalue: ", checkedinputvalue)
-
-    const arrayCopy = JSON.parse(JSON.stringify(mainspec));
-    let arr = []
-
-    checkedinputvalue.map(async(item, index)=> {
-      //setTimeout(async()=> {
-        const dublSpec = mainspec.find((el)=>el.id === parseInt(item.id))
-        console.log("dublSpec: ", dublSpec)
-
-        // если нужен элемент массива
-        let max = arrayCopy.reduce((acc, curr) => acc.id > curr.id ? acc : curr);
-        
-        const newObj = {
-              id: max.id + 1,
-              userId,
-              date: dublSpec.date,
-              specId: dublSpec.specId,
-              vidWork: dublSpec.vidWork, //JSON.stringify({name: dublSpec.vidWork, color: ''}),
-              specialization: dublSpec.specialization, //JSON.stringify({name: dublSpec.specialization, color: ''}),
-              stavka: dublSpec.stavka, //JSON.stringify({name: dublSpec.stavka, color: ''}),
-              taxi: dublSpec.taxi,
-              merch: dublSpec.merch,
-              comment: dublSpec.comment,
-              comteg: dublSpec.comteg, //JSON.stringify({name: dublSpec.comteg, color: ''}),
-              projectId: dublSpec.projectId, 
-              hr: dublSpec.hr,
-        }
-        console.log("newObj: ", newObj)
-        arrayCopy.splice(item.element + checkedinputvalue.length, 0, newObj)
- 
-      //}, 2000)  
-      
-      console.log("newArr: ", arrayCopy)
-      const checkedvalue = arrayCopy.map((user)=>{ return {...user, isChecked: false}})
-      
-      setMainspec(checkedvalue)
-    })
-
-    
-  }
-
-  const handleAllDelete =()=> {
-    const checkedinputvalue=[]
-    for(let i=0; i<mainspec.length; i++) 
-    {
-      if (mainspec[i].isChecked === true) {
-        checkedinputvalue.push(parseInt(mainspec[i].id))
-      }
-    }
-
-    const copyArray = JSON.parse(JSON.stringify(mainspec));
-    
-    checkedinputvalue.map(async(item)=> {
-      await deleteMainspec(item)
-    })
-
-    const result = copyArray.filter(item => !checkedinputvalue.some(el => item.id === el));
-    console.log("copyArray: ", result)
-
-    setMainspec(result)
-  }
 
   const onChangeCity = (e) => {
     //console.log(e.target.value)
@@ -1218,112 +618,12 @@ ${loc.url}`;
       setGeoId('')
     }
   }
-
-
-  // const filterOptions = (options, state) => {
-  //   let newOptions = [];
-  //   options.forEach((element) => {
-  //     if (
-  //       element
-  //         //.replace(",", "")
-  //         .toLowerCase()
-  //         .includes(state.inputValue.toLowerCase())
-  //     )
-  //       newOptions.push(element);
-  //   });
-  //   return newOptions;
-  // };
   
 
   const clickSave = () => {
 
   }
 
-  // const createPredSmeta = async(id) => {
-	// 	// Button begins to shake
-	// 	setPress(true);
-	// 	console.log(press)
-        
-	// 	// Buttons stops to shake after 2 seconds
-	// 	setTimeout(() => setPress(false), 200);
-
-	// 	audioIshodCall.play();
-	// 	await getSendCall(id)
-	// }
-
-  const pressPredSmeta = async() => {
-    setPlayPredSmeta(!playPredSmeta)
-
-    //api
-    console.log("crmID: ", crmID)
-    const resAddSmeta = await getCreatePredSmeta(crmID)
-    console.log("resAddSmeta: ", resAddSmeta)
-
-    setTimeout(()=> {
-      if (resAddSmeta) {
-        setDonePredSmeta(true)
-      }
-    }, 5000)
-  }
-
-  const pressFinSmeta = async() => {
-    setPlayFinSmeta(!playFinSmeta)
-
-    //api
-    console.log("crmID: ", crmID)
-    const resAddSmeta = await getCreateFinSmeta(crmID)
-    console.log("resAddSmeta: ", resAddSmeta)
-
-    setTimeout(()=> {
-      if (resAddSmeta) {
-        setDoneFinSmeta(true)
-      }
-    }, 5000)
-  }
-
-  const pressPoster = async() => {
-    setPlayPoster(!playPoster)
-    setShowLoader(true)
-
-    //api
-    const resAddPoster = await getCreatePoster(crmID)
-    console.log("resAddPoster: ", resAddPoster)
-
-    setTimeout(()=> {
-      setShowLoader(false)
-    }, 2000)
-  }
-
-
-  const sortDate = () => {
-    setCountPressDate(countPressDate + 1)
-    
-    if (countPressDate + 1 >= 3) {
-      setCountPressDate(0)
-    }
-    console.log("check sort", countPressDate + 1)
-
-    if (countPressDate + 1 === 1) {
-      const sortedWorker = [...pretendents].sort((a, b) => {       
-        var tgA = a.data, tgB = b.data 
-        return (tgA < tgB) ? -1 : (tgA > tgB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setPretendents(sortedWorker)
-    } else if (countPressDate + 1 === 2) {
-      const sortedWorker = [...pretendents].sort((a, b) => {       
-        var tgA = a.data, tgB = b.data 
-        return (tgA > tgB) ? -1 : (tgA < tgB) ? 1 : 0;  //сортировка по возрастанию 
-      })
-      setPretendents(sortedWorker)
-    } else {
-      const sortedWorker = [...pretendents].sort((a, b) => {       
-        var fioA = a.id, fioB = b.id 
-        return fioB-fioA  //сортировка по убыванию 
-      })
-
-      setPretendents(sortedWorker)
-    }
-  }
 
   const changeDate = (date, e) => {
     console.log(e.target.value)
@@ -1379,13 +679,9 @@ ${loc.url}`;
                           </CCardHeader>                    
 
                           <CCardBody style={{padding: '12px'}}>
-                            <label className='title-label' style={{marginLeft: '32px'}}>ID</label>
-                            <div className="text-field" style={{marginBottom: '0px'}}>
-                              <input disabled={true} className="text-field__input" type="text" name="projectName" id="projectName" value='0' style={{width: '80px'}}/>
-                            </div>
-                            <div style={{position: 'relative', display: 'flex', flexDirection: 'row'}}>
+                            <div style={{position: 'relative', height: '320px', display: 'flex', flexDirection: 'row'}}>
                               {/* 1 */}                               
-                              <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
+                              <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginRight: '40px'}}>
                                 
                                   <label className='title-label'></label>
                                   <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
@@ -1475,10 +771,52 @@ ${loc.url}`;
                               </div>
 
                               {/* 2 */}   
-                              <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
+                              <div className='widthBlock3' style={{textAlign: 'center', marginTop: '2px', marginRight: '40px'}}>
                               <label className='title-label'>Проект</label>
                               <div className="text-field">
-                                <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/>
+                                {/* <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/> */}
+                                <Autocomplete
+                                  sx={{
+                                      display: 'inline-block',
+                                      '& input': {zIndex: '25',
+                                          width: '100%',
+                                          border: 'none',
+                                          height: '40px',
+                                          padding: '5px 4px',
+                                          fontFamily: 'inherit',
+                                          fontSize: '14px',
+                                          fontWeight: '400',
+                                          lineHeight: '1.5',
+                                          textAlign: 'center',
+                                          color: '#ffffff',
+                                          backgroundColor: 'transparent', 
+                                      }
+                                  }}
+                                  className="text-field__input" 
+                                  openOnFocus
+                                  id="custom-input-demo"
+                                  options={sortedProjects}
+                                  style={{width: '100%', padding: '0'}}
+                                  //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                  onInputChange={onChangeCity}
+                                  onChange={(event, newValue) => {
+                                    if (newValue && newValue.length) {                                                      
+                                      //setCity(newValue)
+                                    }  
+                                  }}
+                                  value={city} 
+                                  inputValue={city}
+                                  renderInput={(params) => (
+                                  <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                      <input 
+                                          className="text-field__input" 
+                                          type="text" {...params.inputProps} 
+                                          placeholder=''
+                                          autoComplete='off'
+                                      />
+                                  </div>
+                                  )}
+                                />
                               </div>
 
                               <label className='title-label'>Город</label>
@@ -1601,7 +939,7 @@ ${loc.url}`;
                               </div>
 
                               {/* 3 */}   
-                              <div className='widthBlock6' style={{textAlign: 'center', marginTop: '10px'}}>
+                              <div className='widthBlock6' style={{textAlign: 'center', marginTop: '2px'}}>
 
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                   <div style={{width: '100%'}}>
@@ -1699,13 +1037,14 @@ ${loc.url}`;
 
                               </div>
                             </div>
+                          </CCardBody>
+                        </CCard>
 
-                            {/* HR */}   
-                            <hr></hr>
-
-                            <div style={{position: 'relative', height: '435px', display: 'flex', flexDirection: 'row'}}>
+                        <CCard className="mb-4">
+                          <CCardBody style={{padding: '12px'}}>
+                            <div style={{position: 'relative', height: '152px', display: 'flex', flexDirection: 'row'}}>
                               {/* 1 */}                               
-                              <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
+                              <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginRight: '40px'}}>
 
                                   <label className='title-label'>Формат</label>
                                   <div className="text-field" style={{width: '230px'}}>
@@ -1731,7 +1070,7 @@ ${loc.url}`;
                               </div>
 
                               {/* 2 */}   
-                              <div className='widthBlock3' style={{textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
+                              <div className='widthBlock3' style={{textAlign: 'center', marginTop: '2px', marginRight: '40px'}}>
 
                                 <label className='title-label'>Категория</label>
                                 <div className="text-field">
@@ -1749,7 +1088,7 @@ ${loc.url}`;
                               </div>
 
                               {/* 3 */}   
-                              <div className='widthBlock6' style={{textAlign: 'center', marginTop: '10px'}}>
+                              <div className='widthBlock6' style={{textAlign: 'center', marginTop: '2px'}}>
                                 {/* 1 */}
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                   <div style={{width: '100%'}}>
@@ -1890,6 +1229,14 @@ ${loc.url}`;
 
                           </CCardBody>
                         </CCard>
+
+                        <CCard className="mb-4">
+                          <CCardBody style={{padding: '12px'}}>
+                            <div style={{position: 'relative', height: '160px', display: 'flex', flexDirection: 'row'}}>
+                              
+                            </div>
+                          </CCardBody>
+                        </CCard>
                       </CCol>
                     </CRow>
 
@@ -1915,25 +1262,7 @@ ${loc.url}`;
                       </CModalBody>
                     </CModal>
 
-                    <CModal
-                      backdrop="static"
-                      visible={visibleDelete}
-                      onClose={() => setVisibleDelete(false)}
-                      aria-labelledby="StaticBackdropExampleLabel"
-                    >
-                      <CModalHeader>
-                        <CModalTitle id="StaticBackdropExampleLabel">Предупреждение</CModalTitle>
-                      </CModalHeader>
-                      <CModalBody>
-                        Проект будет удален из базы!
-                      </CModalBody>
-                      <CModalFooter>
-                        <CButton color="secondary" onClick={() => setVisibleDelete(false)}>
-                          Отмена
-                        </CButton>
-                        <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
-                      </CModalFooter>
-                    </CModal>
+                  
                 </Suspense>
             </CContainer>
 

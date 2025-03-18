@@ -173,7 +173,7 @@ const AppHeader = (props) => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
+          {/* <CIcon icon={logo} height={48} alt="Logo" /> */}
           {/* <h5>U.L.E.Y TEAM</h5> */}
         </CHeaderBrand>
 

@@ -33,6 +33,8 @@ import {addManager} from "../../../http/managerAPI";
 import {addCompanyProf} from "../../../http/companyAPI";
 import { addConversation, newMessage } from 'src/http/supportAPI'
 
+import logo from './../../../assets/brand/logo_04_light.png'
+
 const Login = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
@@ -251,7 +253,9 @@ const Login = observer(() => {
 
                 <CCardBody style={{display: showLogin ? 'block' : 'none', height: '300px'}}>
                   <CForm>
-                    <h1 style={{textAlign: 'center', color: '#fff'}}>{'U.L.E.Y'}</h1>
+                    <div style={{textAlign: 'center', marginBottom: '10px'}}>
+                      <img src={logo} alt='' height={35} className={"sidebar-brand-full"}/>
+                    </div>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Войдите в свой аккаунт</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
@@ -303,7 +307,9 @@ const Login = observer(() => {
 
                 <CCardBody className="p-4" style={{display: !showLogin ? 'block' : 'none', height: '300px'}}>
                   <CForm style={{marginTop: '-20px'}}>
-                    <h1 style={{textAlign: 'center', color: '#fff'}}>U.L.E.Y</h1>
+                    <div style={{textAlign: 'center', marginBottom: '10px'}}>
+                      <img src={logo} alt='' height={35} className={"sidebar-brand-full"}/>
+                    </div>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Создайте свой аккаунт</p>
                                   <CInputGroup className="mb-3">
                                     <CInputGroupText>
@@ -319,7 +325,7 @@ const Login = observer(() => {
                                       maskChar=""
                                       onChange={(e) => setPhone(e.target.value)} 
                                       value={phone}
-                                      placeholder="Введите ваш телефон..." 
+                                      placeholder="+7 (900) 123-45-67" 
                                     >
                                     </InputMask>
                                   </CInputGroup>
@@ -357,6 +363,10 @@ const Login = observer(() => {
                                       label="Согласие на обработку персональных данных" 
                                       checked={checked}
                                       onChange={() => setChecked(!checked)}
+                                      style={{
+                                        backgroundColor: '#181924',
+                                        border: '1px solid #434343',
+                                      }}
                                     />
                                   </div>
                                   : ''}
