@@ -63,7 +63,12 @@ class UserController {
     //check
     async getCode(req, res) {
         const {phone, code} = req.body
-        const user = await Code.findOne({where: {phone}})
+        const user = await Code.findOne({
+            where: {phone},
+            order: [
+                ['createdAt', 'DESC'],
+            ],
+        })
         return res.json({user})
     }
 

@@ -16,7 +16,9 @@ import {
   CNavItem,
   CNavLink,
   CFormCheck,
-  CFormLabel
+  CFormLabel,
+  CModal,
+  CModalBody,
 } from '@coreui/react'
 
 import InputMask from 'react-input-mask';
@@ -49,6 +51,9 @@ const Login = observer(() => {
     const [showCode, setShowCode] = useState(false)
     const [checked, setChecked] = useState(false)
     const [enterCode, setEnterCode] = useState(false)
+
+    const [showModal, setShowModal] = useState(false)
+    const [textToast, setTextToats] = useState('')
 
     const { userId, setUserId, addNewMessage3, sendMessSupport } = useUsersContext();
 
@@ -105,7 +110,8 @@ const Login = observer(() => {
 
             navigate(ADMIN_ROUTE)
         } catch (e) {
-            alert(e.message)
+            setTextToats(e.message)
+            setShowModal(true)
         }
     }
 
@@ -133,15 +139,18 @@ const Login = observer(() => {
 
               navigate(ADMIN_ROUTE)
             } else {
-              alert("Пароли не совпадают!")
+              setTextToats("Пароли не совпадают!")
+              setShowModal(true)
             }
           } else {
-            alert("Введите пароль!")
+            setTextToats("Введите пароль!")
+            setShowModal(true)
           }
           
           
       } catch (e) {
-          alert(e.message)
+        setTextToats(e.message)
+        setShowModal(true)
       }
     }
 
@@ -194,13 +203,12 @@ const Login = observer(() => {
         const resGetCode = await getCode(phone, code)
         console.log("resGetCode: ", resGetCode)
 
-        
-
         if (parseInt(resGetCode) === parseInt(code)) {
           setShowPassword(true)
           setShowCode(false)
         } else {
-          alert('Код неверный! Попробуйте еще раз!')
+          setTextToats('Код неверный! Попробуйте еще раз!')
+          setShowModal(true)
           setShowPassword(false)
           setShowCode(true)
         }
@@ -413,6 +421,28 @@ const Login = observer(() => {
             </CCardGroup>
           </CCol>
         </CRow>
+
+                            <CModal
+                              alignment="center"
+                              visible={showModal}
+                              onClose={() => setShowModal(false)}
+                              aria-labelledby="VerticallyCenteredExample"
+                            >
+                              <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                                {textToast}
+                              </CModalBody>
+                            </CModal>
+        
+                            {/* <CModal
+                              alignment="center"
+                              visible={showModalEmpty}
+                              onClose={() => setShowModalEmpty(false)}
+                              aria-labelledby="VerticallyCenteredExample"
+                            >
+                              <CModalBody style={{ textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
+                              Функция доступна в расширенной версии. Подробности – в техподдержке.
+                              </CModalBody>
+                            </CModal> */}
       </CContainer>
     </div>
   )
