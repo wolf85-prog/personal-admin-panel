@@ -113,7 +113,7 @@ const ProjectNew = () => {
 	const audioIshodCall = new Audio(ishodCall);
   const audioIshodRobotCall = new Audio(ishodRobotCall);
 
-  const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
+  //const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
   const { userId, companysAll, clientAll, workersAll, platformsAll, setShowCallCard } = useUsersContext();
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
@@ -131,6 +131,7 @@ const ProjectNew = () => {
   const [height, setHeight] = useState(435)
 
   const [projects, setProjects] = useState([]);
+  const [project, setProject] = useState('');
 
   const [id, setId] = useState('');
   const [crmID, setCrmID] = useState('');
@@ -233,47 +234,6 @@ const ProjectNew = () => {
   //select
   const [selectedElement, setSelectedElement] = useState("")
   const [selectedElement2, setSelectedElement2] = useState("")
-
-  const table = useReactTable({
-    defaultColumn: {
-      size: 200, //starting column size
-      minSize: 40, //enforced during column resizing
-      maxSize: 500, //enforced during column resizing
-    },
-    data,
-    columns,
-    state: {
-      columnFilters,
-    },
-    meta: {
-      updateData: (rowIndex, columnId, value) =>
-        setData((prev) =>
-          prev.map((row, index) =>
-            index === rowIndex ? { ...prev[rowIndex], [columnId]: value } : row,
-          ),
-        ),
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-
-    getPaginationRowModel: getPaginationRowModel(),
-
-    enableRowSelection: true,
-    getRowCanExpand: () => true,
-  })
-
-  const {
-    specialitiesIsPending,
-    specialitiesError,
-    data: specialities,
-  } = useQuery({
-    queryKey: ['specialities'],
-    queryFn: getSpecialitiesFilter,
-    initialData: []
-  })
   
 
   // при первой загрузке приложения выполнится код ниже
@@ -418,6 +378,7 @@ const ProjectNew = () => {
     const fetchData = async() => {
       const projs = await getProjects(userId)
       console.log("projs: ", projs)
+      setProjects(projs)
       // const sortProj = [...projs].sort((a, b) => {  
       //   if (a.dateStart < b.dateStart)
       //     return -1;
@@ -881,21 +842,42 @@ const ProjectNew = () => {
                                   options={sortedProjects}
                                   style={{width: '100%', padding: '0'}}
                                   //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                  onInputChange={onChangeCity}
+                                  //getOptionLabel={(proj) => proj.name }
+                                  //onInputChange={setProject}
+                                  //isOptionEqualToValue={(option, value) => option.name === value.name }
                                   onChange={(event, newValue) => {
-                                    if (newValue && newValue.length) {                                                      
-                                      //setCity(newValue)
+                                    if (newValue) { 
+                                      console.log(newValue)
+                                      setProject(newValue)                                                     
+                                      //console.log("projects: ", projects)                                                     
+                                      const comp = projects.find(item=> item.name === newValue)
+                                      //console.log("comp worker: ", comp, newValue)
+                                      if (comp) {
+                                        //setPhone2(comp.phone)
+                                        //setManagerName2(comp.userfamily)
+                                        setCity(comp.city)
+                                        setStartDate(comp.dateStart)
+                                        setEndDate(comp.dateEnd)
+                                        //setSpecifikaProject(comp.specifika)
+                                        setSpecifikaProject({name: comp.specifika, color: specifikaData.find((stat)=> stat.label === comp.specifika)?.color})
+                                        //setLocationProject(comp.geo)
+                                        setTehText(comp.teh)
+
+                                        const managerFio = clientAll.find(item=> item.id.toString() === comp.managerId)
+                                        setManagerName2(managerFio?.userfamily)
+
+                                      }
                                     }  
                                   }}
-                                  value={city} 
-                                  inputValue={city}
+                                  value={project} 
+                                  inputValue={project}
                                   renderInput={(params) => (
                                   <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                       <input 
                                           className="text-field__input" 
                                           type="text" {...params.inputProps} 
                                           placeholder=''
-                                          autoComplete='off'
+                                          //autoComplete='off'
                                       />
                                   </div>
                                   )}
