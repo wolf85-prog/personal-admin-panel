@@ -398,6 +398,7 @@ const ProjectNew = () => {
       })
 
       setSortedProjects(sorted)
+
     }
 
     fetchData()
@@ -846,7 +847,7 @@ const ProjectNew = () => {
                                   //getOptionLabel={(proj) => proj.name }
                                   //onInputChange={setProject}
                                   //isOptionEqualToValue={(option, value) => option.name === value.name }
-                                  onChange={(event, newValue) => {
+                                  onChange={async(event, newValue) => {
                                     if (newValue) { 
                                       console.log(newValue)
                                       setProject(newValue)                                                     
@@ -869,6 +870,25 @@ const ProjectNew = () => {
                                           setPhone('')
                                         }
 
+                                        //основной состав (специалисты)
+                                        let resMain
+                                        resMain = await getMainSpecProject(comp.id)
+                                        console.log("resMain: ", resMain[0]?.vidWork)
+                                        setVidProject({name: resMain[0]?.vidWork, color: ''})
+
+
+                                        const loc = platformsAll.find(item=> item.id === parseInt(comp?.geo))
+                                        //console.log("platformsAll: ", platformsAll)
+                                        //console.log("geo: ", comp?.geo)
+                                        console.log("loc: ", loc)
+                                        if (loc) {
+                                          setAddress(loc.address)
+                                          setLocationProject(loc.title)
+                                        } else {
+                                          setLocationProject('')
+                                          setAddress('')
+                                          setTrack('')
+                                        }
                                       } else {
                                         setCity('')
                                         setStartDate('00:00')
