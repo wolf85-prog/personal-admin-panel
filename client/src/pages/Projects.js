@@ -98,7 +98,7 @@ import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall, getCompanySendCallRaut } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
-import { sendSpecialistOtkaz } from '../http/specAPI'
+import { sendSpecialistOtkaz, getSpecialist } from '../http/specAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 import startData from 'src/data/startData';
 import {
@@ -113,7 +113,7 @@ const Projects = () => {
   const audioIshodRobotCall = new Audio(ishodRobotCall);
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { userId, companysAll, clientAll, workersAll, platformsAll, setShowCallCard } = useUsersContext();
+  const { userId, companysAll, clientAll, workersAll, setWorkersAll, platformsAll, setShowCallCard } = useUsersContext();
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
   const { robotIshod, setRobotIshod, showCallCardRobot, setShowCallCardRobot} = useUsersContext();
@@ -299,24 +299,24 @@ const Projects = () => {
     setClientsData(sortedManager)
 
     //3
-    let arrWorkers = []
-    console.log("workersAll: ", workersAll)
-    workersAll.map((item, index)=> {
-      if (item.userfamily) {
-        const obj = {
-          id: item.id,
-          label: item.userfamily,
-          value: index,
-        }
-        arrWorkers.push(obj)
-        //arrWorkers.push(item.userfamily)
-      }  
-    })
-    const sortedWorker = [...arrWorkers].sort((a, b) => {       
-      return (a.label < b.label) ? -1 : (a.label > b.label) ? 1 : 0;  //сортировка по возрастанию 
-    })
-    console.log("arrWorkers: ", sortedWorker)
-    setWorkersData(sortedWorker)
+    // let arrWorkers = []
+    // console.log("workersAll: ", workersAll)
+    // workersAll.map((item, index)=> {
+    //   if (item.userfamily) {
+    //     const obj = {
+    //       id: item.id,
+    //       label: item.userfamily,
+    //       value: index,
+    //     }
+    //     arrWorkers.push(obj)
+    //     //arrWorkers.push(item.userfamily)
+    //   }  
+    // })
+    // const sortedWorker = [...arrWorkers].sort((a, b) => {       
+    //   return (a.label < b.label) ? -1 : (a.label > b.label) ? 1 : 0;  //сортировка по возрастанию 
+    // })
+    // console.log("arrWorkers: ", sortedWorker)
+    // setWorkersData(sortedWorker)
 
     //4
     let arrPlatfroms = []
@@ -343,6 +343,52 @@ const Projects = () => {
       })
 
       setProjects(sortProj)
+
+      //0 все специалисты
+      let all = await getSpecialist(userId)
+      console.log("all spec: ", all)
+      const arrayWorkerAll = []
+      all.map(async (user) => {
+        const newWorker = {
+          id: user.id,
+          userfamily: user.fio, //user.userfamily != null ? user.userfamily : '',
+          username: '',//user.username,
+          phone: user.phone,
+          dateborn: user.age,
+          city: user.city, 
+          //newcity: user.newcity, 
+          companys: user.company,
+          //stag: user.stag,
+          worklist:  user.specialization,
+          chatId: user.chatId,
+          createDate: user.createdAt,
+          avatar: user.profile,
+          //from: user.from,
+          promoId: user.promoId,
+          blockW: user.blockW,
+          block18: user.block18,
+          krest: user.krest,
+          deleted: user.deleted,
+          comment: user.comment,
+          comteg: user.comteg,
+        }
+    
+              arrayWorkerAll.push(newWorker)
+      })
+          
+      setWorkersAll(arrayWorkerAll)
+      let arrWorkers = []
+      //console.log("workersAll: ", workersAll)
+      arrayWorkerAll.map((item, index) => {
+        const obj = {
+          id: item.id,
+          label: item.userfamily + ' ' + item.username,
+          value: index,
+        }
+        arrWorkers.push(obj)
+      })
+      //console.log("arrWorkers: ", arrWorkers)
+      setWorkersData(arrWorkers)
     }
 
     fetchData()
