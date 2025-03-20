@@ -621,9 +621,10 @@ const ProjectNew = () => {
     if (endDate !== '' && endDate !== null) {
       //setEndTime('00:00')
       console.log("endDate: ", endDate)
+      console.log("endTime: ", endTime)
     }
     
-  }, [endDate])
+  }, [endDate, endTime])
 
 
   const changeDateProject=(e, index)=> {
@@ -851,21 +852,30 @@ const ProjectNew = () => {
                                       setProject(newValue)                                                     
                                       //console.log("projects: ", projects)                                                     
                                       const comp = projects.find(item=> item.name === newValue)
-                                      //console.log("comp worker: ", comp, newValue)
                                       if (comp) {
-                                        //setPhone2(comp.phone)
-                                        //setManagerName2(comp.userfamily)
                                         setCity(comp.city)
                                         setStartDate(comp.dateStart)
+                                        setStartTime(comp.dateStart?.split('T')[1]?.slice(0, 5)) 
+                                        setEndTime(comp.dateEnd ? comp.dateEnd?.split('T')[1]?.slice(0, 5) : '') 
                                         setEndDate(comp.dateEnd)
-                                        //setSpecifikaProject(comp.specifika)
                                         setSpecifikaProject({name: comp.specifika, color: specifikaData.find((stat)=> stat.label === comp.specifika)?.color})
-                                        //setLocationProject(comp.geo)
-                                        setTehText(comp.teh)
-
                                         const managerFio = clientAll.find(item=> item.id.toString() === comp.managerId)
                                         setManagerName2(managerFio?.userfamily)
 
+                                        const man = workersAll.find(item=> item.userfamily === managerFio?.userfamily)
+                                        if (man) {
+                                          setPhone(man.phone)
+                                        } else {
+                                          setPhone('')
+                                        }
+
+                                      } else {
+                                        setCity('')
+                                        setStartDate('00:00')
+                                        setStartTime('') 
+                                        setEndTime('') 
+                                        setEndDate('')
+                                        setSpecifikaProject('')
                                       }
                                     }  
                                   }}
@@ -1044,7 +1054,7 @@ const ProjectNew = () => {
                                             const comp = workersAll.find(item=> item.userfamily === newValue.label)
                                             console.log("comp worker: ", comp, newValue)
                                             if (comp) {
-                                              setPhone2(comp.phone)
+                                              setPhone(comp.phone)
                                               setManagerName2(comp.userfamily)
                                             }
                                           }  
@@ -1188,7 +1198,7 @@ const ProjectNew = () => {
                                           disabled={true}
                                           maskChar=""
                                           // onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          //value={phone}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -1209,7 +1219,7 @@ const ProjectNew = () => {
                                           disabled={true}
                                           maskChar=""
                                           // onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          //value={phone}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -1230,7 +1240,7 @@ const ProjectNew = () => {
                                           disabled={true}
                                           maskChar=""
                                           // onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          //value={phone}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -1262,7 +1272,7 @@ const ProjectNew = () => {
                                           disabled={true}
                                           maskChar=""
                                           // onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          //value={phone}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -1283,7 +1293,7 @@ const ProjectNew = () => {
                                           disabled={true}
                                           maskChar=""
                                           // onChange={(e) => setPhone(e.target.value)} 
-                                          value={phone}
+                                          //value={phone}
                                           placeholder=''
                                       >
                                       </InputMask>
