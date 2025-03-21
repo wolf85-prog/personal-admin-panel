@@ -158,6 +158,7 @@ const Projects = () => {
 
   const [clientsData, setClientsData] = useState([]);
   const [workersData, setWorkersData] = useState([]);
+  const [specialistData, setSpecialistData] = useState([]);
 
   const [specialistName, setSpecialistName] = useState([]);
 
@@ -468,7 +469,7 @@ const Projects = () => {
 
       //0 все специалисты
       let all = await getSpecialist(userId)
-      console.log("all spec: ", all)
+      console.log("workersAll: ", all)
       const arrayWorkerAll = []
       all.map(async (user) => {
         const newWorker = {
@@ -478,14 +479,11 @@ const Projects = () => {
           phone: user.phone,
           dateborn: user.age,
           city: user.city, 
-          //newcity: user.newcity, 
           companys: user.company,
-          //stag: user.stag,
           worklist:  user.specialization,
           chatId: user.chatId,
           createDate: user.createdAt,
           avatar: user.profile,
-          //from: user.from,
           promoId: user.promoId,
           blockW: user.blockW,
           block18: user.block18,
@@ -495,22 +493,25 @@ const Projects = () => {
           comteg: user.comteg,
         }
     
-              arrayWorkerAll.push(newWorker)
+          arrayWorkerAll.push(newWorker)
       })
           
       setWorkersAll(arrayWorkerAll)
       let arrWorkers = []
+      let arrWorkers2 = []
       //console.log("workersAll: ", workersAll)
       arrayWorkerAll.map((item, index) => {
         if (item.userfamily) {
-          arrWorkers.push(item.userfamily)
+          arrWorkers2.push(item.userfamily)
         }
-        // const obj = {
-        //   id: item.id,
-        //   label: item.userfamily + ' ' + item.username,
-        //   value: index,
-        // }
-        //arrWorkers.push(obj)
+        setSpecialistData(arrWorkers2)
+
+        const obj = {
+          id: item.id,
+          label: item.userfamily + ' ' + item.username,
+          value: index,
+        }
+        arrWorkers.push(obj)
       })
       //console.log("arrWorkers: ", arrWorkers)
       setWorkersData(arrWorkers)
@@ -1941,7 +1942,7 @@ ${loc.url}`;
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-manager2"
-                                              options={workersData}
+                                              options={specialistData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={onChangeManager2} 
