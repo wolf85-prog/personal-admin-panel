@@ -118,6 +118,7 @@ const ProjectNew = () => {
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
   const { robotIshod, setRobotIshod, showCallCardRobot, setShowCallCardRobot} = useUsersContext();
+  const { countWorker, setCountWorker} = useUsersContext();
 
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
@@ -188,6 +189,7 @@ const ProjectNew = () => {
   const [spec, setSpec] = useState([]);
   const [stavka, setStavka] = useState([]);
   const [statusPretendent, setStatusPretendent] = useState('');
+  const [stavkaProject, setStavkaProject] = useState('');
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
@@ -223,6 +225,17 @@ const ProjectNew = () => {
   const [categories, setCategories] = useState([]);
   //специальности
   const [models, setModels] = useState([]);
+
+  const [smenaData, setSmenaData] = useState([
+    {label: '1 час', value: '1', color: ''}, 
+    {label: '2 час', value: '2', color: ''}, 
+    {label: '4 часа', value: '3', color: ''}, 
+    {label: '6 часов', value: '4', color: ''},
+    {label: '8 часов', value: '5', color: ''},
+    {label: '10 часов', value: '6', color: ''}
+  ]);
+
+  const [smenaSpec, setSmenaSpec] = useState([]);
   
   //работник
   const [worker, setWorker] = useState({id: '', cat: '', spec: '', count: 1, icon: ''})
@@ -686,6 +699,54 @@ const ProjectNew = () => {
 		audioIshodRobotCall.play();
 		await getCompanySendCallRaut(id)
 	}
+
+
+  useEffect(()=> {
+    if (workers) {
+      console.log("workers: ", workers)
+    } 
+  }, [workers])
+
+  function increment() {
+    setCountWorker(countWorker + 1)
+    setWorker({...worker, count: countWorker + 1})
+  }
+
+  function decrement() {
+      if (countWorker != 1 && countWorker > 0) {
+          setCountWorker(countWorker - 1)
+          setWorker({...worker, count: countWorker - 1})
+      }     
+  }
+
+
+  {/* Добавление работника */}
+  const addNewWorker = (e) => {
+    e.preventDefault();
+
+    if (worker.cat !== '' || worker.spec !== '') {
+        setWorkers([...workers, {...worker, id: Date.now()}])
+    }
+    setWorker({cat: '', spec: '', count: 1, icon: ''})
+
+    setCountWorker(1);
+    setSelectedElement("");
+
+    //setDisabled(true);
+    //setShowSpec(false)
+    //setDisabledBtn(true);
+
+  }
+
+  {/* Удаление работника */}
+  const removeWorker = (worker) => {
+      setWorkers(workers.filter(p => p.id !== worker.id))
+  }
+
+  {/* Правка работника */}
+  const changeWorker = (worker) => {
+      setWorkers(workers.filter(p => p.id !== worker.id))
+  }
 
   return (
     <div className='dark-theme'>
@@ -1186,7 +1247,7 @@ const ProjectNew = () => {
                                       options={models}
                                       selected={selectedElement2}
                                       setSelected={setSelectedElement2}
-                                      placeholder='Выбрать категорию'
+                                      placeholder='Выбрать специальность'
                                     />
                                 </div>
 
@@ -1272,30 +1333,36 @@ const ProjectNew = () => {
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                   <div style={{width: '100%'}}>
                                     <label className='title-label'>Количество</label>
-                                    <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" />
-
+                                    <div className="text-field" style={{display: 'flex'}}>
+                                      <CButton onClick={increment} className='uley_edit_manager' style={{width: '40px', height: '40px', marginLeft: '1px'}}>
+                                        <span style={{fontSize: '18px', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                          +
+                                        </span>
+                                      </CButton> 
+                                      <div>
+                                        <input disabled={false} value={countWorker} onChange={e => setWorker({...worker, count: e.target.value})} className="text-field__input" type="text" name="dateReg" id="dateReg" />
+                                      </div>
+                                      <CButton onClick={decrement}  className='uley_edit_manager' style={{width: '40px', height: '40px', marginLeft: '1px'}}>
+                                        <span style={{fontSize: '18px', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                          -
+                                        </span>
+                                      </CButton> 
                                     </div>
+                                    
+
                                   </div>
 
                                   <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
                                     <label className='title-label'>Смена</label>
                                     <div className="text-field">
                                       {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
-                                      <InputMask
-                                          className="text-field__input" 
-                                          style={{marginRight: '10px'}}
-                                          type="text" 
-                                          name="phone" 
-                                          id="phone"
-                                          mask="+7 (999) 999-99-99"
-                                          disabled={true}
-                                          maskChar=""
-                                          // onChange={(e) => setPhone(e.target.value)} 
-                                          //value={phone}
-                                          placeholder=''
-                                      >
-                                      </InputMask>
+                                      <MyDropdown4
+                                        style={{backgroundColor: '#131c21'}}
+                                        options={smenaData}
+                                        selected={smenaSpec}
+                                        setSelected={setSmenaSpec}
+                                        placeholder='Смена'
+                                      />
                                     </div>
                                   </div>
 
@@ -1307,13 +1374,13 @@ const ProjectNew = () => {
                                           className="text-field__input" 
                                           style={{marginRight: '10px'}}
                                           type="text" 
-                                          name="phone" 
-                                          id="phone"
-                                          mask="+7 (999) 999-99-99"
-                                          disabled={true}
+                                          name="stavka" 
+                                          id="stavka"
+                                          mask="99999"
+                                          disabled={false}
                                           maskChar=""
-                                          // onChange={(e) => setPhone(e.target.value)} 
-                                          //value={phone}
+                                          onChange={(e) => setStavkaProject(e.target.value)} 
+                                          value={stavkaProject}
                                           placeholder=''
                                       >
                                       </InputMask>
@@ -1321,7 +1388,7 @@ const ProjectNew = () => {
                                   </div>
 
                                   <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
-                                    <CButton  className='uley_edit_manager' style={{width: '100%', height: '40px', marginLeft: '1px', borderColor: 'green', marginTop: '22px'}}>
+                                    <CButton onClick={addNewWorker} className='uley_edit_manager' style={{width: '100%', height: '40px', marginLeft: '1px', borderColor: 'green', marginTop: '22px'}}>
                                       <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                         Добавить
                                       </span>
@@ -1337,8 +1404,60 @@ const ProjectNew = () => {
 
                         <CCard className="mb-4">
                           <CCardBody style={{padding: '12px'}}>
-                            <div style={{position: 'relative', height: '160px', display: 'flex', flexDirection: 'row'}}>
-                              
+                            <div style={{position: 'relative', height: '160px', display: 'flex', flexDirection: 'column'}}>
+                              <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
+                                <CTableHead className="text-center" color="light">
+                                  <CTableRow>
+                                    <CTableHeaderCell className="text-center" style={{width: '56px'}}>
+                                    </CTableHeaderCell> 
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Кол-во</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '80px'}}>Ставка</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Часы</CTableHeaderCell>                         
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Вид работ</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Техническое задание</CTableHeaderCell>
+                                  </CTableRow>
+                                </CTableHead>
+                                <CTableBody> 
+                                { workers.length > 0 ?
+                                 workers.map((item, index)=> (
+                                  <CTableRow className="parent-element" key={item.id} v-for="item in tableItems" style={{lineHeight: '14px'}}>   
+                                    <CTableDataCell className="text-center">
+                                      {index + 1}
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
+                                      {item.cat}
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
+                                      {item.count}
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center widthSpace">
+                                    
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                    
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                    
+                                    </CTableDataCell>   
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell> 
+       
+                                  </CTableRow>
+                                  ))
+                                  :""
+                                }
+                                </CTableBody>                   
+                              </CTable>
+
+                              <div style={{width: '20%', textAlign: 'center', marginLeft: '10px'}}>
+                                    <CButton className='uley_edit_manager' style={{width: '100%', height: '40px', marginLeft: '1px', borderColor: 'green', marginTop: '22px'}}>
+                                      <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                        Подать заявку
+                                      </span>
+                                    </CButton> 
+                              </div>
                             </div>
                           </CCardBody>
                         </CCard>

@@ -2,9 +2,9 @@ import React, {useState, useRef, useEffect} from 'react';
 import Select from '../Select/Select.js'
 import drp from './Dropdown.module.css'
 
-const Dropdown = ({options, selected, setSelected}) => {
+const Dropdown = ({options, selected, setSelected, placeholder}) => {
     const [menuShow, setMenuShow] = useState(false)
-    // const [selected, setSelected] = useState(options[0])
+    //const [selected, setSelected] = useState(placeholder)
 
     //console.log(options)
 
@@ -45,6 +45,7 @@ const Dropdown = ({options, selected, setSelected}) => {
                 menuShow={menuShow}
                 setMenuShow={setMenuShow}
                 selected={selected}
+                placeholder={selected ? null : placeholder}
             />
             <ul className={`${drp.menu} ${menuShow && drp.menuOpen}`}>
                 {dropdownList}

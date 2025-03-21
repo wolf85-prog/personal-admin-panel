@@ -98,6 +98,7 @@ const UsersProvider = ({ children }) => {
 
 	const [companyId, setCompanyId] = useState('');
 
+	const [countWorker, setCountWorker] = useState(0)
 
 	const [countMessageWork, setCountMessageWork] = useState(() => {
 		// getting stored value
@@ -1836,7 +1837,7 @@ const fetchNotifAdmin = async (dataAll) => {
 			setContacts,
 			companys,
 			setCompanys,
-			
+
 			managersAll, 
 			setManagersAll,
 
@@ -1864,6 +1865,9 @@ const fetchNotifAdmin = async (dataAll) => {
 			userWorkers,
 			workersAll,
 			setWorkersAll,
+
+			countWorker, 
+			setCountWorker,
 			
 			support, 
 			setSupport,
