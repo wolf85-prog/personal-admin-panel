@@ -295,10 +295,11 @@ const Profile = () => {
   }
 
   const clickCompany = ()=> {
+    console.log(title)
     setShowModal(true)
     setTimeout(()=> {
         setShowModal(false)
-    }, 2000)
+    }, 3000)
   }
 
   return (
@@ -442,7 +443,9 @@ const Profile = () => {
 
                                   <label className='title-label'>Компания</label>
                                   <div className="text-field"> 
-                                    <div onClick={clickCompany} className="text-field__input" value={title} onChange={(e)=>changeCompany(e)}  />
+                                    <div onClick={clickCompany} className="text-field__input" style={{paddingTop: '8px'}}> 
+                                      {title}
+                                    </div>
                                   </div>
 
                                   <label className='title-label'>Должность</label>

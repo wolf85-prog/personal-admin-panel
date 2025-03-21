@@ -1836,12 +1836,16 @@ const fetchNotifAdmin = async (dataAll) => {
 			setContacts,
 			companys,
 			setCompanys,
+			
 			managersAll, 
 			setManagersAll,
+
 			companysAll,
+			setCompanysAll,
+
 			platforms, 
 			setPlatforms,
-			setCompanysAll,
+			
 			platformsAll,
 			setPlatformsAll,
 			

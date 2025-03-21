@@ -99,7 +99,10 @@ import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall, getCompanySendCallRaut } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz, getSpecialist } from '../http/specAPI'
+import { getCompany } from '../http/companyAPI'
+import { getPlatforms } from '../http/platformAPI'
 import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
+
 import startData from 'src/data/startData';
 import {
   getSpecialitiesFilter,
@@ -113,7 +116,7 @@ const Projects = () => {
   const audioIshodRobotCall = new Audio(ishodRobotCall);
 
   const { columns, data, setData, columnFilters, setColumnFilters, handleActive } = useTableData()
-  const { userId, companysAll, clientAll, workersAll, setWorkersAll, platformsAll, setShowCallCard } = useUsersContext();
+  const { userId, companysAll, setCompanysAll, clientAll, workersAll, setWorkersAll, platformsAll, setPlatformsAll, setShowCallCard } = useUsersContext();
   const { clientIshod, setClientIshod, showCallCardClient, setShowCallCardClient} = useUsersContext();
   const { workerIshod, setWorkerIshod, showCallCardWorker, setShowCallCardWorker} = useUsersContext();
   const { robotIshod, setRobotIshod, showCallCardRobot, setShowCallCardRobot} = useUsersContext();
@@ -254,6 +257,125 @@ const Projects = () => {
     queryFn: getSpecialitiesFilter,
     initialData: []
   })
+
+
+  //------------------------------------------------------------------------------------------
+  // get Companys
+  //------------------------------------------------------------------------------------------	
+    useEffect(() => {
+      const fetchData = async () => {
+  
+        const user = localStorage.getItem('user')
+  
+        let company = await getCompany(user && JSON.parse(user)?.id);
+        console.log("companys context: ", company)
+  
+      
+        let arrCompanys = []
+      
+        company && company.map(async (user, i) => {
+          const d = new Date(user.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
+          const d2 = new Date(d)
+          const month = String(d2.getMonth()+1).padStart(2, "0");
+          const day = String(d2.getDate()).padStart(2, "0");
+          const chas = d2.getHours();
+          const min = String(d2.getMinutes()).padStart(2, "0");
+          const newDate = `${day}.${month} ${chas}:${min}`;
+      
+          let str_comment = ''
+          user.comment && JSON.parse(user.comment).map((item, index)=> {
+          str_comment = str_comment + item.content + (index+1 !== JSON.parse(user.comment).length ? ', ' : '')
+          })    
+      
+          const newUser = {
+          id: user.id,
+          userId: user.userId,
+          title: user.title,
+          city: user.city,
+          office: user.office,
+          sklad: user.sklad,
+          comment: str_comment,
+          inn: user.inn,
+          bugalterFio: user.bugalterFio, 
+          bugalterEmail: user.bugalterEmail,
+          bugalterPhone: user.bugalterPhone,
+          profile: user.profile,
+          sfera: user.sfera,
+          comteg: user.comteg,
+          }
+          arrCompanys.push(newUser)
+      
+          //если элемент массива последний
+          if (i === company.length-1) {
+            const sortedUser = [...arrCompanys].sort((a, b) => {       
+              var idA = a.id, idB = b.id 
+              return idB-idA  //сортировка по возрастанию 
+            })
+      
+            setCompanysAll(sortedUser)
+                
+          }
+      
+        })
+      }
+  
+      fetchData();
+  
+    },[])
+  
+  
+  //------------------------------------------------------------------------------------------
+  // get Platforms
+  //------------------------------------------------------------------------------------------	
+    useEffect(() => {
+      const fetchData = async () => {
+        const user = localStorage.getItem('user')
+        
+        let platforms = await getPlatforms(user && JSON.parse(user)?.id);
+        console.log("platforms context: ", platforms)
+      
+        let arrCompanys = []
+      
+        platforms && platforms.map(async (user, i) => {
+      
+          const newUser = {
+          id: user.id,
+          title: user.title,
+          city: user.city,
+          address: user.address,
+          track: user.track, //
+          url: user.url,
+          karta: user.karta,
+          }
+          arrCompanys.push(newUser)
+      
+          //если элемент массива последний
+          if (i === platforms.length-1) {
+            const sortedUser = [...arrCompanys].sort((a, b) => {       
+              let titleA = a.title 
+              let titleB = b.title
+              // return titleB-titleA  //сортировка по возрастанию 
+              if (titleA.toLowerCase() < titleB.toLowerCase()) {
+                return -1;
+              }
+              if (titleA.toLowerCase() > titleB.toLowerCase()) {
+                return 1;
+              }
+              return 0;
+            })
+            //console.log("sortedUser: ", sortedUser)
+      
+            setPlatformsAll(sortedUser)
+                
+          }
+      
+        })
+  
+      }
+  
+      fetchData();
+  
+    },[])
   
 
 
@@ -380,12 +502,15 @@ const Projects = () => {
       let arrWorkers = []
       //console.log("workersAll: ", workersAll)
       arrayWorkerAll.map((item, index) => {
-        const obj = {
-          id: item.id,
-          label: item.userfamily + ' ' + item.username,
-          value: index,
+        if (item.userfamily) {
+          arrWorkers.push(item.userfamily)
         }
-        arrWorkers.push(obj)
+        // const obj = {
+        //   id: item.id,
+        //   label: item.userfamily + ' ' + item.username,
+        //   value: index,
+        // }
+        //arrWorkers.push(obj)
       })
       //console.log("arrWorkers: ", arrWorkers)
       setWorkersData(arrWorkers)
@@ -393,7 +518,7 @@ const Projects = () => {
 
     fetchData()
     
-}, [workersAll, clientAll, platformsAll])
+}, [])
 
 
 
@@ -655,6 +780,13 @@ ${loc.url}`;
     console.log("Основной состав: ", mainspec)
   }, [mainspec])
 
+
+  useEffect(()=>{
+    console.log("Менеджер Старший: ", managerName2)
+  }, [managerName2])
+
+  
+
   //сохранить проект
   const saveProject = async(id) => {
 
@@ -662,12 +794,14 @@ ${loc.url}`;
     setShowModal(true)
 
     console.log("id: ", id)
-    console.log("start: ", startDate)
-    console.log("end: ", endDate)
-    console.log("managerId: ", clientAll.find(item=> item.fio === managerName)?.id)
-    console.log("managerId2: ", workersAll.find(item=> item.fio === managerName)?.id)
-    console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
-    console.log("startProject: ", startProject)
+    // console.log("start: ", startDate)
+    // console.log("end: ", endDate)
+    // console.log("managerId: ", clientAll.find(item=> item.userfamily === managerName)?.id)
+    // console.log("managerId2: ", workersAll.find(item=> item.userfamily === managerName2)?.id)
+    // console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
+    // console.log("startProject: ", startProject)
+
+    // console.log("workersAll: ", workersAll)
 
     //удаляем старые записи из Основного состава
     //const resAllDel = await deleteMainspecProject(id)
@@ -696,9 +830,9 @@ ${loc.url}`;
       teh7,
       teh8,
       geo: geoId, 
-      managerId: clientAll.find(item=> item.userfamily === managerName)?.id, 
-      managerId2: workersAll.find(item=> item.userfamily === managerName2)?.id,
-      companyId: companysAll.find(item=> item.title === companyName)?.id, 
+      managerId: clientAll.find(item=> item.userfamily === managerName)?.id ? clientAll.find(item=> item.userfamily === managerName)?.id : '', 
+      managerId2: workersAll.find(item=> item.userfamily === managerName2)?.id ? workersAll.find(item=> item.userfamily === managerName2)?.id : '',
+      companyId: companysAll.find(item=> item.title === companyName)?.id ? companysAll.find(item=> item.title === companyName)?.id : '', 
       comment, 
       specifika: specifikaProject.name, 
       city,
@@ -872,25 +1006,28 @@ ${loc.url}`;
   }
 
 
+  // const onChangeManager = (e, index) => {
+  //   //console.log(e.target.value, index)
+
+  //   setManagerName(e.target.value)
+  
+  // }
+
   const onChangeManager = (e, index) => {
-    //console.log(e.target.value, index)
-
-    setManagerName(e.target.value)
-
-    // setManagersObj((managersObj) => {                                           
-    //   const usersCopy = JSON.parse(JSON.stringify(managersObj));			
-    //   const userObject = JSON.parse(usersCopy[index]);
-    //   usersCopy[index] = JSON.stringify({ ...userObject, fio: e.target.value});		
-    //   //console.log(usersCopy) 
-    //   return usersCopy;
-    // });   
+    if (index) {
+      setManagerName(index) 
+    } else {
+      setManagerName('') 
+      setPhone('')
+    }
   }
 
   const onChangeManager2 = (e, index) => {
-    if (e) {
-      setManagerName2(e.target.value) 
+    if (index) {
+      setManagerName2(index) 
     } else {
       setManagerName2('') 
+      setPhone2('')
     }
   }
 
@@ -1752,10 +1889,10 @@ ${loc.url}`;
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               //filterOptions={filterOptions}
-                                              //onInputChange={(e)=>setManagerName(e.target.value)}
-                                              onInputChange={(event, newInputValue) => {
-                                                setManagerName(newInputValue);
-                                              }}
+                                              onInputChange={onChangeManager}
+                                              // onInputChange={(event, newInputValue) => {
+                                              //   setManagerName(newInputValue);
+                                              // }}
                                               onChange={(event, newValue) => {
                                                 if (newValue && newValue.length) {   
                                                   console.log("clientAll: ", clientAll)                                                   
@@ -1807,14 +1944,14 @@ ${loc.url}`;
                                               options={workersData}
                                               style={{width: '100%', padding: '0'}}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              //onInputChange={onChangeManager2} 
-                                              onInputChange={(event, newInputValue) => {
-                                                setManagerName2(newInputValue);
-                                              }}
+                                              onInputChange={onChangeManager2} 
+                                              // onInputChange={(event, newInputValue) => {
+                                              //   setManagerName2(newInputValue);
+                                              // }}
                                               onChange={(event, newValue) => {
-                                                if (newValue) {  
+                                                if (newValue && newValue.length) {  
                                                   console.log("workersAll 2: ", workersAll)                                                     
-                                                  const comp = workersAll.find(item=> item.userfamily === newValue.label)
+                                                  const comp = workersAll.find(item=> item.userfamily === newValue)
                                                   console.log("comp worker: ", comp, newValue)
                                                   if (comp) {
                                                     setPhone2(comp.phone)
