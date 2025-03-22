@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { Link, useLocation } from 'react-router-dom'
+import CurrencyInput from './../common/CurrencyInput'
 import { 
   CContainer, 
   CSpinner, 
@@ -120,6 +121,9 @@ const ProjectNew = () => {
   const { robotIshod, setRobotIshod, showCallCardRobot, setShowCallCardRobot} = useUsersContext();
   const { countWorker, setCountWorker} = useUsersContext();
 
+  const [countWorkerAll, setCountWorkerAll] = useState(0)
+  const [stavkaWorkerAll, setStavkaWorkerAll] = useState(0)
+
   const [showSidebar, setShowSidebar] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [showCalendar2, setShowCalendar2] = useState(true)
@@ -189,7 +193,7 @@ const ProjectNew = () => {
   const [spec, setSpec] = useState([]);
   const [stavka, setStavka] = useState([]);
   const [statusPretendent, setStatusPretendent] = useState('');
-  const [stavkaProject, setStavkaProject] = useState('');
+  const [stavkaProject, setStavkaProject] = useState(0);
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
@@ -235,7 +239,7 @@ const ProjectNew = () => {
     {label: '10 часов', value: '6', color: ''}
   ]);
 
-  const [smenaSpec, setSmenaSpec] = useState([]);
+  const [smenaSpec, setSmenaSpec] = useState({name: '10 часов', value: '6', color: ''});
   
   //работник
   const [worker, setWorker] = useState({id: '', cat: '', spec: '', count: 1, icon: ''})
@@ -271,6 +275,23 @@ const ProjectNew = () => {
     }
     
   }, [selectedElement])
+
+  useEffect(() => {
+    console.log("!!!!", selectedElement2)
+    if (selectedElement2 !== '') {
+      onSpecSelectChange(selectedElement2)
+    }
+    
+  }, [selectedElement2])
+
+
+  // useEffect(() => {
+  //   console.log("countWorkerAll: ", countWorkerAll, countWorker)
+  // }, [countWorkerAll, countWorker])
+
+  useEffect(() => {
+    console.log("stavkaWorkerAll: ", stavkaWorkerAll, stavkaProject )
+  }, [stavkaWorkerAll, stavkaProject])
 
   useEffect(() => {
     if (models.length !== 0) {
@@ -615,21 +636,6 @@ const ProjectNew = () => {
     setManagerName(e.target.value)   
   }
 
-  const onChangeManager2 = (e, index) => {
-    if (e) {
-      setManagerName2(e.target.value) 
-    } else {
-      setManagerName2('') 
-    }
-  }
-
-  const clickDelete = (id) => {
-    console.log(id)
-
-    setVisibleDelete(!visibleDelete)
-
-  }
-
 
   useEffect(()=> {
     if (endDate !== '' && endDate !== null) {
@@ -677,28 +683,13 @@ const ProjectNew = () => {
       setGeoId('')
     }
   }
-  
 
-  const clickSave = () => {
-
-  }
 
 
   const changeDate = (date, e) => {
     console.log(e.target.value)
     setStartDate(date)
   }
-
-
-  const clickToCall = async(id, callType) => {
-		audioIshodCall.play();
-		await getCompanySendCall(id, callType)
-	}
-
-	const clickToCallRaut = async(id) => {
-		audioIshodRobotCall.play();
-		await getCompanySendCallRaut(id)
-	}
 
 
   useEffect(()=> {
@@ -724,13 +715,22 @@ const ProjectNew = () => {
   const addNewWorker = (e) => {
     e.preventDefault();
 
+    const all = countWorkerAll + countWorker
+    setCountWorkerAll(all)
+
+    const allStavka = stavkaWorkerAll + parseInt(stavkaProject.replace(/\s+/g, ''))
+    setStavkaWorkerAll(allStavka)
+
     if (worker.cat !== '' || worker.spec !== '') {
-        setWorkers([...workers, {...worker, id: Date.now()}])
+        setWorkers([...workers, {...worker, id: Date.now(), stavka: stavkaProject, chasi: smenaSpec.name, vidSpec: vidSpec.name}])
     }
     setWorker({cat: '', spec: '', count: 1, icon: ''})
 
     setCountWorker(1);
     setSelectedElement("");
+    setSelectedElement2("");
+    setVidSpec({name: '', color: ''})
+    setStavkaProject(0)
 
     //setDisabled(true);
     //setShowSpec(false)
@@ -1229,7 +1229,7 @@ const ProjectNew = () => {
                               <div className='widthBlock3' style={{textAlign: 'center', marginTop: '2px', marginRight: '40px'}}>
 
                                 <label className='title-label'>Категория</label>
-                                <div className="text-field" style={{width: '320px'}}>
+                                <div className="text-field widthBlock3">
                                   {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}} placeholder='Выбрать категорию'/> */}
                                   <MyDropdownCategory
                                       style={{backgroundColor: '#131c21', width: '320px'}}
@@ -1340,7 +1340,7 @@ const ProjectNew = () => {
                                         </span>
                                       </CButton> 
                                       <div>
-                                        <input disabled={false} value={countWorker} onChange={e => setWorker({...worker, count: e.target.value})} className="text-field__input" type="text" name="dateReg" id="dateReg" />
+                                        <input disabled={false} value={countWorker === 0 ? 1 : countWorker} onChange={e => setWorker({...worker, count: e.target.value})} className="text-field__input" type="text" name="dateReg" id="dateReg" />
                                       </div>
                                       <CButton onClick={decrement}  className='uley_edit_manager' style={{width: '40px', height: '40px', marginLeft: '1px'}}>
                                         <span style={{fontSize: '18px', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
@@ -1369,21 +1369,14 @@ const ProjectNew = () => {
                                   <div style={{width: '100%', textAlign: 'center', marginLeft: '10px'}}>
                                     <label className='title-label'>Ставка</label>
                                     <div className="text-field">
-                                      {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
-                                      <InputMask
+                                      <CurrencyInput
                                           className="text-field__input" 
                                           style={{marginRight: '10px'}}
-                                          type="text" 
-                                          name="stavka" 
-                                          id="stavka"
-                                          mask="99999"
-                                          disabled={false}
-                                          maskChar=""
-                                          onChange={(e) => setStavkaProject(e.target.value)} 
+                                          placeholder='0.00'
+                                          type="text"
                                           value={stavkaProject}
-                                          placeholder=''
-                                      >
-                                      </InputMask>
+                                          onChange={(e) => setStavkaProject(e.target.value)} 
+                                      /> 
                                     </div>
                                   </div>
 
@@ -1404,18 +1397,18 @@ const ProjectNew = () => {
 
                         <CCard className="mb-4">
                           <CCardBody style={{padding: '12px'}}>
-                            <div style={{position: 'relative', height: '160px', display: 'flex', flexDirection: 'column'}}>
-                              <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1592px', borderRadius: '5px' }}>
+                            <div style={{position: 'relative', height: 'auto', display: 'flex', flexDirection: 'column'}}>
+                              <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1160px', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '56px'}}>
+                                    <CTableHeaderCell className="text-center" style={{width: '50px'}}>
                                     </CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Кол-во</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '100px'}}>Специальность</CTableHeaderCell>  
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Кол-во</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '80px'}}>Ставка</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Часы</CTableHeaderCell>                         
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Вид работ</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Техническое задание</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Часы</CTableHeaderCell>                         
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '80px'}}>Вид работ</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Техническое задание</CTableHeaderCell>
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody> 
@@ -1426,19 +1419,19 @@ const ProjectNew = () => {
                                       {index + 1}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      {item.cat}
+                                      {item.spec}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
                                       {item.count}
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                    
+                                      {item.stavka === 0 ? item.stavka+'.00' : item.stavka}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    
+                                      {item.chasi}
                                     </CTableDataCell> 
                                     <CTableDataCell className="text-center">
-                                    
+                                      {item.vidSpec}
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
                                       
@@ -1451,12 +1444,24 @@ const ProjectNew = () => {
                                 </CTableBody>                   
                               </CTable>
 
-                              <div style={{width: '20%', textAlign: 'center', marginLeft: '10px'}}>
-                                    <CButton className='uley_edit_manager' style={{width: '100%', height: '40px', marginLeft: '1px', borderColor: 'green', marginTop: '22px'}}>
-                                      <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                        Подать заявку
-                                      </span>
-                                    </CButton> 
+                              <div style={{position: 'relative', height: '56px'}}>
+                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '0', width: '50px',}}>
+                                  <input disabled={true} value={workers.length} className="text-field__input" type="text" name="dateReg"/>      
+                                </div>
+
+                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '375px', width: '50px',}}>
+                                  <input disabled={true} value={countWorkerAll} className="text-field__input" type="text" name="dateReg"/>      
+                                </div>
+
+                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '680px', width: '180px',}}>
+                                  <input disabled={true} value={stavkaWorkerAll+'.00'} className="text-field__input" type="text" name="dateReg"/>      
+                                </div>
+                                
+                                <CButton className='uley_edit_manager' style={{position: 'absolute', top: '15px', right: '0', width: '220px', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                  <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                    Подать заявку
+                                  </span>
+                                </CButton> 
                               </div>
                             </div>
                           </CCardBody>
