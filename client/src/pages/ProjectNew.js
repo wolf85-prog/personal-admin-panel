@@ -1398,7 +1398,7 @@ const ProjectNew = () => {
                         <CCard className="mb-4">
                           <CCardBody style={{padding: '12px'}}>
                             <div style={{position: 'relative', height: 'auto', display: 'flex', flexDirection: 'column'}}>
-                              <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '1160px', borderRadius: '5px' }}>
+                              <CTable align="middle" className="mb-0 border table-dark" hover responsive style={{fontSize: '16px',overflow: 'hidden', width: '100%', borderRadius: '5px' }}>
                                 <CTableHead className="text-center" color="light">
                                   <CTableRow>
                                     <CTableHeaderCell className="text-center" style={{width: '50px'}}>
@@ -1449,11 +1449,11 @@ const ProjectNew = () => {
                                   <input disabled={true} value={workers.length} className="text-field__input" type="text" name="dateReg"/>      
                                 </div>
 
-                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '375px', width: '50px',}}>
+                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '32%', width: '50px',}}>
                                   <input disabled={true} value={countWorkerAll} className="text-field__input" type="text" name="dateReg"/>      
                                 </div>
 
-                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '680px', width: '180px',}}>
+                                <div className="text-field" style={{position: 'absolute', top: '15px', left: '50%', width: '180px',}}>
                                   <input disabled={true} value={stavkaWorkerAll+'.00'} className="text-field__input" type="text" name="dateReg"/>      
                                 </div>
                                 
