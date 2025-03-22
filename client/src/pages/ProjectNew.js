@@ -722,7 +722,7 @@ const ProjectNew = () => {
     setStavkaWorkerAll(allStavka)
 
     if (worker.cat !== '' || worker.spec !== '') {
-        setWorkers([...workers, {...worker, id: Date.now(), stavka: stavkaProject, chasi: smenaSpec.name, vidSpec: vidSpec.name}])
+        setWorkers([...workers, {...worker, id: Date.now(), stavka: stavkaProject, chasi: smenaSpec.name, vidSpec: vidSpec.name, teh: tehText}])
     }
     setWorker({cat: '', spec: '', count: 1, icon: ''})
 
@@ -1434,7 +1434,7 @@ const ProjectNew = () => {
                                       {item.vidSpec}
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
-                                      
+                                      {item.teh}
                                     </CTableDataCell> 
        
                                   </CTableRow>
