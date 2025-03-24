@@ -1,4 +1,4 @@
-import {$authHost, $host} from "./index";
+import {$authHost, $host, $host_panel} from "./index";
 
 export const getProjects = async (userId) =>{
     try {
@@ -58,5 +58,14 @@ export const getProjectId = async (id) =>{
        return response.data;
     } catch (error) {
         console.log("error while calling getProjectId api", error.message);
+    }
+}
+
+export const addProjectPanel = async (data) =>{
+    try {
+        let response = await $host_panel.post(`api/projectnew/add`, data); 
+        return response.data;
+    } catch (error) {
+        console.log("error while calling addProject api",error.message);
     }
 }

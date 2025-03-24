@@ -95,13 +95,13 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { addProject } from '../http/projectAPI'
+import { addProjectPanel } from '../http/projectAPI'
 import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall, getCompanySendCallRaut } from '../http/adminAPI'
 import { getProjects, deleteProject, editProject, getProjectId } from '../http/projectAPI'
 import { sendSpecialistOtkaz } from '../http/specAPI'
-import { addMainspec, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
+import { addMainspec, addMainspecPanel, deleteMainspec, editMainspec, getMainSpecProject, getMainSpecId, deleteMainspecProject } from '../http/mainspecAPI'
 import startData from 'src/data/startData';
 import specData from "../data/specData"
 import {
@@ -764,7 +764,7 @@ const ProjectNew = () => {
     const projectStart = 'Проект 120'
 
     const data = {
-        userId,
+        //userId,
         name: project, 
         status: projectStatus,
         specifika: specifikaProject.name,
@@ -784,7 +784,7 @@ const ProjectNew = () => {
     console.log("data: ", data)
 
     //добавить проект в базу данных
-    const res = await addProject(data)
+    const res = await addProjectPanel(data)
     console.log("res: ", res)
 
     const startD = new Date(startDate).toLocaleString().split(',')[0]
@@ -796,7 +796,7 @@ const ProjectNew = () => {
       for (let i = 0; i < worker.count; i++) {
           setTimeout(async()=> {
             //добавить строку в основной состав
-            const resAdd1 = await addMainspec(
+            const resAdd1 = await addMainspecPanel(
               {
                 date: startD +'T'+ startT, 
                 projectId: res.id, 

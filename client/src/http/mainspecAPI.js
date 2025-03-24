@@ -1,4 +1,4 @@
-import {$authHost, $host} from "./index";
+import {$authHost, $host, $host_panel} from "./index";
 
 export const getMainSpecProject = async (id) =>{
     try {
@@ -49,5 +49,15 @@ export const getMainSpecId = async (id) =>{
        return response.data;
     } catch (error) {
         console.log("error while calling getMainSpecId api", error.message);
+    }
+}
+
+
+export const addMainspecPanel = async (data) =>{
+    try {
+        let response = await $host_panel.post(`api/mainspec/add`, data); 
+        return response.data;
+    } catch (error) {
+        console.log("error while calling addMainspec api",error.message);
     }
 }
