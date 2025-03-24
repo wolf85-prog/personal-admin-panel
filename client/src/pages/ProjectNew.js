@@ -830,8 +830,8 @@ const ProjectNew = () => {
     })
 
     setTimeout(()=> {     
-      setShowModalAdd(false)
-      navigate('/')
+      setShowModal(false)
+      navigate('/project')
     }, 2000)
   
   }
