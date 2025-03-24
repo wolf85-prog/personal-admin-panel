@@ -95,6 +95,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { addProject } from '../http/projectAPI'
 import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
 import { getPretendentProjectId, editPretendent, getCreatePredSmeta, getCreateFinSmeta, getCreatePoster, getCompanySendCall, getCompanySendCallRaut } from '../http/adminAPI'
@@ -162,6 +163,8 @@ const ProjectNew = () => {
 
   const [managerName, setManagerName] = useState('');
   const [managerName2, setManagerName2] = useState('');
+
+  const [managerId, setManagerId] = useState('');
 
   const [clientsData, setClientsData] = useState([]);
   const [workersData, setWorkersData] = useState([]);
@@ -600,7 +603,7 @@ const ProjectNew = () => {
     setProjectName('')  
     setStartDate('')
     setEndDate('')
-    setStartTime('') 
+    setStartTime('00:00') 
     setEndTime('') 
     setStatusProject({name: '', color: ''})
     setStartProject({name: '', color: ''})
@@ -746,6 +749,81 @@ const ProjectNew = () => {
   {/* Правка работника */}
   const changeWorker = (worker) => {
       setWorkers(workers.filter(p => p.id !== worker.id))
+  }
+
+
+  // Создание проекта
+  const addNewProject = async() => {
+
+    const projectStatus = 'Новый'
+    const projectStart = 'Проект 120'
+
+    const data = {
+        userId,
+        name: project, 
+        status: projectStatus,
+        specifika: specifikaProject.name,
+        city: city,
+        datestart: new Date(startDate), 
+        dateend: new Date(endDate), //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
+        teh: tehText, 
+        start: projectStart,
+        managerId2: managerId, 
+        // companyId: '', 
+        //chatId: '1775583141', 
+        // spec: '', 
+        // geo: '',
+        // index: 1,
+    }
+
+    console.log("data: ", data)
+
+    //добавить проект в базу данных
+    const res = await addProject(data)
+    console.log("res: ", res)
+
+    const startD = new Date(startDate).toLocaleString().split(',')[0]
+    const startT = startTime
+    console.log("startD: ", startD, startT)
+
+    //добавить список работников        
+    workers.length > 0 && workers.forEach((worker, index) => {           
+      for (let i = 0; i < worker.count; i++) {
+          setTimeout(async()=> {
+            //добавить строку в основной состав
+            const resAdd1 = await addMainspec(
+              {
+                date: startD +'T'+ startT, 
+                projectId: res.id, 
+                specialization: worker.spec,
+                vidWork: worker.vidSpec, 
+                stavka: "№1", 
+                userId
+              }
+            )
+            console.log("resAdd1: ", resAdd1)  
+            //const res = await addMainSpec(resAdd2?.id, dateStart, worker.spec, '№1');
+          }, 300 * i) 
+      }    
+    });
+
+    workers.length > 0 && workers.map(async(item, index)=> {
+      //новый состав специалистов
+     
+      //добавить строку в основной состав
+      const resAdd1 = await addMainspec(
+        {
+          date: startD +'T'+ startT, 
+          projectId: res.id, 
+          specialization: item.spec,
+          vidWork: item.vidSpec, 
+          stavka: "№1", 
+          userId
+        }
+      )
+      console.log("resAdd1: ", resAdd1)  
+    })
+  
   }
 
   return (
@@ -953,8 +1031,8 @@ const ProjectNew = () => {
                                         }
                                       } else {
                                         setCity('')
-                                        setStartDate('00:00')
-                                        setStartTime('') 
+                                        setStartDate('')
+                                        setStartTime('00:00') 
                                         setEndTime('') 
                                         setEndDate('')
                                         setSpecifikaProject('')
@@ -1138,6 +1216,7 @@ const ProjectNew = () => {
                                             if (comp) {
                                               setPhone(comp.phone ? comp.phone : '')
                                               setManagerName2(comp.userfamily)
+                                              setManagerId(comp.id)
                                             }
                                           }  
                                         }}
@@ -1458,7 +1537,7 @@ const ProjectNew = () => {
                                   <input disabled={true} value={stavkaWorkerAll+'.00'} className="text-field__input" type="text" name="dateReg"/>      
                                 </div>
                                 
-                                <CButton className='uley_edit_manager' style={{position: 'absolute', top: '15px', right: '0', width: '220px', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
+                                <CButton onClick={addNewProject} className='uley_edit_manager' style={{position: 'absolute', top: '15px', right: '0', width: '220px', height: '40px', marginLeft: '1px', borderColor: 'green'}}>
                                   <span style={{fontSize: '16px', color: 'green', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                     Подать заявку
                                   </span>
