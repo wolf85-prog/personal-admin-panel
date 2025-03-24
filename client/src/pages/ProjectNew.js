@@ -108,8 +108,10 @@ import {
   getSpecialitiesFilter,
 } from 'src/services/api/speciality'
 
+import { useNavigate } from "react-router";
+
 const ProjectNew = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const audioVhodCall = new Audio(vhodCall);
 	const audioIshodCall = new Audio(ishodCall);
@@ -755,6 +757,9 @@ const ProjectNew = () => {
   // Создание проекта
   const addNewProject = async() => {
 
+    //Toast
+    setShowModal(true)
+
     const projectStatus = 'Новый'
     const projectStart = 'Проект 120'
 
@@ -823,6 +828,11 @@ const ProjectNew = () => {
       )
       console.log("resAdd1: ", resAdd1)  
     })
+
+    setTimeout(()=> {     
+      setShowModalAdd(false)
+      navigate('/')
+    }, 2000)
   
   }
 
