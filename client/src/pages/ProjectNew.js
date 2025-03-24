@@ -914,6 +914,7 @@ const ProjectNew = () => {
                                       setProject(newValue)                                                     
                                       //console.log("projects: ", projects)                                                     
                                       const comp = projects.find(item=> item.name === newValue)
+                                      console.log("comp: ", comp)
                                       if (comp) {
                                         setCity(comp.city)
                                         setStartDate(comp.dateStart)
@@ -921,7 +922,7 @@ const ProjectNew = () => {
                                         setEndTime(comp.dateEnd ? comp.dateEnd?.split('T')[1]?.slice(0, 5) : '') 
                                         setEndDate(comp.dateEnd)
                                         setSpecifikaProject({name: comp.specifika, color: specifikaData.find((stat)=> stat.label === comp.specifika)?.color})
-                                        const managerFio = clientAll.find(item=> item.id.toString() === comp.managerId)
+                                        const managerFio = workersAll.find(item=> item.id.toString() === comp.managerId2)
                                         setManagerName2(managerFio?.userfamily)
 
                                         const man = workersAll.find(item=> item.userfamily === managerFio?.userfamily)
@@ -1135,7 +1136,7 @@ const ProjectNew = () => {
                                             const comp = workersAll.find(item=> item.userfamily === newValue.label)
                                             console.log("comp worker: ", comp, newValue)
                                             if (comp) {
-                                              setPhone(comp.phone)
+                                              setPhone(comp.phone ? comp.phone : '')
                                               setManagerName2(comp.userfamily)
                                             }
                                           }  
