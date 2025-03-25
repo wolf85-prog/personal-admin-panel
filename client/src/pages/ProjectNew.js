@@ -95,6 +95,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegsWorker';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
+import { getCompany } from '../http/companyAPI'
 import { addProjectBot, addProjectPanel } from '../http/projectAPI'
 import { getSendCall, getSendCallRaut } from '../http/adminAPI';
 import { addCanceled, getCanceled, getCanceledId } from '../http/workerAPI'
@@ -111,6 +112,7 @@ import {
 import { useNavigate } from "react-router";
 
 import { $host_bot } from './../http/index'
+import { getManager, getManagerId } from 'src/http/managerAPI'
 
 const ProjectNew = () => {
   const navigate = useNavigate();
@@ -764,23 +766,19 @@ const ProjectNew = () => {
     //Toast
     setShowModal(true)
 
-    //заявка в бота
-    const dataBot = {
-      projectname: project,
-      datestart: startDate,
-      geo: '',
-      teh: tehText,
-      worklist: workers,
-      managerId: managerId.toString(),
-      companyId: '',
-    }
-
     const d = new Date(startDate);
+    d.setHours(d.getHours() - 3);
     const year = d.getFullYear();
     const month = String(d.getMonth()+1).padStart(2, "0");
     const day = String(d.getDate()).padStart(2, "0");
     const chas = d.getHours();
     const minut = String(d.getMinutes()).padStart(2, "0");
+
+    const comp = await getCompany(userId)
+    //console.log("comp: ", comp)
+
+    const manager = await getManagerId(userId)
+    //console.log("manager: ", manager)
 
     //отправить сообщение в чат-админку (телеграм)
     const text = `Заявка успешно создана!
@@ -788,6 +786,10 @@ const ProjectNew = () => {
 Название проекта:  ${project} 
 Дата: ${day}.${month}.${year}
 Время: ${chas}:${minut} 
+Компания: ${comp[0]?.title}
+Менеджер: ${manager?.fio}
+Старший: ${managerName2} | ${phone}
+Адрес: ${address} 
 Тех. задание: ${tehText}
       
 Специалисты:  
@@ -799,82 +801,79 @@ ${workers.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(
     const sendToTelegram = await $host_bot.get(url_send_msg);
     console.log('sendToTelegram: ', sendToTelegram)
 
-    //const resAddBot = await addProjectBot(dataBot)
-    //console.log("resAddBot: ", resAddBot)
 
     const projectStatus = 'Новый'
     const projectStart = 'Проект 120'
 
+    const tehTextAll = `Компания: ${comp[0]?.title}
+Менеджер: ${manager?.fio}
+Старший: ${managerName2} | ${phone}
+Адрес: ${address}   
+${tehText}`
+
     const data = {
-        //userId,
         name: project, 
         status: projectStatus,
         specifika: specifikaProject.name,
         city: city,
         datestart: new Date(startDate), 
-        dateend: new Date(endDate), //new Date(endDay.setDate(endDay.getDate() + 1)).toISOString(), 
-        teh: tehText, 
+        dateend: new Date(endDate),  
+        teh: tehTextAll, 
         start: projectStart,
-        managerId2: managerId, 
-        // companyId: '', 
-        //chatId: '1775583141', 
-        // spec: '', 
-        // geo: '',
-        // index: 1,
     }
 
     console.log("data: ", data)
 
     //добавить проект в базу данных
-    // const res = await addProjectPanel(data)
-    // console.log("res: ", res)
+    const res = await addProjectPanel(data)
+    console.log("res: ", res)
 
-    // const startD = new Date(startDate).toLocaleString().split(',')[0]
-    // const startT = startTime
-    // console.log("startD: ", startD, startT)
+    const startD = new Date(startDate).toLocaleString().split(',')[0]
+    const startT = startTime
+    console.log("startD: ", startD, startT)
 
-    // //добавить список работников        
-    // workers.length > 0 && workers.forEach((worker, index) => {           
-    //   for (let i = 0; i < worker.count; i++) {
-    //       setTimeout(async()=> {
-    //         //добавить строку в основной состав
-    //         const resAdd1 = await addMainspecPanel(
-    //           {
-    //             date: startD +'T'+ startT, 
-    //             projectId: res.id, 
-    //             specialization: worker.spec,
-    //             vidWork: worker.vidSpec, 
-    //             stavka: "№1", 
-    //             userId
-    //           }
-    //         )
-    //         console.log("resAdd1: ", resAdd1)  
-    //         //const res = await addMainSpec(resAdd2?.id, dateStart, worker.spec, '№1');
-    //       }, 300 * i) 
-    //   }    
-    // });
+    //добавить список работников        
+    workers.length > 0 && workers.forEach((worker, index) => {           
+      for (let i = 0; i < worker.count; i++) {
+          setTimeout(async()=> {
+            //добавить строку в основной состав
+            const resAdd1 = await addMainspecPanel(
+              {
+                date: startD +'T'+ startT, 
+                projectId: res.id, 
+                specialization: worker.spec,
+                vidWork: worker.vidSpec, 
+                stavka: "№1", 
+                userId
+              }
+            )
+            console.log("resAdd1: ", resAdd1)  
+            //const res = await addMainSpec(resAdd2?.id, dateStart, worker.spec, '№1');
+          }, 300 * i) 
+      }    
+    });
 
-    // workers.length > 0 && workers.map(async(item, index)=> {
-    //   //новый состав специалистов
+    workers.length > 0 && workers.map(async(item, index)=> {
+      //новый состав специалистов
      
-    //   //добавить строку в основной состав
-    //   const resAdd1 = await addMainspec(
-    //     {
-    //       date: startD +'T'+ startT, 
-    //       projectId: res.id, 
-    //       specialization: item.spec,
-    //       vidWork: item.vidSpec, 
-    //       stavka: "№1", 
-    //       userId
-    //     }
-    //   )
-    //   console.log("resAdd1: ", resAdd1)  
-    // })
+      //добавить строку в основной состав
+      const resAdd1 = await addMainspec(
+        {
+          date: startD +'T'+ startT, 
+          projectId: res.id, 
+          specialization: item.spec,
+          vidWork: item.vidSpec, 
+          stavka: "№1", 
+          userId
+        }
+      )
+      console.log("resAdd1: ", resAdd1)  
+    })
 
-    // setTimeout(()=> {     
-    //   setShowModal(false)
-    //   navigate('/project')
-    // }, 2000)
+    setTimeout(()=> {     
+      setShowModal(false)
+      navigate('/project')
+    }, 2000)
   
   }
 
