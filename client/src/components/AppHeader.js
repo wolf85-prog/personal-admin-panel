@@ -60,6 +60,11 @@ const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
   const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
     soundVolume, setSoundVolume, soundMute, setSoundMute} = useUsersContext();
 
@@ -239,6 +244,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="Инструкция"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink style={{position: 'relative', cursor: 'pointer'}}>
                 <img onClick={()=>setShowModalEmpty(true)} src={Vopros} onMouseOver={e => (e.currentTarget.src = Vopros2)} onMouseOut={e => (e.currentTarget.src = Vopros)}  style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -251,6 +257,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="Команды / Триггеры"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink onClick={()=>setShowBarHelp(!showBarHelp)} style={{position: 'relative',  cursor: 'pointer'}}>
                 <img src={Help} onMouseOver={e => (e.currentTarget.src = Help2)} onMouseOut={e => (e.currentTarget.src = Help)}  style={{width: '18px', paddingBottom: '5px'}}/>
@@ -333,6 +340,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="Mango"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink style={{position: 'relative', transform: 'rotate(90deg)', marginBottom: '3px'}}>
                 <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilPhone} size="lg"/>
@@ -715,6 +723,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="10 ближайших проектов"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="#" style={{position: 'relative'}}>
                 <img onClick={()=>setShowModalEmpty(true)} src={Next} onMouseOver={e => (e.currentTarget.src = Next2)} onMouseOut={e => (e.currentTarget.src = Next)}  style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -727,6 +736,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="Удаленные проекты"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="#" style={{position: 'relative'}}>
                 <img onClick={()=>setShowModalEmpty(true)} src={Delete} onMouseOver={e => (e.currentTarget.src = Delete2)} onMouseOut={e => (e.currentTarget.src = Delete)} style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -739,6 +749,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="Ошибки в проектах"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="#" style={{position: 'relative'}}>
                 <img onClick={()=>setShowModalEmpty(true)} src={Error} onMouseOver={e => (e.currentTarget.src = Error2)} onMouseOut={e => (e.currentTarget.src = Error)}  style={{width: '18px', paddingBottom: '5px'}}/>               
@@ -751,6 +762,7 @@ const AppHeader = (props) => {
             <CTooltip
               content="Звуковые уведомления"
               placement="bottom"
+              style={customTooltipStyle}
             >
               <CNavLink href="#" style={{position: 'relative'}}>
                 <CIcon onClick={()=>setShowModalEmpty(true)} icon={cilBell} size="lg" />
