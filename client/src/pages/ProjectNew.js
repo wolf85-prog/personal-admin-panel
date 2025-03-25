@@ -268,6 +268,8 @@ const ProjectNew = () => {
   useEffect(() => {
     const fetch = async() => {
 
+        setCountWorker(1)
+
         // устанавливаем категории
         if (specData.length > 0 && specData) {
             setCategories(specData);
@@ -727,6 +729,7 @@ const ProjectNew = () => {
     e.preventDefault();
 
     const all = countWorkerAll + countWorker
+    console.log("count:", countWorkerAll, countWorker)
     setCountWorkerAll(all)
 
     const allStavka = stavkaWorkerAll + parseInt(stavkaProject.replace(/\s+/g, ''))
