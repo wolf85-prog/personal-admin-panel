@@ -43,6 +43,7 @@ const Login = observer(() => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
+    const [passwordSave, setPasswordSave] = useState('')
     const [code, setCode] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [activeKey, setActiveKey] = useState(1)
@@ -50,6 +51,7 @@ const Login = observer(() => {
     const [showPassword, setShowPassword] = useState(false)
     const [showCode, setShowCode] = useState(false)
     const [checked, setChecked] = useState(false)
+    const [checkedPass, setCheckedPass] = useState(false)
     const [enterCode, setEnterCode] = useState(false)
 
     const [showModal, setShowModal] = useState(false)
@@ -81,6 +83,17 @@ const Login = observer(() => {
         //setShowPassword(false)
       }
     }, [checked])
+
+    useEffect(()=> {
+      if (checkedPass) {
+        //localStorage.setItem("passwordSave", password);
+        const saved = localStorage.getItem("passwordSave");
+        setPassword(saved !== 'null' ? saved : '')
+      } else {
+        setPassword('')
+      }
+    }, [checkedPass])
+
 
     useEffect(()=> {
       if (code.length > 0) {
@@ -294,6 +307,26 @@ const Login = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                       />
                     </CInputGroup>
+                    <div style={{fontSize: '14px', color: '#6d6b6b', marginBottom: '10px', marginTop: '-10px'}}>
+                                    <CFormCheck 
+                                      id="flexCheckDefault" 
+                                      label="Запомнить пароль" 
+                                      checked={checkedPass}
+                                      onChange={() => {
+                                        if (checkedPass) {
+                                          localStorage.setItem("passwordSave", password);
+                                        }
+                                        
+                                        setCheckedPass(!checkedPass)
+                                      }
+                                      }
+                                      style={{
+                                        backgroundColor: '#181924',
+                                        border: '1px solid #fff',
+                                      }}
+                                    />
+                    </div>
+                                  
                     <CRow className='text-center'>
                       <CCol xs={12}>
                         <CButton 

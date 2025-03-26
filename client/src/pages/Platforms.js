@@ -142,6 +142,11 @@ const Platforms = () => {
 
   const API_URL_HOST = process.env.REACT_APP_API_URL
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
     //поиск
   useEffect(() => {
     const filteredData = platformsAll.filter(user=> (user.title)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
@@ -697,15 +702,15 @@ const onSortAddress = () => {
                                 </div>
                                 {/* Кнопки */}
                                 <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <CTooltip content="Удалить локацию" placement="bottom">
+                                      <CTooltip content="Удалить локацию" placement="bottom" style={customTooltipStyle}>
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                       <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       {/* <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>   */}
-                                      <CTooltip content="Сохранить локацию" placement="bottom">
+                                      <CTooltip content="Сохранить локацию" placement="bottom" style={customTooltipStyle}>
                                         <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       </CTooltip>
-                                      <CTooltip content="Закрыть окно" placement="bottom">
+                                      <CTooltip content="Закрыть окно" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                 </div>
@@ -826,13 +831,13 @@ const onSortAddress = () => {
                                     <div style={{display: 'flex', justifyContent: 'center'}}>
                                       <label className='title-label' style={{position: 'absolute', top: '-25px'}}>Проекты</label>
 
-                                      <CTooltip content="За месяц" placement="bottom">
+                                      <CTooltip content="За месяц" placement="bottom" style={customTooltipStyle}>
                                         <div className="text-field" style={{marginRight: '40px'}}>
                                           <input disabled className="text-field__input" type="text" value={0} />
                                         </div> 
                                       </CTooltip>
 
-                                      <CTooltip content="Всего" placement="bottom">
+                                      <CTooltip content="Всего" placement="bottom" style={customTooltipStyle}>
                                         <div className="text-field">
                                           <input disabled className="text-field__input" type="text" value={0} />
                                         </div> 

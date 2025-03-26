@@ -160,6 +160,11 @@ const Specialist = () => {
   const toaster = useRef()
   const [sortedCities, setSortedCities] = useState([])
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
   const exampleToast = (
     <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
@@ -1067,7 +1072,7 @@ const Specialist = () => {
                                   
                                   {/* Кнопки */}
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <CTooltip content="Удалить клиента" placement="bottom">
+                                      <CTooltip content="Удалить клиента" placement="bottom" style={customTooltipStyle}>
                                         {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
@@ -1312,27 +1317,27 @@ const Specialist = () => {
                                   <div className="uley-line" style={{left: '900px', top: '60px', width: '50px'}}></div>
                                   <div style={{display: 'flex'}}>
                                     {/* возраст */}
-                                    <CTooltip content="Возраст" placement="bottom">
+                                    <CTooltip content="Возраст" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
                                         <input disabled className="text-field__input" type="text" name="age2" id="age2" value={age2}  onChange={(e) => setAge2(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>  
                                       </div>
                                     </CTooltip>
                                     {/* год рождения */}
-                                    <CTooltip content="Год рождения" placement="bottom">
+                                    <CTooltip content="Год рождения" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
                                         <input className="text-field__input" type="text" name="age" id="age" value={age} onChange={(e) => setAge(e.target.value)} style={{width: '80px', marginRight: '8px'}}/>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* проекты за месяц */}
-                                    <CTooltip content="Проекты за месяц" placement="bottom">
+                                    <CTooltip content="Проекты за месяц" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
                                         <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* проекты всего */}
-                                    <CTooltip content="Проекты всего" placement="bottom">
+                                    <CTooltip content="Проекты всего" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
                                         <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                       </div> 
@@ -1346,7 +1351,7 @@ const Specialist = () => {
                                     </CTooltip>
                                     
                                     {/* невыходы */}
-                                    <CTooltip content="Невыходы" placement="bottom">
+                                    <CTooltip content="Невыходы" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
                                         <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', color: 'red'}}/>
                                       </div>

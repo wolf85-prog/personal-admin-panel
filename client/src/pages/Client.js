@@ -79,6 +79,11 @@ const Client = () => {
   const workerId= location.state?.workerId
   //console.log("workerId: ", workerId)
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
   const audioIshodCall = new Audio(ishodCall);
 
   const { userId, clientAll, setClientAll, client, setClient,
@@ -1013,7 +1018,7 @@ const Client = () => {
                                     </div> 
                                   </div>
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <CTooltip content="Удалить клиента" placement="bottom">
+                                      <CTooltip content="Удалить клиента" placement="bottom" style={customTooltipStyle}>
                                         {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
@@ -1027,10 +1032,10 @@ const Client = () => {
                                         style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                        {/* <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <CTooltip content="Сохранить" placement="bottom">
+                                      <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
                                         <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       </CTooltip>
-                                      <CTooltip content="Закрыть" placement="bottom">
+                                      <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                       
@@ -1196,28 +1201,28 @@ const Client = () => {
                                   <label className='title-label' style={{position: 'absolute', top: '40px'}}>Проекты</label>
                                   <div style={{display: 'flex'}}>
                                     {/* проекты за месяц */}
-                                    <CTooltip content="Проекты за месяц" placement="bottom">
+                                    <CTooltip content="Проекты за месяц" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" style={{marginRight: '8px'}}>
                                         <input className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{marginRight: '8px'}}/>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* проекты всего */}
-                                    <CTooltip content="Проекты всего" placement="bottom">
+                                    <CTooltip content="Проекты всего" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" style={{marginRight: '8px'}}>
                                         <input className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{marginRight: '8px'}}/>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* опоздания */}
-                                    <CTooltip content="Отмененные проекты" placement="bottom">
+                                    <CTooltip content="Отмененные проекты" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" style={{marginRight: '8px'}}>
                                         <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{marginRight: '8px', color: 'red'}}/>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* невыходы */}
-                                    <CTooltip content="... проеты" placement="bottom">
+                                    <CTooltip content="... проеты" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" >
                                         <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{color: 'red'}}/>
                                       </div>

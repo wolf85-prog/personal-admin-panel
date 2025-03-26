@@ -77,6 +77,11 @@ const Document = () => {
   const [showModalEmpty, setShowModalEmpty] = useState(false)
   const queryClient = useQueryClient()
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
   const { state } = useLocation()
 
   const {

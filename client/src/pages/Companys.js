@@ -64,6 +64,11 @@ import { CollectionsOutlined } from '@mui/icons-material';
 //Workers.js
 const Companys = () => {
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
   const { userId, companys, setCompanys, companysAll, companysCount, setCompanysCount, managersAll, setManagersAll, role } = useUsersContext();
   const [sortedCities, setSortedCities] = useState([])
   const [companyCount, setCompanyCount] = useState([]); 
@@ -938,7 +943,7 @@ const Companys = () => {
                                   </div>
                                   {/* Кнопки */}
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <CTooltip content="Удалить компанию" placement="bottom">
+                                      <CTooltip content="Удалить компанию" placement="bottom" style={customTooltipStyle}>
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
@@ -1172,14 +1177,14 @@ const Companys = () => {
                                   <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
                                     
                                     {/* проекты за месяц */}
-                                    <CTooltip content="Проекты за месяц" placement="bottom">
+                                    <CTooltip content="Проекты за месяц" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" style={{marginRight: '8px'}}>
                                         <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '40px', marginRight: '8px'}}/>
                                       </div>
                                     </CTooltip>                                    
                                                                         
                                     {/* проекты всего */}
-                                    <CTooltip content="Проекты всего" placement="bottom">
+                                    <CTooltip content="Проекты всего" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" style={{marginRight: '8px'}}>
                                         <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{width: '40px', marginRight: '8px'}}/>
                                       </div>

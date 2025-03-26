@@ -213,6 +213,11 @@ const ProfileCompany = () => {
 
   const host = process.env.REACT_APP_HOST
 
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
+
   const [toast, addToast] = useState(0)
   const toaster = useRef()
 
@@ -1374,7 +1379,7 @@ const ProfileCompany = () => {
                                                                   <>
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>ФИО</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[0]?.fio}
                                                                         </div>
@@ -1383,7 +1388,7 @@ const ProfileCompany = () => {
                                     
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>ФИО</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[1]?.fio}
                                                                         </div>
@@ -1392,7 +1397,7 @@ const ProfileCompany = () => {
 
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>ФИО</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                         {manData[2]?.fio}
                                                                         </div>
@@ -1562,7 +1567,7 @@ const ProfileCompany = () => {
                                                                   <>
                                                                     <div style={{ marginTop: '2px' }}>
                                                                       <label className='title-label'>Должность</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[0]?.dolgnost}
                                                                         </div>
@@ -1570,7 +1575,7 @@ const ProfileCompany = () => {
                                                                     </div>
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Должность</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[1]?.dolgnost}
                                                                         </div>
@@ -1579,7 +1584,7 @@ const ProfileCompany = () => {
                                     
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Должность</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[2]?.dolgnost}
                                                                         </div>
@@ -1676,7 +1681,7 @@ const ProfileCompany = () => {
                                                                   <>
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Телефон</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[0]?.phone}
                                                                         </div>
@@ -1685,7 +1690,7 @@ const ProfileCompany = () => {
                                     
                                                                     <div style={{ marginTop: '17px' }}>
                                                                       <label className='title-label'>Телефон</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[1]?.phone}
                                                                         </div>
@@ -1694,7 +1699,7 @@ const ProfileCompany = () => {
 
                                                                     <div style={{ marginTop: '20px' }}>
                                                                       <label className='title-label'>Телефон</label>
-                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля">
+                                                                      <CTooltip content="Данные подгрузятся после сохранения профиля" style={customTooltipStyle}>
                                                                         <div className="text-field__input" type="text" name="contragent1" id="contragent1" style={{ height: '40px', cursor: 'pointer', paddingTop: '8px' }}>
                                                                           {manData[2]?.phone}
                                                                         </div>
