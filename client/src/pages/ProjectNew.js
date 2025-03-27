@@ -203,6 +203,7 @@ const ProjectNew = () => {
   const [stavka, setStavka] = useState([]);
   const [statusPretendent, setStatusPretendent] = useState('');
   const [stavkaProject, setStavkaProject] = useState(0);
+  const [showErrorStavka, setShowErrorStavka] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleA, setVisibleA] = useState(false)
@@ -733,27 +734,28 @@ const ProjectNew = () => {
   const addNewWorker = (e) => {
     e.preventDefault();
 
-    const all = countWorkerAll + countWorker
-    console.log("count:", countWorkerAll, countWorker)
-    setCountWorkerAll(all)
+    if (stavkaProject !== 0) {
+      setShowErrorStavka(false)
+      const all = countWorkerAll + countWorker
+      console.log("count:", countWorkerAll, countWorker)
+      setCountWorkerAll(all)
 
-    const allStavka = stavkaWorkerAll + parseInt(stavkaProject.replace(/\s+/g, ''))
-    setStavkaWorkerAll(allStavka)
+      const allStavka = stavkaWorkerAll + parseInt(stavkaProject.replace(/\s+/g, ''))
+      setStavkaWorkerAll(allStavka)
 
-    if (worker.cat !== '' || worker.spec !== '') {
-        setWorkers([...workers, {...worker, id: Date.now(), stavka: stavkaProject, chasi: smenaSpec.name, vidSpec: vidSpec.name, teh: tehText}])
+      if (worker.cat !== '' || worker.spec !== '') {
+          setWorkers([...workers, {...worker, id: Date.now(), stavka: stavkaProject, chasi: smenaSpec.name, vidSpec: vidSpec.name, teh: tehText}])
+      }
+      setWorker({cat: '', spec: '', count: 1, icon: ''})
+
+      setCountWorker(1);
+      setSelectedElement("");
+      setSelectedElement2("");
+      setVidSpec({name: '', color: ''})
+      setStavkaProject(0)
+    }  else {
+      setShowErrorStavka(true)
     }
-    setWorker({cat: '', spec: '', count: 1, icon: ''})
-
-    setCountWorker(1);
-    setSelectedElement("");
-    setSelectedElement2("");
-    setVidSpec({name: '', color: ''})
-    setStavkaProject(0)
-
-    //setDisabled(true);
-    //setShowSpec(false)
-    //setDisabledBtn(true);
 
   }
 
@@ -1510,7 +1512,7 @@ ${tehText}`
                                     <div className="text-field">
                                       <CurrencyInput
                                           className="text-field__input" 
-                                          style={{marginRight: '10px'}}
+                                          style={{marginRight: '10px', border: showErrorStavka ? '1px solid red' : ''}}
                                           placeholder='0.00'
                                           type="text"
                                           value={stavkaProject}
