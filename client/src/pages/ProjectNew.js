@@ -1550,6 +1550,7 @@ ${tehText}`
                                     <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>Часы</CTableHeaderCell>                         
                                     <CTableHeaderCell className="text-center" style={{minWidth: '80px'}}>Вид работ</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Техническое задание</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{width: '50px'}}></CTableHeaderCell> 
                                   </CTableRow>
                                 </CTableHead>
                                 <CTableBody> 
@@ -1576,6 +1577,9 @@ ${tehText}`
                                     </CTableDataCell>   
                                     <CTableDataCell className="text-center">
                                       {item.teh}
+                                    </CTableDataCell> 
+                                    <CTableDataCell className="text-center">
+                                      <img src={Close} onClick={()=>removeWorker(item)} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                     </CTableDataCell> 
        
                                   </CTableRow>
