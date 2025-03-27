@@ -740,7 +740,7 @@ const ProjectNew = () => {
       console.log("count:", countWorkerAll, countWorker)
       setCountWorkerAll(all)
 
-      const allStavka = stavkaWorkerAll + parseInt(stavkaProject.replace(/\s+/g, ''))
+      const allStavka = stavkaWorkerAll + parseInt(stavkaProject.replace(/\s+/g, ''))*countWorker
       setStavkaWorkerAll(allStavka)
 
       if (worker.cat !== '' || worker.spec !== '') {
