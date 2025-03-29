@@ -91,7 +91,7 @@ const Profile = ({ user, closeSidebar }) => {
 		console.log("user: ", user)
 
 		setTimeout(()=>{
-			setHeightImage(divBlock.current.getBoundingClientRect())
+			// setHeightImage(divBlock.current.getBoundingClientRect())
 
 			var imgsize = new Image();
 
@@ -254,7 +254,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker && worker.worklist.length > 0 ? JSON.parse(worker.worklist)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table>
+							{/* <table className="table-noborder">{worker && worker.worklist.length > 0 ? JSON.parse(worker.worklist)?.map((worker, index) => <tr key={index}><td>{worker.spec}</td></tr> ) : '—'}</table> */}
 						</span>	
 					</p>
 				</li>
