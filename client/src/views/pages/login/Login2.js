@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   CButton,
@@ -14,20 +14,14 @@ import {
   CRow,
   CNav,
   CNavItem,
-  CNavLink,
-  CFormCheck,
-  CFormLabel,
-  CModal,
-  CModalBody,
+  CNavLink
 } from '@coreui/react'
 
-import InputMask from 'react-input-mask';
-
 import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilPhone, cilUser } from '@coreui/icons'
+import { cilLockLocked, cilUser } from '@coreui/icons'
 import {observer} from "mobx-react-lite";
 import {ADMIN_ROUTE} from "../../../utils/consts";
-import {addCode, getCode, checkCode, login, registration} from "../../../http/userAPI";
+import {login, registration} from "../../../http/userAPI";
 import {Context} from "../../../index";
 import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 
@@ -35,135 +29,64 @@ import {addManager} from "../../../http/managerAPI";
 import {addCompanyProf} from "../../../http/companyAPI";
 import { addConversation, newMessage } from 'src/http/supportAPI'
 
-import logo from './../../../assets/brand/logo_04_light.png'
-
 const Login = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
-    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
-    const [passwordSave, setPasswordSave] = useState('')
-    const [code, setCode] = useState('')
     const [showLogin, setShowLogin] = useState(true)
     const [activeKey, setActiveKey] = useState(1)
-
-    const [showPassword, setShowPassword] = useState(false)
-    const [showCode, setShowCode] = useState(false)
-    const [checked, setChecked] = useState(false)
-    const [checkedPass, setCheckedPass] = useState(false)
-    const [enterCode, setEnterCode] = useState(false)
-
-    const [showModal, setShowModal] = useState(false)
-    const [textToast, setTextToats] = useState('')
 
     const { userId, setUserId, addNewMessage3, sendMessSupport } = useUsersContext();
 
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 
-    useEffect(()=> {
-      console.log(phone.length)
-      if (phone.length === 18) {
-        if (checked) {
-          setShowCode(true)
-        } else {
-          setShowCode(false)
-        } 
-      } else {
-        setShowCode(false)
-      }
-    }, [phone, checked])
-
-    useEffect(()=> {
-      if (checked) {
-        //setShowCode(false)
-        //setShowPassword(true)
-      } else {
-        //setShowCode(false)
-        //setShowPassword(false)
-      }
-    }, [checked])
-
-    useEffect(()=> {
-      if (checkedPass) {
-        //localStorage.setItem("passwordSave", password);
-        const saved = localStorage.getItem("passwordSave");
-        setPassword(saved !== 'null' ? saved : '')
-      } else {
-        setPassword('')
-      }
-    }, [checkedPass])
-
-
-    useEffect(()=> {
-      if (code.length > 0) {
-        setEnterCode(true)
-      } else {
-        setEnterCode(false)
-      }
-    }, [code])
-
-    const getRandomIntInclusive = (min, max) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1) + min); // Максимум и минимум включаются
-    }
-
-
     const clickLogin = async () => {
         try {
-            const data = await login(phone, password);
+            const data = await login(email, password);
             console.log(data)
 
             user.setUser(user)
             user.setIsAuth(true)
 
             setUserId(data.id)
-            localStorage.setItem('user', JSON.stringify({id: data.id, phone: data.phone, role: data.role}))
+            localStorage.setItem('user', JSON.stringify({id: data.id, email: data.email, role: data.role}))
 
             navigate(ADMIN_ROUTE)
         } catch (e) {
-            setTextToats(e.message)
-            setShowModal(true)
+            alert(e.message)
         }
     }
 
     const clickReg = async () => {
       try {
-          if (password.length !== 0) {
-            if (password === password2) {
-              const data = await registration(phone, password, '2');
-              console.log(data)
+          if (password === password2) {
+            const data = await registration(email, password, '2');
+            console.log(data)
 
-              //создание менеджера
-              const resManager = await addManager({fio: "ФИО", userId: data?.id, phone: data?.role})
-              console.log("resManager: ", resManager)
+            //создание менеджера
+            const resManager = await addManager({fio: "ФИО", userId: data?.id, email: data?.role})
+            console.log("resManager: ", resManager)
 
-              //создание компании
-              const resCompany = await addCompanyProf({userId: data?.id, title: 'Название компании' })
+            //создание компании
+            const resCompany = await addCompanyProf({userId: data?.id, title: 'Название компании' })
 
-              user.setUser(data)
-              user.setIsAuth(true)
+            user.setUser(data)
+            user.setIsAuth(true)
 
-              setUserId(data.id)
-              localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
+            setUserId(data.id)
+            localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
 
-              sendText(data.id)
+            sendText(data.id)
 
-              navigate(ADMIN_ROUTE)
-            } else {
-              setTextToats("Пароли не совпадают!")
-              setShowModal(true)
-            }
+            navigate(ADMIN_ROUTE)
           } else {
-            setTextToats("Введите пароль!")
-            setShowModal(true)
+            alert("Пароли не совпадают!")
           }
           
-          
       } catch (e) {
-        setTextToats(e.message)
-        setShowModal(true)
+          alert(e.message)
       }
     }
 
@@ -211,40 +134,6 @@ const Login = observer(() => {
       
     }
 
-    const clickEnterCode = async() => {
-      if (enterCode) {
-        const resGetCode = await getCode(phone, code)
-        console.log("resGetCode: ", resGetCode)
-
-        if (parseInt(resGetCode) === parseInt(code)) {
-          setShowPassword(true)
-          setShowCode(false)
-        } else {
-          setTextToats('Код неверный! Попробуйте еще раз!')
-          setShowModal(true)
-          setShowPassword(false)
-          setShowCode(true)
-        }
-        
-      } else {
-        const code = getRandomIntInclusive(1000, 9999)
-        console.log(code)
-
-        const resAddCode = await addCode(phone, code)
-        console.log("resAddCode: ", resAddCode)
-
-        const resCheckCode = await checkCode(phone, code)
-
-        setShowPassword(false)
-        setShowCode(true)
-      }  
-    }
-
-    const handleCode = event => {
-      const result = event.target.value.replace(/\D/g, '');
-      setCode(result)
-    };
-
   return (
     <div className="bg-dark min-vh-100 d-flex flex-row align-items-center dark-theme bg-uley">
       <CContainer>
@@ -274,26 +163,18 @@ const Login = observer(() => {
 
                 <CCardBody style={{display: showLogin ? 'block' : 'none', height: '300px'}}>
                   <CForm>
-                    <div style={{textAlign: 'center', marginBottom: '10px'}}>
-                      <img src={logo} alt='' height={35} className={"sidebar-brand-full"}/>
-                    </div>
+                    <h1 style={{textAlign: 'center', color: '#fff'}}>{'U.L.E.Y'}</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Войдите в свой аккаунт</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
-                        <CIcon icon={cilPhone} />
+                        <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <InputMask
-                        className='form-control'
-                        type="text" 
-                        name="phone" 
-                        id="phone"
-                        mask="+7 (999) 999-99-99"
-                        maskChar=""
-                        onChange={(e) => setPhone(e.target.value)} 
-                        value={phone}
-                        placeholder="Введите ваш телефон..." 
-                      >
-                      </InputMask>
+                      <CFormInput 
+                        placeholder="Введите ваш email..." 
+                        autoComplete="username" 
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -307,26 +188,6 @@ const Login = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                       />
                     </CInputGroup>
-                    <div style={{fontSize: '14px', color: '#6d6b6b', marginBottom: '10px', marginTop: '-10px'}}>
-                                    <CFormCheck 
-                                      id="flexCheckDefault" 
-                                      label="Запомнить пароль" 
-                                      checked={checkedPass}
-                                      onChange={() => {
-                                        if (checkedPass) {
-                                          localStorage.setItem("passwordSave", password);
-                                        }
-                                        
-                                        setCheckedPass(!checkedPass)
-                                      }
-                                      }
-                                      style={{
-                                        backgroundColor: '#181924',
-                                        border: '1px solid #fff',
-                                      }}
-                                    />
-                    </div>
-                                  
                     <CRow className='text-center'>
                       <CCol xs={12}>
                         <CButton 
@@ -348,30 +209,18 @@ const Login = observer(() => {
 
                 <CCardBody className="p-4" style={{display: !showLogin ? 'block' : 'none', height: '300px'}}>
                   <CForm style={{marginTop: '-20px'}}>
-                    <div style={{textAlign: 'center', marginBottom: '10px'}}>
-                      <img src={logo} alt='' height={35} className={"sidebar-brand-full"}/>
-                    </div>
+                    <h1 style={{textAlign: 'center', color: '#fff'}}>U.L.E.Y</h1>
                     <p className="text-medium-emphasis" style={{textAlign: 'center', color: '#fff!important'}}>Создайте свой аккаунт</p>
                                   <CInputGroup className="mb-3">
-                                    <CInputGroupText>
-                                      <CIcon icon={cilPhone} />
-                                    </CInputGroupText>
-                                    <InputMask
-                                      className='form-control'
-                                      style={{textAlign: 'center'}}
-                                      type="text" 
-                                      name="phone" 
-                                      id="phone"
-                                      mask="+7 (999) 999-99-99"
-                                      maskChar=""
-                                      onChange={(e) => setPhone(e.target.value)} 
-                                      value={phone}
-                                      placeholder="+7 (900) 123-45-67" 
-                                    >
-                                    </InputMask>
+                                    <CInputGroupText>@</CInputGroupText>
+                                    <CFormInput 
+                                      placeholder="Введите ваш email..." 
+                                      autoComplete="email"
+                                      value={email}
+                                      onChange={e => setEmail(e.target.value)} 
+                                    />
                                   </CInputGroup>
-                                  {showPassword ? 
-                                  <><CInputGroup className="mb-3">
+                                  <CInputGroup className="mb-3">
                                     <CInputGroupText>
                                       <CIcon icon={cilLockLocked} />
                                     </CInputGroupText>
@@ -395,87 +244,16 @@ const Login = observer(() => {
                                       value={password2}
                                       onChange={e => setPassword2(e.target.value)}
                                     />
-                                  </CInputGroup></>
-                                  :''}
-                                  {!showPassword ? 
-                                  <div style={{fontSize: '14px', color: '#6d6b6b', marginBottom: '10px'}}>
-                                    <CFormCheck 
-                                      id="flexCheckDefault" 
-                                      label="Согласие на обработку персональных данных" 
-                                      checked={checked}
-                                      onChange={() => setChecked(!checked)}
-                                      style={{
-                                        backgroundColor: '#181924',
-                                        border: '1px solid #fff',
-                                      }}
-                                    />
-                                  </div>
-                                  : ''}
-
-                                  {showCode ? 
-                                  <CCol xs="auto" style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-                                    <div style={{width: '48%'}}>
-                                      {/* <CFormInput 
-                                        type="text" 
-                                        style={{paddingLeft: '50px'}}
-                                        id="code"
-                                        placeholder="Ввести код" 
-                                        value={code}
-                                        onChange={handleCode}
-                                      /> */}
-                                      <InputMask
-                                        className="text-field__input" 
-                                        type="text" 
-                                        name="code" 
-                                        id="inn"
-                                        mask="9999"
-                                        maskChar=""
-                                        onChange={(e) => setCode(e.target.value)} 
-                                        value={code}
-                                        placeholder='Ввести код'
-                                      >
-                                      </InputMask>
-                                    </div>
-
-                                    <CButton onClick={clickEnterCode} color="primary" style={{width: '48%'}} className="mb-3">
-                                      {enterCode ? 'Ввести код' : 'Получить код'}
-                                    </CButton>
-                                  </CCol>
-                                  : ''}
-                                  
-                                  {showPassword ? 
+                                  </CInputGroup>
                                   <div className="d-grid">
                                     <CButton onClick={clickReg} color="success">Создать</CButton>
                                   </div>
-                                  :''}
                                 </CForm>              
                 </CCardBody>
               </CCard>
             </CCardGroup>
           </CCol>
         </CRow>
-
-                            <CModal
-                              alignment="center"
-                              visible={showModal}
-                              onClose={() => setShowModal(false)}
-                              aria-labelledby="VerticallyCenteredExample"
-                            >
-                              <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
-                                {textToast}
-                              </CModalBody>
-                            </CModal>
-        
-                            {/* <CModal
-                              alignment="center"
-                              visible={showModalEmpty}
-                              onClose={() => setShowModalEmpty(false)}
-                              aria-labelledby="VerticallyCenteredExample"
-                            >
-                              <CModalBody style={{ textAlign: 'center', fontSize: '18px', paddingTop: '15px'}}>
-                              Функция доступна в расширенной версии. Подробности – в техподдержке.
-                              </CModalBody>
-                            </CModal> */}
       </CContainer>
     </div>
   )

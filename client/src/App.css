@@ -291,7 +291,7 @@ th.widthCompany {
     --cui-input-focus-bg: hsla(0,0%,100%,.05);
     --cui-input-focus-border-color: hsla(0,0%,100%,.2);
     --cui-input-disabled-bg: rgba(0,0,21,.1);
-    --cui-input-placeholder-color: hsla(0,0%,100%,.6);
+    --cui-input-placeholder-color: hsla(0, 4%, 44%, 0.6);
     --cui-input-plaintext-color: hsla(0,0%,100%,.87);
     --cui-form-text-color: hsla(0,0%,100%,.6);
 }

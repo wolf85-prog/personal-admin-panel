@@ -140,6 +140,8 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
 
   const [countPress, setCountPress] = useState(0);
 
+  const [filterText, setFilterText] = useState('');
+
   const handleChangeFilterType = (selectedOption) => {
     setShowRazrab(true)
     setTimeout(()=> {
@@ -179,6 +181,10 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
       setShowCalendar2(false)
     } 
     
+  }
+
+  const startFilter = (e) => {
+    setFilterText(e.target.value)
   }
 
   return (
@@ -226,12 +232,12 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
                 </span>
               </CButton>
 
-              <input className="form-control widthSearch" style={{background: 'transparent', marginRight: '10px'}} placeholder='Поиск'></input>
+              <input onChange={(e)=>startFilter(e)} value={filterText} className="form-control widthSearch" style={{background: 'transparent', marginRight: '10px'}} placeholder='Поиск'></input>
               
               <CCloseButton
                 className="uley_select_reset"
                 style={{ height: '28px', width: '28px',marginRight: '180px', marginLeft: '0' }}
-                onClick={() => setColumnFilters([])}
+                onClick={() => setFilterText('')}
               />
               
               {/* <CButton onClick={() => setDate(new Date(year, month - 1, day))} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
