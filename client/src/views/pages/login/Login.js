@@ -53,6 +53,7 @@ const Login = observer(() => {
     const [checked, setChecked] = useState(false)
     const [checkedPass, setCheckedPass] = useState(false)
     const [enterCode, setEnterCode] = useState(false)
+    const [sendCode, setSendCode] = useState(false)
 
     const [showModal, setShowModal] = useState(false)
     const [textToast, setTextToats] = useState('')
@@ -98,6 +99,7 @@ const Login = observer(() => {
     useEffect(()=> {
       if (code.length > 0) {
         setEnterCode(true)
+        setSendCode(false)
       } else {
         setEnterCode(false)
       }
@@ -236,7 +238,7 @@ const Login = observer(() => {
         console.log("resAddCode: ", resAddCode)
 
         const resCheckCode = await checkCode(phone, code)
-
+        setSendCode(true)
         setShowPassword(false)
         setShowCode(true)
       }  
@@ -439,9 +441,13 @@ const Login = observer(() => {
                                       </InputMask>
                                     </div>
 
-                                    <CButton onClick={clickEnterCode} color="primary" style={{width: '48%'}} className="mb-3">
+                                    { !sendCode ? 
+                                      <CButton onClick={clickEnterCode} color="primary" style={{width: '48%'}} className="mb-3">
                                       {enterCode ? 'Ввести код' : 'Получить код'}
                                     </CButton>
+                                    :<CButton color="success" style={{width: '48%'}} className="mb-3">
+                                      {'Код отправлен'}
+                                    </CButton>}
                                   </CCol>
                                   : ''}
                                   
