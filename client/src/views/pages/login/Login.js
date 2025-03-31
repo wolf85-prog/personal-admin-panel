@@ -113,7 +113,8 @@ const Login = observer(() => {
     const clickLogin = async () => {
         try {
             const data = await login(phone, password);
-            console.log(data)
+            console.log("data: ",data)
+            //setTextToats(data)
 
             user.setUser(user)
             user.setIsAuth(true)
@@ -123,7 +124,8 @@ const Login = observer(() => {
 
             navigate(ADMIN_ROUTE)
         } catch (e) {
-            setTextToats(e.message)
+            //next(e)
+            setTextToats(e.response?.data?.message)
             setShowModal(true)
         }
     }
@@ -162,7 +164,7 @@ const Login = observer(() => {
           
           
       } catch (e) {
-        setTextToats(e.message)
+        setTextToats(e.response?.data?.message)
         setShowModal(true)
       }
     }
