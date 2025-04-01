@@ -431,6 +431,7 @@ const Login = observer(() => {
                                       /> */}
                                       <InputMask
                                         className="text-field__input" 
+                                        style={{border: '1px solid #c0c0c9', backgroundColor: '#1f272c'}}
                                         type="text" 
                                         name="code" 
                                         id="inn"
