@@ -133,8 +133,10 @@ const Login = observer(() => {
     }
 
     const clickReg = async () => {
+      //console.log("password: ", password)
       try {
-          if (password.length !== 0) {
+          
+          if (password !== null) {
             if (password === password2) {
               const data = await registration(phone, password, '2');
               console.log(data)
