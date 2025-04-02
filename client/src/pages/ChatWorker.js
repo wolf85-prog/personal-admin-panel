@@ -50,7 +50,7 @@ const ChatsWorker = () => {
                     </div>
                   </div>
 
-                  <CModal
+                  {/* <CModal
                           alignment="center"
                           visible={showModal}
                           onClose={() => setShowModal(false)}
@@ -59,7 +59,7 @@ const ChatsWorker = () => {
                           <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
                             Функция находится в разработке
                           </CModalBody>
-                  </CModal>
+                  </CModal> */}
 
                 </Suspense>
             </CContainer>
