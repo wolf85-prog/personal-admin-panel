@@ -28,7 +28,7 @@ import {
   CToastBody,
   CToastClose,
   CToaster,
-
+  CTooltip,
 } from '@coreui/react'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
 import {Context} from "../index";
@@ -109,11 +109,18 @@ const Profile = () => {
   const [visibleDelete, setVisibleDelete] = useState(false)
 
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
   const [image, setImage]= useState("");
+
+  const customTooltipStyle = {
+    '--cui-tooltip-bg': '#000',
+    '--cui-tootip-color': '#fff'
+  }
 
   const host = process.env.REACT_APP_HOST
 
@@ -302,6 +309,22 @@ const Profile = () => {
     }, 3000)
   }
 
+  const clickProjects = ()=> {
+   // console.log(title)
+    setShowModal2(true)
+    setTimeout(()=> {
+        setShowModal2(false)
+    }, 3000)
+  }
+
+  const clickRazrab = ()=> {
+    //console.log(title)
+    setShowModal3(true)
+    setTimeout(()=> {
+        setShowModal3(false)
+    }, 3000)
+  }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -331,8 +354,12 @@ const Profile = () => {
                                   </div>
                                    {/* Кнопки */}
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                    <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                    <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                    <CTooltip content="Сохранить профиль" placement="bottom" style={customTooltipStyle}>
+                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                    </CTooltip>
+                                    <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                    </CTooltip>
                                   </div>
 
 
@@ -457,17 +484,17 @@ const Profile = () => {
                                     <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
                                     <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '24px'}}>                                   
                                       {/* проекты за месяц */}
-                                      <div style={{marginRight: '10px'}}>
+                                      <div style={{marginRight: '10px', width: '100%'}}>
                                         <label className='title-label'>За месяц</label>
                                         <div className="text-field">
-                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '100%', marginRight: '8px'}}/>
+                                            <div onClick={clickProjects}  className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} style={{width: '100%', marginRight: '8px'}}/>
                                         </div>
                                       </div>
                                       {/* проекты всего */}
-                                      <div> 
+                                      <div style={{width: '100%'}}> 
                                         <label className='title-label'>Всего</label>
                                         <div className="text-field">
-                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '100%', marginRight: '8px'}}/>
+                                            <div onClick={clickProjects}  className="text-field__input" type="text" name="rank" id="rank" value={rank} style={{width: '100%', marginRight: '8px'}}/>
                                         </div>
                                       </div>
                                       
@@ -518,12 +545,12 @@ const Profile = () => {
 
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <input disabled className="text-field__input" type="text" name="email" id="email" value={email}/>
+                                    <div onClick={clickRazrab}  className="text-field__input" type="text" name="email" id="email" value={email}/>
                                   </div> 
 
                                   <label className='title-label'>Пароль</label>
                                   <div className="text-field">
-                                    <input disabled className="text-field__input" type="text" name="password" id="password"  />
+                                    <div onClick={clickRazrab} className="text-field__input" type="text" name="password" id="password"  />
                                   </div> 
                                 </div>
 
@@ -531,7 +558,7 @@ const Profile = () => {
                                 <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '250px'}}>
 
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div onClick={clickProjects} className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '100%', height: '291px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
@@ -555,6 +582,29 @@ const Profile = () => {
                     >
                       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '14px', paddingTop: '35px'}}>
                         Название компании редактируется в разделе Компания в правом верхнем меню
+                      </CModalBody>
+                    </CModal>
+
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal2}
+                      onClose={() => setShowModal2(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Заполняется системой автоматически
+                      </CModalBody>
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal3}
+                      onClose={() => setShowModal3(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Функция находится в разработке
                       </CModalBody>
                     </CModal>
 

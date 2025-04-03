@@ -201,6 +201,7 @@ const ProfileCompany = () => {
   const [showSave, setShowSave] = useState(true)
 
   const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [visibleClear, setVisibleClear] = useState(false)
@@ -957,6 +958,14 @@ const ProfileCompany = () => {
   }
 
 
+  const clickProjects = ()=> {
+    // console.log(title)
+     setShowModal2(true)
+     setTimeout(()=> {
+         setShowModal2(false)
+     }, 3000)
+   }
+
 
   return (
     <div className='dark-theme'>
@@ -989,8 +998,8 @@ const ProfileCompany = () => {
                                   { role==='1' ? <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                       {/* <Icon id="delete" onClick={()=>clickDelete(id)} /> */}
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
-                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> 
+                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>*/}
                                       {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                   </div>:''
@@ -1606,7 +1615,7 @@ const ProfileCompany = () => {
                                 <div className='widthBlock4' style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column'}}>
                                   
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '-10px'}}>
+                                  <div onClick={clickProjects} className="text-field" style={{marginBottom: '-10px'}}>
                                     <ul className='spec-style' style={{width: '100%', height: '292px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
@@ -1741,11 +1750,11 @@ const ProfileCompany = () => {
                                           visible={showModal}
                                           onClose={() => setShowModal(false)}
                                           aria-labelledby="VerticallyCenteredExample"
-                                        >
-                                          <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
-                                            {showSave ? 'Данные успешно сохранены' : 'Некорректно заполненные данные!'}
-                                          </CModalBody>
-                                        </CModal>
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        {showSave ? 'Данные успешно сохранены' : 'Некорректно заполненные данные!'}
+                      </CModalBody>
+                    </CModal>
 
                     <CModal
                       backdrop="static"
@@ -1775,6 +1784,18 @@ const ProfileCompany = () => {
                     >
                       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
                        Функция доступна для роли «Руководитель»
+                      </CModalBody>
+                    </CModal>
+
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal2}
+                      onClose={() => setShowModal2(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Заполняется системой автоматически
                       </CModalBody>
                     </CModal>
                   
