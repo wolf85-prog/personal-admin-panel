@@ -1000,8 +1000,12 @@ const ProfileCompany = () => {
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> 
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>*/}
-                                      {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      <CTooltip content="Сохранить профиль" placement="bottom" style={customTooltipStyle}>
+                                        {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
+                                      </CTooltip>
+                                      <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                        <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      </CTooltip>
                                   </div>:''
                                   }
 {/* 1 */} 
@@ -1033,7 +1037,9 @@ const ProfileCompany = () => {
 
                                   <label className='title-label'>ID</label>
                                   <div className="text-field" >
-                                    <input disabled={true} className="text-field__input" type="text" name="companyId" id="companyId" value={id} style={{width: '250px', marginRight: '25px'}}/>
+                                    <CTooltip content="ID компании руководителя" placement="bottom" style={customTooltipStyle}>
+                                      <div className="text-field__input" type="text" name="companyId" id="companyId" style={{width: '250px', marginRight: '25px'}}>{id}</div>
+                                    </CTooltip>
                                   </div>
 
                                   <label className='title-label'>Реквизиты</label>
