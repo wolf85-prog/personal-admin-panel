@@ -168,6 +168,7 @@ const Specialist = () => {
     '--cui-tootip-color': '#fff'
   }
 
+
   const exampleToast = (
     <CToast autohide={true} visible={true} color="success" className="text-white align-items-center">
       <div className="d-flex">
@@ -188,14 +189,14 @@ const Specialist = () => {
 
 
   //поиск
-  // useEffect(() => {
-	// 	const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
-  //   setSpecialist(text === '' ? specialistCount : filteredData); 
+  useEffect(() => {
+		//const filteredData = specialistAll.filter(user=> (user.fio + user.chatId + user.phone + user.speclist)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+    //setSpecialist(text === '' ? specialistCount : filteredData); 
 
-  //   setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
-  //   //console.log("specialist", specialist)
-  //   setShowClear(text === '' ? false : true)
-  // }, [text]);
+    //setSpecialistsCount(text === '' ? specialistAll.length : filteredData.length)
+    console.log("specialist", specialistsCount)
+    setShowClear(text === '' ? false : true)
+  }, [text]);
 
   useEffect(() => {
       let count = 0

@@ -980,7 +980,7 @@ const onSortAddress = () => {
                       aria-labelledby="VerticallyCenteredExample"
                     >
                       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
-                                            Заполняется системой автоматически
+                        Заполняется системой автоматически
                       </CModalBody>
                     </CModal>
                 </Suspense>

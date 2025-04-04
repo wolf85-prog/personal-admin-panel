@@ -55,7 +55,8 @@ import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa2 from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { array } from 'prop-types';
@@ -121,6 +122,7 @@ const Client = () => {
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
 
   const [clientId, setClientId] = useState('');
   const [id, setId] = useState('');
@@ -885,6 +887,14 @@ const Client = () => {
       await getCompanySendCall(id, callType)
     }
 
+    const clickProjects = ()=> {
+      // console.log(title)
+       setShowModal2(true)
+       setTimeout(()=> {
+           setShowModal2(false)
+       }, 3000)
+     }
+
 
   return (
     <div className='dark-theme'>
@@ -1033,7 +1043,7 @@ const Client = () => {
                                        {/* <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
-                                        <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                        <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       </CTooltip>
                                       <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1222,7 +1232,7 @@ const Client = () => {
                                     </CTooltip>
                                     
                                     {/* невыходы */}
-                                    <CTooltip content="... проеты" placement="bottom" style={customTooltipStyle}>
+                                    <CTooltip content="... проекты" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field" >
                                         <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{color: 'red'}}/>
                                       </div>
@@ -1289,7 +1299,7 @@ const Client = () => {
                                   </div> 
 
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px', width: '100%'}}>
+                                  <div onClick={clickProjects} className="text-field" style={{marginBottom: '0px', width: '100%'}}>
                                     <ul className='spec-style' style={{width: '100%', height: '293px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
@@ -1336,6 +1346,17 @@ const Client = () => {
                         </CButton>
                         <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
                       </CModalFooter>
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal2}
+                      onClose={() => setShowModal2(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Заполняется системой автоматически
+                      </CModalBody>
                     </CModal>
                   </Suspense>
             </CContainer>

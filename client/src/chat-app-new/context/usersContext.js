@@ -454,6 +454,8 @@ useEffect(() => {
 	
 		setClientAll(arrayClientAll)
 
+		setClientsCount(arrayClientAll?.length)
+
 
 		//1 все специалисты 100
 		//let response = await getClientCount(user && user && JSON.parse(user)?.id, 100, client.length);
@@ -624,6 +626,8 @@ useEffect(() => {
 				//console.log("sortedClients: ", sortedClients)
 	
 				setUserClients(sortedClients)
+
+				
 			}				
 		})	
 	}
@@ -644,6 +648,8 @@ useEffect(() => {
 			//0 все специалисты
 			let all = await getWorkers(user && JSON.parse(user)?.id)
 			console.log("Workers all: ", all)
+
+			console.log("specialistsCount: ", specialistsCount)
 
 			const arrayWorkerAll = []
 		
@@ -845,6 +851,10 @@ useEffect(() => {
 					//console.log("sortedClients: ", sortedClients.length)
 		
 					setUserWorkers(sortedClients)
+
+					setSpecialistAll(sortedClients)
+
+					setSpecialistsCount(sortedClients?.length)
 
 					//сохранить кэш
 					//localStorage.setItem("userWorkers", JSON.stringify(sortedClients));
@@ -1885,6 +1895,9 @@ const fetchNotifAdmin = async (dataAll) => {
 			setClientsCount,
 			clientsCount, 
 			setClientsCount,
+
+			specialistsCount, 
+			setSpecialistsCount,
 
 			managerProfile, 
 			setManagerProfile,

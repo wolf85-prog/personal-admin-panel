@@ -195,46 +195,11 @@ class ClientController {
             const {fio, userId} = req.body
             
             const currentMonth = new Date().getMonth() + 1
-            let urlAvatar = ''
-            
-            if (currentMonth === 4) {
-                //апрель
-                urlAvatar = 'https://proj.uley.team/upload/2024-04-23T08:08:31.547Z.jpg'
-            } 
-            else if (currentMonth === 5) {
-                //май
-                urlAvatar = 'https://proj.uley.team/upload/2024-05-02T06:01:44.244Z.jpg'
-            } 
-            else if (currentMonth === 6) {
-                //июнь
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:51:23.345Z.jpg'
-            }
-            else if (currentMonth === 7) {
-                //июль
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:52:17.472Z.jpg'
-            }
-            else if (currentMonth === 8) {
-                //август
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:53:06.699Z.jpg'
-            }
-            else if (currentMonth === 9) {
-                //сентябрь
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:54:00.494Z.jpg'
-            }
-            else if (currentMonth === 10) {
-                //октябрь
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:54:13.965Z.jpg'
-            }
-            else if (currentMonth === 11) {
-                //ноябрь
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:54:28.857Z.jpg'
-            }
-            else if (currentMonth === 12) {
-                //декабрь
-                urlAvatar = 'https://proj.uley.team/upload/2024-06-06T07:54:44.499Z.jpg'
-            } 
+            let urlAvatar = ''        
 
-            const newUser = await Client.create({userId, fio, profile: urlAvatar})
+            urlAvatar = 'https://uley.company:2000/uploads/2025-04-04T13:01:59.490Z.png'   
+
+            const newUser = await Client.create({userId, fio, profile: urlAvatar, reyting: '3'})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
