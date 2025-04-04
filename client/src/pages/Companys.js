@@ -297,6 +297,7 @@ const Companys = () => {
           profile: user.profile,
           sfera: user.sfera,
           comteg: user.comteg,
+          reyting: user.reyting,
 
         }
         arrCompanys.push(newUser)
@@ -639,6 +640,7 @@ const Companys = () => {
         profile,
         sfera,
         comteg,
+        reyting,
       }
       console.log("saveData: ", saveData)
   
@@ -665,6 +667,7 @@ const Companys = () => {
           profile,
           sfera,
           comteg,
+          reyting,
         };
   
         console.log("update user: ", usersCopy[userIndex])
@@ -775,6 +778,7 @@ const Companys = () => {
     setComteg(user.comteg ? user.comteg : '')
     setComment(user.comment)
     setShowBlacklist(user.sfera ? user.sfera.includes('Blacklist') : false)
+    setReyting(user.reyting === null ? '' : user.reyting)
   }
 
   const onChangeManager = (e, index) => {

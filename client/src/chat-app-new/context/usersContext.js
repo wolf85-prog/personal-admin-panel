@@ -333,6 +333,7 @@ const UsersProvider = ({ children }) => {
 				profile: user.profile,
 				sfera: user.sfera,
 				comteg: user.comteg,
+				reyting: user.reyting,
 				}
 				arrCompanys.push(newUser)
 		
@@ -665,6 +666,7 @@ useEffect(() => {
 				comteg: user.comteg,
 				nik: user.nik,
 				skill: user.skill,
+				reyting: user.reyting,
 				}
 		
 				arrayWorkerAll.push(newWorker)

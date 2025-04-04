@@ -53,7 +53,8 @@ import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa2 from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
 import arrowDown from './../assets/images/arrowDown.svg'
 import threeDots from './../assets/images/three-dots.svg'
 import DeleteIcon from "./../assets/images/delete_icon.png"
@@ -124,6 +125,7 @@ const Platforms = () => {
 
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState('');
@@ -611,6 +613,14 @@ const onSortAddress = () => {
     // Additional validation logic
   };
 
+  const clickProjects = ()=> {
+    // console.log(title)
+     setShowModal2(true)
+     setTimeout(()=> {
+         setShowModal2(false)
+     }, 3000)
+   }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -705,10 +715,10 @@ const onSortAddress = () => {
                                       <CTooltip content="Удалить локацию" placement="bottom" style={customTooltipStyle}>
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
-                                      <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      {/* <img src={blockProfile ? zamok : zamok2} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/> */}
                                       {/* <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>   */}
                                       <CTooltip content="Сохранить локацию" placement="bottom" style={customTooltipStyle}>
-                                        <img src={Disketa} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                        <img src={Disketa2} onClick={savePlatforma} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       </CTooltip>
                                       <CTooltip content="Закрыть окно" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -832,7 +842,7 @@ const onSortAddress = () => {
                                       <label className='title-label' style={{position: 'absolute', top: '-25px'}}>Проекты</label>
 
                                       <CTooltip content="За месяц" placement="bottom" style={customTooltipStyle}>
-                                        <div className="text-field" style={{marginRight: '40px'}}>
+                                        <div className="text-field" style={{marginRight: '15px'}}>
                                           <input disabled className="text-field__input" type="text" value={0} />
                                         </div> 
                                       </CTooltip>
@@ -887,7 +897,7 @@ const onSortAddress = () => {
                                       <div className="text-field">
                                         <div className='text-field__input' style={{textAlign: 'start'}}>
                                           <img src={PaperIcon} alt="upload" width={20} height={20} />
-                                          <input className='text-field__input' style={{position: 'absolute', top: '0', opacity: '0'}} type="file"  name="photo"  onChange={handleFileChange} />
+                                          <input className='text-field__input' style={{position: 'absolute', top: '0', opacity: '0', width: '20px'}} type="file"  name="photo"  onChange={handleFileChange} />
                                           {image && image.length > 20 ? " " + image.substr(0, 20) + '...' : image}
                                         </div>  
                                       </div> 
@@ -916,7 +926,7 @@ const onSortAddress = () => {
                                 <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '46px', display: 'flex', flexDirection: 'column', width: '250px', position: 'relative'}}>
 
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div onClick={clickProjects} className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '250px', height: '378px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
@@ -961,6 +971,17 @@ const onSortAddress = () => {
                                             </CButton>
                                             <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
                                           </CModalFooter>                    
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal2}
+                      onClose={() => setShowModal2(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                                            Заполняется системой автоматически
+                      </CModalBody>
                     </CModal>
                 </Suspense>
             </CContainer>
