@@ -43,7 +43,8 @@ import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
+import Disketa2 from "./../assets/images/disketa.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
@@ -91,6 +92,7 @@ const Companys = () => {
   const [showSaveOffice, setShowSaveOffice] = useState(false)
   const [showSaveSklad, setShowSaveSklad] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
 
     const [starActive1, setStarActive1] = useState(true)
     const [starActive2, setStarActive2] = useState(true)
@@ -815,6 +817,14 @@ const Companys = () => {
     );
   }
 
+  const clickProjects = ()=> {
+    // console.log(title)
+     setShowModal2(true)
+     setTimeout(()=> {
+         setShowModal2(false)
+     }, 3000)
+   }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -946,9 +956,14 @@ const Companys = () => {
                                       <CTooltip content="Удалить компанию" placement="bottom" style={customTooltipStyle}>
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
-                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      {/* <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/> */}
+                                      <CTooltip content="Сохранить компанию" placement="bottom" style={customTooltipStyle}>
+                                        <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      </CTooltip>
+                                      <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                        <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      </CTooltip>
+                                        
                                   </div>
 {/* 1 */}                               
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
@@ -1000,7 +1015,7 @@ const Companys = () => {
                                   </div>
 
                                   <label className='title-label'>Реквизиты</label>
-                                  <CButton className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '6px'}}>
+                                  <CButton onClick={clickManager} className='uley_add_user' style={{width: '250px', height: '40px', marginLeft: '6px'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Реквизиты
                                     </span>
@@ -1160,7 +1175,7 @@ const Companys = () => {
 
                                   {/* Договор */}
                                   <label className='title-label'>Договор</label>
-                                  <CButton className='uley_add_user' style={{width: '100%', height: '40px', marginLeft: '0'}}>
+                                  <CButton onClick={clickManager} className='uley_add_user' style={{width: '100%', height: '40px', marginLeft: '0'}}>
                                     <span style={{fontSize: '18px', color: '#fff', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                       Договор
                                     </span>
@@ -1177,26 +1192,29 @@ const Companys = () => {
                                   <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
                                     
                                     {/* проекты за месяц */}
-                                    <CTooltip content="Проекты за месяц" placement="bottom" style={customTooltipStyle}>
-                                      <div className="text-field" style={{marginRight: '8px'}}>
-                                        <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '40px', marginRight: '8px'}}/>
+                                    <CTooltip content="За месяц" placement="bottom" style={customTooltipStyle}>
+                                      <div className="text-field" style={{width: '100%', marginRight: '8px'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="reyting" id="reyting">0</div>
                                       </div>
                                     </CTooltip>                                    
                                                                         
                                     {/* проекты всего */}
-                                    <CTooltip content="Проекты всего" placement="bottom" style={customTooltipStyle}>
-                                      <div className="text-field" style={{marginRight: '8px'}}>
-                                        <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{width: '40px', marginRight: '8px'}}/>
+                                    <CTooltip content="Всего" placement="bottom" style={customTooltipStyle}>
+                                      <div className="text-field" style={{width: '100%', marginRight: '8px'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="rank" id="rank">0</div>
                                       </div>
                                     </CTooltip>
 
                                     {/* проекты за месяц */}
-                                    <div className="text-field" >
-                                      <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value='0' style={{width: '40px', marginRight: '8px'}}/>
-                                    </div>
+                                    <CTooltip content="Отмененные" placement="bottom" style={customTooltipStyle}>
+                                      <div className="text-field" style={{width: '100%', marginRight: '8px'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="reyting" id="reyting">0</div>
+                                      </div>
+                                    </CTooltip>
+
                                     {/* проекты всего */}
-                                    <div className="text-field">
-                                      <input disabled className="text-field__input" type="text" name="rank" id="rank" value='0' style={{width: '40px', marginRight: '8px'}}/>
+                                    <div className="text-field" style={{width: '100%'}}>
+                                      <div onClick={clickProjects} className="text-field__input" type="text" name="rank" id="rank">0</div>
                                     </div>
                                   </div>
                                   
@@ -1286,13 +1304,13 @@ const Companys = () => {
 
                                   {/* phone */}
                                   <label className='title-label'>Телефон</label>
-                                  <div className="text-field" >
-                                      {/* <img 
+                                  <div className="text-field" onMouseOver={()=>setShowSavePhone(true)} onMouseOut={()=>setShowSavePhone(false)}>
+                                      <img 
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                         alt="" 
                                         style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                      /> */}
+                                      />
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
                                           className="text-field__input" 
@@ -1325,7 +1343,7 @@ const Companys = () => {
 
 
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div onClick={clickProjects} className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '100%', height: showManagers ? '533px' : '123px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
@@ -1383,6 +1401,18 @@ const Companys = () => {
                     >
                       <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
                         Функция находится в разработке
+                      </CModalBody>
+                    </CModal>
+
+
+                    <CModal
+                                          alignment="center"
+                                          visible={showModal2}
+                                          onClose={() => setShowModal2(false)}
+                                          aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Заполняется системой автоматически
                       </CModalBody>
                     </CModal>
                   

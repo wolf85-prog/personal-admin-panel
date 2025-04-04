@@ -52,7 +52,8 @@ import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa2 from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import { array } from 'prop-types';
@@ -107,7 +108,9 @@ const Specialist = () => {
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
+  const [showSavePassport, setShowSavePassport] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
 
   const [starActive1, setStarActive1] = useState(true)
   const [starActive2, setStarActive2] = useState(true)
@@ -921,6 +924,14 @@ const Specialist = () => {
       
     }
 
+    const clickProjects = ()=> {
+      // console.log(title)
+       setShowModal2(true)
+       setTimeout(()=> {
+           setShowModal2(false)
+       }, 3000)
+    }
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1078,9 +1089,13 @@ const Specialist = () => {
                                       </CTooltip>
                                       <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
-                                      <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
+                                      {/* <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/> */}
+                                      <CTooltip content="Сохранить профиль" placement="bottom" style={customTooltipStyle}>
+                                        <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      </CTooltip>
+                                      <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                        <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
+                                      </CTooltip> 
                                   </div>
         {/* 1 */}                           
                                 <div style={{width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
@@ -1367,7 +1382,7 @@ const Specialist = () => {
                                   
                                   <div style={{position:'relative'}}>
                                     <label className='title-label'>Паспорт</label>
-                                    <div className="text-field" style={{marginBottom: '0px'}}>
+                                    <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSavePassport(true)} onMouseOut={()=>setShowSavePassport(false)}>
                                       <textarea 
                                         className="text-field__input" 
                                         type="text" 
@@ -1377,7 +1392,9 @@ const Specialist = () => {
                                         onChange={(e) => setPassport(e.target.value)} 
                                         style={{resize: 'none', height: '295px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
-                                    {/* <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" style={{position: 'absolute', top: '40px', left: '205px', cursor: 'pointer', width: '25px', height: '25px'}}/> */}
+                                    <img src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" 
+                                      style={{visibility: showSavePassport ? 'visible' : 'hidden', position: 'absolute', top: '40px', right: '15px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                   </div>
 
                                 </div>
@@ -1421,7 +1438,7 @@ const Specialist = () => {
 
 
                                   <label className='title-label'>Проекты</label>
-                                  <div className="text-field" style={{marginBottom: '0px'}}>
+                                  <div onClick={clickProjects} className="text-field" style={{marginBottom: '0px'}}>
                                     <ul className='spec-style' style={{width: '100%', height: '296px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left'}}>
                                     
                                     </ul>
