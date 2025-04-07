@@ -43,6 +43,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
+import Paper from '@mui/material/Paper';
 
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -1038,6 +1039,9 @@ ${tehText}`
                                           backgroundColor: 'transparent', 
                                       }
                                   }}
+                                  PaperComponent={({ children }) => (
+                                    <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                  )}
                                   className="text-field__input" 
                                   openOnFocus
                                   id="custom-input-demo"

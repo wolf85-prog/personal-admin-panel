@@ -42,6 +42,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
+import Paper from '@mui/material/Paper';
 
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -1904,6 +1905,9 @@ ${loc.url}`;
                                               id="custom-input-manager"
                                               options={clientsData}
                                               style={{width: '100%', padding: '0'}}
+                                              PaperComponent={({ children }) => (
+                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                              )}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               //filterOptions={filterOptions}
                                               onInputChange={onChangeManager}
@@ -1937,7 +1941,6 @@ ${loc.url}`;
 
                                           <label className='title-label'>Старший</label>
                                           <div className="text-field">
-                                            {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
                                             <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -1954,23 +1957,16 @@ ${loc.url}`;
                                                       color: '#ffffff',
                                                       backgroundColor: 'transparent', 
                                                     },
-                                                    "& .MuiAutocomplete-paper .MuiAutocomplete-option": {
-                                                          backgroundColor: "#000",
-                                                      },
-                                                  //}
                                               }}
                                               className="text-field__input" 
+                                              fullWidth
+                                              PaperComponent={({ children }) => (
+                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                              )}
                                               openOnFocus
                                               id="custom-input-manager2"
                                               options={specialistData}
                                               style={{width: '100%', padding: '0'}}
-                                              classes={{
-                                                option: {
-                                                  "&:hover": {
-                                                    backgroundColor: "cyan !important"
-                                                  }
-                                                }
-                                              }}
                                               getOptionLabel={(option) => option}
                                               // renderOption={(props, option) => {
                                               //   const { title } = option;

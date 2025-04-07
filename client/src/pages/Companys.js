@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
 import InputMask from 'react-input-mask';
 import Autocomplete from '@mui/material/Autocomplete';
+import Paper from '@mui/material/Paper'
 import { 
   CContainer, 
   CSpinner, 
@@ -1062,6 +1063,9 @@ const Companys = () => {
                                                       backgroundColor: 'transparent', 
                                                   }
                                               }}
+                                              PaperComponent={({ children }) => (
+                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                              )}
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-demo"
@@ -1141,6 +1145,9 @@ const Companys = () => {
                                                 backgroundColor: 'transparent', 
                                             }
                                         }}
+                                        PaperComponent={({ children }) => (
+                                          <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                        )}
                                         className="text-field__input" 
                                         openOnFocus
                                         id="custom-input-demo"

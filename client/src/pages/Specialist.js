@@ -5,6 +5,7 @@ import DataTable, { createTheme } from 'react-data-table-component';
 import { useSelector, useDispatch } from 'react-redux'
 import InputMask from 'react-input-mask';
 import Autocomplete from '@mui/material/Autocomplete';
+import Paper from '@mui/material/Paper';
 import { 
   CContainer, 
   CSpinner, 
@@ -1236,6 +1237,9 @@ const Specialist = () => {
                                                       backgroundColor: 'transparent', 
                                                   }
                                               }}
+                                              PaperComponent={({ children }) => (
+                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                              )}
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-demo"
