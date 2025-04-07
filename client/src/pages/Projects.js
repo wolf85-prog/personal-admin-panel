@@ -1580,68 +1580,80 @@ ${loc.url}`;
                                     <div style={{position: 'relative', height: '435px', display: 'flex', flexDirection: 'row'}}>
 
                                           {/* 1 */}                               
-                                          <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '8px', marginRight: '40px'}}>
+                                          <div style={{display: 'flex', flexDirection: 'column', width: '230px', textAlign: 'center', marginTop: '10px', marginRight: '40px'}}>
                                             
-                                              <label className='title-label'></label>
-                                              <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
-                                                <div className="text-field">
-                                                  {/*<input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>*/}
-                                                  <DatePicker
-                                                    className="uley-datepicker-control text-center text-field__input"
-                                                    style={{ height: '40px', width: '120px'}}
-                                                    selected={startDate}
-                                                    onChange={(date, e) => changeDate(date, e)}
-                                                    selectsStart
-                                                    //startDate={startDate}
-                                                    dateFormat="dd.MM.yyyy"
-                                                  />
+                                              <div style={{display: 'flex', justifyContent: 'space-between', width: '230px'}}>
+                                                <div>
+                                                  <label className='title-label'>Дата</label>
+                                                  <div className="text-field">
+                                                    {/*<input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg" id="dateReg" style={{width: '120px'}}/>*/}
+                                                    <DatePicker
+                                                      className="uley-datepicker-control text-center text-field__input"
+                                                      style={{ height: '40px', width: '120px'}}
+                                                      selected={startDate}
+                                                      onChange={(date, e) => changeDate(date, e)}
+                                                      selectsStart
+                                                      //startDate={startDate}
+                                                      dateFormat="dd.MM.yyyy"
+                                                    />
+                                                  </div>
                                                 </div>
-                                                <div className="text-field">
-                                                  {/* <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/> */}
-                                                  <InputMask 
-                                                    mask="99:99"
-                                                    value={startTime}
-                                                    onChange={(e)=>setStartTime(e.target.value)}>
-                                                    {(inputProps) => <CFormInput 
-                                                                      {...inputProps} 
-                                                                      placeholder="" 
-                                                                      disableUnderline
-                                                                      aria-label="sm input example"
-                                                                      className="text-field__input"
-                                                                      style={{width: '90px'}} 
-                                                                    />}
-                                                  </InputMask>
+                                                
+                                                <div>
+                                                  <label className='title-label'>Время</label>
+                                                  <div className="text-field">
+                                                    {/* <input disabled={false} className="text-field__input" type="text" value={startTime} onChange={(e)=>setStartTime(e.target.value)} name="dateReg2" id="dateReg2" style={{width: '90px',}}/> */}
+                                                    <InputMask 
+                                                      mask="99:99"
+                                                      value={startTime}
+                                                      onChange={(e)=>setStartTime(e.target.value)}>
+                                                      {(inputProps) => <CFormInput 
+                                                                        {...inputProps} 
+                                                                        placeholder="" 
+                                                                        disableUnderline
+                                                                        aria-label="sm input example"
+                                                                        className="text-field__input"
+                                                                        style={{width: '90px'}} 
+                                                                      />}
+                                                    </InputMask>
+                                                  </div>
                                                 </div>
                                               </div>
 
-                                              <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '25px', width: '230px'}}>
-                                                <div className="text-field">
-                                                  {/* <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/> */}
-                                                  <DatePicker
-                                                    className="uley-datepicker-control text-center text-field__input"
-                                                    style={{ height: '40px', width: '120px'}}
-                                                    selected={endDate}
-                                                    onChange={(date) => setEndDate(date)}
-                                                    selectsStart
-                                                    //endDate={endDate}
-                                                    dateFormat="dd.MM.yyyy"
-                                                  />
+                                              <div style={{display: 'flex', justifyContent: 'space-between', width: '230px'}}>
+                                                <div>
+                                                  <label className='title-label'>Дата</label>
+                                                  <div className="text-field">
+                                                    {/* <input disabled={true} className="text-field__input" type="text" value='01.01.2024' name="dateReg3" id="dateReg3" style={{width: '120px'}}/> */}
+                                                    <DatePicker
+                                                      className="uley-datepicker-control text-center text-field__input"
+                                                      style={{ height: '40px', width: '120px'}}
+                                                      selected={endDate}
+                                                      onChange={(date) => setEndDate(date)}
+                                                      selectsStart
+                                                      //endDate={endDate}
+                                                      dateFormat="dd.MM.yyyy"
+                                                    />
+                                                  </div>
                                                 </div>
-                                                <div className="text-field">
-                                                  {/* <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/> */}
-                                                  <InputMask 
-                                                    mask="99:99"
-                                                    value={endTime}
-                                                    onChange={(e)=>setEndTime(e.target.value)}>
-                                                    {(inputProps) => <CFormInput 
-                                                                      {...inputProps} 
-                                                                      placeholder="" 
-                                                                      disableUnderline
-                                                                      aria-label="sm input example"
-                                                                      className="text-field__input"
-                                                                      style={{width: '90px'}} 
-                                                                    />}
-                                                  </InputMask>
+                                                <div>
+                                                  <label className='title-label'>Время</label>
+                                                  <div className="text-field">
+                                                    {/* <input disabled={false} className="text-field__input" type="text" value={endTime} onChange={(e)=>setEndTime(e.target.value)} name="dateReg4" id="dateReg4" style={{width: '90px'}}/> */}
+                                                    <InputMask 
+                                                      mask="99:99"
+                                                      value={endTime}
+                                                      onChange={(e)=>setEndTime(e.target.value)}>
+                                                      {(inputProps) => <CFormInput 
+                                                                        {...inputProps} 
+                                                                        placeholder="" 
+                                                                        disableUnderline
+                                                                        aria-label="sm input example"
+                                                                        className="text-field__input"
+                                                                        style={{width: '90px'}} 
+                                                                      />}
+                                                    </InputMask>
+                                                  </div>
                                                 </div>
                                               </div>
 
@@ -1941,13 +1953,33 @@ ${loc.url}`;
                                                       textAlign: 'center',
                                                       color: '#ffffff',
                                                       backgroundColor: 'transparent', 
-                                                  }
+                                                    },
+                                                    "& .MuiAutocomplete-paper .MuiAutocomplete-option": {
+                                                          backgroundColor: "#000",
+                                                      },
+                                                  //}
                                               }}
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-manager2"
                                               options={specialistData}
                                               style={{width: '100%', padding: '0'}}
+                                              classes={{
+                                                option: {
+                                                  "&:hover": {
+                                                    backgroundColor: "cyan !important"
+                                                  }
+                                                }
+                                              }}
+                                              getOptionLabel={(option) => option}
+                                              // renderOption={(props, option) => {
+                                              //   const { title } = option;
+                                              //   return (
+                                              //     <span {...props} style={{ backgroundColor: '#000' }}>
+                                              //       {title}
+                                              //     </span>
+                                              //   );
+                                              // }}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={onChangeManager2} 
                                               // onInputChange={(event, newInputValue) => {
@@ -2036,7 +2068,7 @@ ${loc.url}`;
                                             </InputMask>
                                           </div>
 
-                                          <label className='title-label'> </label>
+                                          <label className='title-label'>Телефон</label>
                                           <div className="text-field">
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
                                             <InputMask
