@@ -123,7 +123,7 @@ const Profile = () => {
     '--cui-tootip-color': '#fff'
   }
 
-  const host = process.env.REACT_APP_HOST
+  const host = process.env.REACT_APP_API_URL
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -194,10 +194,10 @@ const Profile = () => {
             let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
             console.log("response: ", response.data.path)
   
-            setImage(response.data.path.split('.team')[1]);
+            setImage(host + response.data.path);
             //сообщение с ссылкой на файл
-            console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
-            setAvatar(host + response.data.path.split('.team')[1])
+            console.log("Путь к файлу: ", host + response.data.path)
+            setAvatar(host + response.data.path)
           }
       }
       getImage();
