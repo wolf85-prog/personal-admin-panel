@@ -991,7 +991,7 @@ const Companys = () => {
                                       type="file"
                                       id="formFile" 
                                       accept="image/*,image/jpeg" 
-                                      name="avatar"
+                                      name="photo"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
                                     />

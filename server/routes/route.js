@@ -165,6 +165,7 @@ route.get("/platforms/count/get", getPlatformCountAll);
 
 
 route.post("/file/upload", upload.single("photo"), uploadFile);
+route.post("/file/upload2", upload.single("photo2"), uploadFile);
 //route.post("/file/avatar", uploadAvatar.single("avatar"), uploadFile);
 
 

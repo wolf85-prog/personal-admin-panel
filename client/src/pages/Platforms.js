@@ -68,7 +68,7 @@ import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegs';
 import specOnlyData2 from 'src/data/specOnlyData2';
 
-import { uploadFile } from './../http/chatAPI';
+import { uploadFile, uploadFile2 } from './../http/chatAPI';
 import { getProjectsDel, editProject } from '../http/projectAPI'
 import { useAsyncError } from 'react-router-dom';
 import Filters from 'src/components/table/Filters2'
@@ -367,11 +367,6 @@ const onChangeKrest = () => {
   setBlockW(!blockW)
 } 
 
-{/* Добавление файла */}
-const onFileChange = (e) => {
-  setFile(e.target.files[0]);
-  setFilePreview(URL.createObjectURL(e.target.files[0]));
-}
 
 const clickSearch = (e) => {
   setShowClear(true)
@@ -589,7 +584,7 @@ const onSortAddress = () => {
   useEffect(() => {
     const getImage = async () => {
         if (selectedFile) {
-          console.log("file:", selectedFile)
+          console.log("selectedFile:", selectedFile)
           const data = new FormData();
           data.append("name", selectedName);
           data.append("photo", selectedFile);
@@ -606,6 +601,33 @@ const onSortAddress = () => {
     getImage();
   }, [selectedFile])
 
+  useEffect(() => {
+    const getImage = async () => {
+        if (file) {
+          console.log("file:", file)
+          const data = new FormData();
+          data.append("name", file);
+          data.append("photo2", file);
+          
+          let response = await uploadFile2(data);
+          console.log("response: ", response.data.path)
+
+          setImage(API_URL_HOST + response.data.path);
+          //сообщение с ссылкой на файл
+          console.log(API_URL_HOST + response.data.path)
+          //setValue(host + response.data.path)
+        }
+    }
+    getImage();
+  }, [file])
+
+  {/* Добавление файла */}
+  const onFileChange = (e) => {
+    console.log(e.target.files[0])
+    setFile(e.target.files[0]);
+    setFilePreview(URL.createObjectURL(e.target.files[0]));
+  }
+  
   {/* Добавление файла */}
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -742,7 +764,7 @@ const onSortAddress = () => {
                                       type="file"
                                       id="formFile" 
                                       accept="image/*,image/jpeg" 
-                                      name="photo"
+                                      name="photo2"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
                                     />

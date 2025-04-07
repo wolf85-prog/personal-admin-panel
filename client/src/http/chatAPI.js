@@ -149,6 +149,20 @@ export const uploadFile = async (data) =>{
     }
 }
 
+//file
+export const uploadFile2 = async (data) =>{
+    try {
+        return await $host.post(`api/file/upload2`, data, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+    } catch (error) {
+        console.log("error while calling uploadFile2 api",error.message);
+        
+    }
+}
+
 //distrib files
 export const distribFile = async (data) =>{
     try {
