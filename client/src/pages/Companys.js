@@ -59,7 +59,8 @@ import dolgnostData from 'src/data/dolgnostData';
 import sferaData from 'src/data/sfera';
 import companyData from 'src/data/companyData';
 
-import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar } from '../http/companyAPI'
+import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } from '../http/companyAPI'
+import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getManager, editManager } from 'src/http/managerAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
 
@@ -146,7 +147,7 @@ const Companys = () => {
   const [filePreview, setFilePreview] = useState();
   const [image, setImage]= useState("");
 
-  const host = process.env.REACT_APP_HOST
+  const host = process.env.REACT_APP_API_URL
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -521,14 +522,14 @@ const Companys = () => {
           //console.log("file:", file)
           const data = new FormData();
           data.append("name", file.name);
-          data.append("avatar", file);
+          data.append("photo", file);
           
-          let response = await uploadAvatar(data) //distribFile(data) // uploadFile(data)
+          let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
 
-          setImage(response.data.path.split('.team')[1]);
+          setImage(host + response.data.path);
           //сообщение с ссылкой на файл
-          console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
-          setProfile(host + response.data.path.split('.team')[1])
+          console.log("Путь к файлу: ", host + response.data.path)
+          setProfile(host + response.data.path)
           //setShowUpload(false)
         }
     }

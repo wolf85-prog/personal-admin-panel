@@ -56,7 +56,7 @@ export const getCompanyCountAll = async (userId) =>{
 //file
 export const uploadAvatar = async (data) =>{
     try {
-        return await $host.post(`api/file/avatar`, data, {
+        return await $host.post(`api/file/upload`, data, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
