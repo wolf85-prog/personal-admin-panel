@@ -1065,7 +1065,7 @@ const Companys = () => {
                                                   }
                                               }}
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
                                               )}
                                               className="text-field__input" 
                                               openOnFocus
@@ -1147,7 +1147,7 @@ const Companys = () => {
                                             }
                                         }}
                                         PaperComponent={({ children }) => (
-                                          <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                          <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
                                         )}
                                         className="text-field__input" 
                                         openOnFocus

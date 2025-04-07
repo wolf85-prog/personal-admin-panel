@@ -1779,6 +1779,9 @@ ${loc.url}`;
                                                       backgroundColor: 'transparent', 
                                                   }
                                               }}
+                                              PaperComponent={({ children }) => (
+                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
+                                              )}
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-demo"
@@ -1906,7 +1909,7 @@ ${loc.url}`;
                                               options={clientsData}
                                               style={{width: '100%', padding: '0'}}
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
                                               )}
                                               //isOptionEqualToValue={(option, value) => option.value === value.value}
                                               //filterOptions={filterOptions}
@@ -1961,7 +1964,7 @@ ${loc.url}`;
                                               className="text-field__input" 
                                               fullWidth
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#1d1f2b', color: '#fff'}}>{children}</Paper>
+                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
                                               )}
                                               openOnFocus
                                               id="custom-input-manager2"
