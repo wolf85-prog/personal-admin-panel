@@ -612,10 +612,15 @@ th.widthCompany {
   .text-field__input:focus {
     color: #858585;
     background-color: #1d1f2b;
-    border-color: #bdbdbd;
+    border: 2px #26489a solid;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+    /* //box-shadow: 0 0 0 0.2rem rgba(82, 17, 17, 0.25); */
+
   }
+
+  /* input:focus {
+    border: 2px #26489a solid !important;
+  } */
 
   .text-field__input:disabled,
   .text-field__input[readonly] {

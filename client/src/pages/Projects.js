@@ -43,6 +43,7 @@ import {
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
 import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -217,6 +218,8 @@ const Projects = () => {
   const [pretendents, setPretendents] = useState([])
 
   const [countPressDate, setCountPressDate] = useState(0);
+
+  const [hasFocus, setFocus] = useState(false);
   
   const customTooltipStyle = {
     '--cui-tooltip-bg': '#000',
@@ -1530,6 +1533,27 @@ ${loc.url}`;
 		await getCompanySendCallRaut(id)
 	}
 
+
+  const theme = createTheme({
+    components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: 20,
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: `5px solid green`,
+            },
+            "&.Mui-focused": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: `5px dotted red`,
+              },
+            }
+          }
+        }
+      }
+    }
+  });
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -1708,6 +1732,7 @@ ${loc.url}`;
                                           <label className='title-label'>Компания</label>
                                           <div className="text-field">
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
+                                          <ThemeProvider theme={theme}>
                                             <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -1723,20 +1748,7 @@ ${loc.url}`;
                                                     textAlign: 'center',
                                                     color: '#ffffff',
                                                     backgroundColor: 'transparent',
-                                                   // border: '2px #26489a solid',
                                                   },
-                                                  // "&.Mui-focused": {
-                                                  //   "& .MuiOutlinedInput-notchedOutline": {
-                                                  //     border: `5px dotted red`,
-                                                  //   },
-                                                  // }
-                                                //   "& .MuiOutlinedInput-root": {
-                                                //   "&:hover": {
-                                                //     borderRadius: 50,
-                                                //     borderColor: "red",
-                                                //     borderWidth: 10
-                                                //   }
-                                                // }
                                               }}
                                               PaperComponent={({ children }) => (
                                                 <Paper style={{ 
@@ -1778,6 +1790,7 @@ ${loc.url}`;
                                               </div>
                                               )}
                                             />
+                                            </ThemeProvider>
                                           </div>
 
                                           <label className='title-label'>Город</label>
