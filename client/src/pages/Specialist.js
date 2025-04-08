@@ -1238,7 +1238,7 @@ const Specialist = () => {
                                                   }
                                               }}
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
+                                                <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
                                               )}
                                               className="text-field__input" 
                                               openOnFocus

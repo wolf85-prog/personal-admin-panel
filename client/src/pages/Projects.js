@@ -110,6 +110,7 @@ import startData from 'src/data/startData';
 import {
   getSpecialitiesFilter,
 } from 'src/services/api/speciality'
+import { TextField } from '@mui/material'
 
 const Projects = () => {
   //const navigate = useNavigate();
@@ -1539,13 +1540,16 @@ ${loc.url}`;
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            borderRadius: 20,
+            borderRadius: 6,
+            marginTop: 4,
+            paddingRight: 5,
+            height: 36,
             "& .MuiOutlinedInput-notchedOutline": {
-              border: `5px solid green`,
+              border: `none`,
             },
             "&.Mui-focused": {
               "& .MuiOutlinedInput-notchedOutline": {
-                border: `5px dotted red`,
+                border: `2px solid #26489a`,
               },
             }
           }
@@ -1782,8 +1786,9 @@ ${loc.url}`;
                                               inputValue={companyName}
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
+                                                  <TextField 
                                                       className="text-field__input" 
+                                                      // style={{height: '20px'}}
                                                       type="text" {...params.inputProps} 
                                                       placeholder='' 
                                                   />
@@ -1795,6 +1800,7 @@ ${loc.url}`;
 
                                           <label className='title-label'>Город</label>
                                           <div className="text-field">
+                                          <ThemeProvider theme={theme}>
                                             <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -1813,7 +1819,13 @@ ${loc.url}`;
                                                   }
                                               }}
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
+                                                <Paper style={{ 
+                                                  background: '#131c21', 
+                                                  color: '#fff',
+                                                  border: '1px solid #2d2e38',
+                                                }}>
+                                                  {children}
+                                                </Paper>
                                               )}
                                               className="text-field__input" 
                                               openOnFocus
@@ -1831,7 +1843,7 @@ ${loc.url}`;
                                               inputValue={city}
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
+                                                  <TextField 
                                                       className="text-field__input" 
                                                       type="text" {...params.inputProps} 
                                                       placeholder=''
@@ -1840,65 +1852,79 @@ ${loc.url}`;
                                               </div>
                                               )}
                                             />
+                                          </ThemeProvider>
+                                            
                                           </div>
 
                                           <label className='title-label'>Локация</label>
                                           <div className="text-field widthBlock3"  onMouseOver={()=>setShowSaveLocation(true)} onMouseOut={()=>setShowSaveLocation(false)}>
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
-                                            <Autocomplete
-                                              sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                    width: '100%',
-                                                    border: 'none',
-                                                    height: '40px',
-                                                    padding: '5px 4px',
-                                                    fontFamily: 'inherit',
-                                                    fontSize: '14px',
-                                                    fontWeight: '400',
-                                                    lineHeight: '1.5',
-                                                    textAlign: 'center',
-                                                    color: '#ffffff',
-                                                    backgroundColor: 'transparent',
-                                                  }
-                                              }}
-                                              className="text-field__input" 
-                                              openOnFocus
-                                              id="custom-input-demo"
-                                              options={platformsData}
-                                              style={{width: '100%', padding: '0'}}
-                                              onInputChange={(e)=>changeLocation(e)}
-                                              //onInputChange={(e)=>console.log(e.target.value)}
-                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onChange={(event, newValue) => {
-                                                  if (newValue && newValue.length) {
-                                                      setLocationProject(newValue)
-                                                      
-                                                      const loc = platformsAll.find(item=> item.title === newValue)
-                                                      console.log("loc: ", loc)
-                                                      if (loc) {
-                                                        let text = `${loc.city}   
-${loc.track}   
-${loc.url}`;
-                                                        setAddress(loc.address)
-                                                        setTrack(text)
-                                                        setGeoId(loc.id)
-                                                        setLocation(text)
-                                                      }
-                                                  }  
-                                              }}
-                                              value={locationProject}
-                                              inputValue={locationProject}
-                                              renderInput={(params) => (
-                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
-                                                      className="text-field__input" 
-                                                      type="text" {...params.inputProps} 
-                                                      placeholder=''
-                                                  />
-                                              </div>
-                                              )}
-                                            />
+                                            <ThemeProvider theme={theme}>
+                                              <Autocomplete
+                                                sx={{
+                                                    display: 'inline-block',
+                                                    '& input': {zIndex: '25',
+                                                      width: '100%',
+                                                      border: 'none',
+                                                      height: '40px',
+                                                      padding: '5px 4px',
+                                                      fontFamily: 'inherit',
+                                                      fontSize: '14px',
+                                                      fontWeight: '400',
+                                                      lineHeight: '1.5',
+                                                      textAlign: 'center',
+                                                      color: '#ffffff',
+                                                      backgroundColor: 'transparent',
+                                                    }
+                                                }}
+                                                PaperComponent={({ children }) => (
+                                                  <Paper style={{ 
+                                                    background: '#131c21', 
+                                                    color: '#fff',
+                                                    border: '1px solid #2d2e38',
+                                                  }}>
+                                                    {children}
+                                                  </Paper>
+                                                )}
+                                                className="text-field__input" 
+                                                openOnFocus
+                                                id="custom-input-demo"
+                                                options={platformsData}
+                                                style={{width: '100%', padding: '0'}}
+                                                onInputChange={(e)=>changeLocation(e)}
+                                                //onInputChange={(e)=>console.log(e.target.value)}
+                                                //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                                onChange={(event, newValue) => {
+                                                    if (newValue && newValue.length) {
+                                                        setLocationProject(newValue)
+                                                        
+                                                        const loc = platformsAll.find(item=> item.title === newValue)
+                                                        console.log("loc: ", loc)
+                                                        if (loc) {
+                                                          let text = `${loc.city}   
+  ${loc.track}   
+  ${loc.url}`;
+                                                          setAddress(loc.address)
+                                                          setTrack(text)
+                                                          setGeoId(loc.id)
+                                                          setLocation(text)
+                                                        }
+                                                    }  
+                                                }}
+                                                value={locationProject}
+                                                inputValue={locationProject}
+                                                renderInput={(params) => (
+                                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                    <TextField 
+                                                        className="text-field__input" 
+                                                        type="text" {...params.inputProps} 
+                                                        placeholder=''
+                                                    />
+                                                </div>
+                                                )}
+                                              />
+                                            </ThemeProvider>
+                                            
 
                                             <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
                                           </div>
@@ -1920,63 +1946,67 @@ ${loc.url}`;
                                           <label className='title-label'>Заказчик</label>
                                           <div className="text-field">
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
-                                            <Autocomplete
-                                              sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                      width: '100%',
-                                                      border: 'none',
-                                                      height: '40px',
-                                                      padding: '5px 4px',
-                                                      fontFamily: 'inherit',
-                                                      fontSize: '14px',
-                                                      fontWeight: '400',
-                                                      lineHeight: '1.5',
-                                                      textAlign: 'center',
-                                                      color: '#ffffff',
-                                                      backgroundColor: 'transparent', 
-                                                  }
-                                              }}
-                                              className="text-field__input" 
-                                              id="custom-input-manager"
-                                              options={clientsData}
-                                              style={{width: '100%', padding: '0'}}
-                                              PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
-                                              )}
-                                              //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              //filterOptions={filterOptions}
-                                              onInputChange={onChangeManager}
-                                              // onInputChange={(event, newInputValue) => {
-                                              //   setManagerName(newInputValue);
-                                              // }}
-                                              onChange={(event, newValue) => {
-                                                if (newValue && newValue.length) {   
-                                                  console.log("clientAll: ", clientAll)                                                   
-                                                  const comp = clientAll.find(item=> item.userfamily === newValue.toString())
-                                                  console.log("comp client: ", comp, newValue)
-                                                  if (comp) {
-                                                    setPhone(comp.phone)
-                                                    setManagerName(comp.userfamily)
-                                                  }
-                                                } 
-                                              }}
-                                              value={managerName} 
-                                              inputValue={managerName}
-                                              renderInput={(params) => (
-                                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                    <input 
-                                                        className="text-field__input" 
-                                                        type="text" {...params.inputProps} 
-                                                        placeholder='ФИО'
-                                                    />
-                                                </div>
-                                              )}
-                                            />
+                                            <ThemeProvider theme={theme}>
+                                                <Autocomplete
+                                                sx={{
+                                                    display: 'inline-block',
+                                                    '& input': {zIndex: '25',
+                                                        width: '100%',
+                                                        border: 'none',
+                                                        height: '40px',
+                                                        padding: '5px 4px',
+                                                        fontFamily: 'inherit',
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        lineHeight: '1.5',
+                                                        textAlign: 'center',
+                                                        color: '#ffffff',
+                                                        backgroundColor: 'transparent', 
+                                                    }
+                                                }}
+                                                className="text-field__input" 
+                                                id="custom-input-manager"
+                                                options={clientsData}
+                                                style={{width: '100%', padding: '0'}}
+                                                PaperComponent={({ children }) => (
+                                                  <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
+                                                )}
+                                                //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                                //filterOptions={filterOptions}
+                                                onInputChange={onChangeManager}
+                                                // onInputChange={(event, newInputValue) => {
+                                                //   setManagerName(newInputValue);
+                                                // }}
+                                                onChange={(event, newValue) => {
+                                                  if (newValue && newValue.length) {   
+                                                    console.log("clientAll: ", clientAll)                                                   
+                                                    const comp = clientAll.find(item=> item.userfamily === newValue.toString())
+                                                    console.log("comp client: ", comp, newValue)
+                                                    if (comp) {
+                                                      setPhone(comp.phone)
+                                                      setManagerName(comp.userfamily)
+                                                    }
+                                                  } 
+                                                }}
+                                                value={managerName} 
+                                                inputValue={managerName}
+                                                renderInput={(params) => (
+                                                  <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                      <TextField 
+                                                          className="text-field__input" 
+                                                          type="text" {...params.inputProps} 
+                                                          placeholder='ФИО'
+                                                      />
+                                                  </div>
+                                                )}
+                                              />
+                                            </ThemeProvider>
+                                            
                                           </div>
 
                                           <label className='title-label'>Старший</label>
                                           <div className="text-field">
+                                          <ThemeProvider theme={theme}>
                                             <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
@@ -1997,7 +2027,7 @@ ${loc.url}`;
                                               className="text-field__input" 
                                               fullWidth
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
+                                                <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
                                               )}
                                               openOnFocus
                                               id="custom-input-manager2"
@@ -2032,7 +2062,7 @@ ${loc.url}`;
                                               inputValue={managerName2}
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
+                                                  <TextField 
                                                       className="text-field__input" 
                                                       type="text" {...params.inputProps} 
                                                       placeholder='ФИО'
@@ -2040,6 +2070,7 @@ ${loc.url}`;
                                               </div>
                                               )}
                                             />
+                                          </ThemeProvider>
                                           </div>
 
                                           <label className='title-label'>Техническое Задание</label>
