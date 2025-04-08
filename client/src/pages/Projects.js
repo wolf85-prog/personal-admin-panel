@@ -1723,8 +1723,28 @@ ${loc.url}`;
                                                     textAlign: 'center',
                                                     color: '#ffffff',
                                                     backgroundColor: 'transparent',
-                                                  }
+                                                   // border: '2px #26489a solid',
+                                                  },
+                                                  // "&.Mui-focused": {
+                                                  //   "& .MuiOutlinedInput-notchedOutline": {
+                                                  //     border: `5px dotted red`,
+                                                  //   },
+                                                  // }
+                                                //   "& .MuiOutlinedInput-root": {
+                                                //   "&:hover": {
+                                                //     borderRadius: 50,
+                                                //     borderColor: "red",
+                                                //     borderWidth: 10
+                                                //   }
+                                                // }
                                               }}
+                                              PaperComponent={({ children }) => (
+                                                <Paper style={{ 
+                                                  background: '#131c21', 
+                                                  border: '1px solid #2d2e38',
+                                                  color: '#fff'
+                                                }}>{children}</Paper>
+                                              )}
                                               className="text-field__input" 
                                               openOnFocus
                                               id="custom-input-company"
@@ -1753,7 +1773,7 @@ ${loc.url}`;
                                                   <input 
                                                       className="text-field__input" 
                                                       type="text" {...params.inputProps} 
-                                                      placeholder=''
+                                                      placeholder='' 
                                                   />
                                               </div>
                                               )}
