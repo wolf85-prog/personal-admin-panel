@@ -1542,7 +1542,8 @@ ${loc.url}`;
           root: {
             borderRadius: 6,
             marginTop: 4,
-            paddingRight: 5,
+            padding: '9px!important',
+            paddingRight: 0,
             height: 36,
             "& .MuiOutlinedInput-notchedOutline": {
               border: `none`,
@@ -1787,7 +1788,8 @@ ${loc.url}`;
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                   <TextField 
-                                                      className="text-field__input" 
+                                                      style={{width: '100%'}}
+                                                      className="text-field__input widthBlock3" 
                                                       // style={{height: '20px'}}
                                                       type="text" {...params.inputProps} 
                                                       placeholder='' 
@@ -1804,8 +1806,9 @@ ${loc.url}`;
                                             <Autocomplete
                                               sx={{
                                                   display: 'inline-block',
+                                                  // width: '380px',
                                                   '& input': {zIndex: '25',
-                                                      width: '100%',
+                                                      //width: '260px',
                                                       border: 'none',
                                                       height: '40px',
                                                       padding: '5px 4px',
@@ -1819,11 +1822,7 @@ ${loc.url}`;
                                                   }
                                               }}
                                               PaperComponent={({ children }) => (
-                                                <Paper style={{ 
-                                                  background: '#131c21', 
-                                                  color: '#fff',
-                                                  border: '1px solid #2d2e38',
-                                                }}>
+                                                <Paper style={{background: '#131c21', color: '#fff', border: '1px solid #2d2e38'}}>
                                                   {children}
                                                 </Paper>
                                               )}
@@ -1844,7 +1843,8 @@ ${loc.url}`;
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                   <TextField 
-                                                      className="text-field__input" 
+                                                      style={{width: '100%'}}
+                                                      // className="text-field__input" 
                                                       type="text" {...params.inputProps} 
                                                       placeholder=''
                                                       autoComplete='off'
@@ -1916,6 +1916,7 @@ ${loc.url}`;
                                                 renderInput={(params) => (
                                                 <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                     <TextField 
+                                                        style={{width: '100%'}}
                                                         className="text-field__input" 
                                                         type="text" {...params.inputProps} 
                                                         placeholder=''
@@ -1993,6 +1994,7 @@ ${loc.url}`;
                                                 renderInput={(params) => (
                                                   <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                       <TextField 
+                                                          style={{width: '100%'}}
                                                           className="text-field__input" 
                                                           type="text" {...params.inputProps} 
                                                           placeholder='ФИО'
@@ -2063,7 +2065,8 @@ ${loc.url}`;
                                               renderInput={(params) => (
                                               <div ref={params.InputProps.ref} style={{position: 'relative'}}>
                                                   <TextField 
-                                                      className="text-field__input" 
+                                                      style={{width: '100%'}}
+                                                      //className="text-field__input" 
                                                       type="text" {...params.inputProps} 
                                                       placeholder='ФИО'
                                                   />
