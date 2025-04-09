@@ -45,7 +45,8 @@ import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa2 from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 import MyDropdown from 'src/components/Dropdown/Dropdown';
@@ -1002,7 +1003,7 @@ const ProfileCompany = () => {
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> 
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>*/}
                                       <CTooltip content="Сохранить профиль" placement="bottom" style={customTooltipStyle}>
-                                        {showRekviz ? '' : <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
+                                        {showRekviz ? '' : <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
                                       </CTooltip>
                                       <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1256,7 +1257,7 @@ const ProfileCompany = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(office)}} 
                                       alt="" 
-                                      style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="office" id="office" value={office} onChange={(e) => setOffice(e.target.value)}/>
                                   </div> 

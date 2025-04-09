@@ -378,7 +378,7 @@ const Profile = () => {
                                   </svg>
                                   )
                                   }
-                                  <div className="file-upload" style={{marginBottom: '8px'}}>
+                                  <div className="file-upload" style={{marginBottom: '-2px'}}>
                                     <img src={addAvatar} alt="upload" style={{display: showUpload ? 'block' : 'none', position: 'absolute', top: '100px', left: '100px', cursor: 'pointer', width: '50px', height: '50px'}}/>
                                     <input 
                                       type="file"
@@ -392,15 +392,13 @@ const Profile = () => {
 
                                   <label className='title-label'>ID</label>
                                   <div className="text-field">
-                                      <input 
-                                        disabled={true} 
+                                    <CTooltip content="ID пользователя" placement="bottom" style={customTooltipStyle}>
+                                      <div 
                                         className="text-field__input" 
                                         type="text" 
-                                        name="dateReg" 
-                                        id="dateReg" 
-                                        value={'0000'+ userId} 
-                                        style={{width: '250px'}}
-                                      />
+                                        style={{width: '250px', paddingTop: '10px'}}
+                                      >{'0000'+ userId}</div>
+                                    </CTooltip>   
                                   </div>
 
 
@@ -584,8 +582,8 @@ const Profile = () => {
                       onClose={() => setShowModal(false)}
                       aria-labelledby="VerticallyCenteredExample"
                     >
-                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '14px', paddingTop: '35px'}}>
-                        Название компании редактируется в разделе Компания в правом верхнем меню
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '16px', paddingTop: '25px'}}>
+                        Название компании редактируется в разделе &quot;Компания&quot; в правом верхнем меню
                       </CModalBody>
                     </CModal>
 

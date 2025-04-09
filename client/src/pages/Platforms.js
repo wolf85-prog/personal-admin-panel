@@ -890,7 +890,7 @@ const onSortAddress = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(address)}} 
                                       alt="" 
-                                      style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input disabled={false} className="text-field__input" type="text" name="address" id="address" value={address} onChange={(e)=>setAddress(e.target.value)} />
                                   </div> 
@@ -901,7 +901,7 @@ const onSortAddress = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(track)}} 
                                       alt="" 
-                                      style={{visibility: showSaveTrack ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveTrack ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input disabled={false} className="text-field__input" type="text" name="track" id="track" value={track} onChange={(e)=>setTrack(e.target.value)}/>
                                   </div> 
@@ -914,7 +914,7 @@ const onSortAddress = () => {
                                           src={Disketa} 
                                           onClick={()=>{navigator.clipboard.writeText(url)}} 
                                           alt="" 
-                                          style={{visibility: showSaveUrl ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                          style={{visibility: showSaveUrl ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                         />
                                         <input disabled={false} className="text-field__input" type="text" name="url" id="url" value={url} onChange={(e)=>setUrl(e.target.value)}/>
                                       </div> 

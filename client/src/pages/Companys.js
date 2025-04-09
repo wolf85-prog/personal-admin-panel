@@ -1126,7 +1126,7 @@ const Companys = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(office)}} 
                                       alt="" 
-                                      style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveOffice ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input className="text-field__input" type="text" name="office" id="office" value={office} onChange={(e) => setOffice(e.target.value)}/>
                                   </div> 
@@ -1138,7 +1138,7 @@ const Companys = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(sklad)}} 
                                       alt="" 
-                                      style={{visibility: showSaveSklad ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveSklad ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} onChange={(e) => setSklad(e.target.value)}/>
                                   </div> 
@@ -1326,7 +1326,7 @@ const Companys = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(bugalterFio)}} 
                                       alt="" 
-                                      style={{visibility: showSaveFio ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSaveFio ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input 
                                       className="text-field__input" 
@@ -1346,7 +1346,7 @@ const Companys = () => {
                                         src={Disketa} 
                                         onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                         alt="" 
-                                        style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                        style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                       />
                                       {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                       <InputMask
@@ -1371,7 +1371,7 @@ const Companys = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(email)}} 
                                       alt="" 
-                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)}/>
                                   </div> 
