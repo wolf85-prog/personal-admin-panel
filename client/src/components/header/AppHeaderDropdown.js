@@ -37,8 +37,8 @@ import { getCompanyProfId } from '../../http/companyAPI'
 const AppHeaderDropdown = observer(() => {
   const {user} = useContext(Context)
   const { userId, setUserId, companyId, role } = useUsersContext();
-  // const [companyId, setCompanyId] = useState('');
 
+  const [profile, setProfile] = useState('');
   const [visibleOut, setVisibleOut] = useState(false)
 
   const location = useLocation();
@@ -56,11 +56,26 @@ const AppHeaderDropdown = observer(() => {
     //location("/profile")
   }
 
+  useEffect(()=> {
+    const fetch = async()=> {
+      const result = await getCompanyProfId(userId)
+      console.log("CompanyHeader: ", result, userId)
+
+      setProfile(result?.profile)
+    }
+
+    fetch()
+  })
+
   return (
     <>
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar} size="md" />
+        {
+          profile ? <CAvatar src={profile} size="md" /> 
+          :
+          <CAvatar src={avatar} size="md" />
+        }     
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="dark:bg-white fw-semibold py-2">Аккаунт ID: {'0000'+ userId}</CDropdownHeader>

@@ -62,6 +62,7 @@ import companyData from 'src/data/companyData';
 
 import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany, uploadAvatar, getCompanyProfId, addCompanyProf, editCompanyProf } from '../http/companyAPI'
 import { getManager, editManager, getManagerId } from 'src/http/managerAPI';
+import { uploadFile } from '../http/chatAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
 
 //Workers.js
@@ -214,7 +215,7 @@ const ProfileCompany = () => {
 
   const [showRazrab, setShowRazrab] = useState(false);
 
-  const host = process.env.REACT_APP_HOST
+  const host = process.env.REACT_APP_API_URL
 
   const customTooltipStyle = {
     '--cui-tooltip-bg': '#000',
@@ -411,14 +412,14 @@ const ProfileCompany = () => {
           //console.log("file:", file)
           const data = new FormData();
           data.append("name", file.name);
-          data.append("avatar", file);
+          data.append("photo", file);
           
-          let response = await uploadAvatar(data) //distribFile(data) // uploadFile(data)
+          let response = await uploadFile(data) //distribFile(data) // uploadFile(data)
 
-          setImage(response.data.path.split('.team')[1]);
+          setImage(response.data.path);
           //сообщение с ссылкой на файл
-          console.log("Путь к файлу: ", host + response.data.path.split('.team')[1])
-          setProfile(host + response.data.path.split('.team')[1])
+          console.log("Путь к файлу: ", host + response.data.path)
+          setProfile(host + response.data.path)
           //setShowUpload(false)
         }
     }
@@ -1031,7 +1032,7 @@ const ProfileCompany = () => {
                                       id="formFile" 
                                       disabled={role==='1' ? false : true}
                                       accept="image/*,image/jpeg" 
-                                      name="avatar"
+                                      name="photo"
                                       onChange={(e) => onFileChange(e)}
                                       style={{position: 'absolute', top: '130px', left: '10px', opacity: '0', zIndex: '100', width: '230px'}}
                                     />
@@ -1479,17 +1480,17 @@ const ProfileCompany = () => {
                                     <label className='title-label' style={{position: 'absolute', top: '-15px', left: '40%'}}>Проекты</label>
                                     <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0px'}}>                                   
                                       {/* проекты за месяц */}
-                                      <div style={{marginRight: '10px'}}>
+                                      <div style={{marginRight: '10px', width: '100%'}}>
                                         <label className='title-label'>За месяц</label>
                                         <div className="text-field">
-                                            <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{width: '100%', marginRight: '8px'}}/>
+                                            <div onClick={clickProjects} className="text-field__input" type="text" name="reyting" id="reyting" style={{marginRight: '8px'}}>0</div>
                                         </div>
                                       </div>
                                       {/* проекты всего */}
-                                      <div> 
+                                      <div style={{width: '100%'}}> 
                                         <label className='title-label'>Всего</label>
                                         <div className="text-field">
-                                            <input disabled className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{width: '100%', marginRight: '8px'}}/>
+                                            <div onClick={clickProjects} className="text-field__input" type="text" name="rank" id="rank"  style={{marginRight: '8px'}}>0</div>
                                         </div>
                                       </div>
                                       

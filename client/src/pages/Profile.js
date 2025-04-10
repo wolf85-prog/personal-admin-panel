@@ -489,14 +489,14 @@ const Profile = () => {
                                       <div style={{marginRight: '10px', width: '100%'}}>
                                         <label className='title-label'>За месяц</label>
                                         <div className="text-field">
-                                            <div onClick={clickProjects}  className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} style={{width: '100%', marginRight: '8px'}}/>
+                                            <div onClick={clickProjects}  className="text-field__input" type="text" name="reyting" id="reyting" style={{width: '100%', marginRight: '8px'}}>{reyting}</div>
                                         </div>
                                       </div>
                                       {/* проекты всего */}
                                       <div style={{width: '100%'}}> 
                                         <label className='title-label'>Всего</label>
                                         <div className="text-field">
-                                            <div onClick={clickProjects}  className="text-field__input" type="text" name="rank" id="rank" value={rank} style={{width: '100%', marginRight: '8px'}}/>
+                                            <div onClick={clickProjects}  className="text-field__input" type="text" name="rank" id="rank" style={{width: '100%', marginRight: '8px'}}>{rank}</div>
                                         </div>
                                       </div>
                                       
