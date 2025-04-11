@@ -510,8 +510,11 @@ const ProfileCompany = () => {
         console.log("Company: ", result)
 
         const saveData2 = { 
-          companyId: result?.id
+          companyId: result?.id,
+          avatar: profile,
         }
+
+        console.log("save data2: ", saveData2)
         
         if (!result) {
           const resAdd = await addCompanyProf(saveData)
@@ -621,8 +624,10 @@ const ProfileCompany = () => {
       console.log("Company: ", result)
 
       const saveData2 = { 
-        companyId: result?.id
+        companyId: result?.id,
+        avatar: profile,
       }
+      console.log("saveData2: ", saveData2)
       
       if (!result) {
         const resAdd = await addCompanyProf(saveData)

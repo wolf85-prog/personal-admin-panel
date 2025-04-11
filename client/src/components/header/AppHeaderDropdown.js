@@ -59,7 +59,7 @@ const AppHeaderDropdown = observer(() => {
   useEffect(()=> {
     const fetch = async()=> {
       const result = await getCompanyProfId(userId)
-      console.log("CompanyHeader: ", result, userId)
+      //console.log("CompanyHeader: ", result, userId)
 
       setProfile(result?.profile)
     }
