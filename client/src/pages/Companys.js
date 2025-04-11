@@ -64,6 +64,7 @@ import { getCompany, getCompanyCount, editCompany, addCompany, deleteCompany } f
 import { uploadAvatar, uploadFile } from '../http/chatAPI';
 import { getManager, editManager } from 'src/http/managerAPI';
 import { CollectionsOutlined } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 
 //Workers.js
 const Companys = () => {
@@ -854,7 +855,7 @@ const Companys = () => {
            }
          }
        }
-     });
+    });
 
   return (
     <div className='dark-theme'>
@@ -1072,50 +1073,58 @@ const Companys = () => {
                                         setSelected={setCity}
                                         // onChange={addCity}
                                       /> */}
-                                      <Autocomplete
-                                              sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                      width: '100%',
-                                                      border: 'none',
-                                                      height: '40px',
-                                                      padding: '5px 4px',
-                                                      fontFamily: 'inherit',
-                                                      fontSize: '14px',
-                                                      fontWeight: '400',
-                                                      lineHeight: '1.5',
-                                                      textAlign: 'center',
-                                                      color: '#ffffff',
-                                                      backgroundColor: 'transparent', 
-                                                  }
-                                              }}
-                                              PaperComponent={({ children }) => (
-                                                <Paper style={{ background: '#131c21', color: '#fff'}}>{children}</Paper>
-                                              )}
-                                              className="text-field__input" 
-                                              openOnFocus
-                                              id="custom-input-demo"
-                                              options={sortedCities}
-                                              style={{width: '100%', padding: '0'}}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>setCity(e.target.value)}
-                                              onChange={(event, newValue) => {
-                                                if (newValue && newValue.length) {                                                      
-                                                  setCity(newValue)
-                                                }  
-                                              }}
-                                              value={city} 
-                                              inputValue={city}
-                                              renderInput={(params) => (
-                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
-                                                      className="text-field__input" 
-                                                      type="text" {...params.inputProps} 
-                                                      placeholder=''
-                                                  />
-                                              </div>
-                                              )}
-                                      />
+                                      <ThemeProvider theme={theme}>
+                                        <Autocomplete
+                                                sx={{
+                                                    display: 'inline-block',
+                                                    '& input': {zIndex: '25',
+                                                        width: '100%',
+                                                        border: 'none',
+                                                        height: '40px',
+                                                        padding: '5px 4px',
+                                                        fontFamily: 'inherit',
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        lineHeight: '1.5',
+                                                        textAlign: 'center',
+                                                        color: '#ffffff',
+                                                        backgroundColor: 'transparent', 
+                                                    }
+                                                }}
+                                                PaperComponent={({ children }) => (
+                                                  <Paper style={{ 
+                                                    background: '#131c21', 
+                                                    border: '1px solid #2d2e38',
+                                                    color: '#fff'
+                                                  }}>{children}</Paper>
+                                                )}
+                                                className="text-field__input" 
+                                                openOnFocus
+                                                id="custom-input-demo"
+                                                options={sortedCities}
+                                                style={{width: '100%', padding: '0'}}
+                                                isOptionEqualToValue={(option, value) => option.value === value.value}
+                                                onInputChange={(e)=>setCity(e.target.value)}
+                                                onChange={(event, newValue) => {
+                                                  if (newValue && newValue.length) {                                                      
+                                                    setCity(newValue)
+                                                  }  
+                                                }}
+                                                value={city} 
+                                                inputValue={city}
+                                                renderInput={(params) => (
+                                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                    <TextField 
+                                                        style={{width: '100%'}}
+                                                        className="text-field__input" 
+                                                        type="text" {...params.inputProps} 
+                                                        placeholder=''
+                                                    />
+                                                </div>
+                                                )}
+                                        />
+                                      </ThemeProvider>
+                                        
                                       <img src={Close} onClick={() => setCity('')} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 

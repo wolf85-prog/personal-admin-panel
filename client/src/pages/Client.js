@@ -1,11 +1,13 @@
 import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AppSidebar, AppFooter, AppHeader, AppRightbar } from '../components/index'
-import DataTable, { createTheme } from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 import { useSelector, useDispatch } from 'react-redux'
 import InputMask from 'react-input-mask';
 import Autocomplete from '@mui/material/Autocomplete';
 import Paper from '@mui/material/Paper'
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { TextField } from '@mui/material'
 import { 
   CContainer, 
   CSpinner, 
@@ -896,6 +898,30 @@ const Client = () => {
        }, 3000)
      }
 
+     const theme = createTheme({
+            components: {
+              MuiOutlinedInput: {
+                styleOverrides: {
+                  root: {
+                    borderRadius: 6,
+                    marginTop: 4,
+                    padding: '9px!important',
+                    paddingRight: 0,
+                    height: 36,
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      border: `none`,
+                    },
+                    "&.Mui-focused": {
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: `2px solid #26489a`,
+                      },
+                    }
+                  }
+                }
+              }
+            }
+      });
+
 
   return (
     <div className='dark-theme'>
@@ -1133,56 +1159,58 @@ const Client = () => {
                                   {/* Город */}
                                   <label className='title-label'>Город</label>
                                   <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative'}}> 
-                                      <Autocomplete
-                                              sx={{
-                                                  display: 'inline-block',
-                                                  '& input': {zIndex: '25',
-                                                      width: '100%',
-                                                      border: 'none',
-                                                      height: '40px',
-                                                      padding: '5px 4px',
-                                                      fontFamily: 'inherit',
-                                                      fontSize: '14px',
-                                                      fontWeight: '400',
-                                                      lineHeight: '1.5',
-                                                      textAlign: 'center',
-                                                      color: '#ffffff',
-                                                      backgroundColor: 'transparent', 
-                                                  }
-                                              }}
-                                              PaperComponent={({ children }) => (
-                                                <Paper style={{ 
-                                                                                                  background: '#131c21', 
-                                                                                                  color: '#fff',
-                                                                                                  border: '1px solid #2d2e38',
-                                                                                                }}>
-                                                                                                  {children}
-                                                                                                </Paper>
-                                              )}
-                                              className="text-field__input" 
-                                              openOnFocus
-                                              id="custom-input-demo"
-                                              options={sortedCities}
-                                              style={{width: '100%', padding: '0'}}
-                                              isOptionEqualToValue={(option, value) => option.value === value.value}
-                                              onInputChange={(e)=>setCity(e.target.value)}
-                                              onChange={(event, newValue) => {
-                                                if (newValue && newValue.length) {                                                      
-                                                  setCity(newValue)
-                                                }  
-                                              }}
-                                              value={city} 
-                                              inputValue={city}
-                                              renderInput={(params) => (
-                                              <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                                  <input 
-                                                      className="text-field__input" 
-                                                      type="text" {...params.inputProps} 
-                                                      placeholder=''
-                                                  />
-                                              </div>
-                                              )}
-                                      />
+                                     <ThemeProvider theme={theme}>
+                                        <Autocomplete
+                                                sx={{
+                                                    display: 'inline-block',
+                                                    '& input': {zIndex: '25',
+                                                        width: '100%',
+                                                        border: 'none',
+                                                        height: '40px',
+                                                        padding: '5px 4px',
+                                                        fontFamily: 'inherit',
+                                                        fontSize: '14px',
+                                                        fontWeight: '400',
+                                                        lineHeight: '1.5',
+                                                        textAlign: 'center',
+                                                        color: '#ffffff',
+                                                        backgroundColor: 'transparent', 
+                                                    }
+                                                }}
+                                                PaperComponent={({ children }) => (
+                                                  <Paper style={{ 
+                                                    background: '#131c21', 
+                                                    border: '1px solid #2d2e38',
+                                                    color: '#fff'
+                                                  }}>{children}</Paper>
+                                                )}
+                                                className="text-field__input" 
+                                                openOnFocus
+                                                id="custom-input-demo"
+                                                options={sortedCities}
+                                                style={{width: '100%', padding: '0'}}
+                                                isOptionEqualToValue={(option, value) => option.value === value.value}
+                                                onInputChange={(e)=>setCity(e.target.value)}
+                                                onChange={(event, newValue) => {
+                                                  if (newValue && newValue.length) {                                                      
+                                                    setCity(newValue)
+                                                  }  
+                                                }}
+                                                value={city} 
+                                                inputValue={city}
+                                                renderInput={(params) => (
+                                                <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                                    <TextField 
+                                                        style={{width: '100%'}}
+                                                        className="text-field__input" 
+                                                        type="text" {...params.inputProps} 
+                                                        placeholder=''
+                                                    />
+                                                </div>
+                                                )}
+                                        />
+                                      </ThemeProvider> 
+                                      
                                       <img src={Close} onClick={clearCity} width={15} alt='' style={{position: 'absolute', top: '13px', right: '15px', visibility: showClearCity ? 'visible' : 'hidden', cursor: 'pointer'}}></img>
                                   </div>
 

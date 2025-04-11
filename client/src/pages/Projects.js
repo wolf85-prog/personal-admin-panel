@@ -1927,7 +1927,7 @@ ${loc.url}`;
                                             </ThemeProvider>
                                             
 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
                                           <label className='title-label'>Адрес</label>
@@ -1937,7 +1937,7 @@ ${loc.url}`;
                                               id="address" 
                                               value={address}
                                             />
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
                                         </div>
@@ -2166,7 +2166,7 @@ ${loc.url}`;
                                                 onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
                                               />
                                             </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-40px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-40px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
                                           <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>

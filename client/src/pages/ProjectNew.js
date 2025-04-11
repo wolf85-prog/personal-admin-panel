@@ -44,6 +44,7 @@ import {
 } from '@tanstack/react-table'
 import Autocomplete from '@mui/material/Autocomplete';
 import Paper from '@mui/material/Paper';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -76,7 +77,8 @@ import robot from "src/chat-app-worker/assets/images/robot.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa2 from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
 
@@ -114,6 +116,7 @@ import { useNavigate } from "react-router";
 
 import { $host_bot } from './../http/index'
 import { getManager, getManagerId } from 'src/http/managerAPI'
+import { TextField } from '@mui/material'
 
 const ProjectNew = () => {
   const navigate = useNavigate();
@@ -888,6 +891,30 @@ ${tehText}`
   
   }
 
+  const theme = createTheme({
+      components: {
+        MuiOutlinedInput: {
+          styleOverrides: {
+            root: {
+              borderRadius: 6,
+              marginTop: 4,
+              padding: '9px!important',
+              paddingRight: 0,
+              height: 36,
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: `none`,
+              },
+              "&.Mui-focused": {
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: `2px solid #26489a`,
+                },
+              }
+            }
+          }
+        }
+      }
+    });
+
   return (
     <div className='dark-theme'>
       <AppSidebar />
@@ -915,7 +942,7 @@ ${tehText}`
                                 <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                 <img src={zamok} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                 <CTooltip content="Сохранить проект" placement="bottom" style={customTooltipStyle}>
-                                  <img src={Disketa} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                  <img src={Disketa2} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                 </CTooltip>
                                 <CTooltip content="Закрыть окно" placement="bottom" style={customTooltipStyle}>
                                   <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1021,148 +1048,163 @@ ${tehText}`
                               <div className='widthBlock3' style={{textAlign: 'center', marginTop: '2px', marginRight: '40px'}}>
                               <label className='title-label'>Проект</label>
                               <div className="text-field">
-                                {/* <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/> */}
-                                <Autocomplete
-                                  sx={{
-                                      display: 'inline-block',
-                                      '& input': {zIndex: '25',
-                                          width: '100%',
-                                          border: 'none',
-                                          height: '40px',
-                                          padding: '5px 4px',
-                                          fontFamily: 'inherit',
-                                          fontSize: '14px',
-                                          fontWeight: '400',
-                                          lineHeight: '1.5',
-                                          textAlign: 'center',
-                                          color: '#ffffff',
-                                          backgroundColor: 'transparent', 
-                                      }
-                                  }}
-                                  PaperComponent={({ children }) => (
-                                    <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
-                                  )}
-                                  className="text-field__input" 
-                                  openOnFocus
-                                  id="custom-input-demo"
-                                  options={sortedProjects}
-                                  style={{width: '100%', padding: '0'}}
-                                  //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                  //getOptionLabel={(proj) => proj.name }
-                                  //onInputChange={setProject}
-                                  //isOptionEqualToValue={(option, value) => option.name === value.name }
-                                  onChange={async(event, newValue) => {
-                                    if (newValue) { 
-                                      console.log(newValue)
-                                      setProject(newValue)                                                     
-                                      //console.log("projects: ", projects)                                                     
-                                      const comp = projects.find(item=> item.name === newValue)
-                                      console.log("comp: ", comp)
-                                      if (comp) {
-                                        setCity(comp.city)
-                                        setStartDate(comp.dateStart)
-                                        setStartTime(comp.dateStart?.split('T')[1]?.slice(0, 5)) 
-                                        setEndTime(comp.dateEnd ? comp.dateEnd?.split('T')[1]?.slice(0, 5) : '') 
-                                        setEndDate(comp.dateEnd)
-                                        setSpecifikaProject({name: comp.specifika, color: specifikaData.find((stat)=> stat.label === comp.specifika)?.color})
-                                        const managerFio = workersAll.find(item=> item.id.toString() === comp.managerId2)
-                                        setManagerName2(managerFio?.userfamily)
-
-                                        const man = workersAll.find(item=> item.userfamily === managerFio?.userfamily)
-                                        if (man) {
-                                          setPhone(man.phone)
-                                        } else {
-                                          setPhone('')
+                                {/* <input disabled={false} className="text-field__input" type="text" name="projectName" id="projectName" value={projectName} onChange={(e)=>setProjectName(e.target.value)}/> */} 
+                                <ThemeProvider theme={theme}>
+                                  <Autocomplete
+                                    sx={{
+                                        display: 'inline-block',
+                                        '& input': {zIndex: '25',
+                                            width: '100%',
+                                            border: 'none',
+                                            height: '40px',
+                                            padding: '5px 4px',
+                                            fontFamily: 'inherit',
+                                            fontSize: '14px',
+                                            fontWeight: '400',
+                                            lineHeight: '1.5',
+                                            textAlign: 'center',
+                                            color: '#ffffff',
+                                            backgroundColor: 'transparent', 
                                         }
+                                    }}
+                                    PaperComponent={({ children }) => (
+                                      <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
+                                    )}
+                                    className="text-field__input" 
+                                    openOnFocus
+                                    id="custom-input-demo"
+                                    options={sortedProjects}
+                                    style={{width: '100%', padding: '0'}}
+                                    //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                    //getOptionLabel={(proj) => proj.name }
+                                    //onInputChange={setProject}
+                                    //isOptionEqualToValue={(option, value) => option.name === value.name }
+                                    onChange={async(event, newValue) => {
+                                      if (newValue) { 
+                                        console.log(newValue)
+                                        setProject(newValue)                                                     
+                                        //console.log("projects: ", projects)                                                     
+                                        const comp = projects.find(item=> item.name === newValue)
+                                        console.log("comp: ", comp)
+                                        if (comp) {
+                                          setCity(comp.city)
+                                          setStartDate(comp.dateStart)
+                                          setStartTime(comp.dateStart?.split('T')[1]?.slice(0, 5)) 
+                                          setEndTime(comp.dateEnd ? comp.dateEnd?.split('T')[1]?.slice(0, 5) : '') 
+                                          setEndDate(comp.dateEnd)
+                                          setSpecifikaProject({name: comp.specifika, color: specifikaData.find((stat)=> stat.label === comp.specifika)?.color})
+                                          const managerFio = workersAll.find(item=> item.id.toString() === comp.managerId2)
+                                          setManagerName2(managerFio?.userfamily)
 
-                                        //основной состав (специалисты)
-                                        let resMain
-                                        resMain = await getMainSpecProject(comp.id)
-                                        console.log("resMain: ", resMain[0]?.vidWork)
-                                        setVidProject({name: resMain[0]?.vidWork, color: ''})
+                                          const man = workersAll.find(item=> item.userfamily === managerFio?.userfamily)
+                                          if (man) {
+                                            setPhone(man.phone)
+                                          } else {
+                                            setPhone('')
+                                          }
+
+                                          //основной состав (специалисты)
+                                          let resMain
+                                          resMain = await getMainSpecProject(comp.id)
+                                          console.log("resMain: ", resMain[0]?.vidWork)
+                                          setVidProject({name: resMain[0]?.vidWork, color: ''})
 
 
-                                        const loc = platformsAll.find(item=> item.id === parseInt(comp?.geo))
-                                        //console.log("platformsAll: ", platformsAll)
-                                        //console.log("geo: ", comp?.geo)
-                                        console.log("loc: ", loc)
-                                        if (loc) {
-                                          setAddress(loc.address)
-                                          setLocationProject(loc.title)
+                                          const loc = platformsAll.find(item=> item.id === parseInt(comp?.geo))
+                                          //console.log("platformsAll: ", platformsAll)
+                                          //console.log("geo: ", comp?.geo)
+                                          console.log("loc: ", loc)
+                                          if (loc) {
+                                            setAddress(loc.address)
+                                            setLocationProject(loc.title)
+                                          } else {
+                                            setLocationProject('')
+                                            setAddress('')
+                                            setTrack('')
+                                          }
                                         } else {
-                                          setLocationProject('')
-                                          setAddress('')
-                                          setTrack('')
+                                          setCity('')
+                                          setStartDate('')
+                                          setStartTime('00:00') 
+                                          setEndTime('') 
+                                          setEndDate('')
+                                          setSpecifikaProject('')
                                         }
-                                      } else {
-                                        setCity('')
-                                        setStartDate('')
-                                        setStartTime('00:00') 
-                                        setEndTime('') 
-                                        setEndDate('')
-                                        setSpecifikaProject('')
-                                      }
-                                    }  
-                                  }}
-                                  value={project} 
-                                  inputValue={project}
-                                  renderInput={(params) => (
-                                  <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                      <input 
-                                          className="text-field__input" 
-                                          type="text" {...params.inputProps} 
-                                          placeholder=''
-                                          //autoComplete='off'
-                                      />
-                                  </div>
-                                  )}
-                                />
+                                      }  
+                                    }}
+                                    value={project} 
+                                    inputValue={project}
+                                    renderInput={(params) => (
+                                    <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                        <TextField 
+                                            style={{width: '100%'}}
+                                            className="text-field__input" 
+                                            type="text" {...params.inputProps} 
+                                            placeholder=''
+                                            //autoComplete='off'
+                                        />
+                                    </div>
+                                    )}
+                                  />
+                                </ThemeProvider>
+                                
                               </div>
 
                               <label className='title-label'>Город</label>
                               <div className="text-field">
-                                <Autocomplete
-                                  sx={{
-                                      display: 'inline-block',
-                                      '& input': {zIndex: '25',
-                                          width: '100%',
-                                          border: 'none',
-                                          height: '40px',
-                                          padding: '5px 4px',
-                                          fontFamily: 'inherit',
-                                          fontSize: '14px',
-                                          fontWeight: '400',
-                                          lineHeight: '1.5',
-                                          textAlign: 'center',
-                                          color: '#ffffff',
-                                          backgroundColor: 'transparent', 
-                                      }
-                                  }}
-                                  className="text-field__input" 
-                                  openOnFocus
-                                  id="custom-input-demo"
-                                  options={sortedCities}
-                                  style={{width: '100%', padding: '0'}}
-                                  //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                  onInputChange={onChangeCity}
-                                  onChange={(event, newValue) => {
-                                    if (newValue && newValue.length) {                                                      
-                                      setCity(newValue)
-                                    }  
-                                  }}
-                                  value={city} 
-                                  inputValue={city}
-                                  renderInput={(params) => (
-                                  <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                      <input 
-                                          className="text-field__input" 
-                                          type="text" {...params.inputProps} 
-                                          placeholder=''
-                                          autoComplete='off'
-                                      />
-                                  </div>
-                                  )}
-                                />
+                                <ThemeProvider theme={theme}>
+                                  <Autocomplete
+                                    sx={{
+                                        display: 'inline-block',
+                                        '& input': {zIndex: '25',
+                                            width: '100%',
+                                            border: 'none',
+                                            height: '40px',
+                                            padding: '5px 4px',
+                                            fontFamily: 'inherit',
+                                            fontSize: '14px',
+                                            fontWeight: '400',
+                                            lineHeight: '1.5',
+                                            textAlign: 'center',
+                                            color: '#ffffff',
+                                            backgroundColor: 'transparent', 
+                                        }
+                                    }}
+                                    PaperComponent={({ children }) => (
+                                                                                    <Paper style={{ 
+                                                                                      background: '#131c21', 
+                                                                                      border: '1px solid #2d2e38',
+                                                                                      color: '#fff'
+                                                                                    }}>{children}</Paper>
+                                                                                  )}
+                                    className="text-field__input" 
+                                    openOnFocus
+                                    id="custom-input-demo"
+                                    options={sortedCities}
+                                    style={{width: '100%', padding: '0'}}
+                                    //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                    onInputChange={onChangeCity}
+                                    onChange={(event, newValue) => {
+                                      if (newValue && newValue.length) {                                                      
+                                        setCity(newValue)
+                                      }  
+                                    }}
+                                    value={city} 
+                                    inputValue={city}
+                                    renderInput={(params) => (
+                                    <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                        <TextField
+                                            style={{width: '100%'}}
+                                            className="text-field__input" 
+                                            type="text" {...params.inputProps} 
+                                            placeholder=''
+                                            autoComplete='off'
+                                        />
+                                    </div>
+                                    )}
+                                  />
+                                </ThemeProvider>
+                                
                               </div>
 
                               <label className='title-label'>Локация</label>
@@ -1223,7 +1265,7 @@ ${tehText}`
                                   )}
                                 />
 
-                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(location)}} alt="" style={{visibility: showSaveLocation ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                               </div>
 
                               <label className='title-label'>Адрес</label>
@@ -1233,7 +1275,7 @@ ${tehText}`
                                   id="address" 
                                   value={address}
                                 />
-                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '8px', left: '290px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(address)}} alt="" style={{visibility: showSaveAddress ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                               </div>
 
                               </div>
@@ -1246,57 +1288,68 @@ ${tehText}`
                                     <label className='title-label'>Старший</label>
                                     <div className="text-field">
                                       {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '320px'}}/> */}
-                                      <Autocomplete
-                                        sx={{
-                                            display: 'inline-block',
-                                            '& input': {zIndex: '25',
-                                                width: '100%',
-                                                border: 'none',
-                                                height: '40px',
-                                                padding: '5px 4px',
-                                                fontFamily: 'inherit',
-                                                fontSize: '14px',
-                                                fontWeight: '400',
-                                                lineHeight: '1.5',
-                                                textAlign: 'center',
-                                                color: '#ffffff',
-                                                backgroundColor: 'transparent', 
-                                            }
-                                        }}
-                                        className="text-field__input" 
-                                        openOnFocus
-                                        id="custom-input-manager2"
-                                        options={workersData}
-                                        style={{width: '100%', padding: '0'}}
-                                        //isOptionEqualToValue={(option, value) => option.value === value.value}
-                                        //onInputChange={onChangeManager2} 
-                                        onInputChange={(event, newInputValue) => {
-                                          setManagerName2(newInputValue);
-                                        }}
-                                        onChange={(event, newValue) => {
-                                          if (newValue) {  
-                                            console.log("workersAll 2: ", workersAll)                                                     
-                                            const comp = workersAll.find(item=> item.userfamily === newValue.label)
-                                            console.log("comp worker: ", comp, newValue)
-                                            if (comp) {
-                                              setPhone(comp.phone ? comp.phone : '')
-                                              setManagerName2(comp.userfamily)
-                                              setManagerId(comp.id)
-                                            }
-                                          }  
-                                        }}
-                                        value={managerName2} 
-                                        inputValue={managerName2}
-                                        renderInput={(params) => (
-                                        <div ref={params.InputProps.ref} style={{position: 'relative'}}>
-                                            <input 
-                                                className="text-field__input" 
-                                                type="text" {...params.inputProps} 
-                                                placeholder='ФИО'
-                                            />
-                                        </div>
-                                        )}
-                                      />
+                                      <ThemeProvider theme={theme}>
+                                        <Autocomplete
+                                          sx={{
+                                              display: 'inline-block',
+                                              '& input': {zIndex: '25',
+                                                  width: '100%',
+                                                  border: 'none',
+                                                  height: '40px',
+                                                  padding: '5px 4px',
+                                                  fontFamily: 'inherit',
+                                                  fontSize: '14px',
+                                                  fontWeight: '400',
+                                                  lineHeight: '1.5',
+                                                  textAlign: 'center',
+                                                  color: '#ffffff',
+                                                  backgroundColor: 'transparent', 
+                                              }
+                                          }}
+                                          PaperComponent={({ children }) => (
+                                                                                          <Paper style={{ 
+                                                                                            background: '#131c21', 
+                                                                                            border: '1px solid #2d2e38',
+                                                                                            color: '#fff'
+                                                                                          }}>{children}</Paper>
+                                                                                        )}
+                                          className="text-field__input" 
+                                          openOnFocus
+                                          id="custom-input-manager2"
+                                          options={workersData}
+                                          style={{width: '100%', padding: '0'}}
+                                          //isOptionEqualToValue={(option, value) => option.value === value.value}
+                                          //onInputChange={onChangeManager2} 
+                                          onInputChange={(event, newInputValue) => {
+                                            setManagerName2(newInputValue);
+                                          }}
+                                          onChange={(event, newValue) => {
+                                            if (newValue) {  
+                                              console.log("workersAll 2: ", workersAll)                                                     
+                                              const comp = workersAll.find(item=> item.userfamily === newValue.label)
+                                              console.log("comp worker: ", comp, newValue)
+                                              if (comp) {
+                                                setPhone(comp.phone ? comp.phone : '')
+                                                setManagerName2(comp.userfamily)
+                                                setManagerId(comp.id)
+                                              }
+                                            }  
+                                          }}
+                                          value={managerName2} 
+                                          inputValue={managerName2}
+                                          renderInput={(params) => (
+                                          <div ref={params.InputProps.ref} style={{position: 'relative'}}>
+                                              <TextField 
+                                                  style={{width: '100%'}}
+                                                  className="text-field__input" 
+                                                  type="text" {...params.inputProps} 
+                                                  placeholder='ФИО'
+                                              />
+                                          </div>
+                                          )}
+                                        />
+                                      </ThemeProvider>
+                                      
                                     </div>
                                   </div>
 

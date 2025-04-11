@@ -236,7 +236,7 @@ export default function Filters({ columnFilters, setColumnFilters, setShowCalend
               
               <CCloseButton
                 className="uley_select_reset"
-                style={{ height: '28px', width: '28px',marginRight: '180px', marginLeft: '0' }}
+                style={{ height: '28px', width: '28px',marginRight: '200px', marginLeft: '0' }}
                 onClick={() => setFilterText('')}
               />
               

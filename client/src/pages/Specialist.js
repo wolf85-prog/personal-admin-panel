@@ -1163,7 +1163,7 @@ const Specialist = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(telegram)}} 
                                       alt="" 
-                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSave2 ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     <input 
                                       className="text-field__input" 
@@ -1414,7 +1414,7 @@ const Specialist = () => {
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(phone)}} 
                                       alt="" 
-                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
+                                      style={{visibility: showSave ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
                                     />
                                     {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
                                     <InputMask
