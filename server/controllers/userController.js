@@ -17,11 +17,11 @@ class UserController {
     async registration(req, res, next) {
         const {username, email, password, role} = req.body
         if (!email || !password) {
-            return next(ApiError.badRequest('Некорректный email или пароль'))
+            return next(ApiError.badRequest('Некорректный логин или пароль'))
         }
         const candidate = await User.findOne({where: {email}})
         if (candidate) {
-            return next(ApiError.badRequest('Пользователь с таким email уже существует!'))
+            return next(ApiError.badRequest('Пользователь с таким телефоном уже существует!'))
         }
         const hashPassword = await bcrypt.hash(password, 5)
         const user = await User.create({username, email, password: hashPassword, role})

@@ -529,7 +529,9 @@ const ProfileCompany = () => {
 
           //добавить Id компании в профиль
           const result2 = await getManagerId(userId)
-          const resAdd2 = await editManager(saveData2, result2?.id)
+          console.log("result2: ", result2)
+          const resEdit = await editManager(saveData2, result2?.id)
+          console.log("resEdit: ", resEdit)
         }
     
         //addToast(exampleToast) //ваши данные сохранены
@@ -961,7 +963,7 @@ const ProfileCompany = () => {
   }
 
   //Редактировать менеджера
-  const editManager = () => {
+  const editManagerClick = () => {
     setShowEditManager(!showEditManager)
   }
 
@@ -1733,7 +1735,7 @@ const ProfileCompany = () => {
                                                                     </div> 
 
                                                                     <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between'}}>
-                                                                      <CButton onClick={editManager} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
+                                                                      <CButton onClick={editManagerClick} className='uley_edit_manager' style={{width: '45%', height: '40px', marginLeft: '1px', borderColor: 'yellow'}}>
                                                                         <span style={{fontSize: '16px', color: 'yellow', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                                                           {showEditManager ? 'Применить' : 'Изменить'}
                                                                         </span>

@@ -184,7 +184,7 @@ const AppHeader = (props) => {
 
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <a href='https://t.me/ULEY_Projects_Bot'>
+            <a href='/project_new'>
               <CButton className='leftButtonHeader' color="dark" style={{backgroundColor: 'transparent'}}>
                 Найти специалистов
               </CButton>

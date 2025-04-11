@@ -137,7 +137,7 @@ const Login = observer(() => {
       try {
           
           if (password !== null) {
-            if (password === password2) {
+            //if (password === password2) {
               const data = await registration(phone, password, '2');
               console.log(data)
 
@@ -157,10 +157,10 @@ const Login = observer(() => {
               sendText(data.id)
 
               navigate(ADMIN_ROUTE)
-            } else {
-              setTextToats("Пароли не совпадают!")
-              setShowModal(true)
-            }
+            // } else {
+            //   setTextToats("Пароли не совпадают!")
+            //   setShowModal(true)
+            // }
           } else {
             setTextToats("Введите пароль!")
             setShowModal(true)
@@ -390,7 +390,7 @@ const Login = observer(() => {
                                     />
                                     <a href="#" className="password-control"></a>
                                   </CInputGroup>
-                                  <CInputGroup className="mb-4">
+                                  {/* <CInputGroup className="mb-4">
                                     <CInputGroupText>
                                       <CIcon icon={cilLockLocked} />
                                     </CInputGroupText>
@@ -401,7 +401,8 @@ const Login = observer(() => {
                                       value={password2}
                                       onChange={e => setPassword2(e.target.value)}
                                     />
-                                  </CInputGroup></>
+                                  </CInputGroup> */}
+                                  </>
                                   :''}
                                   {!showPassword ? 
                                   <div style={{fontSize: '14px', color: '#6d6b6b', marginBottom: '10px'}}>
