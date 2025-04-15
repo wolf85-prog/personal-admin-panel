@@ -1570,7 +1570,7 @@ ${loc.url}`;
                 <Suspense fallback={<CSpinner color="primary" />}>
                     {/* <h2>Проекты</h2> */}
                     <CRow className="mt-2">
-                      <CCol xs style={{overflow: 'scroll', height: '450px'}}>
+                      <CCol xs>
                         <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '0', zIndex:'100'}}>
                           <CCardBody style={{padding: '5px'}}>                                                  
                               <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available'}}>   

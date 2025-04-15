@@ -1438,7 +1438,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
     }
     
   return (
-    <div className='frame2' ref={ref} style={{overflow: 'scroll', height: '140px'}}>
+    <div className='frame2' ref={ref} style={{overflow: 'scroll', height: '640px'}}>
         <div className='calendar-header'>
             <CButton onClick={prevMonth} className='uley_add_user uley_select_reset' style={{marginRight: '10px', padding: '18px', marginLeft: '0'}}>
                 <span style={{fontSize: '36px', color: '#2d2e38', position: 'absolute', top: '-14px', left: '11px'}}>
