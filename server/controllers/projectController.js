@@ -167,7 +167,7 @@ class ProjectController {
 
     async getProjectCreate(req, res) {
         const {userId, name, status, start, specifika, city, datestart, dateend, teh, 
-            managerId, companyId, chatId, spec, geo, comment, equipment, index, number} = req.body
+            managerId, companyId, chatId, spec, geo, comment, equipment, index, number, webform} = req.body
 
         try {
 
@@ -194,6 +194,7 @@ class ProjectController {
                 comment,
                 equipment,
                 number,
+                webform,
             }
 
             const project = await Project.create(obj)

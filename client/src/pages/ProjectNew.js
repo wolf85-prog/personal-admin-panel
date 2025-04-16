@@ -834,6 +834,7 @@ ${tehText}`
         dateend: new Date(endDate),  
         teh: tehTextAll, 
         start: projectStart,
+        webforma: true,
     }
 
     console.log("data: ", data)
