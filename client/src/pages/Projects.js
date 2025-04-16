@@ -1571,7 +1571,7 @@ ${loc.url}`;
                     {/* <h2>Проекты</h2> */}
                     <CRow className="mt-2">
                       <CCol xs>
-                        <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none',  zIndex:'100'}}>
+                        <CCard className="mb-4" style={{display: showHeader ? 'block' : 'none', position: 'sticky', top: '113px', zIndex:'100'}}>
                           <CCardBody style={{padding: '5px'}}>                                                  
                               <div style={{color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between', width: '-webkit-fill-available', }}>   
                                 <div className="text-field" style={{marginBottom: '0'}}>
@@ -1599,7 +1599,7 @@ ${loc.url}`;
 
                         <CCard className="mb-4">
                           {/* <CCardHeader></CCardHeader> */}
-                          <CCardBody style={{padding: '12px', height: `${height}px`}}>
+                          <CCardBody style={{padding: '12px', height: showHeader ? `${height}px` : `${height+25}px`}}>
                             {!showProject ? <Filters setShowCalendar={setShowCalendar} setShowCalendar2={setShowCalendar2} columnFilters={columnFilters} setColumnFilters={setColumnFilters} /> : '' }
                             {
                               showCalendar ? 
