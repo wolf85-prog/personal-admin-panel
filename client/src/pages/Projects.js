@@ -2548,126 +2548,142 @@ ${loc.url}`;
                           </CCollapse>
                         </CCard>
 
-                        {/* <CCard className="mb-4" style={{display: showPretendentTable ? 'block' : 'none'}}>
-                          <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
-                          <CCollapse visible={visibleB}>
-                            <CCardBody style={{padding: '12px'}}>
-                            <CTable align="middle" className="mb-0 border" hover responsive style={{fontSize: '16px',overflow: 'auto', width: '1471px', borderRadius: '5px' }}>
-                                <CTableHead className="text-center" color="light">
-                                  <CTableRow>
-                                    <CTableHeaderCell className="text-center" style={{width: '61px'}}>
-                                      <CFormCheck
-                                        style={{backgroundColor: '#181924', border: '1px solid #121212'}}
-                                      />
-                                      <split style={{position: 'absolute', left: '65px', top: '61px'}}>{pretendents.length}</split>
-                                    </CTableHeaderCell> 
-                                    <CTableHeaderCell onClick={sortDate} className="text-center" style={{width: '160px'}}>Дата</CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '150px'}}>Статус</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '40px'}}>Проекты</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Комтег</CTableHeaderCell>                      
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Комментарий</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>С</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}>Д</CTableHeaderCell>
-                                  </CTableRow>
-                                </CTableHead>
-                                <CTableBody>   
-                                { pretendents.length > 0 ?
-                                 pretendents.map((item, index)=> (                               
-                                  <CTableRow key={item.id}  v-for="item in tableItems" style={{lineHeight: '14px'}}>
-                                    <CTableDataCell className="text-center" style={{position: 'relative'}}>
-                                      <div className="parent-element" style={{position: 'absolute', left: '2px', top: '6px'}}>
+                        <CCard
+                    className="mb-4"
+                    style={{ display: showPretendentTable ? 'block' : 'none' }}
+                  >
+                    <CCardHeader onClick={() => setVisibleB(!visibleB)}>Претенденты</CCardHeader>
+                    <CCollapse visible={visibleB}>
+                      <CCardBody style={{ padding: '12px' }}>
+                        <CTable
+                          align="middle"
+                          className="mb-0 border"
+                          hover
+                          responsive
+                          style={{
+                            fontSize: '16px',
+                            overflow: 'auto',
+                            width: '1471px',
+                            borderRadius: '5px',
+                          }}
+                        >
+                          <CTableHead className="text-center" color="light">
+                            <CTableRow>
+                              <CTableHeaderCell className="text-center">
+                                <split style={{ position: 'absolute', left: '47px', top: '63px' }}>
+                                  {0}
+                                </split>
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                onClick={sortDate}
+                                className="text-center"
+                                style={{ width: '160px' }}
+                              >
+                                Дата
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '150px' }}
+                              >
+                                Статус
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '250px' }}
+                              >
+                                ФИО
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '20px' }}
+                              ></CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '250px' }}
+                              >
+                                Специальность
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '40px' }}
+                              >
+                                Проекты
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '250px' }}
+                              >
+                                Комтег
+                              </CTableHeaderCell>
+                              <CTableHeaderCell
+                                className="text-center"
+                                style={{ minWidth: '170px' }}
+                              >
+                                Комментарий
+                              </CTableHeaderCell>
+                            </CTableRow>
+                          </CTableHead>
+                          <CTableBody>
+                            <CTableRow
+                                    v-for="item in tableItems"
+                                    style={{ lineHeight: '14px' }}
+                                  >
+                                    <CTableDataCell
+                                      className="text-center"
+                                      style={{ position: 'relative' }}
+                                    >
+                                      <div
+                                        className="parent-element"
+                                        style={{ position: 'absolute', left: '5px', top: '6px' }}
+                                      >
                                         <Dropdown>
-                                          <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
-                                          </Dropdown.Toggle>
-                                          <Dropdown.Menu as={CustomMenu}> 
-                                          <Dropdown.Item>Добавить</Dropdown.Item>
-                                          <Dropdown.Item>Дублировать</Dropdown.Item>
-                                          <Dropdown.Item>Разделитель</Dropdown.Item>
-                                          <Dropdown.Item>Удалить</Dropdown.Item>
+                                          <Dropdown.Toggle
+                                            as={CustomToggle}
+                                            id="dropdown-custom-components"
+                                          ></Dropdown.Toggle>
+                                          <Dropdown.Menu as={CustomMenu}>
+                                            <Dropdown.Item>Добавить</Dropdown.Item>
+                                            <Dropdown.Item>Дублировать</Dropdown.Item>
+                                            <Dropdown.Item>Разделитель</Dropdown.Item>
+                                            <Dropdown.Item>Удалить</Dropdown.Item>
                                           </Dropdown.Menu>
                                         </Dropdown>
                                       </div>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
 
-                                      <CFormCheck 
-                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px', position: 'absolute', left: '15px', top: '7px'}} 
-                                        
-                                      />
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
                                       
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      {item.data}
-                                    </CTableDataCell>  
-                                    <CTableDataCell className="text-center">
-                                      <MyDropdown52
-                                        options={[{label: "В Проект", name: 'В Проект', color: 'green'}, {label: "Отказано", name: 'Отказано', color: 'yellow'}]}
-                                        selected={pretendents}
-                                        setSelected={setPretendents}
-                                        index={index}
-                                        setWorker={setPretendents}
-                                        element={'status'}
-                                        placeholder='—'
-                                        style={{height: '60px'}}
-                                      />
-                                    </CTableDataCell>   
-                                    <CTableDataCell className="text-center" style={{cursor: 'pointer'}}>
-                                      <Link to={'/specialist'} state={{ workerId: item.workerId, }}>
-                                        {item.fio}
-                                      </Link>
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center" style={{padding: '0px 5px'}}>
-                                      <img src={Trubka} alt='' onClick={clickSave} style={{cursor: 'pointer', width: '20px', height: '20px'}}/>
+                                    </CTableDataCell>
+                                    <CTableDataCell
+                                      className="text-left"
+                                      style={{ cursor: 'pointer', }}
+                                    >
+
+                                    </CTableDataCell>
+                                    <CTableDataCell
+                                      className="text-center"
+                                      style={{ padding: '0px 5px' }}
+                                    >
+                                      
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
-                                      <CTooltip
-                                        content={item.spec}
-                                        placement="bottom"
-                                      >
-                                        <div>{item.spec}</div>
-                                      </CTooltip>
+                                      
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">0 | 0</CTableDataCell>
+                                    <CTableDataCell className="text-center">
 
-                                    </CTableDataCell> 
+                                    </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                      0 | 0
-                                    </CTableDataCell>  
-                                    <CTableDataCell className="text-center">
-                                      {item.comteg ? 
-                                      // <CTooltip
-                                      //   content={item.comteg[0]?.name}
-                                      //   placement="bottom"
-                                      // >
-                                      <div>{item.comteg[0]?.name}</div>
-                                      // </CTooltip>
-                                      :''}
-                                    </CTableDataCell>    
-                                    <CTableDataCell className="text-center">
-                                      {item.comment ? 
-                                      <CTooltip
-                                        content={item.comment[0]?.content}
-                                        placement="bottom"
-                                      >
-                                        <div>{item.comment[0]?.content && item.comment[0]?.content.length > 10 ? item.comment[0]?.content.substr(0, 10) + '...' : item.comment[0]?.content}</div>
-                                      </CTooltip>  
-                                      :''}
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      🟩
-                                    </CTableDataCell> 
-                                    <CTableDataCell className="text-center">
-                                      🟩
-                                    </CTableDataCell>           
+                                      
+                                    </CTableDataCell>
                                   </CTableRow>
-                                  ))
-                                  :""
-                                }
-                                </CTableBody>                   
-                              </CTable>
-                            </CCardBody>
-                          </CCollapse>
-                        </CCard>
-                        */}
+                          </CTableBody>
+                        </CTable>
+                      </CCardBody>
+                    </CCollapse>
+                  </CCard>
 
                         {/* <CCard className="mb-4" style={{display: showPosterTable ? 'block' : 'none'}}>
                           <CCardHeader onClick={() => setVisibleC(!visibleC)}>Постеры</CCardHeader>
