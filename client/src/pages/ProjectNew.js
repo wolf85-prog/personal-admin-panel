@@ -776,6 +776,7 @@ const ProjectNew = () => {
 
   // Создание проекта
   const addNewProject = async() => {
+    console.log("add new project")
 
     //Toast
     setShowModal(true)
@@ -812,8 +813,9 @@ ${workers.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 
     const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatGroupId}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
     console.log("url_send_msg: ", url_send_msg)
-    const sendToTelegram = await $host_bot.get(url_send_msg);
-    console.log('sendToTelegram: ', sendToTelegram)
+    
+    //const sendToTelegram = await $host_bot.get(url_send_msg);
+    //console.log('sendToTelegram: ', sendToTelegram)
 
 
     const projectStatus = 'Новый'
@@ -825,6 +827,19 @@ ${workers.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 Адрес: ${address}   
 ${tehText}`
 
+console.log("Teh: ", tehTextAll)
+
+//массив специалистов
+let specArr = []
+
+  if (workers !== '') {
+    specArr = workers.map(item => ({
+        spec: item.spec,
+        cat: item.cat,
+        count: item.count,
+    }));
+  }
+
     const data = {
         name: project, 
         status: projectStatus,
@@ -834,6 +849,7 @@ ${tehText}`
         dateend: new Date(endDate),  
         teh: tehTextAll, 
         start: projectStart,
+        spec: JSON.stringify(specArr),
         webforma: true,
     }
 
@@ -868,22 +884,20 @@ ${tehText}`
       }    
     });
 
-    workers.length > 0 && workers.map(async(item, index)=> {
-      //новый состав специалистов
-     
-      //добавить строку в основной состав
-      const resAdd1 = await addMainspec(
-        {
-          date: startD +'T'+ startT, 
-          projectId: res.id, 
-          specialization: item.spec,
-          vidWork: item.vidSpec, 
-          stavka: "№1", 
-          userId
-        }
-      )
-      console.log("resAdd1: ", resAdd1)  
-    })
+    // workers.length > 0 && workers.map(async(item, index)=> {
+    //   //добавить строку в основной состав
+    //   const resAdd1 = await addMainspec(
+    //     {
+    //       date: startD +'T'+ startT, 
+    //       projectId: res.id, 
+    //       specialization: item.spec,
+    //       vidWork: item.vidSpec, 
+    //       stavka: "№1", 
+    //       userId
+    //     }
+    //   )
+    //   console.log("resAdd1: ", resAdd1)  
+    // })
 
     setTimeout(()=> {     
       setShowModal(false)
