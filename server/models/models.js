@@ -67,7 +67,6 @@ const Project = sequelize.define('project', {
     teh7: {type: DataTypes.STRING},
     teh8: {type: DataTypes.STRING},
     deleted: {type: DataTypes.BOOLEAN},
-    webforma: {type: DataTypes.BOOLEAN},
 })
 
 const Worker = sequelize.define('worker', {
