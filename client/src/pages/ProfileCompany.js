@@ -91,6 +91,7 @@ const ProfileCompany = () => {
   const [showSave3, setShowSave3] = useState(false)
   const [showSaveOffice, setShowSaveOffice] = useState(false)
   const [showSaveSklad, setShowSaveSklad] = useState(false)
+  const [showSaveEmail, setShowSaveEmail] = useState(false)
 
   const [id, setId] = useState('');
   const [title, setTitle] = useState('Название компании');
@@ -1036,10 +1037,10 @@ const ProfileCompany = () => {
                                       {/* <img src={Trubka} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       <img src={Tg} onClick={()=>setShowProfile(false)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> 
                                       <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>*/}
-                                      <CTooltip content="Сохранить профиль" placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
                                         {showRekviz ? '' : <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>}
                                       </CTooltip>
-                                      <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                   </div>:''
@@ -1302,7 +1303,13 @@ const ProfileCompany = () => {
 
                                   {/*  */}
                                   <label className='title-label'>Склад</label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSaveSklad(true)} onMouseOut={()=>setShowSaveSklad(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(sklad)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveSklad ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                    />
                                     <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="sklad" id="sklad" value={sklad} onChange={(e) => setSklad(e.target.value)}/>
                                   </div> 
 
@@ -1475,8 +1482,13 @@ const ProfileCompany = () => {
                                 <div className='widthBlock2' style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column'}}>
                                   {/* phone */}
                                   <label className='title-label'>Телефон</label>
-                                  <div className="text-field" >
-                                      {/* <input className="text-field__input" type="text" name="phone" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} style={{width: '250px'}}/> */}
+                                  <div className="text-field" onMouseOver={()=>setShowSavePhone(true)} onMouseOut={()=>setShowSavePhone(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(bugalterPhone)}} 
+                                      alt="" 
+                                      style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                    />
                                       <InputMask
                                           className="text-field__input" 
                                           type="text" 
@@ -1495,7 +1507,13 @@ const ProfileCompany = () => {
 
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSaveEmail(true)} onMouseOut={()=>setShowSaveEmail(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(bugalterEmail)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveEmail ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                    />
                                     <input disabled={role==='1' ? false : true} className="text-field__input" type="text" name="email" id="email" value={bugalterEmail} onChange={(e) => setBugalterEmail(e.target.value)} />
                                   </div> 
 

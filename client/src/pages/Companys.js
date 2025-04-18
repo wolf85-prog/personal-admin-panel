@@ -985,14 +985,14 @@ const Companys = () => {
                                   </div>
                                   {/* Кнопки */}
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <CTooltip content="Удалить компанию" placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip content="Удалить" placement="bottom" style={customTooltipStyle}>
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>
                                       {/* <img src={blockProfile ? zamok : zamok2} onClick={blockedProfile} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/> */}
-                                      <CTooltip content="Сохранить компанию" placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
                                         <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                       </CTooltip>
-                                      <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                         <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                       </CTooltip>
                                         

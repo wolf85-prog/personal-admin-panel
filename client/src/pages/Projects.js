@@ -1578,17 +1578,17 @@ ${loc.url}`;
                                   <input disabled={true} className="text-field__input" type="text" name="projectId" id="projectId" value={crmID} style={{width: '120px', marginRight: '25px'}}/>
                                 </div>
                                 <div style={{display: 'flex', alignItems: 'center'}}>
-                                  <CTooltip content="Удалить проекты" placement="bottom" style={customTooltipStyle}>
+                                  <CTooltip content="Удалить" placement="bottom" style={customTooltipStyle}>
                                     {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
                                     <img src={DeleteIcon} onClick={() => setVisibleDelete(true)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                   </CTooltip>
                                   {/* <img src={Trubka} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                   <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                   <img src={zamok} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
-                                  <CTooltip content="Сохранить проект" placement="bottom" style={customTooltipStyle}>
+                                  <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
                                     <img src={Disketa2} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                   </CTooltip>
-                                  <CTooltip content="Закрыть окно" placement="bottom" style={customTooltipStyle}>
+                                  <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                     <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                   </CTooltip>
                                   

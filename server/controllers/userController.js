@@ -17,7 +17,7 @@ class UserController {
     async registration(req, res, next) {
         const {username, email, password, role} = req.body
         if (!email || !password) {
-            return next(ApiError.badRequest('Некорректный логин или пароль'))
+            return next(ApiError.badRequest('Неверный номер или пароль'))
         }
         const candidate = await User.findOne({where: {email}})
         if (candidate) {
@@ -36,12 +36,12 @@ class UserController {
         const user = await User.findOne({where: {email}})
         // Check if user exists
         if (!user) {
-            return next(ApiError.internal('Неверный номер телефона'))
+            return next(ApiError.internal('Неверный номер или пароль'))
         }
         // Check password
         let comparePassword = bcrypt.compareSync(password, user.password)
         if (!comparePassword) {
-            return next(ApiError.internal('Неверный пароль'))
+            return next(ApiError.internal('Неверный номер или пароль'))
         }
         const token = generateJwt(user.id, user.email, user.role)
         return res.json({token})

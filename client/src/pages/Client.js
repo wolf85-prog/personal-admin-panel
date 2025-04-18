@@ -1055,7 +1055,7 @@ const Client = () => {
                                     </div> 
                                   </div>
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                      <CTooltip content="Удалить клиента" placement="bottom" style={customTooltipStyle}>
+                                      <CTooltip content="Удалить" placement="bottom" style={customTooltipStyle}>
                                         {/* <Icon id="delete" onClick={()=>clickDelete(id)} style={{cursor: 'pointer'}}/> */}
                                         <img src={DeleteIcon} onClick={()=>clickDelete(id)} style={{ cursor: 'pointer', width: '26px', height: '26px', marginLeft: '20px'}}/>  
                                       </CTooltip>

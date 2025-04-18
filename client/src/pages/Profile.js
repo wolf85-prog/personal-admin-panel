@@ -381,10 +381,10 @@ const Profile = () => {
                                   </div>
                                    {/* Кнопки */}
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
-                                    <CTooltip content="Сохранить профиль" placement="bottom" style={customTooltipStyle}>
+                                    <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
                                       <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                     </CTooltip>
-                                    <CTooltip content="Закрыть профиль" placement="bottom" style={customTooltipStyle}>
+                                    <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
                                     </CTooltip>
                                   </div>
