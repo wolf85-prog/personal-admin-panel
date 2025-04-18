@@ -84,6 +84,8 @@ class PlatformsController {
                 url,
                 karta,
                 comment,
+                reyting,
+                profile,
             } = req.body
 
             const newUser = await Platform.update(
@@ -95,7 +97,9 @@ class PlatformsController {
                     track,
                     url,
                     karta,
-                    comment,   
+                    comment, 
+                    reyting, 
+                    profile, 
                 },
                 { where: {id: id} })
             return res.status(200).json(newUser);

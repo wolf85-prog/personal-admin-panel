@@ -107,6 +107,8 @@ const Platform = sequelize.define('platform', {
     url: {type: DataTypes.STRING}, //
     karta: {type: DataTypes.STRING}, //
     comment: {type: DataTypes.TEXT},
+    reyting: {type: DataTypes.STRING},
+    profile: {type: DataTypes.TEXT},
 })
 
 const Company = sequelize.define('company', {

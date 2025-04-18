@@ -56,6 +56,7 @@ import StarActive from "./../assets/images/star_activ.svg";
 import Disketa2 from "./../assets/images/disketa.png";
 import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
+import PaperIcon from "./../assets/images/paper-clip.png"
 
 import { array } from 'prop-types';
 
@@ -109,9 +110,14 @@ const Specialist = () => {
   const [showSave, setShowSave] = useState(false)
   const [showSave2, setShowSave2] = useState(false)
   const [showSave3, setShowSave3] = useState(false)
+  const [showSaveEmail, setShowSaveEmail] = useState(false)
   const [showSavePassport, setShowSavePassport] = useState(false)
+  const [showSaveScan, setShowSaveScan] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [showModal2, setShowModal2] = useState(false)
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedName, setSelectedName] = useState("");
 
   const [starActive1, setStarActive1] = useState(true)
   const [starActive2, setStarActive2] = useState(true)
@@ -926,6 +932,15 @@ const Specialist = () => {
       
     }
 
+
+    {/* Добавление файла */}
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setSelectedFile(file);
+      setSelectedName(file.name);
+      // Additional validation logic
+    };
+
     const clickProjects = ()=> {
       // console.log(title)
        setShowModal2(true)
@@ -1180,12 +1195,12 @@ const Specialist = () => {
                                   {/* ник */}
                                   <label className='title-label'>Никнейм</label>
                                   <div className="text-field" onMouseOver={()=>setShowSave3(true)} onMouseOut={()=>setShowSave3(false)}>
-                                    {/* <img 
+                                    <img 
                                       src={Disketa} 
                                       onClick={()=>{navigator.clipboard.writeText(nik)}} 
                                       alt="" 
                                       style={{visibility: showSave3 ? 'visible' : 'hidden', position: 'absolute', top: '10px', right: '15px', cursor: 'pointer', width: '20px', height: '20px'}}
-                                    /> */}
+                                    />
                                     <input className="text-field__input" type="text" name="nik" id="nik" value={nik} onChange={(e) => setNik(e.target.value.replace(/[А-Яа-я]/g, ''))} style={{width: '250px'}}/>
                                   </div> 
 
@@ -1352,7 +1367,7 @@ const Specialist = () => {
                                     {/* проекты за месяц */}
                                     <CTooltip content="Проекты за месяц" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
-                                        <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={reyting} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
+                                        <input disabled className="text-field__input" type="text" name="reyting" id="reyting" value={rank} onChange={(e) => setReyting(e.target.value)} style={{width: '40px', marginRight: '8px'}}/>
                                       </div>
                                     </CTooltip>
                                     
@@ -1381,13 +1396,23 @@ const Specialist = () => {
 
                                   {/* скан паспорта */}
                                   <label className='title-label'>Скан паспорта</label>
-                                  <div className="text-field">
-                                    <input className="text-field__input" type="text" name="passportScan" id="passportScan" value={passportScan} onChange={(e) => setPassportScan(e.target.value)} style={{overflow: 'hidden', textOverflow: 'ellipsis'}}/>
+                                  <div className="text-field" onMouseOver={()=>setShowSaveScan(true)} onMouseOut={()=>setShowSaveScan(false)}>
+                                      <img src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" 
+                                        style={{visibility: showSaveScan ? 'visible' : 'hidden', position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
+                                    <div className='text-field__input' style={{textAlign: 'start'}}>
+                                      <img src={PaperIcon} alt="upload" width={20} height={20} />
+                                      <input className='text-field__input' style={{position: 'absolute', top: '0', opacity: '0', width: '20px'}} type="file"  name="photo"  onChange={handleFileChange} />
+                                      {image && image.length > 20 ? " " + image.substr(0, 20) + '...' : image}
+                                    </div>  
                                   </div> 
                                   
                                   <div style={{position:'relative'}}>
                                     <label className='title-label'>Паспорт</label>
                                     <div className="text-field" style={{marginBottom: '0px'}} onMouseOver={()=>setShowSavePassport(true)} onMouseOut={()=>setShowSavePassport(false)}>
+                                      <img src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" 
+                                        style={{visibility: showSavePassport ? 'visible' : 'hidden', position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                       <textarea 
                                         className="text-field__input" 
                                         type="text" 
@@ -1397,9 +1422,7 @@ const Specialist = () => {
                                         onChange={(e) => setPassport(e.target.value)} 
                                         style={{resize: 'none', height: '295px', whiteSpace: 'pre-line', textAlign: 'left', borderRadius:'6px'}}/>
                                     </div> 
-                                    <img src={Disketa} 
-                                      onClick={()=>{navigator.clipboard.writeText(passport)}} alt="" 
-                                      style={{visibility: showSavePassport ? 'visible' : 'hidden', position: 'absolute', top: '40px', right: '15px', cursor: 'pointer', width: '25px', height: '25px'}}/>
+                                    
                                   </div>
 
                                 </div>
@@ -1437,7 +1460,13 @@ const Specialist = () => {
 
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSaveEmail(true)} onMouseOut={()=>setShowSaveEmail(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(email)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveEmail ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                    />
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                                   </div> 
 
@@ -1490,6 +1519,17 @@ const Specialist = () => {
                         </CButton>
                         <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
                       </CModalFooter>
+                    </CModal>
+
+                    <CModal
+                      alignment="center"
+                      visible={showModal2}
+                      onClose={() => setShowModal2(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalBody style={{height: '100px', textAlign: 'center', fontSize: '18px', paddingTop: '35px'}}>
+                        Заполняется системой автоматически
+                      </CModalBody>
                     </CModal>
                   </Suspense>
             </CContainer>

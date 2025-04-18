@@ -99,7 +99,7 @@ const Platforms = () => {
   const [blockW, setBlockW] = useState(false)
   const [showMenuKrest, setShowMenuKrest] = useState(false)
   const [showKrest, setShowKrest] = useState(false)
-  
+  const [profile, setProfile] = useState('');
   const [cityValue, setCityValue] = useState(0)
   
   const [showSave, setShowSave] = useState(false)
@@ -117,6 +117,7 @@ const Platforms = () => {
   const [track, setTrack] = useState('');
   const [url, setUrl] = useState('');
   const [comment, setComment] = useState('');
+  const [reyting, setReyting] = useState('');
 
   const [blockProfile, setBlockProfile] = useState(true)
   const [showBlacklist, setShowBlacklist] = useState(false)
@@ -143,6 +144,12 @@ const Platforms = () => {
   const [selectedName, setSelectedName] = useState("");
   const [imageKarta, setImageKarta]= useState("");
 
+  const [starActive1, setStarActive1] = useState(true)
+  const [starActive2, setStarActive2] = useState(true)
+  const [starActive3, setStarActive3] = useState(true)
+  const [starActive4, setStarActive4] = useState(false)
+  const [starActive5, setStarActive5] = useState(false)
+
   const API_URL_HOST = process.env.REACT_APP_API_URL
 
   const customTooltipStyle = {
@@ -159,6 +166,32 @@ const Platforms = () => {
     //console.log("specialist", specialist)
     setShowClear(text === '' ? false : true)
   }, [text]);
+
+
+  useEffect(() => {
+      let count = 0
+      if (starActive1) {
+        count = 1
+        console.log("reyting: ", 1)
+      }
+      if (starActive2) {
+        count = 2
+        console.log("reyting: ", 2)
+      }
+      if (starActive3) {
+        count = 3
+        console.log("reyting: ", 3)
+      }
+      if (starActive4) {
+        count = 4
+        console.log("reyting: ", 4)
+      }
+      if (starActive5) {
+        count = 5
+        console.log("reyting: ", 5)
+      }
+      setReyting(count)
+  }, [starActive1, starActive2, starActive3, starActive4, starActive5]);
 
   useEffect(()=> {
     // сортировка городов
@@ -203,6 +236,8 @@ const Platforms = () => {
           url: platform.url,
           karta: platform.karta,
           comment: platform.comment, 
+          reyting: platform.reyting,
+          profile: platform.profile,
           createdAt: platform.createdAt,
         }
         arrWorkers.push(newPlatform)
@@ -260,8 +295,45 @@ const openPlatform = (resPlatform) => {
     setUrl(resPlatform.url)
     setImage(resPlatform.karta)
     setComment(resPlatform.comment)
+    setProfile(resPlatform.profile)
+
+    if (resPlatform.reyting === '1') {
+      setStarActive1(true)
+      setStarActive2(false)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (resPlatform.reyting === '2') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(false)
+      setStarActive4(false)
+      setStarActive5(false)
+    } 
+    if (resPlatform.reyting === '3') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(false)
+      setStarActive5(false)
+    }
+    if (resPlatform.reyting === '4') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(false)
+    }
+    if (resPlatform.reyting === '5') {
+      setStarActive1(true)
+      setStarActive2(true)
+      setStarActive3(true)
+      setStarActive4(true)
+      setStarActive5(true)
+    }
   }
-  
+  setReyting(resPlatform.reyting === null ? '' : resPlatform.reyting)
   
 
   setTimeout(()=> {
@@ -284,6 +356,7 @@ const openPlatform = (resPlatform) => {
     url,
     karta: image,
     comment,
+    reyting,
   }
   console.log("saveData: ", saveData)
 
@@ -301,6 +374,7 @@ const openPlatform = (resPlatform) => {
       url,
       karta: image,
       comment,
+      reyting,
     };
 
     console.log("update user: ", usersCopy[userIndex])
@@ -616,6 +690,7 @@ const onSortAddress = () => {
           //сообщение с ссылкой на файл
           console.log(API_URL_HOST + response.data.path)
           //setValue(host + response.data.path)
+          setProfile(API_URL_HOST + response.data.path)
         }
     }
     getImage();
@@ -749,13 +824,18 @@ const onSortAddress = () => {
                                 </div>
                     {/* 1 */} 
                                 <div style={{display: 'flex', flexDirection: 'column', width: '250px'}} onMouseOver={()=>setShowUpload(true)} onMouseOut={()=>setShowUpload(false)}>
-                                  {/* {
+                                {filePreview ? 
+                                  <img src={filePreview} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} className='avatarStyle'/>
+                                  :
+                                  (
                                     profile ? 
                                   <img src={profile} width='250px' height='250px' alt='poster' style={{borderRadius: '7px', marginBottom: '5px'}}/>
-                                  :  */}
-                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', margin: '4px 10px 2px 0px'}}>
+                                  : 
+                                  <svg className="rounded me-2" width="250" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" style={{float:'left', marginBottom: '3px'}}>
                                     <rect width="250px" height="250px" fill="#007aff" rx="40"></rect> 
                                   </svg>
+                                  )
+                                  }
                                   
                                   {/* } */}
                                   <div className="file-upload" style={{marginBottom: '8px'}}>
@@ -772,24 +852,13 @@ const onSortAddress = () => {
 
                                   <div className="menu-reyting">
                                       <div style={{width: '250px', display: 'flex', justifyContent: 'center'}}>
-                                        {showBlacklist ?
-                                        <span onClick={()=>setShowMenu2(true)} style={{cursor: 'pointer', color: 'red', fontSize: '24px', fontWeight: '700', marginBottom: '3px'}}>Blacklist</span>
-                                        :<div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
-                                          <img className='star-icon' src={StarActive} alt='' /> 
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={StarActive} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                          <img className='star-icon' src={Star} alt='' />
-                                        </div>
-                                        }
-                                      </div>
-                                      <div className="menu-content" style={{display: showMenu1 ? 'block' : 'none'}}>
-                                          <span>Изменить рейтинг</span>
-                                          <span onClick={onChangeBlacklist} style={{cursor: 'pointer'}}>Blacklist</span>
-                                      </div>
-                                      <div className="menu-content" style={{display: showMenu2 ? 'block' : 'none'}}>
-                                          <span>Изменить рейтинг</span>
-                                          <span onClick={onChangeReyting} style={{cursor: 'pointer'}}>Рейтинг</span>
+                                        <div className="star-block" style={{cursor: 'pointer', marginBottom: '8px'}} onClick={()=>setShowMenu1(true)}>
+                                          <img className='star-icon' onClick={()=>setStarActive1(!starActive1)} src={starActive1 ? StarActive : Star} alt='' /> 
+                                          <img className='star-icon' onClick={()=>setStarActive2(!starActive2)} src={starActive2 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive3(!starActive3)} src={starActive3 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive4(!starActive4)} src={starActive4 ? StarActive : Star} alt='' />
+                                          <img className='star-icon' onClick={()=>setStarActive5(!starActive5)} src={starActive5 ? StarActive : Star} alt='' />
+                                        </div>  
                                       </div>
                                   </div>
                                   
@@ -809,8 +878,8 @@ const onSortAddress = () => {
                                 <div style={{ textAlign: 'center', marginLeft: '40px', marginTop: '70px', display: 'flex', flexDirection: 'column', width: '100%', position: 'relative'}}>
                                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     {/* Город */}
-                                    <label className='title-label' style={{position: 'absolute', top: '-25px', left: '100px'}}>Город</label>
-                                    <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px', width: '250px'}}> 
+                                    <label className='title-label' style={{position: 'absolute', top: '-25px', left: '130px'}}>Город</label>
+                                    <div className="text-field" onMouseOver={()=>setShowClearCity(true)} onMouseOut={()=>setShowClearCity(false)} style={{position: 'relative', marginRight: '40px', width: '320px'}}> 
                                         {/* <CFormSelect 
                                           aria-label="Default select example"
                                           style={{backgroundColor: '#131c21'}}
@@ -864,20 +933,23 @@ const onSortAddress = () => {
                                     </div>
 
                                     {/* Проекты */}
-                                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                                    <div style={{display: 'flex', justifyContent: 'center', width: '320px'}}>
                                       <label className='title-label' style={{position: 'absolute', top: '-25px'}}>Проекты</label>
 
-                                      <CTooltip content="За месяц" placement="bottom" style={customTooltipStyle}>
-                                        <div className="text-field" style={{marginRight: '15px'}}>
-                                          <input disabled className="text-field__input" type="text" value={0} />
-                                        </div> 
-                                      </CTooltip>
+                                      <div className="text-field" style={{marginRight: '15px', width: '100%'}}>
+                                        <CTooltip content="За месяц" placement="bottom" style={customTooltipStyle}>
+                                          <div onClick={clickProjects} className="text-field__input" type="text" value={0} />
+                                        </CTooltip>
+                                      </div> 
+                                 
 
-                                      <CTooltip content="Всего" placement="bottom" style={customTooltipStyle}>
-                                        <div className="text-field">
-                                          <input disabled className="text-field__input" type="text" value={0} />
-                                        </div> 
-                                      </CTooltip>
+                                      
+                                      <div className="text-field" style={{width: '100%'}}>
+                                        <CTooltip content="Всего" placement="bottom" style={customTooltipStyle}>
+                                          <div onClick={clickProjects} className="text-field__input" type="text" value={0} />
+                                        </CTooltip>
+                                      </div> 
+                                      
                                     </div>
                                     
                                   </div>

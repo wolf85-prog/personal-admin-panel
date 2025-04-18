@@ -133,6 +133,8 @@ const Projects = () => {
   const [showSaveLocation, setShowSaveLocation] = useState(false)
   const [showSaveAddress, setShowSaveAddress] = useState(false)
   const [showSaveTreck, setShowSaveTreck] = useState(false)
+  const [showSavePhone, setShowSavePhone] = useState(false)
+  const [showSavePhone2, setShowSavePhone2] = useState(false)
 
   const [height, setHeight] = useState(435)
 
@@ -2119,7 +2121,7 @@ ${loc.url}`;
 {/* 4 */}   
                                         <div className='widthBlock4' style={{textAlign: 'center', marginTop: '10px', marginRight: '10px'}}>
                                           <label className='title-label'>Телефон</label>
-                                          <div className="text-field">
+                                          <div className="text-field" onMouseOver={()=>setShowSavePhone(true)} onMouseOut={()=>setShowSavePhone(false)}>
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
                                             <InputMask
                                                 className="text-field__input" 
@@ -2135,10 +2137,11 @@ ${loc.url}`;
                                                 placeholder=''
                                             >
                                             </InputMask>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(phone)}} alt="" style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
                                           <label className='title-label'>Телефон</label>
-                                          <div className="text-field">
+                                          <div className="text-field" onMouseOver={()=>setShowSavePhone2(true)} onMouseOut={()=>setShowSavePhone2(false)}>
                                             {/* <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" style={{width: '230px', marginRight: '10px'}}/> */}
                                             <InputMask
                                                 className="text-field__input" 
@@ -2154,6 +2157,7 @@ ${loc.url}`;
                                                 placeholder=''
                                             >
                                             </InputMask>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(phone2)}} alt="" style={{visibility: showSavePhone2 ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
                                           <div style={{position:'relative'}}>
@@ -2169,7 +2173,7 @@ ${loc.url}`;
                                                 onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
                                               />
                                             </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-40px', cursor: 'pointer', width: '15px', height: '15px'}}/>
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-25px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
                                           <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>

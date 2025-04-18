@@ -420,6 +420,7 @@ const Profile = () => {
                                   <div className="text-field">
                                     <CTooltip content="ID пользователя" placement="bottom" style={customTooltipStyle}>
                                       <div 
+                                        onClick={clickProjects}
                                         className="text-field__input" 
                                         type="text" 
                                         style={{width: '250px', paddingTop: '10px'}}
