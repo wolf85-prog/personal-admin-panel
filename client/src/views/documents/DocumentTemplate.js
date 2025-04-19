@@ -97,7 +97,7 @@ const DocumentTemplate = () => {
   const [visible, setVisible] = useState(false)
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
+    '--cui-tooltip-bg': '#2e4053',
     '--cui-tootip-color': '#fff'
   }
 

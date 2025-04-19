@@ -225,7 +225,7 @@ const Projects = () => {
   const [hasFocus, setFocus] = useState(false);
   
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
+    '--cui-tooltip-bg': '#2e4053',
     '--cui-tootip-color': '#fff'
   }
 
@@ -1554,7 +1554,8 @@ ${loc.url}`;
               "& .MuiOutlinedInput-notchedOutline": {
                 border: `2px solid #26489a`,
               },
-            }
+            },
+            '& .MuiAutocomplete-noOptions': {color: '#fff'}
           }
         }
       }
@@ -1895,6 +1896,7 @@ ${loc.url}`;
                                                 openOnFocus
                                                 id="custom-input-demo"
                                                 options={platformsData}
+                                                noOptionsText={'Пусто'}
                                                 style={{width: '100%', padding: '0'}}
                                                 onInputChange={(e)=>changeLocation(e)}
                                                 //onInputChange={(e)=>console.log(e.target.value)}
@@ -1968,21 +1970,28 @@ ${loc.url}`;
                                                         textAlign: 'center',
                                                         color: '#ffffff',
                                                         backgroundColor: 'transparent', 
-                                                    }
+                                                    },
+                                                    '& .MuiAutocomplete-noOptions': {color: '#fff'}
                                                 }}
                                                 className="text-field__input" 
                                                 id="custom-input-manager"
                                                 options={clientsData}
+                                                noOptionsText={'Пусто'}
                                                 style={{width: '100%', padding: '0'}}
                                                 PaperComponent={({ children }) => (
                                                   <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
                                                 )}
+                                                renderOption={(props, option) => {
+                                                  //const { title, color } = option;
+                                                  return (
+                                                    <span style={{ color: '#fff' }}>
+                                                      {option}
+                                                    </span>
+                                                  );
+                                                }}
                                                 //isOptionEqualToValue={(option, value) => option.value === value.value}
                                                 //filterOptions={filterOptions}
                                                 onInputChange={onChangeManager}
-                                                // onInputChange={(event, newInputValue) => {
-                                                //   setManagerName(newInputValue);
-                                                // }}
                                                 onChange={(event, newValue) => {
                                                   if (newValue && newValue.length) {   
                                                     console.log("clientAll: ", clientAll)                                                   
@@ -2040,12 +2049,13 @@ ${loc.url}`;
                                               id="custom-input-manager2"
                                               options={specialistData}
                                               style={{width: '100%', padding: '0'}}
+                                              noOptionsText={'Пусто'}
                                               getOptionLabel={(option) => option}
                                               // renderOption={(props, option) => {
                                               //   const { title } = option;
                                               //   return (
-                                              //     <span {...props} style={{ backgroundColor: '#000' }}>
-                                              //       {title}
+                                              //     <span {...props} style={{ backgroundColor: '#fff' }}>
+                                              //       {option}
                                               //     </span>
                                               //   );
                                               // }}

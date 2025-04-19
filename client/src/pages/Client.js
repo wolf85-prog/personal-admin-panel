@@ -84,7 +84,7 @@ const Client = () => {
   //console.log("workerId: ", workerId)
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
+    '--cui-tooltip-bg': '#2e4053',
     '--cui-tootip-color': '#fff'
   }
 
@@ -1188,6 +1188,7 @@ const Client = () => {
                                                 openOnFocus
                                                 id="custom-input-demo"
                                                 options={sortedCities}
+                                                noOptionsText={'Пусто'}
                                                 style={{width: '100%', padding: '0'}}
                                                 isOptionEqualToValue={(option, value) => option.value === value.value}
                                                 onInputChange={(e)=>setCity(e.target.value)}

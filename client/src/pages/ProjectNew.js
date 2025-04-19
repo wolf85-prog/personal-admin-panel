@@ -270,7 +270,7 @@ const ProjectNew = () => {
   const chatGroupId = process.env.REACT_APP_CHAT_GROUP_ID2
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
+    '--cui-tooltip-bg': '#2e4053',
     '--cui-tootip-color': '#fff'
   }
 
@@ -1089,6 +1089,7 @@ let specArr = []
                                     openOnFocus
                                     id="custom-input-demo"
                                     options={sortedProjects}
+                                    noOptionsText={'Пусто'}
                                     style={{width: '100%', padding: '0'}}
                                     //isOptionEqualToValue={(option, value) => option.value === value.value}
                                     //getOptionLabel={(proj) => proj.name }
@@ -1196,6 +1197,7 @@ let specArr = []
                                     openOnFocus
                                     id="custom-input-demo"
                                     options={sortedCities}
+                                    noOptionsText={'Пусто'}
                                     style={{width: '100%', padding: '0'}}
                                     //isOptionEqualToValue={(option, value) => option.value === value.value}
                                     onInputChange={onChangeCity}
@@ -1246,6 +1248,7 @@ let specArr = []
                                   openOnFocus
                                   id="custom-input-demo"
                                   options={platformsData}
+                                  noOptionsText={'Пусто'}
                                   style={{width: '100%', padding: '0'}}
                                   onInputChange={(e)=>changeLocation(e)}
                                   //onInputChange={(e)=>console.log(e.target.value)}
@@ -1332,6 +1335,7 @@ let specArr = []
                                           openOnFocus
                                           id="custom-input-manager2"
                                           options={workersData}
+                                          noOptionsText={'Пусто'}
                                           style={{width: '100%', padding: '0'}}
                                           //isOptionEqualToValue={(option, value) => option.value === value.value}
                                           //onInputChange={onChangeManager2} 

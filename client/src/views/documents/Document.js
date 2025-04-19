@@ -78,7 +78,7 @@ const Document = () => {
   const queryClient = useQueryClient()
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
+    '--cui-tooltip-bg': '#2e4053',
     '--cui-tootip-color': '#fff'
   }
 

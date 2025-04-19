@@ -61,8 +61,8 @@ const AppHeader = (props) => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
-    '--cui-tootip-color': '#fff'
+    '--cui-tooltip-bg': `#2e4053`,
+    '--cui-tootip-color': '#fff',
   }
 
   const { workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 

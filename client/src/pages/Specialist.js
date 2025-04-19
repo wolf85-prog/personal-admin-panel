@@ -171,7 +171,7 @@ const Specialist = () => {
   const [sortedCities, setSortedCities] = useState([])
 
   const customTooltipStyle = {
-    '--cui-tooltip-bg': '#000',
+    '--cui-tooltip-bg': '#2e4053',
     '--cui-tootip-color': '#fff'
   }
 
@@ -1093,7 +1093,7 @@ const Specialist = () => {
                                   {/* ФИО */}
                                   <div style={{position: 'absolute', top: '5px', left: '286px', color: '#fff', zIndex: '100', display: 'flex', justifyContent: 'space-between'}}>   
                                     <div className="text-field">
-                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '600px'}}></input>
+                                      <input type="text" name="fio" id="fio" value={fio} onChange={(e)=>setFio(e.target.value)} style={{fontSize: '33px', position: 'absolute', top: '-17px', backgroundColor: 'transparent', border: '0', color: '#f3f3f3', width: '450px'}}></input>
                                     </div>
                                     
                                   </div>
@@ -1259,6 +1259,7 @@ const Specialist = () => {
                                               openOnFocus
                                               id="custom-input-demo"
                                               options={sortedCities}
+                                              noOptionsText={'Пусто'}
                                               style={{width: '100%', padding: '0'}}
                                               isOptionEqualToValue={(option, value) => option.value === value.value}
                                               onInputChange={(e)=>setCity(e.target.value)}
