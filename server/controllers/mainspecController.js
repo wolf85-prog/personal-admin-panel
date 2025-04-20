@@ -18,9 +18,29 @@ const socketUrl = process.env.SOCKET_APP_URL
 
 class MainspecController {
     async getMainSpecByFilter(req, res) {
-        const { dateFilter, mainSpecDateNotEmpty, projectId} = req.body;        
+        const { dateFilter, mainSpecDateNotEmpty, projectId, workersFilter} = req.body;
         
         try {
+            if (workersFilter === "true") {
+                
+                const workers = await MainSpec.findAll({
+                    order: [["id", "DESC"]],
+                    where: {
+                        updatedAt: {
+                            [Op.gte]: Date.parse(dateFilter),
+                          },
+                       
+                        specId: {
+                            [Op.and]: {
+                                [Op.ne]: null,
+                                [Op.ne]: ''
+                              }
+                        }
+                    },
+                  });
+                  return res.status(200).json(workers);
+
+            }
 
             if (dateFilter) {
                 const workers = await MainSpec.findAll({
@@ -48,6 +68,7 @@ class MainspecController {
                   return res.status(200).json(workers);
 
             }
+            
     
           
         } catch (error) {
