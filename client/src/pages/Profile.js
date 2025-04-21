@@ -46,7 +46,8 @@ import Trubka from "./../assets/images/trubka.png";
 import Tg from "./../assets/images/tg.png";
 import Star from "./../assets/images/star.png";
 import StarActive from "./../assets/images/star_activ.svg";
-import Disketa from "./../assets/images/disketa.png";
+import Disketa2 from "./../assets/images/disketa.png";
+import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 
 
@@ -115,6 +116,10 @@ const Profile = () => {
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
+
+  const [showSavePhone, setShowSavePhone] = useState(false);
+  const [showSavePhone2, setShowSavePhone2] = useState(false);
+  const [showSaveEmail, setShowSaveEmail] = useState(false);
 
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
@@ -382,7 +387,7 @@ const Profile = () => {
                                    {/* Кнопки */}
                                   <div style={{display: 'flex', position: 'absolute', right: '0'}}>
                                     <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
-                                      <img src={Disketa} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                      <img src={Disketa2} onClick={()=>saveProfile(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                     </CTooltip>
                                     <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                       <img src={Close} onClick={closeProfile} style={{display: showClose ? 'block' : 'block', cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -540,7 +545,13 @@ const Profile = () => {
 {/* 3 */}
                                 <div style={{marginLeft: '40px', marginTop: '85px', display: 'flex', flexDirection: 'column', width: '320px'}}>
                                     <label className='title-label'>Телефон №1</label>
-                                    <div className="text-field">                                   
+                                    <div className="text-field" onMouseOver={()=>setShowSavePhone(true)} onMouseOut={()=>setShowSavePhone(false)}>
+                                      <img 
+                                        src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(phone)}} 
+                                        alt="" 
+                                        style={{visibility: showSavePhone ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                      />                                 
                                       <InputMask
                                           className="text-field__input" 
                                           //style={{width: '225px'}}
@@ -559,7 +570,13 @@ const Profile = () => {
                                     </div> 
 
                                   <label className='title-label'>Телефон №2</label>
-                                  <div className="text-field">                                    
+                                  <div className="text-field" onMouseOver={()=>setShowSavePhone2(true)} onMouseOut={()=>setShowSavePhone2(false)}>
+                                      <img 
+                                        src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(phone2)}} 
+                                        alt="" 
+                                        style={{visibility: showSavePhone2 ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                      />                                    
                                       <InputMask
                                           className="text-field__input" 
                                           //style={{width: '320px'}}
@@ -578,7 +595,13 @@ const Profile = () => {
                                   </div> 
 
                                   <label className='title-label'>Почта</label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSaveEmail(true)} onMouseOut={()=>setShowSaveEmail(false)}>
+                                      <img 
+                                        src={Disketa} 
+                                        onClick={()=>{navigator.clipboard.writeText(email)}} 
+                                        alt="" 
+                                        style={{visibility: showSaveEmail ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                      />  
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                                   </div> 
 

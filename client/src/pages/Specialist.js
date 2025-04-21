@@ -1380,7 +1380,7 @@ const Specialist = () => {
                                     </CTooltip>
                                     
                                     {/* опоздания */}
-                                    <CTooltip content="Опоздания" placement="bottom">
+                                    <CTooltip content="Опоздания" placement="bottom" style={customTooltipStyle}>
                                       <div className="text-field">
                                         <input disabled className="text-field__input" type="text" name="rank" id="rank" value={rank} onChange={(e) => setRank(e.target.value)} style={{width: '40px', marginRight: '8px', color: 'red'}}/>
                                       </div>

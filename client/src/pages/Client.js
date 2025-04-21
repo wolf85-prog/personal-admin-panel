@@ -168,6 +168,8 @@ const Client = () => {
 
   const [visibleDelete, setVisibleDelete] = useState(false)
 
+  const [showSaveEmail, setShowSaveEmail] = useState(false)
+
   const [file, setFile] = useState(0);
   const [filePreview, setFilePreview] = useState();
   const [image, setImage]= useState("");
@@ -1118,7 +1120,7 @@ const Client = () => {
                                   <label className='title-label'>ID</label>
                                   <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <div className="text-field">
-                                      <input disabled={true} className="text-field__input" type="text" name="dateReg" id="dateReg" value={id}  style={{width: '250px'}}/>
+                                      <div onClick={clickProjects} className="text-field__input" type="text" name="dateReg" id="dateReg" value={id}  style={{width: '250px', paddingTop: '8px'}}>{id}</div>
                                     </div>
                                   </div> 
 
@@ -1238,7 +1240,13 @@ const Client = () => {
 
                                   {/* email */}
                                   <label className='title-label'>Почта</label>
-                                  <div className="text-field">
+                                  <div className="text-field" onMouseOver={()=>setShowSaveEmail(true)} onMouseOut={()=>setShowSaveEmail(false)}>
+                                    <img 
+                                      src={Disketa} 
+                                      onClick={()=>{navigator.clipboard.writeText(email)}} 
+                                      alt="" 
+                                      style={{visibility: showSaveEmail ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}
+                                    />
                                     <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                   </div> 
                                   
@@ -1248,32 +1256,32 @@ const Client = () => {
                                   <div className="uley-line" style={{left: '685px', top: '60px', width: '85px'}}></div>
                                   <div className="uley-line" style={{left: '850px', top: '60px', width: '85px'}}></div>
                                   <label className='title-label' style={{position: 'absolute', top: '40px'}}>Проекты</label>
-                                  <div style={{display: 'flex'}}>
+                                  <div style={{display: 'flex', width: '100%'}}>
                                     {/* проекты за месяц */}
                                     <CTooltip content="Проекты за месяц" placement="bottom" style={customTooltipStyle}>
-                                      <div className="text-field" style={{marginRight: '8px'}}>
-                                        <input className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{marginRight: '8px'}}/>
+                                      <div className="text-field" style={{marginRight: '8px', width: '100%'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="reyting" id="reyting" value={'0'} style={{marginRight: '8px', width: '100%', paddingTop: '8px'}}>0</div>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* проекты всего */}
                                     <CTooltip content="Проекты всего" placement="bottom" style={customTooltipStyle}>
-                                      <div className="text-field" style={{marginRight: '8px'}}>
-                                        <input className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{marginRight: '8px'}}/>
+                                      <div className="text-field" style={{marginRight: '8px', width: '100%'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="rank" id="rank" value={'0'}  style={{marginRight: '8px', width: '100%', paddingTop: '8px'}}>0</div>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* опоздания */}
                                     <CTooltip content="Отмененные проекты" placement="bottom" style={customTooltipStyle}>
-                                      <div className="text-field" style={{marginRight: '8px'}}>
-                                        <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{marginRight: '8px', color: 'red'}}/>
+                                      <div className="text-field" style={{marginRight: '8px', width: '100%'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{marginRight: '8px', color: 'red', width: '100%', paddingTop: '8px'}}>0</div>
                                       </div>
                                     </CTooltip>
                                     
                                     {/* невыходы */}
                                     <CTooltip content="... проекты" placement="bottom" style={customTooltipStyle}>
-                                      <div className="text-field" >
-                                        <input className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{color: 'red'}}/>
+                                      <div className="text-field" style={{width: '100%'}}>
+                                        <div onClick={clickProjects} className="text-field__input" type="text" name="rank" id="rank" value={'0'} style={{color: 'red', width: '100%', paddingTop: '8px'}}>0</div>
                                       </div>
                                     </CTooltip>
                                     
