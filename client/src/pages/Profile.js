@@ -579,7 +579,7 @@ const Profile = () => {
 
                                   <label className='title-label'>Почта</label>
                                   <div className="text-field">
-                                    <div onClick={clickRazrab}  className="text-field__input" type="text" name="email" id="email" value={email}/>
+                                    <input className="text-field__input" type="text" name="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                                   </div> 
 
                                   <label className='title-label'>Пароль</label>
