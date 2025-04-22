@@ -122,7 +122,9 @@ class PlatformsController {
         try {     
             const {title, userId} = req.body
 
-            const newUser = await Platform.create({userId, title})
+            const urlAvatar = 'https://uley.company:2000/uploads/2025-04-04T13:01:59.490Z.png'
+
+            const newUser = await Platform.create({userId, title, profile: urlAvatar})
             return res.status(200).json(newUser);
         } catch (error) {
             return res.status(500).json(error.message);
