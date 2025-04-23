@@ -473,142 +473,7 @@ const ProjectNew = () => {
     console.log("Основной состав: ", mainspec)
   }, [mainspec])
 
-  //сохранить проект
-  const saveProject = async(id) => {
 
-    //Toast
-    setShowModal(true)
-
-    console.log("id: ", id)
-    console.log("start: ", startDate)
-    console.log("end: ", endDate)
-    console.log("managerId: ", clientAll.find(item=> item.fio === managerName)?.id)
-    console.log("managerId2: ", workersAll.find(item=> item.fio === managerName)?.id)
-    console.log("companyId: ", companysAll.find(item=> item.title === companyName)?.id)
-    console.log("startProject: ", startProject)
-
-    //удаляем старые записи из Основного состава
-    //const resAllDel = await deleteMainspecProject(id)
-    //console.log("resAllDel: ", resAllDel)
-
-    const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
-    const day = String(new Date(startDate).getDate()).padStart(2, "0");
-
-    const month2 = String(new Date(endDate).getMonth()+1).padStart(2, "0");
-    const day2 = String(new Date(endDate).getDate()).padStart(2, "0");
-  
-    const saveData = {
-      userId,
-      name: projectName,
-      status: statusProject.name,
-      start: startProject.name,
-      datestart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
-      dateend: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
-      teh: tehText, 
-      teh1,
-      teh2,
-      teh3,
-      teh4,
-      teh5,
-      teh6,
-      teh7,
-      teh8,
-      geo: geoId, 
-      managerId: clientAll.find(item=> item.userfamily === managerName)?.id, 
-      managerId2: workersAll.find(item=> item.userfamily === managerName2)?.id,
-      companyId: companysAll.find(item=> item.title === companyName)?.id, 
-      comment, 
-      specifika: specifikaProject.name, 
-      city,
-    }
-    console.log(saveData)
-  
-    //сохранить изменения в базе
-    const resSave = await editProject(saveData, id) 
-    console.log("resSave: ", resSave)
-
-    console.log("mainSpec save: ", mainspec)
-
-    const resMain = await getMainSpecProject(id)
-    console.log("mainSpec get: ", resMain)
-
-    mainspec.map(async(item, index)=> {
-      //setTimeout(async()=> {
-        //console.log("id item: ", resMain[index]?.id)
-        const resItem = resMain.find(item2 => item2.id === item.id)
-        if (resItem) {
-          const resEdit = await editMainspec(
-            {
-             // userId: item.userId,
-              date: item.date,
-              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-              specId: item.specId,
-              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-              comment: item.comment,
-              projectId: item.projectId,
-              number: index+1,
-              hr: item.hr,
-              merch: item.merch,
-              taxi: item.taxi,
-            },
-            resItem.id
-          )
-          console.log("resEdit: ", resEdit)
-        } else {
-          await addMainspec(
-            {
-              userId,
-              date: item.date,
-              vidWork: item.vidWork ? JSON.parse(item.vidWork).name : '',
-              specId: item.specId,
-              specialization: item.specialization ? JSON.parse(item.specialization).name : '',
-              stavka: item.stavka ? JSON.parse(item.stavka).name : '',
-              comteg: item.comteg ? JSON.parse(item.comteg).name : '',
-              comment: item.comment,
-              projectId: item.projectId,
-              number: index+1,
-              hr: item.hr,
-              // merch,
-              // taxi,
-            }
-          )
-        }
-        
-      //}, 500 * ++index)
-    })
-
-  
-    setProjects((projects) => {	
-      const month = String(new Date(startDate).getMonth()+1).padStart(2, "0");
-      const day = String(new Date(startDate).getDate()).padStart(2, "0");
-  
-      let userIndex = projects.findIndex((item) => item.id === id);
-      console.log(userIndex)
-      const usersCopy = JSON.parse(JSON.stringify(projects));
-  
-      const userObject = usersCopy[userIndex];
-      usersCopy[userIndex] = { ...userObject, 
-        id: id,
-        name: projectName, 
-        status: statusProject.name,
-        specifika: specifikaProject.name,
-        dateStart: `${new Date(startDate).getFullYear()}-${month}-${day}T${startTime}:00.000Z`,
-        dateEnd: endDate ? `${new Date(endDate).getFullYear()}-${month2}-${day2}T${endTime}:00.000Z` : '',
-      };
-  
-      console.log("update user: ", usersCopy)
-  
-      return usersCopy;
-    });
-
-
-    setTimeout(()=> {     
-      setShowModal(false)
-      closeProfile()
-    }, 2000)
-  }
 
   const closeProfile = () => {
     setShowHeader(false)
@@ -820,7 +685,7 @@ ${workers.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 
 
     const projectStatus = 'Новый'
-    const projectStart = 'Проект 120'
+    const projectStart = '120 минут'
 
     const tehTextAll = `Компания: ${comp[0]?.title}
 Менеджер: ${manager?.fio}
@@ -958,7 +823,7 @@ let specArr = []
                                 <img src={Tg}  style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/> */}
                                 <img src={zamok} onClick={()=>setShowModalEmpty(true)} style={{cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>
                                 <CTooltip content="Сохранить" placement="bottom" style={customTooltipStyle}>
-                                  <img src={Disketa2} onClick={()=>saveProject(id)} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
+                                  <img src={Disketa2} style={{cursor: 'pointer', width: '24px', height: '24px', marginLeft: '20px'}}/>
                                 </CTooltip>
                                 <CTooltip content="Закрыть" placement="bottom" style={customTooltipStyle}>
                                   <img src={Close} onClick={closeProfile} style={{ cursor: 'pointer', width: '19px', height: '24px', marginLeft: '20px'}}/>  
@@ -1552,19 +1417,19 @@ let specArr = []
                                   <div style={{width: '100%'}}>
                                     <label className='title-label'>Количество</label>
                                     <div className="text-field" style={{display: 'flex'}}>
-                                      <CButton onClick={increment} className='uley_edit_manager' style={{width: '40px', height: '40px', marginLeft: '1px'}}>
-                                        <span style={{fontSize: '18px', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
-                                          +
-                                        </span>
-                                      </CButton> 
-                                      <div>
-                                        <input disabled={false} value={countWorker === 0 ? 1 : countWorker} onChange={e => setWorker({...worker, count: e.target.value})} className="text-field__input" type="text" name="dateReg" id="dateReg" />
-                                      </div>
                                       <CButton onClick={decrement}  className='uley_edit_manager' style={{width: '40px', height: '40px', marginLeft: '1px'}}>
                                         <span style={{fontSize: '18px', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
                                           -
                                         </span>
                                       </CButton> 
+                                      <div>
+                                        <input disabled={false} value={countWorker === 0 ? 1 : countWorker} onChange={e => setWorker({...worker, count: e.target.value})} className="text-field__input" type="text" name="dateReg" id="dateReg" />
+                                      </div> 
+                                      <CButton onClick={increment} className='uley_edit_manager' style={{width: '40px', height: '40px', marginLeft: '1px'}}>
+                                        <span style={{fontSize: '18px', position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)'}}>
+                                          +
+                                        </span>
+                                      </CButton>
                                     </div>
                                     
 
