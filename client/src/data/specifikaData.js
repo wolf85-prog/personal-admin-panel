@@ -6,10 +6,10 @@ const specifikaData = [
   {value: 3, label: 'Улица', color: '#1E90FF'},
   {value: 4, label: "Ночь", color: '#1E90FF'},
 
-  {value: 5, label: "Корпоративное такси", color: '#1E90FF'},
-  {value: 6, label: "Доп. расходы", color: '#1E90FF'},
-  {value: 7, label: "Нестандартный проект", color: '#1E90FF'},
-  {value: 8, label: "Гастрольный тур", color: '#1E90FF'},
+  {value: 5, label: "Корпоративное такси", color: 'red'},
+  {value: 6, label: "Доп. расходы", color: 'red'},
+  {value: 7, label: "Нестандартный проект", color: 'red'},
+  {value: 8, label: "Гастрольный тур", color: 'red'},
 
   // {value: 10, label: "Проект 90", color: '#1E90FF'},
   // {value: 11, label: "Проект 60", color: '#1E90FF'},

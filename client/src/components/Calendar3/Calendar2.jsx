@@ -986,7 +986,7 @@ export default function Calendar2({projects, setProjects, openProject, setHeight
 
         const projectTitle = 'Название проекта'
         const projectStatus = 'Новый'
-        const projectStart = 'Проект 120'
+        const projectStart = '120 минут'
         const projectColor = '#1E90FF'
 
         const data = {

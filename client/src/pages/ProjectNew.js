@@ -96,6 +96,7 @@ import cities from 'src/data/cities';
 import specifikaData from 'src/data/specifikaData';
 import vids from 'src/data/vids';
 import comtegs from 'src/data/comtegsWorker';
+import formatData from 'src/data/formatData';
 // import specOnlyData2 from 'src/data/specOnlyData2';
 
 import { getCompany } from '../http/companyAPI'
@@ -1423,7 +1424,7 @@ let specArr = []
                                   <div className="text-field" style={{width: '230px'}}>
                                     <MyDropdown4
                                       style={{backgroundColor: '#131c21'}}
-                                      options={specifikaData}
+                                      options={formatData}
                                       selected={formatSpec}
                                       setSelected={setFormatSpec}
                                       placeholder='Выбери формат'
