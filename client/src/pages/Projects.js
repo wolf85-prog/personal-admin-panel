@@ -1981,14 +1981,14 @@ ${loc.url}`;
                                                 PaperComponent={({ children }) => (
                                                   <Paper style={{ background: '#131c21', border: '1px solid #2d2e38', color: '#fff'}}>{children}</Paper>
                                                 )}
-                                                renderOption={(props, option) => {
-                                                  //const { title, color } = option;
-                                                  return (
-                                                    <span style={{ color: '#fff' }}>
-                                                      {option}
-                                                    </span>
-                                                  );
-                                                }}
+                                                // renderOption={(props, option) => {
+                                                //   //const { title, color } = option;
+                                                //   return (
+                                                //     <span style={{ color: '#fff' }}>
+                                                //       {option}
+                                                //     </span>
+                                                //   );
+                                                // }}
                                                 //isOptionEqualToValue={(option, value) => option.value === value.value}
                                                 //filterOptions={filterOptions}
                                                 onInputChange={onChangeManager}
