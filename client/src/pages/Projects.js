@@ -2665,7 +2665,7 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-
+                                        25.04.2025 | 10:00
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       
@@ -2674,7 +2674,7 @@ ${loc.url}`;
                                       className="text-left"
                                       style={{ cursor: 'pointer', }}
                                     >
-
+                                      Осипов Илья Александрович
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-center"
@@ -2683,16 +2683,180 @@ ${loc.url}`;
                                       
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
+                                      <CTooltip
+                                          content='Звукорежессер'
+                                          placement="bottom"
+                                          style={customTooltipStyle}
+                                        >
+                                          <div>
+                                            Звукорежессер
+                                          </div>
+                                        </CTooltip>
                                       
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">0 | 0</CTableDataCell>
+                                    <CTableDataCell className="text-center">10 | 5</CTableDataCell>
                                     <CTableDataCell className="text-center">
-
+                                        Опоздание
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <CTooltip
+                                          content='Комментарий'
+                                          placement="bottom"
+                                          style={customTooltipStyle}
+                                        >
+                                          <div>
+                                            Комментарий
+                                          </div>
+                                        </CTooltip>
+                                      
+                                    </CTableDataCell>
+                            </CTableRow>
+                            <CTableRow
+                                    v-for="item in tableItems"
+                                    style={{ lineHeight: '14px' }}
+                                  >
+                                    <CTableDataCell
+                                      className="text-center"
+                                      style={{ position: 'relative' }}
+                                    >
+                                      <div
+                                        className="parent-element"
+                                        style={{ position: 'absolute', left: '5px', top: '6px' }}
+                                      >
+                                        <Dropdown>
+                                          <Dropdown.Toggle
+                                            as={CustomToggle}
+                                            id="dropdown-custom-components"
+                                          ></Dropdown.Toggle>
+                                          <Dropdown.Menu as={CustomMenu}>
+                                            <Dropdown.Item>Добавить</Dropdown.Item>
+                                            <Dropdown.Item>Дублировать</Dropdown.Item>
+                                            <Dropdown.Item>Разделитель</Dropdown.Item>
+                                            <Dropdown.Item>Удалить</Dropdown.Item>
+                                          </Dropdown.Menu>
+                                        </Dropdown>
+                                      </div>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                        25.04.2025 | 10:00
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       
                                     </CTableDataCell>
-                                  </CTableRow>
+                                    <CTableDataCell
+                                      className="text-left"
+                                      style={{ cursor: 'pointer', }}
+                                    >
+                                      Тобияш Егор Романович
+                                    </CTableDataCell>
+                                    <CTableDataCell
+                                      className="text-center"
+                                      style={{ padding: '0px 5px' }}
+                                    >
+                                      
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center widthSpace">
+                                      <CTooltip
+                                          content='Звукорежессер'
+                                          placement="bottom"
+                                          style={customTooltipStyle}
+                                        >
+                                          <div>
+                                            Звукорежессер
+                                          </div>
+                                        </CTooltip>
+                                      
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">3 | 3</CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                        Опоздание
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <CTooltip
+                                          content='Комментарий'
+                                          placement="bottom"
+                                          style={customTooltipStyle}
+                                        >
+                                          <div>
+                                            Комментарий
+                                          </div>
+                                        </CTooltip>
+                                      
+                                    </CTableDataCell>
+                            </CTableRow>
+                            <CTableRow
+                                    v-for="item in tableItems"
+                                    style={{ lineHeight: '14px' }}
+                                  >
+                                    <CTableDataCell
+                                      className="text-center"
+                                      style={{ position: 'relative' }}
+                                    >
+                                      <div
+                                        className="parent-element"
+                                        style={{ position: 'absolute', left: '5px', top: '6px' }}
+                                      >
+                                        <Dropdown>
+                                          <Dropdown.Toggle
+                                            as={CustomToggle}
+                                            id="dropdown-custom-components"
+                                          ></Dropdown.Toggle>
+                                          <Dropdown.Menu as={CustomMenu}>
+                                            <Dropdown.Item>Добавить</Dropdown.Item>
+                                            <Dropdown.Item>Дублировать</Dropdown.Item>
+                                            <Dropdown.Item>Разделитель</Dropdown.Item>
+                                            <Dropdown.Item>Удалить</Dropdown.Item>
+                                          </Dropdown.Menu>
+                                        </Dropdown>
+                                      </div>
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                        25.04.2025 | 10:00
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      
+                                    </CTableDataCell>
+                                    <CTableDataCell
+                                      className="text-left"
+                                      style={{ cursor: 'pointer', }}
+                                    >
+                                      Ломейко Алексей Александрович
+                                    </CTableDataCell>
+                                    <CTableDataCell
+                                      className="text-center"
+                                      style={{ padding: '0px 5px' }}
+                                    >
+                                      
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center widthSpace">
+                                      <CTooltip
+                                          content='Звукорежессер'
+                                          placement="bottom"
+                                          style={customTooltipStyle}
+                                        >
+                                          <div>
+                                            Звукорежессер
+                                          </div>
+                                        </CTooltip>
+                                      
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">12 | 4</CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                        Невыход
+                                    </CTableDataCell>
+                                    <CTableDataCell className="text-center">
+                                      <CTooltip
+                                          content='Комментарий'
+                                          placement="bottom"
+                                          style={customTooltipStyle}
+                                        >
+                                          <div>
+                                            Комментарий
+                                          </div>
+                                        </CTooltip>
+                                      
+                                    </CTableDataCell>
+                            </CTableRow>
                           </CTableBody>
                         </CTable>
                       </CCardBody>
