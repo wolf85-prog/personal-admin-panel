@@ -776,7 +776,7 @@ ${loc.url}`;
 
     
     setVisibleA(true)
-    setVisibleB(true)
+    //setVisibleB(true)
     setShowMainTable(true)
     setShowPretendentTable(true)
     setShowPosterTable(true)
@@ -2585,7 +2585,7 @@ ${loc.url}`;
                             <CTableRow>
                               <CTableHeaderCell className="text-center">
                                 <split style={{ position: 'absolute', left: '47px', top: '63px' }}>
-                                  {0}
+                                  {3}
                                 </split>
                               </CTableHeaderCell>
                               <CTableHeaderCell
@@ -2684,19 +2684,19 @@ ${loc.url}`;
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                       <CTooltip
-                                          content='Звукорежессер'
+                                          content='Системный инженер'
                                           placement="bottom"
                                           style={customTooltipStyle}
                                         >
                                           <div>
-                                            Звукорежессер
+                                          Системный инженер
                                           </div>
                                         </CTooltip>
                                       
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">10 | 5</CTableDataCell>
+                                    <CTableDataCell className="text-center">5 | 10</CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        Опоздание
+                                        Нарушение субординации
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       <CTooltip
@@ -2738,7 +2738,7 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 | 10:00
+                                        25.04.2025 | 10:05
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       
@@ -2811,7 +2811,7 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 | 10:00
+                                        25.04.2025 | 11:08
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       
@@ -2830,28 +2830,28 @@ ${loc.url}`;
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center widthSpace">
                                       <CTooltip
-                                          content='Звукорежессер'
+                                          content='Backline'
                                           placement="bottom"
                                           style={customTooltipStyle}
                                         >
                                           <div>
-                                            Звукорежессер
+                                            Backline
                                           </div>
                                         </CTooltip>
                                       
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">12 | 4</CTableDataCell>
+                                    <CTableDataCell className="text-center">4 | 12</CTableDataCell>
                                     <CTableDataCell className="text-center">
                                         Невыход
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       <CTooltip
-                                          content='Комментарий'
+                                          content='🔵 Портфолио:\n\n◉ Возраст: 24\n◉ Рост: 170\n◉ Размер: 40 - 44\n◉ Обувь: 38\n—\n◉ Фото:\n\n🔵https://img.notionusercontent.com/s3/prod-files-secure%2F87f1026b-715b-458c-be85-cd4eae7e3e00%2Fef2a933e-f75f-479c-8d68-aa07ab33e06e%2F1725651394465.jpg/size/w=2000?exp=1727941320&sig=6hXjNRoIwUdt158sEWQUTXILzXDYVqfQ6DMYWaN0pHc\n\n🔵https://img.notionusercontent.com/s3/prod-files-secure%2F87f1026b-715b-458c-be85-cd4eae7e3e00%2Fde537a02-04dd-4d34-92d7-ba13f83db15f%2F1725651394590.jpg/size/w=2000?exp=1727941334&sig=aV6zxVmjH7MKZOV0XvCuKw7-OMzSp1uxrRSJjJ_7MNs\n\n◉ Видео:'
                                           placement="bottom"
                                           style={customTooltipStyle}
                                         >
                                           <div>
-                                            Комментарий
+                                          🔵 Портфолио:\n\n◉ Возраст:...
                                           </div>
                                         </CTooltip>
                                       
