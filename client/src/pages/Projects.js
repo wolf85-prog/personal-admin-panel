@@ -222,6 +222,10 @@ const Projects = () => {
 
   const [countPressDate, setCountPressDate] = useState(0);
 
+  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked2, setIsChecked2] = useState(false)
+  const [isChecked3, setIsChecked3] = useState(false)
+
   const [hasFocus, setFocus] = useState(false);
   
   const customTooltipStyle = {
@@ -2665,11 +2669,13 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 10:00
+                                        25.04.2025 <span style={{paddingLeft: '10px'}}>10:00</span>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       <CFormCheck 
-                                        checked={false}
+                                        name={1}
+                                        checked={isChecked}
+                                        onChange={()=>setIsChecked(!isChecked)}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px',}} 
                                       />
                                     </CTableDataCell>
@@ -2701,7 +2707,7 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center">
                                         Нарушение субординации
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">
+                                    <CTableDataCell className="text-left">
                                       <CTooltip
                                           content='❌ Живет у м. Беговая 
 
@@ -2772,7 +2778,7 @@ ${loc.url}`;
                                           style={customTooltipStyle}
                                         >
                                           <div>
-                                          ❌ Живет у м. Беговая ...
+                                          ❌ Живет у м. Беговая ❌ 10.04...
                                           </div>
                                         </CTooltip>
                                       
@@ -2805,11 +2811,13 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 10:05
+                                        25.04.2025 <span style={{paddingLeft: '10px'}}>10:05</span>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       <CFormCheck 
-                                        checked={false}
+                                        name={2}
+                                        checked={isChecked2}
+                                        onChange={()=>setIsChecked2(!isChecked2)}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px',}} 
                                       />
                                     </CTableDataCell>
@@ -2841,7 +2849,7 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center">
                                         Опоздание
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">
+                                    <CTableDataCell className="text-left">
                                       <CTooltip
                                           content='🔵 Живет в р-оне  Зябликово
 
@@ -2915,11 +2923,13 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 11:08
+                                        25.04.2025 <span style={{paddingLeft: '10px'}}>11:08</span>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
                                       <CFormCheck 
-                                        checked={false}
+                                        name={3}
+                                        checked={isChecked3}
+                                        onChange={()=>setIsChecked3(!isChecked3)}
                                         style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px',}} 
                                       />
                                     </CTableDataCell>
@@ -2951,7 +2961,7 @@ ${loc.url}`;
                                     <CTableDataCell className="text-center">
                                         Невыход
                                     </CTableDataCell>
-                                    <CTableDataCell className="text-center">
+                                    <CTableDataCell className="text-left">
                                       <CTooltip
                                           content='❌12.04.2025 | Прорыв — Отметился во всех перекличках, при запуске нажал «на связи» и пропал, на сообщения и звонки не отвечал.
 
