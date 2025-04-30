@@ -2344,7 +2344,7 @@ ${loc.url}`;
                                     </CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{width: '180px'}}>Дата</CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '170px'}}>Вид работ</CTableHeaderCell>  
-                                    <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>ФИО</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center" style={{minWidth: '50px'}}>ФИО</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell> 
                                     <CTableHeaderCell className="text-center" style={{minWidth: '20px'}}></CTableHeaderCell>
                                     <CTableHeaderCell className="text-center" style={{minWidth: '250px'}}>Специальность</CTableHeaderCell>  
@@ -2597,13 +2597,13 @@ ${loc.url}`;
                               </CTableHeaderCell>
                               <CTableHeaderCell
                                 className="text-center"
-                                style={{ minWidth: '150px' }}
+                                style={{ minWidth: '50px' }}
                               >
                                 Статус
                               </CTableHeaderCell>
                               <CTableHeaderCell
                                 className="text-center"
-                                style={{ minWidth: '250px' }}
+                                style={{ minWidth: '50px' }}
                               >
                                 ФИО
                               </CTableHeaderCell>
@@ -2665,16 +2665,19 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 | 10:00
+                                        25.04.2025 10:00
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                      
+                                      <CFormCheck 
+                                        checked={false}
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px',}} 
+                                      />
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-left"
                                       style={{ cursor: 'pointer', }}
                                     >
-                                      Осипов Илья Александрович
+                                      Илья
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-center"
@@ -2802,16 +2805,19 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 | 10:05
+                                        25.04.2025 10:05
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                      
+                                      <CFormCheck 
+                                        checked={false}
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px',}} 
+                                      />
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-left"
                                       style={{ cursor: 'pointer', }}
                                     >
-                                      Тобияш Егор Романович
+                                      Егор
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-center"
@@ -2909,16 +2915,19 @@ ${loc.url}`;
                                       </div>
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                        25.04.2025 | 11:08
+                                        25.04.2025 11:08
                                     </CTableDataCell>
                                     <CTableDataCell className="text-center">
-                                      
+                                      <CFormCheck 
+                                        checked={false}
+                                        style={{backgroundColor: '#181924', border: '1px solid #434343', margin: '0px 5px',}} 
+                                      />
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-left"
                                       style={{ cursor: 'pointer', }}
                                     >
-                                      Ломейко Алексей Александрович
+                                      Алексей
                                     </CTableDataCell>
                                     <CTableDataCell
                                       className="text-center"
