@@ -34,6 +34,7 @@ import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import {addManager} from "../../../http/managerAPI";
 import {addCompanyProf} from "../../../http/companyAPI";
 import { addConversation, newMessage } from 'src/http/supportAPI'
+import {createTenant} from 'src/services/api/tenant'
 
 import logo from './../../../assets/brand/logo_04_light.png'
 
@@ -124,6 +125,9 @@ const Login = observer(() => {
             setUserId(data.id)
             localStorage.setItem('user', JSON.stringify({id: data.id, phone: data.phone, role: data.role}))
 
+            // const resTenant = await createTenant(data.id)
+            // console.log("resTenant: ", resTenant)
+
             navigate(ADMIN_ROUTE)
         } catch (e) {
             //next(e)
@@ -153,6 +157,9 @@ const Login = observer(() => {
 
               setUserId(data.id)
               localStorage.setItem('user', JSON.stringify({id: data.id, email: data?.role}))
+              
+              const resTenant = await createTenant(data.id)
+              console.log("resTenant: ", resTenant)
 
               sendText(data.id)
 
