@@ -22,7 +22,7 @@ class MainspecController {
         
         try {
             if (workersFilter === "true") {
-                
+                console.log(dateFilter)
                 const workers = await MainSpec.findAll({
                     order: [["id", "DESC"]],
                     where: {
@@ -31,7 +31,7 @@ class MainspecController {
                           },
                        
                         specId: {
-                            [Op.and]: {
+                            [Op.or]: {
                                 [Op.ne]: null,
                                 [Op.ne]: ''
                               }
