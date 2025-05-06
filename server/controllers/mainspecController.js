@@ -31,8 +31,8 @@ class MainspecController {
                           },
                        
                         specId: {
-                            [Op.or]: {
-                                [Op.ne]: null,
+                            [Op.and]: {
+                                [Op.not]: null,
                                 [Op.ne]: ''
                               }
                         }
