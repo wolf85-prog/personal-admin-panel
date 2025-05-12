@@ -81,10 +81,15 @@ import Disketa from "./../assets/images/copy.png";
 import arrowDown from 'src/assets/images/arrowDown.svg'
 import threeDots from 'src/assets/images/three-dots.svg'
 
-import btnBlue from 'src/assets/images/button_blue.png'
-import btnRed from 'src/assets/images/button_red.png'
-import btnGreen from 'src/assets/images/button_green.jpg'
-import btnYellow from 'src/assets/images/button_yellow.jpg'
+import btnBlue from 'src/assets/images/button_pause.png'
+import btnRed from 'src/assets/images/button_rec.png'
+import btnGreen from 'src/assets/images/button_play.png'
+import btnYellow from 'src/assets/images/button_stop.png'
+
+import btnPause from 'src/assets/images/button_pause.png'
+import btnRec from 'src/assets/images/button_rec.png'
+import btnPlay from 'src/assets/images/button_play.png'
+import btnStop from 'src/assets/images/button_stop.png'
 
 import vhodCall from 'src/assets/sound/call_in.mp3';
 import ishodCall from 'src/assets/sound/call_out.mp3';
@@ -2096,7 +2101,7 @@ ${loc.url}`;
                                           </div>
 
                                           <label className='title-label'>Техническое Задание</label>
-                                          <div className="text-field" style={{marginBottom: '0px'}}>
+                                          {/* <div className="text-field" style={{marginBottom: '0px'}}>
                                             <textarea 
                                               className="text-field__input widthBlock3"
                                               type="text" 
@@ -2106,7 +2111,30 @@ ${loc.url}`;
                                               onChange={(e)=>setTehText(e.target.value)}
                                               style={{resize: 'none', height: '208px', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
                                             />
-                                          </div> 
+                                          </div>  */}
+
+                                          <div className="text-field">
+                                            <input disabled={false} className="text-field__input" type="text" 
+                                              name="address" 
+                                              id="address" 
+                                            />
+                                          </div>
+
+                                          <div style={{position:'relative'}}>
+                                            <label className='title-label'>Как добраться</label>
+                                            <div className="text-field" style={{marginBottom: '0px'}} >
+                                              <textarea 
+                                                className="text-field__input widthBlock3" 
+                                                type="text" 
+                                                name="treck" 
+                                                id="treck"
+                                                value={track}
+                                                style={{resize: 'none',  height: '125px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
+                                                onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
+                                              />
+                                            </div> 
+                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-25px', cursor: 'pointer', width: '15px', height: '15px'}}/>
+                                          </div>
 
                                           {/* <label className='title-label' style={{marginTop: '44px', position: 'absolute', top: '387px', right: '200px'}}>Техническое Задание</label>
 
@@ -2174,23 +2202,10 @@ ${loc.url}`;
                                             <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(phone2)}} alt="" style={{visibility: showSavePhone2 ? 'visible' : 'hidden', position: 'absolute', top: '13px', right: '15px', cursor: 'pointer', width: '15px', height: '15px'}}/>
                                           </div>
 
-                                          <div style={{position:'relative'}}>
-                                            <label className='title-label otstup'>Как добраться</label>
-                                            <div className="text-field" style={{marginBottom: '0px'}} >
-                                              <textarea 
-                                                className="text-field__input widthBlock5" 
-                                                type="text" 
-                                                name="treck" 
-                                                id="treck"
-                                                value={track}
-                                                style={{resize: 'none',  height: '92px', whiteSpace: 'nowrap', borderRadius: '6px', textAlign: 'left'}}
-                                                onMouseOver={()=>setShowSaveTreck(true)} onMouseOut={()=>setShowSaveTreck(false)}
-                                              />
-                                            </div> 
-                                            <img src={Disketa} onClick={()=>{navigator.clipboard.writeText(track)}} alt="" style={{visibility: showSaveTreck ? 'visible' : 'hidden', position: 'absolute', top: '30px', right: '-25px', cursor: 'pointer', width: '15px', height: '15px'}}/>
-                                          </div>
+                                          
 
-                                          <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>
+
+                                          {/* <label className='title-label' style={{marginLeft: '50px'}}>Комментарии</label>
                                           <div className="text-field" style={{marginBottom: '0px'}}>
                                                 <textarea 
                                                   className="text-field__input widthBlock5" 
@@ -2201,17 +2216,17 @@ ${loc.url}`;
                                                   value={comment}
                                                   onChange={(e)=>setComment(e.target.value)}
                                                 />
-                                            </div>
+                                            </div> */}
 
-                                          {/* <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
-                                            <label className='title-label' style={{marginTop: '15px'}}>Предварительная смета</label>
+                                          <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
+                                            <label className='title-label' style={{marginTop: '10px'}}>Техническое задание</label>
 
-                                            <label className='title-label' style={{marginTop: '20px'}}>Финальная смета</label>
+                                            <label className='title-label' style={{marginTop: '35px'}}>Техническое задание 2</label>
 
-                                            <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
+                                            <label className='title-label' style={{marginTop: '35px'}}>Перекличка</label>
 
-                                            <label className='title-label' style={{marginTop: '20px'}}>Постер</label>
-                                          </div> */}
+                                            <label className='title-label' style={{marginTop: '30px'}}>Списки</label>
+                                          </div>
 
                                           {/* <div style={{marginTop: '93px', marginLeft: '-40px'}}>
                                               <div style={{display: 'flex'}}>
@@ -2258,7 +2273,7 @@ ${loc.url}`;
                                               }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          {/* <div onClick={pressPredSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '40px'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px', marginTop: '40px'}}>
                                             {
                                               playPredSmeta ? 
                                               (donePredSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
@@ -2269,7 +2284,7 @@ ${loc.url}`;
                                             }
                                           </div>
 
-                                          <div onClick={pressFinSmeta} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px'}}>
                                           {
                                               playFinSmeta ? 
                                               (doneFinSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
@@ -2280,7 +2295,7 @@ ${loc.url}`;
                                             }                   
                                           </div>
 
-                                          <div onClick={pressPoster} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px', color: 'blue'}}>
                                             {
                                               playPoster ? 
                                               (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
@@ -2290,7 +2305,7 @@ ${loc.url}`;
                                             }
                                           </div>
 
-                                          <div onClick={pressPoster} className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
                                             {
                                               playPoster ? 
                                               (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
@@ -2298,7 +2313,7 @@ ${loc.url}`;
                                               )
                                               : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
                                             }
-                                          </div> */}
+                                          </div>
                                         </div>
                                         
                             {/* </CCollapse> */}
