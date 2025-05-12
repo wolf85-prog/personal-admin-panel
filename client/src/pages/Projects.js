@@ -2219,9 +2219,11 @@ ${loc.url}`;
                                             </div> */}
 
                                           <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
-                                            <label className='title-label' style={{marginTop: '10px'}}>Техническое задание</label>
+                                            <label className='title-label' style={{marginTop: '10px'}}>Техническое задание №1</label>
 
-                                            <label className='title-label' style={{marginTop: '35px'}}>Техническое задание 2</label>
+                                            <label className='title-label' style={{marginTop: '35px'}}>Техническое задание №2</label>
+
+                                            <label className='title-label' style={{marginTop: '35px'}}>Документы</label>
 
                                             <label className='title-label' style={{marginTop: '35px'}}>Перекличка</label>
 
