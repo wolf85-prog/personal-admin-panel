@@ -2221,13 +2221,13 @@ ${loc.url}`;
                                           <div style={{textAlign: 'left', display: 'flex', flexDirection: 'column', marginTop: '33px'}}>
                                             <label className='title-label' style={{marginTop: '10px'}}>Техническое задание №1</label>
 
-                                            <label className='title-label' style={{marginTop: '35px'}}>Техническое задание №2</label>
+                                            <label className='title-label' style={{marginTop: '20px'}}>Техническое задание №2</label>
 
-                                            <label className='title-label' style={{marginTop: '35px'}}>Документы</label>
+                                            <label className='title-label' style={{marginTop: '20px'}}>Документы</label>
 
-                                            <label className='title-label' style={{marginTop: '35px'}}>Перекличка</label>
+                                            <label className='title-label' style={{marginTop: '20px'}}>Перекличка</label>
 
-                                            <label className='title-label' style={{marginTop: '30px'}}>Списки</label>
+                                            <label className='title-label' style={{marginTop: '20px'}}>Списки</label>
                                           </div>
 
                                           {/* <div style={{marginTop: '93px', marginLeft: '-40px'}}>
@@ -2275,18 +2275,18 @@ ${loc.url}`;
                                               }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px', marginTop: '40px'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '35px'}}>
                                             {
                                               playPredSmeta ? 
                                               (donePredSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
                                                 <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
                                               )
                                               
-                                              : '🟥'
+                                              : <img src={btnRed} alt='' width={25} style={{marginBottom: '7px'}}/>
                                             }
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px'}}>
                                           {
                                               playFinSmeta ? 
                                               (doneFinSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
@@ -2297,7 +2297,7 @@ ${loc.url}`;
                                             }                   
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px', color: 'blue'}}>
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
                                             {
                                               playPoster ? 
                                               (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
@@ -2308,6 +2308,16 @@ ${loc.url}`;
                                           </div>
 
                                           <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', color: 'blue'}}>
+                                            {
+                                              playPoster ? 
+                                              (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
+                                                <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                              )
+                                              : <img src={btnBlue} alt='' width={25} style={{marginBottom: '7px'}}/>
+                                            }
+                                          </div>
+
+                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '15px', fontSize: '20px', color: 'blue'}}>
                                             {
                                               playPoster ? 
                                               (showLoader ? <CSpinner style={{width: '20px', height: '20px'}}/> :
