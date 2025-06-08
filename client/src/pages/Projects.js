@@ -203,6 +203,7 @@ const Projects = () => {
   const [visibleA, setVisibleA] = useState(false)
   const [visibleB, setVisibleB] = useState(false)
   const [visibleC, setVisibleC] = useState(false)
+  const [visibleTZ, setVisibleTZ] = useState(false)
 
   const [showMainTable, setShowMainTable] = useState(false)
   const [showPretendentTable, setShowPretendentTable] = useState(false)
@@ -2275,7 +2276,7 @@ ${loc.url}`;
                                               }} style={{cursor: 'pointer', width: '24px', height: '24px'}}/>
                                           </div>
 
-                                          <div className="text-field text-field__input" style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '35px'}}>
+                                          <div className="text-field text-field__input" onClick={()=>setVisibleTZ(true)} style={{textAlign: 'center', height: '40px', width: '40px', marginBottom: '5px', fontSize: '20px', marginTop: '35px'}}>
                                             {
                                               playPredSmeta ? 
                                               (donePredSmeta ? <img src={btnYellow} alt='' width={25} style={{marginBottom: '7px'}}/> :   
@@ -3093,6 +3094,42 @@ ${loc.url}`;
                           Отмена
                         </CButton>
                         <CButton color="primary" onClick={()=>deleteProfile(id)}>Удалить</CButton>
+                      </CModalFooter>
+                    </CModal>
+
+
+                    <CModal
+                      alignment="center"
+                      size="lg"
+                      visible={visibleTZ}
+                      onClose={() => setVisibleTZ(false)}
+                      aria-labelledby="VerticallyCenteredExample"
+                    >
+                      <CModalHeader>
+                        <CModalTitle id="VerticallyCenteredExample">Редактировать техническое задание</CModalTitle>
+                      </CModalHeader>
+
+                      <CModalBody>
+                        <label className='title-label'>Техническое Задание</label>
+                        <div className="text-field" style={{marginBottom: '0px'}}>
+                          <textarea 
+                            className="text-field__input widthBlock3"
+                            type="text" 
+                            name="comment" 
+                            id="comment"
+                            value={tehText}
+                            onChange={(e)=>setTehText(e.target.value)}
+                            style={{resize: 'none', height: '208px', width: '100%', whiteSpace: 'pre-line', borderRadius: '6px', textAlign: 'left', marginBottom: '20px'}}
+                          />
+                        </div> 
+
+                      </CModalBody>
+                      
+                      <CModalFooter>
+                        <CButton color="secondary" onClick={() => setVisibleTZ(false)}>
+                          Отмена
+                        </CButton>
+                        <CButton color="primary" onClick={() => setVisibleTZ(false)}>Сохранить</CButton>
                       </CModalFooter>
                     </CModal>
                 </Suspense>
