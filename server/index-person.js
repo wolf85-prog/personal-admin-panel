@@ -44,6 +44,7 @@ const corsOptions = {
         'https://proj.uley.team:3001',
         'https://proj.uley.team:3000',
         'http://localhost:7001', 
+        'https://proj.uley.team:7001', 
     ], //(https://your-client-app.com)
     optionsSuccessStatus: 200,
 };
