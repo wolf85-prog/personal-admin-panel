@@ -116,7 +116,7 @@ class ManagersController {
     async getManagerId2(req, res) {
         const {id} = req.params
         try {
-            const manager = await Manager.findOne({where: {id: id.toString()}})
+            const manager = await Manager.findOne({where: {id: id}})
             return res.status(200).json(manager);
         } catch (err) {
             return res.status(500).json(err);
