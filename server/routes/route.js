@@ -24,7 +24,7 @@ const { getSpecialistAll, getSpecialist, getSpecCount, editSpecialist,
     blockSpecialist,getSpecialistByPhone, getSpecialistsByFilter} = require('../controllers/specialistController')
 
 const { getManagers, getManagerCount, editManager, getManagerId, 
-    addManager, deleteManager, getManagerCountAll } = require('../controllers/managersController')
+    addManager, deleteManager, getManagerCountAll, getManagerId2 } = require('../controllers/managersController')
 
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, 
     addCompany, deleteCompany, getCompanyCountAll, addCompanyProf, editCompanyProf, getCompanyProfId, getCompanyProf } = require('../controllers/companysController')
@@ -139,6 +139,7 @@ route.get("/managers/delete/:id", deleteManager);
 route.post("/managers/add", addManager);
 route.get("/managers/count/get", getManagerCountAll);
 route.get("/managers/chat/:id", getManagerId);
+route.get("/manager/get/:id", getManagerId2);
 
 //----------------- Компании ---------------------------------
 route.get('/companys/user/get/:userId', getCompanys)
