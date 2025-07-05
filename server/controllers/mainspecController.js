@@ -255,11 +255,11 @@ class MainspecController {
     }
 
     async getProjectsSpecId(req, res) {
-        const {projectId, specId} = req.params  
+        const {userId, specId} = req.params  
         try {
             const projects = await MainSpec.findAll({
                 where: {
-                    projectId: projectId,
+                    userId: userId,
                     specId: specId,
                 }
             })

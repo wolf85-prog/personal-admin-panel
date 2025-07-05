@@ -179,7 +179,7 @@ route.post("/mainspec/add", addMainspec);
 route.get("/mainspec/count/get/:userId", getMainspecCountAll);
 route.post('/mainspec/filter', getMainSpecByFilter)
 route.post('/mainspec/project/date', getMainSpecProjectDate)
-route.get('/mainspec/spec/get/:projectId/:specId', getProjectsSpecId)
+route.get('/mainspec/spec/get/:userId/:specId', getProjectsSpecId)
 
 
 route.get("/crmid/add", addCrmID);
