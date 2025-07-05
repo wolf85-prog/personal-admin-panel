@@ -254,6 +254,21 @@ class MainspecController {
         }
     }
 
+    async getProjectsSpecId(req, res) {
+        const {projectId, specId} = req.params  
+        try {
+            const projects = await MainSpec.findAll({
+                where: {
+                    projectId: projectId,
+                    specId: specId,
+                }
+            })
+            return res.status(200).json(projects);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
 }
 
 module.exports = new MainspecController()
